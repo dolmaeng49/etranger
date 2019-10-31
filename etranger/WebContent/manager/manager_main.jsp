@@ -27,26 +27,27 @@
 </head>
 <body>
 	<h1>관리자 페이지 테스트</h1>
-
 	<div class="comment-form-wrap pt-5">
-		<h3 class="mb-5">Leave a comment</h3>
+		<h3 class="mb-5">상품 분류 등록</h3>
+<!-- 상품코드 이름 지역 도시 테마 -->
 		<form action="#" class="p-5 bg-light">
+			<div class="form-group">
+				<label for="code">Product *</label> <input type="text" class="form-control" id="code">
+			</div>
 			<div class="form-group">
 				<label for="name">Name *</label> <input type="text" class="form-control" id="name">
 			</div>
 			<div class="form-group">
-				<label for="email">Email *</label> <input type="email" class="form-control" id="email">
+				<label for="region">region *</label> <input type="text" class="form-control" id="region">
 			</div>
 			<div class="form-group">
-				<label for="website">Website</label> <input type="url" class="form-control" id="website">
-			</div>
-
-			<div class="form-group">
-				<label for="message">Message</label>
-				<textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+				<label for="city">city *</label> <input type="text" class="form-control" id="city">
 			</div>
 			<div class="form-group">
-				<input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+				<label for="theme">theme *</label> <input type="text" class="form-control" id="theme">
+			</div>
+			<div class="form-group">
+				<input type="submit" value="등록하기" class="btn py-3 px-4 btn-primary">
 			</div>
 		</form>
 	</div>
