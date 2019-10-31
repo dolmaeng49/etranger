@@ -4,20 +4,20 @@
 <html lang="en">
   <head>
 	<!-- 스타일 인클루드 -->
-<jsp:include page="./include/style.jsp"/>
+<jsp:include page="../include/style.jsp"/>
   </head>
   <body>
     
 	<!-- 탑메뉴 인클루드 -->    
-<jsp:include page="./include/top_menu.jsp"/>
+<jsp:include page="../include/top_menu.jsp"/>
     
     <section class="home-slider owl-carousel">
-      <div class="slider-item" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+      <div class="slider-item" style="background-image: url('../images/bg_3.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
           <div class="row slider-text align-items-center">
             <div class="col-md-7 col-sm-12 ftco-animate">
-              <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span><a href="blog.html">Blog</a></span> <span>Single Blog</span></p>
+              <p class="breadcrumbs"><span class="mr-2"><a href="../main/index.jsp">Home</a></span> <span><a href="blog.html">Blog</a></span> <span>Single Blog</span></p>
               <h1 class="mb-3">Blog details</h1>
             </div>
           </div>
@@ -33,14 +33,14 @@
             <h2 class="mb-3">#1. We Love WordPress Themes</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, eius mollitia suscipit, quisquam doloremque distinctio perferendis et doloribus unde architecto optio laboriosam porro adipisci sapiente officiis nemo accusamus ad praesentium? Esse minima nisi et. Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
             <p>
-              <img src="images/image_6.jpg" alt="" class="img-fluid">
+              <img src="../images/image_6.jpg" alt="" class="img-fluid">
             </p>
             <p>Molestiae cupiditate inventore animi, maxime sapiente optio, illo est nemo veritatis repellat sunt doloribus nesciunt! Minima laborum magni reiciendis qui voluptate quisquam voluptatem soluta illo eum ullam incidunt rem assumenda eveniet eaque sequi deleniti tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor minima esse vero ut ea, repudiandae suscipit!</p>
             
             <h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2>
             <p>Temporibus ad error suscipit exercitationem hic molestiae totam obcaecati rerum, eius aut, in. Exercitationem atque quidem tempora maiores ex architecto voluptatum aut officia doloremque. Error dolore voluptas, omnis molestias odio dignissimos culpa ex earum nisi consequatur quos odit quasi repellat qui officiis reiciendis incidunt hic non? Debitis commodi aut, adipisci.</p>
             <p>
-              <img src="images/image_8.jpg" alt="" class="img-fluid">
+              <img src="../images/image_8.jpg" alt="" class="img-fluid">
             </p>
             <p>Quisquam esse aliquam fuga distinctio, quidem delectus veritatis reiciendis. Nihil explicabo quod, est eos ipsum. Unde aut non tenetur tempore, nisi culpa voluptate maiores officiis quis vel ab consectetur suscipit veritatis nulla quos quia aspernatur perferendis, libero sint. Error, velit, porro. Deserunt minus, quibusdam iste enim veniam, modi rem maiores.</p>
             <p>Odit voluptatibus, eveniet vel nihil cum ullam dolores laborum, quo velit commodi rerum eum quidem pariatur! Quia fuga iste tenetur, ipsa vel nisi in dolorum consequatur, veritatis porro explicabo soluta commodi libero voluptatem similique id quidem? Blanditiis voluptates aperiam non magni. Reprehenderit nobis odit inventore, quia laboriosam harum excepturi ea.</p>
@@ -57,7 +57,7 @@
             
             <div class="about-author d-flex pt-5">
               <div class="bio align-self-md-center mr-4">
-                <img src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
+                <img src="../images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
               </div>
               <div class="desc align-self-md-center">
                 <h3>About The Author</h3>
@@ -78,7 +78,7 @@
               <ul class="comment-list">
                 <li class="comment">
                   <div class="vcard bio">
-                    <img src="images/person_1.jpg" alt="Image placeholder">
+                    <img src="../images/person_1.jpg" alt="Image placeholder">
                   </div>
                   <div class="comment-body">
                     <h3>Jean Doe</h3>
@@ -90,7 +90,7 @@
 
                 <li class="comment">
                   <div class="vcard bio">
-                    <img src="images/person_1.jpg" alt="Image placeholder">
+                    <img src="../images/person_1.jpg" alt="Image placeholder">
                   </div>
                   <div class="comment-body">
                     <h3>Jean Doe</h3>
@@ -102,7 +102,7 @@
                   <ul class="children">
                     <li class="comment">
                       <div class="vcard bio">
-                        <img src="images/person_1.jpg" alt="Image placeholder">
+                        <img src="../images/person_1.jpg" alt="Image placeholder">
                       </div>
                       <div class="comment-body">
                         <h3>Jean Doe</h3>
@@ -115,7 +115,7 @@
                       <ul class="children">
                         <li class="comment">
                           <div class="vcard bio">
-                            <img src="images/person_1.jpg" alt="Image placeholder">
+                            <img src="../images/person_1.jpg" alt="Image placeholder">
                           </div>
                           <div class="comment-body">
                             <h3>Jean Doe</h3>
@@ -127,7 +127,7 @@
                             <ul class="children">
                               <li class="comment">
                                 <div class="vcard bio">
-                                  <img src="images/person_1.jpg" alt="Image placeholder">
+                                  <img src="../images/person_1.jpg" alt="Image placeholder">
                                 </div>
                                 <div class="comment-body">
                                   <h3>Jean Doe</h3>
@@ -145,7 +145,7 @@
 
                 <li class="comment">
                   <div class="vcard bio">
-                    <img src="images/person_1.jpg" alt="Image placeholder">
+                    <img src="../images/person_1.jpg" alt="Image placeholder">
                   </div>
                   <div class="comment-body">
                     <h3>Jean Doe</h3>
@@ -231,10 +231,10 @@
     </section> <!-- .section -->
 
 	<!-- footer 인클루드 -->
-<jsp:include page="./include/footer.jsp"/>
+<jsp:include page="../include/footer.jsp"/>
 
 	<!-- loader 인클루드 -->
-<jsp:include page="./include/loader.jsp"/>
+<jsp:include page="../include/loader.jsp"/>
     
   </body>
 </html>

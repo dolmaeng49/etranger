@@ -4,15 +4,15 @@
 <html lang="en">
   <head>
 	<!-- 스타일 인클루드 -->
-<jsp:include page="./include/style.jsp"/>
+<jsp:include page="../include/style.jsp"/>
   </head>
   <body>
     
 <!-- 탑메뉴 인클루드 -->    
-<jsp:include page="./include/top_menu.jsp"/>
+<jsp:include page="../include/top_menu.jsp"/>
     
     <section class="home-slider owl-carousel">
-      <div class="slider-item" style="background-image: url('images/bg_4.jpg');">
+      <div class="slider-item" style="background-image: url('../images/bg_4.jpg');">
         <div class="overlay"></div>
         <div class="container">
           <div class="row slider-text align-items-center">
@@ -23,7 +23,7 @@
         </div>
       </div>
 
-      <div class="slider-item" style="background-image: url('images/bg_1.jpg');">
+      <div class="slider-item" style="background-image: url('../images/bg_1.jpg');">
         <div class="overlay"></div>
         <div class="container">
           <div class="row slider-text align-items-center">
@@ -34,7 +34,7 @@
         </div>
       </div>
 
-      <div class="slider-item" style="background-image: url('images/bg_3.jpg');">
+      <div class="slider-item" style="background-image: url('../images/bg_3.jpg');">
         <div class="overlay"></div>
         <div class="container">
           <div class="row slider-text align-items-center">
@@ -168,7 +168,7 @@
     <section class="ftco-section-2">
       <div class="container-fluid d-flex">
         <div class="section-2-blocks-wrapper row no-gutters">
-          <div class="img col-sm-12 col-lg-6" style="background-image: url('images/tour-1.jpg');">
+          <div class="img col-sm-12 col-lg-6" style="background-image: url('../images/tour-1.jpg');">
             <a href="https://vimeo.com/45830194" class="button popup-vimeo"><span class="ion-ios-play"></span></a>
           </div>
           <div class="text col-lg-6 ftco-animate">
@@ -188,7 +188,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-3 promo ftco-animate">
-            <a href="#" class="promo-img mb-4" style="background-image: url(images/promo-1.jpg);"></a>
+            <a href="#" class="promo-img mb-4" style="background-image: url(../images/promo-1.jpg);"></a>
             <div class="text text-center">
               <h2>Group Cruises</h2>
               <h3 class="price"><span>from</span> $299</h3>
@@ -196,7 +196,7 @@
             </div>
           </div>
           <div class="col-lg-3 promo ftco-animate">
-            <a href="#" class="promo-img mb-4" style="background-image: url(images/promo-2.jpg);"></a>
+            <a href="#" class="promo-img mb-4" style="background-image: url(../images/promo-2.jpg);"></a>
             <div class="text text-center">
               <h2>Beach Tours</h2>
               <h3 class="price"><span>from</span> $199</h3>
@@ -204,7 +204,7 @@
             </div>
           </div>
           <div class="col-lg-3 promo ftco-animate">
-            <a href="#" class="promo-img mb-4" style="background-image: url(images/promo-3.jpg);"></a>
+            <a href="#" class="promo-img mb-4" style="background-image: url(../images/promo-3.jpg);"></a>
             <div class="text text-center">
               <h2>Mountain Tours</h2>
               <h3 class="price"><span>from</span> $179</h3>
@@ -212,7 +212,7 @@
             </div>
           </div>
           <div class="col-lg-3 promo ftco-animate">
-            <a href="#" class="promo-img mb-4" style="background-image: url(images/promo-3.jpg);"></a>
+            <a href="#" class="promo-img mb-4" style="background-image: url(../images/promo-3.jpg);"></a>
             <div class="text text-center">
               <h2>Family Tours</h2>
               <h3 class="price"><span>from</span> $599</h3>
@@ -281,7 +281,7 @@
         </div>
         <div class="row no-gutters">
           <div class="col-md-6 col-lg-3 ftco-animate">
-            <a href="#" class="block-5" style="background-image: url('images/tour-1.jpg');">
+            <a href="#" class="block-5" style="background-image: url('../images/tour-1.jpg');">
               <div class="text">
                 <span class="price">$399</span>
                 <h3 class="heading">Group Tour in Maldives</h3>
@@ -293,7 +293,7 @@
             </a>
           </div>
           <div class="col-md-6 col-lg-3 ftco-animate">
-            <a href="#" class="block-5" style="background-image: url('images/tour-2.jpg');">
+            <a href="#" class="block-5" style="background-image: url('../images/tour-2.jpg');">
               <div class="text">
                 <span class="price">$399</span>
                 <h3 class="heading">Group Tour in Maldives</h3>
@@ -305,7 +305,7 @@
             </a>
           </div>
           <div class="col-md-6 col-lg-3 ftco-animate">
-            <a href="#" class="block-5" style="background-image: url('images/tour-3.jpg');">
+            <a href="#" class="block-5" style="background-image: url('../images/tour-3.jpg');">
               <div class="text">
                 <span class="price">$399</span>
                 <h3 class="heading">Group Tour in Maldives</h3>
@@ -317,7 +317,7 @@
             </a>
           </div>
           <div class="col-md-6 col-lg-3 ftco-animate">
-            <a href="#" class="block-5" style="background-image: url('images/tour-4.jpg');">
+            <a href="#" class="block-5" style="background-image: url('../images/tour-4.jpg');">
               <div class="text">
                 <span class="price">$399</span>
                 <h3 class="heading">Group Tour in Maldives</h3>
@@ -329,7 +329,7 @@
             </a>
           </div>
           <div class="col-md-6 col-lg-3 ftco-animate">
-            <a href="#" class="block-5" style="background-image: url('images/tour-5.jpg');">
+            <a href="#" class="block-5" style="background-image: url('../images/tour-5.jpg');">
               <div class="text">
                 <span class="price">$399</span>
                 <h3 class="heading">Group Tour in Maldives</h3>
@@ -341,7 +341,7 @@
             </a>
           </div>
           <div class="col-md-6 col-lg-3 ftco-animate">
-            <a href="#" class="block-5" style="background-image: url('images/tour-6.jpg');">
+            <a href="#" class="block-5" style="background-image: url('../images/tour-6.jpg');">
               <div class="text">
                 <span class="price">$399</span>
                 <h3 class="heading">Group Tour in Maldives</h3>
@@ -353,7 +353,7 @@
             </a>
           </div>
           <div class="col-md-6 col-lg-3 ftco-animate">
-            <a href="#" class="block-5" style="background-image: url('images/tour-7.jpg');">
+            <a href="#" class="block-5" style="background-image: url('../images/tour-7.jpg');">
               <div class="text">
                 <span class="price">$399</span>
                 <h3 class="heading">Group Tour in Maldives</h3>
@@ -365,7 +365,7 @@
             </a>
           </div>
           <div class="col-md-6 col-lg-3 ftco-animate">
-            <a href="#" class="block-5" style="background-image: url('images/tour-8.jpg');">
+            <a href="#" class="block-5" style="background-image: url('../images/tour-8.jpg');">
               <div class="text">
                 <span class="price">$399</span>
                 <h3 class="heading">Group Tour in Maldives</h3>
@@ -391,7 +391,7 @@
           <div class="carousel owl-carousel ftco-owl">
             <div class="item text-center">
               <div class="testimony-wrap p-4 pb-5">
-                <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)" style="border: 1px solid red;"></div>
+                <div class="user-img mb-4" style="background-image: url(../images/person_1.jpg)" style="border: 1px solid red;"></div>
                 <div class="text">
                   <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span></p>
                   <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
@@ -402,7 +402,7 @@
             </div>
             <div class="item text-center">
               <div class="testimony-wrap p-4 pb-5">
-                <div class="user-img mb-4" style="background-image: url(images/person_2.jpg)" style="border: 1px solid red;"></div>
+                <div class="user-img mb-4" style="background-image: url(../images/person_2.jpg)" style="border: 1px solid red;"></div>
                 <div class="text">
                   <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span></p>
                   <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
@@ -413,7 +413,7 @@
             </div>
             <div class="item text-center">
               <div class="testimony-wrap p-4 pb-5">
-                <div class="user-img mb-4" style="background-image: url(images/person_3.jpg)" style="border: 1px solid red;"></div>
+                <div class="user-img mb-4" style="background-image: url(../images/person_3.jpg)" style="border: 1px solid red;"></div>
                 <div class="text">
                   <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span></p>
                   <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
@@ -424,7 +424,7 @@
             </div>
             <div class="item text-center">
               <div class="testimony-wrap p-4 pb-5">
-                <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)" style="border: 1px solid red;"></div>
+                <div class="user-img mb-4" style="background-image: url(../images/person_1.jpg)" style="border: 1px solid red;"></div>
                 <div class="text">
                   <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span></p>
                   <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
@@ -435,7 +435,7 @@
             </div>
             <div class="item text-center">
               <div class="testimony-wrap p-4 pb-5">
-                <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)" style="border: 1px solid red;"></div>
+                <div class="user-img mb-4" style="background-image: url(../images/person_1.jpg)" style="border: 1px solid red;"></div>
                 <div class="text">
                   <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span></p>
                   <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
@@ -467,7 +467,7 @@
             <h2 class="mb-5 p-2 pb-3 ftco-animate">Most Recommended Hotels</h2>
             <div class="row no-gutters d-flex">
               <div class="col-md-4 ftco-animate">
-                <a href="#" class="block-5" style="background-image: url('images/hotel-1.jpg');">
+                <a href="#" class="block-5" style="background-image: url('../images/hotel-1.jpg');">
                   <div class="text">
                     <span class="price">$29/night</span>
                     <h3 class="heading">Luxe Hotel</h3>
@@ -479,7 +479,7 @@
                 </a>
               </div>
               <div class="col-md-4 ftco-animate">
-                <a href="#" class="block-5" style="background-image: url('images/hotel-2.jpg');">
+                <a href="#" class="block-5" style="background-image: url('../images/hotel-2.jpg');">
                   <div class="text">
                     <span class="price">$29/night</span>
                     <h3 class="heading">Deluxe Hotel</h3>
@@ -491,7 +491,7 @@
                 </a>
               </div>
               <div class="col-md-4 ftco-animate">
-                <a href="#" class="block-5" style="background-image: url('images/hotel-3.jpg');">
+                <a href="#" class="block-5" style="background-image: url('../images/hotel-3.jpg');">
                   <div class="text">
                     <span class="price">$29/night</span>
                     <h3 class="heading">Deluxe Hotel</h3>
@@ -519,7 +519,7 @@
           <div class="carousel1 owl-carousel ftco-owl">
             <div class="item">
               <div class="blog-entry">
-                <a href="blog-single.html" class="block-20" style="background-image: url('images/image_5.jpg');">
+                <a href="blog-single.html" class="block-20" style="background-image: url('../images/image_5.jpg');">
                 </a>
                 <div class="text p-4">
                   <div class="meta">
@@ -536,7 +536,7 @@
             </div>
             <div class="item">
               <div class="blog-entry" data-aos-delay="100">
-                <a href="blog-single.html" class="block-20" style="background-image: url('images/image_6.jpg');">
+                <a href="blog-single.html" class="block-20" style="background-image: url('../images/image_6.jpg');">
                 </a>
                 <div class="text p-4">
                   <div class="meta">
@@ -553,7 +553,7 @@
             </div>
             <div class="item">
               <div class="blog-entry" data-aos-delay="200">
-                <a href="blog-single.html" class="block-20" style="background-image: url('images/image_7.jpg');">
+                <a href="blog-single.html" class="block-20" style="background-image: url('../images/image_7.jpg');">
                 </a>
                 <div class="text p-4">
                   <div class="meta">
@@ -570,7 +570,7 @@
             </div>
             <div class="item">
               <div class="blog-entry" data-aos-delay="200">
-                <a href="blog-single.html" class="block-20" style="background-image: url('images/image_8.jpg');">
+                <a href="blog-single.html" class="block-20" style="background-image: url('../images/image_8.jpg');">
                 </a>
                 <div class="text p-4">
                   <div class="meta">
@@ -587,7 +587,7 @@
             </div>
             <div class="item">
               <div class="blog-entry" data-aos-delay="200">
-                <a href="blog-single.html" class="block-20" style="background-image: url('images/image_9.jpg');">
+                <a href="blog-single.html" class="block-20" style="background-image: url('../images/image_9.jpg');">
                 </a>
                 <div class="text p-4">
                   <div class="meta">
@@ -608,10 +608,10 @@
     </section>
 
 	<!-- footer 인클루드 -->
-<jsp:include page="./include/footer.jsp"/>
+<jsp:include page="/include/footer.jsp"/>
 
 	<!-- loader 인클루드 -->
-<jsp:include page="./include/loader.jsp"/>
+<jsp:include page="/include/loader.jsp"/>
     
   </body>
 </html>

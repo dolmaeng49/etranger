@@ -4,20 +4,20 @@
 <html lang="en">
   <head>
 	<!-- 스타일 인클루드 -->
-<jsp:include page="./include/style.jsp"/>
+<jsp:include page="../include/style.jsp"/>
   </head>
   <body>
     
 	<!-- 탑메뉴 인클루드 -->    
-<jsp:include page="./include/top_menu.jsp"/>
+<jsp:include page="../include/top_menu.jsp"/>
     
     <section class="home-slider owl-carousel">
-      <div class="slider-item" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+      <div class="slider-item" style="background-image: url('../images/bg_1.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
           <div class="row slider-text align-items-center">
             <div class="col-md-7 col-sm-12 ftco-animate">
-              <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Blog</span></p>
+              <p class="breadcrumbs"><span class="mr-2"><a href="../main/index.jsp">Home</a></span> <span>Blog</span></p>
               <h1 class="mb-3">Blog</h1>
             </div>
           </div>
@@ -31,7 +31,7 @@
         <div class="row">
           <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="blog-entry">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_1.jpg');">
+              <a href="blog-single.html" class="block-20" style="background-image: url('../images/image_1.jpg');">
               </a>
               <div class="text p-4">
                 <div class="meta">
@@ -48,7 +48,7 @@
           </div>
           <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="blog-entry">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_2.jpg');">
+              <a href="blog-single.html" class="block-20" style="background-image: url('../images/image_2.jpg');">
               </a>
               <div class="text p-4">
                 <div class="meta">
@@ -65,7 +65,7 @@
           </div>
           <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="blog-entry" data-aos-delay="200">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_3.jpg');">
+              <a href="blog-single.html" class="block-20" style="background-image: url('../images/image_3.jpg');">
               </a>
               <div class="text p-4">
                 <div class="meta">
@@ -82,7 +82,7 @@
           </div>
           <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="blog-entry" data-aos-delay="200">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_4.jpg');">
+              <a href="blog-single.html" class="block-20" style="background-image: url('../images/image_4.jpg');">
               </a>
               <div class="text p-4">
                 <div class="meta">
@@ -99,7 +99,7 @@
           </div>
           <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="blog-entry" data-aos-delay="200">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_5.jpg');">
+              <a href="blog-single.html" class="block-20" style="background-image: url('../images/image_5.jpg');">
               </a>
               <div class="text p-4">
                 <div class="meta">
@@ -116,7 +116,7 @@
           </div>
           <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="blog-entry" data-aos-delay="200">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_6.jpg');">
+              <a href="blog-single.html" class="block-20" style="background-image: url('../images/image_6.jpg');">
               </a>
               <div class="text p-4">
                 <div class="meta">
@@ -133,7 +133,7 @@
           </div>
           <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="blog-entry" data-aos-delay="200">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_7.jpg');">
+              <a href="blog-single.html" class="block-20" style="background-image: url('../images/image_7.jpg');">
               </a>
               <div class="text p-4">
                 <div class="meta">
@@ -150,7 +150,7 @@
           </div>
           <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="blog-entry" data-aos-delay="200">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_8.jpg');">
+              <a href="blog-single.html" class="block-20" style="background-image: url('../images/image_8.jpg');">
               </a>
               <div class="text p-4">
                 <div class="meta">
@@ -186,10 +186,10 @@
     </section>
 
 	<!-- footer 인클루드 -->
-<jsp:include page="./include/footer.jsp"/>
+<jsp:include page="../include/footer.jsp"/>
 
 	<!-- loader 인클루드 -->
-<jsp:include page="./include/loader.jsp"/>
+<jsp:include page="../include/loader.jsp"/>
     
   </body>
 </html>

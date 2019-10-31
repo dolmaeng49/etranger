@@ -4,20 +4,20 @@
 <html lang="en">
   <head>
 	<!-- 스타일 인클루드 -->
-<jsp:include page="./include/style.jsp"/>
+<jsp:include page="../include/style.jsp"/>
   </head>
   <body>
     
 	<!-- 탑메뉴 인클루드 -->    
-<jsp:include page="./include/top_menu.jsp"/>
+<jsp:include page="../include/top_menu.jsp"/>
     
     <section class="home-slider owl-carousel">
-      <div class="slider-item" style="background-image: url('images/bg_4.jpg');" data-stellar-background-ratio="0.5">
+      <div class="slider-item" style="background-image: url('../images/bg_4.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
           <div class="row slider-text align-items-center">
             <div class="col-md-7 col-sm-12 ftco-animate">
-              <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Services</span></p>
+              <p class="breadcrumbs"><span class="mr-2"><a href="../main/index.jsp">Home</a></span> <span>Services</span></p>
               <h1 class="mb-3">Services</h1>
             </div>
           </div>
@@ -30,7 +30,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-3 promo ftco-animate">
-            <a href="#" class="promo-img mb-4" style="background-image: url(images/promo-1.jpg);"></a>
+            <a href="#" class="promo-img mb-4" style="background-image: url(../images/promo-1.jpg);"></a>
             <div class="text text-center">
               <h2>Group Cruises</h2>
               <h3 class="price"><span>from</span> $299</h3>
@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="col-lg-3 promo ftco-animate">
-            <a href="#" class="promo-img mb-4" style="background-image: url(images/promo-2.jpg);"></a>
+            <a href="#" class="promo-img mb-4" style="background-image: url(../images/promo-2.jpg);"></a>
             <div class="text text-center">
               <h2>Beach Tours</h2>
               <h3 class="price"><span>from</span> $199</h3>
@@ -46,7 +46,7 @@
             </div>
           </div>
           <div class="col-lg-3 promo ftco-animate">
-            <a href="#" class="promo-img mb-4" style="background-image: url(images/promo-3.jpg);"></a>
+            <a href="#" class="promo-img mb-4" style="background-image: url(../images/promo-3.jpg);"></a>
             <div class="text text-center">
               <h2>Mountain Tours</h2>
               <h3 class="price"><span>from</span> $179</h3>
@@ -54,7 +54,7 @@
             </div>
           </div>
           <div class="col-lg-3 promo ftco-animate">
-            <a href="#" class="promo-img mb-4" style="background-image: url(images/promo-3.jpg);"></a>
+            <a href="#" class="promo-img mb-4" style="background-image: url(../images/promo-3.jpg);"></a>
             <div class="text text-center">
               <h2>Family Tours</h2>
               <h3 class="price"><span>from</span> $599</h3>
@@ -115,10 +115,10 @@
     </section>
 
 	<!-- footer 인클루드 -->
-<jsp:include page="./include/footer.jsp"/>
+<jsp:include page="../include/footer.jsp"/>
     
   <!-- loader 인클루드 -->
-<jsp:include page="./include/loader.jsp"/>
+<jsp:include page="../include/loader.jsp"/>
     
   </body>
 </html>

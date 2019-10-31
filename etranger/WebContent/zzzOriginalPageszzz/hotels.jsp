@@ -4,20 +4,20 @@
 <html lang="en">
   <head>
 	<!-- 스타일 인클루드 -->
-<jsp:include page="./include/style.jsp"/>
+<jsp:include page="../include/style.jsp"/>
   </head>
   <body>
     
-	<!-- 탑메뉴 인클루드 -->    
-<jsp:include page="./include/top_menu.jsp"/>
+<!-- 탑메뉴 인클루드 -->    
+<jsp:include page="../include/top_menu.jsp"/>
     
     <section class="home-slider owl-carousel">
-      <div class="slider-item" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+      <div class="slider-item" style="background-image: url('../images/bg_2.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
           <div class="row slider-text align-items-center">
             <div class="col-md-7 col-sm-12 ftco-animate">
-              <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Tour</span></p>
+              <p class="breadcrumbs"><span class="mr-2"><a href="../main/index.jsp">Home</a></span> <span>Tour</span></p>
               <h1 class="mb-3">Tours Destination</h1>
             </div>
           </div>
@@ -32,7 +32,7 @@
           <div class="col-lg-8">
             <div class="row">
               <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
-                <a href="#" class="block-5" style="background-image: url('images/tour-1.jpg');">
+                <a href="#" class="block-5" style="background-image: url('../images/tour-1.jpg');">
                   <div class="text">
                     <span class="price">$399</span>
                     <h3 class="heading">Group Tour in Maldives</h3>
@@ -44,7 +44,7 @@
                 </a>
               </div>
               <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
-                <a href="#" class="block-5" style="background-image: url('images/tour-2.jpg');">
+                <a href="#" class="block-5" style="background-image: url('../images/tour-2.jpg');">
                   <div class="text">
                     <span class="price">$399</span>
                     <h3 class="heading">Group Tour in Maldives</h3>
@@ -56,7 +56,7 @@
                 </a>
               </div>
               <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
-                <a href="#" class="block-5" style="background-image: url('images/tour-3.jpg');">
+                <a href="#" class="block-5" style="background-image: url('../images/tour-3.jpg');">
                   <div class="text">
                     <span class="price">$399</span>
                     <h3 class="heading">Group Tour in Maldives</h3>
@@ -68,7 +68,7 @@
                 </a>
               </div>
               <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
-                <a href="#" class="block-5" style="background-image: url('images/tour-4.jpg');">
+                <a href="#" class="block-5" style="background-image: url('../images/tour-4.jpg');">
                   <div class="text">
                     <span class="price">$399</span>
                     <h3 class="heading">Group Tour in Maldives</h3>
@@ -80,7 +80,7 @@
                 </a>
               </div>
               <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
-                <a href="#" class="block-5" style="background-image: url('images/tour-5.jpg');">
+                <a href="#" class="block-5" style="background-image: url('../images/tour-5.jpg');">
                   <div class="text">
                     <span class="price">$399</span>
                     <h3 class="heading">Group Tour in Maldives</h3>
@@ -92,7 +92,7 @@
                 </a>
               </div>
               <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
-                <a href="#" class="block-5" style="background-image: url('images/tour-6.jpg');">
+                <a href="#" class="block-5" style="background-image: url('../images/tour-6.jpg');">
                   <div class="text">
                     <span class="price">$399</span>
                     <h3 class="heading">Group Tour in Maldives</h3>
@@ -104,7 +104,7 @@
                 </a>
               </div>
               <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
-                <a href="#" class="block-5" style="background-image: url('images/tour-7.jpg');">
+                <a href="#" class="block-5" style="background-image: url('../images/tour-7.jpg');">
                   <div class="text">
                     <span class="price">$399</span>
                     <h3 class="heading">Group Tour in Maldives</h3>
@@ -116,7 +116,7 @@
                 </a>
               </div>
               <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
-                <a href="#" class="block-5" style="background-image: url('images/tour-8.jpg');">
+                <a href="#" class="block-5" style="background-image: url('../images/tour-8.jpg');">
                   <div class="text">
                     <span class="price">$399</span>
                     <h3 class="heading">Group Tour in Maldives</h3>
@@ -213,10 +213,10 @@
     </section>
 
 	<!-- footer 인클루드 -->
-<jsp:include page="./include/footer.jsp"/>
+<jsp:include page="../include/footer.jsp"/>
 
-	<!-- loader 인클루드 -->
-<jsp:include page="./include/loader.jsp"/>
+   <!-- loader 인클루드 -->
+<jsp:include page="../include/loader.jsp"/>
     
   </body>
 </html>
