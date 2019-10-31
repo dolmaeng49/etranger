@@ -16,7 +16,7 @@
 				<li class="nav-item"><a href="./contact.jsp" class="nav-link">Contact</a></li>
 
 				<!-- test -->
-				<li class="nav-item"><a href="./manager/manager_main.jsp" class="nav-link">Manager</a></li>
+				<li class="nav-item"><a href="../manager/manager_main.jsp" class="nav-link">Manager</a></li>
 
 
 			</ul>
