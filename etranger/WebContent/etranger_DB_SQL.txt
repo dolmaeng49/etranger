@@ -1,0 +1,181 @@
+etranger_DB_SQL
+
+create database etranger01;
+
+// etranger/etranger1234(계정/비번) 계정에 etranger01디비에 대한 모든 권한 부여(로컬접속)
+grant all privileges on etranger01.* to etranger@host identified by 'etranger1234';
+
+// etranger/etranger1234(계정/비번) 계정에 etranger01디비에 대한 모든 권한 부여(원격접속)
+grant all privileges on etranger01.* to etranger@'%' identified by 'etranger1234';
+
+// 권한부여 적용
+flush privileges;
+==========================================
+
+CREATE TABLE `member` (
+  `member_id` VARCHAR(12),
+  `member_passwd` VARCHAR(20) NOT NULL,
+  `member_name` VARCHAR(15) NOT NULL,
+  `member_addr` VARCHAR(200) NOT NULL,
+  `member_phone` VARCHAR(11) NOT NULL,
+  `member_email` VARCHAR(100) NOT NULL,
+  `member_birth` DATE NOT NULL,
+  `member_gender` VARCHAR(1) NOT NULL,
+  `member_leg_date` TIMESTAMP NOT NULL,
+  `member_last_login` TIMESTAMP NOT NULL,
+  `member_grade` VARCHAR(45) NOT NULL DEFAULT 'bronze',
+  PRIMARY KEY (`member_id`))
+
+CREATE TABLE `category_region` (
+  `category_region_code` INT AUTO_INCREMENT,
+  `category_region_name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`category_region_code`),
+  UNIQUE INDEX `category_region_name_UNIQUE` (`category_region_name`))
+
+CREATE TABLE `category_city` (
+  `category_city_code` INT AUTO_INCREMENT,
+  `category_city_name` VARCHAR(45) NOT NULL,
+  `category_city_region_code` INT NOT NULL,
+  PRIMARY KEY (`category_city_code`),
+  UNIQUE INDEX `category_city_name_UNIQUE` (`category_city_name`),
+  CONSTRAINT `fk_category_city_category_region1`
+    FOREIGN KEY (`category_city_region_code`)
+    REFERENCES `category_region` (`category_region_code`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+
+CREATE TABLE `category_theme` (
+  `category_theme_code` INT AUTO_INCREMENT,
+  `category_theme_name` VARCHAR(45) NULL,
+  PRIMARY KEY (`category_theme_code`),
+  UNIQUE INDEX `category_theme_name_UNIQUE` (`category_theme_name`))
+===========================
+
+
+CREATE TABLE `package_category` (
+  `package_category_code` VARCHAR(100),
+  `package_category_name` VARCHAR(50) NOT NULL,
+  `package_category_region` INT NOT NULL,
+  `package_category_city` INT NOT NULL,
+  `package_category_theme` VARCHAR(100),
+  `package_category_image` VARCHAR(100) NOT NULL,
+  `package_category_content` VARCHAR(2000) NOT NULL,
+  PRIMARY KEY (`package_category_code`),
+  UNIQUE INDEX `package_category_name_UNIQUE` (`package_category_name` ASC),
+  UNIQUE INDEX `package_category_conbineUNIQUE` (`package_category_city`,
+  `package_category_region`,`package_category_theme`),
+  CONSTRAINT `fk_package_category_region`
+    FOREIGN KEY (`package_category_region`)
+    REFERENCES `category_region` (`category_region_code`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_package_category_city`
+    FOREIGN KEY (`package_category_city`)
+    REFERENCES `category_city` (`category_city_code`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+
+
+CREATE TABLE `package_product` (
+  `package_product_num` VARCHAR(100),
+  `package_category_code` VARCHAR(100) NOT NULL,
+  `package_product_depart_date` DATE NOT NULL,
+  `package_product_arriv_date` DATE NOT NULL,
+  `package_product_price` INT NOT NULL,
+  `package_product_total` INT NOT NULL,
+  `package_product_current` INT NOT NULL,
+  `package_product_wish_count` INT NULL,
+  PRIMARY KEY (`package_product_num`),
+  CONSTRAINT `fk_package_product_package_category`
+    FOREIGN KEY (`package_category_code`)
+    REFERENCES `package_category` (`package_category_code`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+
+CREATE TABLE `reservation` (
+  `reservation_num` INT AUTO_INCREMENT,
+  `reservation_member_id` VARCHAR(12) NOT NULL,
+  `reservation_product_num` VARCHAR(100) NOT NULL,
+  `reservation_time` TIMESTAMP NOT NULL,
+  `reservation_price` INT NOT NULL,
+  `reservation_headcount` INT NOT NULL,
+  `reservation_pay_way` VARCHAR(45) NOT NULL,
+  `reservation_ispayment` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`reservation_num`),
+  CONSTRAINT `fk_reservation_member1`
+    FOREIGN KEY (`reservation_member_id`)
+    REFERENCES `member` (`member_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_reservation_package_product1`
+    FOREIGN KEY (`reservation_product_num`)
+    REFERENCES `package_product` (`package_product_num`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+
+
+CREATE TABLE `wish` (
+  `wish_num` INT NOT NULL,
+  `wish_member_id` VARCHAR(12) NOT NULL,
+  `wish_product_num` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`wish_num`),
+  CONSTRAINT `fk_wish_member1`
+    FOREIGN KEY (`wish_member_id`)
+    REFERENCES `member` (`member_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_wish_package_product1`
+    FOREIGN KEY (`wish_product_num`)
+    REFERENCES `package_product` (`package_product_num`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+
+
+CREATE TABLE `review` (
+  `review_num` INT NOT NULL AUTO_INCREMENT,
+  `review_member_id` VARCHAR(12) NOT NULL,
+  `review_subject` VARCHAR(100) NOT NULL,
+  `review_image` VARCHAR(100) NOT NULL,
+  `review_content` VARCHAR(2000) NOT NULL,
+  `review_timestamp` TIMESTAMP NOT NULL,
+  `review_readcount` INT NOT NULL,
+  `review_package_category_code` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`review_num`),
+  CONSTRAINT `fk_review_package_category1`
+    FOREIGN KEY (`review_package_category_code`)
+    REFERENCES `package_category` (`package_category_code`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_review_member1`
+    FOREIGN KEY (`review_member_id`)
+    REFERENCES `member` (`member_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+
+CREATE TABLE `review_reply` (
+  `review_reply_num` INT NOT NULL AUTO_INCREMENT,
+  `review_reply_member_id` VARCHAR(12) NULL,
+  `review_reply_review_num` INT NULL,
+  `review_reply_ref` INT NULL,
+  `review_reply_lev` INT NULL,
+  `review_reply_seq` INT NULL,
+  `review_reply_timestamp` TIMESTAMP NULL,
+  `review_reply_content` VARCHAR(200) NULL,
+  PRIMARY KEY (`review_reply_num`),
+  CONSTRAINT `fk_review_reply_ref1`
+    FOREIGN KEY (`review_reply_ref`)
+    REFERENCES `review_reply` (`review_reply_num`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_review_reply_member1`
+    FOREIGN KEY (`review_reply_member_id`)
+    REFERENCES `member` (`member_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_review_reply_review1`
+    FOREIGN KEY (`review_reply_review_num`)
+    REFERENCES `review` (`review_num`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+
+
