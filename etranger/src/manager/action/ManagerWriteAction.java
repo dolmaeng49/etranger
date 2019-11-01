@@ -10,6 +10,7 @@ public class ManagerWriteAction implements Action {
 
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		
 		return null;
 	}
