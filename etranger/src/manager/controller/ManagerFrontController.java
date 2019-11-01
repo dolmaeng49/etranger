@@ -11,22 +11,38 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.action.Action;
 import common.vo.ActionForward;
+import manager.action.ManagerInsertProAction;
 
 @WebServlet("*.ma")
 public class ManagerFrontController extends HttpServlet {
 
-	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
 		String command = request.getServletPath();
 
 		Action action = null;
 		ActionForward forward = null;
-		
+
+//		System.out.println(command);
+
 		// manager_main.jsp 페이지 이동
-		if (command.equals("/ManagerMain.ma")) {
+		if (command.equals("/zzzOriginalPageszzz/ManagerMain.ma")) {
 			forward = new ActionForward();
 			forward.setPath("/manager/manager_main.jsp");
+		}
+		else if(command.equals("/zzzOriginalPageszzz/ManagerInsert.ma")) {
+			forward = new ActionForward();
+			forward.setPath("/manager/manager_insert.jsp");
+		}else if(command.equals("/ManagerProInsert.ma")) {
+			action = new ManagerInsertProAction();
+			
+			try {
+				forward = action.excute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		if (forward != null) {
@@ -41,12 +57,14 @@ public class ManagerFrontController extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doProcess(request, response);
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doProcess(request, response);
 	}
 }

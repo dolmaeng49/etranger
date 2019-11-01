@@ -29,12 +29,31 @@
 	</section>
 	<!-- END slider -->
 
-	<h1>관리자 페이지 테스트</h1>
 	<div class="comment-form-wrap pt-5">
-		<input type="button" class="search-submit btn btn-primary" value="상품 분류 등록" onclick="location.href='ManagerInsert.ma'">
-		
+		<h3 class="mb-5">상품 분류 등록</h3>
+		<!-- 상품코드 이름 지역 도시 테마 -->
+		<form action="ManagerProInsert.ma" class="p-5 bg-light">
+			<div class="form-group">
+				<label for="code">Product *</label> <input type="text" class="form-control" id="code">
+			</div>
+			<div class="form-group">
+				<label for="name">Name *</label> <input type="text" class="form-control" id="name">
+			</div>
+			<div class="form-group">
+				<label for="region">region *</label> <input type="text" class="form-control" id="region">
+			</div>
+			<div class="form-group">
+				<label for="city">city *</label> <input type="text" class="form-control" id="city">
+			</div>
+			<div class="form-group">
+				<label for="theme">theme *</label> <input type="text" class="form-control" id="theme">
+			</div>
+			<div class="form-group">
+				<input type="submit" value="등록하기" class="btn py-3 px-4 btn-primary">
+			</div>
+		</form>
 	</div>
-
+	
 	<!-- footer 인클루드 -->
 	<jsp:include page="/include/footer.jsp" />
 
