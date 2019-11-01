@@ -20,7 +20,7 @@ import review.action.ReviewReplyProAction;
 import review.action.ReviewWriteProAction;
 
 
-@WebServlet("*rv")
+@WebServlet("*.rv")
 public class ReviewFrontController extends HttpServlet {
 
 	
