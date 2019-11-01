@@ -29,10 +29,26 @@
 	</section>
 	<!-- END slider -->
 
-	<h1>관리자 페이지 테스트</h1>
 	<div class="comment-form-wrap pt-5">
-		<input type="button" class="search-submit btn btn-primary" value="상품 분류 등록" onclick="location.href='ManagerInsert.ma'">
-		
+		<h3 class="mb-5">상품 분류 등록</h3>
+		<!-- 상품코드 이름 지역 도시 테마 -->
+		<form action="ManagerProInsert.ma" class="p-5 bg-light">
+			<div class="form-group">
+				<label for="code">도시이름 *</label> <input type="text" class="form-control" name="city_name">
+			</div>
+			<div class="form-group">
+				<label for="name">도시코드 *</label> <input type="text" class="form-control" name="city_code">
+			</div>
+			<div class="form-group">
+				<label for="region">지역이름 *</label> <input type="text" class="form-control" name="region_name">
+			</div>
+			<div class="form-group">
+				<label for="city">지역코드 *</label> <input type="text" class="form-control" name="region_code">
+			</div>
+			<div class="form-group">
+				<input type="submit" value="등록하기" class="btn py-3 px-4 btn-primary">
+			</div>
+		</form>
 	</div>
 
 	<!-- footer 인클루드 -->
