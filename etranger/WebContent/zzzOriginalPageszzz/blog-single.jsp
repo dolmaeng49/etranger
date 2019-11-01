@@ -69,8 +69,8 @@
             <div class="datepicker_inline" data-date="" id="pick_date">
             </div>
             <input type="text" id="pick_date_input">
-            <div id="checkin_date" data-date=""></div>
-            <input type="text" id="checkin_date_input">
+            <div class="pick_date" data-date=""></div>
+            <input type="text" class="pick_date_input">
 <!-- 달력 -->
 
             <div class="pt-5 mt-5">
