@@ -39,7 +39,7 @@ public class ManagerFrontController extends HttpServlet {
 			action = new ManagerInsertProAction();
 			
 			try {
-				forward = action.excute(request, response);
+				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
