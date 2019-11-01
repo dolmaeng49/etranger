@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.action.Action;
 import common.vo.ActionForward;
+import manager.action.ManagerInsertProAction;
 
 @WebServlet("*.ma")
 public class ManagerFrontController extends HttpServlet {
@@ -34,6 +35,14 @@ public class ManagerFrontController extends HttpServlet {
 		else if(command.equals("/zzzOriginalPageszzz/ManagerInsert.ma")) {
 			forward = new ActionForward();
 			forward.setPath("/manager/manager_insert.jsp");
+		}else if(command.equals("/ManagerProInsert.ma")) {
+			action = new ManagerInsertProAction();
+			
+			try {
+				forward = action.excute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		if (forward != null) {
