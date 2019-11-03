@@ -1,4 +1,4 @@
-	<title>etranger - The best choice for your travel</title>
+	<title>étranger - The best choice for your travel</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700" rel="stylesheet">

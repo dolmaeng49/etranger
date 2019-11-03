@@ -32,63 +32,62 @@ public class ReviewFrontController extends HttpServlet {
 		ActionForward forward = null;
 		
 		
-		if(command.equals("/ReviewWriteForm.rv")) {
+		if(command.equals("/R/ReviewWriteForm.rv")) {
 			forward = new ActionForward();
 			forward.setPath("/review/review_write.jsp");
-		}else if(command.equals("/ReviewWritePro.rv")) {
+		}else if(command.equals("/R/ReviewWritePro.rv")) {
 			action = new ReviewWriteProAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-		else if(command.equals("/ReviewList.rv")){
+		}else if(command.equals("/R/ReviewList.rv")){
 			action = new ReviewListAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/ReviewDetail.rv")){
+		}else if(command.equals("/R/ReviewDetail.rv")){
 			action = new ReviewDetailAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/ReviewModifyForm.rv")){
+		}else if(command.equals("/R/ReviewModifyForm.rv")){
 			action = new ReviewModifyFormAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/ReviewModifyPro.rv")){
+		}else if(command.equals("/R/ReviewModifyPro.rv")){
 			action = new ReviewModifyProAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/ReviewDeleteForm.rv")) {
+		}else if(command.equals("/R/ReviewDeleteForm.rv")) {
 			forward = new ActionForward();
 			forward.setPath("/review/review_delete.jsp");
-		}else if(command.equals("/ReviewDeletePro.rv")){
+		}else if(command.equals("/R/ReviewDeletePro.rv")){
 			action = new ReviewDeleteProAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/ReviewReplyForm.rv")){
+		}else if(command.equals("/R/ReviewReplyForm.rv")){
 			action = new ReviewReplyFormAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/ReviewReplyPro.rv")){
+		}else if(command.equals("/R/ReviewReplyPro.rv")){
 			action = new ReviewReplyProAction();
 			try {
 				forward=action.execute(request, response);
