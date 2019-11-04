@@ -34,17 +34,12 @@
 		<!-- 상품코드 이름 지역 도시 테마 -->
 		<form action="ManagerProInsert.ma" class="p-5 bg-light">
 			<div class="form-group">
-				<label for="code">도시이름 *</label> <input type="text" class="form-control" name="city_name">
-			</div>
-			<div class="form-group">
-				<label for="name">도시코드 *</label> <input type="text" class="form-control" name="city_code">
-			</div>
-			<div class="form-group">
 				<label for="region">지역이름 *</label> <input type="text" class="form-control" name="region_name">
 			</div>
 			<div class="form-group">
-				<label for="city">지역코드 *</label> <input type="text" class="form-control" name="region_code">
+				<label for="code">도시이름 *</label> <input type="text" class="form-control" name="city_name">
 			</div>
+
 			<div class="form-group">
 				<input type="submit" value="등록하기" class="btn py-3 px-4 btn-primary">
 			</div>

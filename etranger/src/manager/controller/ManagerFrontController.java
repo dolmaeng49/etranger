@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import common.action.Action;
 import common.vo.ActionForward;
 import manager.action.ManagerInsertProAction;
+import manager.action.ManagerMainAction;
 
 @WebServlet("*.ma")
 public class ManagerFrontController extends HttpServlet {
@@ -28,16 +29,27 @@ public class ManagerFrontController extends HttpServlet {
 //		System.out.println(command);
 
 		// manager_main.jsp 페이지 이동
+//		if (command.equals("/zzzOriginalPageszzz/ManagerMain.ma")) {
+//			forward = new ActionForward();
+//			forward.setPath("/manager/manager_main.jsp");
+//		}
+//		
 		if (command.equals("/zzzOriginalPageszzz/ManagerMain.ma")) {
-			forward = new ActionForward();
-			forward.setPath("/manager/manager_main.jsp");
+			action = new ManagerMainAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		else if(command.equals("/zzzOriginalPageszzz/ManagerInsert.ma")) {
+
+		else if (command.equals("/zzzOriginalPageszzz/ManagerInsert.ma")) {
 			forward = new ActionForward();
 			forward.setPath("/manager/manager_insert.jsp");
-		}else if(command.equals("/ManagerProInsert.ma")) {
+		}
+
+		else if (command.equals("/zzzOriginalPageszzz/ManagerProInsert.ma")) {
 			action = new ManagerInsertProAction();
-			
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -48,8 +60,7 @@ public class ManagerFrontController extends HttpServlet {
 		if (forward != null) {
 			if (forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());
-			}
-			else {
+			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
