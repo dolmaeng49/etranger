@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
  	<!-- 스타일 인클루드 -->
-<jsp:include page="../include/style.jsp"/>
+<jsp:include page="/include/style.jsp"/>
 <style type="text/css">
 	.form-control-short {
 		display: inline-block;
@@ -13,20 +13,25 @@
 	.form-group-message {
 		height: 1em;
 	}
-	.login-info {
-		text-align: right;
-	}
 	.container, .navbar-brand, .navbar-collapse {
-	border: 1px solid red;}
+		border: 1px solid red;}
+	#login-info-div {
+		border: 1px solid blue;
+	}
+	#ftco-navbar {
+		margin-top: 20px;
+	}
+	
+	
 </style>
   </head>
   <body>
     
 <!-- 탑메뉴 인클루드 -->    
-<jsp:include page="../include/top_menu.jsp"/>
+<jsp:include page="/include/top_menu.jsp"/>
     
     <section class="home-slider owl-carousel">
-      <div class="slider-item" style="background-image: url('../images/bg_5.jpg');" data-stellar-background-ratio="0.5">
+      <div class="slider-item" style="background-image: url('images/bg_5.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
           <div class="row slider-text align-items-center">
@@ -94,10 +99,10 @@
     </section>
 
 	<!-- footer 인클루드 -->
-<jsp:include page="../include/footer.jsp"/>
+<jsp:include page="/include/footer.jsp"/>
 
 	<!-- loader 인클루드 -->
-<jsp:include page="../include/loader.jsp"/>
+<jsp:include page="/include/loader.jsp"/>
     
   </body>
 </html>
