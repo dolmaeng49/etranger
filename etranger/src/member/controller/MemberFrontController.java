@@ -32,7 +32,7 @@ public class MemberFrontController extends HttpServlet {
 		}else if (command.equals("/MemberJoinPro.me")) {
 			action = new MemberJoinProAction();
 			try {
-				forward = action.excute(request, response);
+				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

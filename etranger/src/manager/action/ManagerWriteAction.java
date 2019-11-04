@@ -9,8 +9,7 @@ import common.vo.ActionForward;
 public class ManagerWriteAction implements Action {
 
 	@Override
-	public ActionForward excute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		return null;
 	}
