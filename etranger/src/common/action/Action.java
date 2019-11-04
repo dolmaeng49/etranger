@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import common.vo.ActionForward;
 
 public interface Action {
-	ActionForward excute(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
 
 

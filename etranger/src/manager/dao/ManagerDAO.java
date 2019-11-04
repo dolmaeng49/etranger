@@ -1,6 +1,12 @@
 package manager.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import manager.vo.CategoryBean;
+
+import static common.db.JdbcUtil.*;
 
 public class ManagerDAO {
 
@@ -23,8 +29,28 @@ public class ManagerDAO {
 		this.con = con;
 	}
 
-	// 메서드
-	
-	
-	
+	public int insertCategory(CategoryBean cb) {
+		int insertCount = 0;
+
+		PreparedStatement pstmt = null;
+
+		String sql = "INSERT INTO category_city VALUES(?, ?)";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, cb.getCityName());
+			pstmt.setInt(2, cb.getCityCode());
+			
+			insertCount = pstmt.executeUpdate();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		
+		return insertCount;
+	}
+
 }

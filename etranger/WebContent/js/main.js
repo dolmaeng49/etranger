@@ -401,14 +401,14 @@
    
    
    
-   $('#pick_date').datepicker({
+   $('.pick_date').datepicker({
 	   'format': 'yyyy/m/d',
 	   'autoclose': true
    });
    
-   $('#pick_date').on('changeDate', function() {
-	   $('#pick_date_input').val(
-		   $('#pick_date').datepicker('getFormattedDate')
+   $('.pick_date').on('changeDate', function() {
+	   $('.pick_date_input').val(
+		   $('.pick_date').datepicker('getFormattedDate')
 	   );
    });
    
