@@ -8,3 +8,7 @@ import common.vo.ActionForward;
 public interface Action {
 	ActionForward excute(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
+
+
+
+	
