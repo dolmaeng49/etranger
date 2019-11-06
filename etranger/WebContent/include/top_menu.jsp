@@ -1,6 +1,7 @@
 <!-- login-info  class="container"-->
-	<div id="login-info-div">
-		<p id="login-info-p">Log In &nbsp;&nbsp;|&nbsp;&nbsp; Create an Account</p>
+	<div class="container">
+		<p id="login-info-p">Log In &nbsp;&nbsp;|&nbsp;&nbsp;
+		<a href="MemberJoinForm.me">Create an Account</a></p>
 	</div>
 <!-- login-info -->
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
