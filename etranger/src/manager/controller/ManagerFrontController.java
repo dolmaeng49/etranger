@@ -28,18 +28,15 @@ public class ManagerFrontController extends HttpServlet {
 
 		System.out.println(command);
 
-//		 manager_main.jsp 페이지 이동
+		// manager_main.jsp 페이지 이동
 		if (command.equals("/ManagerMain.ma")) {
 			forward = new ActionForward();
 			forward.setPath("/manager/manager_main.jsp");
 		}
 
-//		else if (command.equals("/zzzOriginalPageszzz/ManagerInsert.ma")) {
-//			forward = new ActionForward();
-//			forward.setPath("/manager/manager_insert.jsp");
-//		}
-		else if(command.equals("/ManagerInsert.ma")) {
-			// BoardListAction 클래스로 이동
+		// CategoryListAction 클래스로 이동
+		else if (command.equals("/ManagerInsert.ma")) {
+
 			action = new CategoryListAction();
 			try {
 				forward = action.execute(request, response);
@@ -47,7 +44,8 @@ public class ManagerFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
+		
+		// ManagerInsertProAction 클래스로 이동
 		else if (command.equals("/ManagerProInsert.ma")) {
 			action = new ManagerInsertProAction();
 			try {
