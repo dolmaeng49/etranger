@@ -16,7 +16,7 @@
 	<jsp:include page="../include/top_menu.jsp" />
 
 	<section class="home-slider owl-carousel">
-		<div class="slider-item" style="background-image: url('../images/bg_4.jpg');" data-stellar-background-ratio="0.5">
+		<div class="slider-item" style="background-image: url('./images/bg_4.jpg');" data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row slider-text align-items-center">
@@ -36,10 +36,6 @@
 	<div class="comment-form-wrap pt-5">
 		<input type="button" class="search-submit btn btn-primary" value="상품 분류 등록" onclick="location.href='ManagerInsert.ma'">
 	</div>
-		<div class="comment-form-wrap pt-5">
-		<input type="button" class="search-submit btn btn-primary" value="상품 정보 조회" onclick="location.href='ManagerSELECT.ma'">
-	</div>
-	
 	<!-- footer 인클루드 -->
 	<jsp:include page="/include/footer.jsp" />
 
