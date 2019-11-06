@@ -36,15 +36,18 @@
                 <h3 class="mb-5">Login</h3>
                 <form action="#" class="p-5 bg-light">
                   <div class="form-group">
-                    <label for="name">ID *</label>
-                    <input type="text" class="form-control" id="name">
+                    <label for="id">ID *</label>
+                    <input type="text" class="form-control" id="id">
                   </div>
                   <div class="form-group">
-                    <label for="email">PASSWORD *</label>
-                    <input type="email" class="form-control" id="email">
+                    <label for="passwd">PASSWORD *</label>
+                    <input type="passwd" class="form-control" id="passwd">
                   </div>
                    <div class="form-group">
                     <input type="submit" value="Login" class="btn py-3 px-4 btn-primary">
+                  </div>
+                   <div class="form-group">
+                    <input type="button" value="Sign up" class="btn py-3 px-4 btn-primary" onclick="location.href='MemberJoinForm.me'">
                   </div>
 
 

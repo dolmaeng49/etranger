@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import member.vo.MemberBean;
+
 import static common.db.JdbcUtil.*;
 
 public class MemberDAO {
@@ -55,4 +57,71 @@ public class MemberDAO {
 		return loginResult;
 	}
 
+	public int insertMember(MemberBean memberBean) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int insertCount = 0;
+		
+		try {
+			String sql = "insert into member(id,passwd,name,addr,phone,email,gender,leg_date,last_login,grade,birth) values(?,?,?,?,?,?,?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, memberBean.getId());
+			pstmt.setString(2, memberBean.getPasswd());
+			pstmt.setString(3, memberBean.getName());
+			pstmt.setString(4, memberBean.getAddr());
+			pstmt.setString(5, memberBean.getPhone());
+			pstmt.setString(6, memberBean.getEmail());
+			pstmt.setString(7, memberBean.getGender());
+			pstmt.setTimestamp(8, memberBean.getLeg_date());
+			pstmt.setTimestamp(9, memberBean.getLast_login());
+			pstmt.setString(1, memberBean.getGrade());
+			pstmt.setDate(1, memberBean.getBirth());
+			
+			insertCount = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("insertArticle() 오류 -"+e.getMessage());
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return insertCount;
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
