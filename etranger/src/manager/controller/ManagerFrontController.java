@@ -29,7 +29,7 @@ public class ManagerFrontController extends HttpServlet {
 //		System.out.println(command);
 
 //		 manager_main.jsp 페이지 이동
-		if (command.equals("/zzzOriginalPageszzz/ManagerMain.ma")) {
+		if (command.equals("/ManagerMain.ma")) {
 			forward = new ActionForward();
 			forward.setPath("/manager/manager_main.jsp");
 		}

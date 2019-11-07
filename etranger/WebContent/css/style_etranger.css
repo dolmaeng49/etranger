@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/* include/top_menu */
 #login-info-p {
 	text-align: right;
 }
@@ -7,3 +8,6 @@
 #ftco-navbar {
 	margin-top: 20px;
 }
+
+/* member/member_join_form */
+

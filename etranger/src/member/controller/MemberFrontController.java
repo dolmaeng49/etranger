@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import common.action.Action;
 import common.vo.ActionForward;
 import manager.action.ManagerInsertProAction;
+import member.action.MemberIdDupCheckAction;
 import member.action.MemberJoinProAction;
 
 @WebServlet("*.me") // 서블릿(Controller)이 매핑을 담당할 주소 설정
@@ -29,6 +30,13 @@ public class MemberFrontController extends HttpServlet {
 		if(command.equals("/MemberJoinForm.me")) {
 			forward = new ActionForward();
 			forward.setPath("member/member_join_form.jsp");
+		}else if (command.equals("/MemberIdDupCheck.me")) {
+			action = new MemberIdDupCheckAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}else if (command.equals("/MemberJoinPro.me")) {
 			action = new MemberJoinProAction();
 			try {

@@ -10,17 +10,21 @@
 		display: inline-block;
 		width: 60%;
 	}
+	
 	.form-group-message {
 		height: 1em;
+		margin-bottom: 2em;
 	}
+	
+	
 	.container, .navbar-brand, .navbar-collapse {
 		border: 1px solid red;}
 	#login-info-div {
 		border: 1px solid blue;
 	}
-	#ftco-navbar {
+/* 	#ftco-navbar {
 		margin-top: 20px;
-	}
+	} */
 	
 	
 </style>
@@ -52,17 +56,24 @@
             <div class="row d-block flex-row">
               <h2 class="h4 mb-4">Account Information</h2>
               <div class="form-group">
-                <input type="text" class="form-control form-control-short" placeholder="ID" name="member_id" required="required">
-                <input type="button" value="Dup.Check" class="btn btn-primary py-3 px-5">
+                <input type="text" class="form-control form-control-short" placeholder="ID"
+                	name="member_id" id="member_id" required="required">
+                <input type="button" value="Dup.Check" class="btn btn-primary py-3 px-5" id="btn_dup">
+                <input type="hidden" id="member_id_DupCheck">
               </div>
-              <div class="form-group form-group-message"></div>
+              <div class="form-group form-group-message">
+              	<p id="checkIdResult"></p>
+              </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Password" name="member_passwd" required="required">
+                <input type="text" class="form-control" placeholder="Password"
+                	name="member_passwd" id="member_passwd" required="required">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Retype Password" name="member_passwd2" required="required">
+                <input type="text" class="form-control" placeholder="Retype Password"
+                	name="member_passwd2" id="member_passwd_retype" required="required">
               </div>
-              <div class="form-group form-group-message"></div>
+              <div class="form-group form-group-message" id="checkPasswdResult"></div>
+              <div class="form-group form-group-message" id="checkPasswdRetype"></div>
             </div>
           </div>
           <div class="col-md-6">
@@ -103,6 +114,7 @@
 
 	<!-- loader 인클루드 -->
 <jsp:include page="/include/loader.jsp"/>
+<script src="js/member.js"></script>
     
   </body>
 </html>
