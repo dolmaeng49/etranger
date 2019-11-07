@@ -98,6 +98,22 @@
 			</select>
 			<p id="Region"></p>
 		</div>
+		
+		<div class="select-wrap one-third">
+			테마1.
+		 	<input type="checkbox" name= "theme1" value="혼자">혼자서
+ 			<input type="checkbox" name= "theme2" value="커플">커플
+ 			<input type="checkbox" name= "theme3" value="가족">가족 
+ 			<br>
+ 			테마2. 
+ 			<input type="checkbox" name= "theme2" value="호캉스"> 호캉스
+ 			<input type="checkbox" name= "theme2" value="축구직관"> 축구직관
+ 			<input type="checkbox" name= "theme2" value="허니문"> 허니문
+ 			<input type="checkbox" name= "theme2" value="미식여행"> 미식여행
+ 			<input type="checkbox" name= "theme2" value="트레킹"> 트레킹
+ 			<input type="checkbox" name= "theme2" value="액티비티"> 액티비티
+ 			
+		</div>
 
 
 		<form action="ManagerProInsert.ma" class="p-5 bg-light">
