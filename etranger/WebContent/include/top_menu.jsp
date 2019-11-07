@@ -1,6 +1,6 @@
 <!-- login-info  class="container"-->
 	<div class="container">
-		<p id="login-info-p">Log In &nbsp;&nbsp;|&nbsp;&nbsp;
+		<p id="login-info-p"><a href="LoginForm.me">Log In </a>&nbsp;&nbsp;|&nbsp;&nbsp;
 		<a href="MemberJoinForm.me">Create an Account</a></p>
 	</div>
 <!-- login-info -->
@@ -13,7 +13,7 @@
 
 		<div class="collapse navbar-collapse" id="ftco-nav">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a href="../zzzOriginalPageszzz/index.jsp" class="nav-link">Home</a></li>
+				<li class="nav-item"><a href="index.jsp" class="nav-link">Home</a></li>
 				<li class="nav-item"><a href="../zzzOriginalPageszzz/tours.jsp" class="nav-link">Tours</a></li>
 				<li class="nav-item"><a href="../zzzOriginalPageszzz/hotels.jsp" class="nav-link">Hotels</a></li>
 				<li class="nav-item"><a href="../zzzOriginalPageszzz/services.jsp" class="nav-link">Services</a></li>
