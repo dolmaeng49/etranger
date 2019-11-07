@@ -2,6 +2,18 @@ package member.controller;
 
 import java.io.IOException;
 
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import common.action.Action;
+import common.vo.ActionForward;
+import member.action.MemberLoginProAction;
+
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,6 +47,17 @@ public class MemberFrontController extends HttpServlet {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
+			}if (command.equals("/LoginForm.me")) {
+				forward = new ActionForward();
+				forward.setPath("/member/member_login_form.jsp");
+			} else if (command.equals("/LoginPro.me")) {
+				action = new MemberLoginProAction();
+
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		
@@ -65,3 +88,4 @@ public class MemberFrontController extends HttpServlet {
 	}
 	
 }
+
