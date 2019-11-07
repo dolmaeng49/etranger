@@ -17,7 +17,7 @@ public class ManagerInsertProAction implements Action {
 		ActionForward forward = null;
 		
 		CategoryBean cb = new CategoryBean();
-		cb.setCityName(request.getParameter("region_name"));
+		cb.setRegionName(request.getParameter("region_name"));
 		cb.setCityName(request.getParameter("city_name"));
 		
 		ManagerInsertProService mips = new ManagerInsertProService();

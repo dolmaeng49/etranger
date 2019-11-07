@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.action.Action;
 import common.vo.ActionForward;
+import manager.action.CategoryListAction;
 import manager.action.ManagerInsertProAction;
-import manager.action.ManagerMainAction;
 
 @WebServlet("*.ma")
 public class ManagerFrontController extends HttpServlet {
@@ -26,29 +26,27 @@ public class ManagerFrontController extends HttpServlet {
 		Action action = null;
 		ActionForward forward = null;
 
-//		System.out.println(command);
+		System.out.println(command);
 
-//		 manager_main.jsp 페이지 이동
+		// manager_main.jsp 페이지 이동
 		if (command.equals("/ManagerMain.ma")) {
 			forward = new ActionForward();
 			forward.setPath("/manager/manager_main.jsp");
 		}
-//		
-//		if (command.equals("/zzzOriginalPageszzz/ManagerMain.ma")) {
-//			action = new ManagerMainAction();
-//			try {
-//				forward = action.execute(request, response);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
 
-		else if (command.equals("/zzzOriginalPageszzz/ManagerInsert.ma")) {
-			forward = new ActionForward();
-			forward.setPath("/manager/manager_insert.jsp");
+		// CategoryListAction 클래스로 이동
+		else if (command.equals("/ManagerInsert.ma")) {
+
+			action = new CategoryListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-
-		else if (command.equals("/zzzOriginalPageszzz/ManagerProInsert.ma")) {
+		
+		// ManagerInsertProAction 클래스로 이동
+		else if (command.equals("/ManagerProInsert.ma")) {
 			action = new ManagerInsertProAction();
 			try {
 				forward = action.execute(request, response);
