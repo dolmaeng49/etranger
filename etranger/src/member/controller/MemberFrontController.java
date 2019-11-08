@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import common.action.Action;
 import common.vo.ActionForward;
 import manager.action.ManagerInsertProAction;
+import member.action.MemberEmailCheckAction;
 import member.action.MemberIdDupCheckAction;
 import member.action.MemberJoinProAction;
 
@@ -61,6 +62,13 @@ public class MemberFrontController extends HttpServlet {
 			forward.setPath("/member/member_login_form.jsp");
 		} else if (command.equals("/LoginPro.me")) {
 			action = new MemberLoginProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/MemberSendEmailCode.me")) {
+			action = new MemberEmailCheckAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

@@ -24,7 +24,7 @@ public class MemberIdDupCheckAction implements Action {
 		if(!isDup) { // ID 중복이 아닐 경우
 			out.println("<script>");
 			out.println("alert('사용 가능한 아이디입니다!')");
-			out.println(id); // 스크립트에 사용가능한 id 출력(ajax 으로 리턴)
+			out.println(id); // 스크립트에 중복체크 완료한 id 출력(ajax 으로 리턴)
 			out.println("</script>");
 		}else { // 중복일 경우
 			out.println("<script>");

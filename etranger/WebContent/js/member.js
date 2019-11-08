@@ -32,11 +32,11 @@
 	// P/W 체크
 	$('#member_passwd').keyup(function(){
 		// 8-20자리 영문자대문자,소문자,숫자,특수문자(!@#$%^&*()_+)중 3가지 조합
-		var lengthCaseRegex = /[A-Za-z0-9!@#$%^&*()_+]{8,20}/;
-		var upperCaseRegex = /[A-Z]/;
-		var lowerCaseRegex = /[a-z]/;
-		var digitCaseRegex = /[0-9]/;
-		var specialCharRegex = /[!@#$%^&*()_+]/;
+		var lengthCaseRegex = /[A-Za-z0-9!@#$%^&*()_+]{8,20}/g;
+		var upperCaseRegex = /[A-Z]/g;
+		var lowerCaseRegex = /[a-z]/g;
+		var digitCaseRegex = /[0-9]/g;
+		var specialCharRegex = /[!@#$%^&*()_+]/g;
 		
 		var element = document.getElementById('checkPasswdResult');
 		var checkCount = 0;
@@ -55,7 +55,7 @@
 			element.innerHTML = "사용 가능 패스워드입니다";
 			checkPasswdResult = true;
 		}else {
-			element.innerHTML = "8-20자리 영문자대문자,소문자,숫자,특수문자(!@#$%^&*()_+)중 3가지 이상 조합으로 입력해주세요";
+			element.innerHTML = "영문 대,소문자,숫자,특수문자(!@#$%^&*()_+)중 3가지 이상 조합 8-20자리";
 			checkPasswdResult = false;
 		}
 	});
@@ -73,7 +73,7 @@
 	// ID 중복 체크 버튼
 	$('#btn_dup').click(function(){
 		var fid=$('#member_id').val();
-		
+		alert(fid);
 		/*$.getJSON('MemberIdDupCheck.me?id='+fid,function(data){
 			$.each(data,function(index,item){
 				$('#member_id_DupCheck').html(item.id);
@@ -87,10 +87,14 @@
 		});
 	});
 	// Email 인증 코드 발송
-	$('#btn_email_check').click(function(){
+	$('#btn_email_code').click(function(){
+		var element = document.getElementById('email_check');
 		$.ajax('MemberSendEmailCode.me',{
-			success:function(sdata){
-				$('#email_check').html(sdata);
+			success:function(data){
+				alert(data);
+//				$('#email_check').html('hi');
+//				element.innerHTML = "hello";
+				$('#email_check').val(data);
 			}
 		});
 	});
