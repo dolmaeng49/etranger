@@ -80,8 +80,8 @@
 			</select>
 			<p id="Region"></p>
 		</div>
-	
-	
+<!-- 	야야야야야야야 -->
+		<select></select>
 		<!-- 도시선택 클릭하면 해당 지역의 도시를 옵션으로 출력.. 해야하는데 select 방식, 어떻게 작동시킬지 고민.. -->
 		<div class="select-wrap one-third">
 			<select id="selectRegion" class="form-control" onChange="select()">
