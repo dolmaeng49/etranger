@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import common.action.Action;
 import common.vo.ActionForward;
 import member.action.MemberLoginProAction;
-
+import member.action.MemberLogoutProAction;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -58,6 +58,26 @@ public class MemberFrontController extends HttpServlet {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+			}else if (command.equals("/MemberJoinForm.me")) {
+					forward = new ActionForward();
+					forward.setRedirect(false);
+					forward.setPath("/member/member_join_form.jsp");
+				} else if (command.equals("/LogoutPro.me")) {
+					action = new MemberLogoutProAction();
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}else if (command.equals("/MemberJoinPro.me")) {
+						action = new MemberJoinProAction();
+						try {
+							forward = action.execute(request, response);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						
+						
 			}
 		
 		

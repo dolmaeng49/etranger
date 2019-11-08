@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+<script src="../js/jquery-3.4.1.js"></script>
 <script type="text/javascript">
 //아이디 유효성 
 	function checkId(member_id) {
@@ -45,8 +45,7 @@
 		}else{
 			element.innerHTML="올바른 이메일 형식이 아닙니다."
 		}
-	}	
-	
+	}
 	
 </script>
 <!-- 스타일 인클루드 -->
@@ -109,7 +108,7 @@
 						<div class="form-group">
 							<input type="text" class="form-control form-control-short"
 								placeholder="ID" name="member_id" required="required"
-								onkeyup="checkId(this)"> 
+								onkeyup="checkId(this)">
 							 <span id="checkIDresult"></span>
 							 <input type="button" value="Dup.Check" class="btn btn-primary py-3 px-5">
 						</div>

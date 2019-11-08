@@ -42,13 +42,13 @@
 						<form action="#" class="p-5 bg-light">
 							<div class="form-group">
 								<label for="id">ID *</label> <input type="text"
-									class="form-control" id="id">
+									class="form-control" id="id" required="required" name="member_id">
 							</div>
 							<div class="form-group">
 								<label for="password">PASSWORD *</label> <input type="password"
-									class="form-control" id="passwd">
+									class="form-control" id="passwd" required="required" name="member_passwd">
 							</div>
-							<div class="form-group">
+			 				<div class="form-group">
 								<input type="submit" value="Login"
 									class="btn py-3 px-4 btn-primary">
 
@@ -57,7 +57,7 @@
 									class="btn py-3 px-4 btn-primary"
 									onclick="location.href='MemberJoinForm.me'">
 							</div>
-
+						
 						</form>
 					</div>
 				</div>

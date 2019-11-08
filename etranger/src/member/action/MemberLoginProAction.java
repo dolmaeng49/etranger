@@ -19,6 +19,7 @@ public class MemberLoginProAction implements Action {
 		
 		String member_id = request.getParameter("member_id");
 		String member_passwd = request.getParameter("member_passwd");
+		System.out.println(member_id+","+member_passwd);
 		
 		MemberLoginProService memberLoginProService = new MemberLoginProService();
 		int loginResult = memberLoginProService.memberLogin(member_id,member_passwd);
@@ -39,7 +40,7 @@ public class MemberLoginProAction implements Action {
 			out.println("</script>");
 		}else if(loginResult==1) {
 			HttpSession session = request.getSession();
-			session.setAttribute("sId", member_id);
+			session.setAttribute("member_id", member_id);
 			forward = new ActionForward();
 			forward.setPath("index.jsp");
 			forward.setRedirect(true);
