@@ -102,6 +102,7 @@
 				<div class="col-md-6 pr-md-5 flex-column">
 					<div class="row d-block flex-row">
 						<h2 class="h4 mb-4">Account Information</h2>
+<!-- 						아이디 -->
 						<div class="form-group">
 							<input type="text" class="form-control form-control-short"
 								placeholder="ID" name="member_id" required="required"
@@ -110,6 +111,7 @@
 							 <input type="button" value="Dup.Check" class="btn btn-primary py-3 px-5">
 						</div>
 						<div class="form-group form-group-message"></div>
+<!-- 						비밀번호 -->
 						<div class="form-group">
 							<input type="password" class="form-control"
 								placeholder="Password" name="member_passwd" required="required"
