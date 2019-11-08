@@ -17,8 +17,8 @@ public class MemberLoginProAction implements Action {
 		
 		ActionForward forward = null;
 		
-		String member_id = request.getParameter("id");
-		String member_passwd = request.getParameter("passwd");
+		String member_id = request.getParameter("member_id");
+		String member_passwd = request.getParameter("member_passwd");
 		
 		MemberLoginProService memberLoginProService = new MemberLoginProService();
 		int loginResult = memberLoginProService.memberLogin(member_id,member_passwd);
@@ -41,7 +41,7 @@ public class MemberLoginProAction implements Action {
 			HttpSession session = request.getSession();
 			session.setAttribute("sId", member_id);
 			forward = new ActionForward();
-			forward.setPath("BoardMain.bo");
+			forward.setPath("index.jsp");
 			forward.setRedirect(true);
 			
 		}

@@ -30,18 +30,18 @@ public class MemberDAO {
 		ResultSet rs = null;
 
 		try {
-			String sql = "select id from member where member_id=?";
+			String sql = "select member_id from member where member_id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_id);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				sql = "select passwd from member where member_id=?";
+				sql = "select member_passwd from member where member_id=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, member_id);
 				rs = pstmt.executeQuery();
 				if (rs.next()) {
-					if (member_passwd.equals(rs.getString("passwd")))
+					if (member_passwd.equals(rs.getString("member_passwd")))
 						loginResult = 1;
 				} else {
 					loginResult = -1;
