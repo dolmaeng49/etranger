@@ -30,7 +30,7 @@
 		</div>
 	</section>
 	<!-- END slider -->
-
+<form action="LoginPro.me" method="post">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
@@ -73,8 +73,7 @@
 	<!-- loader 인클루드 -->
 	<jsp:include page="../include/loader.jsp" />
 
-</body>
-</html>
 
+</form>
 </body>
 </html>
