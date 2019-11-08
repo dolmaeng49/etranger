@@ -48,21 +48,17 @@
 				<%for(int i=0; i<articleList.size(); i++) {%>
           <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="blog-entry">
-<<<<<<< HEAD
-              <a href="ReviewDetail.rv?num=<%=articleList.get(i).getReview_num()%>" class="block-20" style="background-image: url('reviewUpload/<%=articleList.get(i).getReview_image()%>');">
-=======
-              <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num() %>&page=<%=nowPage %>" class="block-20" style="background-image: url('reviewUpload/<%=articleList.get(i).getReview_image()%>');">
->>>>>>> refs/remotes/origin/master
+              <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="block-20" style="background-image: url('reviewUpload/<%=articleList.get(i).getReview_image()%>');">
               </a>
               <div class="text p-4" >
-                <div class="meta" onclick="location.href='ReviewDetail.rv?num=<%=articleList.get(i).getReview_num()%>'">
+                <div class="meta" onclick="location.href='ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>'">
 <%--                   <div><a href="#"><%=articleList.get(i).getReview_date()%></a></div> --%>
-                  <div><a href="ReviewDetail.rv?num=<%=articleList.get(i).getReview_num()%>"><%=articleList.get(i).getReview_member_id()%></a></div><!-- 아이디 대신 이름 들어갈 곳 -->
+                  <div><a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>"><%=articleList.get(i).getReview_member_id()%></a></div><!-- 아이디 대신 이름 들어갈 곳 -->
                 </div>
-                <h3 class="heading"><a href="ReviewDetail.rv?num=<%=articleList.get(i).getReview_num()%>"><%=articleList.get(i).getReview_content()%></a></h3>
+                <h3 class="heading"><a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>"><%=articleList.get(i).getReview_content()%></a></h3>
                 <p class="clearfix">
-                  <a href="ReviewDetail.rv?num=<%=articleList.get(i).getReview_num()%>" class="float-left"><%=articleList.get(i).getReview_date()%></a>
-                  <a href="ReviewDetail.rv?num=<%=articleList.get(i).getReview_num()%>" class="float-right meta-chat"><span class="icon-chat"></span>댓글 수 </a>
+                  <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="float-left"><%=articleList.get(i).getReview_date()%></a>
+                  <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="float-right meta-chat"><span class="icon-chat"></span>댓글 수 </a>
                 </p>
               </div>
             </div>
