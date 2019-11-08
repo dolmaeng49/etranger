@@ -1,26 +1,10 @@
 package review.service;
 
-<<<<<<< HEAD
-import review.vo.ReviewBean;
-
-public class ReviewDetailService {
-
-	
-	
-	public ReviewBean getArticle(String string) {
-		return null;
-	}
-
-	
-	
-=======
-
 import review.vo.ReviewBean;
 
 import java.sql.Connection;
 import static common.db.JdbcUtil.*;
 import review.dao.ReviewDAO;
-import review.vo.ReviewBean;
 
 public class ReviewDetailService {
 
@@ -54,5 +38,5 @@ public class ReviewDetailService {
 	}
 
 
->>>>>>> refs/remotes/origin/master
+
 }
