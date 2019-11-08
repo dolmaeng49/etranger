@@ -102,7 +102,7 @@
 				<div class="col-md-6 pr-md-5 flex-column">
 					<div class="row d-block flex-row">
 						<h2 class="h4 mb-4">Account Information</h2>
-
+						<!-- 아이디 -->
 						<div class="form-group">
 							<input type="text" class="form-control form-control-short"
 								placeholder="ID" name="member_id" required="required"
