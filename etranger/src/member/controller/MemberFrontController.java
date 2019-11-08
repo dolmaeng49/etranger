@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import common.action.Action;
 import common.vo.ActionForward;
 import member.action.MemberLoginProAction;
-
+import member.action.MemberLogoutProAction;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,7 +37,7 @@ public class MemberFrontController extends HttpServlet {
 		Action action = null;
 		ActionForward forward = null;
 		
-		// 추출한 서블릿 주소 매핑
+		// 추출한 서블릿 주소 매핑  
 		if(command.equals("/MemberJoinForm.me")) {
 			forward = new ActionForward();
 			forward.setPath("member/member_join_form.jsp");
@@ -47,19 +47,40 @@ public class MemberFrontController extends HttpServlet {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}if (command.equals("/LoginForm.me")) {
+			}
+			}else if (command.equals("/LoginForm.me")) {
 				forward = new ActionForward();
-				forward.setPath("/member/member_login_form.jsp");
+				forward.setPath("member/member_login_form.jsp");
 			} else if (command.equals("/LoginPro.me")) {
 				action = new MemberLoginProAction();
-
 				try {
 					forward = action.execute(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+			}else if (command.equals("/MemberJoinForm.me")) {
+					forward = new ActionForward();
+					forward.setRedirect(false);
+					forward.setPath("/member/member_join_form.jsp");
+				} else if (command.equals("/LogoutPro.me")) {
+					action = new MemberLogoutProAction();
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}else if (command.equals("/MemberJoinPro.me")) {
+						action = new MemberJoinProAction();
+						try {
+							forward = action.execute(request, response);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						
+						
 			}
-		}
+		
+		
 		
 		
 		

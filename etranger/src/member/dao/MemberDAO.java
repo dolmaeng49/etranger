@@ -24,31 +24,31 @@ public class MemberDAO {
 		this.con = con;
 	}
 
-	public int selectMemberLogin(String id, String passwd) {
+	public int selectMemberLogin(String member_id, String member_passwd) {
 		int loginResult = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
-			String sql = "select id from member where id=?";
+			String sql = "select member_id from member where member_id=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1, member_id);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				sql = "select passwd from member where id=?";
+				sql = "select member_passwd from member where member_id=?";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, id);
+				pstmt.setString(1, member_id);
 				rs = pstmt.executeQuery();
 				if (rs.next()) {
-					if (passwd.equals(rs.getString("passwd")))
+					if (member_passwd.equals(rs.getString("member_passwd")))
 						loginResult = 1;
 				} else {
 					loginResult = -1;
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("selectMemberLogin 오류 -"+e.getMessage());
 		} finally {
 			close(rs);
 			close(pstmt);
@@ -64,20 +64,19 @@ public class MemberDAO {
 		int insertCount = 0;
 		
 		try {
-			String sql = "insert into member(id,passwd,name,addr,phone,email,gender,leg_date,last_login,grade,birth) values(?,?,?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into member(member_id,member_passwd,member_name,member_addr,member_phone,member_email,member_gender,member_leg_date,member_grade,member_birth)"
+					+ "values(?,?,?,?,?,?,?,?,'bronze',?)";
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, memberBean.getId());
-			pstmt.setString(2, memberBean.getPasswd());
-			pstmt.setString(3, memberBean.getName());
-			pstmt.setString(4, memberBean.getAddr());
-			pstmt.setString(5, memberBean.getPhone());
-			pstmt.setString(6, memberBean.getEmail());
-			pstmt.setString(7, memberBean.getGender());
-			pstmt.setTimestamp(8, memberBean.getLeg_date());
-			pstmt.setTimestamp(9, memberBean.getLast_login());
-			pstmt.setString(1, memberBean.getGrade());
-			pstmt.setDate(1, memberBean.getBirth());
+			pstmt.setString(1, memberBean.getMember_id());
+			pstmt.setString(2, memberBean.getMember_passwd());
+			pstmt.setString(3, memberBean.getMember_name());
+			pstmt.setString(4, memberBean.getMember_addr());
+			pstmt.setString(5, memberBean.getMember_phone());
+			pstmt.setString(6, memberBean.getMember_email());
+			pstmt.setString(7, memberBean.getMember_gender());
+			pstmt.setTimestamp(8, memberBean.getMember_leg_date());
+			pstmt.setString(9, memberBean.getMember_birth());
 			
 			insertCount = pstmt.executeUpdate();
 			
@@ -92,8 +91,6 @@ public class MemberDAO {
 	}
 
 }
-
-
 
 
 
