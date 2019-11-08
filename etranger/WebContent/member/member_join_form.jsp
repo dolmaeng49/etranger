@@ -5,6 +5,7 @@
 <head>
 
 <script type="text/javascript">
+//아이디 유효성
 	function checkId(member_id) {
 		var regex = /^[A-Za-z0-9_]{4,16}$/g;
 		var element = document.getElementById('checkIdResult');
@@ -30,6 +31,8 @@
 			element.innerHTML = "사용 불가능한 패스워드 입니다.";
 		}
 		}
+
+	
 	function checkEmail(member_email) {
 
 		var element = document.getElementById('checkEmailResult');
