@@ -37,7 +37,7 @@ public class MemberFrontController extends HttpServlet {
 		Action action = null;
 		ActionForward forward = null;
 		
-		// 추출한 서블릿 주소 매핑 
+		// 추출한 서블릿 주소 매핑  
 		if(command.equals("/MemberJoinForm.me")) {
 			forward = new ActionForward();
 			forward.setPath("member/member_join_form.jsp");
