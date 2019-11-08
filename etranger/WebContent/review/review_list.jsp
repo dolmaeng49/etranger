@@ -20,15 +20,13 @@
   <head>
 	<!-- 스타일 인클루드 -->
 <jsp:include page="/include/style.jsp"/>
-
   </head>
   <body>
-    
 	<!-- 탑메뉴 인클루드 -->    
 <jsp:include page="/include/top_menu.jsp"/>
     
     <section class="home-slider owl-carousel">
-      <div class="slider-item" style="background-image: url('../images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+      <div class="slider-item" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
           <div class="row slider-text align-items-center">
@@ -41,7 +39,6 @@
       </div>
     </section>
     <!-- END slider -->
-
     <section class="ftco-section bg-light">
 			<%
 			if(articleList != null && listCount > 0) {%>
@@ -51,24 +48,22 @@
 				<%for(int i=0; i<articleList.size(); i++) {%>
           <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="blog-entry">
-              <a href="blog-single.jsp" class="block-20" style="background-image: url('../reviewUpload/<%=articleList.get(i).getReview_image()%>');">
+              <a href="ReviewDetail.rv?num=<%=articleList.get(i).getReview_num()%>" class="block-20" style="background-image: url('reviewUpload/<%=articleList.get(i).getReview_image()%>');">
               </a>
-              <div class="text p-4">
-                <div class="meta">
-                  <div><a href="#"><%=articleList.get(i).getReview_date()%></a></div>
-                  <div><a href="#"><%=articleList.get(i).getReview_member_id()%></a></div>
+              <div class="text p-4" >
+                <div class="meta" onclick="location.href='ReviewDetail.rv?num=<%=articleList.get(i).getReview_num()%>'">
+<%--                   <div><a href="#"><%=articleList.get(i).getReview_date()%></a></div> --%>
+                  <div><a href="ReviewDetail.rv?num=<%=articleList.get(i).getReview_num()%>"><%=articleList.get(i).getReview_member_id()%></a></div><!-- 아이디 대신 이름 들어갈 곳 -->
                 </div>
-                <h3 class="heading"><a href="#"><%=articleList.get(i).getReview_content()%></a></h3>
+                <h3 class="heading"><a href="ReviewDetail.rv?num=<%=articleList.get(i).getReview_num()%>"><%=articleList.get(i).getReview_content()%></a></h3>
                 <p class="clearfix">
-                  <a href="#" class="float-left">Read more</a>
-                  <a href="#" class="float-right meta-chat"><span class="icon-chat"></span> 3</a>
+                  <a href="ReviewDetail.rv?num=<%=articleList.get(i).getReview_num()%>" class="float-left"><%=articleList.get(i).getReview_date()%></a>
+                  <a href="ReviewDetail.rv?num=<%=articleList.get(i).getReview_num()%>" class="float-right meta-chat"><span class="icon-chat"></span>댓글 수 </a>
                 </p>
               </div>
             </div>
           </div>
-				<%}
-			}
-			%>
+				<%}%>
           <!-- 리스트에서 보여지는 게시물 썸네일 한 덩이 끝 -->
         </div> <!-- <div class="row">의 끝 -->
 		<!-- 페이지 부분 -->
@@ -76,26 +71,49 @@
           <div class="col text-center">
             <div class="block-27">
               <ul>
-                <li><a href="#">&lt;</a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
+            <%if(nowPage<=1){%>
+            <li><a>&lt;</a></li>
+            <%}else
+            {%><li><a href="ReviewList.rv?page=<%=nowPage -1%>">&lt;</a></li><%} %>
+            	<%for(int i=startPage; i<=endPage; i++) {
+            	if(i== nowPage) {%><li class="active"><span><%=i %></span></li>
+            	<%}else{%>
+                <li><a href="ReviewList.rv?page=<%=i%>"><%=i %></a></li>
+                <%}%>
+                <%}%>
+                <%if(nowPage>=maxPage){%><li><a>&gt;</a></li>
+                <%}else{ %>
+                <li><a href="ReviewList.rv?page=<%=nowPage +1%>">&gt;</a></li>
+                <%} %>
               </ul>
             </div>
           </div>
         </div>
         <!-- 페이지 부분 -->
+	<%}else{%><div id="emptyArticle">등록된 글이 없습니다</div><%} %>
       </div> <!-- <div class="container">의 끝 -->
     </section>
+    
+<!--     <li class="active"><span>1</span></li> -->
 
 	<!-- footer 인클루드 -->
 <jsp:include page="/include/footer.jsp"/>
 
 	<!-- loader 인클루드 -->
 <jsp:include page="/include/loader.jsp"/>
-    
+    <script type="text/javascript">
+$('h3.heading').each(function(){
+	 
+	  var length = 18; //표시할 글자수 정하기
+	  
+	  //전체 옵션을 자를 경우
+	  $(this).each(function(){
+	   if( $(this).text().length >= length ){
+	    $(this).text($(this).text().substr(0,length)+'...'); //지정한 글자수 이후 표시할 텍스트(...)
+	   }
+	  });
+	  
+	 });
+</script>
   </body>
 </html>

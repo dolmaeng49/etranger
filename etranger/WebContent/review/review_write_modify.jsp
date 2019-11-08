@@ -5,9 +5,10 @@
   <head>
 	<!-- 스타일 인클루드 -->
 <jsp:include page="/include/style.jsp"/>
+<link rel="stylesheet" href="css/css/summernote-lite.css">
+<script src="js/summernote-lite.js"></script>
   </head>
   <body>
-    
 	<!-- 탑메뉴 인클루드 -->    
 <jsp:include page="/include/top_menu.jsp"/>
     
@@ -39,21 +40,22 @@
                     <input type="text" class="form-control" id="name">
                   </div>
                   <div class="form-group">
-                    <label for="email"></label>
-                    <input type="email" class="form-control" id="email">
-                  </div>
-                  <div class="form-group">
-                    <label for="website">Website</label>
+                    <label for="subject">제목</label>
                     <input type="url" class="form-control" id="website">
                   </div>
-
                   <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                    <label for="content">내용</label>
+                    <textarea name="summernote" name="editordata" id="summernote" cols="30" rows="10" class="form-control"></textarea>
                   </div>
                   <div class="form-group">
-                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+                    <label for="image"><span id="fileName"></span></label>
+                  <input type="file" name="upFile" multiple="multiple" accept="image/*" id="image"
+                  onchange="javascript:document.getElementById('fileName').value = this.value">
                   </div>
+                  <div class="form-group">
+                    <input type="submit" value="글쓰기" class="btn py-3 px-4 btn-primary">
+                  </div>
+                  
 
                 </form>
               
@@ -76,7 +78,7 @@
                 <img src="../images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
               </div>
               <div class="desc align-self-md-center">
-                <h3>글쓴이</h3>
+                <h3>작성자 정보</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
               </div>
             </div>
@@ -171,7 +173,7 @@
               
               <!-- comment 작성폼 div -->
               <div class="comment-form-wrap pt-5">
-                <h3 class="mb-5">Leave a comment</h3>
+                <h3 class="mb-5">댓글 작성</h3>
                 <form action="#" class="p-5 bg-light">
                   <div class="form-group">
                     <label for="name">Name *</label>
