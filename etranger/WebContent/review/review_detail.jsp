@@ -38,15 +38,16 @@
         <div class="row">
           <div class="col-md-8 ftco-animate">
 <!--           	//------------------------------------------------------------------- -->
-			<p>글번호<%=article.getReview_num() %></p>
-			<p>글쓴날짜<%=article.getReview_date() %></p>
-			<p>조회수<%=article.getReview_readcount() %>
-			<p>작성자<%=article.getReview_member_id() %></p>
+			<div class="align-center">
+			<p>no.<%=article.getReview_num() %></p>
+			<p>조회수&nbsp<%=article.getReview_readcount() %>
+			<p>작성일 &nbsp<%=article.getReview_date() %></p>
+			<p>작성자&nbsp<%=article.getReview_member_id() %></p>
 			<p>제목</p>
-			<h2 class="mb-3"><%=article.getReview_subject() %></h2>
-			<p><img src="reviewUpload/<%=article.getReview_image()%>" width="300" height="300"></p>
-			<p>내용</p><%=article.getReview_content() %>
-
+			<h3 class="mb-3"><%=article.getReview_subject() %></h3>
+			<p><img src="reviewUpload/<%=article.getReview_image()%>" width="600" height="500"></p>
+			<p><%=article.getReview_content() %></p>
+			</div>
 
 			        
 <!--             // ----------------------------------------------------------------- -->

@@ -1,23 +1,10 @@
 package review.service;
 
-<<<<<<< HEAD
+
 import review.vo.ReviewBean;
 
-public class ReviewDetailService {
-
-	
-	
-	public ReviewBean getArticle(String string) {
-		return null;
-	}
-
-	
-	
-=======
-import static common.db.JdbcUtil.*;
-
 import java.sql.Connection;
-
+import static common.db.JdbcUtil.*;
 import review.dao.ReviewDAO;
 import review.vo.ReviewBean;
 
@@ -31,7 +18,7 @@ public class ReviewDetailService {
 		reviewDAO.setConnection(con);
 		
 		ReviewBean article = reviewDAO.selectArticle(review_num);
-		System.out.println(review_num);
+		System.out.println();
 		System.out.println(article);
 		
 		// BoardDAO 의 updateReadcount() 메서드를 호출하여 조회수 증가
@@ -52,5 +39,5 @@ public class ReviewDetailService {
 		return article;
 	}
 
->>>>>>> refs/remotes/origin/master
+
 }
