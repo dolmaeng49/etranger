@@ -45,7 +45,7 @@
 									class="form-control" id="id">
 							</div>
 							<div class="form-group">
-								<label for="passwd">PASSWORD *</label> <input type="passwd"
+								<label for="password">PASSWORD *</label> <input type="password"
 									class="form-control" id="passwd">
 							</div>
 							<div class="form-group">

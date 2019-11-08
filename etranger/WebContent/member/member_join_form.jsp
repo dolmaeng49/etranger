@@ -30,7 +30,25 @@
 			element.innerHTML = "사용 불가능한 패스워드 입니다.";
 		}
 		}
-	
+	function checkEmail(member_email) {
+
+		var element = document.getElementById('checkEmailResult');
+
+		var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+
+		if(exptext.exec(member_email.value)){
+
+			//이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우
+
+			element.innerHTML="올바른 이메일 형식입니다."
+
+		}else{
+
+			element.innerHTML="올바른 이메일 형식이 아닙니다."
+
+		}
+
+	}
 
 	
 	
@@ -128,7 +146,9 @@
 						</div>
 						<div class="form-group">
 							<input type="email" class="form-control" placeholder="Email"
-								name="member_email" required="required">
+								name="member_email" required="required"onkeyup="checkEmail(this)">
+
+                <span id ="checkEmailResult"></span>
 
 						</div>
 						<div class="form-group">
