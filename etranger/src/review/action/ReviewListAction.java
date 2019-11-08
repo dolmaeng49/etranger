@@ -20,7 +20,7 @@ public class ReviewListAction implements Action {
 		
 		//페이징 처리
 		int page=1;
-		int limit=10;
+		int limit=12;
 		
 		if(request.getParameter("page")!=null) {
 			page=Integer.parseInt(request.getParameter("page"));
