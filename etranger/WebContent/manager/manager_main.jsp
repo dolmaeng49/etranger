@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	ArrayList<CategoryBean> articleList = (ArrayList<CategoryBean>) request.getAttribute("articleList");
+    ArrayList<CategoryBean> themeList = (ArrayList<CategoryBean>) request.getAttribute("themeList");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,10 +108,19 @@
 
 			<div class="select-wrap one-third">
 				<!-- 		예시임. 원래 db로 가져와야함      -->
-				테마1. <input type="checkbox" name="theme" value="혼자">혼자 <input type="checkbox" name="theme" value="커플">커플 <input type="checkbox" name="theme" value="가족">가족
-				<br>
-				테마2. <input type="checkbox" name="theme" value="호캉스"> 호캉스 <input type="checkbox" name="theme" value="축구직관"> 축구직관 <input type="checkbox" name="theme" value="허니문"> 허니문 <input type="checkbox" name="theme" value="미식여행"> 미식여행 <input type="checkbox" name="theme" value="트레킹"> 트레킹 <input type="checkbox" name="theme" value="액티비티"> 액티비티
-
+				테마
+				<%
+			       for(int i = 0; i< themeList.size(); i++){
+			    	   %>
+			    	   <input type="checkbox" name="theme" value="<%=themeList.get(i).getThemeName()%>"> <%=themeList.get(i).getThemeName()%> 
+			    	   
+			    	   <%
+			       }
+				%>
+				
+			     <input type="button" value="테마추가하기" onclick="check()">
+				<p id="Theme"></p>
+				
 			</div>
 
 			<form action="ManagerProInsert.ma" class="p-5 bg-light">
