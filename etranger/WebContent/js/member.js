@@ -1,16 +1,9 @@
 
 (function($) {
-// 아이디, 패스워드 유효성 검사 결과를 저장하는 전역 변수
+	
+	// 아이디, 패스워드 유효성 검사 결과를 저장하는 전역 변수
 	var checkIdResult = false, checkPasswdResult = false;
 
-/* 	function emailSelect() {
-// 		alert(document.join_fr.email_select.value);
-		document.join_fr.email_2.value = document.join_fr.email_select.value;
-		if(document.join_fr.email_select.selectedIndex == 0) {
-			document.join_fr.email_2.focus();
-		}
-	} */
-	
 	// ID 체크
 	$('#member_id').keyup(function(){
 		// 4-12자리 영문자,숫자 조합
@@ -29,6 +22,7 @@
 			checkIdResult = false;
 		}
 	});
+	
 	// P/W 체크
 	$('#member_passwd').keyup(function(){
 		// 8-20자리 영문자대문자,소문자,숫자,특수문자(!@#$%^&*()_+)중 3가지 조합
@@ -41,25 +35,23 @@
 		var element = document.getElementById('checkPasswdResult');
 		var checkCount = 0;
 		if(lengthCaseRegex.exec($(this).val())) {
-			if(upperCaseRegex.exec($(this).val())){
-				checkCount += 1;
-			}if(lowerCaseRegex.exec($(this).val())) {
-				checkCount += 1;
-			}if(digitCaseRegex.exec($(this).val())) {
-				checkCount += 1;
-			}if(specialCharRegex.exec($(this).val())) {
-				checkCount += 1;
-			}
+			// 대문자, 소문자, 숫자, 특수문자가 포함되었을 경우 마다 checkCount += 1
+			checkCount += upperCaseRegex.exec($(this).val()) ? 1 : 0;
+			checkCount += lowerCaseRegex.exec($(this).val()) ? 1 : 0;
+			checkCount += digitCaseRegex.exec($(this).val()) ? 1 : 0;
+			checkCount += specialCharRegex.exec($(this).val()) ? 1 : 0;
 		}
 		if(checkCount >= 3){
+			// 3가지 이상의 조합을 사용한 경우 메세지
 			element.innerHTML = "사용 가능 패스워드입니다";
 			checkPasswdResult = true;
 		}else {
-			element.innerHTML = "영문 대,소문자,숫자,특수문자(!@#$%^&*()_+)중 3가지 이상 조합 8-20자리";
+			element.innerHTML = "대,소문자,숫자,특수문자(!@#$%^&*()_+)중 셋 이상 조합 8-20자리";
 			checkPasswdResult = false;
 		}
 	});
-	// P/W 재입력 확인
+	
+	// P/W 재입력 일치여부 확인
 	var checkPasswdRetype = false;
 	$('#member_passwd_retype').keyup(function(){
 		var element = document.getElementById('checkPasswdRetype');
@@ -70,6 +62,7 @@
 			checkPasswdRetype = true;
 		}
 	});
+	
 	// ID 중복 체크 버튼
 	$('#btn_dup').click(function(){
 		var fid=$('#member_id').val();
@@ -86,6 +79,7 @@
 			}
 		});
 	});
+	
 	// Email 인증 코드 발송
 	$('#btn_email_code').click(function(){
 		var element = document.getElementById('email_check');
@@ -94,10 +88,12 @@
 				alert(data);
 //				$('#email_check').html('hi');
 //				element.innerHTML = "hello";
+				// 인증코드 일치 확인을 위해 input hidden 에 인증코드 저장 
 				$('#email_check').val(data);
 			}
 		});
 	});
+	
 	// Email 인증 코드 입력 확인
 	var checkEmailCode = false;
 	$('#btn_email_check').click(function(){
@@ -129,11 +125,45 @@
 		document.member_join_form.submit();
 	});
 	
-
-	
-	
-	
-	/*function checkSubmit() {
+/*
+ * // submit() 이벤트 발생
+		$('#my_form').submit(function(){
+			var name=$('#name').val();
+			var pass=$('#pass').val();
+// 			alert(name+':'+pass);
+			// 이름 미입력 제어
+			if(name==""){
+				alert('이름을 입력하세요');
+				$('#name').focus();
+				return false;
+			}
+			// 비밀번호 미입력 제어
+			if(pass.length==0){
+				alert('비밀번호를 입력하세요');
+				$('#pass').focus();
+				return false;
+			}
+			// 성별체크
+			// 라디오박스 id를 다르게 부여해서 각각 제어한다
+			if($('#gender_man').is(":checked")==false && $('#gender_woman').is(":checked")==false){
+				alert('성별체크 하세요');
+				$('#gender_man').focus();
+				return false;
+			}
+			// select 박스
+			var age=$('#age').val();
+			if(age==""){
+				alert('나이를 선택하세요');
+				$('#age').focus();
+				return false;
+			}
+			
+		});
+		
+		
+	});
+ 	
+ 	function checkSubmit() {
 		//
 		if(checkIdResult && checkPasswdResult) {
 			return true;
@@ -145,5 +175,50 @@
 	
 })(jQuery);
 
+/* --------은지씨 스크립트
+ * 
+//아이디 유효성 
+function checkId(member_id) {
+	var regex = /^[A-Za-z0-9_]{4,16}$/g;
+	var element = document.getElementById('checkIdResult');
+	if (regex.exec(member_id.value)) {
+		element.innerHTML = "사용 가능한 아이디입니다.";
+	} else {
+		element.innerHTML = "사용 불가능한 아이디입니다.";
+	}
+}
+
+function checkPasswd(member_passwd) {
+	var lengthCaseRegex = /[A-Za-z0-9!@#$%^&*()_+]{8,20}/;
+	var upperCaseRegex = /[A-z]/;
+	var lowerCaseRegex = /[a-z]/;
+	var digitCaseRegex = /[0-9]/;
+	var specialCharRegex = /[!@#$%^&*()_+]/
+	var element = document.getElementById('checkPasswdResult');
+	if (lengthCaseRegex.exec(member_passwd.value)
+			&& upperCaseRegex.exec(member_passwd.value)
+			&& lowerCaseRegex.exec(member_passwd.value)
+			&& digitCaseRegex.exec(member_passwd.value)
+			&& specialCharRegex.exec(member_passwd.value)) {
+		element.innerHTML = "사용 가능한 패스워드 입니다.";
+	} else {
+		element.innerHTML = "사용 불가능한 패스워드 입니다.";
+	}
+}
+ */
+
+function checkEmail(member_email) {
+
+	var element = document.getElementById('checkEmailResult');
+
+	var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+
+	if (exptext.exec(member_email.value)) {
+		//이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우
+		element.innerHTML = "올바른 이메일 형식입니다."
+	} else {
+		element.innerHTML = "올바른 이메일 형식이 아닙니다."
+	}
+}
 	
 	

@@ -25,6 +25,7 @@ public class MemberEmailCheckAction implements Action {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println("인증코드발송성공");
+		
 		forward = null;
 		return forward;
 	}

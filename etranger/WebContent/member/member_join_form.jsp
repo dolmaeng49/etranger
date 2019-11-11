@@ -176,6 +176,7 @@
 	<!-- loader 인클루드 -->
 <jsp:include page="/include/loader.jsp"/>
 <script src="js/member.js"></script>
-    
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="js/member.kakao.js"></script>
   </body>
 </html>

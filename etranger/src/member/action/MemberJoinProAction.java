@@ -1,9 +1,12 @@
 package member.action;
 
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.IntData;
 
 import common.action.Action;
 import common.vo.ActionForward;
@@ -16,23 +19,27 @@ public class MemberJoinProAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward;
 		forward = null;
+		System.out.println("MemberJoinProAction");
 		
-		String id = request.getParameter("id");
-		String passwd=request.getParameter("pass");
-		String name = request.getParameter("name");
-		String addr = request.getParameter("addr");
-		String phone = request.getParameter("phone");
-		String email = request.getParameter("email");
-		String gender = request.getParameter("gender");
+		Timestamp leg_date = new Timestamp(System.currentTimeMillis());
+		
 		
 		MemberBean memberBean=new MemberBean();
-		memberBean.setId(request.getParameter("id"));
-		memberBean.setPasswd(request.getParameter("pass"));
-		memberBean.setName(request.getParameter("name"));
-		memberBean.setAddr(request.getParameter("addr"));
-		memberBean.setPhone(request.getParameter("phone"));
-		memberBean.setEmail(request.getParameter("email"));
-		memberBean.setGender(request.getParameter("Gender"));
+		memberBean.setMember_id(request.getParameter("member_id"));
+		memberBean.setMember_passwd(request.getParameter("member_passwd"));
+		memberBean.setMember_name(request.getParameter("member_name"));
+		String member_addr = request.getParameter("member_addr") + request.getParameter("member_addr2")
+				+ request.getParameter("member_addr3") + request.getParameter("member_addr4");
+		memberBean.setMember_addr(member_addr);
+		memberBean.setMember_phone(request.getParameter("member_phone"));
+		memberBean.setMember_email(request.getParameter("member_email"));
+		memberBean.setMember_gender(request.getParameter("member_gender"));
+		memberBean.setMember_leg_date(leg_date);
+		memberBean.setMember_birth(request.getParameter("member_birth"));
+		
+		
+		
+		
 		
 		MemberJoinProService memberJoinProService = new MemberJoinProService();
 		boolean isWriteSuccess=memberJoinProService.registMember(memberBean);
@@ -43,7 +50,6 @@ public class MemberJoinProAction implements Action {
 			out.println("<script>");
 			out.println("alert('회원가입 실패!')");
 			out.println("history.back()");
-//			out.println("history.go(-1)");
 			out.println("</script>");
 		}else {	
 			forward = new ActionForward();

@@ -51,7 +51,7 @@
 				<%for(int i=0; i<articleList.size(); i++) {%>
           <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="blog-entry">
-              <a href="blog-single.jsp" class="block-20" style="background-image: url('../reviewUpload/<%=articleList.get(i).getReview_image()%>');">
+              <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num() %>&page=<%=nowPage %>" class="block-20" style="background-image: url('reviewUpload/<%=articleList.get(i).getReview_image()%>');">
               </a>
               <div class="text p-4">
                 <div class="meta">

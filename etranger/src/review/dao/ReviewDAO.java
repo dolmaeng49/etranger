@@ -149,7 +149,67 @@ public class ReviewDAO {
 	
 	
 	////////////////////////////////JWoo 작업영역 시작/////////////////////////////////////
-	
+	public ReviewBean selectArticle(int review_num) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ReviewBean reviewBean = null;
+		
+		try {
+			String sql = "SELECT * FROM review WHERE review_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, review_num);
+			rs = pstmt.executeQuery();
+			
+			// 게시물이 존재할 경우 ReviewBean 객체에 모든 데이터 저장
+			if(rs.next()) {
+				reviewBean = new ReviewBean();
+				reviewBean.setReview_num(rs.getInt("review_num"));
+				reviewBean.setReview_member_id(rs.getString("review_member_id"));
+				reviewBean.setReview_subject(rs.getString("review_subject"));
+				reviewBean.setReview_image(rs.getString("review_image"));
+				reviewBean.setReview_content(rs.getString("review_content"));
+				reviewBean.setReview_date(rs.getTimestamp("review_date"));
+				reviewBean.setReview_readcount(rs.getInt("review_readcount"));
+				reviewBean.setReview_package_catagory_code(rs.getString("review_package_category_code"));
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("selectArticle() 오류 - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return reviewBean;
+	}
+
+
+
+	public int updateReadcount(int review_num) {
+		// review_num 에 해당하는 게시물 조회수(readcount) 1 증가
+		PreparedStatement pstmt = null;
+				
+		int updateCount = 0;
+				
+		try {
+		// 조회수를 증가시킬 게시물 번호(board_num)를 SQL 구문 작성 시 바로 결합해도 되고
+//		String sql = "UPDATE board SET board_readcount=board_readcount+1 WHERE board_num=" + board_num;
+					
+		// 만능문자(?)를 사용하여 파라미터 값 지정해도 됨(setXXX() 필수)
+		String sql = "UPDATE review SET review_readcount=review_readcount+1 WHERE review_num=?";
+		pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1, review_num);
+		updateCount = pstmt.executeUpdate();
+					
+		} catch (SQLException e) {
+			System.out.println("updateReadcount() 오류 - " + e.getMessage());
+		} finally {
+			close(pstmt);
+		}
+		return updateCount;
+	}	
 	
 	
 	
