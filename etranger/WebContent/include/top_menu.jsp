@@ -11,13 +11,13 @@
 %>
 
 <!-- login-info  class="container"-->
-<div class="container">
+<div class="container"><p id="login-info-p">
 <%if(member_id==null){ %>
 	<a href="LoginForm.me">Log In</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="MemberJoinForm.me">Create an Account</a>
 <%}else{ %>
-<%=member_id %>님 | <a href="LogoutPro.me">Log Out</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="../member/updateForm.jsp">Modify</a></div>
+<%=member_id %>님 | <a href="LogoutPro.me">Log Out</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="../member/updateForm.jsp">Modify</a>
 <%} %>
-
+</p>
 </div>
 <!-- login-info -->
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
