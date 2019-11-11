@@ -9,6 +9,7 @@ import manager.vo.CategoryBean;
 
 public class CategoryListService {
 	public ArrayList<CategoryBean> getArticleList() {
+
 		Connection con = getConnection();
 		
 		ManagerDAO mdao = ManagerDAO.getInstance();

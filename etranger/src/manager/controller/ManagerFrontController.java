@@ -13,6 +13,7 @@ import common.action.Action;
 import common.vo.ActionForward;
 import manager.action.CategoryListAction;
 import manager.action.ManagerInsertProAction;
+import manager.action.ThemeListAction;
 
 @WebServlet("*.ma")
 public class ManagerFrontController extends HttpServlet {
@@ -31,6 +32,7 @@ public class ManagerFrontController extends HttpServlet {
 		// manager_main.jsp 페이지 이동
 		if (command.equals("/ManagerMain.ma")) {
 			action = new CategoryListAction();
+			
 			try {
 				forward = action.execute(request, response);
 			}
@@ -50,6 +52,7 @@ public class ManagerFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+	
 
 		// ManagerInsertProAction 클래스로 이동
 		else if (command.equals("/ManagerProInsert.ma")) {
