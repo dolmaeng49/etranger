@@ -107,7 +107,7 @@
 			</div>
 
 			<div class="select-wrap one-third">
-				<!-- 		예시임. 원래 db로 가져와야함      -->
+				<!-- 	테마리스트만뿌려주기 : 해야할 것 : 버튼누르면 테마추가뜨기 ㅡㅡ    -->
 				테마<br>
 				<%
 			       for(int i = 0; i< themeList.size(); i++){
