@@ -23,7 +23,7 @@ public class CategoryListAction implements Action {
 		request.setAttribute("articleList", articleList);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("/manager/manager_insert.jsp");
+		forward.setPath("/manager/manager_main.jsp");
 		
 		return forward;
 	}

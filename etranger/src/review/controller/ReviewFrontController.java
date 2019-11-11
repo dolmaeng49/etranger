@@ -94,7 +94,13 @@ public class ReviewFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/ReviewModi.rv")) {
+			forward = new ActionForward();
+			forward.setPath("/review/review_write_modify.jsp");
 		}
+		
+		
+		
 		
 		if (forward != null) {
 			if (forward.isRedirect()) {

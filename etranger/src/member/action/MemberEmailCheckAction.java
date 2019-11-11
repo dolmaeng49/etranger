@@ -18,14 +18,13 @@ public class MemberEmailCheckAction implements Action {
 		MemberEmailService memberEmailService = new MemberEmailService();
 		String email = "dm49@naver.com";
 		String subject = "etranger 회원가입 인증 코드입니다.";
-		String content = "가입을 환영합니다!";
+		String content = "etranger 회원가입을 환영합니다! E-mail 인증을 위해 아래의 코드를 회원가입 페이지에 입력해주세요. <코드는 아직 없음>";
 		
-//		memberEmailService.mailSend(email, subject, content);
+		memberEmailService.mailSend(email, subject, content);
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println("인증코드발송성공");
-		
 		forward = null;
 		return forward;
 	}

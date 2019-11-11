@@ -9,5 +9,7 @@
 	margin-top: 20px;
 }
 
-/* member/member_join_form */
-
+.align-center { 
+	margin: 0 auto;
+	text-align : center;
+}

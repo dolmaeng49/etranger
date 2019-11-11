@@ -1,12 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%
+	//현재 세션 객체에 "sid"세션값이 존재할 경우 String 타입 변수 sid에 저장
+	String member_id=null;
+
+	if(session.getAttribute("member_id")!=null){
+		member_id=(String)session.getAttribute("member_id");
+	}
+%>
+
 <!-- login-info  class="container"-->
-	<div class="container">
-		<p id="login-info-p"><a href="LoginForm.me">Log In </a>&nbsp;&nbsp;|&nbsp;&nbsp;
-		<a href="MemberJoinForm.me">Create an Account</a></p>
-	</div>
+<div class="container"><p id="login-info-p">
+<%if(member_id==null){ %>
+	<a href="LoginForm.me">Log In</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="MemberJoinForm.me">Create an Account</a>
+<%}else{ %>
+<%=member_id %>님 | <a href="LogoutPro.me">Log Out</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="../member/updateForm.jsp">Modify</a>
+<%} %>
+</p>
+</div>
 <!-- login-info -->
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	<div class="container">
-		<a class="navbar-brand" href="index.jsp">�tranger</a>
+		<a class="navbar-brand" href="index.jsp">étranger</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="oi oi-menu"></span> Menu
 		</button>

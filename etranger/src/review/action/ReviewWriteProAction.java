@@ -42,7 +42,7 @@ public class ReviewWriteProAction implements Action {
 		//ReviewBean 객체 생성
 		
 		rb= new ReviewBean();
-		rb.setReview_member_id(multi.getParameter("member_id"));
+		rb.setReview_member_id(multi.getParameter("review_member_id"));
 		rb.setReview_subject(multi.getParameter("subject"));
 		rb.setReview_content(multi.getParameter("content"));
 		rb.setReview_image(multi.getOriginalFileName((String) multi.getFileNames().nextElement()));

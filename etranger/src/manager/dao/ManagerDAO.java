@@ -83,5 +83,35 @@ public class ManagerDAO {
 		}
 		return articleList;
 	}
+	
+	public ArrayList<CategoryBean> selectThemeList() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		ArrayList<CategoryBean> themeList = new ArrayList<CategoryBean>();
+
+		try {
+
+			String sql = "SELECT category_theme_code, category_theme_name FROM category_theme";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				CategoryBean cb = new CategoryBean();
+				cb.setThemeCode(rs.getInt("category_theme_code"));
+				cb.setThemeName(rs.getString("category_theme_name"));
+
+				themeList.add(cb);
+			}
+		} catch (SQLException e) {
+
+			System.out.println("selectThemeList() 오류 - " + e.getMessage());
+
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return themeList;
+	}
 
 }

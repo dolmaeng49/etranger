@@ -117,6 +117,8 @@ public class ReviewDAO {
 		}
 		return articleList;
 	}
+	
+	
 
 
 
