@@ -7,23 +7,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.action.Action;
 import common.vo.ActionForward;
-import manager.svc.CategoryListService;
 import manager.svc.ThemeListService;
 import manager.vo.CategoryBean;
 
-public class CategoryListAction implements Action {
+public class ThemeListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		CategoryListService categoryListService = new CategoryListService();
-
-		ArrayList<CategoryBean> articleList = new ArrayList<CategoryBean>();
-		articleList = categoryListService.getArticleList();
-		
-		request.setAttribute("articleList", articleList);
-		
-		
+		System.out.println("themeAction");
 		ThemeListService themeListService = new ThemeListService();
 		
 		ArrayList<CategoryBean> themeList = new ArrayList<CategoryBean>();

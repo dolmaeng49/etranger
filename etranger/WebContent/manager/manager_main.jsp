@@ -107,17 +107,17 @@
 			</div>
 
 			<div class="select-wrap one-third">
-				<!-- 		예시임. 원래 db로 가져와야함      -->
-				테마
+				<!-- 	테마리스트만뿌려주기 : 해야할 것 : 버튼누르면 테마추가뜨기 ㅡㅡ    -->
+				테마<br>
 				<%
 			       for(int i = 0; i< themeList.size(); i++){
 			    	   %>
-			    	   <input type="checkbox" name="theme" value="<%=themeList.get(i).getThemeName()%>"> <%=themeList.get(i).getThemeName()%> 
-			    	   
+			    	  <input type="checkbox" name="theme" value="<%=themeList.get(i).getThemeName()%>"><%=themeList.get(i).getThemeName() %>
+			    	  
 			    	   <%
-			       }
+			      }
 				%>
-				
+				<br>
 			     <input type="button" value="테마추가하기" onclick="check()">
 				<p id="Theme"></p>
 				

@@ -39,7 +39,6 @@
 
 					<div class="comment-form-wrap pt-5">
 						<h3 class="mb-5">Login</h3>
-						<form action="#" class="p-5 bg-light">
 							<div class="form-group">
 								<label for="id">ID *</label> <input type="text"
 									class="form-control" id="id" required="required" name="member_id">
@@ -58,7 +57,6 @@
 									onclick="location.href='MemberJoinForm.me'">
 							</div>
 						
-						</form>
 					</div>
 				</div>
 			</div>

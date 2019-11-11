@@ -19,7 +19,6 @@ public class MemberLoginProAction implements Action {
 		
 		String member_id = request.getParameter("member_id");
 		String member_passwd = request.getParameter("member_passwd");
-		System.out.println(member_id+","+member_passwd);
 		
 		MemberLoginProService memberLoginProService = new MemberLoginProService();
 		int loginResult = memberLoginProService.memberLogin(member_id,member_passwd);
