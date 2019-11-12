@@ -53,7 +53,7 @@
 	</section>
 	<!-- END slider -->
 
-	<form action="MemberJoinPro.me" method="post" name="joinForm">
+	<form action="MemberJoinPro.me" method="post" name="joinForm" id="joinForm">
 		<section class="ftco-section contact-section">
 			<div class="container">
 				<div class="row block-9 mb-4">
@@ -64,10 +64,11 @@
 							<div class="form-group">
 								<input type="text" class="form-control form-control-short" placeholder="ID" name="member_id"
 									required="required" id="member_id">
-								<input type="button" value="Dup.Check" class="btn btn-primary py-3 px-5 btn-small">
+								<input type="button" value="Dup.Check" class="btn btn-primary py-3 px-5 btn-small" id="btn_dup">
 							</div>
 							<!-- 아이디 유효성 검사 결과 표시 -->
 							<div class="form-group form-group-message">
+								<input type="text" id="member_id_DupCheck" placeholder="hidden으로 바꿀 예정">
 								<span id="checkIdResult"></span>
 							</div>
 
@@ -77,7 +78,7 @@
 							</div>
 							<div class="form-group">
 								<input type="password" class="form-control" id="member_passwd_retype" placeholder="Retype Password"
-									name="member_passwd2" required="required">
+									name="member_passwd2" id="member_passwd2" required="required">
 							</div>
 							<!-- 패스워드 유효성 검사 결과, 패스워드 재입력 일치 여부 표시 -->
 							<div class="form-group form-group-message">
@@ -93,15 +94,15 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Phone Number" name="member_phone" required="required">
+							<input type="number" class="form-control" placeholder="Phone Number" name="member_phone" required="required">
 						</div>
 						<div class="form-group">
-							<input type="email" class="form-control" placeholder="Email" name="member_email" required="required" onkeyup="checkEmail(this)">
+							<input type="text" class="form-control" placeholder="Email" name="member_email" id="member_email" required="required" onkeyup="checkEmail(this)">
 							<input type="text" class="form-control form-control-email"
 								placeholder="Email 인증 코드" name="member_email_code" id="member_email_code" required="required">
 							<input type="button" value="인증" class="btn btn-primary py-3 px-5 btn-small" id="btn_email_check">
 							<input type="button" value="인증코드발송" class="btn btn-primary py-3 px-5 btn-small" id="btn_email_code">
-							<input type="text" id="email_check" placeholder="hidden으로 바꿀 예정">
+							<input type="hidden" id="email_check" placeholder="hidden으로 바꿀 예정">
 							<span id="checkEmailResult"></span>
 							</div>
 
@@ -124,8 +125,8 @@
 								<span>생년월일을 선택해주세요</span>
 							</div>
 							<div class="form-group">
-								<input type="radio" name="member_gender" value="1">Man&nbsp;&nbsp;&nbsp;
-								<input type="radio" name="member_gender" value="2">Woman
+								<input type="radio" name="member_gender" value="1" id="gender_man">Man&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="member_gender" value="2" id="gender_woman">Woman
 							</div>
 							<div class="form-group">
 								<input type="submit" value="Join"

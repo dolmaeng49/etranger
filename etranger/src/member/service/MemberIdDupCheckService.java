@@ -14,6 +14,7 @@ public class MemberIdDupCheckService {
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		memberDAO.setConnection(con);
 		
+		// ID 중복 여부를 확인하는 메서드 호출, 결과 리턴
 		isDup = memberDAO.checkDup(id);
 		
 		
