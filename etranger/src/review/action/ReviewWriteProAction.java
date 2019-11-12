@@ -18,7 +18,7 @@ public class ReviewWriteProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		System.out.println("ReviewWriteProAction");
+		System.out.println("ReviewWriteProAction");
 		
 		ActionForward forward = null;
 		

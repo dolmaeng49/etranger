@@ -9,7 +9,7 @@ import review.vo.ReviewBean;
 public class ReviewWriteProService {
 
 	public boolean registArticle(ReviewBean rb) {
-		
+		System.out.println("ReviewWriteProService - registArticle");
 		boolean isWriteSuccess = false;
 		
 		Connection con = getConnection();
