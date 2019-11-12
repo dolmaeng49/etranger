@@ -17,11 +17,11 @@ public class MemberLoginProAction implements Action {
 		
 		ActionForward forward = null;
 		
-		String id = request.getParameter("id");
-		String passwd = request.getParameter("passwd");
+		String member_id = request.getParameter("member_id");
+		String member_passwd = request.getParameter("member_passwd");
 		
 		MemberLoginProService memberLoginProService = new MemberLoginProService();
-		int loginResult = memberLoginProService.memberLogin(id,passwd);
+		int loginResult = memberLoginProService.memberLogin(member_id,member_passwd);
 		
 		if(loginResult==0) {
 			response.setContentType("text/html; charset=UTF-8");
@@ -39,9 +39,9 @@ public class MemberLoginProAction implements Action {
 			out.println("</script>");
 		}else if(loginResult==1) {
 			HttpSession session = request.getSession();
-			session.setAttribute("sId", id);
+			session.setAttribute("member_id", member_id);
 			forward = new ActionForward();
-			forward.setPath("BoardMain.bo");
+			forward.setPath("index.jsp");
 			forward.setRedirect(true);
 			
 		}
