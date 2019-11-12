@@ -17,7 +17,8 @@ public class MemberJoinProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ActionForward forward = null;
+		ActionForward forward;
+		forward = null;
 		System.out.println("MemberJoinProAction");
 		
 		Timestamp leg_date = new Timestamp(System.currentTimeMillis());
@@ -56,9 +57,6 @@ public class MemberJoinProAction implements Action {
 			forward.setRedirect(true);//Redirect 방식 = true, Dispatch 방식 = false 전달
 		}
 		
-
-			
-			
 		return forward;
 	}
 

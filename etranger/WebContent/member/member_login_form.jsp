@@ -30,7 +30,7 @@
 		</div>
 	</section>
 	<!-- END slider -->
-
+<form action="LoginPro.me" method="post">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
@@ -39,16 +39,15 @@
 
 					<div class="comment-form-wrap pt-5">
 						<h3 class="mb-5">Login</h3>
-						<form action="#" class="p-5 bg-light">
 							<div class="form-group">
 								<label for="id">ID *</label> <input type="text"
-									class="form-control" id="id">
+									class="form-control" id="id" required="required" name="member_id">
 							</div>
 							<div class="form-group">
 								<label for="password">PASSWORD *</label> <input type="password"
-									class="form-control" id="passwd">
+									class="form-control" id="passwd" required="required" name="member_passwd">
 							</div>
-							<div class="form-group">
+			 				<div class="form-group">
 								<input type="submit" value="Login"
 									class="btn py-3 px-4 btn-primary">
 
@@ -57,8 +56,7 @@
 									class="btn py-3 px-4 btn-primary"
 									onclick="location.href='MemberJoinForm.me'">
 							</div>
-
-						</form>
+						
 					</div>
 				</div>
 			</div>
@@ -73,8 +71,7 @@
 	<!-- loader 인클루드 -->
 	<jsp:include page="../include/loader.jsp" />
 
-</body>
-</html>
 
+</form>
 </body>
 </html>

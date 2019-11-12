@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/* include/top_menu */
 #login-info-p {
 	text-align: right;
 }
@@ -11,4 +12,4 @@
 .align-center { 
 	margin: 0 auto;
 	text-align : center;
-
+}

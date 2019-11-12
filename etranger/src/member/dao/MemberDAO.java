@@ -30,18 +30,18 @@ public class MemberDAO {
 		ResultSet rs = null;
 
 		try {
-			String sql = "select id from member where member_id=?";
+			String sql = "select member_id from member where member_id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_id);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				sql = "select passwd from member where member_id=?";
+				sql = "select member_passwd from member where member_id=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, member_id);
 				rs = pstmt.executeQuery();
 				if (rs.next()) {
-					if (member_passwd.equals(rs.getString("passwd")))
+					if (member_passwd.equals(rs.getString("member_passwd")))
 						loginResult = 1;
 				} else {
 					loginResult = -1;
@@ -59,7 +59,6 @@ public class MemberDAO {
 
 	public int insertMember(MemberBean memberBean) {
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		
 		int insertCount = 0;
 		
@@ -88,6 +87,29 @@ public class MemberDAO {
 		}
 		
 		return insertCount;
+	}
+	// ID 중복검사
+	public boolean checkDup(String id) {
+		boolean isDup = false;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT id FROM member WHERE id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) { // 같은 아이디가 존재하는 경우
+				isDup = true; // true 리턴
+			}
+		} catch (SQLException e) {
+			System.out.println("checkDup 실패! : " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return isDup;
 	}
 
 }

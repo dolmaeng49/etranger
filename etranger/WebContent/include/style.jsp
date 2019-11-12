@@ -1,4 +1,4 @@
-	<title>étranger - The best choice for your travel</title>
+	<title>ï¿½tranger - The best choice for your travel</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700" rel="stylesheet">
@@ -13,5 +13,5 @@
     <link rel="stylesheet" href="css/jquery.timepicker.css">
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style_etranger.css">
+    <link rel="stylesheet" href="css/style.css">
