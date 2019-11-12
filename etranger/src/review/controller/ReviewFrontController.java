@@ -29,7 +29,7 @@ public class ReviewFrontController extends HttpServlet {
 		
 		if(command.equals("/ReviewWriteForm.rv")) {
 			forward = new ActionForward();
-			forward.setPath("/review/review_write.jsp");
+			forward.setPath("/review/review_write2.jsp");
 		}else if(command.equals("/ReviewWritePro.rv")) {
 			action = new ReviewWriteProAction();
 			try {

@@ -95,7 +95,7 @@ public class MemberDAO {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "SELECT id FROM member WHERE id=?";
+			String sql = "SELECT member_id FROM member WHERE member_id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();

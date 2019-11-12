@@ -99,6 +99,13 @@ public class MemberFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (command.equals("/MemberIdDupCheck.me")) {
+			action = new MemberIdDupCheckAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		// ActionForward 객체의 정보에 따른 포워딩
