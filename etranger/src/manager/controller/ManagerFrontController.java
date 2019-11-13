@@ -13,6 +13,7 @@ import common.action.Action;
 import common.vo.ActionForward;
 import manager.action.CategoryListAction;
 import manager.action.ManagerInsertProAction;
+import manager.action.RegionSelectAction;
 import manager.action.ThemeListAction;
 
 @WebServlet("*.ma")
@@ -35,20 +36,7 @@ public class ManagerFrontController extends HttpServlet {
 			
 			try {
 				forward = action.execute(request, response);
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		// CategoryListAction 클래스로 이동
-		else if (command.equals("/ManagerInsert.ma")) {
-
-			action = new CategoryListAction();
-			try {
-				forward = action.execute(request, response);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -59,8 +47,17 @@ public class ManagerFrontController extends HttpServlet {
 			action = new ManagerInsertProAction();
 			try {
 				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			catch (Exception e) {
+		}
+
+		// ManagerInsertProAction 클래스로 이동
+		else if (command.equals("/RegionSelect.ma")) {
+			action = new RegionSelectAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -68,12 +65,12 @@ public class ManagerFrontController extends HttpServlet {
 		if (forward != null) {
 			if (forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());
-			}
-			else {
+			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
 		}
+
 	}
 
 	@Override

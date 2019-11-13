@@ -84,6 +84,36 @@ public class ManagerDAO {
 		return articleList;
 	}
 	
+	public ArrayList<CategoryBean> selectRegionList() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		ArrayList<CategoryBean> articleList = new ArrayList<CategoryBean>();
+
+		try {
+
+			String sql = "SELECT * FROM category_region ORDER BY category_region_code DESC";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				CategoryBean cb = new CategoryBean();
+				cb.setRegionCode(rs.getInt("category_region_code"));
+				cb.setRegionName(rs.getString("category_region_name"));
+
+				articleList.add(cb);
+			}
+		} catch (SQLException e) {
+
+			System.out.println("selectArticleList() 오류 - " + e.getMessage());
+
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return articleList;
+	}
+	
 	public ArrayList<CategoryBean> selectThemeList() {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

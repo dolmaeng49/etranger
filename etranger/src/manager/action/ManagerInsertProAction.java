@@ -18,7 +18,6 @@ public class ManagerInsertProAction implements Action {
 		
 		CategoryBean cb = new CategoryBean();
 		cb.setRegionName(request.getParameter("region_name"));
-		cb.setCityName(request.getParameter("city_name"));
 		
 		ManagerInsertProService mips = new ManagerInsertProService();
 		boolean isInsertSuccess = mips.InsertCategory(cb);
@@ -27,13 +26,13 @@ public class ManagerInsertProAction implements Action {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter(); // response 객체로부터 PrintWriter 객체 얻어오기
 			out.println("<script>");
-			out.println("alert('상품 등록 실패!')");
+			out.println("alert('지역 등록 실패!')");
 			out.println("history.back()");
 			out.println("</script>");
 		} else {
-			forward = new ActionForward();
-			forward.setRedirect(true);
-			forward.setPath("ManagerMain.ma");
+//			forward = new ActionForward();
+//			forward.setRedirect(true);
+//			forward.setPath("ManagerMain.ma");
 		}
 		
 		return forward;
