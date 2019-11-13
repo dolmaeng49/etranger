@@ -1,7 +1,8 @@
 <%@page import="manager.vo.PageInfo"%>
 <%@page import="manager.vo.CategoryBean"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%
 	ArrayList<CategoryBean> articleList = (ArrayList<CategoryBean>) request.getAttribute("articleList");
 	ArrayList<CategoryBean> themeList = (ArrayList<CategoryBean>) request.getAttribute("themeList");
@@ -10,12 +11,12 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
+<meta charset="UTF-8">
 
 
-	<!-- 스타일 include -->
-	<jsp:include page="../include/style.jsp" />
-
+<!-- 스타일 include -->
+<jsp:include page="../include/style.jsp" />
+<jsp:include page="../include/style_manager.jsp" />
 </head>
 
 <body>
@@ -23,7 +24,8 @@
 	<jsp:include page="../include/top_menu.jsp" />
 
 	<section class="home-slider owl-carousel">
-		<div class="slider-item" style="background-image: url('./images/bg_4.jpg');"
+		<div class="slider-item"
+			style="background-image: url('./images/bg_4.jpg');"
 			data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			<div class="container">
@@ -51,9 +53,11 @@
 			</tr>
 		</table>
 		<h1>관리자 페이지 테스트</h1>
-		<input type="text" name="id" id="id"> <input type="button" id="btn" value="버튼">
-		<p id="div"></p>
-		<input type="button" id='show' class="search-submit btn btn-primary" value="상품 분류 등록" onclick="dis()">
+<!-- 		<input type="text" name="id" id="id"> <input type="button" -->
+<!-- 			id="btn" value="버튼"> -->
+<!-- 		<p id="div"></p> -->
+		<input type="button" id='show' class="search-submit btn btn-primary"
+			value="상품 분류 등록" onclick="dis()">
 		<section id="dis" style="display: none;">
 
 
@@ -74,8 +78,8 @@
 				</select>
 				<p id="Region"></p>
 				<div class="form-group" id="addRegion" style="display: none;">
-					<input type="text" size="20" id="region_addbox"><input type="button" id="region_addbtn"
-						value="지역추가">
+					<input type="text" size="20" id="region_addbox">
+					<input type="button" id="region_addbtn" value="지역추가" class="btn btn-primary">
 				</div>
 			</div>
 
@@ -85,33 +89,37 @@
 					<option>도시선택</option>
 					<option value="add">도시추가</option>
 					<%
-// 						for (int i = 0; i < articleList.size(); i++) {
+						// 						for (int i = 0; i < articleList.size(); i++) {
 					%>
-<%-- 					<option value="<%=articleList.get(i).getCityCode()%>"> --%>
-<%-- 						<%="도시코드 : " + articleList.get(i).getCityCode() + ", 도시이름 : " + articleList.get(i).getCityName()%> --%>
-<!-- 					</option> -->
+					<%-- 					<option value="<%=articleList.get(i).getCityCode()%>"> --%>
+					<%-- 						<%="도시코드 : " + articleList.get(i).getCityCode() + ", 도시이름 : " + articleList.get(i).getCityName()%> --%>
+					<!-- 					</option> -->
 					<%
-// 						}
+						// 						}
 					%>
 				</select>
 				<p id="Region"></p>
 			</div>
 
 			<div class="select-wrap one-third">
-				<!-- 	테마리스트만뿌려주기 : 해야할 것 : 버튼누르면 테마추가뜨기 ㅡㅡ    -->
 				테마<br>
 				<%
-			       for(int i = 0; i< themeList.size(); i++){
-			    	   %>
-			    	  <input type="checkbox" name="theme" value="<%=themeList.get(i).getThemeName()%>"><%=themeList.get(i).getThemeName() %>
-			    	  
-			    	   <%
-			      }
+					for (int i = 0; i < themeList.size(); i++) {
 				%>
-				<br>
-			     <input type="button" value="테마추가하기" onclick="check()">
+				<input type="checkbox" name="theme"
+					value="<%=themeList.get(i).getThemeName()%>"><%=themeList.get(i).getThemeName()%>
+
+				<%
+					}
+				%>
+		
 				<p id="Theme"></p>
-				
+				<input type="button" id="theme_addbtn" value="테마추가" class="btn btn-primary" onclick="check()">
+				<div class="form-group" id="addTheme" style="display: none;">
+					<input type="text" size="20" id="theme_addbox"> 
+					<input type="button" id="theme_addbtn" class="btn btn-primary" value="추가">
+				</div>
+
 			</div>
 
 			<form action="ManagerProInsert.ma" class="p-5 bg-light">
@@ -128,6 +136,7 @@
 	<!-- loader 인클루드 -->
 	<jsp:include page="/include/loader.jsp" />
 </body>
+<script src="../js/jquery-3.4.1.js"></script>
 <script type="text/javascript">
 	function dis() {
 		if ($('#dis').css('display') == 'none') {
@@ -144,24 +153,35 @@
 			$('#addRegion').hide();
 		}
 	}
-	
-// 	$(document).ready(function() {
-// 		$('#selectRegion').change(function(){
-// 			$.getJSON('RegionSelect.ma',function(data){
-// 				$.each(data,function(index,value){
-// 					$('#selectRegion').append("<option>"+value.regionName+"</option>");				
-// 				});
-// 			});
-// 		});
-// 	});
 
-	$('#region_addbtn').click(function () {
+	function check() {
+		if ($('#addTheme').css('display') == 'none') {
+			$('#addTheme').show();
+		} else {
+			$('#addTheme').hide();
+		}
+	}
+
+
+	// 	$(document).ready(function() {
+	// 		$('#selectRegion').change(function(){
+	// 			$.getJSON('RegionSelect.ma',function(data){
+	// 				$.each(data,function(index,value){
+	// 					$('#selectRegion').append("<option>"+value.regionName+"</option>");				
+	// 				});
+	// 			});
+	// 		});
+	// 	});
+
+	$('#region_addbtn').click(function() {
 		$.ajax('ManagerProInsert.ma', {
-			data: {
-				region_name: $('#region_addbox').val()
+			data : {
+				region_name : $('#region_addbox').val()
 			}
 		});
 	});
+
+	
 </script>
 
 </html>
