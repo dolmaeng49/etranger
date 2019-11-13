@@ -42,20 +42,9 @@
 	</section>
 	<!-- END slider -->
 	<div class="container">
-		<input type="button" value="글조회" id="btntest">
-		<table border="1" id="test">
-			<tr>
-				<td>번호</td>
-				<td>제목</td>
-				<td>작성자</td>
-				<td>날짜</td>
-				<td>조회수</td>
-			</tr>
-		</table>
+		
 		<h1>관리자 페이지 테스트</h1>
-<!-- 		<input type="text" name="id" id="id"> <input type="button" -->
-<!-- 			id="btn" value="버튼"> -->
-<!-- 		<p id="div"></p> -->
+		
 		<input type="button" id='show' class="search-submit btn btn-primary"
 			value="상품 분류 등록" onclick="dis()">
 		<section id="dis" style="display: none;">
@@ -163,15 +152,16 @@
 	}
 
 
-	// 	$(document).ready(function() {
-	// 		$('#selectRegion').change(function(){
-	// 			$.getJSON('RegionSelect.ma',function(data){
-	// 				$.each(data,function(index,value){
-	// 					$('#selectRegion').append("<option>"+value.regionName+"</option>");				
-	// 				});
-	// 			});
-	// 		});
-	// 	});
+	$('#selectRegion').change(function(){
+		$('#selectRegion').empty();
+		$('#selectRegion').append("<option>지역선택</option>");
+		$('#selectRegion').append("<option value="+"add"+">지역추가</option>");
+		$.getJSON('RegionSelect.ma',function(data){
+			$.each(data,function(index,value){
+ 				$('#selectRegion').append("<option>"+value.regionName+"</option>");				
+			});
+		});
+	});
 
 	$('#region_addbtn').click(function() {
 		$.ajax('ManagerProInsert.ma', {

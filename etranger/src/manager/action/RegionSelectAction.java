@@ -1,5 +1,6 @@
 package manager.action;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,6 @@ public class RegionSelectAction implements Action {
 		ArrayList<CategoryBean> articleList = new ArrayList<CategoryBean>();
 		articleList = regionListService.getRegionList();
 
-		request.setAttribute("articleList", articleList);
 
 		JSONArray regionList = new JSONArray();
 		for (int i = 0; i < articleList.size(); i++) {
@@ -31,7 +31,13 @@ public class RegionSelectAction implements Action {
 			rl.put("regionCode", articleList.get(i).getRegionCode());
 			regionList.add(rl);
 		}
-
+		request.setAttribute("regionList", regionList);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		out.print(regionList);
+		
 		ActionForward forward = null;
 
 		return forward;
