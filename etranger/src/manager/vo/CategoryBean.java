@@ -2,6 +2,9 @@ package manager.vo;
 
 public class CategoryBean {
 	
+	private int cityRegionCode;
+	
+
 	private int cityCode;
 	private String cityName;
 	private int regionCode;
@@ -9,6 +12,14 @@ public class CategoryBean {
 	private int themeCode;
 	private String themeName;
 
+	
+	public int getCityRegionCode() {
+		return cityRegionCode;
+	}
+
+	public void setCityRegionCode(int cityRegionCode) {
+		this.cityRegionCode = cityRegionCode;
+	}
 	public int getCityCode() {
 		return cityCode;
 	}
