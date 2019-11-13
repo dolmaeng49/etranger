@@ -53,7 +53,28 @@ public class ManagerDAO {
 
 		return insertCount;
 	}
+	
+	public int insertCity(CategoryBean cb) {
+		int insertCount = 0;
 
+		PreparedStatement pstmt = null;
+
+		String sql = "INSERT INTO category_city VALUES(null, ?, ?)";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, cb.getCityName());
+			pstmt.setInt(2, cb.getCityRegionCode());
+
+			insertCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return insertCount;
+	}
+	
 	public ArrayList<CategoryBean> selectArticleList() {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -114,6 +135,33 @@ public class ManagerDAO {
 		return articleList;
 	}
 	
+	public ArrayList<CategoryBean> selectCityList(int code) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<CategoryBean> CityList = new ArrayList<CategoryBean>();
+		
+		String sql = "SELECT * from category_city where category_city_region_code=? ORDER BY category_city_code DESC";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, code);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				CategoryBean cb = new CategoryBean();
+				cb.setCityCode(rs.getInt("Category_city_code"));
+				cb.setCityName(rs.getString("Category_city_name"));
+				
+				CityList.add(cb);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return CityList;
+	}
+	
 	public ArrayList<CategoryBean> selectThemeList() {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -144,4 +192,29 @@ public class ManagerDAO {
 		return themeList;
 	}
 
+	
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
