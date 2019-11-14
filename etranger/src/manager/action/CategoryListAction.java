@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.action.Action;
 import common.vo.ActionForward;
-import manager.svc.CategoryListService;
+import manager.svc.RegionListService;
 import manager.svc.ThemeListService;
 import manager.vo.CategoryBean;
 
@@ -16,12 +16,12 @@ public class CategoryListAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		CategoryListService categoryListService = new CategoryListService();
+		RegionListService regionListService = new RegionListService();
 
-		ArrayList<CategoryBean> articleList = new ArrayList<CategoryBean>();
-		articleList = categoryListService.getArticleList();
+		ArrayList<CategoryBean> regionList = new ArrayList<CategoryBean>();
+		regionList = regionListService.getRegionList();
 		
-		request.setAttribute("articleList", articleList);
+		request.setAttribute("regionList", regionList);
 		
 		
 		ThemeListService themeListService = new ThemeListService();

@@ -5,22 +5,20 @@ import static common.db.JdbcUtil.*;
 import java.sql.Connection;
 
 import member.dao.MemberDAO;
+import member.vo.MemberBean;
 
-public class MemberIdDupCheckService {
+public class MemberResetPasswdFormService {
 
-	public boolean checkDup(String id) {
-		boolean isDup = false;
+	public int isCorrectMemberEmail(MemberBean memberBean) {
+		int result = 0;
 		Connection con = getConnection();
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		memberDAO.setConnection(con);
 		
-		// ID 중복 여부를 확인하는 메서드 호출, 결과 리턴
-		isDup = memberDAO.checkDup(id);
-		
+		result = memberDAO.isCorrectMemberEmail(memberBean);
 		
 		close(con);
-		
-		return isDup;
+		return result;
 	}
 	
 }

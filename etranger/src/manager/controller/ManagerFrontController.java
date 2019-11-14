@@ -12,7 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import common.action.Action;
 import common.vo.ActionForward;
 import manager.action.CategoryListAction;
-import manager.action.ManagerInsertProAction;
+import manager.action.CityInsertAction;
+import manager.action.CitySelectAction;
+import manager.action.ThemeInsertAction;
+import manager.action.RegionInsertAction;
+import manager.action.RegionSelectAction;
+import manager.action.ThemeCheckBoxAction;
 import manager.action.ThemeListAction;
 
 @WebServlet("*.ma")
@@ -27,40 +32,75 @@ public class ManagerFrontController extends HttpServlet {
 		Action action = null;
 		ActionForward forward = null;
 
-		System.out.println(command);
+//		System.out.println(command);
 
 		// manager_main.jsp 페이지 이동
 		if (command.equals("/ManagerMain.ma")) {
 			action = new CategoryListAction();
-			
+
 			try {
 				forward = action.execute(request, response);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-
-		// CategoryListAction 클래스로 이동
-		else if (command.equals("/ManagerInsert.ma")) {
-
-			action = new CategoryListAction();
-			try {
-				forward = action.execute(request, response);
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	
 
 		// ManagerInsertProAction 클래스로 이동
 		else if (command.equals("/ManagerProInsert.ma")) {
-			action = new ManagerInsertProAction();
+			action = new RegionInsertAction();
 			try {
 				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			catch (Exception e) {
+		}
+		
+		//ManagerThemeInsertAction 클래스로 이동
+		else if (command.equals("/ManagerTheme.ma")) {
+			action = new ThemeInsertAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		// ThemeCheckBoxAction 클래스로 이동
+		else if (command.equals("/ThemeCheckBox.ma")) {
+			action = new ThemeCheckBoxAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		// RegionSelectAction 클래스로 이동
+		else if (command.equals("/RegionSelect.ma")) {
+			action = new RegionSelectAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		// CityInsertAction 클래스로 이동
+		else if (command.equals("/CityInsert.ma")) {
+			action = new CityInsertAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		// CitySelectAction 클래스로 이동
+		else if (command.equals("/CitySelect.ma")) {
+			action = new CitySelectAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -68,12 +108,12 @@ public class ManagerFrontController extends HttpServlet {
 		if (forward != null) {
 			if (forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());
-			}
-			else {
+			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
 		}
+
 	}
 
 	@Override

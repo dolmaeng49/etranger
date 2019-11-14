@@ -12,12 +12,20 @@
 	.row-padding {
 		padding-left: 20%
 	}
-	.form-wrap-login {
+ 	.form-wrap-login {
 		display: inline-block;
-		width: 70%;
+		width: 80%;
 	}
 	.wrap-links {
 		text-align: right;
+	}
+	.form-control-short {
+		display: inline-block;
+		width: 60%;
+	}
+	.form-control-shortshort {
+		display: inline-block;
+		width: 30%;
 	}
 </style>
 </head>
@@ -36,16 +44,15 @@
 					<div class="col-md-7 col-sm-12 ftco-animate">
 						<p class="breadcrumbs">
 							<span class="mr-2"><a href="../main/index.jsp">Home</a></span><span><a 
-								href="MemberLoginForm.me">Login</a></span>
+								href="MemberFindIdForm.me">Find ID</a></span>
 						</p>
-						<h1 class="mb-3">Login</h1>
+						<h1 class="mb-3">Find ID</h1>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 	<!-- END slider -->
-<form action="LoginPro.me" method="post">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row row-padding">
@@ -53,21 +60,28 @@
 
 
 					<div class="comment-form-wrap pt-5 form-wrap-login">
-						<h3 class="mb-5">Login</h3>
+						<h3 class="mb-5">Find ID</h3>
+<form action="MemberFindIdPro.me" method="post" id="findIdForm">
 						<div class="form-group">
-							<label for="id">ID</label><br>
-							<input type="text" class="form-control" id="id" required="required" name="member_id">
+							<input type="text" class="form-control" placeholder="Name" name="member_name"
+								required="required">
 						</div>
 						<div class="form-group">
-							<label for="password">PASSWORD</label><br>
-							<input type="password" class="form-control" id="passwd" required="required" name="member_passwd">
+							<input type="text" class="form-control form-control-shortshort pick_date"
+								id="checkin_date" value="1990/1/1" placeholder="Birth" readonly="readonly"
+								name="member_birth" required="required">&nbsp;&nbsp;&nbsp;
+							<span>생년월일을 선택해주세요</span>
 						</div>
-						<p class="wrap-links"><a href="MemberFindIdForm.me">ID 찾기</a> |
-							<a href="MemberFindPasswdForm.me">P/W 찾기</a> |
+						<div class="form-group">
+							<input type="radio" name="member_gender" value="m" id="gender_man">Man&nbsp;&nbsp;&nbsp;
+							<input type="radio" name="member_gender" value="f" id="gender_woman">Woman
+						</div>
+						<div class="form-group form-group-btn">
+							<input type="submit" value="ID 찾기" class="btn btn-primary py-3 px-5">
+						</div>
+</form>
+						<p class="wrap-links"><a href="MemberFindPasswdForm.me">P/W 찾기</a> |
 							<a href="MemberJoinForm.me">회원가입</a> |</p>
-			 			<div class="form-group form-group-btn">
-							<input type="submit" value="Login" class="btn py-3 px-4 btn-primary">&nbsp;&nbsp;
-						</div>
 					</div>
 				</div>
 			</div>
@@ -81,8 +95,7 @@
 
 	<!-- loader 인클루드 -->
 	<jsp:include page="../include/loader.jsp" />
+	<script src="js/member.js"></script>
 
-
-</form>
 </body>
 </html>

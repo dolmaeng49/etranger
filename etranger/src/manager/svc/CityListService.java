@@ -9,19 +9,20 @@ import java.util.ArrayList;
 import manager.dao.ManagerDAO;
 import manager.vo.CategoryBean;
 
-public class ThemeListService {
-	public ArrayList<CategoryBean> getThemeList() {
+public class CityListService {
+
+	public ArrayList<CategoryBean> getCityList(int code) {
 		Connection con = getConnection();
-		
+
 		ManagerDAO mdao = ManagerDAO.getInstance();
 		mdao.setConnection(con);
-		
-		ArrayList<CategoryBean> themeList = null;
-		themeList = mdao.selectThemeList();
-		
+
+		ArrayList<CategoryBean> cityArrayList = null;
+		cityArrayList = mdao.selectCityList(code);
+
 		close(con);
-		
-		return themeList;
-		
+
+		return cityArrayList;
 	}
+
 }
