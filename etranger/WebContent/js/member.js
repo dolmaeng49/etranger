@@ -1,10 +1,10 @@
 
 (function($) {
 	
-	// 아이디, 패스워드 유효성 검사 결과를 저장하는 전역 변수
-	var checkIdResult = false, checkPasswdResult = false;
+// ============= 회원가입
 
 	// ID 체크
+	var checkIdResult = false;
 	$('#member_id').keyup(function(){
 		// 4-12자리 영문자,숫자 조합
 		var regex = /^[a-zA-Z0-9]{4,12}$/g;
@@ -24,6 +24,7 @@
 	});
 	
 	// P/W 체크
+	var checkPasswdResult = false;
 	$('#member_passwd').keyup(function(){
 		// 8-20자리 영문자대문자,소문자,숫자,특수문자(!@#$%^&*()_+)중 3가지 조합
 		var lengthCaseRegex = /[A-Za-z0-9!@#$%^&*()_+]{8,20}/g;
@@ -88,7 +89,6 @@
 	// Email 인증 코드 발송
 	$('#btn_email_code').click(function(){
 		var fEmail=$('#member_email').val();
-//		alert(fEmail);
 		$.ajax('MemberSendEmailCode.me',{
 			data:{email:fEmail},
 			success:function(sdata){
@@ -103,88 +103,121 @@
 	var checkEmailCode = false;
 	$('#btn_email_check').click(function(){
 		var element = document.getElementById('member_email_code');
-		alert('입력받은코드:' + element.value + '발송한코드:' + $('#email_check').val());
+//		alert('입력받은코드:' + element.value + '발송한코드:' + $('#email_check').val());
+		if(checkEmailCode){
+			alert('이미 인증완료 되었습니다!\n 다른 이메일 주소를 이용하려면 페이지를 새로고침해주세요');
+		}
+		if(element.value==""){alert('인증코드를 입력해주세요!'); return;}
 		if(element.value==($('#email_check').val())){
-			element.innerHTML = "Email 인증 성공";
-			element.attr('readonly',"readonly");
 			alert('인증완료 되었습니다!');
+			$('#member_email_code').val("인증 성공");
+			$('#member_email_code').attr('readonly',"readonly");
+			$('#member_email').attr('readonly',"readonly");
 			checkEmailCode = true;
 		}else{
 			alert('인증코드를 확인해주세요');
 		}
 	});
-/*	
-	$('#member_join_submit').click(function(){
-		var checkIdDup = false; // ID 중복 검사 여부를 확인할 변수
-		if($('#member_id_DupCheck').val()==$('#member_id').val()){
-			// ID 입력칸과 중복체크한 ID (input hidden)가 일치할 경우
-			checkIdDup = true;
-		}else{
-			alert('ID 중복체크 필수!');
-			return;
-		}
-		if(!(checkIdResult && checkPasswdResult && checkPasswdRetype)){
-			// ID, 패스워드 유효성 검사, 패스워드 재입력 일치 중 하나라도 부족한 경우
-			alert('ID 또는 패스워드를 확인해 주세요');
-			return;
-		}
-		// 모든 조건 통과시 form submit
-		document.member_join_form.submit();
-	});
-*/	
-		// submit() 이벤트 발생시 제어
-		$('#joinForm').submit(function(){
-			alert($('#member_id_DupCheck').val() + ', ' + $('#member_id').val());
-			// 성별체크 입력 확인
-			if($('#gender_man').is(":checked")==false && $('#gender_woman').is(":checked")==false){
-				alert('성별을 체크 해주세요');
-				$('#gender_man').focus();
-				return false;
-			}
-			// 아이디 유효성 검사 확인
-			if(!checkIdResult){
-				alert('아이디를 확인해주세요');
-				$('#member_id').focus();
-				return false;
-			}
-			// ID 중복체크 확인
-			if(!($('#member_id_DupCheck').val()==($('#member_id').val()))){
-				alert('아이디 중복체크는 필수입니다!');
-				$('#member_id').focus();
-				return false;
-			}
-			// 패스워드 유효성 검사 확인
-			if(!checkPasswdResult){
-				alert('패스워드를 확인해주세요');
-				$('#member_passwd').focus();
-				return false;
-			}
-			// 패스워드 재입력 일치여부 확인
-			if(!checkPasswdRetype){
-				alert('패스워드 재입력을 확인해주세요');
-				$('#member_passwd2').focus();
-				return false;
-			}
-			// Email 인증 확인
-			if(!checkEmailCode){
-				alert('E-Mail 인증을 확인해주세요');
-				$('#member_email_code').focus();
-				return false;
-			}
-		});
-		
-		
-//	});
-/* 	
- 	function checkSubmit() {
-		//
-		if(checkIdResult && checkPasswdResult) {
-			return true;
-		}else {
-			alert('아이디 또는 패스워드 규칙 확인 필수');
+	
+	// 회원가입  submit() 이벤트 발생시 제어
+	$('#joinForm').submit(function(){
+		// 성별체크 입력 확인
+		if($('#gender_man').is(":checked")==false && $('#gender_woman').is(":checked")==false){
+			alert('성별을 체크 해주세요');
+			$('#gender_man').focus();
 			return false;
 		}
-	}*/
+		// 아이디 유효성 검사 확인
+		if(!checkIdResult){
+			alert('아이디를 확인해주세요');
+			$('#member_id').focus();
+			return false;
+		}
+		// ID 중복체크 확인
+		if(!($('#member_id_DupCheck').val()==($('#member_id').val()))){
+			alert('아이디 중복체크는 필수입니다!');
+			$('#member_id').focus();
+			return false;
+		}
+		// 패스워드 유효성 검사 확인
+		if(!checkPasswdResult){
+			alert('패스워드를 확인해주세요');
+			$('#member_passwd').focus();
+			return false;
+		}
+		// 패스워드 재입력 일치여부 확인
+		if(!checkPasswdRetype){
+			alert('패스워드 재입력을 확인해주세요');
+			$('#member_passwd2').focus();
+			return false;
+		}
+		// Email 인증 확인
+		if(!checkEmailCode){
+			alert('E-Mail 인증을 확인해주세요');
+			$('#member_email_code').focus();
+			return false;
+		}
+	});
+	
+// ============= ID, PW 찾기	
+	
+	// ID 찾기 submit() 이벤트 발생시 제어
+	$('#findIdForm').submit(function(){
+		// 성별체크 입력 확인
+		if($('#gender_man').is(":checked")==false && $('#gender_woman').is(":checked")==false){
+			alert('성별을 체크 해주세요');
+			$('#gender_man').focus();
+			return false;
+		}
+	});
+	// PW찾기 - ID, Email 정보 확인, 인증 코드 발송
+	$('#btn_email_code_findPasswd').click(function(){
+		var fId=$('#member_id_findPasswd').val();
+		var fEmail=$('#member_email').val();
+		$.ajax('MemberResetPasswdForm.me',{
+			data:{member_id:fId,member_email:fEmail},
+			dataType:"xml",
+			success:function(sdata){
+				var result = $(sdata).find('findId').find('result').text();
+				var checkCode = $(sdata).find('findId').find('checkCode').text();
+				if(result == '0'){
+					alert('존재하지 않는 아이디입니다');
+				}else if(result == '-1'){
+					alert('Email 주소가 일치하지 않습니다');
+				}else if(result == '1'){
+					// 인증코드 일치 확인을 위해 input hidden 에 인증코드 저장 
+					$('#email_check').val(checkCode);
+					alert('인증 코드 발송 완료!');
+					// 인증 후 아이디, Email 변경 방지 
+					$('#member_id_findPasswd').attr('readonly',"readonly");
+					$('#member_email').attr('readonly',"readonly");
+				}
+				
+			}
+		});
+	});
+	// PW찾기 - submit() 이벤트 발생시 제어
+	$('#findPasswdForm').submit(function(){
+		// 패스워드 유효성 검사 확인
+		if(!checkPasswdResult){
+			alert('패스워드를 확인해주세요');
+			$('#member_passwd').focus();
+			return false;
+		}
+		// 패스워드 재입력 일치여부 확인
+		if(!checkPasswdRetype){
+			alert('패스워드 재입력을 확인해주세요');
+			$('#member_passwd2').focus();
+			return false;
+		}
+		// 이메일 인증 확인
+		if(!checkEmailCode){
+			alert('E-Mail 인증을 확인해주세요');
+			$('#member_email_code').focus();
+			return false;
+		}
+	});
+		
 	
 })(jQuery);
 

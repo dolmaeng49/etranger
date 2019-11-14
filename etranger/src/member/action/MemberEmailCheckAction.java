@@ -16,7 +16,6 @@ public class MemberEmailCheckAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward;
-		System.out.println("MemberEmailCheckAction");
 		MemberEmailService memberEmailService = new MemberEmailService();
 		String email = "";
 		// ajax통해 전달 받은 email 주소 저장
