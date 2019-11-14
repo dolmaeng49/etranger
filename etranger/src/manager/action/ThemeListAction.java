@@ -14,7 +14,7 @@ public class ThemeListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("themeAction");
+//		System.out.println("themeAction");
 		ThemeListService themeListService = new ThemeListService();
 		
 		ArrayList<CategoryBean> themeList = new ArrayList<CategoryBean>();
