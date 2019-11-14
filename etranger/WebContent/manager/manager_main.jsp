@@ -78,7 +78,7 @@
 
 			<div class="select-wrap one-third">
 				테마
-				<br>
+				<label id="newTheme">
 				<%
 					for (int i = 0; i < themeList.size(); i++) {
 				%>
@@ -87,13 +87,12 @@
 				<%
 					}
 				%>
-
+				 </label>
 				<p id="Theme"></p>
 				<input type="button" id="theme_addbtn" value="테마추가" class="btn btn-primary" onclick="check()">
 				<div class="form-group" id="addTheme" style="display: none;">
-					<input type="text" size="20" id="theme_addbox"> <input type="button" id="theme_addbtn" class="btn btn-primary" value="추가">
+					<input type="text" size="20" id="theme_addbox"> <input type="button" id="theme_addbtn2" class="btn btn-primary" value="추가">
 				</div>
-
 			</div>
 
 			<form action="ManagerProInsert.ma" class="p-5 bg-light">

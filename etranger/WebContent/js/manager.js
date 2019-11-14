@@ -47,6 +47,25 @@
         });
     });
     
+    // 테마추가
+    $('#theme_addbtn2').click(function () {
+        $.ajax('ManagerTheme.ma', {
+            data: {
+            	theme_name: $('#theme_addbox').val()
+            }
+        });
+
+        $('#newTheme').empty(); // #addTheme에 있는 내용 지우기
+        alert('테마추가성공 :-)');
+        //addTheme에 추가
+        $.getJSON('ThemeCheckBox.ma', function (data) {
+            $.each(data, function (index, value) {
+            	$('#newTheme').append('<input type="checkbox" name="theme" value="'+value.themeName+'">'+value.themeName+'&nbsp;');
+            });
+        });
+        
+
+    });
 
 })(jQuery);
 
@@ -54,10 +73,12 @@
 function dis() {
     if ($('#dis').css('display') == 'none') {
         $('#dis').show();
+        $('#dis').css('transition') == 'all 2.5s 0.5s';
     } else {
         $('#dis').hide();
     }
 }
+
 
 // 지역 추가 표시, 선택한 지역의 도시출력
 function showRegionAdd() {

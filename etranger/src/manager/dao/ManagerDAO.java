@@ -54,6 +54,8 @@ public class ManagerDAO {
 		return insertCount;
 	}
 	
+
+	
 	public int insertCity(CategoryBean cb) {
 		int insertCount = 0;
 
@@ -65,6 +67,27 @@ public class ManagerDAO {
 			pstmt.setString(1, cb.getCityName());
 			pstmt.setInt(2, cb.getCityRegionCode());
 
+			insertCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return insertCount;
+	}
+	
+	// 테마추가
+	public int insertTheme(CategoryBean cb) {
+		int insertCount = 0;
+
+		PreparedStatement pstmt = null;
+
+		String sql = "INSERT INTO category_theme (category_theme_code,category_theme_name) VALUES (null,?)";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, cb.getThemeName());
 			insertCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -170,7 +193,7 @@ public class ManagerDAO {
 
 		try {
 
-			String sql = "SELECT category_theme_code, category_theme_name FROM category_theme";
+			String sql = "SELECT category_theme_code, category_theme_name FROM category_theme ORDER BY category_theme_code DESC";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
@@ -191,6 +214,8 @@ public class ManagerDAO {
 		}
 		return themeList;
 	}
+
+
 
 	
 

@@ -15,7 +15,9 @@ import manager.action.CategoryListAction;
 import manager.action.CityInsertAction;
 import manager.action.CitySelectAction;
 import manager.action.ManagerInsertProAction;
+import manager.action.ManagerThemeInsertAction;
 import manager.action.RegionSelectAction;
+import manager.action.ThemeCheckBoxAction;
 import manager.action.ThemeListAction;
 
 @WebServlet("*.ma")
@@ -46,6 +48,26 @@ public class ManagerFrontController extends HttpServlet {
 		// ManagerInsertProAction 클래스로 이동
 		else if (command.equals("/ManagerProInsert.ma")) {
 			action = new ManagerInsertProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		//ManagerThemeInsertAction 클래스로 이동
+		else if (command.equals("/ManagerTheme.ma")) {
+			action = new ManagerThemeInsertAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		// ThemeCheckBoxAction 클래스로 이동
+		else if (command.equals("/ThemeCheckBox.ma")) {
+			action = new ThemeCheckBoxAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
