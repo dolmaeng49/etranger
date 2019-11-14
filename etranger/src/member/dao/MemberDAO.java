@@ -11,7 +11,7 @@ import static common.db.JdbcUtil.*;
 
 public class MemberDAO {
 	private static MemberDAO instance = new MemberDAO();
-	private Connection con = null;;
+	private Connection con = null;
 
 	private MemberDAO() {
 	}
@@ -41,11 +41,12 @@ public class MemberDAO {
 				pstmt.setString(1, member_id);
 				rs = pstmt.executeQuery();
 				if (rs.next()) {
-					if (member_passwd.equals(rs.getString("member_passwd")))
+					if (member_passwd.equals(rs.getString("member_passwd"))) {
 						loginResult = 1;
-				} else {
-					loginResult = -1;
-				}
+					}else {
+						loginResult = -1;
+					}
+				} 
 			}
 		} catch (SQLException e) {
 			System.out.println("selectMemberLogin 오류 -"+e.getMessage());
@@ -110,6 +111,89 @@ public class MemberDAO {
 		}
 		
 		return isDup;
+	}
+	
+	// ID 찾기 : 이름, 생년월일, 성별 정보를 이용해
+	public String findId(MemberBean memberBean) {
+		String selectedId = "";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String sql = "SELECT member_id FROM member WHERE member_name=? AND member_birth=? AND member_gender=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, memberBean.getMember_name());
+			pstmt.setString(2, memberBean.getMember_birth());
+			pstmt.setString(3, memberBean.getMember_gender());
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) { // 조회결과가 존재하는 경우 해당 ID 리턴
+				selectedId = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("findId 실패 : " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		// 조회결과가 없는 경우 null 리턴
+		return selectedId;
+	}
+
+	public int isCorrectMemberEmail(MemberBean memberBean) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT member_id FROM member WHERE member_id=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, memberBean.getMember_id());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				sql = "SELECT member_email FROM member WHERE member_id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, memberBean.getMember_id());
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					if(rs.getString(1).equals(memberBean.getMember_email())) {
+						return 1; // 아이디, email 정보 일치할 경우
+					}
+				}
+				return -1; // 아이디 존재하지만, email 정보 불일치
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("isCorrectMemberEmail 실패 : " + e.getMessage());
+		} finally {
+			close(rs);
+		}
+		
+		return result;
+	}
+	
+	// ID 가 일치하는 회원정보의 비밀번호를 변경하는 메서드
+	public boolean updatePasswd(MemberBean memberBean) {
+		boolean isUpdateSuccess = false;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE member SET member_passwd=? WHERE member_id=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, memberBean.getMember_passwd());
+			pstmt.setString(2, memberBean.getMember_id());
+			int result = pstmt.executeUpdate();
+			if(result > 0) {
+//				isUpdateSuccess = true;
+				return true;
+			}else {
+				return false;
+			}
+		} catch (SQLException e) {
+			System.out.println("updatePasswd 실패! : " + e.getMessage());
+		}
+		
+		
+		
+		
+		return isUpdateSuccess;
 	}
 
 }

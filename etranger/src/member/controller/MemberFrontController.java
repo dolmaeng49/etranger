@@ -12,6 +12,8 @@ import common.action.Action;
 import common.vo.ActionForward;
 import member.action.MemberLoginProAction;
 import member.action.MemberLogoutProAction;
+import member.action.MemberResetPasswdFormAction;
+import member.action.MemberResetPasswdProAction;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,8 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.action.Action;
 import common.vo.ActionForward;
-import manager.action.ManagerInsertProAction;
 import member.action.MemberEmailCheckAction;
+import member.action.MemberFindIdProAction;
 import member.action.MemberIdDupCheckAction;
 import member.action.MemberJoinProAction;
 
@@ -106,7 +108,35 @@ public class MemberFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (command.equals("/MemberFindIdForm.me")) {
+			forward = new ActionForward();
+			forward.setPath("/member/member_findId_form.jsp");
+		} else if (command.equals("/MemberFindIdPro.me")) {
+			action = new MemberFindIdProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/MemberFindPasswdForm.me")) {
+			forward = new ActionForward();
+			forward.setPath("/member/member_findPasswd_form.jsp");
+		} else if (command.equals("/MemberResetPasswdForm.me")) {
+			action = new MemberResetPasswdFormAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/MemberResetPasswdPro.me")) {
+			action = new MemberResetPasswdProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
 
 		// ActionForward 객체의 정보에 따른 포워딩
 		if (forward != null) {
