@@ -12,6 +12,8 @@ import common.action.Action;
 import common.vo.ActionForward;
 import review.action.ReviewDetailAction;
 import review.action.ReviewListAction;
+import review.action.ReviewModifyFormAction;
+import review.action.ReviewModifyProAction;
 import review.action.ReviewWriteProAction;
 
 
@@ -51,22 +53,23 @@ public class ReviewFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-//		}
-//		else if(command.equals("/ReviewModifyForm.rv")){
-//			action = new ReviewModifyFormAction();
-//			try {
-//				forward=action.execute(request, response);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}else if(command.equals("/ReviewModifyPro.rv")){
-//			action = new ReviewModifyProAction();
-//			try {
-//				forward=action.execute(request, response);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}else if(command.equals("/ReviewDeleteForm.rv")) {
+		}else if(command.equals("/ReviewModifyForm.rv")){
+			action = new ReviewModifyFormAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/ReviewModifyPro.rv")){
+			action = new ReviewModifyProAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+//			else if(command.equals("/ReviewDeleteForm.rv")) {
 //			forward = new ActionForward();
 //			forward.setPath("/review/review_delete.jsp");
 //		}else if(command.equals("/ReviewDeletePro.rv")){
@@ -90,10 +93,10 @@ public class ReviewFrontController extends HttpServlet {
 //			} catch (Exception e) {
 //				e.printStackTrace();
 //			}
-		}else if(command.equals("/ReviewModi.rv")) {
-			forward = new ActionForward();
-			forward.setPath("/review/review_write_modify.jsp");
-		}
+//		}else if(command.equals("/ReviewModi.rv")) {
+//			forward = new ActionForward();
+//			forward.setPath("/review/review_modify.jsp");
+//		}
 		
 		
 		
