@@ -11,15 +11,15 @@
 			width: 60%;
 		}
 		
-		.form-control-email {
+		.form-control-shortshort {
 			display: inline-block;
-			width: 45%;
+			width: 30%;
 		}
 		
 		.btn-small {
-			width: 130px;
+			width: 110px;
 			height: 50px;
-			padding: 0.7rem 1rem !important;
+			padding: 0.7rem 0.3rem !important;
 			text-align: center;
 		}
 		
@@ -68,7 +68,7 @@
 							</div>
 							<!-- 아이디 유효성 검사 결과 표시 -->
 							<div class="form-group form-group-message">
-								<input type="text" id="member_id_DupCheck" placeholder="hidden으로 바꿀 예정">
+								<input type="hidden" id="member_id_DupCheck" placeholder="hidden으로 바꿀 예정">
 								<span id="checkIdResult"></span>
 							</div>
 
@@ -98,13 +98,13 @@
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Email" name="member_email" id="member_email" required="required" onkeyup="checkEmail(this)">
-							<input type="text" class="form-control form-control-email"
-								placeholder="Email 인증 코드" name="member_email_code" id="member_email_code" required="required">
+							<input type="text" class="form-control form-control-shortshort"
+								placeholder="인증 코드" name="member_email_code" id="member_email_code" required="required">
 							<input type="button" value="인증" class="btn btn-primary py-3 px-5 btn-small" id="btn_email_check">
-							<input type="button" value="인증코드발송" class="btn btn-primary py-3 px-5 btn-small" id="btn_email_code">
+							<input type="button" value="인증코드받기" class="btn btn-primary py-3 px-5 btn-small" id="btn_email_code">
 							<input type="hidden" id="email_check" placeholder="hidden으로 바꿀 예정">
 							<span id="checkEmailResult"></span>
-							</div>
+						</div>
 
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="Address"
@@ -119,14 +119,14 @@
 									class="form-control form-control-short" name="member_addr4">
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control form-control-short pick_date"
+								<input type="text" class="form-control form-control-shortshort pick_date"
 									id="checkin_date" value="1990/1/1" placeholder="Birth"
 									name="member_birth" required="required">&nbsp;&nbsp;&nbsp;
 								<span>생년월일을 선택해주세요</span>
 							</div>
 							<div class="form-group">
-								<input type="radio" name="member_gender" value="1" id="gender_man">Man&nbsp;&nbsp;&nbsp;
-								<input type="radio" name="member_gender" value="2" id="gender_woman">Woman
+								<input type="radio" name="member_gender" value="m" id="gender_man">Man&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="member_gender" value="f" id="gender_woman">Woman
 							</div>
 							<div class="form-group">
 								<input type="submit" value="Join"

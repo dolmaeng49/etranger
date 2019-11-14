@@ -211,7 +211,33 @@ public class ReviewDAO {
 			close(pstmt);
 		}
 		return updateCount;
-	}	
+	}
+
+
+
+	public int updateArticle(ReviewBean rb) { // 글수정
+		PreparedStatement pstmt = null;
+		int updateCount = 0;
+		
+		try {
+			// 객체에 저장되어 있는 게시물 수정 정보(작성자, 제목, 내용)을
+			// 객체에 저장되어 있는 게시물 번호에 해당하는 레코드에 수정
+			String sql = "UPDATE review SET review_subject=?, review_image=?, review_content=? WHERE review_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, rb.getReview_subject());
+			pstmt.setString(2, rb.getReview_image());
+			pstmt.setString(3, rb.getReview_content());
+			pstmt.setInt(4, rb.getReview_num());
+			updateCount = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("updateArticle() 오류 - " + e.getMessage());
+		} finally {
+			close(pstmt);
+		}
+		
+		return updateCount;
+	}	// end updateArticle()
 	
 	
 	

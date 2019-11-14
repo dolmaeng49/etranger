@@ -7,7 +7,7 @@ import manager.vo.CategoryBean;
 
 import static common.db.JdbcUtil.*;
 
-public class ManagerInsertProService {
+public class RegionInsertService {
 
 	public boolean InsertCategory(CategoryBean cb) {
 		boolean isInsertSuccess = false;
@@ -16,7 +16,7 @@ public class ManagerInsertProService {
 		ManagerDAO managerDAO = ManagerDAO.getInstance();
 		managerDAO.setConnection(con);
 		
-		int insertCount = managerDAO.insertCategory(cb);
+		int insertCount = managerDAO.insertRegion(cb);
 		
 		if(insertCount > 0) {
 			commit(con);
