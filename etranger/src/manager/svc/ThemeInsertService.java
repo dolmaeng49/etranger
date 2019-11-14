@@ -10,7 +10,7 @@ import java.sql.Connection;
 import manager.dao.ManagerDAO;
 import manager.vo.CategoryBean;
 
-public class ManagerThemeInsertService {
+public class ThemeInsertService {
 
 	public boolean InsertTheme(CategoryBean cb) {
 		boolean isInsertSuccess = false;

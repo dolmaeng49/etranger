@@ -35,6 +35,7 @@ public class RegionSelectAction implements Action {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
+		System.out.println(regionList);
 		out.print(regionList);
 		
 		ActionForward forward = null;

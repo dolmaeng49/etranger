@@ -11,7 +11,6 @@ import manager.vo.CategoryBean;
 
 public class ThemeListService {
 	public ArrayList<CategoryBean> getThemeList() {
-//		System.out.println("themeService");
 		Connection con = getConnection();
 		
 		ManagerDAO mdao = ManagerDAO.getInstance();

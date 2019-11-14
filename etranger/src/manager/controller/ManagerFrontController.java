@@ -14,8 +14,8 @@ import common.vo.ActionForward;
 import manager.action.CategoryListAction;
 import manager.action.CityInsertAction;
 import manager.action.CitySelectAction;
-import manager.action.ManagerInsertProAction;
-import manager.action.ManagerThemeInsertAction;
+import manager.action.ThemeInsertAction;
+import manager.action.RegionInsertAction;
 import manager.action.RegionSelectAction;
 import manager.action.ThemeCheckBoxAction;
 import manager.action.ThemeListAction;
@@ -47,7 +47,7 @@ public class ManagerFrontController extends HttpServlet {
 
 		// ManagerInsertProAction 클래스로 이동
 		else if (command.equals("/ManagerProInsert.ma")) {
-			action = new ManagerInsertProAction();
+			action = new RegionInsertAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -57,7 +57,7 @@ public class ManagerFrontController extends HttpServlet {
 		
 		//ManagerThemeInsertAction 클래스로 이동
 		else if (command.equals("/ManagerTheme.ma")) {
-			action = new ManagerThemeInsertAction();
+			action = new ThemeInsertAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

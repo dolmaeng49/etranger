@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.action.Action;
 import common.vo.ActionForward;
-import manager.action.ManagerInsertProAction;
 import member.action.MemberEmailCheckAction;
 import member.action.MemberIdDupCheckAction;
 import member.action.MemberJoinProAction;

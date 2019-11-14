@@ -31,8 +31,9 @@ public class ManagerDAO {
 		this.con = con;
 	}
 
-	// 카테고리 추가
-	public int insertCategory(CategoryBean cb) {
+	// =============================== 카테고리 추가 ========================================
+	// --- insertRegion
+	public int insertRegion(CategoryBean cb) {
 		int insertCount = 0;
 
 		PreparedStatement pstmt = null;
@@ -42,7 +43,6 @@ public class ManagerDAO {
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, cb.getRegionName());
-//			pstmt.setInt(2, cb.getCityCode());
 
 			insertCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -53,9 +53,10 @@ public class ManagerDAO {
 
 		return insertCount;
 	}
+	// insertRegion ---
 	
 
-	
+	// --- insertCity
 	public int insertCity(CategoryBean cb) {
 		int insertCount = 0;
 
@@ -76,8 +77,9 @@ public class ManagerDAO {
 
 		return insertCount;
 	}
+	// insertCity ---
 	
-	// 테마추가
+	// --- insertTheme
 	public int insertTheme(CategoryBean cb) {
 		int insertCount = 0;
 
@@ -97,37 +99,10 @@ public class ManagerDAO {
 
 		return insertCount;
 	}
+	// insertTheme ---
 	
-	public ArrayList<CategoryBean> selectArticleList() {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		ArrayList<CategoryBean> articleList = new ArrayList<CategoryBean>();
-
-		try {
-
-			String sql = "SELECT * FROM category_region ORDER BY category_region_code DESC";
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				CategoryBean cb = new CategoryBean();
-				cb.setRegionCode(rs.getInt("category_region_code"));
-				cb.setRegionName(rs.getString("category_region_name"));
-
-				articleList.add(cb);
-			}
-		} catch (SQLException e) {
-
-			System.out.println("selectArticleList() 오류 - " + e.getMessage());
-
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		return articleList;
-	}
-	
+	// =============================== 카테고리 출력 ========================================
+	// --- selectRegionList
 	public ArrayList<CategoryBean> selectRegionList() {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -157,7 +132,9 @@ public class ManagerDAO {
 		}
 		return articleList;
 	}
+	// selectRegionList ---
 	
+	// --- selectCityList
 	public ArrayList<CategoryBean> selectCityList(int code) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -184,7 +161,9 @@ public class ManagerDAO {
 		
 		return CityList;
 	}
+	// selectCityList ---
 	
+	// --- selectThemeList
 	public ArrayList<CategoryBean> selectThemeList() {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -214,12 +193,7 @@ public class ManagerDAO {
 		}
 		return themeList;
 	}
-
-
-
-	
-
-
+	// selectThemeList ---
 }
 
 
