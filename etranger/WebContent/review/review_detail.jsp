@@ -48,7 +48,12 @@
 			<p><img src="reviewUpload/<%=article.getReview_image()%>" width="600" height="500"></p>
 			<p><%=article.getReview_content() %></p>
 			</div>
-
+			 <div class="form-group">
+                    <input type="submit" value="수정" class="btn py-3 px-4 btn-primary" onclick="location.href='ReviewModifyForm.rv?review_num=<%=article.getReview_num()%>&page=<%=nowPage%>'">
+                    <input type="reset" value="" class="btn py-3 px-4 btn-primary">
+                    <input type="button" value="뒤로가기" class="btn py-3 px-4 btn-primary" onclick="history.back()">
+                    <input type="submit" value="" class="btn py-3 px-4 btn-primary">
+            </div>
 			        
 <!--             // ----------------------------------------------------------------- -->
 <!--             <h2 class="mb-3">#1. We Love WordPress Themes</h2> -->
