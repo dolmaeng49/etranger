@@ -14,10 +14,16 @@
 
 <!-- 스타일 include -->
 <jsp:include page="../include/style.jsp" />
-<jsp:include page="../include/style_manager.jsp" />
+
+<style type="text/css">
+
+</style>
+
 </head>
 
 <body>
+
+<header>
 	<!-- 탑메뉴 인클루드 -->
 	<jsp:include page="../include/top_menu.jsp" />
 
@@ -36,15 +42,21 @@
 			</div>
 		</div>
 	</section>
+</header>
+
 	<!-- END slider -->
 	<div class="container">
-
 		<h1>관리자 페이지 테스트</h1>
-
+		<section id="categoryInsertbtn" style="height:100px;">
 		<input type="button" id='show' class="search-submit btn btn-primary" value="상품 분류 등록" onclick="dis()">
-		<section id="dis" style="display: none;">
+		</section>
+		
+		<!-- 지역,도시,테마 선택결과 가지고 ManagerProInsert.ma 이동 -->
+		<form action="ManagerProInsert.ma" class="p-5 bg-light">
+		<section id="dis" style="display: none; ">
 
-			<div class="row block-9 mb-4">
+				<!-- 지역,도시,테마 구역 패딩줘서 안삐져나가게. -->
+			<div class="row block-9 mb-4" style="padding-left:20px;"> 
 				<div class="col-md-6 pr-md-5 flex-column">
 					<div class="row d-block flex-row">
 						<!-- 지역선택 -->
@@ -84,7 +96,8 @@
 
 				<!-- 테마선택 -->
 				<div class="select-wrap one-third">
-					<h3 class="h4 mb-4">테마</h3>
+					
+					<br><h3 class="h4 mb-4">테마</h3>
 					<label id="newTheme"> 
 					<%
  						for (int i = 0; i < themeList.size(); i++) {
@@ -98,14 +111,18 @@
 						<input type="text" size="20" id="theme_addbox"> <input type="button" id="theme_addbtn2" class="btn btn-primary" value="추가">
 					</div>
 				</div>
-			</div>
-			<form action="ManagerProInsert.ma" class="p-5 bg-light">
+				
 
 				<div class="form-group">
 					<input type="submit" value="등록하기" class="btn py-3 px-4 btn-primary">
 				</div>
-			</form>
+				
+				
+			</div>
+
 		</section>
+		<!-- 지역,도시,테마 선택결과 가지고 ManagerProInsert.ma 이동 -->
+		</form>
 	</div>
 	<!-- footer 인클루드 -->
 	<jsp:include page="/include/footer.jsp" />

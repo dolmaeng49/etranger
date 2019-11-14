@@ -6,12 +6,13 @@
             data: {
                 region_name: $('#region_addbox').val()
             },
-            success:function(sdata){
+            success:function(sdata){ // success로 결과 표시해야지 오류없음.
             	if(sdata=='false'){
             		alert('지역추가 실패!');
             	}
             	else{
             		getRegion();
+            		$('#region_addbox').val("");
             	}
             }
         });
@@ -29,6 +30,7 @@
     		}
     		else{
     			getCity();
+    			$('#city_addbox').val("");
     		}
     	}
     	});
@@ -45,8 +47,10 @@
         			alert('테마추가 실패!');
         		}
         		else{
-        			$('#newTheme').empty(); // #addTheme에 있는 내용 지우기
-        			//addTheme에 추가
+        			$('#newTheme').empty(); // #newTheme에 있는 내용 지우기
+        			$('#theme_addbox').val("");
+        			
+        			// <label id="newTheme">에 추가
         			$.getJSON('ThemeCheckBox.ma', function (data) {
         				$.each(data, function (index, value) {
         					$('#newTheme').append('<input type="checkbox" name="theme" value="'+value.themeName+'">'+value.themeName+'&nbsp;');
@@ -61,16 +65,6 @@
     });
 
 })(jQuery);
-
-// 상품 분류 등록 표시
-function dis() {
-    if ($('#dis').css('display') == 'none') {
-        $('#dis').show();
-        $('#dis').css('transition') == 'all 2.5s 0.5s';
-    } else {
-        $('#dis').hide();
-    }
-}
 
 function getRegion(){
 	$('#addRegion').hide();
@@ -107,30 +101,39 @@ function getCity(){
 // 지역 추가 표시, 선택한 지역의 도시출력
 function showRegionAdd() {
     if ($('#selectRegion').val() == 'add') {
-        $('#addRegion').show();
+        $('#addRegion').show(500);
     }
     else if ($('#selectRegion').val() > 0) {
     	getCity();
     }
     else{
-    	$('#addRegion').hide();
+    	$('#addRegion').hide(500);
     }
 }
 
 // 도시 추가 표시
 function showCityAdd() {
     if ($('#selectCity').val() == 'add') {
-        $('#addCity').show();
+        $('#addCity').show(500);
     } else {
-        $('#addCity').hide();
+        $('#addCity').hide(500);
     }
 }
 
 // 테마 추가 표시
 function check() {
     if ($('#addTheme').css('display') == 'none') {
-        $('#addTheme').show();
+        $('#addTheme').show(1000);
+     } else {
+        $('#addTheme').hide(1000);
+    }
+}
+
+//상품 분류 등록 표시
+function dis() {
+    if ($('#dis').css('display') == 'none') {
+        $('#dis').show(1000);
     } else {
-        $('#addTheme').hide();
+        $('#dis').hide(1000);
     }
 }
