@@ -4,7 +4,6 @@ import java.sql.Connection;
 
 import manager.dao.ManagerDAO;
 import manager.vo.CategoryBean;
-
 import static common.db.JdbcUtil.*;
 
 public class CategoryInsertService {
@@ -31,5 +30,6 @@ public class CategoryInsertService {
 		return isInsertSuccess;
 
 	}
+	
 
 }

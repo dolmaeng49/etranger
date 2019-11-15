@@ -195,8 +195,8 @@ public class ManagerDAO {
 	}
 	// selectThemeList ---
 
-	// --- InsertPackage
-		public int CategoryInsert(CategoryBean cb,String addTheme) {
+	// 카테고리 패키지 insert
+		public int CategoryInsert(CategoryBean cb,String theme) {
 			int insertCount = 0;
 
 			PreparedStatement pstmt = null;
@@ -205,11 +205,19 @@ public class ManagerDAO {
 
 			try {
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1,cb.getPackage_category_region()+"-"+cb.getPackage_category_city()+"-"+addTheme);
+//				| package_category_code    | varchar(100)  | NO   | PRI | NULL    |       |
+//				| package_category_name    | varchar(50)   | NO   | UNI | NULL    |       |
+//				| package_category_region  | int(11)       | NO   | MUL | NULL    |       |
+//				| package_category_city    | int(11)       | NO   | MUL | NULL    |       |
+//				| package_category_theme   | varchar(100)  | YES  |     | NULL    |       |
+//				| package_category_image   | varchar(100)  | NO   |     | NULL    |       |
+//				| package_category_content | varchar(2000) | NO   |     | NULL    |       |
+
+				pstmt.setString(1,cb.getPackage_category_region()+"-"+cb.getPackage_category_city()+"-"+theme);
 				pstmt.setString(2, cb.getRegionName() +cb.getCityName() + cb.getThemeName());
 				pstmt.setInt(3, cb.getPackage_category_region());
 				pstmt.setInt(4,cb.getPackage_category_city());
-				pstmt.setString(5, addTheme);
+				pstmt.setString(5, theme);
 				pstmt.setString(6, cb.getPackage_category_image());
 				pstmt.setString(7, cb.getPackage_category_content());
 

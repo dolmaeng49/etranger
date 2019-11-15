@@ -26,8 +26,8 @@ public class CategoryInsertAction implements Action {
 		ActionForward forward = null;
 		CategoryBean cb = null;
 		
-		String realFolder = ""; // 업로드 할 파일이 저장되는 실제 경로
-		String saveFolder = "/ManagerImgUpload"; // 저장되는 가상 경로(=> 이클립스에서 보이는 폴더 구조)
+		String realFolder = ""; // 실제 경로
+		String saveFolder = "/ManagerImgUpload"; // 가상 경로(=> 이클립스에서 보이는 폴더 구조)
 		int fileSize = 10 * 1024 * 1024; // 10MB 크기 지정
 		
 		// 현재 서블릿을 처리하는 서버의 객체를 가져와서 실제 폴더 위치 알아내기
@@ -44,38 +44,35 @@ public class CategoryInsertAction implements Action {
 				new DefaultFileRenamePolicy() // 동일한 이름의 파일에 대한 처리
 		);
 		
-		
-		
-		
-		
-		
+	
+		// 전달받은 데이터를 저장할 CategoryBean 객체생성
 		cb = new CategoryBean();
 
-
-		int addRegioncode = Integer.parseInt(request.getParameter("addRegioncode"));
-		int addCitycode = Integer.parseInt(request.getParameter("addCitycode"));
-		
-		cb.setPackage_category_region(addRegioncode);
-		cb.setPackage_category_city(addCitycode);
-		
-		cb.setPackage_category_name(request.getParameter(""));
-		cb.setPackage_category_content(request.getParameter(""));
+		int category_citycode = Integer.parseInt(multi.getParameter("category_citycode"));
+		int category_regioncode = Integer.parseInt(multi.getParameter("category_regioncode"));
+		cb.setPackage_category_city(category_citycode);
+		cb.setPackage_category_region(category_regioncode);
+		cb.setPackage_category_name(multi.getParameter("category_name"));
+		cb.setPackage_category_content(multi.getParameter("category_content"));
 		cb.setPackage_category_image(multi.getOriginalFileName((String)multi.getFileNames().nextElement()));
 		String addTheme = "";
 		String s = "#";
-		for (int i = 0; i < request.getParameterValues("theme").length; i++) {
+		for (int i = 0; i < multi.getParameterValues("theme").length; i++) {
 
-			addTheme += (s + (request.getParameterValues("theme")[i]));
+			addTheme += (s + (multi.getParameterValues("theme")[i]));
 
 		}
 		
-		CategoryInsertService mips = new CategoryInsertService();
-		boolean isInsertSuccess = mips.InsertCategory(cb, addTheme);
+		CategoryInsertService cis = new CategoryInsertService();
+		boolean isInsertSuccess = cis.InsertCategory(cb, addTheme);
 
 		if (!isInsertSuccess) {
 			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.print("false");
+			PrintWriter out = response.getWriter(); 
+			out.println("<script>");
+			out.println("alert('상품분류 등록 실패!')");
+			out.println("history.back()");
+			out.println("</script>");
 		}
 
 		return forward;

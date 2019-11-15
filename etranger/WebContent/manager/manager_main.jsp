@@ -69,7 +69,7 @@ div{
 						<!-- 지역선택 -->
 						<div class="select-wrap one-third">
 						  <h3 class="h4 mb-4">Region</h3>
-							<select id="selectRegion" class="form-control" onChange="showRegionAdd()" name="addRegioncode" required="required">
+							<select id="selectRegion" class="form-control" onChange="showRegionAdd()" name="category_regioncode" required="required">
 								<!-- 옵션 클릭시 select()동작 -->
 								<option>지역선택</option>
 								<option value="add">지역추가</option>
@@ -93,7 +93,7 @@ div{
 				<div class="col-md-6">
 					<div class="select-wrap one-third">
 					  <h3 class="h4 mb-4">City</h3>
-						<select id="selectCity" class="form-control" onChange="showCityAdd()"name="addCitycode" required="required">
+						<select id="selectCity" class="form-control" onChange="showCityAdd()"name="category_citycode" required="required">
 							<option>도시선택</option>
 							<option value="add">도시추가</option>
 						</select>
@@ -126,13 +126,13 @@ div{
 				
 				<!-- package_category_name -->
 				<div class="select-wrap one-third theme" >
-				<h3 class="h4 mb-4">Name</h3> <input type="text" id="category_name" required="required">
+				<h3 class="h4 mb-4">Name</h3> <input type="text" id="category_name" name="category_name"required="required">
 				
 				</div>
 
 				<!-- package_category_content -->
 				<div class="select-wrap one-third theme" >
-				<h3 class="h4 mb-4">Content</h3><textarea id="category_content" rows="20" cols="80" required="required"></textarea>
+				<h3 class="h4 mb-4">Content</h3><textarea id="category_content" name ="category_content" rows="20" cols="80" required="required"></textarea>
 				
 				</div>
 
