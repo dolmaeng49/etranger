@@ -1,12 +1,10 @@
 package review.service;
 
-
 import review.vo.ReviewBean;
 
 import java.sql.Connection;
 import static common.db.JdbcUtil.*;
 import review.dao.ReviewDAO;
-import review.vo.ReviewBean;
 
 public class ReviewDetailService {
 
@@ -38,6 +36,7 @@ public class ReviewDetailService {
 		
 		return article;
 	}
+
 
 
 }

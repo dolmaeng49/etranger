@@ -16,7 +16,8 @@
 <jsp:include page="../include/style.jsp" />
 
 <style type="text/css">
-
+ .theme{
+ padding: 13px; width: 90%; height: auto;}
 </style>
 
 </head>
@@ -52,9 +53,9 @@
 		</section>
 		
 		<!-- 지역,도시,테마 선택결과 가지고 ManagerProInsert.ma 이동 -->
-		<form action="ManagerProInsert.ma" class="p-5 bg-light">
+	
 		<section id="dis" style="display: none; ">
-
+			<form action="ManagerProInsert.ma" class="p-5 bg-light">
 				<!-- 지역,도시,테마 구역 패딩줘서 안삐져나가게. -->
 			<div class="row block-9 mb-4" style="padding-left:20px;"> 
 				<div class="col-md-6 pr-md-5 flex-column">
@@ -95,7 +96,7 @@
 				</div>
 
 				<!-- 테마선택 -->
-				<div class="select-wrap one-third">
+				<div class="select-wrap one-third theme" >
 					
 					<br><h3 class="h4 mb-4">테마</h3>
 					<label id="newTheme"> 
@@ -113,16 +114,17 @@
 				</div>
 				
 
-				<div class="form-group">
+				<div class="form-group" style="display: block; clear: both;">
 					<input type="submit" value="등록하기" class="btn py-3 px-4 btn-primary">
 				</div>
 				
 				
 			</div>
-
-		</section>
 		<!-- 지역,도시,테마 선택결과 가지고 ManagerProInsert.ma 이동 -->
-		</form>
+			</form>	
+		</section>
+
+
 	</div>
 	<!-- footer 인클루드 -->
 	<jsp:include page="/include/footer.jsp" />
