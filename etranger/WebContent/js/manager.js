@@ -2,7 +2,7 @@
 
     // 지역추가
     $('#region_addbtn').click(function () {
-        $.ajax('ManagerProInsert.ma', {
+        $.ajax('RegionInsert.ma', {
             data: {
                 region_name: $('#region_addbox').val()
             },
@@ -38,7 +38,7 @@
     
     // 테마추가
     $('#theme_addbtn2').click(function () {
-        $.ajax('ManagerTheme.ma', {
+        $.ajax('ThemeInsert.ma', {
             data: {
             	theme_name: $('#theme_addbox').val()
             },

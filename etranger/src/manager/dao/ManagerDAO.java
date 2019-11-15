@@ -194,6 +194,38 @@ public class ManagerDAO {
 		return themeList;
 	}
 	// selectThemeList ---
+
+	// --- InsertPackage
+		public int PackageInsert(CategoryBean cb,String theme) {
+			int insertCount = 0;
+
+			PreparedStatement pstmt = null;
+
+			String sql = "INSERT INTO package_category VALUES (?,?,?,?,?,?,?)";
+
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1,cb.getPackage_category_region()+"-"+cb.getPackage_category_city()+"-"
+						+theme);
+				pstmt.setString(2,cb.getRegionName()+cb.getPackage_category_region()+cb.getCityName() );
+				pstmt.setInt(3, cb.getPackage_category_region());
+				pstmt.setInt(4,cb.getPackage_category_city());
+				pstmt.setString(5, cb.getPackage_category_city()+cb.getPackage_category_region()+"1");
+				pstmt.setString(6, theme+"");
+				pstmt.setString(7, theme);
+
+				insertCount = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+
+			return insertCount;
+		}
+		// InsertPackage ---
+		
+	
 }
 
 
