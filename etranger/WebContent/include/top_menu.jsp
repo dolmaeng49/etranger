@@ -9,9 +9,6 @@
 		member_id=(String)session.getAttribute("member_id");
 	}
 %>
-<div id="floatMenu"><a href="javascript:void chatChannel()">
-  <img src="https://developers.kakao.com/assets/img/about/logos/channel/consult_small_yellow_pc.png"/>
-</a></div>
 <!-- login-info  class="container"-->
 <div class="container"><p id="login-info-p">
 <%if(member_id==null){ %>

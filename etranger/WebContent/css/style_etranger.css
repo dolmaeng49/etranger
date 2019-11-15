@@ -13,11 +13,19 @@
 	margin: 0 auto;
 	text-align : center;
 }
-
-#floatMenu {
-	width:104px;height:48px; background:transparent; margin: 0pt; padding: 0pt;  position: absolute; right: 20px; top: 1100px;
+/* #floatMenu { */
+/* 	width:104px;height:48px; background:transparent; margin: 0pt; padding: 0pt;  position:fixed; _position:absolute; _z-index:-1 right: 20px; overflow:hidden; top: 500px; */
+/* } */
+#floatdiv {
+   position:fixed; _position:absolute; _z-index:-1;
+    width:120px;
+    overflow:hidden;
+    right:11px; 
+    top:700px; 
+    background-color: transparent;
+    margin:0;
+    padding:0;
 }
-/* #floatMenuTwo {width:60px;height:200px; background:aqua; margin: 0pt; padding: 0pt;  position: absolute; right: 0px; top: 0px;} */  /* 임시저장 */
 
 
 
