@@ -195,7 +195,7 @@ public class ManagerDAO {
 	}
 	// selectThemeList ---
 
-	// 카테고리 패키지 insert
+	// --insertCategory
 		public int CategoryInsert(CategoryBean cb,String theme) {
 			int insertCount = 0;
 
@@ -205,13 +205,19 @@ public class ManagerDAO {
 
 			try {
 				pstmt = con.prepareStatement(sql);
-//				| package_category_code    | varchar(100)  | NO   | PRI | NULL    |       |
-//				| package_category_name    | varchar(50)   | NO   | UNI | NULL    |       |
-//				| package_category_region  | int(11)       | NO   | MUL | NULL    |       |
-//				| package_category_city    | int(11)       | NO   | MUL | NULL    |       |
-//				| package_category_theme   | varchar(100)  | YES  |     | NULL    |       |
-//				| package_category_image   | varchar(100)  | NO   |     | NULL    |       |
-//				| package_category_content | varchar(2000) | NO   |     | NULL    |       |
+				
+				/*
+				 *  11/15 java시간에 배운걸로(컬럼타입네임) 수정 예정 :-)
+				 *  table : package_category
+				 *  package_category_code    varchar(100) 
+				 *  package_category_name    varchar(50)
+				 *  package_category_region  int(11)   
+				 *  package_category_city    int(11)      
+				 *  package_category_theme   varchar(100) 
+				 *  package_category_image   varchar(100) 
+				 *  package_category_image   varchar(100) 
+				 * 
+				 */
 
 				pstmt.setString(1,cb.getPackage_category_region()+"-"+cb.getPackage_category_city()+"-"+theme);
 				pstmt.setString(2, cb.getRegionName() +cb.getCityName() + cb.getThemeName());
@@ -227,12 +233,13 @@ public class ManagerDAO {
 			} finally {
 				close(pstmt);
 			}
-
 			return insertCount;
 		}
-		// InsertPackage ---
 		
-	
+	// insertCategory--
+		
+	// =============================== 카테고리 끝 ========================================
+		
 }
 
 

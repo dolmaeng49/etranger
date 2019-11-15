@@ -27,15 +27,11 @@ public class CategoryInsertAction implements Action {
 		CategoryBean cb = null;
 		
 		String realFolder = ""; // 실제 경로
-		String saveFolder = "/ManagerImgUpload"; // 가상 경로(=> 이클립스에서 보이는 폴더 구조)
-		int fileSize = 10 * 1024 * 1024; // 10MB 크기 지정
-		
-		// 현재 서블릿을 처리하는 서버의 객체를 가져와서 실제 폴더 위치 알아내기
-		ServletContext context = request.getServletContext();
-		realFolder = context.getRealPath(saveFolder); // 프로젝트 상의 가상폴더를 기준으로 실제 경로 알아내기
-//		System.out.println(realFolder);
-		
-		// 파일 업로드 처리를 위해 MultiPartRequest 객체 생성 => cos.jar 필요
+		String saveFolder = "/ManagerImgUpload"; // 가상 경로
+		int fileSize = 100 * 1024 * 1024; // 100MB 크기 지정
+		ServletContext context = request.getServletContext();// 실제 폴더 위치 
+		realFolder = context.getRealPath(saveFolder); // 실제 경로
+
 		MultipartRequest multi = new MultipartRequest(
 				request, // request 객체
 				realFolder, // 실제 업로드 폴더 경로
@@ -55,6 +51,8 @@ public class CategoryInsertAction implements Action {
 		cb.setPackage_category_name(multi.getParameter("category_name"));
 		cb.setPackage_category_content(multi.getParameter("category_content"));
 		cb.setPackage_category_image(multi.getOriginalFileName((String)multi.getFileNames().nextElement()));
+		
+		// 테마 처리
 		String addTheme = "";
 		String s = "#";
 		for (int i = 0; i < multi.getParameterValues("theme").length; i++) {
@@ -64,7 +62,7 @@ public class CategoryInsertAction implements Action {
 		}
 		
 		CategoryInsertService cis = new CategoryInsertService();
-		boolean isInsertSuccess = cis.InsertCategory(cb, addTheme);
+		boolean isInsertSuccess = cis.InsertCategory(cb, addTheme); 
 
 		if (!isInsertSuccess) {
 			response.setContentType("text/html; charset=UTF-8");
@@ -73,6 +71,10 @@ public class CategoryInsertAction implements Action {
 			out.println("alert('상품분류 등록 실패!')");
 			out.println("history.back()");
 			out.println("</script>");
+		}else {
+			forward = new ActionForward();
+			forward.setPath("ManagerMain.ma");
+			forward.setRedirect(true);
 		}
 
 		return forward;
