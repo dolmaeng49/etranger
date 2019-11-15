@@ -19,6 +19,18 @@
 	.wrap-links {
 		text-align: right;
 	}
+	#test{
+		float: right;
+		border: 1px solid red;
+		width: 170px; height: 400px;
+		position: sticky;
+		top: 100px;
+		right: 200px;
+		bottom: 100px;
+		z-index: -100;
+		
+	}
+	
 </style>
 </head>
 <body>
@@ -45,6 +57,11 @@
 		</div>
 	</section>
 	<!-- END slider -->
+	
+<!-- floating bar test -->	
+	<ul id="test"></ul>
+<!-- floating bar test -->
+	
 <form action="LoginPro.me" method="post">
 	<section class="ftco-section">
 		<div class="container">
