@@ -14,3 +14,9 @@
 	text-align : center;
 }
 
+.form-group {
+	float: right;
+}
+.tagcloud {
+	padding-top: 40px;
+}
