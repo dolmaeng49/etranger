@@ -18,7 +18,13 @@
 <style type="text/css">
  .theme{
  padding: 13px; width: 90%; height: auto;}
+
+div{
+	border: 1px solid red;
+}
+
 </style>
+
 
 </head>
 
@@ -47,22 +53,23 @@
 
 	<!-- END slider -->
 	<div class="container">
-		<h1>관리자 페이지 테스트</h1>
+		<h1>Category</h1>
 		<section id="categoryInsertbtn" style="height:100px;">
 		<input type="button" id='show' class="search-submit btn btn-primary" value="상품 분류 등록" onclick="dis()">
 		</section>
 		
-		<!-- 지역,도시,테마 선택결과 가지고 ManagerProInsert.ma 이동 -->
-	
+
 		<section id="dis" style="display: none; ">
-			<form action="PackageInsert.ma" class="p-5 bg-light">
+			<!-- 지역,도시,테마 선택결과 가지고 ManagerProInsert.ma 이동 -->
+			<form action="CategoryInsert.ma" class="p-5 bg-light">
 				<!-- 지역,도시,테마 구역 패딩줘서 안삐져나가게. -->
 			<div class="row block-9 mb-4" style="padding-left:20px;"> 
 				<div class="col-md-6 pr-md-5 flex-column">
 					<div class="row d-block flex-row">
 						<!-- 지역선택 -->
 						<div class="select-wrap one-third">
-							<select id="selectRegion" class="form-control" onChange="showRegionAdd()" name="addRegioncode">
+						  <h3 class="h4 mb-4">Region</h3>
+							<select id="selectRegion" class="form-control" onChange="showRegionAdd()" name="addRegioncode" required="required">
 								<!-- 옵션 클릭시 select()동작 -->
 								<option>지역선택</option>
 								<option value="add">지역추가</option>
@@ -85,7 +92,8 @@
 				<!-- 도시선택 -->
 				<div class="col-md-6">
 					<div class="select-wrap one-third">
-						<select id="selectCity" class="form-control" onChange="showCityAdd()"name="addCitycode">
+					  <h3 class="h4 mb-4">City</h3>
+						<select id="selectCity" class="form-control" onChange="showCityAdd()"name="addCitycode" required="required">
 							<option>도시선택</option>
 							<option value="add">도시추가</option>
 						</select>
@@ -98,7 +106,7 @@
 				<!-- 테마선택 -->
 				<div class="select-wrap one-third theme" >
 					
-					<br><h3 class="h4 mb-4">테마</h3>
+					<br><h3 class="h4 mb-4">Theme</h3>
 					<label id="newTheme"> 
 					<%
  						for (int i = 0; i < themeList.size(); i++) {
@@ -113,14 +121,41 @@
 					</div>
 				</div>
 				
-
-				<div class="form-group" style="display: block; clear: both;">
-					<input type="submit" value="등록하기" class="btn py-3 px-4 btn-primary">
+				<!-----------------------------B 구역-------------------------------------------------->
+<!--package_category_code | package_category_name | package_category_region | package_category_city | package_category_theme | package_category_image | package_category_content -->
+				
+				<!-- package_category_name -->
+				<div class="select-wrap one-third theme" >
+				<h3 class="h4 mb-4">Name</h3> <input type="text" id="category_name" required="required">
+				
 				</div>
+
+				<!-- package_category_content -->
+				<div class="select-wrap one-third theme" >
+				<h3 class="h4 mb-4">Content</h3><textarea id="category_content" rows="20" cols="80" required="required"></textarea>
 				
-				
+				</div>
+
+				<!-- package_category_image -->
+				<div class="select-wrap one-third theme" >
+				<h3 class="h4 mb-4">Img</h3>
+				 <input type="file" name="category_image" required="required" />
+				</div>
+
+
+
+
+
+
+
+
+				<!-- 지역,도시,테마 선택결과 가지고 ManagerProInsert.ma 이동 -->
+				<div class="form-group" style="display: block; clear: both;">&nbsp;&nbsp;
+					<input type="submit" value="등록하기" class="btn py-3 px-4 btn-primary">&nbsp;&nbsp;
+					<input type="reset" value="다시쓰기" class="btn py-3 px-4 btn-primary">
+				</div>
 			</div>
-		<!-- 지역,도시,테마 선택결과 가지고 ManagerProInsert.ma 이동 -->
+
 			</form>	
 		</section>
 

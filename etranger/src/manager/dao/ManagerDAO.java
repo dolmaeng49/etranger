@@ -196,7 +196,7 @@ public class ManagerDAO {
 	// selectThemeList ---
 
 	// --- InsertPackage
-		public int PackageInsert(CategoryBean cb,String theme) {
+		public int CategoryInsert(CategoryBean cb,String addTheme) {
 			int insertCount = 0;
 
 			PreparedStatement pstmt = null;
@@ -205,14 +205,13 @@ public class ManagerDAO {
 
 			try {
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1,cb.getPackage_category_region()+"-"+cb.getPackage_category_city()+"-"
-						+theme);
-				pstmt.setString(2, cb.getRegionName());
+				pstmt.setString(1,cb.getPackage_category_region()+"-"+cb.getPackage_category_city()+"-"+addTheme);
+				pstmt.setString(2, cb.getRegionName() +cb.getCityName() + cb.getThemeName());
 				pstmt.setInt(3, cb.getPackage_category_region());
 				pstmt.setInt(4,cb.getPackage_category_city());
-				pstmt.setString(5, cb.getPackage_category_city()+cb.getPackage_category_region()+"1");
-				pstmt.setString(6, theme+"");
-				pstmt.setString(7, theme);
+				pstmt.setString(5, addTheme);
+				pstmt.setString(6, cb.getPackage_category_image());
+				pstmt.setString(7, cb.getPackage_category_content());
 
 				insertCount = pstmt.executeUpdate();
 			} catch (SQLException e) {

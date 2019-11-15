@@ -11,35 +11,23 @@ public class CategoryBean {
 	private String regionName;
 	private int themeCode;
 	private String themeName;
+	private int package_category_code;
 	private int  package_category_region;
 	private int  package_category_city;
-	private int package_category_code;
-
+	private String  package_category_theme;
+	private String  package_category_name;
+	private String  package_category_image;
+	private String  package_category_content;
 	
-	public int getPackage_category_region() {
-		return package_category_region;
-	}
+//	| package_category_code | 
+//	package_category_name | 
+//	package_category_region | 
+//	package_category_city | 
+//	package_category_theme | 
+//	package_category_image | 
+//	package_category_content |
 
-	public void setPackage_category_region(int package_category_region) {
-		this.package_category_region = package_category_region;
-	}
 
-	public int getPackage_category_city() {
-		return package_category_city;
-	}
-
-	public void setPackage_category_city(int package_category_city) {
-		this.package_category_city = package_category_city;
-	}
-
-	public int getPackage_region_code() {
-		return package_category_code;
-	}
-	
-	public void setPackage_region_code(int package_region_code) {
-		this.package_category_code = package_region_code;
-		
-	}
 
 	public int getCityRegionCode() {
 		return cityRegionCode;
@@ -48,6 +36,7 @@ public class CategoryBean {
 	public void setCityRegionCode(int cityRegionCode) {
 		this.cityRegionCode = cityRegionCode;
 	}
+	
 	public int getCityCode() {
 		return cityCode;
 	}
@@ -96,5 +85,64 @@ public class CategoryBean {
 	public void setThemeName(String themeName) {
 		this.themeName = themeName;
 	}
+	
+
+
+	public int getPackage_category_code() {
+		return package_category_code;
+	}
+
+	public void setPackage_category_code(int package_category_code) {
+		this.package_category_code = package_category_code;
+	}
+
+	public int getPackage_category_region() {
+		return package_category_region;
+	}
+
+	public void setPackage_category_region(int package_category_region) {
+		this.package_category_region = package_category_region;
+	}
+
+	public int getPackage_category_city() {
+		return package_category_city;
+	}
+
+	public void setPackage_category_city(int package_category_city) {
+		this.package_category_city = package_category_city;
+	}
+
+	public String getPackage_category_theme() {
+		return package_category_theme;
+	}
+
+	public void setPackage_category_theme(String package_category_theme) {
+		this.package_category_theme = package_category_theme;
+	}
+
+	public String getPackage_category_name() {
+		return package_category_name;
+	}
+
+	public void setPackage_category_name(String package_category_name) {
+		this.package_category_name = package_category_name;
+	}
+
+	public String getPackage_category_image() {
+		return package_category_image;
+	}
+
+	public void setPackage_category_image(String package_category_image) {
+		this.package_category_image = package_category_image;
+	}
+
+	public String getPackage_category_content() {
+		return package_category_content;
+	}
+
+	public void setPackage_category_content(String package_category_content) {
+		this.package_category_content = package_category_content;
+	}
+	
 
 }
