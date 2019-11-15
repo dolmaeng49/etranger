@@ -36,7 +36,7 @@ public class MemberEmailCheckAction implements Action {
 		String src = Integer.toString(codeLength).concat(":").concat(checkCode);
 		
 		String content = MessageFormat.format(pattern, src.split(":"));
-		memberEmailService.mailSend(email, subject, content);
+		boolean isSendEmailSuccess = memberEmailService.mailSend(email, subject, content);
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();

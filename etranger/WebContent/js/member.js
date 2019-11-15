@@ -66,6 +66,10 @@
 	
 	// ID 중복 체크 버튼
 	$('#btn_dup').click(function(){
+		if(!checkIdResult){
+			alert('아이디를 확인해주세요!');
+			return;
+		}
 		var fid=$('#member_id').val();
 //		alert(fid);
 		/*$.getJSON('MemberIdDupCheck.me?id='+fid,function(data){
@@ -89,6 +93,10 @@
 	// Email 인증 코드 발송
 	$('#btn_email_code').click(function(){
 		var fEmail=$('#member_email').val();
+		if(fEmail.length==0){
+			alert('Email을 입력해주세요!');
+			return;
+		}
 		$.ajax('MemberSendEmailCode.me',{
 			data:{email:fEmail},
 			success:function(sdata){
