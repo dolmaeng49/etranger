@@ -11,8 +11,36 @@ public class CategoryBean {
 	private String regionName;
 	private int themeCode;
 	private String themeName;
+	private int  package_category_region;
+	private int  package_category_city;
+	private int package_category_code;
 
 	
+	public int getPackage_category_region() {
+		return package_category_region;
+	}
+
+	public void setPackage_category_region(int package_category_region) {
+		this.package_category_region = package_category_region;
+	}
+
+	public int getPackage_category_city() {
+		return package_category_city;
+	}
+
+	public void setPackage_category_city(int package_category_city) {
+		this.package_category_city = package_category_city;
+	}
+
+	public int getPackage_region_code() {
+		return package_category_code;
+	}
+	
+	public void setPackage_region_code(int package_region_code) {
+		this.package_category_code = package_region_code;
+		
+	}
+
 	public int getCityRegionCode() {
 		return cityRegionCode;
 	}
@@ -42,6 +70,7 @@ public class CategoryBean {
 
 	public void setRegionCode(int regionCode) {
 		this.regionCode = regionCode;
+		
 	}
 
 	public String getRegionName() {

@@ -5,6 +5,12 @@
 	// page, ReviewBean 객체 파라미터 가져오기
 	String nowPage = (String)request.getParameter("page");
 	ReviewBean article = (ReviewBean)request.getAttribute("article");
+	String sid = null;
+	if(session.getAttribute("member_id")!=null){
+		sid=(String)session.getAttribute("member_id");
+		
+		
+	}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +54,20 @@
 			<p><img src="reviewUpload/<%=article.getReview_image()%>" width="600" height="500"></p>
 			<p><%=article.getReview_content() %></p>
 			</div>
-
+			 <div class="form-group">
+                       	<%
+   					if(sid != null) { // 세션값 아이디 가 있을시
+					if(sid.equals(article.getReview_member_id())) { // 글쓴이와 일치 할경우
+					%>
+                    <input type="submit" value="수정" class="btn py-3 px-4 btn-primary" onclick="location.href='ReviewModifyForm.rv?review_num=<%=article.getReview_num()%>&page=<%=nowPage%>'">
+                    <input type="reset" value="삭제" class="btn py-3 px-4 btn-primary" onclick="location.href='ReviewDeletePro.rv?review_num=<%=article.getReview_num() %>&review_member_id=<%=sid %>&page=<%=nowPage%>'">
+   					<%
+					}
+					}
+					%>
+                    <input type="button" value="목록" class="btn py-3 px-4 btn-primary" onclick="history.back()">
+                    <input type="submit" value="" class="btn py-3 px-4 btn-primary">
+            </div>
 			        
 <!--             // ----------------------------------------------------------------- -->
 <!--             <h2 class="mb-3">#1. We Love WordPress Themes</h2> -->

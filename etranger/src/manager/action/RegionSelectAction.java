@@ -23,7 +23,6 @@ public class RegionSelectAction implements Action {
 		ArrayList<CategoryBean> articleList = new ArrayList<CategoryBean>();
 		articleList = regionListService.getRegionList();
 
-
 		JSONArray regionList = new JSONArray();
 		for (int i = 0; i < articleList.size(); i++) {
 			JSONObject rl = new JSONObject();
@@ -31,13 +30,12 @@ public class RegionSelectAction implements Action {
 			rl.put("regionCode", articleList.get(i).getRegionCode());
 			regionList.add(rl);
 		}
-		
+
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		
-		System.out.println(regionList);
+
 		out.print(regionList);
-		
+
 		ActionForward forward = null;
 
 		return forward;

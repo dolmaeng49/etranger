@@ -2,7 +2,7 @@
 
     // 지역추가
     $('#region_addbtn').click(function () {
-        $.ajax('ManagerProInsert.ma', {
+        $.ajax('RegionInsert.ma', {
             data: {
                 region_name: $('#region_addbox').val()
             },
@@ -38,7 +38,7 @@
     
     // 테마추가
     $('#theme_addbtn2').click(function () {
-        $.ajax('ManagerTheme.ma', {
+        $.ajax('ThemeInsert.ma', {
             data: {
             	theme_name: $('#theme_addbox').val()
             },
@@ -101,39 +101,39 @@ function getCity(){
 // 지역 추가 표시, 선택한 지역의 도시출력
 function showRegionAdd() {
     if ($('#selectRegion').val() == 'add') {
-        $('#addRegion').show(500);
+        $('#addRegion').show(100);
     }
     else if ($('#selectRegion').val() > 0) {
     	getCity();
     }
     else{
-    	$('#addRegion').hide(500);
+    	$('#addRegion').hide(100);
     }
 }
 
 // 도시 추가 표시
 function showCityAdd() {
     if ($('#selectCity').val() == 'add') {
-        $('#addCity').show(500);
+        $('#addCity').show(100);
     } else {
-        $('#addCity').hide(500);
+        $('#addCity').hide(100);
     }
 }
 
 // 테마 추가 표시
 function check() {
     if ($('#addTheme').css('display') == 'none') {
-        $('#addTheme').show(1000);
+        $('#addTheme').show(100);
      } else {
-        $('#addTheme').hide(1000);
+        $('#addTheme').hide(100);
     }
 }
 
 //상품 분류 등록 표시
 function dis() {
     if ($('#dis').css('display') == 'none') {
-        $('#dis').show(1000);
+        $('#dis').show(300);
     } else {
-        $('#dis').hide(1000);
+        $('#dis').hide(300);
     }
 }
