@@ -207,12 +207,12 @@ public class ManagerDAO {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1,cb.getPackage_category_region()+"-"+cb.getPackage_category_city()+"-"
 						+theme);
-				pstmt.setString(2, theme);
+				pstmt.setString(2, cb.getRegionName());
 				pstmt.setInt(3, cb.getPackage_category_region());
 				pstmt.setInt(4,cb.getPackage_category_city());
-				pstmt.setString(5, theme);
-				pstmt.setString(6, theme+8);
-				pstmt.setString(7, theme+0);
+				pstmt.setString(5, cb.getPackage_category_city()+cb.getPackage_category_region()+"1");
+				pstmt.setString(6, theme+"");
+				pstmt.setString(7, theme);
 
 				insertCount = pstmt.executeUpdate();
 			} catch (SQLException e) {
