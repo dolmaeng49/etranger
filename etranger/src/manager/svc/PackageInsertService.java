@@ -7,29 +7,29 @@ import manager.vo.CategoryBean;
 
 import static common.db.JdbcUtil.*;
 
-public class PackageInsertService{
+public class PackageInsertService {
 
-	public boolean InsertPackage(CategoryBean cb,String theme) {
+	public boolean InsertPackage(CategoryBean cb, String theme) {
 		boolean isInsertSuccess = false;
-		
+
 		Connection con = getConnection();
 		ManagerDAO managerDAO = ManagerDAO.getInstance();
 		managerDAO.setConnection(con);
-		
-		int insertCount = managerDAO.PackageInsert(cb,theme);
-		
-		if(insertCount > 0) {
+
+		int insertCount = managerDAO.PackageInsert(cb, theme);
+
+		if (insertCount > 0) {
 			commit(con);
-			isInsertSuccess =true;
+			isInsertSuccess = true;
 		}
 		else {
 			rollback(con);
 		}
-		
+
 		close(con);
-		
+
 		return isInsertSuccess;
-		
+
 	}
-	
+
 }
