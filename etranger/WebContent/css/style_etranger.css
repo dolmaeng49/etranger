@@ -21,16 +21,16 @@
    position:fixed; _position:absolute; _z-index:-1;
     width:120px;
     overflow:hidden;
-    right:11px; 
-    top:700px; 
+    right:1px; 
+    top:840px; 
     background-color: transparent;
     margin:0;
     padding:0;
 }
-
-
-
-
-
-
+.form-group {
+	float: right;
+}
+.tagcloud {
+	padding-top: 40px;
+}
 

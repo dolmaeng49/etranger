@@ -34,7 +34,7 @@ public class ReviewFrontController extends HttpServlet {
 		
 		if(command.equals("/ReviewWriteForm.rv")) {
 			forward = new ActionForward();
-			forward.setPath("/review/review_write2.jsp");
+			forward.setPath("/review/review_write.jsp");
 		}else if(command.equals("/ReviewWritePro.rv")) {
 			action = new ReviewWriteProAction();
 			try {
@@ -70,9 +70,11 @@ public class ReviewFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+
 		}else if(command.equals("/ReviewDeleteForm.rv")) {
 			forward = new ActionForward();
 			forward.setPath("/review/review_delete.jsp");
+
 		}else if(command.equals("/ReviewDeletePro.rv")){
 			action = new ReviewDeleteProAction();
 			try {
@@ -94,12 +96,9 @@ public class ReviewFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/ReviewModi.rv")) {
-			forward = new ActionForward();
-			forward.setPath("/review/review_write_modify.jsp");
 		}
-		
-		
+
+
 		
 		
 		if (forward != null) {
