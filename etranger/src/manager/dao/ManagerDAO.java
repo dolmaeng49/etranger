@@ -207,7 +207,7 @@ public class ManagerDAO {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1,cb.getPackage_category_region()+"-"+cb.getPackage_category_city()+"-"
 						+theme);
-				pstmt.setString(2, theme);
+				pstmt.setString(2,cb.getRegionName()+cb.getPackage_category_region()+cb.getCityName() );
 				pstmt.setInt(3, cb.getPackage_category_region());
 				pstmt.setInt(4,cb.getPackage_category_city());
 				pstmt.setString(5, cb.getPackage_category_city()+cb.getPackage_category_region()+"1");
