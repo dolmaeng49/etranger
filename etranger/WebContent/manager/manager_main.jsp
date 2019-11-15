@@ -55,7 +55,7 @@
 		<!-- 지역,도시,테마 선택결과 가지고 ManagerProInsert.ma 이동 -->
 	
 		<section id="dis" style="display: none; ">
-			<form action="PackageProInsert.ma" class="p-5 bg-light">
+			<form action="PackageInsert.ma" class="p-5 bg-light">
 				<!-- 지역,도시,테마 구역 패딩줘서 안삐져나가게. -->
 			<div class="row block-9 mb-4" style="padding-left:20px;"> 
 				<div class="col-md-6 pr-md-5 flex-column">

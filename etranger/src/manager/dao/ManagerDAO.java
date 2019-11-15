@@ -195,7 +195,7 @@ public class ManagerDAO {
 	}
 	// selectThemeList ---
 
-	// --- InsertPackage--------- 
+	// --- InsertPackage
 		public int PackageInsert(CategoryBean cb,String theme) {
 			int insertCount = 0;
 
@@ -223,7 +223,7 @@ public class ManagerDAO {
 
 			return insertCount;
 		}
-		
+		// InsertPackage ---
 		
 	
 }
