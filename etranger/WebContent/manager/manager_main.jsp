@@ -55,7 +55,7 @@
 		<!-- 지역,도시,테마 선택결과 가지고 ManagerProInsert.ma 이동 -->
 	
 		<section id="dis" style="display: none; ">
-			<form action="PackageInsert.ma" class="p-5 bg-light">
+			<form action="PackageInsert.ma" class="p-5 bg-light" onkeydown="if(event.keyCode==13) return false;">
 				<!-- 지역,도시,테마 구역 패딩줘서 안삐져나가게. -->
 			<div class="row block-9 mb-4" style="padding-left:20px;"> 
 				<div class="col-md-6 pr-md-5 flex-column">
@@ -76,7 +76,7 @@
 								%>
 							</select>
 							<div class="form-group" id="addRegion" style="display: none;">
-								<input type="text" size="20" id="region_addbox"> <input type="button" id="region_addbtn" value="지역추가" class="btn btn-primary">
+								<input type="text" size="20" id="region_addbox" onkeydown="enterKey(this);"> <input type="button" id="region_addbtn" value="지역추가" class="btn btn-primary">
 							</div>
 						</div>
 					</div>
@@ -90,7 +90,7 @@
 							<option value="add">도시추가</option>
 						</select>
 						<div class="form-group" id="addCity" style="display: none;">
-							<input type="text" size="20" id="city_addbox"> <input type="button" id="city_addbtn" value="도시추가" class="btn btn-primary">
+							<input type="text" size="20" id="city_addbox"  onkeydown="enterKey(this);"> <input type="button" id="city_addbtn" value="도시추가" class="btn btn-primary">
 						</div>
 					</div>
 				</div>
@@ -109,7 +109,7 @@
  					%>
 					</label> <input type="button" id="theme_addbtn" value="테마추가" class="btn btn-primary" onclick="check()">
 					<div class="form-group" id="addTheme" style="display: none;">
-						<input type="text" size="20" id="theme_addbox"> <input type="button" id="theme_addbtn2" class="btn btn-primary" value="추가">
+						<input type="text" size="20" id="theme_addbox" onkeydown="enterKey(this);"> <input type="button" id="theme_addbtn2" class="btn btn-primary" value="추가">
 					</div>
 				</div>
 				

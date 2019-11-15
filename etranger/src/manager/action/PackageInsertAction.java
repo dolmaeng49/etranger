@@ -24,10 +24,9 @@ public class PackageInsertAction implements Action {
 		CategoryBean cb = new CategoryBean();
 		String theme = "";
 		String s = "#";
+		
 		for (int i = 0; i < request.getParameterValues("theme").length; i++) {
-
 			theme += (s + (request.getParameterValues("theme")[i]));
-
 		}
 
 		int addRegioncode = Integer.parseInt(request.getParameter("addRegioncode"));
