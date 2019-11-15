@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 <%
 	//현재 세션 객체에 "sid"세션값이 존재할 경우 String 타입 변수 sid에 저장
 	String member_id=null;
@@ -9,9 +9,7 @@
 		member_id=(String)session.getAttribute("member_id");
 	}
 %>
-<div id="floatMenu"><a href="javascript:void chatChannel()">
-  <img src="https://developers.kakao.com/assets/img/about/logos/channel/consult_small_yellow_pc.png"/>
-</a></div>
+
 <!-- login-info  class="container"-->
 <div class="container"><p id="login-info-p">
 <%if(member_id==null){ %>
@@ -41,6 +39,8 @@
 
 				<!-- test -->
 				<li class="nav-item"><a href="ManagerMain.ma" class="nav-link">Manager</a></li>
+
+
 			</ul>
 		</div>
 	</div>

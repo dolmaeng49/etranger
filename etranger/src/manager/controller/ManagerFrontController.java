@@ -14,6 +14,7 @@ import common.vo.ActionForward;
 import manager.action.CategoryListAction;
 import manager.action.CityInsertAction;
 import manager.action.CitySelectAction;
+import manager.action.PackageInsertAction;
 import manager.action.ThemeInsertAction;
 import manager.action.RegionInsertAction;
 import manager.action.RegionSelectAction;
@@ -54,6 +55,18 @@ public class ManagerFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		else if (command.equals("/PackageProInsert.ma")) {
+			action = new PackageInsertAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+			
+		
+		
 		
 		//ManagerThemeInsertAction 클래스로 이동
 		else if (command.equals("/ManagerTheme.ma")) {
