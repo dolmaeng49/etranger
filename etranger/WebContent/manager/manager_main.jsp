@@ -55,14 +55,14 @@
 		<!-- 지역,도시,테마 선택결과 가지고 ManagerProInsert.ma 이동 -->
 	
 		<section id="dis" style="display: none; ">
-			<form action="ManagerProInsert.ma" class="p-5 bg-light">
+			<form action="PackageInsert.ma" class="p-5 bg-light">
 				<!-- 지역,도시,테마 구역 패딩줘서 안삐져나가게. -->
 			<div class="row block-9 mb-4" style="padding-left:20px;"> 
 				<div class="col-md-6 pr-md-5 flex-column">
 					<div class="row d-block flex-row">
 						<!-- 지역선택 -->
 						<div class="select-wrap one-third">
-							<select id="selectRegion" class="form-control" onChange="showRegionAdd()">
+							<select id="selectRegion" class="form-control" onChange="showRegionAdd()" name="addRegioncode">
 								<!-- 옵션 클릭시 select()동작 -->
 								<option>지역선택</option>
 								<option value="add">지역추가</option>
@@ -85,7 +85,7 @@
 				<!-- 도시선택 -->
 				<div class="col-md-6">
 					<div class="select-wrap one-third">
-						<select id="selectCity" class="form-control" onChange="showCityAdd()">
+						<select id="selectCity" class="form-control" onChange="showCityAdd()"name="addCitycode">
 							<option>도시선택</option>
 							<option value="add">도시추가</option>
 						</select>
