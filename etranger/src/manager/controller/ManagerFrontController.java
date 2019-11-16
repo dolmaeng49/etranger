@@ -35,7 +35,7 @@ public class ManagerFrontController extends HttpServlet {
 
 		System.out.println(command);
 
-		// manager_main.jsp 페이지 이동
+		// CategoryListAction 클래스로 이동
 		if (command.equals("/ManagerMain.ma")) {
 			action = new CategoryListAction();
 
