@@ -195,7 +195,7 @@ public class ManagerDAO {
 	}
 	// selectThemeList ---
 
-	// --insertCategory
+	// --- insertCategory
 		public int CategoryInsert(CategoryBean cb,String theme) {
 			int insertCount = 0;
 
@@ -235,11 +235,16 @@ public class ManagerDAO {
 			}
 			return insertCount;
 		}
-		
-	// insertCategory--
+		// insertCategory ---
 		
 	// =============================== 카테고리 끝 ========================================
 		
+		// --- selectProductList
+		public ArrayList<CategoryBean> selectProductList() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		// selectProductList ---
 }
 
 

@@ -14,6 +14,7 @@ import common.vo.ActionForward;
 import manager.action.CategoryListAction;
 import manager.action.CityInsertAction;
 import manager.action.CitySelectAction;
+import manager.action.ProductListSelectAction;
 import manager.action.CategoryInsertAction;
 import manager.action.ThemeInsertAction;
 import manager.action.RegionInsertAction;
@@ -115,6 +116,15 @@ public class ManagerFrontController extends HttpServlet {
 		
 		else if (command.equals("/CategoryInsert.ma")) {
 			action = new CategoryInsertAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		else if (command.equals("/ProductListSelect.ma")) {
+			action = new ProductListSelectAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
