@@ -12,7 +12,10 @@ Language|JAVA, JSP & Servlet(MVC Model-2), AJAX, JQUERY, JAVASCRIPT, HTML5, CSS3
 ## 핵심기술 구현
 구분|구현내용
 ------------|----
-
+회원관리|
+리뷰 게시판|
+관리자 페이지|
+등등(추후 추가예정)|
 
 
 [![Video Label](http://img.youtube.com/vi/GUoib3zluGI/0.jpg)](https://youtu.be/GUoib3zluGI)
