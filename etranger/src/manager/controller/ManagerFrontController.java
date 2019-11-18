@@ -14,7 +14,8 @@ import common.vo.ActionForward;
 import manager.action.CategoryListAction;
 import manager.action.CityInsertAction;
 import manager.action.CitySelectAction;
-import manager.action.CategoryInsertAction;
+import manager.action.ProductInsertAction;
+import manager.action.ProductListAction;
 import manager.action.ThemeInsertAction;
 import manager.action.RegionInsertAction;
 import manager.action.RegionSelectAction;
@@ -24,8 +25,7 @@ import manager.action.ThemeListAction;
 @WebServlet("*.ma")
 public class ManagerFrontController extends HttpServlet {
 
-	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
 		String command = request.getServletPath();
@@ -112,12 +112,25 @@ public class ManagerFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
-		else if (command.equals("/CategoryInsert.ma")) {
-			action = new CategoryInsertAction();
+
+		// CategoryInsertAction 클래스로 이동
+		else if (command.equals("/ProductInsert.ma")) {
+			action = new ProductInsertAction();
 			try {
 				forward = action.execute(request, response);
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		// ProductListAction 클래스로 이동
+		else if (command.equals("/ProductList.ma")) {
+			action = new ProductListAction();
+			try {
+				forward = action.execute(request, response);
+			}
+			catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -135,14 +148,12 @@ public class ManagerFrontController extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);
 	}
 }

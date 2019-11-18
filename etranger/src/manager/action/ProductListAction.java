@@ -8,37 +8,16 @@ import javax.servlet.http.HttpServletResponse;
 import common.action.Action;
 import common.vo.ActionForward;
 import manager.svc.ProductListService;
-import manager.svc.RegionListService;
-import manager.svc.ThemeListService;
 import manager.vo.CategoryBean;
 import manager.vo.PageInfo;
 
-public class CategoryListAction implements Action {
+public class ProductListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		// --- 지역 리스트 ---
-		RegionListService regionListService = new RegionListService();
-
-		ArrayList<CategoryBean> regionList = new ArrayList<CategoryBean>();
-		regionList = regionListService.getRegionList();
-		
-		request.setAttribute("regionList", regionList);
-		// -------------------
-		
-		// --- 테마 리스트 ---
-		ThemeListService themeListService = new ThemeListService();
-		
-		ArrayList<CategoryBean> themeList = new ArrayList<CategoryBean>();
-		themeList = themeListService.getThemeList();
-		
-		request.setAttribute("themeList", themeList);
-		// -------------------
-		
-		// --- 패키지 리스트 ---
 		int page = 1;
-		int limit = 8;
+		int limit = 12;
 
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
@@ -46,6 +25,7 @@ public class CategoryListAction implements Action {
 
 		ProductListService productListService = new ProductListService();
 		int listCount = productListService.getListCount();
+		System.out.println("총 게시물 수(Action) " + listCount);
 
 		ArrayList<CategoryBean> productList = new ArrayList<CategoryBean>();
 		productList = productListService.getProductList(page, limit);
@@ -61,11 +41,10 @@ public class CategoryListAction implements Action {
 
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("productList", productList);
-		// -------------------
-		
+
 		ActionForward forward = new ActionForward();
-		forward.setPath("/manager/manager_main.jsp");
-		
+		forward.setPath("/review/review_list.jsp");
+
 		return forward;
 	}
 

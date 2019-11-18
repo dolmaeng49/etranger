@@ -15,11 +15,11 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import common.action.Action;
 import common.vo.ActionForward;
-import manager.svc.CategoryInsertService;
+import manager.svc.ProductInsertService;
 import manager.svc.RegionInsertService;
 import manager.vo.CategoryBean;
 
-public class CategoryInsertAction implements Action {
+public class ProductInsertAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -61,7 +61,7 @@ public class CategoryInsertAction implements Action {
 
 		}
 		
-		CategoryInsertService cis = new CategoryInsertService();
+		ProductInsertService cis = new ProductInsertService();
 		boolean isInsertSuccess = cis.InsertCategory(cb, addTheme); 
 
 		if (!isInsertSuccess) {

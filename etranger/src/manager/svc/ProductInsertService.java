@@ -6,7 +6,7 @@ import manager.dao.ManagerDAO;
 import manager.vo.CategoryBean;
 import static common.db.JdbcUtil.*;
 
-public class CategoryInsertService {
+public class ProductInsertService {
 
 	public boolean InsertCategory(CategoryBean cb, String theme) {
 		boolean isInsertSuccess = false;
@@ -15,7 +15,7 @@ public class CategoryInsertService {
 		ManagerDAO managerDAO = ManagerDAO.getInstance();
 		managerDAO.setConnection(con);
 
-		int insertCount = managerDAO.CategoryInsert(cb, theme);
+		int insertCount = managerDAO.ProductInsert(cb, theme);
 
 		if (insertCount > 0) {
 			commit(con);
