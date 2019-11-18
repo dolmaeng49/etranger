@@ -64,7 +64,7 @@
 
 		<section id="dis" style="display: none; ">
 			<!-- 지역,도시,테마 선택결과 가지고 ManagerProInsert.ma 이동 -->
-			<form action="PackageInsert.ma" class="p-5 bg-light" method="post" enctype="multipart/form-data"
+			<form action="CategoryInsert.ma" class="p-5 bg-light" method="post" enctype="multipart/form-data"
 				onkeydown="if(event.keyCode==13) return false;">
 				<!-- 지역,도시,테마 구역 패딩줘서 안삐져나가게. -->
 				<div class="row block-9 mb-4" style="padding-left:20px;">
