@@ -242,6 +242,7 @@
 }
 .icon-map-marker:before {
   content: "\f041";
+  padding-right: 7px;
 }
 .icon-adjust:before {
   content: "\f042";
@@ -485,6 +486,7 @@
 }
 .icon-phone:before {
   content: "\f095";
+  padding-right: 7px;
 }
 .icon-square-o:before {
   content: "\f096";
@@ -695,6 +697,7 @@
 }
 .icon-envelope:before {
   content: "\f0e0";
+  padding-right: 7px;
 }
 .icon-linkedin:before {
   content: "\f0e1";
@@ -4877,6 +4880,7 @@
 }
 .icon-web:before {
   content: "\e051";
+  padding-right: 7px;
 }
 .icon-web_asset:before {
   content: "\e069";

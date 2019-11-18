@@ -17,3 +17,11 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/kakaochat.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
+  <script src="js/summernote-ko-KR.js"></script>
+  <script src="js/summernote-fontawesome.js"></script>
+  <script src="js/custom-toolbar.js"></script>
+  
+  
+  

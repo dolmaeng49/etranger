@@ -1,5 +1,6 @@
     <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	<div id="floatdiv"><a href="javascript:void chatChannel()">
   <img src="https://developers.kakao.com/assets/img/about/logos/channel/consult_small_yellow_pc.png"/>
 </a></div>
@@ -46,9 +47,9 @@
               <h2 class="ftco-heading-2">Contact Information</h2>
               <ul class="list-unstyled">
 
-                <li><a href="#" class="py-2 d-block"> etranger 테스트</a></li>
+                <li><a href="#" class="py-2 d-block"> <span class="icon icon-map-marker">부산 부산진구 부전동 112-3</span></a></li>
                 <li><a href="#" class="py-2 d-block"><span class="icon icon-phone">051)803-0909</span></a></li>
-                <li><a href="#" class="py-2 d-block">etranger.com</a></li>
+                <li><a href="#" class="py-2 d-block"><span class="icon icon-web">etranger.com</span></a></li>
                 <li><a href="#" class="py-2 d-block"><span class="icon icon-envelope">etrangermanager@gmail.com</span></a></li>
               </ul>
             </div>
@@ -56,16 +57,19 @@
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
               <ul class="ftco-footer-social list-unstyled float-md-right float-lft">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="https://twitter.com/etrangerdev"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                <li class="ftco-animate"><a href="javascript:void chatChannel()">
+  <img src="https://developers.kakao.com/assets/img/about/logos/channel/consult_small_yellow_pc.png"/>
+</a></li>
               </ul>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12 text-center">
-
+	
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
   Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>

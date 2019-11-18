@@ -14,7 +14,9 @@ public class ReviewBean {
 	private Timestamp review_date;
 	private int review_readcount;
 	private String review_package_catagory_code;
-	
+	private String review_member_name;
+	private int review_star;
+	private int review_reply_count;
 	
 	public int getReview_num() {
 		return review_num;
@@ -65,6 +67,28 @@ public class ReviewBean {
 	public void setReview_package_catagory_code(String review_package_catagory_code) {
 		this.review_package_catagory_code = review_package_catagory_code;
 	}
+	public String getReview_member_name() {
+		return review_member_name;
+	}
+	public void setReview_member_name(String review_member_name) {
+		this.review_member_name = review_member_name;
+	}
+	public int getReview_star() {
+		return review_star;
+	}
+	public void setReview_star(int review_star) {
+		this.review_star = review_star;
+	}
+	public int getReview_reply_count() {
+		return review_reply_count;
+	}
+	public void setReview_reply_count(int review_reply_count) {
+		this.review_reply_count = review_reply_count;
+	}
+	
+	
+	
+	
 
 	
 }

@@ -5,11 +5,9 @@
 	// page, ReviewBean 객체 파라미터 가져오기
 	String nowPage = (String)request.getParameter("page");
 	ReviewBean article = (ReviewBean)request.getAttribute("article");
-	String sid = null;
+	String sessionId = null;
 	if(session.getAttribute("member_id")!=null){
-		sid=(String)session.getAttribute("member_id");
-		
-		
+	  sessionId = (String)session.getAttribute("member_id");
 	}
 %>
 <!DOCTYPE html>
@@ -17,9 +15,15 @@
   <head>
 	<!-- 스타일 인클루드 -->
 <jsp:include page="../include/style.jsp"/>
+<style type="text/css">
+div{
+	border: 1px solid red;
+}
+</style>
+
+
   </head>
   <body>
-    
 	<!-- 탑메뉴 인클루드 -->    
 <jsp:include page="../include/top_menu.jsp"/>
     
@@ -43,49 +47,45 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8 ftco-animate">
-<!--           	//------------------------------------------------------------------- -->
-			<div class="align-center">
-			<p>no.<%=article.getReview_num() %></p>
-			<p>조회수&nbsp<%=article.getReview_readcount() %>
-			<p>작성일 &nbsp<%=article.getReview_date() %></p>
-			<p>작성자&nbsp<%=article.getReview_member_id() %></p>
-			<p>제목</p>
-			<h3 class="mb-3"><%=article.getReview_subject() %></h3>
-			<p><img src="reviewUpload/<%=article.getReview_image()%>" width="600" height="500"></p>
+			<div id="article-info">
+			<h2><%=article.getReview_subject() %></h2>
+			<div class="writer"><strong><%=article.getReview_member_id() %><!-- 이름으로 교체할 곳 --></strong> 님</div>
+			</div> <!-- article-info끝 -->
+			<div id="article-content-wrapper">
+			<div class="content-header">
+			<div id="article-time"><%=article.getReview_date() %></div>
+			<div id="article-readcnt">조회수 : <%=article.getReview_readcount() %></div>
+			<div id="article-commentcnt">댓글 : <%=article.getReview_reply_count() %></div>
+			</div><!-- content-header끝 -->
+			<div class="content-stararea">
+			<div id="stars">★★★★★</div>
+			</div><!-- content-star끝 -->
+			<div class="content-view">
+<%-- 			<p><img src="reviewUpload/<%=article.getReview_image()%>" style="max-width: 100%; height: auto;"></p> --%>
 			<p><%=article.getReview_content() %></p>
-			</div>
-			 <div class="form-group">
-                       	<%
-   					if(sid != null) { // 세션값 아이디 가 있을시
-					if(sid.equals(article.getReview_member_id())) { // 글쓴이와 일치 할경우
+			</div><!-- content-view끝 -->
+			<div class="like-area">
+			<button type="button" class="btnreview btnreview-outline-success vote-btn">
+			<i class="fa fa-thumbs-up"></i> 추천 <span id="up"><!-- ajax로 뿌려줄 값(누적 추천수)들어갈 곳--></span></button>
+			</div><!-- like-area끝 -->
+			<div class="content-footer">
+				<%
+   					if(sessionId != null) { // 세션값 아이디 가 있을시
+					if(sessionId.equals(article.getReview_member_id())) { // 글쓴이와 일치 할경우
 					%>
-                    <input type="submit" value="수정" class="btn py-3 px-4 btn-primary" onclick="location.href='ReviewModifyForm.rv?review_num=<%=article.getReview_num()%>&page=<%=nowPage%>'">
-                    <input type="reset" value="삭제" class="btn py-3 px-4 btn-primary" onclick="location.href='ReviewDeletePro.rv?review_num=<%=article.getReview_num() %>&review_member_id=<%=sid %>&page=<%=nowPage%>'">
+					<div id="modi-del">
+					<a href="ReviewModifyForm.rv?review_num=<%=article.getReview_num()%>&page=<%=nowPage%>" class="btncontrol btncontrol-sm btn-default"><i class="fa fa-pencil-alt"></i>수정</a>
+					<a href="ReviewDeletePro.rv?review_num=<%=article.getReview_num() %>&review_member_id=<%=sessionId %>&page=<%=nowPage%>" class="btncontrol btnforshare-rv btn-default"><i class="fa fa-trash"></i>삭제</a>
+   					</div>
    					<%
 					}
 					}
 					%>
-                    <input type="button" value="목록" class="btn py-3 px-4 btn-primary" onclick="history.back()">
-                    <input type="submit" value="" class="btn py-3 px-4 btn-primary">
-            </div>
-			        
-<!--             // ----------------------------------------------------------------- -->
-<!--             <h2 class="mb-3">#1. We Love WordPress Themes</h2> -->
-<!--             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, eius mollitia suscipit, quisquam doloremque distinctio perferendis et doloribus unde architecto optio laboriosam porro adipisci sapiente officiis nemo accusamus ad praesentium? Esse minima nisi et. Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p> -->
-<!--             <p> -->
-<!--               <img src="images/image_6.jpg" alt="" class="img-fluid"> -->
-<!--             </p> -->
-<!--             <p>Molestiae cupiditate inventore animi, maxime sapiente optio, illo est nemo veritatis repellat sunt doloribus nesciunt! Minima laborum magni reiciendis qui voluptate quisquam voluptatem soluta illo eum ullam incidunt rem assumenda eveniet eaque sequi deleniti tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor minima esse vero ut ea, repudiandae suscipit!</p> -->
-<!--             <h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2> -->
-<!--             <p>Temporibus ad error suscipit exercitationem hic molestiae totam obcaecati rerum, eius aut, in. Exercitationem atque quidem tempora maiores ex architecto voluptatum aut officia doloremque. Error dolore voluptas, omnis molestias odio dignissimos culpa ex earum nisi consequatur quos odit quasi repellat qui officiis reiciendis incidunt hic non? Debitis commodi aut, adipisci.</p> -->
-<!--             <p> -->
-<!--               <img src="images/image_8.jpg" alt="" class="img-fluid"> -->
-<!--             </p> -->
-<!--             <p>Quisquam esse aliquam fuga distinctio, quidem delectus veritatis reiciendis. Nihil explicabo quod, est eos ipsum. Unde aut non tenetur tempore, nisi culpa voluptate maiores officiis quis vel ab consectetur suscipit veritatis nulla quos quia aspernatur perferendis, libero sint. Error, velit, porro. Deserunt minus, quibusdam iste enim veniam, modi rem maiores.</p> -->
-<!--             <p>Odit voluptatibus, eveniet vel nihil cum ullam dolores laborum, quo velit commodi rerum eum quidem pariatur! Quia fuga iste tenetur, ipsa vel nisi in dolorum consequatur, veritatis porro explicabo soluta commodi libero voluptatem similique id quidem? Blanditiis voluptates aperiam non magni. Reprehenderit nobis odit inventore, quia laboriosam harum excepturi ea.</p> -->
-<!--             <p>Adipisci vero culpa, eius nobis soluta. Dolore, maxime ullam ipsam quidem, dolor distinctio similique asperiores voluptas enim, exercitationem ratione aut adipisci modi quod quibusdam iusto, voluptates beatae iure nemo itaque laborum. Consequuntur et pariatur totam fuga eligendi vero dolorum provident. Voluptatibus, veritatis. Beatae numquam nam ab voluptatibus culpa, tenetur recusandae!</p> -->
-<!--             <p>Voluptas dolores dignissimos dolorum temporibus, autem aliquam ducimus at officia adipisci quasi nemo a perspiciatis provident magni laboriosam repudiandae iure iusto commodi debitis est blanditiis alias laborum sint dolore. Dolores, iure, reprehenderit. Error provident, pariatur cupiditate soluta doloremque aut ratione. Harum voluptates mollitia illo minus praesentium, rerum ipsa debitis, inventore?</p> -->
-            <!--     	본문 내용 들어가는 곳 -->
+					<a href="ReviewList.rv" class="btncontrol btnforshare-rv btn-default"><i class="fa fa-list"></i>목록</a>
+			</div>
+			</div><!-- article-content-wrapper끝  -->
+			
+            <!--     	본문 내용 들어가는 곳  끝-->
             <div class="tag-widget post-tag-container mb-5 mt-5">
               <div class="tagcloud">
                 <a href="#" class="tag-cloud-link">Life</a>
@@ -94,21 +94,12 @@
                 <a href="#" class="tag-cloud-link">Travel</a>
               </div>
             </div>
-            
-            <div class="about-author d-flex pt-5">
-              <div class="bio align-self-md-center mr-4">
-                <img src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
-              </div>
-              <div class="desc align-self-md-center">
-                <h3>About The Author</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-              </div>
-            </div>
-
-
+			<!-- 댓글시작 -->
             <div class="pt-5 mt-5">
-              <h3 class="mb-5">6 Comments</h3>
+              <h4 class="rv-5"><%=article.getReview_reply_count()%> Comments</h4>
               <ul class="comment-list">
+                
+				
                 <li class="comment">
                   <div class="vcard bio">
                     <img src="images/person_1.jpg" alt="Image placeholder">
@@ -119,19 +110,9 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
                     <p><a href="#" class="reply">Reply</a></p>
                   </div>
-                </li>
+				<!-- 댓글 한덩이 끝 -->
 
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="images/person_1.jpg" alt="Image placeholder">
-                  </div>
-                  <div class="comment-body">
-                    <h3>Jean Doe</h3>
-                    <div class="meta">June 27, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply">Reply</a></p>
-                  </div>
-
+					<!-- <대댓글일 시, ul .children으로 감싼다 -->
                   <ul class="children">
                     <li class="comment">
                       <div class="vcard bio">
@@ -175,7 +156,7 @@
                     </li>
                   </ul>
                 </li>
-
+	
                 <li class="comment">
                   <div class="vcard bio">
                     <img src="images/person_1.jpg" alt="Image placeholder">
@@ -191,6 +172,9 @@
               <!-- END comment-list -->
               
               <div class="comment-form-wrap pt-5">
+              	<!-- 댓글 작성 폼 -->
+              	<input type="hidden" id="review_reply_num" value=0>
+              	<input type="hidden" id="review_reply_member_id" value=<%=sessionId %>>
                 <h3 class="mb-5">Leave a comment</h3>
                 <form action="#" class="p-5 bg-light">
                   <div class="form-group">

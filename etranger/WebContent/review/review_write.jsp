@@ -1,25 +1,23 @@
+<%@page import="javafx.geometry.Side"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-// //현재 세션 객체에 "sId" 세션값이 존재하지 않을 경우
-// 	// alert 창에 "로그인이 필요합니다" 출력 후 LoginForm.me 로 이동
-// 	String sid= null; 
-// 	if(session.getAttribute("sid") !=null) {
-// 		sid=(String)session.getAttribute("sid");
-// 	}
-%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
 	<!-- 스타일 인클루드 -->
 <jsp:include page="../include/style.jsp"/>
-  </head>
+</head>
 <%-- <body onload="checkSession(<%=sid%>)"> --%>  
   <body>
     
 	<!-- 탑메뉴 인클루드 -->    
 <jsp:include page="../include/top_menu.jsp"/>
-    
+<%
+String sessionId = (String)session.getAttribute("member_id");
+if(sessionId==null) {
+	response.sendRedirect("LoginForm.me");
+}
+%>    
     <section class="home-slider owl-carousel">
       <div class="slider-item" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
@@ -41,38 +39,33 @@
           <div class="col-md-8 ftco-animate">
 
              <!--  글 작성 폼 시작 -->
-              <div class="comment-form-wrap pt-5">
+              <div class="comment-form-wrap">
                 <h3 class="mb-5">여행후기 작성</h3>
+                <div style="height:90px"></div>
                 <form action="ReviewWritePro.rv" method="post" enctype="multipart/form-data" name="review_write_form">
                 <input type="hidden" id="review_num" value=0>
-				<input type="hidden" id="review_package_category_code" name="review_package_category_code" value="1">
+				<input type="hidden" id="review_package_category_code"  name="review_package_category_code" value="1">
+				<!-- input type 내에서 왜 id값의 value로 문자열 인식이 안되는지 알아보기 -->
 				<input type="hidden" id="review_readcount" value=0>
-				
+				<input type="hidden" id="review_member_name" name="review_member_name" value="0">
+				<input type="hidden" id="review_star" value=0>
+				<input type="hidden" name="review_member_id" value=<%=sessionId %>> <!-- 추후에 name값 같이 들고와서 보낼 예정 -->
+				<input type="hidden" name="review_member_name" value="admintest"> <!-- member파트 수정전까진 임시로 이렇게 넘겨줌 -->
                   <div class="writeform-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" name="review_member_id"id="review_member_id"/>
+                    <input type="text" class="form-control-subject" name="review_subject" id="review_subject" maxlength="40" placeholder="제목을 입력해주세요"/>
                   </div>
-<!--                   <div class="form-group"> -->
-<!--                     <label for="email">Email</label> -->
-<!--                     <input type="text" class="form-control"> -->
-<!--                   </div> -->
                   <div class="writeform-group">
-                    <label for="website">Subject</label>
-                    <input type="text" class="form-control" name="subject" id="subject"/>
+                    <div style="height:90px"></div>
+                    <textarea id="summernote" name="review_content" cols="30" rows="20" class="form-control"></textarea>
                   </div>
                   <div class="writeform-group">
                     <label for="image">이미지 첨부</label>
-                    <input name="image" type="file" class="form-control" multiple="multiple" accept="image/*" id="image"/>
-                  </div>
-                  <div class="writeform-group">
-                    <label for="message">Message</label>
-                    <textarea name="content" id="content" cols="30" rows="20" class="form-control"></textarea>
+                    <div id="test"></div>
+                    <input name="review_image" type="file" class="form-control" multiple="multiple" accept="image/*" id="review_image"/>
                   </div>
                   <div class="form-group"> 
                     <input type="submit" value="등록" class="btn py-3 px-4 btn-primary">
-                    <input type="reset" value="다시쓰기" class="btn py-3 px-4 btn-primary">
-                    <input type="button" value="뒤로가기" class="btn py-3 px-4 btn-primary" onclick="history.back()">
-                    <input type="submit" value="Join" class="btn py-3 px-4 btn-primary">
+                    <input type="button" value="취소" class="btn py-3 px-4 btn-primary" onclick="history.back()"> <!-- 나중에 팝업띄워줄 것 -->
                   </div>
 
                 </form>
@@ -126,9 +119,7 @@
 
 	<!-- footer 인클루드 -->
 <jsp:include page="../include/footer.jsp"/>
-
 	<!-- loader 인클루드 -->
 <jsp:include page="../include/loader.jsp"/>
-    
   </body>
 </html>

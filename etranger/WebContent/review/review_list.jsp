@@ -20,6 +20,11 @@
   <head>
 	<!-- 스타일 인클루드 -->
 <jsp:include page="/include/style.jsp"/>
+<style type="text/css">
+div{
+	border: 1px solid red;
+}
+</style>
   </head>
   <body>
 	<!-- 탑메뉴 인클루드 -->    
@@ -92,6 +97,7 @@
         <!-- 페이지 부분 -->
 	<%}else{%><div id="emptyArticle">등록된 글이 없습니다</div><%} %>
       </div> <!-- <div class="container">의 끝 -->
+      <div align="right"><input type="button" value="임시글쓰기" class="btn py-3 px-4 btn-primary" onclick="location.href='./ReviewWriteForm.rv'"></div>
     </section>
     
 <!--     <li class="active"><span>1</span></li> -->
@@ -103,9 +109,8 @@
 <jsp:include page="/include/loader.jsp"/>
     <script type="text/javascript">
 $('h3.heading').each(function(){
-	 
 	  var length = 18; //표시할 글자수 정하기
-	  
+	  var iframe = "</iframe>"
 	  //전체 옵션을 자를 경우
 	  $(this).each(function(){
 	   if( $(this).text().length >= length ){
