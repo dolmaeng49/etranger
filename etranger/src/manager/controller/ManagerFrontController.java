@@ -14,8 +14,9 @@ import common.vo.ActionForward;
 import manager.action.CategoryListAction;
 import manager.action.CityInsertAction;
 import manager.action.CitySelectAction;
-import manager.action.ProductInsertAction;
-import manager.action.ProductListAction;
+//import manager.action.ProductInsertAction;
+import manager.action.CategoryInsertAction;
+//import manager.action.ProductListAction;
 import manager.action.ThemeInsertAction;
 import manager.action.RegionInsertAction;
 import manager.action.RegionSelectAction;
@@ -25,7 +26,8 @@ import manager.action.ThemeListAction;
 @WebServlet("*.ma")
 public class ManagerFrontController extends HttpServlet {
 
-	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
 		String command = request.getServletPath();
@@ -41,8 +43,7 @@ public class ManagerFrontController extends HttpServlet {
 
 			try {
 				forward = action.execute(request, response);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -52,8 +53,7 @@ public class ManagerFrontController extends HttpServlet {
 			action = new RegionInsertAction();
 			try {
 				forward = action.execute(request, response);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -63,8 +63,7 @@ public class ManagerFrontController extends HttpServlet {
 			action = new RegionSelectAction();
 			try {
 				forward = action.execute(request, response);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -74,8 +73,7 @@ public class ManagerFrontController extends HttpServlet {
 			action = new CityInsertAction();
 			try {
 				forward = action.execute(request, response);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -85,8 +83,7 @@ public class ManagerFrontController extends HttpServlet {
 			action = new CitySelectAction();
 			try {
 				forward = action.execute(request, response);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -96,8 +93,7 @@ public class ManagerFrontController extends HttpServlet {
 			action = new ThemeInsertAction();
 			try {
 				forward = action.execute(request, response);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -107,39 +103,46 @@ public class ManagerFrontController extends HttpServlet {
 			action = new ThemeCheckBoxAction();
 			try {
 				forward = action.execute(request, response);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 
 		// CategoryInsertAction 클래스로 이동
-		else if (command.equals("/ProductInsert.ma")) {
-			action = new ProductInsertAction();
+		else if (command.equals("/CategoryInsert.ma")) {
+			action = new CategoryInsertAction();
 			try {
 				forward = action.execute(request, response);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 
-		// ProductListAction 클래스로 이동
-		else if (command.equals("/ProductList.ma")) {
-			action = new ProductListAction();
-			try {
-				forward = action.execute(request, response);
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+//		// ProductListAction 클래스로 이동
+//		else if (command.equals("/ProductList.ma")) {
+//			action = new ProductListAction();
+//			try {
+//				forward = action.execute(request, response);
+//			}
+//			catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+
+//		// CategoryInsertAction 클래스로 이동
+//		else if (command.equals("/ProductInsert.ma")) {
+//			action = new ProductInsertAction();
+//			try {
+//				forward = action.execute(request, response);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
 
 		if (forward != null) {
 			if (forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());
-			}
-			else {
+			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
@@ -148,12 +151,14 @@ public class ManagerFrontController extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doProcess(request, response);
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doProcess(request, response);
 	}
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import manager.dao.ManagerDAO;
 import manager.vo.CategoryBean;
 
-public class ProductListService {
+public class CategoryListService {
 
 	public int getListCount() {
 		Connection con = getConnection();
@@ -23,13 +23,13 @@ public class ProductListService {
 		return listCount;
 	}
 
-	public ArrayList<CategoryBean> getProductList(int page, int limit) {
+	public ArrayList<CategoryBean> getCategoryList(int page, int limit) {
 		Connection con = getConnection();
 		ManagerDAO managerDAO = ManagerDAO.getInstance();
 		managerDAO.setConnection(con);
 		ArrayList<CategoryBean> productList = null;
 
-		productList = managerDAO.selectProductList(page, limit);
+		productList = managerDAO.selectCategoryList(page, limit);
 
 		close(con);
 

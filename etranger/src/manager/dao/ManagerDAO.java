@@ -281,7 +281,7 @@ public class ManagerDAO {
 	// selectListCount ---
 
 	// --- selectProductList
-	public ArrayList<CategoryBean> selectProductList(int page, int limit) {
+	public ArrayList<CategoryBean> selectCategoryList(int page, int limit) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<CategoryBean> productList = new ArrayList<CategoryBean>();

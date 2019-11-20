@@ -5,7 +5,7 @@
 <%
 	ArrayList<CategoryBean> regionList = (ArrayList<CategoryBean>) request.getAttribute("regionList");
 	ArrayList<CategoryBean> themeList = (ArrayList<CategoryBean>) request.getAttribute("themeList");
-	ArrayList<CategoryBean> productList = (ArrayList<CategoryBean>) request.getAttribute("productList");
+	ArrayList<CategoryBean> categoryList = (ArrayList<CategoryBean>) request.getAttribute("categoryList");
 	PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo");
 	int nowPage = pageInfo.getPage();
 	int maxPage = pageInfo.getMaxPage();
@@ -92,7 +92,7 @@
 			<div class="col-md-9">
 				<section id="dis" style="display: none;">
 					<!-- 지역,도시,테마 선택결과 가지고 ManagerProInsert.ma 이동 -->
-					<form action="ProductInsert.ma" class="p-5 bg-light" method="post" enctype="multipart/form-data"
+					<form action="CategoryInsert.ma" class="p-5 bg-light" method="post" enctype="multipart/form-data"
 						onkeydown="if(event.keyCode==13) return false;">
 						<!-- 지역,도시,테마 구역 패딩줘서 안삐져나가게. -->
 						<div class="row block-9 mb-4" style="padding-left: 20px;">
@@ -147,20 +147,23 @@
 
 									<br>
 									<h3 class="h4 mb-4">Theme</h3>
-									<label id="newTheme">
 										<%
  											for (int i = 0; i < themeList.size(); i++) {
 										%>
+									<label id="newTheme">
 										<input type="checkbox" name="theme"
 											value="<%=themeList.get(i).getThemeName()%>"><%=themeList.get(i).getThemeName()%>
+											</label>
 										<%
  											}
  										%>
-									</label> <input type="button" id="theme_addbtn" value="테마추가" class="btn btn-primary"
+ 										<div class="col-md-12">
+									 <input type="button" id="theme_addbtn" value="테마추가" class="btn btn-primary"
 										onclick="check()">
 									<div class="form-group" id="addTheme" style="display: none;">
 										<input type="text" size="20" id="theme_addbox" onkeydown="enterKey(this);">
 										<input type="button" id="theme_addbtn2" class="btn btn-primary" value="추가">
+										</div>
 									</div>
 								</div>
 							</div>
@@ -195,6 +198,7 @@
 							<!-- 지역,도시,테마 선택결과 가지고 ManagerProInsert.ma 이동 -->
 							<div class="col-md-12">
 								<div class="form-group" style="display: block; clear: both;">
+								<br>
 									&nbsp;&nbsp; <input type="submit" value="등록하기"
 										class="btn py-3 px-4 btn-primary">&nbsp;&nbsp; <input type="reset" value="다시쓰기"
 										class="btn py-3 px-4 btn-primary">
@@ -209,17 +213,17 @@
 					<section class="ftco-section bg-light">
 						<h1>상품 리스트</h1>
 						<%
-							if (productList != null && listCount > 0) {
+							if (categoryList != null && listCount > 0) {
 						%>
 						<div class="container">
 							<div class="row">
 								<%
-									for (int i = 0; i < productList.size(); i++) {
+									for (int i = 0; i < categoryList.size(); i++) {
 								%>
 								<div class="col-md-6 col-lg-3 ftco-animate">
 									<div class="blog-entry">
 										<a href="blog-single.jsp" class="block-20"
-											style="background-image: url('ManagerImgUpload/<%=productList.get(i).getPackage_category_image()%>');">
+											style="background-image: url('ManagerImgUpload/<%=categoryList.get(i).getPackage_category_image()%>');">
 										</a>
 										<div class="text p-4">
 											<div class="meta">
@@ -231,7 +235,7 @@
 												</div>
 											</div>
 											<h3 class="heading">
-												<a href="#"><%=productList.get(i).getPackage_category_name()%></a>
+												<a href="#"><%=categoryList.get(i).getPackage_category_name()%></a>
 											</h3>
 											<p class="clearfix">
 												<a href="#" class="float-left">Read more</a> <a href="#"
