@@ -14,6 +14,7 @@ import common.vo.ActionForward;
 import manager.action.CategoryListAction;
 import manager.action.CityInsertAction;
 import manager.action.CitySelectAction;
+import manager.action.ProductDetailAction;
 //import manager.action.ProductInsertAction;
 import manager.action.CategoryInsertAction;
 //import manager.action.ProductListAction;
@@ -138,7 +139,24 @@ public class ManagerFrontController extends HttpServlet {
 //				e.printStackTrace();
 //			}
 //		}
-
+		
+		
+		else if (command.equals("/ProductDetail.ma")) {
+			action = new ProductDetailAction();
+			try {
+				forward = action.execute(request, response);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
 		if (forward != null) {
 			if (forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());

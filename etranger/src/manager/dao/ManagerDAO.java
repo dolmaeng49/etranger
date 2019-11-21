@@ -299,10 +299,13 @@ public class ManagerDAO {
 			while (rs.next()) {
 				CategoryBean cb = new CategoryBean();
 				// 추후 내용추가 예정
+				cb.setPackage_category_code(rs.getString("package_category_code"));
 				cb.setPackage_category_region(rs.getInt("package_category_region"));
+				cb.setPackage_category_theme(rs.getString("package_category_theme"));
 				cb.setPackage_category_image(rs.getString("package_category_image"));
 				cb.setPackage_category_name(rs.getString("package_category_name"));
 				productList.add(cb);
+				System.out.println("DB"+productList.size());
 			}
 		}
 		catch (SQLException e) {
@@ -315,5 +318,51 @@ public class ManagerDAO {
 		return productList;
 	}
 	// selectProductList ---
+
+	public ArrayList<CategoryBean> ProductDetailList(String pcode) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<CategoryBean> productDetailList = new ArrayList<CategoryBean>();
+		
+		System.out.println("ProductDetailList DB");
+		
+		try {
+
+			String sql = "select * from package_category where package_category_code=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, pcode);
+			rs = pstmt.executeQuery();
+			
+			
+			
+			
+			while (rs.next()) {
+			
+			
+				CategoryBean cb = new CategoryBean();
+				cb.setPackage_category_code(rs.getString("package_category_code"));
+				cb.setPackage_category_name(rs.getString("package_category_name"));
+				cb.setPackage_category_theme(rs.getString("package_category_theme"));
+				cb.setPackage_category_image(rs.getString("package_category_image"));
+				cb.setPackage_category_content(rs.getString("package_category_content"));
+				cb.setPackage_category_region(rs.getInt("package_category_region"));
+				cb.setPackage_category_city(rs.getInt("package_category_city"));
+				
+				productDetailList.add(cb);
+			}
+		
+			
+		
+		
+		}
+		catch (SQLException e) {
+			System.out.println("ProductDetailList() 오류! - " + e.getMessage());
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return productDetailList;
+	}
 
 }

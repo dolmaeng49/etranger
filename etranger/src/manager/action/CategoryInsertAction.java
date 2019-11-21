@@ -54,7 +54,7 @@ public class CategoryInsertAction implements Action {
 		
 		// 테마 처리
 		String addTheme = "";
-		String s = "#";
+		String s = "!";
 		for (int i = 0; i < multi.getParameterValues("theme").length; i++) {
 
 			addTheme += (s + (multi.getParameterValues("theme")[i]));

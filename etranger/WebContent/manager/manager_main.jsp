@@ -221,9 +221,12 @@
 									for (int i = 0; i < categoryList.size(); i++) {
 								%>
 								<div class="col-md-6 col-lg-3 ftco-animate">
-									<div class="blog-entry">
-										<a href="blog-single.jsp" class="block-20"
-											style="background-image: url('ManagerImgUpload/<%=categoryList.get(i).getPackage_category_image()%>');">
+								<div class="blog-entry">
+									<%=categoryList.get(i).getPackage_category_code()%>
+										<a href="ProductDetail.ma?package_category_code=<%=categoryList.get(i).getPackage_category_code()%>
+										&package_category_theme=<%=categoryList.get(i).getPackage_category_theme()%>" 
+										class="block-20"style="background-image: url('ManagerImgUpload/<%=categoryList.get(i).getPackage_category_image()%>')
+">
 										</a>
 										<div class="text p-4">
 											<div class="meta">
@@ -248,6 +251,8 @@
 									}
 								%>
 							</div>
+							</div>
+							</section>
 							<div class="row mt-5">
 								<div class="col text-center">
 									<div class="block-27">
