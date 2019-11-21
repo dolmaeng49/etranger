@@ -1,4 +1,4 @@
-package manager.action;
+package product.action;
 
 import java.util.ArrayList;
 
@@ -10,22 +10,26 @@ import common.vo.ActionForward;
 import common.vo.PageInfo;
 import manager.svc.ProductListService;
 import manager.vo.CategoryBean;
+import review.service.ReviewListService;
+import review.vo.ReviewBean;
 
 public class ProductListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		ActionForward forward = null;
+		// 페이징 처리
 		int page = 1;
-		int limit = 12;
-
+		int limit = 8;
+		
+		// 페이지 정보 파라미터를 받은 경우
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 
 		ProductListService productListService = new ProductListService();
 		int listCount = productListService.getListCount();
-		System.out.println("총 게시물 수(Action) " + listCount);
 
 		ArrayList<CategoryBean> productList = new ArrayList<CategoryBean>();
 		productList = productListService.getProductList(page, limit);
@@ -42,8 +46,8 @@ public class ProductListAction implements Action {
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("productList", productList);
 
-		ActionForward forward = new ActionForward();
-		forward.setPath("/review/review_list.jsp");
+		forward = new ActionForward();
+		forward.setPath("/product/productList.jsp");
 
 		return forward;
 	}

@@ -1,4 +1,4 @@
-<%@page import="manager.vo.PageInfo"%>
+<%@page import="common.vo.PageInfo"%>
 <%@page import="manager.vo.CategoryBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>

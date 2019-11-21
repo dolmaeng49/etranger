@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.action.Action;
 import common.vo.ActionForward;
+import common.vo.PageInfo;
 import review.service.ReviewListService;
-import review.vo.PageInfo;
 import review.vo.ReviewBean;
 
 
@@ -46,7 +46,7 @@ public class ReviewListAction implements Action {
 		
 		PageInfo pageInfo = new PageInfo(page, maxPage, startPage, endPage, listCount);
 		
-		request.setAttribute("pageInfo",pageInfo);
+		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("articleList", articleList);
 		
 		ActionForward forward = new ActionForward();

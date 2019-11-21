@@ -30,9 +30,7 @@
 		<div class="collapse navbar-collapse" id="ftco-nav">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a href="index.jsp" class="nav-link">Home</a></li>
-				<li class="nav-item"><a href="../zzzOriginalPageszzz/tours.jsp" class="nav-link">Tours</a></li>
-				<li class="nav-item"><a href="../zzzOriginalPageszzz/hotels.jsp" class="nav-link">Hotels</a></li>
-				<li class="nav-item"><a href="../zzzOriginalPageszzz/services.jsp" class="nav-link">Services</a></li>
+				<li class="nav-item"><a href="./ProductList.pr" class="nav-link">Packages</a></li>
 				<li class="nav-item"><a href="./ReviewList.rv" class="nav-link">Review</a></li>
 				<li class="nav-item"><a href="../zzzOriginalPageszzz/about.jsp" class="nav-link">About</a></li>
 				<li class="nav-item"><a href="../zzzOriginalPageszzz/contact.jsp" class="nav-link">Contact</a></li>

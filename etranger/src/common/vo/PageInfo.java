@@ -1,4 +1,4 @@
-package manager.vo;
+package common.vo;
 
 public class PageInfo {
 		

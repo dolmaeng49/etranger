@@ -1,4 +1,4 @@
-<%@page import="review.vo.PageInfo"%>
+<%@page import="common.vo.PageInfo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="review.vo.ReviewBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

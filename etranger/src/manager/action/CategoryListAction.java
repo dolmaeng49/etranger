@@ -7,11 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.action.Action;
 import common.vo.ActionForward;
+import common.vo.PageInfo;
 import manager.svc.ProductListService;
 import manager.svc.RegionListService;
 import manager.svc.ThemeListService;
 import manager.vo.CategoryBean;
-import manager.vo.PageInfo;
 
 public class CategoryListAction implements Action {
 
