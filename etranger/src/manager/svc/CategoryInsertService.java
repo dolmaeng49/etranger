@@ -1,31 +1,27 @@
 package manager.svc;
 
-import static common.db.JdbcUtil.close;
-import static common.db.JdbcUtil.commit;
-import static common.db.JdbcUtil.getConnection;
-import static common.db.JdbcUtil.rollback;
-
 import java.sql.Connection;
 
 import manager.dao.ManagerDAO;
-import manager.vo.ProductBean;
+import manager.vo.CategoryBean;
+import static common.db.JdbcUtil.*;
 
-public class ProductInsertService {
+public class CategoryInsertService {
 
-	public boolean InsertProduct(ProductBean pb) {
-
+	public boolean InsertCategory(CategoryBean cb, String theme) {
 		boolean isInsertSuccess = false;
 
 		Connection con = getConnection();
 		ManagerDAO managerDAO = ManagerDAO.getInstance();
 		managerDAO.setConnection(con);
 
-		int insertCount = managerDAO.ProductInsert(pb);
+		int insertCount = managerDAO.CategoryInsert(cb, theme);
 
 		if (insertCount > 0) {
 			commit(con);
 			isInsertSuccess = true;
-		} else {
+		}
+		else {
 			rollback(con);
 		}
 
@@ -34,5 +30,6 @@ public class ProductInsertService {
 		return isInsertSuccess;
 
 	}
+	
 
 }

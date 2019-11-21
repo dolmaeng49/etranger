@@ -157,11 +157,11 @@ function check() {
 }
 
 //상품 분류 등록 표시
-function dis() {
-    if ($('#dis').css('display') == 'none') {
-        $('#dis').show(300);
+function dis(thisId) {
+    if ($(thisId).css('display') == 'none') {
+        $(thisId).show(300);
     } else {
-        $('#dis').hide(300);
+        $(thisId).hide(300);
     }
 }
 

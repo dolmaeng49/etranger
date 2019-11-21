@@ -14,7 +14,8 @@ import common.vo.ActionForward;
 import manager.action.CategoryListAction;
 import manager.action.CityInsertAction;
 import manager.action.CitySelectAction;
-//import manager.action.ProductInsertAction;
+import manager.action.ProductDetailAction;
+import manager.action.ProductInsertAction;
 import manager.action.CategoryInsertAction;
 //import manager.action.ProductListAction;
 import manager.action.ThemeInsertAction;
@@ -118,26 +119,30 @@ public class ManagerFrontController extends HttpServlet {
 			}
 		}
 
-//		// ProductListAction 클래스로 이동
-//		else if (command.equals("/ProductList.ma")) {
-//			action = new ProductListAction();
-//			try {
-//				forward = action.execute(request, response);
-//			}
-//			catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
+		// CategoryInsertAction 클래스로 이동
+		else if (command.equals("/ProductInsertPro.ma")) {
+			action = new ProductInsertAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
-//		// CategoryInsertAction 클래스로 이동
-//		else if (command.equals("/ProductInsert.ma")) {
-//			action = new ProductInsertAction();
-//			try {
-//				forward = action.execute(request, response);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
+		// ProductDetailAction
+		else if (command.equals("/ProductDetail.ma")) {
+			action = new ProductDetailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		else if (command.equals("/ProductInsert.ma")) {
+			forward = new ActionForward();
+			forward.setPath("/manager/manager_product_insert.jsp");
+		}
 
 		if (forward != null) {
 			if (forward.isRedirect()) {
@@ -146,6 +151,7 @@ public class ManagerFrontController extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
+
 		}
 
 	}
