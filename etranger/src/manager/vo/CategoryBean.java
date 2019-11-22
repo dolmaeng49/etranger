@@ -11,7 +11,7 @@ public class CategoryBean {
 	private String regionName;
 	private int themeCode;
 	private String themeName;
-	private int package_category_code;
+	private String package_category_code;
 	private int  package_category_region;
 	private int  package_category_city;
 	private String  package_category_theme;
@@ -88,11 +88,11 @@ public class CategoryBean {
 	
 
 
-	public int getPackage_category_code() {
+	public String getPackage_category_code() {
 		return package_category_code;
 	}
 
-	public void setPackage_category_code(int package_category_code) {
+	public void setPackage_category_code(String package_category_code) {
 		this.package_category_code = package_category_code;
 	}
 

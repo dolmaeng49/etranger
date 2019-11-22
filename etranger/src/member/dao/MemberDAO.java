@@ -11,7 +11,7 @@ import static common.db.JdbcUtil.*;
 
 public class MemberDAO {
 	private static MemberDAO instance = new MemberDAO();
-	private Connection con = null;
+	private static Connection con = null;
 
 	private MemberDAO() {
 	}
@@ -196,7 +196,148 @@ public class MemberDAO {
 		return isUpdateSuccess;
 	}
 
-}
+	public boolean isMemberArticleWriter(String member_id, String member_passwd) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean isArticleWriter = false;
+		
+		
+		try {
+		String sql = "SELECT member_passwd FROM board WHERE member_id=?";
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, member_id);
+		rs = pstmt.executeQuery();
+		
+		if(rs.next()) {
+			if(member_passwd.equals(rs.getString("member_passwd"))) {
+				
+				isArticleWriter = true;
+			}
+		}
+		
+	}catch(SQLException e) {
+		System.out.println("isMemberArticleWriter() 오류 - " + e.getMessage());
+	}finally{
+		close(rs);
+		close(pstmt);
+	
+	}
+	return isArticleWriter;
+	
+	}
+
+	
+
+	public boolean ismemberArticleWriter(String member_id, String member_passwd) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean isArticleWriter = false;
+		
+		
+		try {
+			
+			String sql = "SELECT member_passwd FROM member WHERE member_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(member_passwd.equals(rs.getString("member_passwd"))) {
+					isArticleWriter = true;
+				}
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("ismemberArticleWriter() 오류 - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return isArticleWriter;
+	}
+
+
+	public int deleteARticle(String member_id) {
+		PreparedStatement pstmt =null;
+		int deleteCount=0;
+		
+		try {
+			String sql="delete from member where member_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,member_id);
+			deleteCount=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("deleteARticle() 오류 -"+e.getMessage());
+		}finally {
+			close(pstmt);
+		}
+		return deleteCount;
+	}
+
+
+	public static MemberBean selectArticle(String member_id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemberBean memberBean = null;
+		try {
+			String sql = "SELECT * FROM member WHERE member_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,member_id);
+			rs = pstmt.executeQuery();
+			System.out.println(member_id);
+			if(rs.next()) {
+				memberBean = new MemberBean();
+				memberBean.setMember_id(rs.getString("member_id"));
+				memberBean.setMember_name(rs.getString("member_name"));
+				memberBean.setMember_addr(rs.getString("member_addr"));
+				memberBean.setMember_phone(rs.getString("member_phone"));
+				memberBean.setMember_email(rs.getString("member_email"));
+				memberBean.setMember_gender(rs.getString("member_gender"));
+				memberBean.setMember_grade(rs.getString("member_grade"));
+				memberBean.setMember_birth(rs.getString("member_birth"));
+				
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("selectArticle() 오류 - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return memberBean;
+	}
+
+	public int updateArticle(MemberBean article) {
+		PreparedStatement pstmt =null;
+		ResultSet rs = null;
+		int updateCount =0;
+	try {
+		String sql="UPDATE member SET member_name=? where member_id=?";
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, article.getMember_addr());
+		pstmt.setString(2, article.getMember_phone());
+		pstmt.setString(3, article.getMember_email());
+		pstmt.setString(4, article.getMember_birth());
+		pstmt.setString(4, article.getMember_passwd());
+		pstmt.setString(4, article.getMember_id());
+		pstmt.setString(4, article.getMember_name());
+		updateCount=pstmt.executeUpdate();
+	}catch (SQLException e) {
+		System.out.println("updateArticle() 오류 -"+e.getMessage());
+	}finally{
+		close(pstmt);
+		close(rs);
+	}
+	
+	
+	return updateCount;
+	}
+
+	}
+
 
 
 

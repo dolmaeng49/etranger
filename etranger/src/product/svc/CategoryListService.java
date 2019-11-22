@@ -6,7 +6,7 @@ import java.sql.Connection;
 
 import product.dao.ProductDAO;
 
-public class ProductListService {
+public class CategoryListService {
 	// 상품의 총 개수를 리턴하는 메서드
 	public int getProductListCount() {
 		Connection con = getConnection();

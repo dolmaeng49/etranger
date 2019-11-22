@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import common.action.Action;
 import common.vo.ActionForward;
 import common.vo.PageInfo;
-import manager.svc.ProductListService;
+import manager.svc.CategoryListService;
 import manager.svc.RegionListService;
 import manager.svc.ThemeListService;
 import manager.vo.CategoryBean;
@@ -44,11 +44,11 @@ public class CategoryListAction implements Action {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 
-		ProductListService productListService = new ProductListService();
-		int listCount = productListService.getListCount();
+		CategoryListService categoryListService = new CategoryListService();
+		int listCount = categoryListService.getListCount();
 
-		ArrayList<CategoryBean> productList = new ArrayList<CategoryBean>();
-		productList = productListService.getProductList(page, limit);
+		ArrayList<CategoryBean> categoryList = new ArrayList<CategoryBean>();
+		categoryList = categoryListService.getCategoryList(page, limit);
 
 		int maxPage = (int) ((double) listCount / limit + 0.95);
 		int startPage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1;
@@ -60,7 +60,7 @@ public class CategoryListAction implements Action {
 		PageInfo pageInfo = new PageInfo(page, maxPage, startPage, endPage, listCount);
 
 		request.setAttribute("pageInfo", pageInfo);
-		request.setAttribute("productList", productList);
+		request.setAttribute("categoryList", categoryList);
 		// -------------------
 		
 		ActionForward forward = new ActionForward();

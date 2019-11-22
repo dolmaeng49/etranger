@@ -11,7 +11,7 @@
 <script type="text/javascript">
 <%
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-	ArrayList<CategoryBean> productList = (ArrayList<CategoryBean>)request.getAttribute("productList");
+	ArrayList<CategoryBean> categoryList = (ArrayList<CategoryBean>)request.getAttribute("categoryList");
 	int nowPage = pageInfo.getPage();
 	int maxPage = pageInfo.getMaxPage();
 	int startPage = pageInfo.getStartPage();
@@ -45,17 +45,17 @@
         <div class="row">
           <div class="col-lg-8">
             <div class="row">
-			<%if (productList != null && listCount > 0) { %>
-            <%for (int i = 0; i < productList.size(); i++) { %>
+			<%if (categoryList != null && listCount > 0) { %>
+            <%for (int i = 0; i < categoryList.size(); i++) { %>
               <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
-                <a href="#" class="block-5" style="background-image: url('ManagerImgUpload/<%=productList.get(i).getPackage_category_image()%>');">
+                <a href="#" class="block-5" style="background-image: url('ManagerImgUpload/<%=categoryList.get(i).getPackage_category_image()%>');">
                 </a>
                   <div class="text">
                     <span class="price">$399</span>
-                    <h3 class="heading"><%=productList.get(i).getPackage_category_name()%></h3>
+                    <h3 class="heading"><%=categoryList.get(i).getPackage_category_name()%></h3>
                     <div class="post-meta">
 <%--                     <%String content = productList.get(i).getPackage_category_content();%> //.substring(0, Math.min(content.length(), 20)) --%>
-                      <span><%=productList.get(i).getPackage_category_content() %></span>
+                      <span><%=categoryList.get(i).getPackage_category_content() %></span>
                     </div>
                     <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span> <span>500 reviews</span></p>
                   </div>
@@ -74,7 +74,8 @@
                   </div>
                 </a>
               </div>
- -->             
+ -->           
+<!-- PageController -->  
             </div>
             <div class="row mt-5">
               <div class="col text-center">
@@ -94,31 +95,35 @@
           </div>
           <!-- END -->
 
+<!-- SideBar - SearchBox -->
           <div class="col-lg-4 sidebar">
             <div class="sidebar-box ftco-animate">
               <div class="search-tours bg-light p-4">
                 <h3>Find your tour</h3>
-                <form action="" method="post">
+                <form action="CategoryListSearch.pr" method="post">
                   <div class="fields">
                     <div class="row flex-column">
 
-                      <div class="textfield-search col-sm-12 group mb-3"><input type="text" class="form-control" placeholder="Search Location"></div>
+                      <div class="textfield-search col-sm-12 group mb-3">
+                      	<input type="text" class="form-control" placeholder="Search" name="keyword"></div>
 
-                      <div class="check-in col-sm-12 group mb-3"><input type="text" id="checkin_date" class="form-control" placeholder="Check-in date"></div>
+                      <div class="check-in col-sm-12 group mb-3">
+                      	<input type="text" id="checkin_date" class="form-control" placeholder="Date for Departure" name="depart_date"></div>
 
-                      <div class="check-out col-sm-12 group mb-3"><input type="text" id="checkout_date" class="form-control" placeholder="Check-out date"></div>
+                      <div class="check-out col-sm-12 group mb-3">
+                      	<input type="text" id="checkout_date" class="form-control" placeholder="Date for Arrival" name="arriv_date"></div>
                       <div class="select-wrap col-sm-12 group mb-3">
                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="" id="" class="form-control">
-                          <option value="">Guest</option>
-                          <option value="">1</option>
-                          <option value="">2</option>
-                          <option value="">3</option>
-                          <option value="">4+</option>
+                        <select name="guest_count" id="" class="form-control">
+                          <option value="0">Guest</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4+</option>
                         </select>
                       </div>
                       <div class="col-sm-12 group mb-3">
-                        <input type="submit" class="search-submit btn btn-primary" value="Find Flights">
+                        <input type="submit" class="search-submit btn btn-primary" value="Find Packages">
                       </div>
                     </div>
                   </div>
@@ -156,6 +161,8 @@
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
             </div>
           </div>
+<!-- End of SideBar  -->          
+          
         </div>
       </div>
     </section>

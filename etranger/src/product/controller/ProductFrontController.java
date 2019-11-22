@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.action.Action;
 import common.vo.ActionForward;
-import product.action.ProductListAction;
+import product.action.CategoryListAction;
+import product.action.CategoryListSearchAction;
 
 @WebServlet("*.pr") // 서블릿(Controller)이 매핑을 담당할 주소 설정
 public class ProductFrontController extends HttpServlet {
@@ -25,7 +26,7 @@ public class ProductFrontController extends HttpServlet {
 		
 		// 추출한 서블릿 주소 매핑
 		if(command.equals("/ProductList.pr")) {
-			action = new ProductListAction();
+			action = new CategoryListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -34,6 +35,13 @@ public class ProductFrontController extends HttpServlet {
 		} else if(command.equals("/tours.pr")) {
 			forward = new ActionForward();
 			forward.setPath("product/tours.jsp");
+		} else if(command.equals("/CategoryListSearch.pr")) {
+			action = new CategoryListSearchAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 //			else if (command.equals("/AddWish.pr")) {
 //			action = new AddWishAction();
