@@ -15,7 +15,7 @@
 <%if(member_id==null){ %>
 	<a href="LoginForm.me">Log In</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="MemberJoinForm.me">Create an Account</a>
 <%}else{ %>
-<%=member_id %>님 | <a href="LogoutPro.me">Log Out</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="../member/updateForm.jsp">Modify</a>
+<%=member_id %>님 | <a href="LogoutPro.me">Log Out</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="MemberModifyForm.me?member_id=<%=member_id %>">Modify</a>
 <%} %>
 </p>
 </div>

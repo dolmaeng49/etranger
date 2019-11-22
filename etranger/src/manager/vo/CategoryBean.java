@@ -1,9 +1,8 @@
 package manager.vo;
 
 public class CategoryBean {
-	
+
 	private int cityRegionCode;
-	
 
 	private int cityCode;
 	private String cityName;
@@ -11,14 +10,14 @@ public class CategoryBean {
 	private String regionName;
 	private int themeCode;
 	private String themeName;
-	private int package_category_code;
-	private int  package_category_region;
-	private int  package_category_city;
-	private String  package_category_theme;
-	private String  package_category_name;
-	private String  package_category_image;
-	private String  package_category_content;
-	
+	private String package_category_code;
+	private int package_category_region;
+	private int package_category_city;
+	private String package_category_theme;
+	private String package_category_name;
+	private String package_category_image;
+	private String package_category_content;
+
 //	| package_category_code | 
 //	package_category_name | 
 //	package_category_region | 
@@ -27,8 +26,6 @@ public class CategoryBean {
 //	package_category_image | 
 //	package_category_content |
 
-
-
 	public int getCityRegionCode() {
 		return cityRegionCode;
 	}
@@ -36,7 +33,7 @@ public class CategoryBean {
 	public void setCityRegionCode(int cityRegionCode) {
 		this.cityRegionCode = cityRegionCode;
 	}
-	
+
 	public int getCityCode() {
 		return cityCode;
 	}
@@ -59,7 +56,7 @@ public class CategoryBean {
 
 	public void setRegionCode(int regionCode) {
 		this.regionCode = regionCode;
-		
+
 	}
 
 	public String getRegionName() {
@@ -85,15 +82,13 @@ public class CategoryBean {
 	public void setThemeName(String themeName) {
 		this.themeName = themeName;
 	}
-	
 
-
-	public int getPackage_category_code() {
-		return package_category_code;
+	public void setPackage_category_code(String package_category_code) {
+		this.package_category_code = package_category_code;
 	}
 
-	public void setPackage_category_code(int package_category_code) {
-		this.package_category_code = package_category_code;
+	public String getPackage_category_code() {
+		return package_category_code;
 	}
 
 	public int getPackage_category_region() {
@@ -143,6 +138,5 @@ public class CategoryBean {
 	public void setPackage_category_content(String package_category_content) {
 		this.package_category_content = package_category_content;
 	}
-	
 
 }

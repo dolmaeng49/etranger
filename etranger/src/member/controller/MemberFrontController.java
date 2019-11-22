@@ -12,6 +12,8 @@ import common.action.Action;
 import common.vo.ActionForward;
 import member.action.MemberLoginProAction;
 import member.action.MemberLogoutProAction;
+import member.action.MemberModifyFormAction;
+import member.action.MemberModifyProAction;
 import member.action.MemberResetPasswdFormAction;
 import member.action.MemberResetPasswdProAction;
 
@@ -24,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.action.Action;
 import common.vo.ActionForward;
+import member.action.MemberDeleteProAction;
 import member.action.MemberEmailCheckAction;
 import member.action.MemberFindIdProAction;
 import member.action.MemberIdDupCheckAction;
@@ -135,7 +138,42 @@ public class MemberFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if(command.equals("/MemberDeleteForm.me")) {
+		    // WebContent 폴더의 서브 폴더를 지정할 경우 "/서브폴더명/파일명" 으로 지정	
+			forward = new ActionForward();
+			forward.setPath("/member/member_deleteForm.jsp");
+		
+		}else if(command.equals("/MemberDeletePro.me")) {// 회원탈퇴
+			
+			action = new MemberDeleteProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/MemberModifyForm.me")) {
+					// MemberModifyFormAction 클래스로 이동
+					action = new MemberModifyFormAction();
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+		
+		} else if(command.equals("/MemberModifyPro.me")) {
+			
+			action = new MemberModifyProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
 		}
+		
+		
+		
+		
 		
 
 		// ActionForward 객체의 정보에 따른 포워딩
