@@ -366,4 +366,45 @@ public class ManagerDAO {
 		return productDetailList;
 	}
 
+	public ArrayList<ProductBean> ProductList(String pcode) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<ProductBean> productList = new ArrayList<ProductBean>();
+
+		System.out.println("ProductBean ProductList DB");
+
+		try {
+
+			String sql = "select * from package_product where package_category_code=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, pcode);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				/*
+				 * package_product package_product_num ★ package_category_code
+				 * package_product_depart_date ★ package_product_arriv_date ★
+				 * package_product_price ★ package_product_total ★ package_product_current
+				 * package_product_wish_count
+				 */
+				ProductBean pb = new ProductBean();
+				pb.setProductNum(rs.getString("package_product_num"));
+				pb.setProductDepartDate(rs.getString("package_product_depart_date"));
+				pb.setProductArrivDate(rs.getString("package_product_arriv_date"));
+				pb.setProductPrice(rs.getInt("package_product_price"));
+				pb.setProductTotal(rs.getInt("package_product_total"));
+
+				productList.add(pb);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("ProductDetailList() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return productList;
+	}
+
 }
