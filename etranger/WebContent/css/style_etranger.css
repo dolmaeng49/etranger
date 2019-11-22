@@ -221,4 +221,20 @@ a.btn {
     margin-bottom: 1rem !important;
 }
 
+.sidebar-box-list { /* review_list.jsp */
+    margin-bottom: 0px;
+    padding: 0px;
+    font-size: 15px;
+    width: 100%;
+    float: right;
+    background: #fff;
+}
+
+.search-form-list {  /* review_list.jsp */
+    background: #f7f7f7;
+    padding: 0px;
+    width: 400px;
+    float: right;
+}
+
 

@@ -260,6 +260,36 @@ public class ReviewDAO {
 		return deleteCount;
 		
 	} // end deleteArticle
+
+	// 게시판 글 검색
+	public int selectListCount(String search) {
+
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		int listCount = 0;
+		try {
+			con=getConnection();
+//			String sql = "select count(*) from board where subject like '%검색어%'";
+			String sql = "select count(*) from review where review_subject like ?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, "%"+search+"%"); // setString 시 '' 자동으로 생김
+			rs=pstmt.executeQuery();
+			if(rs.next()){
+				listCount =  rs.getInt("count(*)");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs!=null) try {rs.close();}catch(SQLException ex) {}	
+			if(pstmt!=null) try{pstmt.close();}catch(SQLException ex) {}
+			if(con!=null) try {con.close();}catch(SQLException ex) {}
+		}
+		return listCount;		
+		
+	} // end selectListCount(String search)
 	
 	
 	

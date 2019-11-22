@@ -16,6 +16,7 @@ import review.action.ReviewDetailAction;
 import review.action.ReviewListAction;
 import review.action.ReviewModifyFormAction;
 import review.action.ReviewModifyProAction;
+import review.action.ReviewSearchListAction;
 import review.action.ReviewWriteProAction;
 
 
@@ -78,6 +79,13 @@ public class ReviewFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/ImageCallback.rv")){
 			action = new ImageCallbackAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/ReviewSearch.rv")){
+			action = new ReviewSearchListAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {

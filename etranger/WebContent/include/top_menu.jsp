@@ -34,7 +34,7 @@
 				<li class="nav-item"><a href="../zzzOriginalPageszzz/hotels.jsp" class="nav-link">Hotels</a></li>
 				<li class="nav-item"><a href="../zzzOriginalPageszzz/services.jsp" class="nav-link">Services</a></li>
 				<li class="nav-item"><a href="./ReviewList.rv" class="nav-link">Review</a></li>
-				<li class="nav-item"><a href="../zzzOriginalPageszzz/about.jsp" class="nav-link">About</a></li>
+				<li class="nav-item"><a href="about.jsp" class="nav-link">About</a></li>
 				<li class="nav-item"><a href="../zzzOriginalPageszzz/contact.jsp" class="nav-link">Contact</a></li>
 
 				<!-- test -->
