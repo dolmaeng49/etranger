@@ -32,7 +32,7 @@
 				<li class="nav-item"><a href="index.jsp" class="nav-link">Home</a></li>
 				<li class="nav-item"><a href="./ProductList.pr" class="nav-link">Packages</a></li>
 				<li class="nav-item"><a href="./ReviewList.rv" class="nav-link">Review</a></li>
-				<li class="nav-item"><a href="../zzzOriginalPageszzz/about.jsp" class="nav-link">About</a></li>
+				<li class="nav-item"><a href="about.jsp" class="nav-link">About</a></li>
 				<li class="nav-item"><a href="../zzzOriginalPageszzz/contact.jsp" class="nav-link">Contact</a></li>
 
 				<!-- test -->

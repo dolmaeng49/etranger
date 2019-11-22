@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import manager.vo.CategoryBean;
+import manager.vo.ProductBean;
 import review.vo.ReviewBean;
 
 import static common.db.JdbcUtil.*;
@@ -32,7 +33,8 @@ public class ManagerDAO {
 		this.con = con;
 	}
 
-	// =============================== 카테고리 추가 ========================================
+	// =============================== 카테고리 추가
+	// ========================================
 	// --- insertRegion
 	public int insertRegion(CategoryBean cb) {
 		int insertCount = 0;
@@ -46,11 +48,9 @@ public class ManagerDAO {
 			pstmt.setString(1, cb.getRegionName());
 
 			insertCount = pstmt.executeUpdate();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			close(pstmt);
 		}
 
@@ -71,11 +71,9 @@ public class ManagerDAO {
 			pstmt.setInt(2, cb.getCityRegionCode());
 
 			insertCount = pstmt.executeUpdate();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			close(pstmt);
 		}
 
@@ -95,11 +93,9 @@ public class ManagerDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, cb.getThemeName());
 			insertCount = pstmt.executeUpdate();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			close(pstmt);
 		}
 
@@ -107,7 +103,8 @@ public class ManagerDAO {
 	}
 	// insertTheme ---
 
-	// =============================== 카테고리 출력 ========================================
+	// =============================== 카테고리 출력
+	// ========================================
 	// --- selectRegionList
 	public ArrayList<CategoryBean> selectRegionList() {
 		PreparedStatement pstmt = null;
@@ -128,13 +125,11 @@ public class ManagerDAO {
 
 				articleList.add(cb);
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 
 			System.out.println("selectArticleList() 오류 - " + e.getMessage());
 
-		}
-		finally {
+		} finally {
 			close(rs);
 			close(pstmt);
 		}
@@ -163,8 +158,7 @@ public class ManagerDAO {
 
 				CityList.add(cb);
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
@@ -192,13 +186,11 @@ public class ManagerDAO {
 
 				themeList.add(cb);
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 
 			System.out.println("selectThemeList() 오류 - " + e.getMessage());
 
-		}
-		finally {
+		} finally {
 			close(rs);
 			close(pstmt);
 		}
@@ -206,10 +198,11 @@ public class ManagerDAO {
 	}
 	// selectThemeList ---
 
-	// =============================== 카테고리 끝 ========================================
+	// =============================== 카테고리 끝
+	// ========================================
 
 	// --- insertCategory
-	public int ProductInsert(CategoryBean cb, String theme) {
+	public int CategoryInsert(CategoryBean cb, String theme) {
 		int insertCount = 0;
 
 		PreparedStatement pstmt = null;
@@ -220,19 +213,13 @@ public class ManagerDAO {
 			pstmt = con.prepareStatement(sql);
 
 			/*
-			 *  11/15 java시간에 배운걸로(컬럼타입네임) 수정 예정 :-)
-			 *  table : package_category
-			 *  package_category_code    varchar(100) 
-			 *  package_category_name    varchar(50)
-			 *  package_category_region  int(11)   
-			 *  package_category_city    int(11)      
-			 *  package_category_theme   varchar(100) 
-			 *  package_category_image   varchar(100) 
-			 *  package_category_image   varchar(100) 
+			 * 11/15 java시간에 배운걸로(컬럼타입네임) 수정 예정 :-) table : package_category
+			 * package_category_code varchar(100) package_category_name varchar(50)
+			 * package_category_region int(11) package_category_city int(11)
+			 * package_category_theme varchar(100) package_category_image varchar(100)
+			 * package_category_image varchar(100)
 			 * 
 			 */
-
-			// 날짜 추가하는게 좋을듯!!!
 
 			pstmt.setString(1, cb.getPackage_category_region() + "-" + cb.getPackage_category_city() + "-" + theme);
 			pstmt.setString(2, cb.getPackage_category_name());
@@ -243,11 +230,9 @@ public class ManagerDAO {
 			pstmt.setString(7, cb.getPackage_category_content());
 
 			insertCount = pstmt.executeUpdate();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			close(pstmt);
 		}
 		return insertCount;
@@ -268,11 +253,9 @@ public class ManagerDAO {
 			if (rs.next()) {
 				listCount = rs.getInt(1);
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			System.out.println("selectListCount() 오류! - " + e.getMessage());
-		}
-		finally {
+		} finally {
 			close(rs);
 			close(pstmt);
 		}
@@ -298,20 +281,18 @@ public class ManagerDAO {
 
 			while (rs.next()) {
 				CategoryBean cb = new CategoryBean();
-				// 추후 내용추가 예정
 				cb.setPackage_category_code(rs.getString("package_category_code"));
-				cb.setPackage_category_region(rs.getInt("package_category_region"));
+				cb.setPackage_category_name(rs.getString("package_category_name"));
 				cb.setPackage_category_theme(rs.getString("package_category_theme"));
 				cb.setPackage_category_image(rs.getString("package_category_image"));
-				cb.setPackage_category_name(rs.getString("package_category_name"));
+				cb.setPackage_category_content(rs.getString("package_category_content"));
+				cb.setPackage_category_region(rs.getInt("package_category_region"));
+				cb.setPackage_category_city(rs.getInt("package_category_city"));
 				productList.add(cb);
-				System.out.println("DB"+productList.size());
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			System.out.println("selectArticleList() 오류! - " + e.getMessage());
-		}
-		finally {
+		} finally {
 			close(rs);
 			close(pstmt);
 		}
@@ -319,26 +300,51 @@ public class ManagerDAO {
 	}
 	// selectProductList ---
 
+	public int ProductInsert(ProductBean pb) {
+		int insertCount = 0;
+
+		PreparedStatement pstmt = null;
+
+		String sql = "INSERT INTO package_product VALUES (?,?,?,?,?,?,?,?)";
+		try {
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, pb.getProductNum());
+			pstmt.setString(2, pb.getCategoryCode());
+			pstmt.setString(3, pb.getProductDepartDate());
+			pstmt.setString(4, pb.getProductArrivDate());
+			pstmt.setInt(5, pb.getProductPrice());
+			pstmt.setInt(6, pb.getProductTotal());
+//			pstmt.setInt(2, pb.getProductCurrent());
+			pstmt.setInt(7, 0);
+//			pstmt.setInt(1, pb.getProductWishCount());
+			pstmt.setInt(8, 1);
+
+			insertCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return insertCount;
+	}
+
 	public ArrayList<CategoryBean> ProductDetailList(String pcode) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<CategoryBean> productDetailList = new ArrayList<CategoryBean>();
-		
+
 		System.out.println("ProductDetailList DB");
-		
+
 		try {
 
 			String sql = "select * from package_category where package_category_code=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, pcode);
 			rs = pstmt.executeQuery();
-			
-			
-			
-			
+
 			while (rs.next()) {
-			
-			
+
 				CategoryBean cb = new CategoryBean();
 				cb.setPackage_category_code(rs.getString("package_category_code"));
 				cb.setPackage_category_name(rs.getString("package_category_name"));
@@ -347,22 +353,58 @@ public class ManagerDAO {
 				cb.setPackage_category_content(rs.getString("package_category_content"));
 				cb.setPackage_category_region(rs.getInt("package_category_region"));
 				cb.setPackage_category_city(rs.getInt("package_category_city"));
-				
+
 				productDetailList.add(cb);
 			}
-		
-			
-		
-		
-		}
-		catch (SQLException e) {
+
+		} catch (SQLException e) {
 			System.out.println("ProductDetailList() 오류! - " + e.getMessage());
-		}
-		finally {
+		} finally {
 			close(rs);
 			close(pstmt);
 		}
 		return productDetailList;
+	}
+
+	public ArrayList<ProductBean> ProductList(String pcode) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<ProductBean> productList = new ArrayList<ProductBean>();
+
+		System.out.println("ProductBean ProductList DB");
+
+		try {
+
+			String sql = "select * from package_product where package_category_code=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, pcode);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				/*
+				 * package_product package_product_num ★ package_category_code
+				 * package_product_depart_date ★ package_product_arriv_date ★
+				 * package_product_price ★ package_product_total ★ package_product_current
+				 * package_product_wish_count
+				 */
+				ProductBean pb = new ProductBean();
+				pb.setProductNum(rs.getString("package_product_num"));
+				pb.setProductDepartDate(rs.getString("package_product_depart_date"));
+				pb.setProductArrivDate(rs.getString("package_product_arriv_date"));
+				pb.setProductPrice(rs.getInt("package_product_price"));
+				pb.setProductTotal(rs.getInt("package_product_total"));
+
+				productList.add(pb);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("ProductDetailList() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return productList;
 	}
 
 }

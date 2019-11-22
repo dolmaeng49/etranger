@@ -41,7 +41,6 @@ div{
       </div>
     </section>
     <!-- END slider -->
-
     <section class="ftco-section">
 			<!--     	본문 내용 들어가는 곳 -->
       <div class="container">

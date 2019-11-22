@@ -16,8 +16,6 @@
 	int endPage = pageInfo.getEndPage();
 	int listCount = pageInfo.getListCount();
 	
-	// 글검색 Jwoo
-	String search = request.getParameter("search");
 	
 %>  
 <!DOCTYPE html>
@@ -49,16 +47,13 @@ div{
       </div>
     </section>
     <!-- END slider -->
-    
-    <!-- 추천여행지 -->
-    
     <section class="ftco-section bg-light">
 			<%
 			if(articleList != null && listCount > 0) {%>
       <div class="container">
         <div class="row">
 			<!--리스트에서 보여지는 게시물 썸네일 한 덩이 시작 -->
-				<%for(int i=0; i<articleList.size(); i++) {%>
+				<%for(int i=0; i<listCount; i++) {%>
           <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="blog-entry">
               <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="block-20" style="background-image: url('reviewUpload/<%=articleList.get(i).getReview_image()%>');">
@@ -80,26 +75,14 @@ div{
           <!-- 리스트에서 보여지는 게시물 썸네일 한 덩이 끝 -->
         </div> <!-- <div class="row">의 끝 -->
         
-        	<!-- 게시글 검색 & 태그-->
-        	<!-- 검색창 축소 및 태그 검색창 정렬 작업 -->
-            <div class="sidebar-box-list">
-            <div>
-             <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">Life</a>
-                <a href="#" class="tag-cloud-link">Sport</a>
-                <a href="#" class="tag-cloud-link">Tech</a>
-                <a href="#" class="tag-cloud-link">Travel</a>
-                <a href="#" class="tag-cloud-link">Life</a>
-                <a href="#" class="tag-cloud-link">Sport</a>
-                <a href="#" class="tag-cloud-link">Tech</a>
-                <a href="#" class="tag-cloud-link">Travel</a>
-              
-              <form action="ReviewSearch.rv" method="get" class="search-form-list" name="search">
-                  <input type="text"  name="search" placeholder="Type a keyword and hit enter" style="width: 380px;">
+       <!-- 게시글 검색 -->
+            <div class="sidebar-box">
+              <form action="ReviewSearch.rv" method="get" class="search-form" name="search">
+                <div class="form-group">
                   <span class="icon fa fa-search"></span>
+                  <input type="text" class="form-control" name="search" placeholder="Type a keyword and hit enter">
+                </div>
               </form>
-            </div>
-            </div>
             </div>
       <!-- end 게시글 검색 -->
         
@@ -131,6 +114,7 @@ div{
       </div> <!-- <div class="container">의 끝 -->
       <div align="right"><input type="button" value="임시글쓰기" class="btn py-3 px-4 btn-primary" onclick="location.href='./ReviewWriteForm.rv'"></div>
     </section>
+    
 <!--     <li class="active"><span>1</span></li> -->
 
 	<!-- footer 인클루드 -->
