@@ -12,7 +12,6 @@ import review.vo.ReviewBean;
 public class ReviewListService {
 
 	public int getListCount() {
-//		System.out.println("ReviewListService");
 		
 		Connection con =getConnection();
 		ReviewDAO reviewDAO = ReviewDAO.getInstance();
@@ -40,17 +39,4 @@ public class ReviewListService {
 		return articleList;
 	}
 	
-//	public int getCommentNumber() {
-//		System.out.println("getCommentCount");
-//		Connection con = getConnection();
-//		ReviewDAO reviewDAO = ReviewDAO.getInstance();
-//		reviewDAO.setConnection(con);
-//		
-//		commentNumber = reviewDAO.getCommentNumber();
-//		
-//		close(con);
-//		
-//		return commentNumber
-//	}
-
 }

@@ -5,6 +5,7 @@
 	// page, ReviewBean 객체 파라미터 가져오기
 	String nowPage = (String)request.getParameter("page");
 	ReviewBean article = (ReviewBean)request.getAttribute("article");
+	
 	String sessionId = null;
 	if(session.getAttribute("member_id")!=null){
 	  sessionId = (String)session.getAttribute("member_id");
@@ -41,6 +42,7 @@ div{
       </div>
     </section>
     <!-- END slider -->
+
     <section class="ftco-section">
 			<!--     	본문 내용 들어가는 곳 -->
       <div class="container">
@@ -54,7 +56,7 @@ div{
 			<div class="content-header">
 			<div id="article-time"><%=article.getReview_date() %></div>
 			<div id="article-readcnt">조회수 : <%=article.getReview_readcount() %></div>
-			<div id="article-commentcnt">댓글 : <%=article.getReview_reply_count() %></div>
+			<div id="article-commentcnt">댓글 : <%=article.getReview_comment_count() %></div>
 			</div><!-- content-header끝 -->
 			<div class="content-stararea">
 			<div id="stars">★★★★★</div>
@@ -95,111 +97,8 @@ div{
             </div>
 			<!-- 댓글시작 -->
             <div class="pt-5 mt-5">
-              <h4 class="rv-5"><%=article.getReview_reply_count()%> Comments</h4>
-              <ul class="comment-list">
-                
-				
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="images/person_1.jpg" alt="Image placeholder">
-                  </div>
-                  <div class="comment-body">
-                    <h3>Jean Doe</h3>
-                    <div class="meta">June 27, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply">Reply</a></p>
-                  </div>
-				<!-- 댓글 한덩이 끝 -->
-
-					<!-- <대댓글일 시, ul .children으로 감싼다 -->
-                  <ul class="children">
-                    <li class="comment">
-                      <div class="vcard bio">
-                        <img src="images/person_1.jpg" alt="Image placeholder">
-                      </div>
-                      <div class="comment-body">
-                        <h3>Jean Doe</h3>
-                        <div class="meta">June 27, 2018 at 2:21pm</div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                        <p><a href="#" class="reply">Reply</a></p>
-                      </div>
-
-
-                      <ul class="children">
-                        <li class="comment">
-                          <div class="vcard bio">
-                            <img src="images/person_1.jpg" alt="Image placeholder">
-                          </div>
-                          <div class="comment-body">
-                            <h3>Jean Doe</h3>
-                            <div class="meta">June 27, 2018 at 2:21pm</div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                            <p><a href="#" class="reply">Reply</a></p>
-                          </div>
-
-                            <ul class="children">
-                              <li class="comment">
-                                <div class="vcard bio">
-                                  <img src="images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                  <h3>Jean Doe</h3>
-                                  <div class="meta">June 27, 2018 at 2:21pm</div>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                  <p><a href="#" class="reply">Reply</a></p>
-                                </div>
-                              </li>
-                            </ul>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-	
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="images/person_1.jpg" alt="Image placeholder">
-                  </div>
-                  <div class="comment-body">
-                    <h3>Jean Doe</h3>
-                    <div class="meta">June 27, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply">Reply</a></p>
-                  </div>
-                </li>
-              </ul>
-              <!-- END comment-list -->
-              
-              <div class="comment-form-wrap pt-5">
-              	<!-- 댓글 작성 폼 -->
-              	<input type="hidden" id="review_reply_num" value=0>
-              	<input type="hidden" id="review_reply_member_id" value=<%=sessionId %>>
-                <h3 class="mb-5">Leave a comment</h3>
-                <form action="#" class="p-5 bg-light">
-                  <div class="form-group">
-                    <label for="name">Name *</label>
-                    <input type="text" class="form-control" id="name">
-                  </div>
-                  <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" class="form-control" id="email">
-                  </div>
-                  <div class="form-group">
-                    <label for="website">Website</label>
-                    <input type="url" class="form-control" id="website">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
-                  </div>
-
-                </form>
-              </div>
-            </div>
+              <jsp:include page="commentlist.jsp"/>
+            </div> <!-- 댓글 끝 -->
 
           </div> <!-- .col-md-8 -->
           <div class="col-md-4 sidebar">

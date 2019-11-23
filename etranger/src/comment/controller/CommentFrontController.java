@@ -9,7 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import comment.action.CommentAddAction;
+import comment.action.CommentDeleteProAction;
+import comment.action.CommentListAction;
+import comment.action.CommentModifyFormAction;
+import comment.action.CommentModifyProAction;
+import comment.action.CommentReplyFormAction;
+import comment.action.CommentReplyProAction;
+import comment.action.CommentWriteAction;
 import common.action.Action;
 import common.vo.ActionForward;
 ;
@@ -24,57 +30,56 @@ public class CommentFrontController extends HttpServlet{
 			Action action = null;
 			ActionForward forward = null;
 			
-			if(command.equals("/CommentAdd.cm")) {
-				action = new CommentAddAction();
+			if(command.equals("/CommentWrite.cm")) {
+				action = new CommentWriteAction();
+				try {
+					forward=action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else if(command.equals("/CommentList.cm")){
+				action = new CommentListAction();
+				try {
+					forward=action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else if(command.equals("/CommentModifyForm.cm")){
+				action = new CommentModifyFormAction();
+				try {
+					forward=action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else if(command.equals("/CommentModifyPro.cm")){
+				action = new CommentModifyProAction();
+				try {
+					forward=action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else if(command.equals("/CommentDeletePro.cm")){
+				action = new CommentDeleteProAction();
+				try {
+					forward=action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else if(command.equals("/CommentReplyForm.cm")){
+				action = new CommentReplyFormAction();
+				try {
+					forward=action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else if(command.equals("/CommentReplyPro.cm")){
+				action = new CommentReplyProAction();
 				try {
 					forward=action.execute(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-//			else if(command.equals("/CommentList.cm")){
-//				action = new CommentListAction();
-//				try {
-//					forward=action.execute(request, response);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}else if(command.equals("/CommentModifyForm.cm")){
-//				action = new CommentModifyFormAction();
-//				try {
-//					forward=action.execute(request, response);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}else if(command.equals("/CommentModifyPro.cm")){
-//				action = new CommentModifyProAction();
-//				try {
-//					forward=action.execute(request, response);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}else if(command.equals("/CommentDeletePro.cm")){
-//				action = new CommentDeleteProAction();
-//				try {
-//					forward=action.execute(request, response);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}else if(command.equals("/CommentReplyForm.cm")){
-//				action = new CommentReplyFormAction();
-//				try {
-//					forward=action.execute(request, response);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}else if(command.equals("/CommentReplyPro.cm")){
-//				action = new CommentReplyProAction();
-//				try {
-//					forward=action.execute(request, response);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
 			
 			
 			

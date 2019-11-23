@@ -24,11 +24,9 @@ public class ReviewModifyProAction implements Action {
 		
 		ReviewBean rb = null;
 		
-		
 		String realFolder=""; 
 		String saveFolder="/reviewUpload";
 		int fileSize = 10*1024*1024;
-		
 		
 		
 		ServletContext context = request.getServletContext(); // WAS 객체 가져와서 실제 폴더위치 찾기
@@ -41,7 +39,6 @@ public class ReviewModifyProAction implements Action {
 			// Service 클래스의 modifyArticle() 메서드를 호출하여 전달
 		
 		int review_num = Integer.parseInt(multi.getParameter("review_num"));
-		System.out.println(review_num);
 		String page = multi.getParameter("page");
 		
 			rb= new ReviewBean();

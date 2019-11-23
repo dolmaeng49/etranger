@@ -15,7 +15,7 @@ flush privileges;
 CREATE TABLE `member` (
   `member_id` VARCHAR(12),
   `member_passwd` VARCHAR(20) NOT NULL,
-  `member_name` VARCHAR(15) NOT NULL,
+  `member_name` VARCHAR(15) NOT NULL UNIQUE,
   `member_addr` VARCHAR(200) NOT NULL,
   `member_phone` VARCHAR(11) NOT NULL,
   `member_email` VARCHAR(100) NOT NULL,
@@ -134,12 +134,15 @@ CREATE TABLE `wish` (
 CREATE TABLE `review` (
   `review_num` INT NOT NULL AUTO_INCREMENT,
   `review_member_id` VARCHAR(12) NOT NULL,
+  `review_member_name` VARCHAR(15) NOT NULL,
   `review_subject` VARCHAR(100) NOT NULL,
   `review_image` VARCHAR(100) NOT NULL,
   `review_content` VARCHAR(2000) NOT NULL,
-  `review_timestamp` TIMESTAMP NOT NULL,
+  `review_date` DATETIME,
   `review_readcount` INT NOT NULL,
   `review_package_category_code` VARCHAR(100) NOT NULL,
+  `review_star` INT NOT NULL DEFAULT 0,
+  `review_comment_count` INT DEFAULT 0,
   PRIMARY KEY (`review_num`),
   CONSTRAINT `fk_review_package_category1`
     FOREIGN KEY (`review_package_category_code`)
@@ -150,32 +153,41 @@ CREATE TABLE `review` (
     FOREIGN KEY (`review_member_id`)
     REFERENCES `member` (`member_id`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_review_membername1`
+    FOREIGN KEY (`review_member_name`)
+    REFERENCES `member` (`member_name`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 
-CREATE TABLE `review_reply` (
-  `review_reply_num` INT NOT NULL AUTO_INCREMENT,
-  `review_reply_member_id` VARCHAR(12) NULL,
-  `review_reply_review_num` INT NULL,
-  `review_reply_ref` INT NULL,
-  `review_reply_lev` INT NULL,
-  `review_reply_seq` INT NULL,
-  `review_reply_timestamp` TIMESTAMP NULL,
-  `review_reply_content` VARCHAR(200) NULL,
-  PRIMARY KEY (`review_reply_num`),
-  CONSTRAINT `fk_review_reply_ref1`
-    FOREIGN KEY (`review_reply_ref`)
-    REFERENCES `review_reply` (`review_reply_num`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_review_reply_member1`
-    FOREIGN KEY (`review_reply_member_id`)
+CREATE TABLE `review_comment` (
+  `review_comment_num` INT NOT NULL AUTO_INCREMENT,
+  `review_comment_member_id` VARCHAR(12) NULL,
+  `review_comment_member_name` VARCHAR(15) NOT NULL,
+  `review_comment_review_num` INT NULL,
+  `review_comment_content` VARCHAR(200) NULL,
+  `review_comment_ref` INT NULL,
+  `review_comment_lev` INT NULL,
+  `review_comment_seq` INT NULL,
+  `review_comment_date` DATETIME NULL,
+  PRIMARY KEY (`review_comment_num`),
+  CONSTRAINT `fk_review_comment_member1`
+    FOREIGN KEY (`review_comment_member_id`)
     REFERENCES `member` (`member_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_review_reply_review1`
-    FOREIGN KEY (`review_reply_review_num`)
+  CONSTRAINT `fk_review_comment_review1`
+    FOREIGN KEY (`review_comment_review_num`)
     REFERENCES `review` (`review_num`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+    CONSTRAINT `fk_review_comment_membername1`
+    FOREIGN KEY (`review_comment_member_name`)
+    REFERENCES `member` (`member_name`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+    
+    
+    
 
 

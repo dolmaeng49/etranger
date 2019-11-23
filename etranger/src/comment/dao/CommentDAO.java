@@ -1,16 +1,309 @@
 package comment.dao;
 
+import static common.db.JdbcUtil.*;
+
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import comment.vo.CommentBean;
 
 public class CommentDAO {
 
-	
-	
-	
-	public static int insertComment(CommentBean cb) {
-		return 0;
-	}
-	
-	
+		
+		private CommentDAO() {}
+		
+		private static CommentDAO instance;
+		
+		public static CommentDAO getInstance() {
+			if(instance== null) {
+				instance = new CommentDAO();
+			}
+			return instance;
+		}
+		
+		Connection con;
+
+		public void setConnnection(Connection con) {
+			this.con = con;
+		}
+		
+		public int insertComment(CommentBean cb) {
+			PreparedStatement pstmt = null;
+			ResultSet rs=null;
+			int insertCount = 0;
+			int ref_num = 0;
+			
+			try {
+				String sql="SELECT max(review_comment_num) from review_comment";
+				pstmt = con.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				if(rs.next()){
+					ref_num=rs.getInt("max(review_comment_num)")+1;
+				}
+				
+				sql = "UPDATE review_comment set review_comment_seq=review_comment_seq+1 where review_comment_ref=? and review_comment_seq > ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, cb.getReview_comment_ref());
+				pstmt.setInt(2, cb.getReview_comment_seq());
+				pstmt.executeUpdate();
+				
+				sql = "INSERT INTO review_comment values(0,?,?,?,?,?,?,?,now())"; 
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, cb.getReview_comment_member_id());
+				pstmt.setString(2, cb.getReview_comment_member_name());
+				pstmt.setInt(3, cb.getReview_comment_review_num()); 	//테이블 수정
+				pstmt.setString(4, cb.getReview_comment_content());
+				pstmt.setInt(5, ref_num);
+				pstmt.setInt(6, 0);
+				pstmt.setInt(7, 0);
+			
+				insertCount = pstmt.executeUpdate();
+				
+				if(insertCount!=0) {
+					sql="UPDATE review set review_comment_count=review_comment_count+1 where review_num=?";
+					pstmt.setInt(1, cb.getReview_comment_review_num());
+				}
+				
+			} catch (Exception e) {
+				System.out.println("insertComment() 오류! - " + e.getMessage());
+			} finally {
+				close(pstmt);
+			}
+			return insertCount;
+		}
+		
+
+		public int selectCommentCount() {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			int commentCount = 0;
+			
+			try {
+				String sql="select count(*) from review_comment";
+				pstmt = con.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				
+				if(rs.next()) {
+					commentCount = rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				System.out.println("selectCommentCount() 오류! - " + e.getMessage());
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return commentCount;
+		}
+
+		
+		
+		
+		
+		public ArrayList<CommentBean> selectCommentList() {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ArrayList<CommentBean> commentList = new ArrayList<CommentBean>();
+			
+			
+			try {
+				
+				String sql = "select * from review_comment order by review_comment_ref desc, review_comment_seq asc";
+				pstmt=con.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				
+			while(rs.next()) {
+				
+				CommentBean cb = new CommentBean();
+				cb.setReview_comment_num(rs.getInt("review_comment_num"));
+				cb.setReview_comment_member_id(rs.getString("review_comment_member_id"));
+				cb.setReview_comment_member_name(rs.getString("review_comment_member_name"));
+				cb.setReview_comment_review_num(rs.getInt("review_comment_review_num"));
+				cb.setReview_comment_content(rs.getString("review_comment_content"));
+				cb.setReview_comment_ref(rs.getInt("review_comment_ref"));
+				cb.setReview_comment_lev(rs.getInt("review_comment_lev"));
+				cb.setReview_comment_seq(rs.getInt("review_comment_seq"));
+				cb.setReview_comment_date(rs.getTimestamp("review_comment_date"));
+				commentList.add(cb);
+				}
+			} catch (SQLException e) {
+				System.out.println("selectCommentList() 오류! - " + e.getMessage());
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return commentList;
+		}
+
+		public CommentBean selectComment(int comment_num) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			CommentBean cb = null;
+			
+			try {
+				String sql="SELECT * FROM review_comment WHERE review_comment_num=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, comment_num);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					cb = new CommentBean();
+					cb.setReview_comment_num(rs.getInt("review_comment_num"));
+					cb.setReview_comment_member_id(rs.getString("review_comment_member_id"));
+					cb.setReview_comment_member_name(rs.getString("review_comment_member_name"));
+					cb.setReview_comment_review_num(rs.getInt("review_comment_review_num"));
+					cb.setReview_comment_content(rs.getString("review_comment_content"));
+					cb.setReview_comment_ref(rs.getInt("review_comment_ref"));
+					cb.setReview_comment_ref(rs.getInt("review_comment_lev"));
+					cb.setReview_comment_ref(rs.getInt("review_comment_seq"));
+					cb.setReview_comment_date(rs.getTimestamp("review_comment_date"));
+				}
+			} catch (SQLException e) {
+				System.out.println("selectComment() 오류 - " + e.getMessage());
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return cb;
+		}
+
+		public int updateComment(CommentBean cb) {
+			PreparedStatement pstmt = null;
+			int updateCount = 0;
+			
+			try {
+				String sql = "UPDATE review_comment SET review_comment_content=? WHERE review_comment_num=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, cb.getReview_comment_content());
+				pstmt.setInt(2, cb.getReview_comment_num());
+				updateCount = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("updateComment() 오류 - " + e.getMessage());
+			}finally {
+				close(pstmt);
+			}
+			return updateCount;
+		}
+
+		
+		public boolean isCommentWriter(int review_comment_num, String review_comment_member_id) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null; 
+			boolean isCommentWriter = false;
+			
+			try {
+				String sql ="SELECT review_comment_member_id FROM review_comment WHERE review_comment_num=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, review_comment_num);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					
+					if(review_comment_member_id.equals(rs.getString("review_comment_member_id"))) {
+						isCommentWriter = true;
+					}
+				}
+			} catch (SQLException e) {
+				System.out.println("isCommentWriter() 오류 - " + e.getMessage());
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			
+			return isCommentWriter;
+		}
+
+		public int deleteComment(int review_comment_num) {
+			
+			PreparedStatement pstmt = null;
+			int deleteCount = 0;
+			
+			try {
+				String sql = "DELETE from review_comment WHERE review_comment_num=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, review_comment_num);
+				deleteCount = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("deleteComment() 오류 - " + e.getMessage());
+			} finally {
+				close(pstmt);
+			}
+			
+			return deleteCount;
+		}
+
+		public int insertReplyToComment(CommentBean comment) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			//이어서 작업할 것.
+			// 백엔드 작업 후 뷰페이지 정렬 => ajax연동
+			
+			
+			int num = 1; // 새로 등록할 게시물 번호
+			int insertCount = 0;  
+			int ref_num = 0;
+			
+			int comment_ref =comment.getReview_comment_ref();
+			int comment_lev =comment.getReview_comment_lev();
+			int comment_seq =comment.getReview_comment_seq();
+			
+			
+			try {
+				String sql = "SELECT max(review_comment_num) FROM review_comment";
+				pstmt = con.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					ref_num=rs.getInt("max(review_comment_num")+1;
+				}
+				
+				
+				sql="UPDATE review_comment SET review_comment_seq=review_comment_seq+1 WHERE review_comment_ref=? AND review_comment_seq > ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, comment.getReview_comment_ref());
+				pstmt.setInt(2, comment.getReview_comment_seq());
+				
+				int updateCount = pstmt.executeUpdate();
+				
+				//답글 순서 번호에 대한 업데이트가 성공할 경우(updateCount > 0) commit 수행
+				if(updateCount>0) {
+					commit(con);
+				}else {
+					rollback(con);
+				}
+				
+				comment_seq = comment_seq +1; // 새 답글의 순서 번호를 기존 순서번호를 기준 순서번호 +1 로 지정
+				comment_lev = comment_lev +1; // 새 답글의 들여쓰기 레벨을 기존 들여쓰기 레벨 +1 로 지정
+				
+				
+				sql = "INSERT INTO review_comment values(0,?,?,?,?,?,?,?,now())"; 
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, comment.getReview_comment_member_id());
+				pstmt.setString(2, comment.getReview_comment_member_name());
+				pstmt.setInt(3, comment.getReview_comment_review_num()); 	
+				pstmt.setString(4, comment.getReview_comment_content());
+				pstmt.setInt(5, ref_num);
+				pstmt.setInt(6, 0);
+				pstmt.setInt(7, 0);
+				
+				insertCount = pstmt.executeUpdate();
+				
+				if(insertCount!=0) {
+					sql="UPDATE review set review_comment_count=review_comment_count+1 WHERE review_num=?";
+					pstmt.setInt(1, comment.getReview_comment_review_num());
+				}
+			} catch (Exception e) {
+				System.out.println("insertReplytoComment() 오류! - " + e.getMessage());
+			} finally {
+				close(pstmt);
+			}
+			return insertCount;
+		}
+			
+			
+			
 
 }

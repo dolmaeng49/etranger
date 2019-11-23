@@ -6,13 +6,11 @@
 	ReviewBean article = (ReviewBean) request.getAttribute("article");
 %>
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html>
+<head>
 	<!-- 스타일 인클루드 -->
 <jsp:include page="/include/style.jsp"/>
-<link rel="stylesheet" href="css/css/summernote-lite.css">
-<script src="js/summernote-lite.js"></script>
-  </head>
+</head>
   <body>
 	<!-- 탑메뉴 인클루드 -->    
 <jsp:include page="/include/top_menu.jsp"/>
@@ -48,10 +46,6 @@
                     <label for="name">Name</label>
                     <input type="text" class="form-control" name="review_member_id"id="review_member_id" value="<%=article.getReview_member_id() %>" readonly="readonly" />
                   </div>
-<!--                   <div class="form-group"> -->
-<!--                     <label for="email">Email</label> -->
-<!--                     <input type="text" class="form-control"> -->
-<!--                   </div> -->
                   <div class="form-group">
                     <label for="subject">Subject</label>
                     <input type="text" class="form-control" name="subject" id="subject" value="<%=article.getReview_subject()%>"/>
@@ -68,8 +62,6 @@
                   <div class="form-group">
                     <input type="submit" value="수정" class="btn py-3 px-4 btn-primary">
                     <input type="reset" value="글목록" class="btn py-3 px-4 btn-primary" onclick="location.href='review_list.jsp'">
-                    <input type="button" value="뒤로가기" class="btn py-3 px-4 btn-primary" onclick="history.back()">
-                    <input type="submit" value="Join" class="btn py-3 px-4 btn-primary">
                   </div>
 
                 </form>

@@ -60,8 +60,8 @@ public class ReviewDeleteProAction implements Action {
 				out.println("<script>");
 				out.println("alert('삭제 성공');");
 				out.println("</script>");
-				// BoardList.bo 주소로 새로운 요청이 발생해야하므로 Redirect 방식으로 포워딩 설정
-				// => URL 뒤에 파라미터값으로 page 전달
+				// ReviewList 주소로 새로운 요청이 발생해야하므로 Redirect 방식으로 포워딩 설정
+				
 				forward = new ActionForward();
 				forward.setRedirect(true); // true = Redirect 방식
 				forward.setPath("ReviewList.rv?page="+page);

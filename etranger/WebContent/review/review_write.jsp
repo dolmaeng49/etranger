@@ -7,17 +7,17 @@
 	<!-- 스타일 인클루드 -->
 <jsp:include page="../include/style.jsp"/>
 </head>
-<%-- <body onload="checkSession(<%=sid%>)"> --%>  
   <body>
     
 	<!-- 탑메뉴 인클루드 -->    
 <jsp:include page="../include/top_menu.jsp"/>
 <%
 String sessionId = (String)session.getAttribute("member_id");
+String sessionName = (String)session.getAttribute("member_name");
 if(sessionId==null) {
 	response.sendRedirect("LoginForm.me");
 }
-%>    
+%>
     <section class="home-slider owl-carousel">
       <div class="slider-item" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
@@ -37,7 +37,7 @@ if(sessionId==null) {
       <div class="container">
         <div class="row">
           <div class="col-md-8 ftco-animate">
-
+	
              <!--  글 작성 폼 시작 -->
               <div class="comment-form-wrap">
                 <h3 class="mb-5">여행후기 작성</h3>
@@ -47,10 +47,10 @@ if(sessionId==null) {
 				<input type="hidden" id="review_package_category_code"  name="review_package_category_code" value="1">
 				<!-- input type 내에서 왜 id값의 value로 문자열 인식이 안되는지 알아보기 -->
 				<input type="hidden" id="review_readcount" value=0>
-				<input type="hidden" id="review_member_name" name="review_member_name" value="0">
 				<input type="hidden" id="review_star" value=0>
-				<input type="hidden" name="review_member_id" value=<%=sessionId %>> <!-- 추후에 name값 같이 들고와서 보낼 예정 -->
-				<input type="hidden" name="review_member_name" value="admintest"> <!-- member파트 수정전까진 임시로 이렇게 넘겨줌 -->
+				<input type="hidden" name="review_member_id" value=<%=sessionId %>>
+				<input type="hidden" name="review_member_name" value="tester"> <!-- 임시방편 -->
+<%-- 				<input type="hidden" name="review_member_name" value=<%=sessionName %>> --%>
                   <div class="writeform-group">
                     <input type="text" class="form-control-subject" name="review_subject" id="review_subject" maxlength="40" placeholder="제목을 입력해주세요"/>
                   </div>

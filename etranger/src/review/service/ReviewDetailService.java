@@ -18,8 +18,6 @@ public class ReviewDetailService {
 		reviewDAO.setConnection(con);
 		
 		ReviewBean article = reviewDAO.selectArticle(review_num);
-		System.out.println();
-		System.out.println(article);
 		
 		// BoardDAO 의 updateReadcount() 메서드를 호출하여 조회수 증가
 		// => 파라미터 : board_num, 리턴타입 : 

@@ -28,24 +28,22 @@ public class ReviewDAO {
 	public void setConnection(Connection con) {
 		this.con = con;
 	}
-	
-	
 		//////////////////////////////////Bong 작업영역 시작////////////////////////////////////////////
 	public int insertArticle(ReviewBean rb) {
 		PreparedStatement pstmt = null;
 		int insertCount = 0;
 		try {
-			String sql = "INSERT INTO review values(0,?,?,?,?,now(),?,?,?,?,?)"; 
+			String sql = "INSERT INTO review values(0,?,?,?,?,?,now(),?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, rb.getReview_member_id());
-			pstmt.setString(2, rb.getReview_subject());
-			pstmt.setString(3, rb.getReview_image());
-			pstmt.setString(4, rb.getReview_content());
-			pstmt.setInt(5, rb.getReview_readcount());
-			pstmt.setString(6, rb.getReview_package_catagory_code());
-			pstmt.setString(7, rb.getReview_member_name());
+			pstmt.setString(2, rb.getReview_member_name());
+			pstmt.setString(3, rb.getReview_subject());
+			pstmt.setString(4, rb.getReview_image());
+			pstmt.setString(5, rb.getReview_content());
+			pstmt.setInt(6, rb.getReview_readcount());
+			pstmt.setString(7, rb.getReview_package_catagory_code());
 			pstmt.setInt(8, rb.getReview_star());
-			pstmt.setInt(9, rb.getReview_reply_count());
+			pstmt.setInt(9, rb.getReview_comment_count());
 		
 			insertCount = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -109,7 +107,7 @@ public class ReviewDAO {
 			rb.setReview_package_catagory_code(rs.getString("review_package_category_code"));
 			rb.setReview_member_name(rs.getString("review_member_name"));
 			rb.setReview_star(rs.getInt("review_star"));
-			rb.setReview_reply_count(rs.getInt("review_reply_count"));
+			rb.setReview_comment_count(rs.getInt("review_comment_count"));
 			articleList.add(rb);
 			}
 		} catch (SQLException e) {
@@ -121,11 +119,8 @@ public class ReviewDAO {
 		return articleList;
 	}
 	
-
-		
 	
 	//////////////////////////////////Bong 작업영역 끝////////////////////////////////////////////
-	
 	
 	
 	
@@ -144,15 +139,15 @@ public class ReviewDAO {
 				reviewBean = new ReviewBean();
 				reviewBean.setReview_num(rs.getInt("review_num"));
 				reviewBean.setReview_member_id(rs.getString("review_member_id"));
+				reviewBean.setReview_member_name(rs.getString("review_member_name"));
 				reviewBean.setReview_subject(rs.getString("review_subject"));
 				reviewBean.setReview_image(rs.getString("review_image"));
 				reviewBean.setReview_content(rs.getString("review_content"));
 				reviewBean.setReview_date(rs.getTimestamp("review_date"));
 				reviewBean.setReview_readcount(rs.getInt("review_readcount"));
 				reviewBean.setReview_package_catagory_code(rs.getString("review_package_category_code"));
-				reviewBean.setReview_member_name(rs.getString("reivew_member_name"));
 				reviewBean.setReview_star(rs.getInt("review_star"));
-				reviewBean.setReview_reply_count(rs.getInt("review_reply_count"));
+				reviewBean.setReview_comment_count(rs.getInt("review_comment_count"));
 			}
 		} catch (SQLException e) {
 			System.out.println("selectArticle() 오류 - " + e.getMessage());
@@ -166,7 +161,7 @@ public class ReviewDAO {
 
 
 	public int updateReadcount(int review_num) {
-		// review_num 에 해당하는 게시물 조회수(readcount) 1 증가
+		// review_num 에 해당하는 readcount 1 증가
 		PreparedStatement pstmt = null;
 		int updateCount = 0;
 				
@@ -214,7 +209,7 @@ public class ReviewDAO {
 		boolean isArticleWriter = false;
 		
 		try {
-			// board_num 에 해당하는 레코드의 board_pass 가 전달받은 값과 일치하는지 여부 판별
+			// review_num이 전달받은 값과 일치하는지 여부 판별
 			String sql = "SELECT review_member_id FROM review WHERE review_num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, review_num);
@@ -223,7 +218,7 @@ public class ReviewDAO {
 			if(rs.next()) {
 				
 			if(review_member_id.equals(rs.getString("review_member_id"))) {
-				isArticleWriter = true; // 일치할 경우 isArticle 를 true 로 변경해줘면 됨
+				isArticleWriter = true; // 일치시 isArticle 값 true
 			}
 			
 		}
@@ -246,7 +241,7 @@ public class ReviewDAO {
 		int deleteCount = 0;
 		
 		try {
-			// board_num 에 해당하는 레코드 삭제
+			// review_num 에 해당하는 레코드 삭제
 			String sql = "DELETE from review WHERE review_num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, review_num);

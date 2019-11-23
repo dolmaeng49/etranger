@@ -61,7 +61,8 @@
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
                 <li class="ftco-animate"><a href="javascript:void chatChannel()">
-  <img src="https://developers.kakao.com/assets/img/about/logos/channel/consult_small_yellow_pc.png"/>
+  <!-- <img src="https://developers.kakao.com/assets/img/about/logos/channel/consult_small_yellow_pc.png"/> -->
+  <img src="./images/Kakao-re.png">
 </a></li>
               </ul>
             </div>

@@ -1,8 +1,14 @@
 package review.action;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import comment.dao.CommentDAO;
+import comment.service.CommentListService;
+import comment.service.CommentModifyFormService;
+import comment.vo.CommentBean;
 import common.action.Action;
 import common.vo.ActionForward;
 import review.service.ReviewDetailService;
@@ -19,13 +25,22 @@ public class ReviewDetailAction implements Action {
 
 		// request 객체를 통해 전달받은 파라미터 가져오기
 		int review_num = Integer.parseInt(request.getParameter("review_num"));
-		String page = request.getParameter("page"); 
-
+		String page = request.getParameter("page");
 		
 
 		ReviewDetailService reviewDetailService = new ReviewDetailService();
 		ReviewBean article =reviewDetailService.getArticle(review_num);
 		
+		//comment 부분 가져오는 작업
+		CommentListService commentListService = new CommentListService();
+		int commentCount = commentListService.getCommentCount();
+		System.out.println("총 댓글 수(Action)" +commentCount);
+		ArrayList<CommentBean> commentList = new ArrayList<CommentBean>();
+		commentList =commentListService.getCommentList();
+		
+		
+		
+		request.setAttribute("commentList", commentList);
 		request.setAttribute("page", page);
 		request.setAttribute("article", article);
 		

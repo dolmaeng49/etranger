@@ -1,28 +1,25 @@
 package comment.service;
 
-import static common.db.JdbcUtil.close;
-import static common.db.JdbcUtil.commit;
-import static common.db.JdbcUtil.getConnection;
-import static common.db.JdbcUtil.rollback;
+import static common.db.JdbcUtil.*;
+
 
 import java.sql.Connection;
 
 import comment.dao.CommentDAO;
 import comment.vo.CommentBean;
-import review.dao.ReviewDAO;
 
 public class CommentWriteProService {
 
 	public boolean AddComment(CommentBean cb) {
-		System.out.println("들어왔니? WriteProService-AddComment");
+		System.out.println("들어왔니?-CommentWriteProService");
 		boolean isWriteSuccess = false;
 		
 		Connection con = getConnection();
-		ReviewDAO reviewDAO = ReviewDAO.getInstance();
+		CommentDAO commentDAO = CommentDAO.getInstance();
 		
-		reviewDAO.setConnection(con);
+		commentDAO.setConnnection(con);
 		
-		int insertCount= CommentDAO.insertComment(cb);
+		int insertCount= commentDAO.insertComment(cb);
 		
 		if(insertCount>0) {
 			commit(con);
