@@ -15,7 +15,11 @@
 	if(session.getAttribute("member_id")!=null){
 	  sessionId = (String)session.getAttribute("member_id");
 	}
-%>    
+%>
+<!-- ajax 송신 위한 값 저장 -->
+<input type=text" id="sessionId" value=<%=sessionId %>>
+<input type=text" id="nowPage" value=<%=nowPage %>>
+<input type="text" id="cmt_re_num" value=<%=article.getReview_num() %>>    <!-- 확인차 text. 나중에 hidden 처리 -->
     
 <h4 class="rv-5"><%=article.getReview_comment_count()%> Comments</h4>
               <ul class="comment-list">
@@ -49,7 +53,7 @@
               		<input type="submit" class="reply" value="Reply"><%} %>
                 </form>
                     <p><a href="CommentModifyForm.cm?review_num=<%=article.getReview_num()%>&review_comment_num=<%=commentList.get(i).getReview_comment_num()%>&page=<%=nowPage%>">수정</a>
-                    <a href="CommentDeletePro.cm?review_num=<%=article.getReview_num()%>&review_comment_num=<%=commentList.get(i).getReview_comment_num()%>&review_comment_member_id=<%=commentList.get(i).getReview_comment_member_id() %>&page=<%=nowPage%>">삭제</a></p>
+                    <a id="comment_del_btn" href="CommentDeletePro.cm?review_num=<%=article.getReview_num()%>&review_comment_num=<%=commentList.get(i).getReview_comment_num()%>&review_comment_member_id=<%=commentList.get(i).getReview_comment_member_id() %>&page=<%=nowPage%>">삭제</a></p>
                   </div>
                 </li>
                   <%if(commentList.get(i).getReview_comment_lev()>0) { %>
@@ -65,7 +69,7 @@
               	<!-- 댓글 작성 폼 -->
                 <h3>코멘트를 남겨주세요!</h3>
                     <label for="name"><%=sessionId %>님</label>
-                <form action="CommentWrite.cm" class="p-5 bg-light">
+<!--                 <form action="CommentWrite.cm" class="p-5 bg-light"> -->
                   <div class="form-group">
                   	<input type="hidden" id="nowPage" name="nowPage" value=<%=nowPage %>>
               		<input type="hidden" id="review_comment_member_id" name="review_comment_member_id"value=<%=sessionId %>>
@@ -74,17 +78,21 @@
                     <textarea name="review_comment_content" id="review_comment_content" cols="30" rows="5" class="form-control"></textarea>
                   </div>
                   <div class="form-group">
-                    <input type="submit" value="댓글쓰기" class="btn py-3 px-4 btn-primary">
+                    <input type="button" value="댓글쓰기" id="comment_add_btn" class="btn py-3 px-4 btn-primary">
                   </div>
-                </form>
+<!--                 </form> -->
               </div>
               <%}else{%>
               <h3 class="mb-5" align="center">코멘트를 남기시려면 로그인 해주세요!</h2>
               <%}%>
+<!----------------------------------------------------------------------------------------->
+      <script src="js/jquery.min.js"></script> <!-- 작업용 임시 로드 -->
       <!--ajax 작업내용 들어갈 공간(임시)-->    
+      <script type="text/javascript">
       
+
       
-      
+      </script>
       
       
       

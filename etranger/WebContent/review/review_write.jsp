@@ -55,7 +55,20 @@ if(sessionId==null) {
                     <input type="text" class="form-control-subject" name="review_subject" id="review_subject" maxlength="40" placeholder="제목을 입력해주세요"/>
                   </div>
                   <div class="writeform-group">
-                    <div style="height:90px"></div>
+                  <div style="height:20px"></div>
+                  <div class="starRev">
+  					<span class="starR1 on">1</span>
+  					<span class="starR2">2</span>
+  					<span class="starR1">3</span>
+  					<span class="starR2">4</span>
+  					<span class="starR1">5</span>
+ 					<span class="starR2">6</span>
+ 					<span class="starR1">7</span>
+  					<span class="starR2">8</span>
+ 					<span class="starR1">9</span>
+  					<span class="starR2">10</span>
+				   </div>
+                    <div style="height:50px"></div>
                     <textarea id="summernote" name="review_content" cols="30" rows="20" class="form-control"></textarea>
                   </div>
                   <div class="writeform-group">
