@@ -44,18 +44,12 @@ public class CommentDAO {
 				if(rs.next()){
 					ref_num=rs.getInt("max(review_comment_num)")+1;
 				}
-				
-				sql = "UPDATE review_comment set review_comment_seq=review_comment_seq+1 where review_comment_ref=? and review_comment_seq > ?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, cb.getReview_comment_ref());
-				pstmt.setInt(2, cb.getReview_comment_seq());
-				pstmt.executeUpdate();
-				
-				sql = "INSERT INTO review_comment values(0,?,?,?,?,?,?,?,now())"; 
+			
+				sql = "INSERT INTO review_comment values(0,?,?,?,?,?,?,?,now())";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, cb.getReview_comment_member_id());
 				pstmt.setString(2, cb.getReview_comment_member_name());
-				pstmt.setInt(3, cb.getReview_comment_review_num()); 	//테이블 수정
+				pstmt.setInt(3, cb.getReview_comment_review_num());	//테이블 수정
 				pstmt.setString(4, cb.getReview_comment_content());
 				pstmt.setInt(5, ref_num);
 				pstmt.setInt(6, 0);
@@ -66,11 +60,14 @@ public class CommentDAO {
 				if(insertCount!=0) {
 					sql="UPDATE review set review_comment_count=review_comment_count+1 where review_num=?";
 					pstmt.setInt(1, cb.getReview_comment_review_num());
+					pstmt.executeUpdate(sql);
+					System.out.println("review 테이블 값 변경 완료?");
 				}
 				
 			} catch (Exception e) {
 				System.out.println("insertComment() 오류! - " + e.getMessage());
 			} finally {
+				close(rs);
 				close(pstmt);
 			}
 			return insertCount;
@@ -108,10 +105,9 @@ public class CommentDAO {
 			ResultSet rs = null;
 			ArrayList<CommentBean> commentList = new ArrayList<CommentBean>();
 			
-			
 			try {
 				
-				String sql = "select * from review_comment order by review_comment_ref desc, review_comment_seq asc";
+				String sql = "select * from review_comment order by review_comment_ref, review_comment_seq desc";
 				pstmt=con.prepareStatement(sql);
 				rs=pstmt.executeQuery();
 				
@@ -237,47 +233,30 @@ public class CommentDAO {
 
 		public int insertReplyToComment(CommentBean comment) {
 			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			
-			//이어서 작업할 것.
-			// 백엔드 작업 후 뷰페이지 정렬 => ajax연동
-			
-			
-			int num = 1; // 새로 등록할 게시물 번호
 			int insertCount = 0;  
-			int ref_num = 0;
 			
 			int comment_ref =comment.getReview_comment_ref();
 			int comment_lev =comment.getReview_comment_lev();
 			int comment_seq =comment.getReview_comment_seq();
 			
-			
 			try {
-				String sql = "SELECT max(review_comment_num) FROM review_comment";
-				pstmt = con.prepareStatement(sql);
-				rs=pstmt.executeQuery();
-				if(rs.next()) {
-					ref_num=rs.getInt("max(review_comment_num")+1;
-				}
 				
-				
-				sql="UPDATE review_comment SET review_comment_seq=review_comment_seq+1 WHERE review_comment_ref=? AND review_comment_seq > ?";
+				String sql="UPDATE review_comment SET review_comment_seq=review_comment_seq+1 WHERE review_comment_ref=? AND review_comment_seq > ?";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, comment.getReview_comment_ref());
-				pstmt.setInt(2, comment.getReview_comment_seq());
+				pstmt.setInt(1, comment_ref);
+				pstmt.setInt(2, comment_seq);
 				
 				int updateCount = pstmt.executeUpdate();
 				
 				//답글 순서 번호에 대한 업데이트가 성공할 경우(updateCount > 0) commit 수행
 				if(updateCount>0) {
 					commit(con);
+					
 				}else {
 					rollback(con);
 				}
-				
-				comment_seq = comment_seq +1; // 새 답글의 순서 번호를 기존 순서번호를 기준 순서번호 +1 로 지정
-				comment_lev = comment_lev +1; // 새 답글의 들여쓰기 레벨을 기존 들여쓰기 레벨 +1 로 지정
-				
+				comment_lev = comment_lev +1; // 새 답글의 들여쓰기 레벨+1 
+				comment_seq = comment_seq +1; // 새 답글의 순서번호 +1
 				
 				sql = "INSERT INTO review_comment values(0,?,?,?,?,?,?,?,now())"; 
 				pstmt = con.prepareStatement(sql);
@@ -285,15 +264,17 @@ public class CommentDAO {
 				pstmt.setString(2, comment.getReview_comment_member_name());
 				pstmt.setInt(3, comment.getReview_comment_review_num()); 	
 				pstmt.setString(4, comment.getReview_comment_content());
-				pstmt.setInt(5, ref_num);
-				pstmt.setInt(6, 0);
-				pstmt.setInt(7, 0);
+				pstmt.setInt(5,comment_ref); 	//댓글의 댓글이니 ref 값은 그대로 둠.
+				pstmt.setInt(6,comment_lev);
+				pstmt.setInt(7, comment_seq);
 				
 				insertCount = pstmt.executeUpdate();
 				
 				if(insertCount!=0) {
-					sql="UPDATE review set review_comment_count=review_comment_count+1 WHERE review_num=?";
+					sql="UPDATE review set review_comment_count=review_comment_count+1 WHERE review_num = ?";
 					pstmt.setInt(1, comment.getReview_comment_review_num());
+					pstmt.executeUpdate(sql);
+					System.out.println("review에 넘어가나?");
 				}
 			} catch (Exception e) {
 				System.out.println("insertReplytoComment() 오류! - " + e.getMessage());

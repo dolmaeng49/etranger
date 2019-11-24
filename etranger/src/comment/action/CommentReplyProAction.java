@@ -26,9 +26,10 @@ public class CommentReplyProAction implements Action {
 		comment.setReview_comment_review_num(Integer.parseInt(request.getParameter("review_comment_review_num")));
 		comment.setReview_comment_content(request.getParameter("review_comment_content"));
 		comment.setReview_comment_ref(Integer.parseInt(request.getParameter("review_comment_ref")));
-		comment.setReview_comment_ref(Integer.parseInt(request.getParameter("review_comment_lev")));
-		comment.setReview_comment_ref(Integer.parseInt(request.getParameter("review_comment_seq")));
+		comment.setReview_comment_lev(Integer.parseInt(request.getParameter("review_comment_lev")));
+		comment.setReview_comment_seq(Integer.parseInt(request.getParameter("review_comment_seq")));
 		
+		System.out.println("ref값 : " + comment.getReview_comment_ref());
 		
 		CommentReplyProService commentReplyProService = new CommentReplyProService();
 		
@@ -39,7 +40,7 @@ public class CommentReplyProAction implements Action {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('대댓글 등록 성공!')");
+			out.println("alert('대댓글 등록 실패!')");
 			out.println("history.back()");
 			out.println("</script>");
 		}else {

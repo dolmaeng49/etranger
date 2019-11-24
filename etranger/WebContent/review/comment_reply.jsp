@@ -50,7 +50,7 @@
               		<input type="hidden" id="review_comment_member_name" name="review_comment_member_name" value="tester"> <!-- 임시 -->
               		<input type="hidden" id="review_comment_review_num" name="review_comment_review_num"value=<%=article.getReview_num() %>>
                   <input type="hidden" name="review_comment_num" value="<%=comment.getReview_comment_num()%>">
-              		<input type="hidden" id="review_comment_ref" name="review_comment_ref" value=<%=comment.getReview_comment_ref()%>>
+              		<input type="hidden" id="review_comment_ref" name="review_comment_ref" value=<%=comment.getReview_comment_num()%>>
               		<input type="hidden" id="review_comment_lev" name="review_comment_lev" value=<%=comment.getReview_comment_lev()%>>
               		<input type="hidden" id="review_comment_seq" name="review_comment_seq" value=<%=comment.getReview_comment_seq()%>>  
                     
