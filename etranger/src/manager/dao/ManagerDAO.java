@@ -375,7 +375,7 @@ public class ManagerDAO {
 
 		try {
 
-			String sql = "select * from package_product where package_category_code=?";
+			String sql = "select * from package_product where package_category_code=? order by package_product_depart_date ASC";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, pcode);
 			rs = pstmt.executeQuery();
