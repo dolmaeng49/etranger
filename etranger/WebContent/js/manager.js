@@ -169,18 +169,18 @@ function showCategoryInsert() {
 function pageNum(page) {
 		$.ajax('CategoryList.ma?page=' + page, {
 			success : function(data) {
-				$('#testDiv').html(data);
+				$('#productList').html(data);
 			}
 		});
 }
 
-$('.test').click(function() {
+$('.pList').click(function() {
 	 if ($('#productInsert').css('display') == 'none') {
 	$('#categoryInsert').hide(300);
 	$('#productInsert').show(300);
 	$.ajax('CategoryList.ma', {
 		success : function(data) {
-			$('#testDiv').html(data);
+			$('#productList').html(data);
 		}
 	});
 	 }

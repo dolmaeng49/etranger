@@ -39,6 +39,31 @@
 <head>
 <!-- 스타일 인클루드 -->
 <jsp:include page="../include/style.jsp" />
+<style type="text/css">
+table.pdList {
+    border-collapse: separate;
+    border-spacing: 1px;
+    text-align: center;
+    line-height: 1.5;
+    margin: 20px 10px;
+    width: 115%;
+}
+table.pdList th {
+    width: 155px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #fff;
+    background: #ff5f5f ;
+}
+table.pdList td {
+    width: 155px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #eee;
+}
+</style>
 </head>
 <%-- <body onload="checkSession(<%=sid%>)"> --%>
 
@@ -130,19 +155,21 @@
 
 					<div class="writeform-group">
 						<br>
-						<label for="name">날짜별 상품</label>
+						<h3><label for="name">날짜별 상품</label></h3>
 
 
-						<table>
+						<table class="pdList">
 							<%
 								if (pdList != null) {
 							%>
 							<tr id="tr_top">
-								<td>상품코드</td>
-								<td>출발날짜</td>
-								<td>도착날짜</td>
-								<td>가격</td>
-								<td>총인원수</td>
+								<th>상품코드</th>
+								<th>출발날짜</th>
+								<th>도착날짜</th>
+								<th>가격</th>
+								<th>총인원수</th>
+								<th>제어</th>
+								
 							</tr>
 
 							<%
@@ -152,9 +179,9 @@
 								<td><%=pdList.get(i).getProductNum()%></td>
 								<td><%=pdList.get(i).getProductDepartDate()%></td>
 								<td><%=pdList.get(i).getProductArrivDate()%></td>
-								<td><%=pdList.get(i).getProductArrivDate()%></td>
 								<td><%=pdList.get(i).getProductPrice()%></td>
 								<td><%=pdList.get(i).getProductTotal()%></td>
+								<td><input type="button" onclick="deleteList.ma?pdList=<%=pdList.get(i).getProductNum()%>" value="delete"></td>
 							</tr>
 							<%
 								}
@@ -165,12 +192,8 @@
 					</div>
 
 					<div class="form-group">
-						<input type="button" value="등록" class="btn py-3 px-4 btn-primary"
+						<input type="button" value="날짜별 패키지상품 추가하기" class="btn py-3 px-4 btn-primary"
 							onclick="location.href='ProductInsert.ma?package_category_code=<%=code%>'">
-						<input type="button" value="뒤로가기"
-							class="btn py-3 px-4 btn-primary" onclick="history.back()">
-						<input type="submit" value="Join"
-							class="btn py-3 px-4 btn-primary">
 					</div>
 				</div>
 			</div>

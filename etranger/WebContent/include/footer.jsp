@@ -17,8 +17,8 @@
              <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">Book Now</h2>
               <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Flight</a></li>
-                <li><a href="#" class="py-2 d-block">Hotels</a></li>
+                <li><a href="#" class="py-2 d-block">Best Tour</a></li>
+                <li><a href="#" class="py-2 d-block">Familly Tour</a></li>
                 <li><a href="#" class="py-2 d-block">Tour</a></li>
                 <li><a href="#" class="py-2 d-block">Car Rent</a></li>
                 <li><a href="#" class="py-2 d-block">Beach &amp; Resorts</a></li>

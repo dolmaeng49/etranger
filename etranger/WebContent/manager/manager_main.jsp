@@ -76,7 +76,7 @@
 						<li class="list-group-item li_hover"><span class="icon icon-line-chart"></span> 관리자 메인</li>
 						<li class="list-group-item li_hover" onclick="showCategoryInsert()"><span
 								class="icon icon-pencil"></span> 상품 분류 등록</li>
-						<li class="list-group-item li_hover test"><span class="icon icon-add_shopping_cart"></span> 상품
+						<li class="list-group-item li_hover pList"><span class="icon icon-add_shopping_cart"></span> 상품
 							상세 등록</li>
 						<li class="list-group-item li_hover"><span class="icon icon-file-text"></span> 상품 리스트</li>
 						<li class="list-group-item li_hover"><span class="icon icon-users"></span> 회원관리</li>
@@ -157,7 +157,7 @@
 										<input type="button" id="theme_addbtn" value="테마추가" class="btn btn-primary"
 											onclick="check()">
 										<div class="form-group" id="addTheme" style="display: none;">
-											<input type="text" size="20" id="theme_addbox" onkeydown="enterKey(this);">
+											<input type="text" size="20" id="theme_addbox" onkeydown="enterKey(this);" required="required">
 											<input type="button" id="theme_addbtn2" class="btn btn-primary" value="추가">
 										</div>
 									</div>
@@ -170,7 +170,7 @@
 							<div class="col-md-6">
 								<div class="select-wrap one-third theme">
 									<h3 class="h4 mb-12">Name</h3>
-									<input type="text" id="category_name" name="category_name" required="required">
+									<input type="text" id="category_name" name="category_name" required="required" size="80">
 
 								</div>
 							</div>
@@ -209,7 +209,7 @@
 
 				</div>
 				<section id="productInsert" style="display: none;">
-					<div id="testDiv" class="col-md-12"></div>
+					<div id="productList" class="col-md-12"></div>
 				</section>
 
 			</div>
