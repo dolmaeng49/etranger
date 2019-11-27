@@ -1,5 +1,6 @@
 package manager.action;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,7 @@ import manager.svc.RegionListService;
 import manager.svc.ThemeListService;
 import manager.vo.CategoryBean;
 
-public class CategoryListAction implements Action {
+public class ManagerMainAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -62,6 +63,8 @@ public class CategoryListAction implements Action {
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("categoryList", categoryList);
 		// -------------------
+		
+		
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("/manager/manager_main.jsp");
