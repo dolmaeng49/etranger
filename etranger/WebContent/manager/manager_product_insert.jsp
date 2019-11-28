@@ -73,7 +73,6 @@ table.pdList td {
 			<tr>
 				<td><input type="text" class="form-control"
 					name="package_category_code" id="package_category_code"
-					placeholder="total"
 					value="<%=request.getParameter("package_category_code")%>" /></td>
 				<td><input type="text"
 					class="form-control form-control-shortshort pick_date"

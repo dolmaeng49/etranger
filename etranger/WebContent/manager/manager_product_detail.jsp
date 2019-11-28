@@ -41,27 +41,34 @@
 <jsp:include page="../include/style.jsp" />
 <style type="text/css">
 table.pdList {
-    border-collapse: separate;
-    border-spacing: 1px;
-    text-align: center;
-    line-height: 1.5;
-    margin: 20px 10px;
-    width: 115%;
+	border-collapse: separate;
+	border-spacing: 1px;
+	text-align: center;
+	line-height: 1.5;
+	margin: 20px 10px;
+	width: 115%;
 }
+
 table.pdList th {
-    width: 155px;
-    padding: 10px;
-    font-weight: bold;
-    vertical-align: top;
-    color: #fff;
-    background: #ff5f5f ;
+	width: 155px;
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	color: #fff;
+	background: #ff5f5f;
 }
+
 table.pdList td {
-    width: 155px;
-    padding: 10px;
-    vertical-align: top;
-    border-bottom: 1px solid #ccc;
-    background: #eee;
+	width: 155px;
+	padding: 10px;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+	background: #eee;
+	font-size: smaller;
+}
+
+table.pdList td input{
+	font-size: smaller;
 }
 </style>
 </head>
@@ -155,7 +162,9 @@ table.pdList td {
 
 					<div class="writeform-group">
 						<br>
-						<h3><label for="name">날짜별 상품</label></h3>
+						<h3>
+							<label for="name">날짜별 상품</label>
+						</h3>
 
 
 						<table class="pdList">
@@ -169,7 +178,7 @@ table.pdList td {
 								<th>가격</th>
 								<th>총인원수</th>
 								<th>제어</th>
-								
+
 							</tr>
 
 							<%
@@ -181,7 +190,9 @@ table.pdList td {
 								<td><%=pdList.get(i).getProductArrivDate()%></td>
 								<td><%=pdList.get(i).getProductPrice()%></td>
 								<td><%=pdList.get(i).getProductTotal()%></td>
-								<td><input type="button" onclick="deleteList.ma?pdList=<%=pdList.get(i).getProductNum()%>" value="delete"></td>
+								<td><input type="button"
+									onclick="deleteList.ma?pdList=<%=pdList.get(i).getProductNum()%>"
+									value="delete"></td>
 							</tr>
 							<%
 								}
@@ -189,12 +200,59 @@ table.pdList td {
 							%>
 						</table>
 
+
 					</div>
 
 					<div class="form-group">
-						<input type="button" value="날짜별 패키지상품 추가하기" class="btn py-3 px-4 btn-primary"
-							onclick="location.href='ProductInsert.ma?package_category_code=<%=code%>'">
+<!-- 						<input type="button" value="날짜별 패키지상품 추가하기" -->
+<!-- 							class="btn py-3 px-4 btn-primary" -->
+<%-- 							onclick="location.href='ProductInsert.ma?package_category_code=<%=code%>'"> --%>
+							
+				<input type="button" value="날짜별 패키지상품 추가하기" class="btn py-3 px-4 btn-primary"
+							onclick="product()">
 					</div>
+					
+					
+					<div class="form-group" id="addProduct" style="display: none;">
+						<form action="ProductInsertPro.ma" 
+							method="post">
+							<table class="pdList">
+								<tr id="tr_top">
+									<th>상품코드</th>
+									<th>출발날짜</th>
+									<th>도착날짜</th>
+									<th>가격</th>
+									<th>총인원수</th>
+									<th>등록</th>
+								</tr>
+								<tr>
+									<td><input type="text" class="form-control" 
+										name="package_category_code" id="package_category_code"
+										value="<%=request.getParameter("package_category_code")%>" /></td>
+									<td><input type="text"
+										class="form-control form-control-shortshort pick_date"
+										id="product_depardate" value="2019/12/1"
+										placeholder="depardate" name="product_depardate"
+										required="required"></td>
+									<td><input type="text"
+										class="form-control form-control-shortshort pick_date"
+										id="product_arrivdate" value="2019/12/1"
+										placeholder="arrivdate" name="product_arrivdate"
+										required="required"></td>
+									<td><input type="text" class="form-control"
+										name="product_price" id="product_price" placeholder="price" /></td>
+									<td><input type="text" class="form-control"
+										name="product_total" id="product_total" placeholder="total" /></td>
+									<td><input type="submit" value="등록" id="product_addbtn"
+										class="btn py-3 px-4 btn-primary"></td>
+								</tr>
+							</table>
+						</form>
+
+
+					</div>
+
+
 				</div>
 			</div>
 		</div>
@@ -208,5 +266,60 @@ table.pdList td {
 	<jsp:include page="../include/loader.jsp" />
 
 </body>
+<script type="text/javascript">
 
+function product() {
+    if ($('#addProduct').css('display') == 'none') {
+        $('#addProduct').show(100);
+    } else {
+        $('#addProduct').hide(100);
+    }
+}
+
+
+//$('#product_addbtn').click(function () {
+//addProduct();
+//});
+
+function addProduct() {
+    $.ajax('ProductInsertPro.ma', {
+        data: {
+        package_category_code: $('#package_category_code').val(),
+		product_depardate: $('#product_depardate').val(),
+		product_arrivdate: $('#product_arrivdate').val(),
+		product_price: $('#product_price').val(),
+		product_total: $('#product_total').val()
+        },
+        success: function (sdata) {
+            if (sdata == 'false') {
+                alert('상품추가 실패!');
+                
+            }
+            else {
+                getProduct();
+//                 $('#city_addbox').val("");
+            }
+        }
+    });
+}
+
+
+function getProduct() {
+    $('#addProduct').hide();
+    $('#newProduct').empty(); // #newProduct에 있는 내용 지우기
+//     $('#theme_addbox').val("");
+
+    // <label id="newProduct">에 추가
+    $.getJSON('ProductTable.ma', function (data) {
+        $.each(data, function (index, value) {
+//             $('#newTheme').append('<input type="checkbox" name="theme" value="' + value.themeName + '">' + value.themeName + '&nbsp;');
+			// 테이블 뿌려주기 
+        });
+    });
+}
+
+
+
+
+</script>
 </html>

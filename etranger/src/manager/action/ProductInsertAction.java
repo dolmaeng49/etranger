@@ -19,13 +19,13 @@ public class ProductInsertAction implements Action {
 		ActionForward forward = null;
 
 		ProductBean pb = new ProductBean();
-
-		pb.setProductTotal(Integer.parseInt(request.getParameter("product_total")));
-		pb.setProductPrice(Integer.parseInt(request.getParameter("product_price")));
-		pb.setProductArrivDate(request.getParameter("product_arrivdate"));
-		pb.setProductDepartDate(request.getParameter("product_depardate"));
 		pb.setCategoryCode(request.getParameter("package_category_code"));
 		pb.setProductNum(request.getParameter("package_category_code") + request.getParameter("product_arrivdate"));
+		pb.setProductDepartDate(request.getParameter("product_depardate"));
+		pb.setProductArrivDate(request.getParameter("product_arrivdate"));
+		pb.setProductPrice(Integer.parseInt(request.getParameter("product_price")));
+		pb.setProductTotal(Integer.parseInt(request.getParameter("product_total")));
+
 
 		ProductInsertService pis = new ProductInsertService();
 		boolean isInsertSuccess = pis.InsertProduct(pb);
