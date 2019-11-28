@@ -67,7 +67,7 @@ table.pdList td {
 	font-size: smaller;
 }
 
-table.pdList td input{
+table.pdList td input {
 	font-size: smaller;
 }
 </style>
@@ -167,7 +167,7 @@ table.pdList td input{
 						</h3>
 
 
-						<table class="pdList">
+						<table class="pdList" id="test">
 							<%
 								if (pdList != null) {
 							%>
@@ -190,10 +190,12 @@ table.pdList td input{
 								<td><%=pdList.get(i).getProductArrivDate()%></td>
 								<td><%=pdList.get(i).getProductPrice()%></td>
 								<td><%=pdList.get(i).getProductTotal()%></td>
-								<td><input type="button"
-									onclick="deleteList.ma?pdList=<%=pdList.get(i).getProductNum()%>"
-									value="delete"></td>
+								<td><input type="button" id="deletecode"class="test" value="delete" 
+									name="<%=pdList.get(i).getCategoryCode()%>"> <input
+									type="hidden" id="deletenum"
+									name="<%=pdList.get(i).getProductNum()%>"></td>
 							</tr>
+
 							<%
 								}
 								}
@@ -204,18 +206,17 @@ table.pdList td input{
 					</div>
 
 					<div class="form-group">
-<!-- 						<input type="button" value="날짜별 패키지상품 추가하기" -->
-<!-- 							class="btn py-3 px-4 btn-primary" -->
-<%-- 							onclick="location.href='ProductInsert.ma?package_category_code=<%=code%>'"> --%>
-							
-				<input type="button" value="날짜별 패키지상품 추가하기" class="btn py-3 px-4 btn-primary"
-							onclick="product()">
+						<!-- 						<input type="button" value="날짜별 패키지상품 추가하기" -->
+						<!-- 							class="btn py-3 px-4 btn-primary" -->
+						<%-- 							onclick="location.href='ProductInsert.ma?package_category_code=<%=code%>'"> --%>
+
+						<input type="button" value="날짜별 패키지상품 추가하기"
+							class="btn py-3 px-4 btn-primary" onclick="product()">
 					</div>
-					
-					
+
+
 					<div class="form-group" id="addProduct" style="display: none;">
-						<form action="ProductInsertPro.ma" 
-							method="post">
+						<form action="ProductInsertPro.ma" method="post">
 							<table class="pdList">
 								<tr id="tr_top">
 									<th>상품코드</th>
@@ -226,7 +227,7 @@ table.pdList td input{
 									<th>등록</th>
 								</tr>
 								<tr>
-									<td><input type="text" class="form-control" 
+									<td><input type="text" class="form-control"
 										name="package_category_code" id="package_category_code"
 										value="<%=request.getParameter("package_category_code")%>" /></td>
 									<td><input type="text"
@@ -264,62 +265,56 @@ table.pdList td input{
 
 	<!-- loader 인클루드 -->
 	<jsp:include page="../include/loader.jsp" />
+	<!-- js사용 -->
+	<script src="js/manager.js"></script>
 
 </body>
 <script type="text/javascript">
+	function product() {
+		if ($('#addProduct').css('display') == 'none') {
+			$('#addProduct').show(100);
+		} else {
+			$('#addProduct').hide(100);
+		}
+	}
 
-function product() {
-    if ($('#addProduct').css('display') == 'none') {
-        $('#addProduct').show(100);
-    } else {
-        $('#addProduct').hide(100);
-    }
-}
+	//$('#product_addbtn').click(function () {
+	//addProduct();
+	//});
 
+	function addProduct() {
+		$.ajax('ProductInsertPro.ma', {
+			data : {
+				package_category_code : $('#package_category_code').val(),
+				product_depardate : $('#product_depardate').val(),
+				product_arrivdate : $('#product_arrivdate').val(),
+				product_price : $('#product_price').val(),
+				product_total : $('#product_total').val()
+			},
+			success : function(sdata) {
+				if (sdata == 'false') {
+					alert('상품추가 실패!');
 
-//$('#product_addbtn').click(function () {
-//addProduct();
-//});
+				} else {
+					getProduct();
+					//                 $('#city_addbox').val("");
+				}
+			}
+		});
+	}
 
-function addProduct() {
-    $.ajax('ProductInsertPro.ma', {
-        data: {
-        package_category_code: $('#package_category_code').val(),
-		product_depardate: $('#product_depardate').val(),
-		product_arrivdate: $('#product_arrivdate').val(),
-		product_price: $('#product_price').val(),
-		product_total: $('#product_total').val()
-        },
-        success: function (sdata) {
-            if (sdata == 'false') {
-                alert('상품추가 실패!');
-                
-            }
-            else {
-                getProduct();
-//                 $('#city_addbox').val("");
-            }
-        }
-    });
-}
+	function getProduct() {
+		$('#addProduct').hide();
+		$('#newProduct').empty(); // #newProduct에 있는 내용 지우기
+		//     $('#theme_addbox').val("");
 
-
-function getProduct() {
-    $('#addProduct').hide();
-    $('#newProduct').empty(); // #newProduct에 있는 내용 지우기
-//     $('#theme_addbox').val("");
-
-    // <label id="newProduct">에 추가
-    $.getJSON('ProductTable.ma', function (data) {
-        $.each(data, function (index, value) {
-//             $('#newTheme').append('<input type="checkbox" name="theme" value="' + value.themeName + '">' + value.themeName + '&nbsp;');
-			// 테이블 뿌려주기 
-        });
-    });
-}
-
-
-
-
+		// <label id="newProduct">에 추가
+		$.getJSON('ProductTable.ma', function(data) {
+			$.each(data, function(index, value) {
+				//             $('#newTheme').append('<input type="checkbox" name="theme" value="' + value.themeName + '">' + value.themeName + '&nbsp;');
+				// 테이블 뿌려주기 
+			});
+		});
+	}
 </script>
 </html>

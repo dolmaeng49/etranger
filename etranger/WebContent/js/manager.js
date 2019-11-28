@@ -13,6 +13,120 @@ $('#theme_addbtn2').click(function() {
 	addTheme();
 });
 
+
+//상품삭제
+$('#test').click(function() {
+	alert('ddd');
+	var dnum = $('#deletenum').attr('name');
+		
+	var dpcode=$('#deletecode').attr('name');
+	
+	
+	$.ajax('DeleteProduct.ma',{
+		
+		data : {
+			 package_product_num : dnum
+		},
+		success : function(sdata) {
+			if (sdata == 'false') {
+				alert('삭제 실패!');
+				
+			} else {
+			
+			
+			getProductList(dpcode);
+				
+			}
+		}
+	});
+
+
+	
+});
+
+
+
+//삭제 후 리스트 불러오기 
+function getProductList(dpcode) {
+//	$('#test').hide();
+	
+	
+	$('#test').empty();
+	
+	
+	// #selectRegion에 옵션 추가
+	$('#test').append("<tr>" +
+			"<th>상품코드</th>"+
+			"<th>출발날짜</th>"+
+			"<th>도착날짜</th>"+
+			"<th>가격</th>"+
+			"<th>총인원수</th>"+
+			"<th>제어</th>"+
+			"</tr>");
+
+
+	//dpcode = package_product_code
+	//dnum = pacage_product_num
+	
+	
+	$.getJSON('DeleteList.ma?dpcode='+dpcode, function(data) {
+		//$('#test').append("<tr>");
+		
+		
+		
+		
+		
+
+		$.each(data, function(index,item) {
+			$('#test').append(
+				"<tr>"+"<td>"+item.product_num+"</td>"+
+				"<td>"+item.productDepartDate+"</td>"+
+				"<td>"+item.productArrivDate+"</td>"+
+				"<td>"+item.productPrice+"</td>"+
+				"<td>"+item.productTotal+"</td>"+
+				"<td>"+'<input type="button" id="deletecode" class="test" value="delete" name='+item.productCode+'>'+'<input type="hidden" id="deletenum" name='+item.product_num+'>'+
+				'</td>'+'</tr>'
+									
+				);
+			
+			
+//		"<td>"+"<input type=button id=deletelist >"+"</td>"+"</tr>"
+//			"<td>"+"<input type= \"button\" id= \"deletelist\" value= \"delete\" name=\""+value.getProductNum()+"\">"
+//			+"</td>"+"</tr>"
+//		
+			
+
+		});
+		   	
+		
+		                
+	});
+}
+
+
+
+
+function addRegion() {
+	$.ajax('RegionInsert.ma', {
+		data : {
+			region_name : $('#region_addbox').val()
+		},
+		success : function(sdata) {
+			if (sdata == 'false') {
+				alert('지역추가 실패!');
+				$('#city_addbox').val("");
+			} else {
+				getRegion();
+				$('#region_addbox').val("");
+			}
+		}
+	});
+}
+
+
+
+
+
 // 지역 목록 불러오기
 function getRegion() {
 	$('#addRegion').hide();
@@ -25,6 +139,7 @@ function getRegion() {
 
 	// JSON으로 가져온 데이터 #SelectRegion에 옵션으로 추가
 	$.getJSON('RegionSelect.ma', function(data) {
+		
 		$.each(data, function(index, value) {
 			$('#selectRegion').append(
 					"<option value=" + value.regionCode + ">지역코드 : "

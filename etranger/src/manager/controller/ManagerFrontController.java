@@ -14,6 +14,8 @@ import common.vo.ActionForward;
 import manager.action.ManagerMainAction;
 import manager.action.CityInsertAction;
 import manager.action.CitySelectAction;
+import manager.action.DeleteListAction;
+import manager.action.DeleteProductAction;
 import manager.action.ProductDetailAction;
 import manager.action.ProductInsertAction;
 import manager.action.ProductListAction;
@@ -152,6 +154,45 @@ public class ManagerFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		
+		else if (command.equals("/DeleteProduct.ma")) {
+			action = new DeleteProductAction();
+			System.out.println("DeleteProduct.ma");
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+
+		else if (command.equals("/DeleteList.ma")) {
+			action = new DeleteListAction();
+			System.out.println("DeleteList.ma");
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 						
 		if (forward != null) {
