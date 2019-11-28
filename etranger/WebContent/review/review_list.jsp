@@ -19,6 +19,8 @@
 	// 글검색 Jwoo
 	String search = request.getParameter("search");
 	
+	ReviewBean article = (ReviewBean)request.getAttribute("article");
+	
 %>  
 <!DOCTYPE html>
 <html>
@@ -51,7 +53,6 @@ div{
     <!-- END slider -->
     
     <!-- 추천여행지 -->
-    
     <section class="ftco-section bg-light">
 			<%
 			if(articleList != null && listCount > 0) {%>
@@ -64,6 +65,34 @@ div{
               <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="block-20" style="background-image: url('reviewUpload/<%=articleList.get(i).getReview_image()%>');">
               </a>
               <div class="text p-4" >
+             <!--  stars --> 
+               <div id="stars"> 
+			<%if(articleList.get(i).getReview_star() == 0) {
+				%><img src="images/rating0.png" align="middle" /><%
+			} else if(articleList.get(i).getReview_star() == 1) {
+				%><img src="images/rating01.png" align="middle" /><%
+			} else if(articleList.get(i).getReview_star() == 2) {
+				%><img src="images/rating02.png" align="middle" /><%
+			} else if(articleList.get(i).getReview_star() == 3) {
+				%><img src="images/rating03.png" align="middle" /><%
+			} else if(articleList.get(i).getReview_star() == 4) {
+				%><img src="images/rating04.png" align="middle" /><%
+			} else if(articleList.get(i).getReview_star() == 5) {
+				%><img src="images/rating05.png" align="middle" /><%
+			} else if(articleList.get(i).getReview_star() == 6) {
+				%><img src="images/rating06.png" align="middle" /><%
+			} else if(articleList.get(i).getReview_star() == 7) {
+				%><img src="images/rating07.png" align="middle" /><%
+			} else if(articleList.get(i).getReview_star() == 8) {
+				%><img src="images/rating08.png" align="middle" /><%
+			} else if(articleList.get(i).getReview_star() == 9) {
+				%><img src="images/rating09.png" align="middle" /><%
+			} else {
+				%><img src="images/rating10.png" align="middle" /><%
+			}
+			%>
+			</div>
+            <!-- end stars -->  
                 <div class="meta" onclick="location.href='ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>'">
 <%--                   <div><a href="#"><%=articleList.get(i).getReview_date()%></a></div> --%>
                   <div><a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>"><%=articleList.get(i).getReview_member_id()%></a></div><!-- 아이디 대신 이름 들어갈 곳 -->

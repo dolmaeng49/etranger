@@ -58,9 +58,37 @@ div{
 			<div id="article-readcnt">조회수 : <%=article.getReview_readcount() %></div>
 			<div id="article-commentcnt">댓글 : <%=article.getReview_comment_count() %></div>
 			</div><!-- content-header끝 -->
+			
 			<div class="content-stararea">
-			<div id="stars">★★★★★</div>
+			<div id="stars"> 
+			<%if(article.getReview_star() == 0) {
+				%><img src="images/rating0.png" align="middle" /><%
+			} else if(article.getReview_star() == 1) {
+				%><img src="images/rating01.png" align="middle" /><%
+			} else if(article.getReview_star() == 2) {
+				%><img src="images/rating02.png" align="middle" /><%
+			} else if(article.getReview_star() == 3) {
+				%><img src="images/rating03.png" align="middle" /><%
+			} else if(article.getReview_star() == 4) {
+				%><img src="images/rating04.png" align="middle" /><%
+			} else if(article.getReview_star() == 5) {
+				%><img src="images/rating05.png" align="middle" /><%
+			} else if(article.getReview_star() == 6) {
+				%><img src="images/rating06.png" align="middle" /><%
+			} else if(article.getReview_star() == 7) {
+				%><img src="images/rating07.png" align="middle" /><%
+			} else if(article.getReview_star() == 8) {
+				%><img src="images/rating08.png" align="middle" /><%
+			} else if(article.getReview_star() == 9) {
+				%><img src="images/rating09.png" align="middle" /><%
+			} else {
+				%><img src="images/rating10.png" align="middle" /><%
+			}
+			%>
+			<%=article.getReview_star() + " "%>/ 10
+			</div>
 			</div><!-- content-star끝 -->
+			
 			<div class="content-view">
 <%-- 			<p><img src="reviewUpload/<%=article.getReview_image()%>" style="max-width: 100%; height: auto;"></p> --%>
 			<p><%=article.getReview_content() %></p>
@@ -103,10 +131,10 @@ div{
           </div> <!-- .col-md-8 -->
           <div class="col-md-4 sidebar">
             <div class="sidebar-box">
-              <form action="#" class="search-form">
+              <form action="ReviewSearch.rv" method="get" class="search-form" name="search">
                 <div class="form-group">
                   <span class="icon fa fa-search"></span>
-                  <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
+                  <input type="text" name="search" class="form-control" placeholder="Type a keyword and hit enter">
                 </div>
               </form>
             </div>
