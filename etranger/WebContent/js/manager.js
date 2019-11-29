@@ -1,131 +1,17 @@
 // 지역추가
-$('#region_addbtn').click(function() {
+$('#region_addbtn').click(function () {
 	addRegion();
 });
 
 // 도시추가(지역코드 가져와서 같이 저장)
-$('#city_addbtn').click(function() {
+$('#city_addbtn').click(function () {
 	addCity();
 });
 
 // 테마추가
-$('#theme_addbtn2').click(function() {
+$('#theme_addbtn2').click(function () {
 	addTheme();
 });
-
-
-//상품삭제
-$('#test').click(function() {
-	alert('ddd');
-	var dnum = $('#deletenum').attr('name');
-		
-	var dpcode=$('#deletecode').attr('name');
-	
-	
-	$.ajax('DeleteProduct.ma',{
-		
-		data : {
-			 package_product_num : dnum
-		},
-		success : function(sdata) {
-			if (sdata == 'false') {
-				alert('삭제 실패!');
-				
-			} else {
-			
-			
-			getProductList(dpcode);
-				
-			}
-		}
-	});
-
-
-	
-});
-
-
-
-//삭제 후 리스트 불러오기 
-function getProductList(dpcode) {
-//	$('#test').hide();
-	
-	
-	$('#test').empty();
-	
-	
-	// #selectRegion에 옵션 추가
-	$('#test').append("<tr>" +
-			"<th>상품코드</th>"+
-			"<th>출발날짜</th>"+
-			"<th>도착날짜</th>"+
-			"<th>가격</th>"+
-			"<th>총인원수</th>"+
-			"<th>제어</th>"+
-			"</tr>");
-
-
-	//dpcode = package_product_code
-	//dnum = pacage_product_num
-	
-	
-	$.getJSON('DeleteList.ma?dpcode='+dpcode, function(data) {
-		//$('#test').append("<tr>");
-		
-		
-		
-		
-		
-
-		$.each(data, function(index,item) {
-			$('#test').append(
-				"<tr>"+"<td>"+item.product_num+"</td>"+
-				"<td>"+item.productDepartDate+"</td>"+
-				"<td>"+item.productArrivDate+"</td>"+
-				"<td>"+item.productPrice+"</td>"+
-				"<td>"+item.productTotal+"</td>"+
-				"<td>"+'<input type="button" id="deletecode" class="test" value="delete" name='+item.productCode+'>'+'<input type="hidden" id="deletenum" name='+item.product_num+'>'+
-				'</td>'+'</tr>'
-									
-				);
-			
-			
-//		"<td>"+"<input type=button id=deletelist >"+"</td>"+"</tr>"
-//			"<td>"+"<input type= \"button\" id= \"deletelist\" value= \"delete\" name=\""+value.getProductNum()+"\">"
-//			+"</td>"+"</tr>"
-//		
-			
-
-		});
-		   	
-		
-		                
-	});
-}
-
-
-
-
-function addRegion() {
-	$.ajax('RegionInsert.ma', {
-		data : {
-			region_name : $('#region_addbox').val()
-		},
-		success : function(sdata) {
-			if (sdata == 'false') {
-				alert('지역추가 실패!');
-				$('#city_addbox').val("");
-			} else {
-				getRegion();
-				$('#region_addbox').val("");
-			}
-		}
-	});
-}
-
-
-
-
 
 // 지역 목록 불러오기
 function getRegion() {
@@ -138,13 +24,13 @@ function getRegion() {
 	$('#selectRegion').append("<option value=" + "add" + ">지역추가</option>");
 
 	// JSON으로 가져온 데이터 #SelectRegion에 옵션으로 추가
-	$.getJSON('RegionSelect.ma', function(data) {
-		
-		$.each(data, function(index, value) {
+	$.getJSON('RegionSelect.ma', function (data) {
+
+		$.each(data, function (index, value) {
 			$('#selectRegion').append(
-					"<option value=" + value.regionCode + ">지역코드 : "
-							+ value.regionCode + ", 지역이름 : " + value.regionName
-							+ "</option>");
+				"<option value=" + value.regionCode + ">지역코드 : "
+				+ value.regionCode + ", 지역이름 : " + value.regionName
+				+ "</option>");
 		});
 	});
 }
@@ -157,29 +43,29 @@ function getCity() {
 	$('#selectCity').append("<option value=" + "add" + ">도시추가</option>");
 
 	var code = $('#selectRegion').val();
-	$.getJSON('CitySelect.ma?code=' + code, function(data) {
-		$.each(data, function(index, value) {
+	$.getJSON('CitySelect.ma?code=' + code, function (data) {
+		$.each(data, function (index, value) {
 
 			$('#selectCity').append(
-					"<option value=" + value.cityCode + ">도시코드 : "
-							+ value.cityCode + ", 도시이름 : " + value.cityName
-							+ "</option>");
+				"<option value=" + value.cityCode + ">도시코드 : "
+				+ value.cityCode + ", 도시이름 : " + value.cityName
+				+ "</option>");
 		});
 	});
 }
 
 function getTheme() {
 	$('#addTheme').hide();
-	$('#newTheme').empty(); // #newTheme에 있는 내용 지우기
+	$('#test').empty(); // #newTheme에 있는 내용 지우기
 	$('#theme_addbox').val("");
-
 	// <label id="newTheme">에 추가
-	$.getJSON('ThemeCheckBox.ma', function(data) {
-		$.each(data, function(index, value) {
-			$('#newTheme').append(
-					'<input type="checkbox" name="theme" value="'
-							+ value.themeName + '">' + value.themeName
-							+ '&nbsp;');
+	$.getJSON('ThemeCheckBox.ma', function (data) {
+		$.each(data, function (index, value) {
+			$('#test').append(
+					'<label id="newTheme">' +
+				'<input type="checkbox" name="theme" value="'
+				+ value.themeName + '">' + value.themeName
+				+ '&nbsp; </label>');
 		});
 	});
 }
@@ -187,10 +73,10 @@ function getTheme() {
 // 지역 추가하기
 function addRegion() {
 	$.ajax('RegionInsert.ma', {
-		data : {
-			region_name : $('#region_addbox').val()
+		data: {
+			region_name: $('#region_addbox').val()
 		},
-		success : function(sdata) {
+		success: function (sdata) {
 			if (sdata == 'false') {
 				alert('지역추가 실패!');
 				$('#city_addbox').val("");
@@ -206,11 +92,11 @@ function addRegion() {
 function addCity() {
 	if ($("#selectRegion option").index($("#selectRegion option:selected")) > 1) {
 		$.ajax('CityInsert.ma', {
-			data : {
-				region_code : $('#selectRegion').val(),
-				city_name : $('#city_addbox').val()
+			data: {
+				region_code: $('#selectRegion').val(),
+				city_name: $('#city_addbox').val()
 			},
-			success : function(sdata) {
+			success: function (sdata) {
 				if (sdata == 'false') {
 					alert('도시추가 실패!');
 					$('#city_addbox').val("");
@@ -229,10 +115,10 @@ function addCity() {
 // 테마 추가하기
 function addTheme() {
 	$.ajax('ThemeInsert.ma', {
-		data : {
-			theme_name : $('#theme_addbox').val()
+		data: {
+			theme_name: $('#theme_addbox').val()
 		},
-		success : function(sdata) {
+		success: function (sdata) {
 			if (sdata == 'false') {
 				alert('테마추가 실패!');
 				$('#city_addbox').val("");
@@ -281,24 +167,27 @@ function showCategoryInsert() {
 		$('#categoryInsert').show(300);
 	}
 }
+
 function pageNum(page) {
-		$.ajax('CategoryList.ma?page=' + page, {
-			success : function(data) {
+	$.ajax('CategoryList.ma?page=' + page, {
+		success: function (data) {
+			$('#productList').html(data);
+		}, error : {
+			
+		}
+	});
+}
+
+$('.pList').click(function () {
+	if ($('#productInsert').css('display') == 'none') {
+		$('#categoryInsert').hide(300);
+		$('#productInsert').show(300);
+		$.ajax('CategoryList.ma', {
+			success: function (data) {
 				$('#productList').html(data);
 			}
 		});
-}
-
-$('.pList').click(function() {
-	 if ($('#productInsert').css('display') == 'none') {
-	$('#categoryInsert').hide(300);
-	$('#productInsert').show(300);
-	$.ajax('CategoryList.ma', {
-		success : function(data) {
-			$('#productList').html(data);
-		}
-	});
-	 }
+	}
 });
 
 // 지역추가, 도시추가 textbox 엔터키 이벤트

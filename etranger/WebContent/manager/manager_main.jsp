@@ -16,14 +16,6 @@
 	<jsp:include page="../include/style.jsp" />
 
 	<style type="text/css">
-		/* 		.theme { */
-		/* 			padding: 13px; */
-		/* 			width: 90%; */
-		/* 			height: auto; */
-		/* 		} */
-		/* 		div { */
-		/* 			border: 1px solid red; */
-		/* 		} */
 
 		/* 사이드바 화면고정 */
 		.sticky {
@@ -141,31 +133,30 @@
 							<!-- 테마선택 -->
 							<div class="col-md-12">
 								<div class="select-wrap one-third theme">
-
 									<br>
 									<h3 class="h4 mb-4">Theme</h3>
+									<div id="test">
 									<%
 										for (int i = 0; i < themeList.size(); i++) {
 									%>
-									<label id="newTheme"> <input type="checkbox" name="theme"
+									<label id="newTheme"> 
+									<input type="checkbox" name="theme"
 											value="<%=themeList.get(i).getThemeName()%>"><%=themeList.get(i).getThemeName()%>
 									</label>
 									<%
 										}
 									%>
+									</div>
 									<div class="col-md-12">
 										<input type="button" id="theme_addbtn" value="테마추가" class="btn btn-primary"
 											onclick="check()">
 										<div class="form-group" id="addTheme" style="display: none;">
-											<input type="text" size="20" id="theme_addbox" onkeydown="enterKey(this);" required="required">
+											<input type="text" size="20" id="theme_addbox" onkeydown="enterKey(this);">
 											<input type="button" id="theme_addbtn2" class="btn btn-primary" value="추가">
 										</div>
 									</div>
 								</div>
 							</div>
-							<!-----------------------------B 구역-------------------------------------------------->
-							<!--package_category_code | package_category_name | package_category_region | package_category_city | package_category_theme | package_category_image | package_category_content -->
-
 							<!-- package_category_name -->
 							<div class="col-md-6">
 								<div class="select-wrap one-third theme">

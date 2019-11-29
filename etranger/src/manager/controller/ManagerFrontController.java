@@ -14,11 +14,11 @@ import common.vo.ActionForward;
 import manager.action.ManagerMainAction;
 import manager.action.CityInsertAction;
 import manager.action.CitySelectAction;
-import manager.action.DeleteListAction;
+import manager.action.ProductListAction;
 import manager.action.DeleteProductAction;
 import manager.action.ProductDetailAction;
 import manager.action.ProductInsertAction;
-import manager.action.ProductListAction;
+import manager.action.CategoryListAction;
 import manager.action.CategoryInsertAction;
 //import manager.action.ProductListAction;
 import manager.action.ThemeInsertAction;
@@ -146,8 +146,9 @@ public class ManagerFrontController extends HttpServlet {
 			}
 		}
 		
+		// 카테고리 리스트
 		else if (command.equals("/CategoryList.ma")) {
-			action = new ProductListAction();
+			action = new CategoryListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -155,7 +156,7 @@ public class ManagerFrontController extends HttpServlet {
 			}
 		}
 		
-		
+		// 상품 삭제
 		else if (command.equals("/DeleteProduct.ma")) {
 			action = new DeleteProductAction();
 			System.out.println("DeleteProduct.ma");
@@ -166,35 +167,17 @@ public class ManagerFrontController extends HttpServlet {
 			}
 		}
 		
-
-		else if (command.equals("/DeleteList.ma")) {
-			action = new DeleteListAction();
-			System.out.println("DeleteList.ma");
+		// 상품 리스트
+		else if (command.equals("/ProductList.ma")) {
+			action = new ProductListAction();
+			System.out.println("ProductList.ma");
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-						
+												
 		if (forward != null) {
 			if (forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());
