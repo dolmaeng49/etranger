@@ -33,16 +33,8 @@ public class ProductInsertAction implements Action {
 		if (!isInsertSuccess) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('상품 등록 실패!')");
-			out.println("history.back()");
-			out.println("</script>");
-		} else {
-			forward = new ActionForward();
-			forward.setPath("ProductDetail.ma?package_category_code=27-20-!MD추천!자유여행!효도여행&package_category_theme=!MD추천!자유여행!효도여행");
-			forward.setRedirect(true);
-		}
-
+			out.print("false");
+		} 
 		return forward;
 	}
 
