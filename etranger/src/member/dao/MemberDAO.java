@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import member.vo.MemberBean;
 
@@ -64,8 +65,9 @@ public class MemberDAO {
 		int insertCount = 0;
 		
 		try {
-			String sql = "insert into member(member_id,member_passwd,member_name,member_addr,member_phone,member_email,member_gender,member_leg_date,member_grade,member_birth)"
-					+ "values(?,?,?,?,?,?,?,?,'bronze',?)";
+			String sql = "insert into member(member_id,member_passwd,member_name,member_addr,member_phone,"
+					+ "member_email,member_gender,member_leg_date,member_grade,member_birth,member_addr2,member_addr3,member_addr4)"
+					+ "values(?,?,?,?,?,?,?,?,'bronze',?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, memberBean.getMember_id());
@@ -77,6 +79,9 @@ public class MemberDAO {
 			pstmt.setString(7, memberBean.getMember_gender());
 			pstmt.setTimestamp(8, memberBean.getMember_leg_date());
 			pstmt.setString(9, memberBean.getMember_birth());
+			pstmt.setString(10, memberBean.getMember_addr2());
+			pstmt.setString(11, memberBean.getMember_addr3());
+			pstmt.setString(12, memberBean.getMember_addr4());
 			
 			insertCount = pstmt.executeUpdate();
 			
@@ -139,6 +144,7 @@ public class MemberDAO {
 		return selectedId;
 	}
 
+	// 회원가입시 입력한 이메일 확인
 	public int isCorrectMemberEmail(MemberBean memberBean) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -190,9 +196,6 @@ public class MemberDAO {
 			System.out.println("updatePasswd 실패! : " + e.getMessage());
 		}
 		
-		
-		
-		
 		return isUpdateSuccess;
 	}
 
@@ -201,7 +204,6 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		boolean isArticleWriter = false;
-		
 		
 		try {
 		String sql = "SELECT member_passwd FROM board WHERE member_id=?";
@@ -228,15 +230,13 @@ public class MemberDAO {
 	}
 
 	
-
-	public boolean ismemberArticleWriter(String member_id, String member_passwd) {
+	// 아이디, 비밀번호 일치 여부 확인
+	public boolean userCheck(String member_id, String member_passwd) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		boolean isArticleWriter = false;
-		
+		boolean userCheck = false;
 		
 		try {
-			
 			String sql = "SELECT member_passwd FROM member WHERE member_id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_id);
@@ -244,7 +244,7 @@ public class MemberDAO {
 			
 			if(rs.next()) {
 				if(member_passwd.equals(rs.getString("member_passwd"))) {
-					isArticleWriter = true;
+					userCheck = true;
 				}
 			}
 			
@@ -255,7 +255,7 @@ public class MemberDAO {
 			close(pstmt);
 		}
 		
-		return isArticleWriter;
+		return userCheck;
 	}
 
 
@@ -277,7 +277,7 @@ public class MemberDAO {
 	}
 
 
-	public static MemberBean selectArticle(String member_id) {
+	public MemberBean selectMember(String member_id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		MemberBean memberBean = null;
@@ -286,7 +286,6 @@ public class MemberDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1,member_id);
 			rs = pstmt.executeQuery();
-			System.out.println(member_id);
 			if(rs.next()) {
 				memberBean = new MemberBean();
 				memberBean.setMember_id(rs.getString("member_id"));
@@ -297,6 +296,9 @@ public class MemberDAO {
 				memberBean.setMember_gender(rs.getString("member_gender"));
 				memberBean.setMember_grade(rs.getString("member_grade"));
 				memberBean.setMember_birth(rs.getString("member_birth"));
+				memberBean.setMember_addr2(rs.getString("member_addr2"));
+				memberBean.setMember_addr3(rs.getString("member_addr3"));
+				memberBean.setMember_addr4(rs.getString("member_addr4"));
 				
 			}
 			
@@ -334,6 +336,49 @@ public class MemberDAO {
 	
 	
 	return updateCount;
+	}
+
+	// 회원 아이디에 해당하는 회원 이름을 리턴하는 메서드
+	public String getMemberName(String member_id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT member_name FROM member WHERE member_id=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) { // 조회결과 존재할 경우
+				// 조회한 회원 이름 리턴
+				return rs.getString(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("getMemberName 실패 : " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return null;
+	}
+
+	public ArrayList<String> getMemberWishList(String member_id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<String> member_wishList = new ArrayList<String>();
+		String sql = "SELECT wish_category_code FROM wishr WHERE wish_member_id=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_id);
+			rs = pstmt.executeQuery();
+			while(rs.next()) { // 조회결과 존재할경우 반복 접근
+				member_wishList.add(rs.getString(1));// 조회 결과 ArrayList 객체에 저장
+			}
+		} catch (SQLException e) {
+			System.out.println("getMemberName 실패 : " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return member_wishList;
 	}
 
 	}

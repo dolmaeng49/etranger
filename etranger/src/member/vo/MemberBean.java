@@ -17,6 +17,9 @@ public class MemberBean {
 	private Timestamp mebmer_last_login;
 	private String member_grade;
 	private String member_birth;
+	private String member_addr2;
+	private String member_addr3;
+	private String member_addr4;
 	
 	
 	public int getMember_num() {
@@ -90,6 +93,24 @@ public class MemberBean {
 	}
 	public void setMember_birth(String member_birth) {
 		this.member_birth = member_birth;
+	}
+	public String getMember_addr2() {
+		return member_addr2;
+	}
+	public void setMember_addr2(String member_addr2) {
+		this.member_addr2 = member_addr2;
+	}
+	public String getMember_addr3() {
+		return member_addr3;
+	}
+	public void setMember_addr3(String member_addr3) {
+		this.member_addr3 = member_addr3;
+	}
+	public String getMember_addr4() {
+		return member_addr4;
+	}
+	public void setMember_addr4(String member_addr4) {
+		this.member_addr4 = member_addr4;
 	}
 }
 	

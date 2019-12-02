@@ -24,6 +24,7 @@ public class MemberLoginProAction implements Action {
 		int loginResult = memberLoginProService.memberLogin(member_id,member_passwd);
 		
 		if(loginResult==0) {
+			// 아이디가 없을 경우
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
@@ -31,6 +32,7 @@ public class MemberLoginProAction implements Action {
 			out.println("history.back()");
 			out.println("</script>");
 		}else if(loginResult==-1) {
+			// 아이디 일치, 비밀번호 불일치
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
@@ -38,8 +40,17 @@ public class MemberLoginProAction implements Action {
 			out.println("history.back()");
 			out.println("</script>");
 		}else if(loginResult==1) {
+			// 아이디 비밀번호 일치, 로그인 과정 진행
+			
 			HttpSession session = request.getSession();
+			// 아이디 세션에 저장
 			session.setAttribute("member_id", member_id);
+			// 아이디에 해당하는 이름(String) 조회, 세션에 저장
+			session.setAttribute("member_name", memberLoginProService.getMemberName(member_id));
+			// 아이디에 해당하는 찜목록(ArrayList<String>) 조회, 세션에 저장
+			// 찜목록이 없을 경우 ArrayList의 size = 0
+//			session.setAttribute("member_wishList", memberLoginProService.getMemberWishList(member_id));
+			
 			forward = new ActionForward();
 			forward.setPath("index.jsp");
 			forward.setRedirect(true);

@@ -401,9 +401,16 @@
    
    
    
-   $('.pick_date').datepicker({
+   // 현재 날짜, 시간 변수에 저장
+   var date = new Date();
+   // 현재 날짜의 1일 뒤 날짜로 변경
+   date.setDate(date.getDate() + 1);
+   
+   $('.pick_start_date').datepicker({
 	   'format': 'yyyy/m/d',
-	   'autoclose': true
+	   'autoclose': true,
+	   'startDate': date, // 현재날짜의 다음 날부터 표시되도록
+	   function (){}
    });
    
    $('.pick_date').on('changeDate', function() {

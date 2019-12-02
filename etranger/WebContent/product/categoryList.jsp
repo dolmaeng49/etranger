@@ -48,7 +48,8 @@
 			<%if (categoryList != null && listCount > 0) { %>
             <%for (int i = 0; i < categoryList.size(); i++) { %>
               <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
-                <a href="#" class="block-5" style="background-image: url('ManagerImgUpload/<%=categoryList.get(i).getPackage_category_image()%>');">
+                <a href="CategoryDetail.pr?package_category_code=<%=categoryList.get(i).getPackage_category_code() %>+"&package_category_theme=<%=categoryList.get(i).getPackage_category_theme() %>"
+                 class="block-5" style="background-image: url('ManagerImgUpload/<%=categoryList.get(i).getPackage_category_image()%>');">
                 </a>
                   <div class="text">
                     <span class="price">$399</span>
@@ -108,7 +109,9 @@
                       	<input type="text" class="form-control" placeholder="Search" name="keyword"></div>
 
                       <div class="check-in col-sm-12 group mb-3">
-                      	<input type="text" id="checkin_date" class="form-control" placeholder="Date for Departure" name="depart_date"></div>
+<!--                       	<input type="text" id="checkin_date" class="form-control" placeholder="Date for Departure" name="depart_date"> -->
+                      	<input type="text" class="form-control pick_date" placeholder="Date for Departure" name="depart_date">
+                      </div>
 
                       <div class="check-out col-sm-12 group mb-3">
                       	<input type="text" id="checkout_date" class="form-control" placeholder="Date for Arrival" name="arriv_date"></div>

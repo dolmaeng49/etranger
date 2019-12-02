@@ -13,7 +13,7 @@ public class MemberDeleteProService {
 		memberDAO.setConnection(con);
 		
 		
-		boolean isArticleWriter=memberDAO.ismemberArticleWriter(member_id,member_passwd);
+		boolean isArticleWriter=memberDAO.userCheck(member_id,member_passwd);
 		System.out.println(member_passwd);
 		
 		

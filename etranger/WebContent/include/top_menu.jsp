@@ -8,14 +8,18 @@
 	if(session.getAttribute("member_id")!=null){
 		member_id=(String)session.getAttribute("member_id");
 	}
+	String member_name = null;
+	if(session.getAttribute("member_name")!=null){
+		member_name=(String)session.getAttribute("member_name");
+	}
 %>
 
 <!-- login-info  class="container"-->
 <div class="container"><p id="login-info-p">
-<%if(member_id==null){ %>
+<%if(member_id == null){ %>
 	<a href="LoginForm.me">Log In</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="MemberJoinForm.me">Create an Account</a>
 <%}else{ %>
-<%=member_id %>님 | <a href="LogoutPro.me">Log Out</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="MemberModifyForm.me?member_id=<%=member_id %>">Modify</a>
+<%=member_name %>님 | <a href="LogoutPro.me">Log Out</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="MemberModifyForm.me?member_id=<%=member_id %>">회원정보수정</a>
 <%} %>
 </p>
 </div>
