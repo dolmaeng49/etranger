@@ -80,7 +80,7 @@
 							<input type="password" class="form-control" id="passwd" required="required" name="member_passwd">
 						</div>
 						<p class="wrap-links"><a href="MemberFindIdForm.me">ID 찾기</a> |
-							<a href="MemberFindPasswdForm.me">P/W 찾기</a> |
+							<a href="MemberFindPasswdForm.me">P/W 변경</a> |
 							<a href="MemberJoinForm.me">회원가입</a> |</p>
 			 			<div class="form-group form-group-btn">
 							<input type="submit" value="Login" class="btn py-3 px-4 btn-primary">&nbsp;&nbsp;

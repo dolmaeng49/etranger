@@ -9,6 +9,7 @@ import static common.db.JdbcUtil.*;
 
 public class MemberLoginProService {
 
+	// 전달받은 ID, PASSWORD로 로그인
 	public int memberLogin(String member_id, String member_passwd) {
 		Connection con = getConnection();
 		MemberDAO memberDAO= MemberDAO.getInstance();
@@ -20,13 +21,15 @@ public class MemberLoginProService {
 		close(con);
 		
 		return loginResult;
-	}
-
+	}	
+	
+	// 아이디를 이용해 회원의 이름 조회
 	public String getMemberName(String member_id) {
 		Connection con = getConnection();
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		memberDAO.setConnection(con);
 		// 아이디를 이용해 회원의 이름 조회
+		// 아이디에 해당하는 정보가 없으면 null
 		String member_name = memberDAO.getMemberName(member_id);
 		
 		close(con);
@@ -34,6 +37,7 @@ public class MemberLoginProService {
 		return member_name;
 	}
 
+	// ID 에 해당하는 찜목록(ArrayList<String>) 조회
 	public ArrayList<String> getMemberWishList(String member_id) {
 		Connection con = getConnection();
 		MemberDAO memberDAO = MemberDAO.getInstance();

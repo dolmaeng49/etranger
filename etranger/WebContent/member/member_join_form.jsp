@@ -120,7 +120,7 @@
 							</div>
 							<div class="form-group">
 								<input type="text" class="form-control form-control-shortshort pick_date"
-									id="checkin_date" value="1990/1/1" placeholder="Birth"
+									id="checkin_date" value="1990/1/1" placeholder="Birth" readonly="readonly"
 									name="member_birth" required="required">&nbsp;&nbsp;&nbsp;
 								<span>생년월일을 선택해주세요</span>
 							</div>

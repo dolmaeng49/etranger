@@ -1,8 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String delete_id = null; 
+	if(session.getAttribute("member_id")!=null){
+		delete_id = (String)session.getAttribute("member_id");
+	}
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<%	if(delete_id == null){%>
+		<script type="text/javascript">
+			alert('로그인이 필요한 기능입니다!');
+			location.href="LoginForm.me";
+		</script>
+	<%}%>
 <!-- 스타일 인클루드 -->
 <jsp:include page="../include/style.jsp" />
 <style type="text/css">
@@ -12,20 +24,12 @@
 	.row-padding {
 		padding-left: 20%
 	}
- 	.form-wrap-login {
+	.form-wrap-login {
 		display: inline-block;
-		width: 80%;
+		width: 70%;
 	}
 	.wrap-links {
 		text-align: right;
-	}
-	.form-control-short {
-		display: inline-block;
-		width: 60%;
-	}
-	.form-control-shortshort {
-		display: inline-block;
-		width: 30%;
 	}
 </style>
 </head>
@@ -44,15 +48,17 @@
 					<div class="col-md-7 col-sm-12 ftco-animate">
 						<p class="breadcrumbs">
 							<span class="mr-2"><a href="../main/index.jsp">Home</a></span><span><a 
-								href="MemberFindIdForm.me">Find ID</a></span>
+								href="MemberLoginForm.me">회원 탈퇴</a></span>
 						</p>
-						<h1 class="mb-3">Find ID</h1>
+						<h1 class="mb-3">회원 탈퇴</h1>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 	<!-- END slider -->
+	
+<form action="MemberDeletePro.me" method="post">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row row-padding">
@@ -60,28 +66,18 @@
 
 
 					<div class="comment-form-wrap pt-5 form-wrap-login">
-						<h3 class="mb-5">Find ID</h3>
-<form action="MemberFindIdPro.me" method="post" id="findIdForm">
+						<h3 class="mb-5">회원 탈퇴</h3>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Name" name="member_name"
-								required="required">
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control form-control-shortshort pick_date"
-								id="checkin_date" value="1990/1/1" placeholder="Birth" readonly="readonly"
-								name="member_birth" required="required">&nbsp;&nbsp;&nbsp;
-							<span>생년월일을 선택해주세요</span>
+							<label for="id">ID</label><br>
+							<input type="text" class="form-control" required="required" name="member_id" value="<%=delete_id%>" readonly="readonly">
 						</div>
 						<div class="form-group">
-							<input type="radio" name="member_gender" value="m" id="gender_man">Man&nbsp;&nbsp;&nbsp;
-							<input type="radio" name="member_gender" value="f" id="gender_woman">Woman
+							<label for="password">PASSWORD</label><br>
+							<input type="password" class="form-control" required="required" name="member_passwd">
 						</div>
-						<div class="form-group form-group-btn">
-							<input type="submit" value="ID 찾기" class="btn btn-primary py-3 px-5">
+			 			<div class="form-group form-group-btn">
+							<input type="submit" value="탈퇴하기" class="btn py-3 px-4 btn-primary">&nbsp;&nbsp;
 						</div>
-</form>
-						<p class="wrap-links"><a href="MemberFindPasswdForm.me">P/W 변경</a> |
-							<a href="MemberJoinForm.me">회원가입</a> |</p>
 					</div>
 				</div>
 			</div>
@@ -95,7 +91,8 @@
 
 	<!-- loader 인클루드 -->
 	<jsp:include page="../include/loader.jsp" />
-	<script src="js/member.js"></script>
 
+
+</form>
 </body>
 </html>

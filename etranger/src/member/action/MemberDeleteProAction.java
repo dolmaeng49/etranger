@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.action.Action;
 import common.vo.ActionForward;
-import member.service.MemberDeleteProService;
+import member.service.MemberModifyDeleteService;
 
 public class MemberDeleteProAction implements Action {
 
@@ -15,42 +15,38 @@ public class MemberDeleteProAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward=null;
 		
-		int member_num=Integer.parseInt(request.getParameter("member_num"));
-		String member_id=request.getParameter("member_id");
+		String member_id = request.getParameter("member_id");
 		
-		MemberDeleteProService memberDeleteProService=new MemberDeleteProService();
+		// 서비스 객체 생성해 삭제 권한 확인하는 메서드(userCheck(String)) 호출
+		MemberModifyDeleteService service = new MemberModifyDeleteService();
+		int userCheck = service.userCheck(member_id, request.getParameter("member_passwd"));
 		
-		boolean isRightUser= memberDeleteProService.isArticleWriter(member_id, request.getParameter("member_passwd"));
-		
-		
-		
-		
-		if(!isRightUser) {
+		if(userCheck < 1) { // 삭제 권한이 없는 경우
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('삭제 권한이 없습니다!')");
 			out.println("history.back()");
 			out.println("</script>");
-			}else {
-				boolean isDeleteSuccess = MemberDeleteProService.removeArticle(member_id);
-				
-				if(!isRightUser) {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('삭제 실패!')");
-				out.println("history.back()");
-				out.println("</script>");
-				}else {
-					
-					forward=new ActionForward();
-					forward.setRedirect(true);
-					forward.setPath("index.jsp");
-					
-				}
+		}else {
+			// 삭제 권한이 있을 경우, 회원 삭제 메서드 호출
+			boolean isDeleteSuccess = service.deleteMember(member_id);
+			
+			if(!isDeleteSuccess) { // 회원 탈퇴 실패 
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('삭제 실패!')");
+			out.println("history.back()");
+			out.println("</script>");
+			}else { // 회원 탈퇴 성공
+				request.getSession().invalidate(); // 세션 비활성화
+				forward=new ActionForward();
+				forward.setRedirect(true);
+				forward.setPath("index.jsp");
 			}
-			return forward;
 		}
-
+		return forward;
 	}
+
+}

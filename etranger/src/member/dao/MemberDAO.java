@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import member.vo.MemberBean;
@@ -25,6 +26,8 @@ public class MemberDAO {
 		this.con = con;
 	}
 
+	// 전달받은 아이디, 비밀번호를 DB와 비교해 결과 리턴
+	// 1 : 로그인 성공, 0 : 아이디 없음, -1 : 비밀번호 불일치
 	public int selectMemberLogin(String member_id, String member_passwd) {
 		int loginResult = 0;
 		PreparedStatement pstmt = null;
@@ -43,6 +46,11 @@ public class MemberDAO {
 				rs = pstmt.executeQuery();
 				if (rs.next()) {
 					if (member_passwd.equals(rs.getString("member_passwd"))) {
+						// 아이디와 비밀번호가 일치할 때
+						// member 테이블의 last_login 컬럼에 현재 시간 입력
+						sql = "UPDATE member SET member_last_login=?";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
 						loginResult = 1;
 					}else {
 						loginResult = -1;
@@ -54,11 +62,40 @@ public class MemberDAO {
 		} finally {
 			close(rs);
 			close(pstmt);
-
 		}
 		return loginResult;
 	}
+	
+	// 전달받은 아이디, 비밀번호를 DB와 비교해 결과 리턴
+	// 1 : 둘 다 일치, 0 : 아이디 없음, -1 : 비밀번호 불일치
+	public int userCheck(String member_id, String member_passwd) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int userCheck = 0;
+		try {
+			String sql = "SELECT member_passwd FROM member WHERE member_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(member_passwd.equals(rs.getString("member_passwd"))) {
+					userCheck = 1;
+				} else {
+					userCheck = -1;
+				}
+			}
+		} catch (SQLException e) {
+			System.out.println("userCheck() 오류 - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return userCheck;
+	}
 
+	
+	
 	public int insertMember(MemberBean memberBean) {
 		PreparedStatement pstmt = null;
 		
@@ -199,67 +236,8 @@ public class MemberDAO {
 		return isUpdateSuccess;
 	}
 
-	public boolean isMemberArticleWriter(String member_id, String member_passwd) {
 
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		boolean isArticleWriter = false;
-		
-		try {
-		String sql = "SELECT member_passwd FROM board WHERE member_id=?";
-		pstmt = con.prepareStatement(sql);
-		pstmt.setString(1, member_id);
-		rs = pstmt.executeQuery();
-		
-		if(rs.next()) {
-			if(member_passwd.equals(rs.getString("member_passwd"))) {
-				
-				isArticleWriter = true;
-			}
-		}
-		
-	}catch(SQLException e) {
-		System.out.println("isMemberArticleWriter() 오류 - " + e.getMessage());
-	}finally{
-		close(rs);
-		close(pstmt);
-	
-	}
-	return isArticleWriter;
-	
-	}
-
-	
-	// 아이디, 비밀번호 일치 여부 확인
-	public boolean userCheck(String member_id, String member_passwd) {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		boolean userCheck = false;
-		
-		try {
-			String sql = "SELECT member_passwd FROM member WHERE member_id=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, member_id);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				if(member_passwd.equals(rs.getString("member_passwd"))) {
-					userCheck = true;
-				}
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("ismemberArticleWriter() 오류 - " + e.getMessage());
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		
-		return userCheck;
-	}
-
-
-	public int deleteARticle(String member_id) {
+	public int deleteMember(String member_id) {
 		PreparedStatement pstmt =null;
 		int deleteCount=0;
 		
@@ -312,33 +290,36 @@ public class MemberDAO {
 		return memberBean;
 	}
 
-	public int updateArticle(MemberBean article) {
+	// 회원 정보 수정
+	public int updateMemberInfo(MemberBean article) {
 		PreparedStatement pstmt =null;
-		ResultSet rs = null;
 		int updateCount =0;
-	try {
-		String sql="UPDATE member SET member_name=? where member_id=?";
-		pstmt = con.prepareStatement(sql);
-		pstmt.setString(1, article.getMember_addr());
-		pstmt.setString(2, article.getMember_phone());
-		pstmt.setString(3, article.getMember_email());
-		pstmt.setString(4, article.getMember_birth());
-		pstmt.setString(4, article.getMember_passwd());
-		pstmt.setString(4, article.getMember_id());
-		pstmt.setString(4, article.getMember_name());
-		updateCount=pstmt.executeUpdate();
-	}catch (SQLException e) {
-		System.out.println("updateArticle() 오류 -"+e.getMessage());
-	}finally{
-		close(pstmt);
-		close(rs);
-	}
-	
-	
+		try {
+			String sql="UPDATE member SET member_name=?, member_phone=?,"
+					+ "member_addr=?, member_addr2=?, member_addr3=?, member_addr4=?,"
+					+ "member_email=?, member_birth=?, member_gender=? WHERE member_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, article.getMember_name());
+			pstmt.setString(2, article.getMember_phone());
+			pstmt.setString(3, article.getMember_addr());
+			pstmt.setString(4, article.getMember_addr2());
+			pstmt.setString(5, article.getMember_addr3());
+			pstmt.setString(6, article.getMember_addr4());
+			pstmt.setString(7, article.getMember_email());
+			pstmt.setString(8, article.getMember_birth());
+			pstmt.setString(9, article.getMember_gender());
+			pstmt.setString(10, article.getMember_id());
+			updateCount = pstmt.executeUpdate();
+		}catch (SQLException e) {
+			System.out.println("updateMemberInfo() 오류 -"+e.getMessage());
+		}finally{
+			close(pstmt);
+		}
 	return updateCount;
 	}
 
 	// 회원 아이디에 해당하는 회원 이름을 리턴하는 메서드
+	// 아이디에 해당하는 정보가 없으면 null 리턴
 	public String getMemberName(String member_id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

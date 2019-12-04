@@ -128,8 +128,8 @@
 		}
 	});
 	
-	// 회원가입,회원정보수정  submit() 이벤트 발생시 제어
-	$('#joinForm, #modifyForm').submit(function(){
+	// 회원가입 submit() 이벤트 발생시 제어
+	$('#joinForm').submit(function(){
 		// 성별체크 입력 확인
 		if($('#gender_man').is(":checked")==false && $('#gender_woman').is(":checked")==false){
 			alert('성별을 체크 해주세요');
@@ -180,8 +180,26 @@
 		$('#member_email').removeAttr("readonly");
 		$('#old_email_check').css('display',"none");
 		$('#new_email_check').css('display',"inline");
+		$('#member_email_code').css('required',"required");
+	});
+	
+	// 회원정보수정 submit() 이벤트 발생시 제어
+	$('#modifyForm').submit(function(){
+		// 성별체크 입력 확인
+		if($('#gender_man').is(":checked")==false && $('#gender_woman').is(":checked")==false){
+			alert('성별을 체크 해주세요');
+			$('#gender_man').focus();
+			return false;
+		}
+		// Email 인증 확인
+		if(!checkEmailCode){
+			alert('E-Mail 인증을 확인해주세요');
+			$('#member_email_code').focus();
+			return false;
+		}
 	});
 
+	
 	
 // ============= ID, PW 찾기	
 	
@@ -220,7 +238,7 @@
 			}
 		});
 	});
-	// PW찾기 - submit() 이벤트 발생시 제어
+	// PW변경 - submit() 이벤트 발생시 제어
 	$('#findPasswdForm').submit(function(){
 		// 패스워드 유효성 검사 확인
 		if(!checkPasswdResult){
