@@ -164,6 +164,7 @@ function check() {
 function showCategoryInsert() {
 	if ($('#categoryInsert').css('display') == 'none') {
 		$('#productInsert').hide(300);
+		$('#showDataChart').hide(300);
 		$('#categoryInsert').show(300);
 	}
 }
@@ -172,8 +173,6 @@ function pageNum(page) {
 	$.ajax('CategoryList.ma?page=' + page, {
 		success: function (data) {
 			$('#productList').html(data);
-		}, error : {
-			
 		}
 	});
 }
@@ -181,6 +180,7 @@ function pageNum(page) {
 $('.pList').click(function () {
 	if ($('#productInsert').css('display') == 'none') {
 		$('#categoryInsert').hide(300);
+		$('#showDataChart').hide(300);
 		$('#productInsert').show(300);
 		$.ajax('CategoryList.ma', {
 			success: function (data) {
@@ -189,6 +189,19 @@ $('.pList').click(function () {
 		});
 	}
 });
+
+$('.dataChart').click(function () {
+		$('#categoryInsert').hide(300);
+		$('#productInsert').hide(300);
+		$('#showDataChart').show(300);
+//		$.ajax('CategoryList.ma', {
+//			success: function (data) {
+//				$('#productList').html(data);
+//			}
+//		});
+	
+});
+
 
 // 지역추가, 도시추가 textbox 엔터키 이벤트
 function enterKey(thisId) {

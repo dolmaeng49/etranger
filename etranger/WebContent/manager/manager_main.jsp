@@ -65,7 +65,7 @@
 					<ul class="list-group">
 						<li class="list-group-item active li_hover" onclick="location.href='./index.jsp'"><span
 								class="icon icon-home"></span> 홈</li>
-						<li class="list-group-item li_hover"><span class="icon icon-line-chart"></span> 관리자 메인</li>
+						<li class="list-group-item li_hover dataChart"><span class="icon icon-line-chart"></span> 관리자 메인</li>
 						<li class="list-group-item li_hover" onclick="showCategoryInsert()"><span
 								class="icon icon-pencil"></span> 상품 분류 등록</li>
 						<li class="list-group-item li_hover pList"><span class="icon icon-add_shopping_cart"></span> 상품
@@ -75,9 +75,13 @@
 					</ul>
 				</div>
 			</div>
-
+			
 			<!-- 9단길이의 첫번째 열 -->
 			<div class="col-md-9">
+				<section id="showDataChart">
+					<jsp:include page="../manager/datachart.jsp" />
+				</section>
+			
 				<section id="categoryInsert" style="display: none;">
 					<!-- 지역,도시,테마 선택결과 가지고 ManagerProInsert.ma 이동 -->
 					<form action="CategoryInsert.ma" class="p-5 bg-light" method="post" enctype="multipart/form-data"
@@ -196,9 +200,6 @@
 				</section>
 
 				<!-- 상품리스트 출력 -->
-				<div id="Context">
-
-				</div>
 				<section id="productInsert" style="display: none;">
 					<div id="productList" class="col-md-12"></div>
 				</section>

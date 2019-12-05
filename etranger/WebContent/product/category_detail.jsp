@@ -3,8 +3,7 @@
 <%@page import="manager.vo.CategoryBean"%>
 <%@page import="java.util.Locale.Category"%>
 <%@page import="manager.dao.ManagerDAO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	ArrayList<CategoryBean> pdetail = (ArrayList<CategoryBean>) request.getAttribute("pdetail");
 	ArrayList<ProductBean> pdList = (ArrayList<ProductBean>) request.getAttribute("pdList");
@@ -36,6 +35,43 @@
 <head>
 <!-- 스타일 인클루드 -->
 <jsp:include page="../include/style.jsp" />
+
+<style type="text/css">
+.sticky {
+	position: sticky;
+	top: 100px;
+}
+
+table.pdList {
+	border-collapse: separate;
+	border-spacing: 1px;
+	text-align: center;
+	line-height: 1.5;
+	margin: 20px 10px;
+	width: 115%;
+}
+
+table.pdList th {
+	width: 155px;
+	font-weight: bold;
+	vertical-align: top;
+	color: #fff;
+	background: #ff5f5f;
+}
+
+table.pdList td {
+	width: 155px;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+	background: #eee;
+	font-size: smaller;
+}
+
+table.pdList td input {
+	font-size: smaller;
+}
+</style>
+
 </head>
 <%-- <body onload="checkSession(<%=sid%>)"> --%>
 
@@ -45,16 +81,13 @@
 	<jsp:include page="../include/top_menu.jsp" />
 
 	<section class="home-slider owl-carousel">
-		<div class="slider-item"
-			style="background-image: url('images/bg_3.jpg');"
-			data-stellar-background-ratio="0.5">
+		<div class="slider-item" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row slider-text align-items-center">
 					<div class="col-md-7 col-sm-12 ftco-animate">
 						<p class="breadcrumbs">
-							<span class="mr-2"><a href="../main/index.jsp"></a></span> <span><a
-								href="blog.html"></a></span> <span></span>
+							<span class="mr-2"><a href="../main/index.jsp"></a></span> <span><a href="blog.html"></a></span> <span></span>
 						</p>
 						<h1 class="mb-3">상품 상세페이지</h1>
 						<br>
@@ -77,96 +110,80 @@
 					</div>
 
 					<div class="writeform-group">
-						<label for="image">이미지</label>
-						<a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>');">
-						</a>
+						<label for="image">이미지</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>');"> </a>
 					</div>
-
+					<br>
 					<div class="writeform-group">
-						<br> <label for="code">상품코드</label>
-						<input type="text" class="form-control" name="product_code" id="product_code_id" value="<%=code%>" />
+						<label for="name">상품명</label> <input type="text" class="form-control" name="product_name" id="product_name_id" value="<%=name%>" />
 					</div>
 
 					<br>
 					<div class="writeform-group">
-						<label for="code">지역코드</label>
-						<input type="text" class="form-control" name="product_region_code" id="product_region_code_id" value="<%=region_code%>" />
-					</div>
-
-					<br>
-					<div class="writeform-group">
-						<label for="code">도시코드</label>
-						<input type="text" class="form-control" name="product_city_code" id="product_city_code_id" value="<%=city_code%>" />
-					</div>
-
-					<br>
-					<div class="writeform-group">
-						<label for="name">상품명</label> 
-						<input type="text" class="form-control" name="product_name" id="product_name_id" value="<%=name%>" />
-					</div>
-
-					<br>
-					<div class="writeform-group">
-						<label for="name">상품테마</label> 
-						<input type="text" class="form-control" name="product_theme" id="product_theme_id" value="<%=theme%>" />
-					</div>
-
-					<div class="writeform-group">
-						<br> <label for="name">상세내용</label> <br>
-						<textarea name="Product_Detail_content" cols="72" rows="20"><%=content%></textarea>
+						<label for="name">상품테마</label> <input type="text" class="form-control" name="product_theme" id="product_theme_id" value="<%=theme%>" />
 					</div>
 
 					<div class="writeform-group">
 						<br>
-						<label for="name">날짜별 상품</label>
+						<label for="name">상세내용</label>
+						<br>
+						<textarea name="Product_Detail_content" cols="72" rows="20"><%=content%></textarea>
+					</div>
 
-						<table>
-							<%
-								if (pdList != null) {
-							%>
-							<tr id="tr_top">
-								<td>상품코드</td>
-								<td>출발날짜</td>
-								<td>도착날짜</td>
-								<td>가격</td>
-								<td>총인원수</td>
-							</tr>
+					<div class="writeform-group" id="review">
+						<br>
+						<label for="name">리뷰</label>
+						<br>
+					</div>
 
+					<div class="form-group">
+						<!-- 						<input type="button" value="등록" class="btn py-3 px-4 btn-primary" -->
+						<%-- 							onclick="location.href='ProductInsert.ma?package_category_code=<%=code%>'"> --%>
+						<input type="button" value="뒤로가기" class="btn py-3 px-4 btn-primary" onclick="history.back()">
+					</div>
+				</div>
+
+				<div class="col-md-4 ftco-animate">
+					<div class="writeform-group sticky">
+						<br>
+						<input type="button" class="btn py-1 px-2 btn-primary" id="moveReview" value="리뷰보기">
+						<table class="pdList">
 							<%
 								for (int i = 0; i < pdList.size(); i++) {
+									if (pdList != null) {
 							%>
+							<tr id="tr_top">
+								<th>출발날짜</th>
+								<th>도착날짜</th>
+								<th>가격</th>
+								<th>총인원수</th>
+							</tr>
 							<tr>
-								<td><%=pdList.get(i).getProductNum()%></td>
 								<td><%=pdList.get(i).getProductDepartDate()%></td>
-								<td><%=pdList.get(i).getProductArrivDate()%></td>
 								<td><%=pdList.get(i).getProductArrivDate()%></td>
 								<td><%=pdList.get(i).getProductPrice()%></td>
 								<td><%=pdList.get(i).getProductTotal()%></td>
 							</tr>
 							<tr>
-								<td colspan="2"><select>
-									<option>하이</option>
+								<td><select>
+										<option>인원수</option>
+										<%
+										int total = 10;
+										int max = pdList.get(i).getProductTotal()<total ? pdList.get(i).getProductTotal() : total;
+										for(int j = 1; j <= max;j++){
+											%>
+											<option><%=j%></option>
+											<%
+										}
+										%>
 								</select></td>
-								<td colspan="2"><input type="button" value="예약하기" onclick="reservation('<%=pdList.get(i).getProductNum()%>')"></td>
+								<td colspan="2">총합계<br></td>
+								<td><input type="button" class="btn py-1 px-1 btn-primary" value="예약하기" onclick="reservation('<%=pdList.get(i).getProductNum()%>')"></td>
 							</tr>
-							<script type="text/javascript">
-								function reservation(product_num){
-									$('')
-								}
-							</script>
 							<%
 								}
 								}
 							%>
 						</table>
-
-					</div>
-
-					<div class="form-group">
-<!-- 						<input type="button" value="등록" class="btn py-3 px-4 btn-primary" -->
-<%-- 							onclick="location.href='ProductInsert.ma?package_category_code=<%=code%>'"> --%>
-						<input type="button" value="뒤로가기"
-							class="btn py-3 px-4 btn-primary" onclick="history.back()">
 					</div>
 				</div>
 			</div>
@@ -179,7 +196,17 @@
 
 	<!-- loader 인클루드 -->
 	<jsp:include page="../include/loader.jsp" />
-
+	<script>
+		$(document).ready(function() {
+			$('#moveReview').click(function() {
+				var offset = $('#review').offset(); // 이동할 태그 위치 저장
+				// animate() 메서드를 이용해서 지정된 태그위치로 이동 0.3초
+				$('html').animate({
+					scrollTop : offset.top
+				}, 300);
+			});
+		});
+	</script>
 </body>
 
 </html>
