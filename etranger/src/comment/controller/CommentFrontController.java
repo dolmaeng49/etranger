@@ -15,6 +15,7 @@ import comment.action.CommentModifyFormAction;
 import comment.action.CommentModifyProAction;
 import comment.action.CommentReplyFormAction;
 import comment.action.CommentReplyProAction;
+import comment.action.CommentListAjax;
 import comment.action.CommentWriteAction;
 import common.action.Action;
 import common.vo.ActionForward;
@@ -74,6 +75,13 @@ public class CommentFrontController extends HttpServlet{
 				}
 			}else if(command.equals("/CommentReplyPro.cm")){
 				action = new CommentReplyProAction();
+				try {
+					forward=action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else if(command.equals("/CommentListAjax.cm")){
+				action = new CommentListAjax();
 				try {
 					forward=action.execute(request, response);
 				} catch (Exception e) {

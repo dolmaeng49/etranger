@@ -21,11 +21,11 @@ public class CommentDeleteProAction implements Action {
 		int review_comment_num = Integer.parseInt(request.getParameter("review_comment_num"));
 		String review_comment_member_id = (String)request.getParameter("review_comment_member_id");
 		String page = request.getParameter("page");
-		System.out.println(review_comment_num + review_comment_member_id + page);
+		int review_comment_review_num = Integer.parseInt(request.getParameter("review_comment_review_num"));
+//		System.out.println(review_comment_num + review_comment_member_id + page);
 
 		CommentDeleteProService commentDeleteProService = new CommentDeleteProService();
 		boolean isRightUser = commentDeleteProService.isArticleWriter(review_comment_num, review_comment_member_id);
-		
 		
 		if(!isRightUser) {
 			response.setContentType("text/html;charset=UTF-8");
@@ -38,7 +38,7 @@ public class CommentDeleteProAction implements Action {
 		} else {
 			// 삭제 권한이 있는 경우(= 패스워드가 일치하는 경우)
 			// 글 번호(board_num)를 사용하여 글 삭제 => Service 클래스의 removeArticle() 메서드 호출
-			boolean isDeleteSuccess = commentDeleteProService.removeArticle(review_comment_num);
+			boolean isDeleteSuccess = commentDeleteProService.removeArticle(review_comment_num, review_comment_review_num);
 			
 			// isDeleteSuccess 가 false 일 경우 자바스크립트를 사용하여 "삭제 실패!" 출력
 			if(!isDeleteSuccess) {
@@ -52,6 +52,7 @@ public class CommentDeleteProAction implements Action {
 			} else {
 				response.setContentType("text/html;charset=UTF-8");
 				PrintWriter out=response.getWriter(); // response 객체로부터 PrintWriter 객체 얻어오기
+				
 				out.println("<script>");
 				out.println("alert('삭제 성공');");
 				out.println("</script>");
@@ -62,7 +63,7 @@ public class CommentDeleteProAction implements Action {
 				forward.setPath("ReviewDetail.rv?review_num="+review_num+"&page="+page);
 		}
 	}
-
+		forward = null;
 		return forward;
 	}
 

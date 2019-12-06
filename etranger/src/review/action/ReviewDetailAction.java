@@ -20,12 +20,10 @@ public class ReviewDetailAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("ReviewDetailAction");
-
 		
-
 		// request 객체를 통해 전달받은 파라미터 가져오기
 		int review_num = Integer.parseInt(request.getParameter("review_num"));
-		String page = request.getParameter("page");
+		String page = request.getParameter("page"); //게시글의 페이지임.
 		
 
 		ReviewDetailService reviewDetailService = new ReviewDetailService();

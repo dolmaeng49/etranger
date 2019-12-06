@@ -100,7 +100,7 @@ div{
                 <h3 class="heading"><a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>"><%=articleList.get(i).getReview_content()%></a></h3>
                 <p class="clearfix">
                   <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="float-left"><%=articleList.get(i).getReview_date()%></a>
-                  <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="float-right meta-chat"><span class="icon-chat"></span>댓글 수 </a>
+                  <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="float-right meta-chat"><span class="icon-chat"></span><%=articleList.get(i).getReview_comment_count() %></a>
                 </p>
               </div>
             </div>

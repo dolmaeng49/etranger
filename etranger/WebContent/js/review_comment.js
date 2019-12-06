@@ -5,67 +5,164 @@ $('#comment_add_btn').click(function () {	//댓글쓰기 버튼 클릭 시 addCo
     	    addComment();    						
     	});
 
-//삭제
-$('#comment_del_btn').click(function () {	//삭제 버튼 클릭 시 delComment() 호출
-	    delComment();    						
-	});
+//$(document).ready(function(){				//창 열릴때 함수호출
+//	getCommentList();
+//});
 
+//--------------------------------------------------------------------
 
-
-//----------------------------------
-
+//-----------------새 댓글 등록
 function addComment() {					
-
-	
 	  $.ajax({
 		  url:'CommentWrite.cm',
-		  type:'POST',
-		  data:{"review_comment_member_id":	$("#sessionId").val(),
+		  data:{
+			  "review_comment_num" : $("#cmt_num").val(),
+			  "review_comment_member_id":	$("#sessionId").val(),
 			  "nowPage": $("#nowPage").val(),
 			  "review_comment_member_name":"tester",
-			  "review_comment_review_num": $("#cmt_re_num").val() , // 외부에서 불러오기 위해 hidden 값으로 저장해놓고 불러와야됨
+			  "review_comment_review_num": $("#cmt_re_num").val() , 
 			  "review_comment_content": $("#review_comment_content").val()
 		  },
-		  success: function (sdata) {
-		        if (sdata == 'false') {
-		            alert('글 작성 실패!');		//나중에 alert 지울 것.
+		  success: function (result) {
+		        if (result == 'false') {
+		            alert('댓글 작성 실패!');		//나중에 alert 지울 것.
 		        }
 		        else {
-		        	alert('댓글 등록완료!')
-		        								//getCommentList() 불러오기
+		        	
+//		        	loadCommentList();
+		        	$("#review_comment_content").val("");
+		        	alert('댓글 등록완료!');
+		        	getCommentList();
+//		        	$('.comment-form-wrap').get(0).scrollIntoView(true);		//스크롤 위치 이동 함수(선택된 요소를 화면 가운데 위치하게 하는 방법 찾기)
+		        	
 		        }
 		    }
 	  });
 }
 
+//-------------------------댓글 삭제
+function deleteComment(cnum) {
+	var cmcode = $('#commentNum').attr('name'); // ?
+		$.ajax({
+			url:'CommentDeletePro.cm',
+			data: {
+				"review_comment_num": cnum,
+				"review_num":$("#cmt_re_num").val(),
+				"review_comment_member_name":$("#re_cmt_m_name").val(),
+				"review_comment_member_id": $("#re_cmt_m_id").val(),
+				"review_comment_review_num" : $("#review_comment_review_num").val(),
+				"page":$("#nowPage").val()
+			},
+			success: function (result) {
+				if (result == 'false') {
+					alert('댓글삭제 실패!');
+				} else {
+					alert('댓글삭제 성공!')
+//					getCommentList(cnum)   // 리스트 불러오기
+					getCommentList();
+					
+				
+			}
+		}
+	});
+}
+//---------------------댓글 리스트 불러오기
+function getCommentList() {
+	$.ajax({
+		url:'CommentListAjax.cm',
+		data:{
+			"review_num" : $("#review_comment_review_num").val(),			// article.get으로 불러오기 위한 값
+			"sessionId"  : $("#sessionId").val(),
+			"sessionName" : $('#sessionName').val()
+		},
+		success: function(result){
+			if(result!=null){
+				$('#forInsert').html(result);
+			}
+		}
+	});
+}
+
+// 댓글 수정창 열기
+function updateComment(cnum){
+	var htmls="";
+	htmls+='<textarea name="editContent" id="editContent" rows="5" style="width:100%;height:100;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>';
+	htmls+='<a href="javascript:void(0)" onClick="updateCommentPro('+cnum+')">저장<a>';
+	htmls+='<a href="javascript:void(0)" onClick="getCommentList()">취소<a>';
+
+	$('#cb'+cnum).replaceWith(htmls)
+}
+
+// 대댓글 폼 열기
+function replyComment(cnum){
+	var htmls="";
+	htmls+='<textarea name="replyComment" id="replyComment" rows="5" style="width:100%;height:100;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>';
+	htmls+='<a href="javascript:void(0)" onClick="replyCommentPro('+cnum+')">대댓글 쓰기<a>';
+	htmls+='<a href="javascript:void(0)" onClick="getCommentList()">취소<a>';
+	
+	$('#forReply'+cnum).replaceWith(htmls)
+	
+}
 
 
 
-//---댓글 삭제--
+//댓글 수정하기
+function updateCommentPro(cnum){
+	var editContent = $('#editContent').val();
+	
+	$.ajax({
+		url:'CommentModifyPro.cm',
+		data: {
+			"review_comment_num" : cnum,
+			"review_comment_content" : editContent,
+			"review_num" : $("#review_comment_review_num").val(),
+			"page" : $("#nowPage").val()
+		},
+		success: function (result) {
+			if (result == 'false') {
+				alert('댓글 수정 실패!');
+			} else {
+				alert('댓글 수정 성공!')
+				getCommentList();
+		}
+	}
+});
+	
+}
 
 
-//function delComment() {					
-//	  
-//	  $.ajax({
-//		  url:'CommentDeletePro.cm',
-//		  type:'POST',
-//		  data:{"review_num": <%=article.getReview_num()%>,
-//			  "review_comment_num":<%=commentList.get(i).getReview_comment_num()%>,
-//			  "review_comment_member_name":"tester",
-//			  "review_comment_member_id": <%=commentList.get(i).getReview_comment_member_id() %>,
-//			  "page":<%=nowPage%>
-//		  },
-//		  success: function (sdata) {
-//		        if (sdata == 'false') {
-//		            alert('댓글 삭제 실패!');		//나중에 alert 지울 것.
-//		        }
-//		        else {
-//		        	alert('댓글 삭제 성공!')
-//		        								//getCommentList() 불러오기
-//		        }
-//		    }
-//	  });
-//}
+// 대댓글 작성하기
+
+function replyCommentPro(cnum){
+	var replyComment = $('#replyComment').val();
+	
+	$.ajax({
+		url:'CommentReplyPro.cm',
+		data: {
+			"review_num" : $("#review_comment_review_num").val(),
+			"review_comment_num" : cnum,
+			"review_comment_member_id" : $("#review_comment_member_id").val(),
+			"review_comment_member_name" : $("#review_comment_member_name").val(),
+			"review_comment_review_num" : $("#review_comment_review_num").val(),
+			"review_comment_content" : replyComment,
+			"review_comment_ref" : cnum,
+			"review_comment_lev" : $("#review_comment_lev").val(),
+			"review_comment_seq" : $("#review_comment_seq").val()
+		},
+		success: function (result) {
+			if (result == 'false') {
+				alert('댓글 수정 실패!');
+			} else {
+				alert('댓글 수정 성공!')
+				getCommentList();
+		}
+	}
+});
+	
+}
+
+
+
 
 
 

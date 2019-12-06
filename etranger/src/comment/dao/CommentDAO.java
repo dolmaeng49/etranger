@@ -54,12 +54,14 @@ public class CommentDAO {
 				pstmt.setInt(5, ref_num);
 				pstmt.setInt(6, 0);
 				pstmt.setInt(7, 0);
-			
+				System.out.println("날짜:" + cb.getReview_comment_date());
 				insertCount = pstmt.executeUpdate();
-				
+				System.out.println(cb.getReview_comment_review_num());
 				if(insertCount!=0) {
-					sql="UPDATE review set review_comment_count=review_comment_count+1 where review_num=?";
-					pstmt.setInt(1, cb.getReview_comment_review_num());
+					
+					sql="UPDATE review set review_comment_count=review_comment_count+1 where review_num="+cb.getReview_comment_review_num();
+					pstmt=con.prepareStatement(sql);
+//					pstmt.setInt(1, cb.getReview_comment_review_num());  // 만능문자 ? 로 받아와서 처리하면 에러가 나는 이유 알아보기
 					pstmt.executeUpdate(sql);
 					System.out.println("review 테이블 값 변경 완료?");
 				}
@@ -95,10 +97,6 @@ public class CommentDAO {
 			}
 			return commentCount;
 		}
-
-		
-		
-		
 		
 		public ArrayList<CommentBean> selectCommentList() {
 			PreparedStatement pstmt = null;
@@ -107,7 +105,7 @@ public class CommentDAO {
 			
 			try {
 				
-				String sql = "select * from review_comment order by review_comment_ref, review_comment_seq desc";
+				String sql = "select * from review_comment order by review_comment_ref, review_comment_seq";
 				pstmt=con.prepareStatement(sql);
 				rs=pstmt.executeQuery();
 				
@@ -212,16 +210,25 @@ public class CommentDAO {
 			return isCommentWriter;
 		}
 
-		public int deleteComment(int review_comment_num) {
+		public int deleteComment(int review_comment_num, int review_comment_review_num) {
 			
 			PreparedStatement pstmt = null;
 			int deleteCount = 0;
 			
 			try {
-				String sql = "DELETE from review_comment WHERE review_comment_num=?";
+				String sql = "DELETE from review_comment WHERE review_comment_num= ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, review_comment_num);
 				deleteCount = pstmt.executeUpdate();
+				
+				
+				if(deleteCount!=0) {
+					sql="UPDATE review set review_comment_count=review_comment_count-1 where review_num="+review_comment_review_num;
+					pstmt=con.prepareStatement(sql);
+					pstmt.executeUpdate(sql);
+					System.out.println("review 테이블 값 변경 완료?");
+				}
+				
 			} catch (SQLException e) {
 				System.out.println("deleteComment() 오류 - " + e.getMessage());
 			} finally {
@@ -231,6 +238,7 @@ public class CommentDAO {
 			return deleteCount;
 		}
 
+		
 		public int insertReplyToComment(CommentBean comment) {
 			PreparedStatement pstmt = null;
 			int insertCount = 0;  
@@ -262,7 +270,7 @@ public class CommentDAO {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, comment.getReview_comment_member_id());
 				pstmt.setString(2, comment.getReview_comment_member_name());
-				pstmt.setInt(3, comment.getReview_comment_review_num()); 	
+				pstmt.setInt(3, comment.getReview_comment_review_num());
 				pstmt.setString(4, comment.getReview_comment_content());
 				pstmt.setInt(5,comment_ref); 	//댓글의 댓글이니 ref 값은 그대로 둠.
 				pstmt.setInt(6,comment_lev);
@@ -271,7 +279,7 @@ public class CommentDAO {
 				insertCount = pstmt.executeUpdate();
 				
 				if(insertCount!=0) {
-					sql="UPDATE review set review_comment_count=review_comment_count+1 WHERE review_num = ?";
+					sql="UPDATE review set review_comment_count=review_comment_count+1 where review_num="+comment.getReview_comment_review_num();
 					pstmt.setInt(1, comment.getReview_comment_review_num());
 					pstmt.executeUpdate(sql);
 					System.out.println("review에 넘어가나?");

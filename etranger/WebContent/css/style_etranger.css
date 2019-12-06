@@ -90,7 +90,7 @@
 	width: 120px;
 	overflow: hidden;
 	right: 1px;
-	top: 840px;
+	bottom: 40px;
 	background-color: transparent;
 	margin: 0;
 	padding: 0;
@@ -279,4 +279,9 @@ a.btn {
 }
 .starR1.on{background-position:0 0;}
 .starR2.on{background-position:-15px 0;}
+
+
+.comment_update_btn,.comment_del_btn{
+	/*우로 정렬  */
+}
 

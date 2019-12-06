@@ -22,7 +22,7 @@ public class CommentDeleteProService {
 
 	
 	
-	public boolean removeArticle(int review_comment_num) {
+	public boolean removeArticle(int review_comment_num, int review_comment_review_num) {
 		System.out.println("들어왔니? CommentDeleteProService - removeArticle");
 		Connection con = getConnection();
 		CommentDAO commentDAO = CommentDAO.getInstance();
@@ -30,7 +30,7 @@ public class CommentDeleteProService {
 		
 		boolean isDeleteSuccess = false;
 		
-		int deleteCount = commentDAO.deleteComment(review_comment_num);
+		int deleteCount = commentDAO.deleteComment(review_comment_num, review_comment_review_num);
 		
 		if(deleteCount > 0) {
 			isDeleteSuccess = true;

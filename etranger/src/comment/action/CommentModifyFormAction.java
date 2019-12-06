@@ -32,6 +32,8 @@ public class CommentModifyFormAction implements Action {
 		ActionForward forward = new ActionForward();
 		forward.setPath("review/comment_modify.jsp");
 		return forward;
+		
+		
 	}
 
 }

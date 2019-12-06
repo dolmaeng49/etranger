@@ -85,7 +85,7 @@ div{
 				%><img src="images/rating10.png" align="middle" /><%
 			}
 			%>
-			<%=article.getReview_star() + " "%>/ 10
+			<%=(article.getReview_star()/2) + " "%>/ 10
 			</div>
 			</div><!-- content-star끝 -->
 			
@@ -98,6 +98,9 @@ div{
 			<i class="fa fa-thumbs-up"></i> 추천 <span id="up"><!-- ajax로 뿌려줄 값(누적 추천수)들어갈 곳--></span></button>
 			</div><!-- like-area끝 -->
 			<div class="content-footer">
+			
+			
+			
 				<%
    					if(sessionId != null) { // 세션값 아이디 가 있을시
 					if(sessionId.equals(article.getReview_member_id())) { // 글쓴이와 일치 할경우

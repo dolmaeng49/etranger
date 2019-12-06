@@ -57,6 +57,7 @@ public class ReviewDeleteProAction implements Action {
 			} else {
 				response.setContentType("text/html;charset=UTF-8");
 				PrintWriter out=response.getWriter(); // response 객체로부터 PrintWriter 객체 얻어오기
+				
 				out.println("<script>");
 				out.println("alert('삭제 성공');");
 				out.println("</script>");

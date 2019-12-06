@@ -31,24 +31,21 @@ public class CommentModifyProAction implements Action {
 		int review_num = Integer.parseInt(request.getParameter("review_num"));
 		String page = request.getParameter("page");
 		
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter(); 
 		if(!isModifySuccess) {
-			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out = response.getWriter(); // response 객체로부터 PrintWriter 객체 얻어오기
-			out.println("<script>");
-			out.println("alert('글 수정 실패!');");
-			out.println("history.back()");
-			out.println("</script>");
-			
+			out.print("false");
 		} else {
-			forward = new ActionForward();
-			forward.setRedirect(true); // 새로운 서블릿 주소를 요청하므로 Redirect 방식 포워딩
-			forward.setPath("ReviewDetail.rv?review_num=" + review_num + "&page=" + page);
-//			forward.setPath("ReviewList.rv");
+//			forward = new ActionForward();
+//			forward.setRedirect(true); // 새로운 서블릿 주소를 요청하므로 Redirect 방식 포워딩
+			
+			out.print("success");
+			
 		}
 		
 		
 		
-		
+		forward = null;
 		return forward;
 	}
 
