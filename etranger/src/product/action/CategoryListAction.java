@@ -26,6 +26,11 @@ public class CategoryListAction implements Action {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 
+		/*
+		 * 카테고리 리스트카운트, 카테고리 리스트 받아올 때
+		 * 현재날짜의 다음날 이후로 출발하는 상품이 있는 카테고리만 가져와야함
+		 *  => package_product 의 상세 상품과 join 해서 검색 필요
+		 */
 		CategoryListService categoryListService = new CategoryListService();
 		int listCount = categoryListService.getListCount();
 

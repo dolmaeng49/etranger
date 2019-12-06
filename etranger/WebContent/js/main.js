@@ -399,10 +399,11 @@
 	   );
    });
    
-   
+    
    
    $('.pick_start_date').datepicker({
-	   'format': 'yyyy/m/d',
+	   'format': 'yyyy/mm/dd',
+	   'autoclose' : true,
 	   'multidate' : 2,
 	   'startDate': '+1d' // 현재날짜의 다음 날부터 표시되도록
    })
@@ -426,12 +427,21 @@
 //	   });
    
    $('#event_period').datepicker({
-	   'format': 'yyyy/m/d',
+	   'format': 'yyyy/mm/dd',
 	   'autoclose': true,
 	   'startDate': '+1d',
 	   
 	    inputs: $('.actual_range'),
-	    'multidate' : true
+	});
+   
+   // 메인페이지 검색창에 날짜 검색 2개 필요 때문에 (세번째 검색탭)
+   // 아직 작동 안됨, 이유 모름
+   $('#event_period2').datepicker({
+	   'format': 'yyyy/mm/dd',
+	   'autoclose': true,
+	   'startDate': '+1d',
+	   
+	    inputs: $('.actual_range2'),
 	});
 
 })(jQuery);

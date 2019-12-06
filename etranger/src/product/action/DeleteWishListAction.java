@@ -8,7 +8,7 @@ import common.action.Action;
 import common.vo.ActionForward;
 import product.svc.WishListService;
 
-public class AddWishList implements Action {
+public class DeleteWishListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -21,22 +21,22 @@ public class AddWishList implements Action {
 		/*  wish 테이블 수정
 			product_num => category_code
 			외래키도 같이 바꾸기 */
-		// 서비스 클래스의 addWishList 메서드 호출하여 member_id 와 category_code 전달
+		
+		// 서비스 클래스의 deleteWishList 메서드 호출하여 member_id 와 category_code 전달
+		// wish 테이블 INSERT, product_category.wish_count UPDATE 작업 메서드
 		WishListService wishListService = new WishListService();
-		boolean isSuccess = wishListService.addWishList(member_id, category_code);
+		boolean isSuccess = wishListService.deleteWishList(member_id, category_code);
 		
 		if(isSuccess) { // 성공한 경우
-			// 찜목록에 추가되었습니다! 메세지 출력
-			
-			
 			// 세션의 찜목록 업데이트
 			session.setAttribute("member_wishList", wishListService.getMemberWishList(member_id));
+			// 찜목록에서 삭제되었습니다! 메세지 출력
 		} else { // 실패한 경우
-			// 찜목록추가에 실패했습니다! 메세지 출력
+			// 찜목록삭제에 실패했습니다! 메세지 출력
 			
 		}
 		
-	
+		// 페이지 포워딩 없음
 		return null;
 	}
 

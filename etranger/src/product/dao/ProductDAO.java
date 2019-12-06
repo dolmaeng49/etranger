@@ -23,7 +23,7 @@ public class ProductDAO {
 		this.con = con;
 	}
 
-	public int addWishList(String member_id, String category_code) {
+	public int insertWishList(String member_id, String category_code) {
 		PreparedStatement pstmt = null;
 		String sql = "INSERT INTO wish VALUES(?,?,?)";
 		int addCount = 0;
@@ -60,6 +60,40 @@ public class ProductDAO {
 			close(pstmt);
 		}
 		return member_wishList;
+	}
+
+	// product_category 테이블의 wish_count 컬럼을 UPDATE
+	public int updateCategoryWishCount(String category_code, int wishCount) {
+		PreparedStatement pstmt = null;
+		int updateCount = 0;
+		String sql = "UPDATE product_category SET wish_count=? WHERE wish_category_code=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, wishCount);
+			pstmt.setString(2, category_code);
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("updateCategoryWishCount 실패 : " + e.getMessage());
+		}
+		return updateCount;
+	}
+
+	public int deleteWishList(String member_id, String category_code) {
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM wish WHERE wish_member_id=? AND wish_category_code=?";
+		int deleteCount = 0;
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, 0);
+			pstmt.setString(2, member_id);
+			pstmt.setString(3, category_code);
+			
+			deleteCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("addWishList 실패 : " + e.getMessage());
+		}
+		
+		return deleteCount;
 	}
 
 }

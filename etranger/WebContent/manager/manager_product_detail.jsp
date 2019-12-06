@@ -191,10 +191,10 @@ table.pdList td input {
 									<th>총인원수</th>
 									<th>등록</th>
 								</tr>
-								<tr>
+								<tr id="event_period">
 									<td><input type="text" class="form-control" name="package_category_code" id="package_category_code" value="<%=request.getParameter("package_category_code")%>" /></td>
-									<td><input type="text" class="form-control form-control-shortshort pick_date" id="product_depardate" value="2019/12/1" placeholder="depardate" name="product_depardate" required="required"></td>
-									<td><input type="text" class="form-control form-control-shortshort pick_date" id="product_arrivdate" value="2019/12/1" placeholder="arrivdate" name="product_arrivdate" required="required"></td>
+									<td><input type="text" class="form-control form-control-shortshort actual_range" id="product_depardate" placeholder="depardate" name="product_depardate" required="required" readonly="readonly"></td>
+									<td><input type="text" class="form-control form-control-shortshort actual_range" id="product_arrivdate" placeholder="arrivdate" name="product_arrivdate" required="required" readonly="readonly"></td>
 									<td><input type="text" class="form-control" name="product_price" id="product_price" placeholder="price" /></td>
 									<td><input type="text" class="form-control" name="product_total" id="product_total" placeholder="total" /></td>
 									<td><input type="button" value="등록" id="product_addbtn" class="btn py-3 px-4 btn-primary" onclick="addProduct()"></td>
