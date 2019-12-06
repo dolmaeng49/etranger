@@ -401,24 +401,38 @@
    
    
    
-   // 현재 날짜, 시간 변수에 저장
-   var date = new Date();
-   // 현재 날짜의 1일 뒤 날짜로 변경
-   date.setDate(date.getDate() + 1);
-   
    $('.pick_start_date').datepicker({
 	   'format': 'yyyy/m/d',
+	   'multidate' : 2,
+	   'startDate': '+1d' // 현재날짜의 다음 날부터 표시되도록
+   })
+   .on('changeDate', function() {
+	   // 선택된 날짜 변수에 저장
+	   var picked_date = $('.pick_start_date').datepicker('getFormattedDate')
+	   // input 태그에 출력
+	   $('.pick_start_date_input').val(picked_date);
+	   // 도착 달력 시작 날짜를 선택된날짜 이후로 지정
+//	   $('.pick_end_date').datepicker('setStartDate', picked_date);
+   });
+   
+//   $('.pick_end_date').datepicker({
+//	   'format': 'yyyy/m/d',
+//	   'autoclose': true,
+//	   'startDate': '+1d' // 현재날짜의 다음 날부터 표시되도록
+//   }).on('changeDate', function() {
+//	   $('.pick_end_date_input').val(
+//			   $('.pick_end_date').datepicker('getFormattedDate')
+//		   );
+//	   });
+   
+   $('#event_period').datepicker({
+	   'format': 'yyyy/m/d',
 	   'autoclose': true,
-	   'startDate': date, // 현재날짜의 다음 날부터 표시되도록
-	   function (){}
-   });
-   
-   $('.pick_date').on('changeDate', function() {
-	   $('.pick_date_input').val(
-		   $('.pick_date').datepicker('getFormattedDate')
-	   );
-   });
-   
+	   'startDate': '+1d',
+	   
+	    inputs: $('.actual_range'),
+	    'multidate' : true
+	});
 
 })(jQuery);
 

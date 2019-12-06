@@ -59,7 +59,9 @@
 	<!-- END slider -->
 	
 <!-- floating bar test -->	
-	<ul id="test"></ul>
+	<div id="test">
+	<input type="text" class="pick_date_input"></div>
+	<div class="pick_start_date"></div>
 <!-- floating bar test -->
 	
 <form action="LoginPro.me" method="post">

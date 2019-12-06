@@ -48,9 +48,11 @@ public class MemberDAO {
 					if (member_passwd.equals(rs.getString("member_passwd"))) {
 						// 아이디와 비밀번호가 일치할 때
 						// member 테이블의 last_login 컬럼에 현재 시간 입력
-						sql = "UPDATE member SET member_last_login=?";
+						sql = "UPDATE member SET member_last_login=? WHERE member_id=?";
 						pstmt = con.prepareStatement(sql);
 						pstmt.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
+						pstmt.setString(2, member_id);
+						pstmt.executeUpdate();
 						loginResult = 1;
 					}else {
 						loginResult = -1;
@@ -95,7 +97,7 @@ public class MemberDAO {
 	}
 
 	
-	
+	// 회원 가입
 	public int insertMember(MemberBean memberBean) {
 		PreparedStatement pstmt = null;
 		
@@ -209,7 +211,6 @@ public class MemberDAO {
 		} finally {
 			close(rs);
 		}
-		
 		return result;
 	}
 	
@@ -236,18 +237,18 @@ public class MemberDAO {
 		return isUpdateSuccess;
 	}
 
-
+	// 지정된 아이디 회원 정보 삭제(탈퇴)
 	public int deleteMember(String member_id) {
 		PreparedStatement pstmt =null;
 		int deleteCount=0;
 		
 		try {
-			String sql="delete from member where member_id=?";
+			String sql="DELETE FROM member WHERE member_id=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1,member_id);
-			deleteCount=pstmt.executeUpdate();
+			pstmt.setString(1, member_id);
+			deleteCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("deleteARticle() 오류 -"+e.getMessage());
+			System.out.println("deleteMember() 오류 -"+e.getMessage());
 		}finally {
 			close(pstmt);
 		}
@@ -341,28 +342,8 @@ public class MemberDAO {
 		return null;
 	}
 
-	public ArrayList<String> getMemberWishList(String member_id) {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		ArrayList<String> member_wishList = new ArrayList<String>();
-		String sql = "SELECT wish_category_code FROM wishr WHERE wish_member_id=?";
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, member_id);
-			rs = pstmt.executeQuery();
-			while(rs.next()) { // 조회결과 존재할경우 반복 접근
-				member_wishList.add(rs.getString(1));// 조회 결과 ArrayList 객체에 저장
-			}
-		} catch (SQLException e) {
-			System.out.println("getMemberName 실패 : " + e.getMessage());
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		return member_wishList;
-	}
-
-	}
+	
+}
 
 
 

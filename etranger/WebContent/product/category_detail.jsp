@@ -183,6 +183,22 @@ table.pdList td input {
 				<div class="col-md-4 ftco-animate">
 					<div class="writeform-group sticky">
 						<br>
+						
+<!-- 인풋태그 두개로 날짜 범위 선택 하는 달력 -->
+<!-- 달력이 항상 표시되지가 않음
+	input 태그를 div로 바꾸면 달력이 항상 표시되지만 2개가 표시됨 -->
+						<div id="event_period">
+						    <input type="text" class="actual_range">
+						    <input type="text" class="actual_range">
+						</div>
+<!-- 날짜 두개를 선택할 수 있는 달력 -->
+<!-- 범위 표시 안됨, Action에서 날짜 두개 쪼개서
+	빠른 날짜를 출발날짜, 늦은 날짜를 도착날짜로 구분하는 과정 필요 -->
+						<div class="pick_start_date"></div>
+<!-- 						<div class="pick_end_date"></div> -->
+							<input type="text" class="pick_start_date_input">
+<!-- 						    <div class="input-group-addon">to</div> -->
+<!-- 						    <input type="text" class="pick_end_date_input"> -->
 						<input type="button" class="btn py-1 px-2 btn-primary" id="moveReview" value="리뷰보기">
 						<table class="pdList">
 							<%

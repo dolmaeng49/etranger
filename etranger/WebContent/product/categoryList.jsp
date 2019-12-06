@@ -110,7 +110,7 @@
 
                       <div class="check-in col-sm-12 group mb-3">
 <!--                       	<input type="text" id="checkin_date" class="form-control" placeholder="Date for Departure" name="depart_date"> -->
-                      	<input type="text" class="form-control pick_date" placeholder="Date for Departure" name="depart_date">
+                      	<input type="text" class="form-control pick_start_date" placeholder="Date for Departure" name="depart_date">
                       </div>
 
                       <div class="check-out col-sm-12 group mb-3">
