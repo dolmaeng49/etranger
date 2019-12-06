@@ -105,7 +105,7 @@ public class CommentDAO {
 			
 			try {
 				
-				String sql = "select * from review_comment order by review_comment_ref, review_comment_seq";
+				String sql = "select * from review_comment order by review_comment_ref, review_comment_seq desc";
 				pstmt=con.prepareStatement(sql);
 				rs=pstmt.executeQuery();
 				

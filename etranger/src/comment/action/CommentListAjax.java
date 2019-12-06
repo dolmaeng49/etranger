@@ -93,7 +93,7 @@ public class CommentListAjax implements Action {
 							+"<input type=\"hidden\" id=\"review_comment_seq\" name=\"review_comment_seq\" value="+commentList.get(i).getReview_comment_seq()+">";
 						out.print(print1);
 						if(commentList.get(i).getReview_comment_lev()<1) {
-							out.print("<input type=\"submit\" class=\"reply\" value=\"Reply\">");
+							out.print("<input type=\"button\" class=\"reply\" value=\"Reply\" onclick=\"replyComment('"+commentList.get(i).getReview_comment_num()+"')\">");
 						}
 						String print2="";
 						print2+="</form><input type=\"hidden\" id=\"cmt_num\" value="+commentList.get(i).getReview_comment_num()+">"
@@ -108,7 +108,7 @@ public class CommentListAjax implements Action {
 								out.print(print3);
 									}
 								}
-						out.print("</div></li>");
+						out.print("</div><div id=\"forReply"+commentList.get(i).getReview_comment_num()+"></div></li>");
 						if(commentList.get(i).getReview_comment_lev()>0) {
 						out.print("</ul>");	
 						}

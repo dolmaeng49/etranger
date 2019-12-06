@@ -145,7 +145,7 @@ function replyCommentPro(cnum){
 			"review_comment_member_name" : $("#review_comment_member_name").val(),
 			"review_comment_review_num" : $("#review_comment_review_num").val(),
 			"review_comment_content" : replyComment,
-			"review_comment_ref" : cnum,
+			"review_comment_ref" : cnum+1,
 			"review_comment_lev" : $("#review_comment_lev").val(),
 			"review_comment_seq" : $("#review_comment_seq").val()
 		},
