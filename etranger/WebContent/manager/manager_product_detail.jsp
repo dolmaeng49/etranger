@@ -198,6 +198,8 @@ table.pdList td input{
 								}
 								}
 							%>
+							
+							<label id="newProduct"></label>
 						</table>
 
 
@@ -304,15 +306,21 @@ function addProduct() {
 }
 
 
+
 function getProduct() {
     $('#addProduct').hide();
-    $('#newProduct').empty(); // #newProduct에 있는 내용 지우기
+    $('#pdList').empty(); // #pdList에 있는 내용 지우기
 //     $('#theme_addbox').val("");
 
     // <label id="newProduct">에 추가
-    $.getJSON('ProductTable.ma', function (data) {
+    $.getJSON('ProductList.ma', function (data) {
         $.each(data, function (index, value) {
-//             $('#newTheme').append('<input type="checkbox" name="theme" value="' + value.themeName + '">' + value.themeName + '&nbsp;');
+            $('#pdList').append('<tr><td>"' + value.package_category_code + '"</td><td>' 
+            						+ value.product_depardate + '</td><td>'
+            						+ value.product_arrivdate + '</td><td>'
+            						+ value.product_price + '</td><td>'
+            						+ value.product_total + '</td><td><tr>'
+            						);
 			// 테이블 뿌려주기 
         });
     });

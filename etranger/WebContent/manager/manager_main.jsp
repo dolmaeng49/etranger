@@ -157,7 +157,7 @@
 										<input type="button" id="theme_addbtn" value="테마추가" class="btn btn-primary"
 											onclick="check()">
 										<div class="form-group" id="addTheme" style="display: none;">
-											<input type="text" size="20" id="theme_addbox" onkeydown="enterKey(this);" required="required">
+											<input type="text" size="20" id="theme_addbox" onkeydown="enterKey(this);" >
 											<input type="button" id="theme_addbtn2" class="btn btn-primary" value="추가">
 										</div>
 									</div>
