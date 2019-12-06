@@ -133,6 +133,12 @@ public class ManagerFrontController extends HttpServlet {
 				forward = new ActionForward();
 				forward.setPath("/manager/manager_product_insert.jsp");
 			}
+			
+			else if (command.equals("/MemberManagement.ma")) {
+				forward = new ActionForward();
+				forward.setPath("/manager/manager_member.jsp");
+			}
+			
 
 			// CategoryInsertAction 클래스로 이동
 			else if (command.equals("/ProductInsertPro.ma")) {
