@@ -390,10 +390,12 @@ public class ManagerDAO {
 				 */
 				ProductBean pb = new ProductBean();
 				pb.setProductNum(rs.getString("package_product_num"));
+				pb.setCategoryCode(rs.getString("package_category_code"));
 				pb.setProductDepartDate(rs.getString("package_product_depart_date"));
 				pb.setProductArrivDate(rs.getString("package_product_arriv_date"));
 				pb.setProductPrice(rs.getInt("package_product_price"));
 				pb.setProductTotal(rs.getInt("package_product_total"));
+				
 
 				productList.add(pb);
 			}
@@ -407,4 +409,104 @@ public class ManagerDAO {
 		return productList;
 	}
 
+	
+
+	//상품삭제
+		public int DeleteProduct(String deletepcode) {
+			int deleteCount = 0;
+
+			PreparedStatement pstmt = null;
+
+			String sql = "delete from package_product where package_product_num=?";
+			try {
+				pstmt = con.prepareStatement(sql);
+
+				pstmt.setString(1, deletepcode);
+
+				deleteCount = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			return deleteCount;
+		}
+
+		
+		
+		
+		public ArrayList<ProductBean> DeleteListDAO(String dpcode) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ArrayList<ProductBean> dplist = new ArrayList<ProductBean>();
+
+			System.out.println("ProductBean DeleteList DB");
+			System.out.println("dpcode"+dpcode);
+
+			try {
+
+				String sql = "select * from package_product where package_category_code =?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, dpcode);
+				rs = pstmt.executeQuery();
+				
+			while(rs.next()) {
+					System.out.println("rs.next");
+					ProductBean pb = new ProductBean();
+					System.out.println(rs.getString("package_product_num"));
+					System.out.println(rs.getString("package_product_depart_date"));
+					System.out.println(rs.getString("package_product_arriv_date"));
+					System.out.println(rs.getInt("package_product_price"));
+					System.out.println(rs.getInt("package_product_total"));
+					
+					pb.setProductNum(rs.getString("package_product_num"));
+					pb.setProductDepartDate(rs.getString("package_product_depart_date"));
+					pb.setProductArrivDate(rs.getString("package_product_arriv_date"));
+					pb.setProductPrice(rs.getInt("package_product_price"));
+					pb.setProductTotal(rs.getInt("package_product_total"));
+					pb.setCategoryCode(rs.getString("package_category_code"));
+						
+					
+					dplist.add(pb);
+
+				}
+
+
+			} catch (SQLException e) {
+				System.out.println("ProductDeleteList() 오류! - " + e.getMessage());
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return dplist;
+		}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

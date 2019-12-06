@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.action.Action;
 import common.vo.ActionForward;
+import product.action.CategoryDetailAction;
 import product.action.CategoryListAction;
 import product.action.CategoryListSearchAction;
 
@@ -37,6 +38,13 @@ public class ProductFrontController extends HttpServlet {
 			forward.setPath("product/tours.jsp");
 		} else if(command.equals("/CategoryListSearch.pr")) {
 			action = new CategoryListSearchAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/CategoryDetail.pr")) {
+			action = new CategoryDetailAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

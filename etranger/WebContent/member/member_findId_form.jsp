@@ -80,7 +80,7 @@
 							<input type="submit" value="ID 찾기" class="btn btn-primary py-3 px-5">
 						</div>
 </form>
-						<p class="wrap-links"><a href="MemberFindPasswdForm.me">P/W 찾기</a> |
+						<p class="wrap-links"><a href="MemberFindPasswdForm.me">P/W 변경</a> |
 							<a href="MemberJoinForm.me">회원가입</a> |</p>
 					</div>
 				</div>

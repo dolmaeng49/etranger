@@ -78,7 +78,7 @@
 							</div>
 							<div class="form-group">
 								<input type="password" class="form-control" id="member_passwd_retype" placeholder="Retype Password"
-									name="member_passwd2" id="member_passwd2" required="required">
+									name="member_passwd2" required="required">
 							</div>
 							<!-- 패스워드 유효성 검사 결과, 패스워드 재입력 일치 여부 표시 -->
 							<div class="form-group form-group-message">
@@ -94,7 +94,7 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<input type="number" class="form-control" placeholder="Phone Number" name="member_phone" required="required">
+							<input type="number" class="form-control" placeholder="Phone Number" name="member_phone" required="required" maxlength="14">
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Email" name="member_email" id="member_email" required="required" onkeyup="checkEmail(this)">
@@ -103,7 +103,7 @@
 							<input type="button" value="인증" class="btn btn-primary py-3 px-5 btn-small" id="btn_email_check">
 							<input type="button" value="인증코드받기" class="btn btn-primary py-3 px-5 btn-small" id="btn_email_code">
 							<input type="hidden" id="email_check" placeholder="hidden으로 바꿀 예정">
-							<span id="checkEmailResult"></span>
+							<br><span id="checkEmailResult"></span>
 						</div>
 
 							<div class="form-group">
@@ -120,7 +120,7 @@
 							</div>
 							<div class="form-group">
 								<input type="text" class="form-control form-control-shortshort pick_date"
-									id="checkin_date" value="1990/1/1" placeholder="Birth"
+									id="checkin_date" value="1990/1/1" placeholder="Birth" readonly="readonly"
 									name="member_birth" required="required">&nbsp;&nbsp;&nbsp;
 								<span>생년월일을 선택해주세요</span>
 							</div>

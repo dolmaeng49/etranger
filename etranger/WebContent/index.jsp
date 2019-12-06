@@ -5,6 +5,7 @@
   <head>
 	<!-- 스타일 인클루드 -->
 <jsp:include page="/include/style.jsp"/>
+
   </head>
   <body>
     
@@ -168,7 +169,10 @@
     <section class="ftco-section-2">
       <div class="container-fluid d-flex">
         <div class="section-2-blocks-wrapper row no-gutters">
-          <div class="img col-sm-12 col-lg-6" style="background-image: url('images/tour-1.jpg');">
+          <div class="img col-sm-12 col-lg-6">
+          <video autoplay muted loop id="video" width="950px" height="800px">
+			<source src="images/intro.mp4" type="video/mp4">          
+          </video>
             <a href="https://vimeo.com/371024892" class="button popup-vimeo"><span class="ion-ios-play"></span></a>
           </div>
           <div class="text col-lg-6 ftco-animate">

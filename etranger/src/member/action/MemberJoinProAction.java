@@ -28,9 +28,10 @@ public class MemberJoinProAction implements Action {
 		memberBean.setMember_id(request.getParameter("member_id"));
 		memberBean.setMember_passwd(request.getParameter("member_passwd"));
 		memberBean.setMember_name(request.getParameter("member_name"));
-		String member_addr = request.getParameter("member_addr") + request.getParameter("member_addr2")
-				+ request.getParameter("member_addr3") + request.getParameter("member_addr4");
-		memberBean.setMember_addr(member_addr);
+		memberBean.setMember_addr(request.getParameter("member_addr"));
+		memberBean.setMember_addr2(request.getParameter("member_addr2"));
+		memberBean.setMember_addr3(request.getParameter("member_addr3"));
+		memberBean.setMember_addr4(request.getParameter("member_addr4"));
 		memberBean.setMember_phone(request.getParameter("member_phone"));
 		memberBean.setMember_email(request.getParameter("member_email"));
 		memberBean.setMember_gender(request.getParameter("member_gender"));

@@ -16,14 +16,6 @@
 	<jsp:include page="../include/style.jsp" />
 
 	<style type="text/css">
-		/* 		.theme { */
-		/* 			padding: 13px; */
-		/* 			width: 90%; */
-		/* 			height: auto; */
-		/* 		} */
-		/* 		div { */
-		/* 			border: 1px solid red; */
-		/* 		} */
 
 		/* 사이드바 화면고정 */
 		.sticky {
@@ -73,7 +65,7 @@
 					<ul class="list-group">
 						<li class="list-group-item active li_hover" onclick="location.href='./index.jsp'"><span
 								class="icon icon-home"></span> 홈</li>
-						<li class="list-group-item li_hover"><span class="icon icon-line-chart"></span> 관리자 메인</li>
+						<li class="list-group-item li_hover dataChart"><span class="icon icon-line-chart"></span> 관리자 메인</li>
 						<li class="list-group-item li_hover" onclick="showCategoryInsert()"><span
 								class="icon icon-pencil"></span> 상품 분류 등록</li>
 						<li class="list-group-item li_hover pList"><span class="icon icon-add_shopping_cart"></span> 상품
@@ -83,9 +75,13 @@
 					</ul>
 				</div>
 			</div>
-
+			
 			<!-- 9단길이의 첫번째 열 -->
 			<div class="col-md-9">
+				<section id="showDataChart">
+					<jsp:include page="../manager/datachart.jsp" />
+				</section>
+			
 				<section id="categoryInsert" style="display: none;">
 					<!-- 지역,도시,테마 선택결과 가지고 ManagerProInsert.ma 이동 -->
 					<form action="CategoryInsert.ma" class="p-5 bg-light" method="post" enctype="multipart/form-data"
@@ -141,31 +137,33 @@
 							<!-- 테마선택 -->
 							<div class="col-md-12">
 								<div class="select-wrap one-third theme">
-
 									<br>
 									<h3 class="h4 mb-4">Theme</h3>
+									<div id="test">
 									<%
 										for (int i = 0; i < themeList.size(); i++) {
 									%>
-									<label id="newTheme"> <input type="checkbox" name="theme"
+									<label id="newTheme"> 
+									<input type="checkbox" name="theme"
 											value="<%=themeList.get(i).getThemeName()%>"><%=themeList.get(i).getThemeName()%>
 									</label>
 									<%
 										}
 									%>
+									</div>
 									<div class="col-md-12">
 										<input type="button" id="theme_addbtn" value="테마추가" class="btn btn-primary"
 											onclick="check()">
 										<div class="form-group" id="addTheme" style="display: none;">
+
 											<input type="text" size="20" id="theme_addbox" onkeydown="enterKey(this);" >
+
+
 											<input type="button" id="theme_addbtn2" class="btn btn-primary" value="추가">
 										</div>
 									</div>
 								</div>
 							</div>
-							<!-----------------------------B 구역-------------------------------------------------->
-							<!--package_category_code | package_category_name | package_category_region | package_category_city | package_category_theme | package_category_image | package_category_content -->
-
 							<!-- package_category_name -->
 							<div class="col-md-6">
 								<div class="select-wrap one-third theme">
@@ -205,9 +203,6 @@
 				</section>
 
 				<!-- 상품리스트 출력 -->
-				<div id="Context">
-
-				</div>
 				<section id="productInsert" style="display: none;">
 					<div id="productList" class="col-md-12"></div>
 				</section>

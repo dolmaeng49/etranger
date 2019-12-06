@@ -39,6 +39,8 @@ public class CitySelectAction implements Action {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
+		// toJSONString
+//		out.print(JSONArray.toJSONString(articleList));
 		out.print(cityList);
 		
 		ActionForward forward = null;

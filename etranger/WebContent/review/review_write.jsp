@@ -47,7 +47,7 @@ if(sessionId==null) {
 				<input type="hidden" id="review_package_category_code"  name="review_package_category_code" value="1">
 				<!-- input type 내에서 왜 id값의 value로 문자열 인식이 안되는지 알아보기 -->
 				<input type="hidden" id="review_readcount" value=0>
-				<input type="hidden" id="review_star" value=0>
+				<input type="text" id="review_star" name="review_star" >
 				<input type="hidden" name="review_member_id" value=<%=sessionId %>>
 				<input type="hidden" name="review_member_name" value="tester"> <!-- 임시방편 -->
 <%-- 				<input type="hidden" name="review_member_name" value=<%=sessionName %>> --%>

@@ -1,7 +1,7 @@
 
 (function($) {
 	
-// ============= 회원가입
+// ============= 회원가입 & 회원정보 수정 & PW 변경
 
 	// ID 체크
 	var checkIdResult = false;
@@ -58,6 +58,7 @@
 		var element = document.getElementById('checkPasswdRetype');
 		if($('#member_passwd').val()!=$(this).val()){
 			element.innerHTML = "비밀번호가 일치하지 않습니다";
+			checkPasswdRetype = false;
 		}else{
 			element.innerHTML = "";
 			checkPasswdRetype = true;
@@ -127,7 +128,7 @@
 		}
 	});
 	
-	// 회원가입  submit() 이벤트 발생시 제어
+	// 회원가입 submit() 이벤트 발생시 제어
 	$('#joinForm').submit(function(){
 		// 성별체크 입력 확인
 		if($('#gender_man').is(":checked")==false && $('#gender_woman').is(":checked")==false){
@@ -167,6 +168,39 @@
 		}
 	});
 	
+	// 회원정보수정에서 기존 메일 사용
+	$('#select_old_email').click(function(){
+		checkEmailCode = true; // email 인증 확인하는 전역변수 true로 초기화
+		$('#old_email_check').css('display',"none");
+	});
+	
+	// 회원정보수정에서 새로운 메일 인증
+	$('#select_new_email').click(function(){
+		checkEmailCode = false; // email 인증 확인하는 전역변수 false로 초기화
+		$('#member_email').removeAttr("readonly");
+		$('#old_email_check').css('display',"none");
+		$('#new_email_check').css('display',"inline");
+		$('#member_email_code').css('required',"required");
+	});
+	
+	// 회원정보수정 submit() 이벤트 발생시 제어
+	$('#modifyForm').submit(function(){
+		// 성별체크 입력 확인
+		if($('#gender_man').is(":checked")==false && $('#gender_woman').is(":checked")==false){
+			alert('성별을 체크 해주세요');
+			$('#gender_man').focus();
+			return false;
+		}
+		// Email 인증 확인
+		if(!checkEmailCode){
+			alert('E-Mail 인증을 확인해주세요');
+			$('#member_email_code').focus();
+			return false;
+		}
+	});
+
+	
+	
 // ============= ID, PW 찾기	
 	
 	// ID 찾기 submit() 이벤트 발생시 제어
@@ -204,7 +238,7 @@
 			}
 		});
 	});
-	// PW찾기 - submit() 이벤트 발생시 제어
+	// PW변경 - submit() 이벤트 발생시 제어
 	$('#findPasswdForm').submit(function(){
 		// 패스워드 유효성 검사 확인
 		if(!checkPasswdResult){

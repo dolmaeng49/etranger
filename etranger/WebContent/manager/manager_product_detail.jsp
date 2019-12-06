@@ -3,8 +3,7 @@
 <%@page import="manager.vo.CategoryBean"%>
 <%@page import="java.util.Locale.Category"%>
 <%@page import="manager.dao.ManagerDAO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	ArrayList<CategoryBean> regionList = (ArrayList<CategoryBean>) request.getAttribute("regionList");
 	ArrayList<CategoryBean> themeList = (ArrayList<CategoryBean>) request.getAttribute("themeList");
@@ -29,10 +28,6 @@
 		city_code = pdetail.get(i).getPackage_category_city();
 	}
 %>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,36 +62,29 @@ table.pdList td {
 	font-size: smaller;
 }
 
-table.pdList td input{
+table.pdList td input {
 	font-size: smaller;
 }
 </style>
 </head>
-<%-- <body onload="checkSession(<%=sid%>)"> --%>
-
 <body>
 
 	<!-- 탑메뉴 인클루드 -->
 	<jsp:include page="../include/top_menu.jsp" />
 
 	<section class="home-slider owl-carousel">
-		<div class="slider-item"
-			style="background-image: url('images/bg_3.jpg');"
-			data-stellar-background-ratio="0.5">
+		<div class="slider-item" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row slider-text align-items-center">
 					<div class="col-md-7 col-sm-12 ftco-animate">
 						<p class="breadcrumbs">
-							<span class="mr-2"><a href="../main/index.jsp"></a></span> <span><a
-								href="blog.html"></a></span> <span></span>
+							<span class="mr-2"><a href="../main/index.jsp"></a></span> <span><a href="blog.html"></a></span> <span></span>
 						</p>
 						<h1 class="mb-3">상품 상세페이지</h1>
 						<br>
 
 					</div>
-
-
 				</div>
 			</div>
 		</div>
@@ -115,72 +103,61 @@ table.pdList td input{
 					</div>
 
 					<div class="writeform-group">
-						<label for="image">이미지</label><a href="#" class="block-20"
-							style="background-image: url('ManagerImgUpload/<%=image%>'
-										);">
-						</a>
+						<label for="image">이미지</label><a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>'
+										);"> </a>
 					</div>
 
 					<div class="writeform-group">
-						<br> <label for="code">상품코드</label><input type="text"
-							class="form-control" name="product_code" id="product_code_id"
-							value="<%=code%>" />
+						<br>
+						<label for="code">상품코드</label><input type="text" class="form-control" name="product_code" id="product_code_id" value="<%=code%>" />
 					</div>
 
 					<br>
 					<div class="writeform-group">
-						<label for="code">지역코드</label><input type="text"
-							class="form-control" name="product_region_code"
-							id="product_region_code_id" value="<%=region_code%>" />
+						<label for="code">지역코드</label><input type="text" class="form-control" name="product_region_code" id="product_region_code_id" value="<%=region_code%>" />
 					</div>
 
 					<br>
 					<div class="writeform-group">
-						<label for="code">도시코드</label><input type="text"
-							class="form-control" name="product_city_code"
-							id="product_city_code_id" value="<%=city_code%>" />
+						<label for="code">도시코드</label><input type="text" class="form-control" name="product_city_code" id="product_city_code_id" value="<%=city_code%>" />
 					</div>
 
 					<br>
 					<div class="writeform-group">
-						<label for="name">상품명</label> <input type="text"
-							class="form-control" name="product_name" id="product_name_id"
-							value="<%=name%>" />
+						<label for="name">상품명</label> <input type="text" class="form-control" name="product_name" id="product_name_id" value="<%=name%>" />
 					</div>
 
 					<br>
 					<div class="writeform-group">
-						<label for="name">상품테마</label> <input type="text"
-							class="form-control" name="product_theme" id="product_theme_id"
-							value="<%=theme%>" />
+						<label for="name">상품테마</label> <input type="text" class="form-control" name="product_theme" id="product_theme_id" value="<%=theme%>" />
 					</div>
 
 					<div class="writeform-group">
-						<br> <label for="name">상세내용</label> <br>
+						<br>
+						<label for="name">상세내용</label>
+						<br>
 						<textarea name="Product_Detail_content" cols="72" rows="20"><%=content%></textarea>
 					</div>
+
+					<input type="hidden" id="deletenum" name="<%=code%>">
 
 					<div class="writeform-group">
 						<br>
 						<h3>
 							<label for="name">날짜별 상품</label>
 						</h3>
-
-
-						<table class="pdList">
+						<table class="pdList" id="pdlist">
 							<%
 								if (pdList != null) {
 							%>
-							<tr id="tr_top">
+							<tr>
 								<th>상품코드</th>
 								<th>출발날짜</th>
 								<th>도착날짜</th>
 								<th>가격</th>
 								<th>총인원수</th>
 								<th>제어</th>
-
 							</tr>
-
 							<%
 								for (int i = 0; i < pdList.size(); i++) {
 							%>
@@ -190,9 +167,7 @@ table.pdList td input{
 								<td><%=pdList.get(i).getProductArrivDate()%></td>
 								<td><%=pdList.get(i).getProductPrice()%></td>
 								<td><%=pdList.get(i).getProductTotal()%></td>
-								<td><input type="button"
-									onclick="deleteList.ma?pdList=<%=pdList.get(i).getProductNum()%>"
-									value="delete"></td>
+								<td><input type="button" class="deletecode" value="delete" onclick="deleteCode('<%=pdList.get(i).getProductNum()%>')"></td>
 							</tr>
 							<%
 								}
@@ -201,23 +176,12 @@ table.pdList td input{
 							
 							<label id="newProduct"></label>
 						</table>
-
-
 					</div>
-
 					<div class="form-group">
-<!-- 						<input type="button" value="날짜별 패키지상품 추가하기" -->
-<!-- 							class="btn py-3 px-4 btn-primary" -->
-<%-- 							onclick="location.href='ProductInsert.ma?package_category_code=<%=code%>'"> --%>
-							
-				<input type="button" value="날짜별 패키지상품 추가하기" class="btn py-3 px-4 btn-primary"
-							onclick="product()">
+						<input type="button" value="날짜별 패키지상품 추가하기" class="btn py-3 px-4 btn-primary" onclick="product('<%=code%>')">
 					</div>
-					
-					
 					<div class="form-group" id="addProduct" style="display: none;">
-						<form action="ProductInsertPro.ma" 
-							method="post">
+<!-- 						<form action="ProductInsertPro.ma" method="post"> -->
 							<table class="pdList">
 								<tr id="tr_top">
 									<th>상품코드</th>
@@ -228,82 +192,77 @@ table.pdList td input{
 									<th>등록</th>
 								</tr>
 								<tr>
-									<td><input type="text" class="form-control" 
-										name="package_category_code" id="package_category_code"
-										value="<%=request.getParameter("package_category_code")%>" /></td>
-									<td><input type="text"
-										class="form-control form-control-shortshort pick_date"
-										id="product_depardate" value="2019/12/1"
-										placeholder="depardate" name="product_depardate"
-										required="required"></td>
-									<td><input type="text"
-										class="form-control form-control-shortshort pick_date"
-										id="product_arrivdate" value="2019/12/1"
-										placeholder="arrivdate" name="product_arrivdate"
-										required="required"></td>
-									<td><input type="text" class="form-control"
-										name="product_price" id="product_price" placeholder="price" /></td>
-									<td><input type="text" class="form-control"
-										name="product_total" id="product_total" placeholder="total" /></td>
-									<td><input type="submit" value="등록" id="product_addbtn"
-										class="btn py-3 px-4 btn-primary"></td>
+									<td><input type="text" class="form-control" name="package_category_code" id="package_category_code" value="<%=request.getParameter("package_category_code")%>" /></td>
+									<td><input type="text" class="form-control form-control-shortshort pick_date" id="product_depardate" value="2019/12/1" placeholder="depardate" name="product_depardate" required="required"></td>
+									<td><input type="text" class="form-control form-control-shortshort pick_date" id="product_arrivdate" value="2019/12/1" placeholder="arrivdate" name="product_arrivdate" required="required"></td>
+									<td><input type="text" class="form-control" name="product_price" id="product_price" placeholder="price" /></td>
+									<td><input type="text" class="form-control" name="product_total" id="product_total" placeholder="total" /></td>
+									<td><input type="button" value="등록" id="product_addbtn" class="btn py-3 px-4 btn-primary" onclick="addProduct()"></td>
 								</tr>
 							</table>
-						</form>
-
-
 					</div>
-
-
 				</div>
 			</div>
 		</div>
 	</section>
-	<!-- .section -->
 
 	<!-- footer 인클루드 -->
 	<jsp:include page="../include/footer.jsp" />
 
 	<!-- loader 인클루드 -->
 	<jsp:include page="../include/loader.jsp" />
+	<!-- js사용 -->
 
 </body>
 <script type="text/javascript">
+	// 상품 추가폼 출력
+	function product() {
+		if ($('#addProduct').css('display') == 'none') {
+			$('#addProduct').show(100);
+		} else {
+			$('#addProduct').hide(100);
+		}
+	}
+	
+	// 상품 추가
+	function addProduct() {
+		var dpcode = $('#deletenum').attr('name');
+		$.ajax('ProductInsertPro.ma', {
+			data : {
+				package_category_code : $('#package_category_code').val(),
+				product_depardate : $('#product_depardate').val(),
+				product_arrivdate : $('#product_arrivdate').val(),
+				product_price : $('#product_price').val(),
+				product_total : $('#product_total').val()
+			},
+			success : function(sdata) {
+				if (sdata == 'false') {
+					alert('상품추가 실패!');
 
-function product() {
-    if ($('#addProduct').css('display') == 'none') {
-        $('#addProduct').show(100);
-    } else {
-        $('#addProduct').hide(100);
-    }
-}
+				} else {
+					getProductList(dpcode);
+				}
+			}
+		});
+	}
 
+	//상품 삭제
+	function deleteCode(pnum) {
+		var dpcode = $('#deletenum').attr('name');
+		$.ajax('DeleteProduct.ma', {
+			data: {
+				package_product_num: pnum
+			},
+			success: function (sdata) {
+				if (sdata == 'false') {
+					alert('상품삭제 실패!');
+				} else {
+					getProductList(dpcode);
+				}
+			}
+		});
+	}
 
-//$('#product_addbtn').click(function () {
-//addProduct();
-//});
-
-function addProduct() {
-    $.ajax('ProductInsertPro.ma', {
-        data: {
-        package_category_code: $('#package_category_code').val(),
-		product_depardate: $('#product_depardate').val(),
-		product_arrivdate: $('#product_arrivdate').val(),
-		product_price: $('#product_price').val(),
-		product_total: $('#product_total').val()
-        },
-        success: function (sdata) {
-            if (sdata == 'false') {
-                alert('상품추가 실패!');
-                
-            }
-            else {
-                getProduct();
-//                 $('#city_addbox').val("");
-            }
-        }
-    });
-}
 
 
 
@@ -329,5 +288,32 @@ function getProduct() {
 
 
 
+	// 상품 리스트 불러오기 
+	function getProductList(dpcode) {
+		$('#pdlist').empty();
+		$('#pdlist').append("<tr>" +
+			"<th>상품코드</th>" +
+			"<th>출발날짜</th>" +
+			"<th>도착날짜</th>" +
+			"<th>가격</th>" +
+			"<th>총인원수</th>" +
+			"<th>제어</th>" +
+			"</tr>");
+		$.getJSON('ProductList.ma?dpcode=' + dpcode, function (data) {
+			$.each(data, function (index, item) {
+				$('#pdlist').append(
+					"<tr><td>" + item.product_num + "</td>" +
+					"<td>" + item.productDepartDate + "</td>" +
+					"<td>" + item.productArrivDate + "</td>" +
+					"<td>" + item.productPrice + "</td>" +
+					"<td>" + item.productTotal + "</td>" +																	
+					"<td>" + '<input type="button" id="deletecode" value="delete" onclick="deleteCode('+"'" +item.product_num +"'"+')">'
+					+'</td></tr>'
+				);
+			});
+		});
+	}
+
 </script>
+
 </html>

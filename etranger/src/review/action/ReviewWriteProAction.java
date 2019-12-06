@@ -58,7 +58,7 @@ public class ReviewWriteProAction implements Action {
 		rb.setReview_image(multi.getOriginalFileName((String) multi.getFileNames().nextElement()));
 		rb.setReview_package_catagory_code(multi.getParameter("review_package_category_code"));
 		rb.setReview_member_name(multi.getParameter("review_member_name"));
-		
+		rb.setReview_star(Integer.parseInt(multi.getParameter("review_star")));
 		
 		
 		ReviewWriteProService reviewWriteProService = new ReviewWriteProService();

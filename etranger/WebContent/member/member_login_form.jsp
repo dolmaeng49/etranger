@@ -59,7 +59,9 @@
 	<!-- END slider -->
 	
 <!-- floating bar test -->	
-	<ul id="test"></ul>
+	<div id="test">
+	<input type="text" class="pick_date_input"></div>
+	<div class="pick_start_date"></div>
 <!-- floating bar test -->
 	
 <form action="LoginPro.me" method="post">
@@ -80,7 +82,7 @@
 							<input type="password" class="form-control" id="passwd" required="required" name="member_passwd">
 						</div>
 						<p class="wrap-links"><a href="MemberFindIdForm.me">ID 찾기</a> |
-							<a href="MemberFindPasswdForm.me">P/W 찾기</a> |
+							<a href="MemberFindPasswdForm.me">P/W 변경</a> |
 							<a href="MemberJoinForm.me">회원가입</a> |</p>
 			 			<div class="form-group form-group-btn">
 							<input type="submit" value="Login" class="btn py-3 px-4 btn-primary">&nbsp;&nbsp;

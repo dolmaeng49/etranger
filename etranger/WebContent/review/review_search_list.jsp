@@ -15,7 +15,11 @@
 	int startPage = pageInfo.getStartPage();
 	int endPage = pageInfo.getEndPage();
 	int listCount = pageInfo.getListCount();
+
+	// 글검색 Jwoo
+	String search = request.getParameter("search");
 	
+	ReviewBean article = (ReviewBean)request.getAttribute("article");
 	
 %>  
 <!DOCTYPE html>
@@ -59,6 +63,36 @@ div{
               <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="block-20" style="background-image: url('reviewUpload/<%=articleList.get(i).getReview_image()%>');">
               </a>
               <div class="text p-4" >
+              
+               <!--  stars --> 
+               <div id="stars"> 
+			<%if(articleList.get(i).getReview_star() == 0) {
+				%><img src="images/rating0.png" align="middle" /><%
+			} else if(articleList.get(i).getReview_star() == 1) {
+				%><img src="images/rating01.png" align="middle" /><%
+			} else if(articleList.get(i).getReview_star() == 2) {
+				%><img src="images/rating02.png" align="middle" /><%
+			} else if(articleList.get(i).getReview_star() == 3) {
+				%><img src="images/rating03.png" align="middle" /><%
+			} else if(articleList.get(i).getReview_star() == 4) {
+				%><img src="images/rating04.png" align="middle" /><%
+			} else if(articleList.get(i).getReview_star() == 5) {
+				%><img src="images/rating05.png" align="middle" /><%
+			} else if(articleList.get(i).getReview_star() == 6) {
+				%><img src="images/rating06.png" align="middle" /><%
+			} else if(articleList.get(i).getReview_star() == 7) {
+				%><img src="images/rating07.png" align="middle" /><%
+			} else if(articleList.get(i).getReview_star() == 8) {
+				%><img src="images/rating08.png" align="middle" /><%
+			} else if(articleList.get(i).getReview_star() == 9) {
+				%><img src="images/rating09.png" align="middle" /><%
+			} else {
+				%><img src="images/rating10.png" align="middle" /><%
+			}
+			%>
+			</div>
+            <!-- end stars -->  
+              
                 <div class="meta" onclick="location.href='ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>'">
 <%--                   <div><a href="#"><%=articleList.get(i).getReview_date()%></a></div> --%>
                   <div><a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>"><%=articleList.get(i).getReview_member_id()%></a></div><!-- 아이디 대신 이름 들어갈 곳 -->
@@ -75,14 +109,26 @@ div{
           <!-- 리스트에서 보여지는 게시물 썸네일 한 덩이 끝 -->
         </div> <!-- <div class="row">의 끝 -->
         
-       <!-- 게시글 검색 -->
-            <div class="sidebar-box">
-              <form action="ReviewSearch.rv" method="get" class="search-form" name="search">
-                <div class="form-group">
+         	<!-- 게시글 검색 & 태그-->
+        	<!-- 검색창 축소 및 태그 검색창 정렬 작업 -->
+            <div class="sidebar-box-list">
+            <div>
+             <div class="tagcloud">
+                <a href="#" class="tag-cloud-link">Life</a>
+                <a href="#" class="tag-cloud-link">Sport</a>
+                <a href="#" class="tag-cloud-link">Tech</a>
+                <a href="#" class="tag-cloud-link">Travel</a>
+                <a href="#" class="tag-cloud-link">Life</a>
+                <a href="#" class="tag-cloud-link">Sport</a>
+                <a href="#" class="tag-cloud-link">Tech</a>
+                <a href="#" class="tag-cloud-link">Travel</a>
+              
+              <form action="ReviewSearch.rv" method="get" class="search-form-list" name="search">
+                  <input type="text"  name="search" placeholder="Type a keyword and hit enter" style="width: 380px;">
                   <span class="icon fa fa-search"></span>
-                  <input type="text" class="form-control" name="search" placeholder="Type a keyword and hit enter">
-                </div>
               </form>
+            </div>
+            </div>
             </div>
       <!-- end 게시글 검색 -->
         

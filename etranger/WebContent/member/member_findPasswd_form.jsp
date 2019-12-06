@@ -55,9 +55,9 @@
 					<div class="col-md-7 col-sm-12 ftco-animate">
 						<p class="breadcrumbs">
 							<span class="mr-2"><a href="../main/index.jsp">Home</a></span><span><a 
-								href="MemberFindIdForm.me">Find Password</a></span>
+								href="MemberFindIdForm.me">Reset Password</a></span>
 						</p>
-						<h1 class="mb-3">Find Password</h1>
+						<h1 class="mb-3">Reset Password</h1>
 					</div>
 				</div>
 			</div>
@@ -71,7 +71,7 @@
 
 
 					<div class="comment-form-wrap pt-5 form-wrap-login">
-						<h3 class="mb-5">Find Password</h3>
+						<h3 class="mb-5">Reset Password</h3>
 <form action="MemberResetPasswdPro.me" method="post" id="findPasswdForm">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="비밀번호를 찾을 ID를 입력해주세요" name="member_id"
