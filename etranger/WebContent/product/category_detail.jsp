@@ -37,6 +37,16 @@
 <jsp:include page="../include/style.jsp" />
 
 <style type="text/css">
+hr {
+  border-top: 5px solid rgba(0, 0, 0, 0.1); }
+
+h2{
+color: white;
+}
+
+h4{
+color: white;
+}
 .sticky {
 	position: sticky;
 	top: 100px;
@@ -81,16 +91,46 @@ table.pdList td input {
 	<jsp:include page="../include/top_menu.jsp" />
 
 	<section class="home-slider owl-carousel">
-		<div class="slider-item" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+		<div class="slider-item" style="background-image: url('ManagerImgUpload/<%=image%>');" data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row slider-text align-items-center">
-					<div class="col-md-7 col-sm-12 ftco-animate">
-						<p class="breadcrumbs">
-							<span class="mr-2"><a href="../main/index.jsp"></a></span> <span><a href="blog.html"></a></span> <span></span>
-						</p>
-						<h1 class="mb-3">상품 상세페이지</h1>
-						<br>
+					<div class="col-md-12 col-sm-12 ftco-animate">
+						<h2 class="mb-12"><%=name %></h2>
+						<h4 class="mb-2"><%=theme %> </h4>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="slider-item" style="background-image: url('ManagerImgUpload/<%=image%>');" data-stellar-background-ratio="0.5">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row slider-text align-items-center">
+					<div class="col-md-12 col-sm-12 ftco-animate">
+						<h2 class="mb-12"><%=name %></h2>
+						<h4 class="mb-2"><%=theme %> </h4>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="slider-item" style="background-image: url('ManagerImgUpload/<%=image%>');" data-stellar-background-ratio="0.5">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row slider-text align-items-center">
+					<div class="col-md-12 col-sm-12 ftco-animate">
+						<h2 class="mb-12"><%=name %></h2>
+						<h4 class="mb-2"><%=theme %> </h4>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="slider-item" style="background-image: url('ManagerImgUpload/<%=image%>');" data-stellar-background-ratio="0.5">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row slider-text align-items-center">
+					<div class="col-md-12 col-sm-12 ftco-animate">
+						<h2 class="mb-12"><%=name %></h2>
+						<h4 class="mb-2"><%=theme %> </h4>
 					</div>
 				</div>
 			</div>
@@ -99,38 +139,36 @@ table.pdList td input {
 
 	<!-- END slider -->
 
-	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 ftco-animate">
-
+					<hr>
 					<!--  글 작성 폼 시작 -->
-					<div class="managerdetailform">
-						<h3 class="mb-5">상품 상세 페이지</h3>
-					</div>
-
 					<div class="writeform-group">
-						<label for="image">이미지</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>');"> </a>
+					<table width="730">
+					<tr>
+					<td><label for="image">이미지1</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
+					<td><label for="image">이미지2</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
+					<td><label for="image">이미지3</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
+					</tr>
+					<tr>
+					<td colspan="3">
+					<label for="image"></label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>');"> </a>
+					</td>
+					</tr>
+						
+					
+					</table>
 					</div>
-					<br>
 					<div class="writeform-group">
-						<label for="name">상품명</label> <input type="text" class="form-control" name="product_name" id="product_name_id" value="<%=name%>" />
-					</div>
-
-					<br>
-					<div class="writeform-group">
-						<label for="name">상품테마</label> <input type="text" class="form-control" name="product_theme" id="product_theme_id" value="<%=theme%>" />
-					</div>
-
-					<div class="writeform-group">
-						<br>
+					<hr>
 						<label for="name">상세내용</label>
 						<br>
-						<textarea name="Product_Detail_content" cols="72" rows="20"><%=content%></textarea>
+						<textarea name="Product_Detail_content" cols="86" rows="20" style="resize: none;"><%=content%></textarea>
 					</div>
 
 					<div class="writeform-group" id="review">
-						<br>
+						<hr>
 						<label for="name">리뷰</label>
 						<br>
 					</div>
@@ -164,7 +202,7 @@ table.pdList td input {
 								<td><%=pdList.get(i).getProductTotal()%></td>
 							</tr>
 							<tr>
-								<td><select>
+								<td><select onchange="setPeopleCount(<%=pdList.get(i).getProductPrice()%>, <%=i %>)" id = "count<%=i%>">
 										<option>인원수</option>
 										<%
 										int total = 10;
@@ -176,7 +214,7 @@ table.pdList td input {
 										}
 										%>
 								</select></td>
-								<td colspan="2">총합계<br></td>
+								<td colspan="2">총합계<br><span id="result<%=i%>"></span></td>
 								<td><input type="button" class="btn py-1 px-1 btn-primary" value="예약하기" onclick="reservation('<%=pdList.get(i).getProductNum()%>')"></td>
 							</tr>
 							<%
@@ -188,7 +226,6 @@ table.pdList td input {
 				</div>
 			</div>
 		</div>
-	</section>
 	<!-- .section -->
 
 	<!-- footer 인클루드 -->
@@ -197,6 +234,7 @@ table.pdList td input {
 	<!-- loader 인클루드 -->
 	<jsp:include page="../include/loader.jsp" />
 	<script>
+		// 리뷰보기 버튼 클릭시 리뷰 구간으로 이동
 		$(document).ready(function() {
 			$('#moveReview').click(function() {
 				var offset = $('#review').offset(); // 이동할 태그 위치 저장
@@ -206,6 +244,17 @@ table.pdList td input {
 				}, 300);
 			});
 		});
+		
+		// 인원수 설정시 총합계 계산
+		function setPeopleCount(pay, count) {
+			var peopleCount = $('#count' + count + ' option:selected').val();
+			if (peopleCount == '인원수'){
+				$('#result'+ count).html('');	
+			}
+			else{
+				$('#result'+ count).html(peopleCount * pay);
+			}
+		}
 	</script>
 </body>
 
