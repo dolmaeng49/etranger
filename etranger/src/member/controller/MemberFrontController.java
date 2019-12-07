@@ -14,6 +14,7 @@ import member.action.MemberLoginProAction;
 import member.action.MemberLogoutProAction;
 import member.action.MemberModifyFormAction;
 import member.action.MemberModifyProAction;
+import member.action.MemberReservationInfoAction;
 import member.action.MemberResetPasswdFormAction;
 import member.action.MemberResetPasswdProAction;
 
@@ -150,8 +151,19 @@ public class MemberFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
+					
+		}else if (command.equals("/MemberReservationInfo.me")) {
+			//MemberReservationInfoAction 클래스로 이동 
+			System.out.println("/MemberReservation.me");
+			action = new MemberReservationInfoAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
+		
 
 		// ActionForward 객체의 정보에 따른 포워딩
 		if (forward != null) {
