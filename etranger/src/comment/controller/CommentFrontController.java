@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import comment.action.CommentDeleteProAction;
-import comment.action.CommentListAction;
 import comment.action.CommentModifyProAction;
 import comment.action.CommentReplyProAction;
 import comment.action.CommentListAjax;
@@ -31,13 +30,6 @@ public class CommentFrontController extends HttpServlet{
 			
 			if(command.equals("/CommentWrite.cm")) {
 				action = new CommentWriteAction();
-				try {
-					forward=action.execute(request, response);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}else if(command.equals("/CommentList.cm")){
-				action = new CommentListAction();
 				try {
 					forward=action.execute(request, response);
 				} catch (Exception e) {

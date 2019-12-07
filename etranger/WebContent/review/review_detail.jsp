@@ -21,7 +21,6 @@ div{
 	border: 1px solid red;
 }
 </style>
-
   </head>
   <body>
 	<!-- 탑메뉴 인클루드 -->    

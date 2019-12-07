@@ -49,8 +49,7 @@ if(sessionId==null) {
 				<input type="hidden" id="review_readcount" value=0>
 				<input type="hidden" id="review_star" name="review_star" >
 				<input type="hidden" name="review_member_id" value=<%=sessionId %>>
-				<input type="hidden" name="review_member_name" value="tester"> <!-- 임시방편 -->
-<%-- 				<input type="hidden" name="review_member_name" value=<%=sessionName %>> --%>
+				<input type="hidden" name="review_member_name" value=<%=sessionName %>>
                   <div class="writeform-group">
                     <input type="text" class="form-control-subject" name="review_subject" id="review_subject" maxlength="40" placeholder="제목을 입력해주세요"/>
                   </div>
