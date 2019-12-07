@@ -154,7 +154,7 @@ public class MemberFrontController extends HttpServlet {
 					
 		}else if (command.equals("/MemberReservationInfo.me")) {
 			//MemberReservationInfoAction 클래스로 이동 
-			System.out.println("/MemberReservation.me");
+			System.out.println("/MemberReservationInfo.me");
 			action = new MemberReservationInfoAction();
 			try {
 				forward = action.execute(request, response);
