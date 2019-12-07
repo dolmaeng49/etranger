@@ -16,7 +16,6 @@ public class CommentModifyProAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("들어왔니? -CommentModifyProAction");
 		request.setCharacterEncoding("utf-8");
-		ActionForward forward = null;
 		CommentBean cb = null;
 		
 		int comment_num = Integer.parseInt(request.getParameter("review_comment_num"));
@@ -36,17 +35,11 @@ public class CommentModifyProAction implements Action {
 		if(!isModifySuccess) {
 			out.print("false");
 		} else {
-//			forward = new ActionForward();
-//			forward.setRedirect(true); // 새로운 서블릿 주소를 요청하므로 Redirect 방식 포워딩
-			
 			out.print("success");
-			
 		}
 		
+		return null;
 		
-		
-		forward = null;
-		return forward;
 	}
 
 }

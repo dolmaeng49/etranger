@@ -66,33 +66,6 @@
 
                 </form>
               </div>
-           
-           		<!-- 글 입력 폼 -->
-<!--                 <form action="#" class="p-5 bg-light"> -->
-<!--                   <div class="form-group"> -->
-<!--                     <label for="name">작성자</label> -->
-<!--                     <input type="text" class="form-control" id="name"> -->
-<!--                   </div> -->
-<!--                   <div class="form-group"> -->
-<!--                     <label for="subject">제목</label> -->
-<!--                     <input type="url" class="form-control" id="website"> -->
-<!--                   </div> -->
-<!--                   <div class="form-group"> -->
-<!--                     <label for="content">내용</label> -->
-<!--                     <textarea name="summernote" name="editordata" id="summernote" cols="30" rows="10" class="form-control"></textarea> -->
-<!--                   </div> -->
-<!--                   <div class="form-group"> -->
-<!--                     <label for="image"><span id="fileName"></span></label> -->
-<!--                   <input type="file" name="upFile" multiple="multiple" accept="image/*" id="image" -->
-<!--                   onchange="javascript:document.getElementById('fileName').value = this.value"> -->
-<!--                   </div> -->
-<!--                   <div class="form-group"> -->
-<!--                     <input type="submit" value="글쓰기" class="btn py-3 px-4 btn-primary"> -->
-<!--                   </div> -->
-                  
-
-<!--                 </form> -->
-              
             
             <!-- 본문에 삽입된 태그 -->
             <div class="tag-widget post-tag-container mb-5 mt-5">

@@ -15,7 +15,6 @@ public class CommentReplyProAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("들어왔니? -CommentReplyProAction");
-		ActionForward forward = null;
 		String nowPage= request.getParameter("nowPage");
 		int review_num = Integer.parseInt(request.getParameter("review_num"));
 		
@@ -29,7 +28,6 @@ public class CommentReplyProAction implements Action {
 		comment.setReview_comment_lev(Integer.parseInt(request.getParameter("review_comment_lev")));
 		comment.setReview_comment_seq(Integer.parseInt(request.getParameter("review_comment_seq")));
 		
-		System.out.println("ref값 : " + comment.getReview_comment_ref());
 		
 		CommentReplyProService commentReplyProService = new CommentReplyProService();
 		
@@ -40,18 +38,11 @@ public class CommentReplyProAction implements Action {
 		
 		if(!isReplySuccess) {
 			out.print("false");
-//			out.println("<script>");
-//			out.println("alert('대댓글 등록 실패!')");
-//			out.println("history.back()");
-//			out.println("</script>");
 		}else {
-			forward= new ActionForward();
-//			forward.setRedirect(true);
-//			forward.setPath("ReviewDetail.rv?review_num=" + review_num + "&page=" + nowPage);
+			out.print("success");
 		}
 		
-		forward = null;
-		return forward;
+		return null;
 	}
 
 }

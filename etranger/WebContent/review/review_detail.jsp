@@ -22,12 +22,11 @@ div{
 }
 </style>
 
-
   </head>
   <body>
 	<!-- 탑메뉴 인클루드 -->    
 <jsp:include page="../include/top_menu.jsp"/>
-    
+  <input type="hidden" id="review_num" name="review_num" value="<%=article.getReview_num()%>"> <!--맨 처음리스트 불러올 때 필요한 값  -->
     <section class="home-slider owl-carousel">
       <div class="slider-item" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
@@ -93,13 +92,11 @@ div{
 <%-- 			<p><img src="reviewUpload/<%=article.getReview_image()%>" style="max-width: 100%; height: auto;"></p> --%>
 			<p><%=article.getReview_content() %></p>
 			</div><!-- content-view끝 -->
-			<div class="like-area">
-			<button type="button" class="btnreview btnreview-outline-success vote-btn">
-			<i class="fa fa-thumbs-up"></i> 추천 <span id="up"><!-- ajax로 뿌려줄 값(누적 추천수)들어갈 곳--></span></button>
-			</div><!-- like-area끝 -->
+<!-- 			<div class="like-area"> -->
+<!-- 			<button type="button" class="btnreview btnreview-outline-success vote-btn"> -->
+<!-- 			<i class="fa fa-thumbs-up"></i> 추천 <span id="up">ajax로 뿌려줄 값(누적 추천수)들어갈 곳</span></button> -->
+<!-- 			</div>like-area끝 -->
 			<div class="content-footer">
-			
-			
 			
 				<%
    					if(sessionId != null) { // 세션값 아이디 가 있을시

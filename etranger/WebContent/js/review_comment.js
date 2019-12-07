@@ -5,14 +5,34 @@ $('#comment_add_btn').click(function () {	//댓글쓰기 버튼 클릭 시 addCo
     	    addComment();    						
     	});
 
-//$(document).ready(function(){				//창 열릴때 함수호출
-//	getCommentList();
-//});
+//----------중복클릭(광클) 클라이언트단 제어----------
+var isClickDupl = false; // 중복클릭인가? = 아니.
+function duplClickCheck() {
+	setTimeout(function () {
+    	isClickDupl = false;
+    }, 3000);		//3초 뒤에 다시 false로 되돌림.
+     
+     if (isClickDupl) { //
+        console.log("중복됨");
+        return isClickDupl;
+        	
+     } else {
+        console.log("첫클릭");
+        isClickDupl=true;
+        return false;
+     }
+}
+//------
+
+
+
+
 
 //--------------------------------------------------------------------
 
 //-----------------새 댓글 등록
-function addComment() {					
+function addComment() {		
+	if(duplClickCheck()) return;  //광클방지.
 	  $.ajax({
 		  url:'CommentWrite.cm',
 		  data:{
@@ -28,8 +48,6 @@ function addComment() {
 		            alert('댓글 작성 실패!');		//나중에 alert 지울 것.
 		        }
 		        else {
-		        	
-//		        	loadCommentList();
 		        	$("#review_comment_content").val("");
 		        	alert('댓글 등록완료!');
 		        	getCommentList();
@@ -60,8 +78,6 @@ function deleteComment(cnum) {
 					alert('댓글삭제 성공!')
 //					getCommentList(cnum)   // 리스트 불러오기
 					getCommentList();
-					
-				
 			}
 		}
 	});
@@ -71,43 +87,47 @@ function getCommentList() {
 	$.ajax({
 		url:'CommentListAjax.cm',
 		data:{
-			"review_num" : $("#review_comment_review_num").val(),			// article.get으로 불러오기 위한 값
+			"review_num" : $("#review_num").val(),			// article.get으로 불러오기 위한 값
 			"sessionId"  : $("#sessionId").val(),
 			"sessionName" : $('#sessionName').val()
 		},
 		success: function(result){
 			if(result!=null){
+				$('#forInsert').empty;
 				$('#forInsert').html(result);
 			}
 		}
 	});
 }
 
-// 댓글 수정창 열기
-function updateComment(cnum){
+// 댓글 수정폼 열기
+function updateComment(cnum,content){
+	
 	var htmls="";
-	htmls+='<textarea name="editContent" id="editContent" rows="5" style="width:100%;height:100;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>';
+	htmls+='<textarea name="editContent" id="editContent" rows="5" style="width:100%;height:100;border:1;overflow:visible;text-overflow:ellipsis;">'+content+'</textarea>';
 	htmls+='<a href="javascript:void(0)" onClick="updateCommentPro('+cnum+')">저장<a>';
 	htmls+='<a href="javascript:void(0)" onClick="getCommentList()">취소<a>';
 
 	$('#cb'+cnum).replaceWith(htmls)
 }
 
-// 대댓글 폼 열기
+
+
+// 대댓글 작성폼 열기
 function replyComment(cnum){
-	var htmls="";
-	htmls+='<textarea name="replyComment" id="replyComment" rows="5" style="width:100%;height:100;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>';
-	htmls+='<a href="javascript:void(0)" onClick="replyCommentPro('+cnum+')">대댓글 쓰기<a>';
-	htmls+='<a href="javascript:void(0)" onClick="getCommentList()">취소<a>';
 	
-	$('#forReply'+cnum).replaceWith(htmls)
+	var htmls2="";
+	htmls2+='<textarea name="replyComment" id="replyComment" rows="5" style="width:100%;height:100;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>';
+	htmls2+='<a href="javascript:void(0)" onClick="replyCommentPro('+cnum+')">대댓글 쓰기<a>';
+	htmls2+='<a href="javascript:void(0)" onClick="getCommentList()">취소<a>';
 	
+	$('#forReply'+cnum).append(htmls2)
 }
-
-
 
 //댓글 수정하기
 function updateCommentPro(cnum){
+	if(duplClickCheck()) return;  //광클방지
+	
 	var editContent = $('#editContent').val();
 	
 	$.ajax({
@@ -122,7 +142,7 @@ function updateCommentPro(cnum){
 			if (result == 'false') {
 				alert('댓글 수정 실패!');
 			} else {
-				alert('댓글 수정 성공!')
+				alert('댓글 수정 성공!');
 				getCommentList();
 		}
 	}
@@ -130,10 +150,11 @@ function updateCommentPro(cnum){
 	
 }
 
-
 // 대댓글 작성하기
 
 function replyCommentPro(cnum){
+	if(duplClickCheck()) return;  //광클방지(3초)
+	
 	var replyComment = $('#replyComment').val();
 	
 	$.ajax({
@@ -151,20 +172,15 @@ function replyCommentPro(cnum){
 		},
 		success: function (result) {
 			if (result == 'false') {
-				alert('댓글 수정 실패!');
+				alert('대댓글 작성 실패!');
 			} else {
-				alert('댓글 수정 성공!')
+				alert('대댓글 작성 성공!');
 				getCommentList();
 		}
 	}
 });
 	
 }
-
-
-
-
-
 
 
 

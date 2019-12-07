@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import comment.action.CommentDeleteProAction;
 import comment.action.CommentListAction;
-import comment.action.CommentModifyFormAction;
 import comment.action.CommentModifyProAction;
-import comment.action.CommentReplyFormAction;
 import comment.action.CommentReplyProAction;
 import comment.action.CommentListAjax;
 import comment.action.CommentWriteAction;
@@ -45,13 +43,6 @@ public class CommentFrontController extends HttpServlet{
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}else if(command.equals("/CommentModifyForm.cm")){
-				action = new CommentModifyFormAction();
-				try {
-					forward=action.execute(request, response);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 			}else if(command.equals("/CommentModifyPro.cm")){
 				action = new CommentModifyProAction();
 				try {
@@ -61,13 +52,6 @@ public class CommentFrontController extends HttpServlet{
 				}
 			}else if(command.equals("/CommentDeletePro.cm")){
 				action = new CommentDeleteProAction();
-				try {
-					forward=action.execute(request, response);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}else if(command.equals("/CommentReplyForm.cm")){
-				action = new CommentReplyFormAction();
 				try {
 					forward=action.execute(request, response);
 				} catch (Exception e) {

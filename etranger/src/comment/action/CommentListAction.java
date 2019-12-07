@@ -26,7 +26,6 @@ public class CommentListAction implements Action {
 		
 				CommentListService commentListService = new CommentListService();
 				int listCount = commentListService.getCommentCount();
-//				System.out.println("총 댓글 수(Action)" +commentCount);
 				
 				ArrayList<CommentBean> commentList = new ArrayList<CommentBean>();
 				commentList =commentListService.getCommentList();

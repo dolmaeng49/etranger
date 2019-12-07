@@ -20,18 +20,10 @@ public class CommentListAjax implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
-		int page = 1;
-		int limit = 10;
 		
 		int review_num = Integer.parseInt(request.getParameter("review_num"));
 		String sessionId = request.getParameter("sessionId");
 		String sessionName = request.getParameter("sessionName");
-		System.out.println("review_num :" +review_num); //값 넘어오는지 확인
-		System.out.println("sessionId :" +sessionId);
-		if (request.getParameter("page") != null) {
-			page = Integer.parseInt(request.getParameter("page"));
-		}
-		
 		
 		CommentListService commentListService = new CommentListService();
 		int listCount = commentListService.getCommentCount();
@@ -41,26 +33,13 @@ public class CommentListAjax implements Action {
 		
 		ReviewDetailService reviewDetailService = new ReviewDetailService();
 		ReviewBean article =reviewDetailService.getArticle(review_num);
-		
-		
-		//페이징
-		int maxPage = (int) ((double) listCount / limit + 0.95);
-		int startPage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1;
-		int endPage = startPage + 10 - 1;
-		if (endPage > maxPage) {
-			endPage = maxPage;
-		}
 
-		PageInfo pageInfo = new PageInfo(page, maxPage, startPage, endPage, listCount);
+		PageInfo pageInfo = new PageInfo();
 		int nowPage = pageInfo.getPage();
-		maxPage = pageInfo.getMaxPage();
-		startPage = pageInfo.getStartPage();
-		endPage = pageInfo.getEndPage();
-		listCount = pageInfo.getListCount();
-		
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
+		
 //		<ul class="comment-list"> 아래부터 채워넣을 내용.
 		
 //		<div id="forInsert">아래부터.
@@ -76,7 +55,7 @@ public class CommentListAjax implements Action {
 						out.print("<li class=\"comment-parent\" id=cp"+commentList.get(i).getReview_comment_num()+">");
 					}
 					String print1="";
-					print1+="<div class=\"vcard bio\" >"
+					print1+="<div class=\"vcard bio\">"
 							+"<img src=\"images/person_1.jpg\" alt=\"Image placeholder\"></div>"
 							+"<div class=\"comment-body\" id=cb"+commentList.get(i).getReview_comment_num()+"><h3>"+commentList.get(i).getReview_comment_member_name()+"</h3>"
 							+"<div class=\"meta\">"+commentList.get(i).getReview_comment_date()+"</div>"
@@ -93,7 +72,8 @@ public class CommentListAjax implements Action {
 							+"<input type=\"hidden\" id=\"review_comment_seq\" name=\"review_comment_seq\" value="+commentList.get(i).getReview_comment_seq()+">";
 						out.print(print1);
 						if(commentList.get(i).getReview_comment_lev()<1) {
-							out.print("<input type=\"button\" class=\"reply\" value=\"Reply\" onclick=\"replyComment('"+commentList.get(i).getReview_comment_num()+"')\">");
+//							out.print("<input type=\"button\" class=\"reply\" value=\"Reply\" onclick=\"replyComment('"+commentList.get(i).getReview_comment_num()+"')\">");
+							out.print("<a class=\"comment_reply_btn\" href=\"#comment_reply_btn\" onclick=\"replyComment('"+commentList.get(i).getReview_comment_num()+"')\">대댓글</a>");
 						}
 						String print2="";
 						print2+="</form><input type=\"hidden\" id=\"cmt_num\" value="+commentList.get(i).getReview_comment_num()+">"
@@ -103,12 +83,13 @@ public class CommentListAjax implements Action {
 								if(sessionId!=null) {
 									if(sessionId.equals(commentList.get(i).getReview_comment_member_id())){
 						String print3="";
-						print3+="<a class=\"comment_update_btn\" href=\"#comment_update_btn\" onclick=\"updateComment('"+commentList.get(i).getReview_comment_num()+"')\">수정</a>"
+						print3+="<a class=\"comment_update_btn\" href=\"#comment_update_btn\" onclick=\"updateComment('"+commentList.get(i).getReview_comment_num()+"','"+commentList.get(i).getReview_comment_content()+"')\">수정</a>"
 								+"<a class=\"comment_del_btn\" href=\"#comment_del_btn\" onclick=\"deleteComment('"+commentList.get(i).getReview_comment_num()+"')\">삭제</a>";
 								out.print(print3);
 									}
 								}
-						out.print("</div><div id=\"forReply"+commentList.get(i).getReview_comment_num()+"></div></li>");
+						out.print("</div><div id=\"forReply"+commentList.get(i).getReview_comment_num()+"\"></div>");
+						out.print("</li>");
 						if(commentList.get(i).getReview_comment_lev()>0) {
 						out.print("</ul>");	
 						}
@@ -116,8 +97,7 @@ public class CommentListAjax implements Action {
 			}
 		}
 						out.print("</ul>");
-
-		
+						out.print("</div>");
 						
 		return null;
 	}
