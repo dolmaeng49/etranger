@@ -4,6 +4,7 @@
 <%@page import="review.vo.ReviewBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%
 	// 전달받은 request 객체로부터 데이터 가져오기
 	// "pageInfo" 객체와 "articleList" 객체를 request 객체로부터 꺼내서 저장
@@ -94,10 +95,9 @@ div{
 			</div>
             <!-- end stars --> 
                 <div class="meta" onclick="location.href='ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>'">
-<%--                   <div><a href="#"><%=articleList.get(i).getReview_date()%></a></div> --%>
                   <div><a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>"><%=articleList.get(i).getReview_member_name() %></a></div><!-- 아이디 대신 이름 들어갈 곳 -->
                 </div>
-                <h3 class="heading"><a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>"><%=articleList.get(i).getReview_content()%></a></h3>
+                <h3 class="heading"><a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>"><%=articleList.get(i).getReview_subject()%></a></h3>
                 <p class="clearfix">
                   <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="float-left"><%=articleList.get(i).getReview_date()%></a>
                   <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="float-right meta-chat"><span class="icon-chat"></span><%=articleList.get(i).getReview_comment_count() %> </a>

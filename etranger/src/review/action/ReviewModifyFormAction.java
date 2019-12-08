@@ -22,7 +22,7 @@ public class ReviewModifyFormAction implements Action {
 		// ReviewDetailService 클래스의 getArticle() 메서드를 호출하여 게시물 상세 내역 가져오기
 		// => 파라미터 : ReviewBean, 리턴타입 : ReviewBean
 		ReviewDetailService reviewDetailService = new ReviewDetailService();
-		ReviewBean article = reviewDetailService.getArticle(review_num);
+		ReviewBean article = reviewDetailService.getArticleForComment(review_num);
 		
 		
 		// request 객체에 ReviewBean(=article) 객체 저장

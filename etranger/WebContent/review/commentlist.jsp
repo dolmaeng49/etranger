@@ -78,7 +78,7 @@
 <%--                   <%if(commentList.get(i).getReview_comment_lev()>0) { %> --%>
 <%--                   </ul><%} %> --%>
 <%--                   <% }  --%>
-//                   	 }
+<!-- //                   	 } -->
 <%--                   }%> --%>
 <!--               </ul> -->
               </div>
@@ -87,7 +87,7 @@
               <div class="comment-form-wrap">
               	<!-- 댓글 작성 폼 -->
                 <h3>코멘트를 남겨주세요!</h3>
-                    <label for="name"><%=sessionId %>님</label>
+                    <label for="name"><%=sessionName%>님</label>
 <!--                 <form action="CommentWrite.cm" class="p-5 bg-light"> -->
                   <div class="form-group">
               		<input type="hidden" id="review_comment_member_id" name="review_comment_member_id"value="<%=sessionId %>">
@@ -105,9 +105,7 @@
 <!----------------------------------------------------------------------------------------->
       <script src="js/jquery.min.js"></script> 
       <script type="text/javascript">
-      $(document).ready(function(){				//창 열릴때 함수호출
+      $(function(){				//창 열릴때 함수호출
     		getCommentList();
     	});
       </script>
-      
-              

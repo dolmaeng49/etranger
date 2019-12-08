@@ -103,7 +103,7 @@ div{
 					%>
 					<div id="modi-del">
 					<a href="ReviewModifyForm.rv?review_num=<%=article.getReview_num()%>&page=<%=nowPage%>" class="btncontrol btncontrol-sm btn-default"><i class="fa fa-pencil-alt"></i>수정</a>
-					<a href="ReviewDeletePro.rv?review_num=<%=article.getReview_num() %>&review_member_id=<%=sessionId %>&page=<%=nowPage%>" class="btncontrol btnforshare-rv btn-default"><i class="fa fa-trash"></i>삭제</a>
+					<a id="review_del_button" href="ReviewDeletePro.rv?review_num=<%=article.getReview_num() %>&review_member_id=<%=sessionId %>&page=<%=nowPage%>" class="btncontrol btnforshare-rv btn-default"><i class="fa fa-trash"></i>삭제</a>
    					</div>
    					<%
 					}

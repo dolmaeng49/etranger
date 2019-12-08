@@ -178,6 +178,8 @@ public class ReviewDAO {
 		}
 		return updateCount;
 	}
+	
+	
 
 	public int updateArticle(ReviewBean rb) { // 글수정
 		PreparedStatement pstmt = null;

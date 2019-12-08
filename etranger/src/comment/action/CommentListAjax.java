@@ -32,7 +32,7 @@ public class CommentListAjax implements Action {
 		commentList =commentListService.getCommentList();
 		
 		ReviewDetailService reviewDetailService = new ReviewDetailService();
-		ReviewBean article =reviewDetailService.getArticle(review_num);
+		ReviewBean article =reviewDetailService.getArticleForComment(review_num);
 
 		PageInfo pageInfo = new PageInfo();
 		int nowPage = pageInfo.getPage();
@@ -73,7 +73,7 @@ public class CommentListAjax implements Action {
 						out.print(print1);
 						if(commentList.get(i).getReview_comment_lev()<1) {
 //							out.print("<input type=\"button\" class=\"reply\" value=\"Reply\" onclick=\"replyComment('"+commentList.get(i).getReview_comment_num()+"')\">");
-							out.print("<a class=\"comment_reply_btn\" href=\"#comment_reply_btn\" onclick=\"replyComment('"+commentList.get(i).getReview_comment_num()+"')\">대댓글</a>");
+							out.print("<a class=\"comment_reply_btn\" href=\"#comment_reply_btn\" onclick=\"replyComment('"+commentList.get(i).getReview_comment_num()+"'); this.onclick='';\">대댓글</a>");
 						}
 						String print2="";
 						print2+="</form><input type=\"hidden\" id=\"cmt_num\" value="+commentList.get(i).getReview_comment_num()+">"

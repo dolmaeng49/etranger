@@ -36,7 +36,7 @@
           <div class="col-md-8 ftco-animate">
             <h2 class="mb-5">작성글 수정</h2> <!-- 볼드체 제목 -->
            		<!-- 글 수정 폼 시작 -->
-                <form action="ReviewModifyPro.rv" method="post" enctype="multipart/form-data" name="review_write_form">
+                <form action="ReviewModifyPro.rv" method="post" enctype="multipart/form-data" name="review_write_form" onsubmit="return validCheck()">
                 <input type="hidden" name="review_num" value="<%=article.getReview_num() %>">
                 <input type="hidden" name="page" value="<%=nowPage%>" />
 				<input type="hidden" id="review_package_category_code" name="review_package_category_code" value="1">
@@ -76,6 +76,34 @@
 
 	<!-- loader 인클루드 -->
 <jsp:include page="/include/loader.jsp"/>
-    
+<script type="text/javascript">
+
+function validCheck() {
+// 	const review_star = $('#review_star').val();
+	const subject = $('#subject').val();
+	const content = $('#content').val();
+	const img = $('#image').val();
+	
+	if(subject.length<2 || subject.length>30){
+		alert('제목이 너무 짧거나 깁니다!');
+		return false;
+	}if(content.length<10){
+		alert('내용은 10글자 이상 적어주세요 :)');
+		return false;
+	}if(img.length==0){
+		alert('썸네일로 사용할 이미지를 업로드해주세요 :)');
+		return false;
+	}
+	
+}
+
+
+// if(review_star==0){
+// 	alert('별점을 매겨주세요 :)');  		//종우형님 별점 넣으시면 추가할 것
+// 	return false;
+// }
+
+
+</script>    
   </body>
 </html>

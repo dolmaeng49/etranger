@@ -42,14 +42,14 @@ if(sessionId==null) {
               <div class="comment-form-wrap">
                 <h3 class="mb-5">여행후기 작성</h3>
                 <div style="height:90px"></div>
-                <form action="ReviewWritePro.rv" method="post" enctype="multipart/form-data" name="review_write_form">
-                <input type="hidden" id="review_num" value=0>
-				<input type="hidden" id="review_package_category_code"  name="review_package_category_code" value="1">
-				<!-- input type 내에서 왜 id값의 value로 문자열 인식이 안되는지 알아보기 -->
-				<input type="hidden" id="review_readcount" value=0>
-				<input type="hidden" id="review_star" name="review_star" >
+                <form action="ReviewWritePro.rv" method="post" enctype="multipart/form-data" name="review_write_form" onsubmit="return validCheck()">
+                <input type="hidden" name="review_num" value=0>
+				<input type="hidden" name="review_package_category_code" value="1"> <!--추후 카테고리 코드 연동할 것-->
+				<input type="hidden" name="review_readcount" value=0>
+				<input type="hidden" id="review_star" name="review_star" value=0>
 				<input type="hidden" name="review_member_id" value=<%=sessionId %>>
 				<input type="hidden" name="review_member_name" value=<%=sessionName %>>
+				<input type="hidden" name="review_comment_count" value=0>
                   <div class="writeform-group">
                     <input type="text" class="form-control-subject" name="review_subject" id="review_subject" maxlength="40" placeholder="제목을 입력해주세요"/>
                   </div>
@@ -70,10 +70,10 @@ if(sessionId==null) {
                     <div style="height:50px"></div>
                     <textarea id="summernote" name="review_content" cols="30" rows="20" class="form-control"></textarea>
                   </div>
+<!--                     <div id="test"></div> -->
                   <div class="writeform-group">
                     <label for="image">이미지 첨부</label>
-                    <div id="test"></div>
-                    <input name="review_image" type="file" class="form-control" multiple="multiple" accept="image/*" id="review_image"/>
+                    <input id="review_image" name="review_image" type="file" class="form-control" multiple="multiple" accept="image/*"/>
                   </div>
                   <div class="form-group"> 
                     <input type="submit" value="등록" class="btn py-3 px-4 btn-primary">
@@ -133,5 +133,32 @@ if(sessionId==null) {
 <jsp:include page="../include/footer.jsp"/>
 	<!-- loader 인클루드 -->
 <jsp:include page="../include/loader.jsp"/>
+<script type="text/javascript">
+
+function validCheck() {
+	const review_star = $('#review_star').val();
+	const subject = $('#review_subject').val();
+	const content = $('#summernote').val();
+	const img = $('#review_image').val();
+
+	
+	if(subject.length<2 || subject.length>30){
+		alert('제목이 너무 짧거나 깁니다!');
+		return false;
+	}if(review_star==0){
+		alert('별점을 매겨주세요 :)');
+		return false;
+	}if(content.length<10){
+		alert('내용은 10글자 이상 적어주세요 :)');
+		return false;
+	}if(img.length==0){
+		alert('썸네일로 사용할 이미지를 업로드해주세요 :)');
+		return false;
+	}
+	
+}
+
+</script>
+
   </body>
 </html>

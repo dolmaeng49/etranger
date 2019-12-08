@@ -55,16 +55,21 @@ public class ReviewWriteProAction implements Action {
 		rb.setReview_member_id(multi.getParameter("review_member_id"));
 		rb.setReview_subject(multi.getParameter("review_subject"));
 		rb.setReview_content(multi.getParameter("review_content"));
-		rb.setReview_image(multi.getOriginalFileName((String) multi.getFileNames().nextElement()));
+		rb.setReview_image(multi.getOriginalFileName((String)multi.getFileNames().nextElement()));
 		rb.setReview_package_catagory_code(multi.getParameter("review_package_category_code"));
 		rb.setReview_member_name(multi.getParameter("review_member_name"));
 		rb.setReview_star(Integer.parseInt(multi.getParameter("review_star")));
+		rb.setReview_comment_count(Integer.parseInt(multi.getParameter("review_comment_count")));
+		
+		System.out.println("star: " +rb.getReview_star());
+		System.out.println("content: " +rb.getReview_content());
+		System.out.println("image : " +rb.getReview_image());
 		
 		
 		ReviewWriteProService reviewWriteProService = new ReviewWriteProService();
 		
 		boolean isWriteSuccess =reviewWriteProService.registArticle(rb);
-		response.setContentType("text/html; charset=UTF-8"); // 문서 타입(contentType) 지정
+		response.setContentType("text/html; charset=UTF-8"); 
 		
 		PrintWriter out2 = response.getWriter();
 		

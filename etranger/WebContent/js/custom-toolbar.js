@@ -58,12 +58,12 @@ $(function() {
 		  ['table', ['table']],
 		  ['insert', ['link', 'picture', 'video']],
 		  ['view', ['codeview', 'help']]
-		],
-		 callbacks: { 
-			 onImageUpload: function(image) {
-		            uploadImage(image[0]);
-		        }
-		 }
+		]
+//		 callbacks: { 
+//			 onImageUpload: function(image) {
+//		            uploadImage(image[0]);
+//		        }
+//		 }
 //				onImageUpload: function(files, editor, welEditable) {
 //					 sendFile(files[0], editor, welEditable);	//ver1
 ////					sendFile(files[0], this);  //ver2
@@ -75,30 +75,30 @@ $(function() {
 	  });
 	});
 
-function uploadImage(image) {
-    var data = new FormData();
-    data.append("image", image);
-    $.ajax({
-        url: 'ReviewWritePro.rv',  
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: data,
-        type: "post",
-        success: function(url) {
-        	
-        	alert(url);
-            var image = $('<img>').attr('src', 'http://' + url);
-            alert(image);
-            $('#summernote').summernote("insertNode", image[0]);
-            console.log(url);
-        },
-        error: function(data) {
-            console.log(data);
-            alert(data);
-        }
-    });
-}
+//function uploadImage(image) {
+//    var data = new FormData();
+//    data.append("image", image);
+//    $.ajax({
+//        url: 'ReviewWritePro.rv',  
+//        cache: false,
+//        contentType: false,
+//        processData: false,
+//        data: data,
+//        type: "post",
+//        success: function(url) {
+//        	
+//        	alert(url);
+//            var image = $('<img>').attr('src', 'http://' + url);
+//            alert(image);
+//            $('#summernote').summernote("insertNode", image[0]);
+//            console.log(url);
+//        },
+//        error: function(data) {
+//            console.log(data);
+//            alert(data);
+//        }
+//    });
+//}
 
 
 
