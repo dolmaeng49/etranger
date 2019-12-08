@@ -37,9 +37,7 @@ public class ReviewWriteProAction implements Action {
 		int fileSize = 10*1024*1024;
 		String fileName="";
 		
-		//클라이언트 ip 추출 
-//		String writerIpAddr = request.getRemoteAddr();
-//		System.out.println(writerIpAddr);
+	
 		
 		ServletContext context = request.getServletContext(); // WAS 객체 가져와서 실제 폴더위치 찾기
 		realFolder = context.getRealPath(saveFolder); // 가상폴더를 기준으로 실제경로 알아냄

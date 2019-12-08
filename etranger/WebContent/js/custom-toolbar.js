@@ -59,49 +59,78 @@ $(function() {
 		  ['insert', ['link', 'picture', 'video']],
 		  ['view', ['codeview', 'help']]
 		]
-//		 callbacks: { 
+	  ,
+		 callbacks: { 
 //			 onImageUpload: function(image) {
 //		            uploadImage(image[0]);
 //		        }
 //		 }
-//				onImageUpload: function(files, editor, welEditable) {
-//					 sendFile(files[0], editor, welEditable);	//ver1
+				onImageUpload: function(files, editor, welEditable) {
+////					 sendFile(files[0], editor, welEditable);	//ver1
 ////					sendFile(files[0], this);  //ver2
-////		            for (var i = files.length - 1; i >= 0; i--) {	//ver3
-////		            	sendFile(files[i], this);
-//		            }
-//		        }
-//		 }
+		            for (var i = files.length - 1; i >= 0; i--) {	//ver3
+		            	sendFile(files[i], this);
+		            }
+		        }
+		 }
 	  });
 	});
 
+
+//============================================
+
 //function uploadImage(image) {
-//    var data = new FormData();
-//    data.append("image", image);
-//    $.ajax({
-//        url: 'ReviewWritePro.rv',  
-//        cache: false,
-//        contentType: false,
-//        processData: false,
-//        data: data,
-//        type: "post",
-//        success: function(url) {
-//        	
-//        	alert(url);
-//            var image = $('<img>').attr('src', 'http://' + url);
-//            alert(image);
-//            $('#summernote').summernote("insertNode", image[0]);
-//            console.log(url);
-//        },
-//        error: function(data) {
-//            console.log(data);
-//            alert(data);
-//        }
-//    });
+//	var data = new FormData();
+//	data.append("image", image);
+//	$.ajax({
+//		url: 'ImageCallback.rv',  
+//		cache: false,
+//		contentType: false,
+//		processData: false,
+//		enctype: 'multipart/form-data',
+//		data: data,
+//		type: "get",
+//		success: function(url) {
+//			
+//			alert(url);
+//			var image = $('<img>').attr('src', 'http://' + url.path);
+//			alert(image);
+//			$('#summernote').summernote("insertNode", image[0]);
+//			console.log(url);
+//		},
+//		error: function(data) {
+//			console.log(data);
+//			alert(data);
+//		}
+//	});
 //}
 
 
 
+
+
+//========================================
+
+function sendFile(file, el) {
+	var data = new FormData();
+  	data.append('file', file);
+  	$.ajax({
+    	data: data,
+    	type: "POST",
+    	url: 'ImageCallback.rv',
+    	cache: false,
+    	contentType: false,
+    	enctype: 'multipart/form-data',
+    	processData: false,
+    	success: function(data) {
+    		alert(data);
+    		editor.insertImage(welEditable,data.url);
+      		$(el).summernote('editor.insertImage', url);
+//      		$('#test').append('<img src="'+url+'" width="300" height="auto"/>') //업로드 확인용
+      		
+    	}
+  	});
+};
 
 //1119 to do 
 //================	
@@ -130,7 +159,6 @@ $(function() {
 //	    });
 //===============
 	
-
 //function sendFile(file, editor, welEditable) {
 //    data = new FormData();
 //    data.append("uploadFile", file);
@@ -153,6 +181,8 @@ $(function() {
 //    });
 //}
 
+
+//=================================================
 
 //function sendFile(file, editor) {
 //    // 파일 전송을 위한 폼생성
@@ -221,25 +251,6 @@ $(function() {
 
 
 	
-//	function sendFile(file, el) {
-//		var data = new FormData();
-//      	data.append('file', file);
-//      	$.ajax({
-//        	data: data,
-//        	type: "POST",
-//        	url: '/ReviewWritePro.rv',
-//        	cache: false,
-//        	contentType: false,
-//        	enctype: 'multipart/form-data',
-//        	processData: false,
-//        	success: function(data) {
-//        		editor.insertImage(welEditable,data.url);
-//          		$(el).summernote('editor.insertImage', url);
-////          		$('#test').append('<img src="'+url+'" width="300" height="auto"/>') //업로드 확인용
-//          		
-//        	}
-//      	});
-//    };
 
 //function uploadImage(image) {
 //    var data = new FormData();

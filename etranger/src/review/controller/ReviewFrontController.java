@@ -91,7 +91,17 @@ public class ReviewFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/ImageCallback.rv")){
+			action = new ImageCallbackAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
+		
+		
 		
 		
 		

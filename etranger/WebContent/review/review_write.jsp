@@ -68,7 +68,7 @@ if(sessionId==null) {
   					<span class="starR2">10</span>
 				   </div>
                     <div style="height:50px"></div>
-                    <textarea id="summernote" name="review_content" cols="30" rows="20" class="form-control"></textarea>
+                    <textarea id="summernote" name="review_content" cols="30" rows="20" class="form-control" ></textarea>
                   </div>
 <!--                     <div id="test"></div> -->
                   <div class="writeform-group">
@@ -151,10 +151,12 @@ function validCheck() {
 	}if(content.length<10){
 		alert('내용은 10글자 이상 적어주세요 :)');
 		return false;
-	}if(img.length==0){
-		alert('썸네일로 사용할 이미지를 업로드해주세요 :)');
-		return false;
 	}
+	
+// 	if(img.length==0){
+// 		alert('썸네일로 사용할 이미지를 업로드해주세요 :)');
+// 		return false;
+// 	}
 	
 }
 
