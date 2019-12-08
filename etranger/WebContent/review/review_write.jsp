@@ -70,7 +70,7 @@ if(sessionId==null) {
                     <div style="height:50px"></div>
                     <textarea id="summernote" name="review_content" cols="30" rows="20" class="form-control" ></textarea>
                   </div>
-<!--                     <div id="test"></div> -->
+                    <div id="test"></div>
                   <div class="writeform-group">
                     <label for="image">이미지 첨부</label>
                     <input id="review_image" name="review_image" type="file" class="form-control" multiple="multiple" accept="image/*"/>
