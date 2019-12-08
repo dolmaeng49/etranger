@@ -343,6 +343,7 @@ public class MemberDAO {
 	}
 
 	public ReservationInfoBean MemberReservationInfo(String id) {
+		System.out.println("DAO/MemberReservationInfo");
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ReservationInfoBean rib = new ReservationInfoBean();
