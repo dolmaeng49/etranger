@@ -355,7 +355,7 @@ public class MemberDAO {
 					+ "pd.package_product_depart_date,rs.reservation_headcount,rs.reservation_price,reservation_category_code "
 					+ "FROM reservation rs JOIN " + "package_category pc "
 					+ "ON rs.reservation_category_code = pc.package_category_code " + "JOIN package_product pd "
-					+ "ON rs.reservation_product_num = pd.package_product_num " + "AND rs.reservation_member_id=?";
+					+ "ON rs.reservation_product_num = pd.package_product_num " + "where rs.reservation_member_id=?";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
