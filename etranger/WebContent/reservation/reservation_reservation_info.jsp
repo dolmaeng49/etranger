@@ -192,7 +192,7 @@ table.pdList td input {
 					<%
 						} else {
 					%>
-
+					<p>예약상품이 없습니다.</p>
 
 					<%
 						}
