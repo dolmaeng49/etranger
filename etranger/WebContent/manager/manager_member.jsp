@@ -64,6 +64,7 @@ table.reservList td {
 	border-bottom: 1px solid #ccc;
 	background: #eee;
 	font-size: smaller;
+	
 }
 
 table.reservList .left{
@@ -163,7 +164,7 @@ font-weight: 700 !important;
 					<td class="right price"><%=reservList.get(i).getReservation_price() %></td>
 					<td><%=reservList.get(i).getReservation_pay_way() %></td>
 					<td><%=reservList.get(i).getReservation_progress() %></td>
-					<td><input type="button" value="수정" onclick="#"> </td>
+					<td><input type="button" value="삭제" onclick="#"> </td>
 					
 					</tr>
 					<%
