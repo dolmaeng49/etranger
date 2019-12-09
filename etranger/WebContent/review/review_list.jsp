@@ -29,9 +29,9 @@
 	<!-- 스타일 인클루드 -->
 <jsp:include page="/include/style.jsp"/>
 <style type="text/css">
-div{
-	border: 1px solid red;
-}
+/* div{ */
+/* 	border: 1px solid red; */
+/* } */
 </style>
   </head>
   <body>

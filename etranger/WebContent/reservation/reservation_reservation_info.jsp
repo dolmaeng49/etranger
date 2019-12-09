@@ -132,7 +132,7 @@ table.pdList td input {
 					</div>
 
 					<div class="writeform-group">
-						<label for="image">이미지</label><a href="#" class="block-20"
+						<label for="image">이미지</label><a href="CategoryDetail.pr?package_category_code=<%=rb.getReservation_category_code()%>" class="block-20"
 							style="background-image: url('ManagerImgUpload/<%=rb.getPackage_category_image()%>'
 										);">
 						</a>
@@ -141,40 +141,40 @@ table.pdList td input {
 
 					<div class="writeform-group">
 						<br> <label for="code">아이디</label><input type="text"
-							class="form-control" name="product_code" id="product_code_id"
+							class="form-control" name="member_id" id="member_id"
 							value="<%=rb.getReservation_member_id()%>" />
 					</div>
 
 
 					<div class="writeform-group">
 						<br> <label for="code">상품코드</label><input type="text"
-							class="form-control" name="product_code" id="product_code_id"
+							class="form-control" name="category_code" id="category_code"
 							value="<%=rb.getReservation_category_code()%>" />
 					</div>
 
 					<div class="writeform-group">
 						<br> <label for="code">상품이름</label><input type="text"
-							class="form-control" name="product_code" id="product_code_id"
+							class="form-control" name="category_name()" id="category_name()"
 							value="<%=rb.getPackage_category_name()%>" />
 					</div>
 
 
 					<div class="writeform-group">
 						<br> <label for="code">출발날짜</label><input type="text"
-							class="form-control" name="product_code" id="product_code_id"
+							class="form-control" name="depart_date" id="depart_date"
 							value="<%=rb.getPackage_product_depart_date()%>" />
 					</div>
 
 
 					<div class="writeform-group">
 						<br> <label for="code">도착날짜</label><input type="text"
-							class="form-control" name="product_code" id="product_code_id"
+							class="form-control" name="arriv_date" id="arriv_date"
 							value="<%=rb.getPackage_product_arriv_date()%>" />
 					</div>
 
 					<div class="writeform-group">
 						<br> <label for="code">총 인원수</label><input type="text"
-							class="form-control" name="product_code" id="product_code_id"
+							class="form-control" name="headcount" id="headcount"
 							value="<%=rb.getReservation_headcount()%>" />
 					</div>
 					<div class="writeform-group">
@@ -182,7 +182,7 @@ table.pdList td input {
 
 						<div class="writeform-group">
 							<br> <label for="code">총 가격</label><input type="text"
-								class="form-control" name="product_code" id="product_code_id"
+								class="form-control" name="price" id="price"
 								value="<%=rb.getReservation_price()%>" />
 						</div>
 						<div class="writeform-group"></div>
