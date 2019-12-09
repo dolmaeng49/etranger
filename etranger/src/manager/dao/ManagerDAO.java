@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import manager.vo.CategoryBean;
 import manager.vo.ProductBean;
+import reservation.vo.ReservationBean;
 import review.vo.ReviewBean;
 
 import static common.db.JdbcUtil.*;
@@ -479,6 +480,47 @@ public class ManagerDAO {
 				close(pstmt);
 			}
 			return dplist;
+		}
+
+		// --- selectReservList
+		public ArrayList<ReservationBean> selectReservList(int page, int limit) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ArrayList<ReservationBean> reservList = new ArrayList<ReservationBean>();
+
+			int startRow = (page - 1) * 15;
+
+			try {
+
+				String sql = "select * from reservation order by reservation_date desc LIMIT ?,?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, limit);
+				rs = pstmt.executeQuery();
+
+
+
+				while (rs.next()) {
+					//고객아이디 예약일(결제시한) 예약번호 예약상품(이름) 예약인원 출발날짜/도착날짜 금액 진행상태
+					ReservationBean rb = new ReservationBean();
+					rb.setReservation_member_id(rs.getString("reservation_member_id"));
+					rb.setReservation_date(rs.getString("reservation_date"));
+					rb.setReservation_num(rs.getInt("reservation_num"));
+					rb.setReservation_category_code(rs.getString("reservation_category_code"));
+					rb.setReservation_headcount(rs.getInt(""));
+					
+
+
+
+					reservList .add(rb);
+				}
+			} catch (SQLException e) {
+				System.out.println("selectArticleList() 오류! - " + e.getMessage());
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return reservList ;
 		}
 
 	

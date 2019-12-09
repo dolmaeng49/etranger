@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import common.action.Action;
 import common.vo.ActionForward;
 import manager.action.ManagerMainAction;
+import manager.action.MemberManagementAction;
 import manager.action.CityInsertAction;
 import manager.action.CitySelectAction;
 import manager.action.ProductListAction;
@@ -46,8 +47,7 @@ public class ManagerFrontController extends HttpServlet {
 				action = new ManagerMainAction();
 				try {
 					forward = action.execute(request, response);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -57,8 +57,7 @@ public class ManagerFrontController extends HttpServlet {
 				action = new RegionInsertAction();
 				try {
 					forward = action.execute(request, response);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -68,8 +67,7 @@ public class ManagerFrontController extends HttpServlet {
 				action = new RegionSelectAction();
 				try {
 					forward = action.execute(request, response);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -79,8 +77,7 @@ public class ManagerFrontController extends HttpServlet {
 				action = new CityInsertAction();
 				try {
 					forward = action.execute(request, response);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -90,8 +87,7 @@ public class ManagerFrontController extends HttpServlet {
 				action = new CitySelectAction();
 				try {
 					forward = action.execute(request, response);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -101,8 +97,7 @@ public class ManagerFrontController extends HttpServlet {
 				action = new ThemeInsertAction();
 				try {
 					forward = action.execute(request, response);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -112,8 +107,7 @@ public class ManagerFrontController extends HttpServlet {
 				action = new ThemeCheckBoxAction();
 				try {
 					forward = action.execute(request, response);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -123,8 +117,7 @@ public class ManagerFrontController extends HttpServlet {
 				action = new CategoryInsertAction();
 				try {
 					forward = action.execute(request, response);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -133,20 +126,13 @@ public class ManagerFrontController extends HttpServlet {
 				forward = new ActionForward();
 				forward.setPath("/manager/manager_product_insert.jsp");
 			}
-			
-			else if (command.equals("/MemberManagement.ma")) {
-				forward = new ActionForward();
-				forward.setPath("/manager/manager_member.jsp");
-			}
-			
 
 			// CategoryInsertAction 클래스로 이동
 			else if (command.equals("/ProductInsertPro.ma")) {
 				action = new ProductInsertAction();
 				try {
 					forward = action.execute(request, response);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -156,8 +142,7 @@ public class ManagerFrontController extends HttpServlet {
 				action = new ProductDetailAction();
 				try {
 					forward = action.execute(request, response);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -167,8 +152,7 @@ public class ManagerFrontController extends HttpServlet {
 				action = new CategoryListAction();
 				try {
 					forward = action.execute(request, response);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -179,8 +163,7 @@ public class ManagerFrontController extends HttpServlet {
 				System.out.println("DeleteProduct.ma");
 				try {
 					forward = action.execute(request, response);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -191,17 +174,28 @@ public class ManagerFrontController extends HttpServlet {
 				System.out.println("ProductList.ma");
 				try {
 					forward = action.execute(request, response);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
+			}
+
+			else if (command.equals("/MemberManagement.ma")) {
+				action = new MemberManagementAction();
+
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+//				forward = new ActionForward();
+//				forward.setPath("/manager/manager_member.jsp");
 			}
 
 			if (forward != null) {
 				if (forward.isRedirect()) {
 					response.sendRedirect(forward.getPath());
-				}
-				else {
+				} else {
 					RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
 					dispatcher.forward(request, response);
 				}
