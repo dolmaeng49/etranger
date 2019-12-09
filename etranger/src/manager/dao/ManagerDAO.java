@@ -487,15 +487,15 @@ public class ManagerDAO {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			ArrayList<ReservationBean> reservList = new ArrayList<ReservationBean>();
-
+			
 			int startRow = (page - 1) * 15;
 
 			try {
-
-				String sql = "select * from reservation order by reservation_date desc LIMIT ?,?";
+				String sql = "\r\n" + 
+						"SELECT r.reservation_num,r.reservation_category_code,r.reservation_member_id,r.reservation_product_num,r.reservation_date,r.reservation_price,r.reservation_headcount,r.reservation_pay_way,r.reservation_progress,r.reservation_member_id,p.package_product_depart_date,p.package_product_arriv_date,c.package_category_name FROM reservation r JOIN package_product p ON r.reservation_product_num = p.package_product_num JOIN package_category c ON r.reservation_category_code = c.package_category_code";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, limit);
+//				pstmt.setInt(1, startRow);
+//				pstmt.setInt(2, limit);
 				rs = pstmt.executeQuery();
 
 
@@ -503,16 +503,18 @@ public class ManagerDAO {
 				while (rs.next()) {
 					//고객아이디 예약일(결제시한) 예약번호 예약상품(이름) 예약인원 출발날짜/도착날짜 금액 진행상태
 					ReservationBean rb = new ReservationBean();
-					rb.setReservation_member_id(rs.getString("reservation_member_id"));
-					rb.setReservation_date(rs.getString("reservation_date"));
-					rb.setReservation_num(rs.getInt("reservation_num"));
+					rb.setReservation_member_id(rs.getString("reservation_member_id")); // 고객 아이디
+					rb.setReservation_date(rs.getString("reservation_date")); //  예약일
+					rb.setReservation_num(rs.getInt("reservation_num")); // 예약번호
+					rb.setPackage_category_name(rs.getString("package_category_name")); //예약상품
 					rb.setReservation_category_code(rs.getString("reservation_category_code"));
-					rb.setReservation_headcount(rs.getInt(""));
-					
-
-
-
-					reservList .add(rb);
+					rb.setReservation_headcount(rs.getInt("reservation_headcount")); //예약인원
+					rb.setPackage_product_depart_date(rs.getString("package_product_depart_date")); //출발날짜
+					rb.setPackage_product_arriv_date(rs.getString("package_product_arriv_date")); //도착날짜
+					rb.setReservation_price(rs.getInt("reservation_price")); // 가격 
+					rb.setReservation_pay_way(rs.getString("reservation_pay_way"));
+					rb.setReservation_progress(rs.getString("reservation_progress"));
+					reservList.add(rb);
 				}
 			} catch (SQLException e) {
 				System.out.println("selectArticleList() 오류! - " + e.getMessage());
