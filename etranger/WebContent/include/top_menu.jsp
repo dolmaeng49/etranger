@@ -25,7 +25,7 @@
             else {
         %>
         <%=member_name%>님 | <a href="LogoutPro.me">Log Out</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="MemberModifyForm.me">회원정보수정</a>
-        |<a href="MemberReservationInfo.me?member_id=<%=member_id%>">예약 정보</a>
+        |<a href="ReservationInfo.rs?member_id=<%=member_id%>">예약 정보</a>
         <%
             }
         %>
