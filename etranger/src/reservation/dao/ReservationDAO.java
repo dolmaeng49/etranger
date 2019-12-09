@@ -24,35 +24,39 @@ public class ReservationDAO {
 
 		return instance;
 	}
-	
+
 	Connection con;
 
 	public void setConnection(Connection con) {
 		this.con = con;
 	}
 
-	public ReservationBean ReservationInfo(String id) {
+	public ArrayList<ReservationBean> ReservationInfo(String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ReservationBean rb = new ReservationBean();
+		// ReservationBean rb = new ReservationBean();
 		System.out.println(id);
-
+		ArrayList<ReservationBean> daorb = new ArrayList<ReservationBean>();
 		try {
 
-			String sql = "SELECT rs.reservation_member_id,pc.package_category_name,pc.package_category_image,pd.package_product_arriv_date,"
-					+ "pd.package_product_depart_date,rs.reservation_headcount,rs.reservation_price,reservation_category_code "
-					+ "FROM reservation rs JOIN " + "package_category pc "
-					+ "ON rs.reservation_category_code = pc.package_category_code " + "JOIN package_product pd "
-					+ "ON rs.reservation_product_num = pd.package_product_num " + "AND rs.reservation_member_id=?";
-
+			String sql = "SELECT rs.reservation_member_id,pc.package_category_name,pc.package_category_image,pd.package_product_arriv_date, " + 
+					"    pd.package_product_depart_date,rs.reservation_headcount,rs.reservation_price,reservation_category_code,rs.reservation_num,"
+					+ "  rs.reservation_pay_way,rs.reservation_progress " + 
+					"    FROM reservation rs JOIN package_category pc " + 
+					"    ON rs.reservation_category_code = pc.package_category_code JOIN package_product pd " + 
+					"    ON rs.reservation_product_num = pd.package_product_num where rs.reservation_member_id=?;";
+				System.out.println("DB");
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-
+			System.out.println("DB2");
 			while (rs.next()) {
 
+				ReservationBean rb = new ReservationBean();
 				rb.setReservation_member_id(rs.getString("reservation_member_id"));
-				// rib.setReservation_product_num(rs.getInt("reservation_product_num"));
+				rb.setReservation_num(rs.getInt("reservation_num"));
+				rb.setReservation_pay_way(rs.getString("reservation_pay_way"));
+				rb.setReservation_progress(rs.getString("reservation_progress"));
 				rb.setReservation_headcount(rs.getInt("reservation_headcount"));
 				rb.setReservation_price(rs.getInt("reservation_price"));
 				rb.setReservation_category_code(rs.getString("reservation_category_code"));
@@ -60,7 +64,18 @@ public class ReservationDAO {
 				rb.setPackage_category_name(rs.getString("package_category_name"));
 				rb.setPackage_product_arriv_date(rs.getString("package_product_arriv_date"));
 				rb.setPackage_product_depart_date(rs.getString("package_product_depart_date"));
+				daorb.add(rb);
 			}
+			
+			for(int i=0;i<daorb.size();i++) {
+				
+				System.out.println(daorb.get(i));
+				
+				
+				
+				
+			}
+			
 
 		} catch (SQLException e) {
 
@@ -70,7 +85,7 @@ public class ReservationDAO {
 			close(rs);
 			close(pstmt);
 		}
-		return rb;
+		return daorb;
 	}
 
 	public int insertReservation(ReservationBean rb) {
@@ -80,14 +95,14 @@ public class ReservationDAO {
 		int insertCount = 0;
 
 		try {
-			
+
 //			String sql = "INSERT INTO reservation(reservation_member_id,reservation_product_num,reservation_time,reservation_price,"
 //					+ "reservation_headcount,reservation_pay_way,reservation_ispayment,reservation_category_code)"
 //					+ "VALUES (?,?,CURRENT_TIMESTAMP,?,?,?,?,?)";
 			String sql = "INSERT INTO reservation VALUES(null,?,?,?,CURRENT_TIMESTAMP,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			System.out.println("pstmt");
-			
+
 			pstmt.setString(1, rb.getReservation_category_code());
 			pstmt.setString(2, rb.getReservation_member_id());
 			pstmt.setString(3, rb.getReservation_product_num());
@@ -95,7 +110,7 @@ public class ReservationDAO {
 			pstmt.setInt(5, rb.getReservation_headcount());
 			pstmt.setString(6, rb.getReservation_pay_way());
 			pstmt.setString(7, rb.getReservation_progress());
-			
+
 			insertCount = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -109,4 +124,3 @@ public class ReservationDAO {
 	}
 
 }
-

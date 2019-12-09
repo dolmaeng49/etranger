@@ -1,5 +1,7 @@
 package reservation.action;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,11 +16,13 @@ public class ReservationInfoAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("member_id");
 		System.out.println("/MemberReservationInfoAction.me");
+		ReservationBean rbb = new ReservationBean();
+		ArrayList<ReservationBean> rb = new ArrayList<ReservationBean>();
 		ReservationInfoService rs = new ReservationInfoService();
-		ReservationBean rb = new ReservationBean();
-		rb.setReservation_member_id(id);
+		rbb.setReservation_member_id(id);
 		rb = rs.ReservationInfo(id);
-
+		
+		
 		request.setAttribute("ReservationInfo", rb);
 
 		ActionForward forward = new ActionForward();
