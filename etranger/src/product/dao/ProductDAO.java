@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import manager.vo.CategoryBean;
+
 public class ProductDAO {
 	
 	private Connection con;
@@ -96,4 +98,98 @@ public class ProductDAO {
 		return deleteCount;
 	}
 
+	
+	//------------------ManagerDAO의 selectListCount, selectCategoryList 불러옴.
+	
+	// --- selectListCount
+		public int selectListCount(String keyword) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			int listCount = 0;
+
+			try {
+				String sql = "select count(*) from package_category"
+						+ " where package_category_name like ? or"
+						+ " package_category_region like ? or"
+						+ " package_category_city like ? or"
+						+ " package_category_theme like ? or"
+						+ " package_category_content like ?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+keyword+"%");
+				pstmt.setString(2, "%"+keyword+"%");
+				pstmt.setString(3, "%"+keyword+"%");
+				pstmt.setString(4, "%"+keyword+"%");
+				pstmt.setString(5, "%"+keyword+"%");
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					listCount = rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				System.out.println("selectListCount(String keyword) 오류! - " + e.getMessage());
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return listCount;
+		}
+		// selectListCount ---
+	
+		
+		
+		// selectCategoryList ---
+		public ArrayList<CategoryBean> selectCategoryList(int page, int limit, String keyword) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ArrayList<CategoryBean> productList = new ArrayList<CategoryBean>();
+
+			int startRow = (page - 1) * 8;
+
+			try {
+
+				String sql = "select * from package_category"
+						+ " where package_category_name like ? or"
+						+ " package_category_region like ? or"
+						+ " package_category_city like ? or"
+						+ " package_category_theme like ? or"
+						+ " package_category_content like ?"
+						+ " order by package_category_region desc LIMIT ?,?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+keyword+"%");
+				pstmt.setString(2, "%"+keyword+"%");
+				pstmt.setString(3, "%"+keyword+"%");
+				pstmt.setString(4, "%"+keyword+"%");
+				pstmt.setString(5, "%"+keyword+"%");
+				pstmt.setInt(6, startRow);
+				pstmt.setInt(7, limit);
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					CategoryBean cb = new CategoryBean();
+					cb.setPackage_category_code(rs.getString("package_category_code"));
+					cb.setPackage_category_name(rs.getString("package_category_name"));
+					cb.setPackage_category_theme(rs.getString("package_category_theme"));
+					cb.setPackage_category_image(rs.getString("package_category_image"));
+					cb.setPackage_category_content(rs.getString("package_category_content"));
+					cb.setPackage_category_region(rs.getInt("package_category_region"));
+					cb.setPackage_category_city(rs.getInt("package_category_city"));
+					productList.add(cb);
+				}
+			} catch (SQLException e) {
+				System.out.println("selectCategoryList(search) 오류! - " + e.getMessage());
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return productList;
+		}
+		// selectCategoryList ---
+	
+	
+	
+	
+	
+	
 }
