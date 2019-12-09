@@ -44,11 +44,9 @@
 
 
 <%
-
-ReservationBean rb = new ReservationBean();
-rb = (ReservationBean)request.getAttribute("ReservationInfo");
-	
-	%>
+	ReservationBean rb = new ReservationBean();
+	rb = (ReservationBean) request.getAttribute("ReservationInfo");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,8 +88,6 @@ table.pdList td input {
 </head>
 
 
-<%if(rb.getReservation_category_code()!=null){ %>
-
 
 <body>
 
@@ -131,8 +127,14 @@ table.pdList td input {
 						<h3 class="mb-5">예약조회</h3>
 					</div>
 
+					<%
+						if (rb.getReservation_category_code() != null) {
+					%>
+
 					<div class="writeform-group">
-						<label for="image">이미지</label><a href="CategoryDetail.pr?package_category_code=<%=rb.getReservation_category_code()%>" class="block-20"
+						<label for="image">이미지</label><a
+							href="CategoryDetail.pr?package_category_code=<%=rb.getReservation_category_code()%>"
+							class="block-20"
 							style="background-image: url('ManagerImgUpload/<%=rb.getPackage_category_image()%>'
 										);">
 						</a>
@@ -187,6 +189,14 @@ table.pdList td input {
 						</div>
 						<div class="writeform-group"></div>
 					</div>
+					<%
+						} else {
+					%>
+
+
+					<%
+						}
+					%>
 				</div>
 			</div>
 		</div>
@@ -206,18 +216,3 @@ table.pdList td input {
 
 
 </html>
-<%}%><% else { %>
-<script>
-	alert('예약된 상품이 없습니다!!');
-	var result1 = confirm("상품을 구매하러 가시겠습니까?");
-
-	if (result1) {
-		location.href = "ProductList.pr";
-
-	} else {
-		history.back()
-	}
-</script>
-
-
-<%} %>
