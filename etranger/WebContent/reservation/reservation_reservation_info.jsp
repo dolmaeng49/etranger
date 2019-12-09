@@ -90,7 +90,6 @@ table.pdList td input {
 </head>
 
 
-<%if(rb.getReservation_category_code()!=null){ %>
 
 
 <body>
@@ -131,6 +130,7 @@ table.pdList td input {
 						<h3 class="mb-5">예약조회</h3>
 					</div>
 
+<%if(rb.getReservation_category_code()!=null){ %>
 					<div class="writeform-group">
 						<label for="image">이미지</label><a href="CategoryDetail.pr?package_category_code=<%=rb.getReservation_category_code()%>" class="block-20"
 							style="background-image: url('ManagerImgUpload/<%=rb.getPackage_category_image()%>'
@@ -188,10 +188,11 @@ table.pdList td input {
 						<div class="writeform-group"></div>
 					</div>
 				</div>
+<%}%><% else { %>
+<div> 예약 상품이 없습니다</div>
+<%} %>
 			</div>
 		</div>
-
-
 	</section>
 
 	<!-- footer 인클루드 -->
@@ -206,18 +207,3 @@ table.pdList td input {
 
 
 </html>
-<%}%><% else { %>
-<script>
-	alert('예약된 상품이 없습니다!!');
-	var result1 = confirm("상품을 구매하러 가시겠습니까?");
-
-	if (result1) {
-		location.href = "ProductList.pr";
-
-	} else {
-		history.back()
-	}
-</script>
-
-
-<%} %>

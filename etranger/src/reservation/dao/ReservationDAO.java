@@ -24,7 +24,7 @@ public class ReservationDAO {
 
 		return instance;
 	}
-	
+
 	Connection con;
 
 	public void setConnection(Connection con) {
@@ -80,14 +80,13 @@ public class ReservationDAO {
 		int insertCount = 0;
 
 		try {
-			
+
 //			String sql = "INSERT INTO reservation(reservation_member_id,reservation_product_num,reservation_time,reservation_price,"
 //					+ "reservation_headcount,reservation_pay_way,reservation_ispayment,reservation_category_code)"
 //					+ "VALUES (?,?,CURRENT_TIMESTAMP,?,?,?,?,?)";
 			String sql = "INSERT INTO reservation VALUES(null,?,?,?,CURRENT_TIMESTAMP,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
-			System.out.println("pstmt");
-			
+
 			pstmt.setString(1, rb.getReservation_category_code());
 			pstmt.setString(2, rb.getReservation_member_id());
 			pstmt.setString(3, rb.getReservation_product_num());
@@ -95,8 +94,16 @@ public class ReservationDAO {
 			pstmt.setInt(5, rb.getReservation_headcount());
 			pstmt.setString(6, rb.getReservation_pay_way());
 			pstmt.setString(7, rb.getReservation_progress());
-			
+
 			insertCount = pstmt.executeUpdate();
+
+			sql = "UPDATE package_product SET package_product_total = package_product_total - ?, package_product_current = package_product_current + ? WHERE package_product_num = ?";
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, rb.getReservation_headcount());
+			pstmt.setInt(2, rb.getReservation_headcount());
+			pstmt.setString(3, rb.getReservation_product_num());
+			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 			System.out.println("insertArticle() 오류 -" + e.getMessage());
@@ -109,4 +116,3 @@ public class ReservationDAO {
 	}
 
 }
-
