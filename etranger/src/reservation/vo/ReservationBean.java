@@ -24,8 +24,10 @@ public class ReservationBean {
 	private int reservation_headcount;
 	private String reservation_pay_way;
 	private String reservation_progress;
-	
-	
+	private String package_category_name;
+	private String package_category_image;
+	private String package_product_arriv_date;
+	private String package_product_depart_date;
 	public int getReservation_num() {
 		return reservation_num;
 	}
@@ -80,7 +82,31 @@ public class ReservationBean {
 	public void setReservation_progress(String reservation_progress) {
 		this.reservation_progress = reservation_progress;
 	}
-
+	public String getPackage_category_name() {
+		return package_category_name;
+	}
+	public void setPackage_category_name(String package_category_name) {
+		this.package_category_name = package_category_name;
+	}
+	public String getPackage_category_image() {
+		return package_category_image;
+	}
+	public void setPackage_category_image(String package_category_image) {
+		this.package_category_image = package_category_image;
+	}
+	public String getPackage_product_arriv_date() {
+		return package_product_arriv_date;
+	}
+	public void setPackage_product_arriv_date(String package_product_arriv_date) {
+		this.package_product_arriv_date = package_product_arriv_date;
+	}
+	public String getPackage_product_depart_date() {
+		return package_product_depart_date;
+	}
+	public void setPackage_product_depart_date(String package_product_depart_date) {
+		this.package_product_depart_date = package_product_depart_date;
+	}
 	
+
 	
 }

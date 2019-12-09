@@ -56,7 +56,6 @@ public class CategoryInsertAction implements Action {
 		for (int i = 0; i < multi.getParameterValues("theme").length; i++) {
 
 			addTheme += (s + (multi.getParameterValues("theme")[i]));
-
 		}
 
 		CategoryInsertService cis = new CategoryInsertService();

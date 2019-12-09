@@ -1,4 +1,4 @@
-<%@page import="reservation.vo.ReservationInfoBean"%>
+<%@page import="reservation.vo.ReservationBean"%>
 <%@page import="manager.vo.ProductBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="manager.vo.CategoryBean"%>
@@ -45,8 +45,8 @@
 
 <%
 
-ReservationInfoBean rib = new ReservationInfoBean();
-rib = (ReservationInfoBean)request.getAttribute("ReservationInfo");
+ReservationBean rb = new ReservationBean();
+rb = (ReservationBean)request.getAttribute("ReservationInfo");
 	
 	%>
 <!DOCTYPE html>
@@ -90,7 +90,7 @@ table.pdList td input {
 </head>
 
 
-<%if(rib.getReservation_category_code()!=null){ %>
+<%if(rb.getReservation_category_code()!=null){ %>
 
 
 <body>
@@ -132,8 +132,8 @@ table.pdList td input {
 					</div>
 
 					<div class="writeform-group">
-						<label for="image">이미지</label><a href="CategoryDetail.pr?package_category_code=<%=rib.getReservation_category_code()%>" class="block-20"
-							style="background-image: url('ManagerImgUpload/<%=rib.getPackage_category_image()%>'
+						<label for="image">이미지</label><a href="CategoryDetail.pr?package_category_code=<%=rb.getReservation_category_code()%>" class="block-20"
+							style="background-image: url('ManagerImgUpload/<%=rb.getPackage_category_image()%>'
 										);">
 						</a>
 					</div>
@@ -142,40 +142,40 @@ table.pdList td input {
 					<div class="writeform-group">
 						<br> <label for="code">아이디</label><input type="text"
 							class="form-control" name="member_id" id="member_id"
-							value="<%=rib.getReservation_member_id()%>" />
+							value="<%=rb.getReservation_member_id()%>" />
 					</div>
 
 
 					<div class="writeform-group">
 						<br> <label for="code">상품코드</label><input type="text"
 							class="form-control" name="category_code" id="category_code"
-							value="<%=rib.getReservation_category_code()%>" />
+							value="<%=rb.getReservation_category_code()%>" />
 					</div>
 
 					<div class="writeform-group">
 						<br> <label for="code">상품이름</label><input type="text"
 							class="form-control" name="category_name()" id="category_name()"
-							value="<%=rib.getPackage_category_name()%>" />
+							value="<%=rb.getPackage_category_name()%>" />
 					</div>
 
 
 					<div class="writeform-group">
 						<br> <label for="code">출발날짜</label><input type="text"
 							class="form-control" name="depart_date" id="depart_date"
-							value="<%=rib.getPackage_product_depart_date()%>" />
+							value="<%=rb.getPackage_product_depart_date()%>" />
 					</div>
 
 
 					<div class="writeform-group">
 						<br> <label for="code">도착날짜</label><input type="text"
 							class="form-control" name="arriv_date" id="arriv_date"
-							value="<%=rib.getPackage_product_arriv_date()%>" />
+							value="<%=rb.getPackage_product_arriv_date()%>" />
 					</div>
 
 					<div class="writeform-group">
 						<br> <label for="code">총 인원수</label><input type="text"
 							class="form-control" name="headcount" id="headcount"
-							value="<%=rib.getReservation_headcount()%>" />
+							value="<%=rb.getReservation_headcount()%>" />
 					</div>
 					<div class="writeform-group">
 
@@ -183,7 +183,7 @@ table.pdList td input {
 						<div class="writeform-group">
 							<br> <label for="code">총 가격</label><input type="text"
 								class="form-control" name="price" id="price"
-								value="<%=rib.getReservation_price()%>" />
+								value="<%=rb.getReservation_price()%>" />
 						</div>
 						<div class="writeform-group"></div>
 					</div>
@@ -205,6 +205,7 @@ table.pdList td input {
 
 
 
+</html>
 <%}%><% else { %>
 <script>
 	alert('예약된 상품이 없습니다!!');
@@ -220,4 +221,3 @@ table.pdList td input {
 
 
 <%} %>
-</html>

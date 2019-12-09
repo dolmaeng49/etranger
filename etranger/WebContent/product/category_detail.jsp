@@ -12,6 +12,7 @@
 	String name = "";
 	String content = "";
 	String theme = "";
+	String product_num="";
 	int region_code = 0;
 	int city_code = 0;
 	for (int i = 0; i < pdetail.size(); i++) {
@@ -24,6 +25,11 @@
 		region_code = pdetail.get(i).getPackage_category_region();
 		city_code = pdetail.get(i).getPackage_category_city();
 	}
+	for (int i = 0; i < pdList.size(); i++) {
+		product_num = pdList.get(i).getProductNum();
+	}
+	
+	String member_id = (String)session.getAttribute("member_id");
 %>
 
 
@@ -168,7 +174,7 @@ table.pdList td input {
 					<hr>
 					<label for="name">상세내용</label>
 					<br>
-					<textarea name="Product_Detail_content" cols="86" rows="20" readonly="readonly" style="resize: none;"><%=content%></textarea>
+					<textarea name="Product_Detail_content" cols="75" rows="20" readonly="readonly" style="resize: none;"><%=content%></textarea>
 				</div>
 
 				<div class="writeform-group" id="review">
@@ -203,45 +209,50 @@ table.pdList td input {
 					<!-- 						    <div class="input-group-addon">to</div> -->
 					<!-- 						    <input type="text" class="pick_end_date_input"> -->
 					<input type="button" class="btn py-1 px-2 btn-primary" id="moveReview" value="리뷰보기">
-					<table class="pdList">
-						<%
-							for (int i = 0; i < pdList.size(); i++) {
-								if (pdList != null) {
-						%>
-						<tr id="tr_top">
-							<th>출발날짜</th>
-							<th>도착날짜</th>
-							<th>가격</th>
-							<th>총인원수</th>
-						</tr>
-						<tr>
-							<td><%=pdList.get(i).getProductDepartDate()%></td>
-							<td><%=pdList.get(i).getProductArrivDate()%></td>
-							<td><%=pdList.get(i).getProductPrice()%></td>
-							<td><%=pdList.get(i).getProductTotal()%></td>
-						</tr>
-						<tr>
-							<td><select onchange="setPeopleCount(<%=pdList.get(i).getProductPrice()%>, <%=i%>)" id="count<%=i%>">
-									<option>인원수</option>
-									<%
-										int total = 10;
-												int max = pdList.get(i).getProductTotal() < total ? pdList.get(i).getProductTotal() : total;
-												for (int j = 1; j <= max; j++) {
-									%>
-									<option><%=j%></option>
-									<%
-										}
-									%>
-							</select></td>
-							<td colspan="2">총합계<br>
-								<span id="result<%=i%>"></span></td>
-							<td><input type="button" class="btn py-1 px-1 btn-primary" value="예약하기" onclick="reservation('<%=pdList.get(i).getProductNum()%>')"></td>
-						</tr>
-						<%
-							}
-							}
-						%>
-					</table>
+					<form action="ReservationInsert.rs" method="get">
+						<table class="pdList">
+							<%
+								for (int i = 0; i < pdList.size(); i++) {
+									if (pdList != null) {
+							%>
+							<tr id="tr_top">
+								<th>출발날짜</th>
+								<th>도착날짜</th>
+								<th>가격</th>
+								<th>총인원수</th>
+							</tr>
+							<tr>
+								<td><%=pdList.get(i).getProductDepartDate()%></td>
+								<td><%=pdList.get(i).getProductArrivDate()%></td>
+								<td><%=pdList.get(i).getProductPrice()%></td>
+								<td><%=pdList.get(i).getProductTotal()%></td>
+							</tr>
+							<tr>
+								<td><select onchange="setPeopleCount(<%=pdList.get(i).getProductPrice()%>, <%=i%>)" id="count<%=i%>" name="headCount">
+										<option>인원수</option>
+										<%
+											int total = 10;
+													int max = pdList.get(i).getProductTotal() < total ? pdList.get(i).getProductTotal() : total;
+													for (int j = 1; j <= max; j++) {
+										%>
+										<option><%=j%></option>
+										<%
+											}
+										%>
+								</select></td>
+								<td colspan="2">총합계<br> <span id="result<%=i%>"></span></td>
+								<td><input type="submit" class="btn py-1 px-1 btn-primary" value="예약하기"></td>
+							</tr>
+							<%
+								}
+								}
+							%>
+						</table>
+						<input type="hidden" name="member_id" value="<%=member_id%>">
+						<input type="hidden" name="category_code" value="<%=code%>">
+						<input type="hidden" name="product_num" value="<%=product_num%>">
+						<input type="hidden" name="price" id="price">
+					</form>
 				</div>
 			</div>
 		</div>
@@ -269,10 +280,12 @@ table.pdList td input {
 		function setPeopleCount(pay, count) {
 			var peopleCount = $('#count' + count + ' option:selected').val();
 			if (peopleCount == '인원수'){
-				$('#result'+ count).html('');	
+				$('#result'+ count).html('');
+				$('#price').val('');
 			}
 			else{
 				$('#result'+ count).html(peopleCount * pay);
+				$('#price').val(peopleCount * pay);
 			}
 		}
 	</script>
