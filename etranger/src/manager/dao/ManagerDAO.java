@@ -396,7 +396,8 @@ public class ManagerDAO {
 				pb.setProductArrivDate(rs.getString("package_product_arriv_date"));
 				pb.setProductPrice(rs.getInt("package_product_price"));
 				pb.setProductTotal(rs.getInt("package_product_total"));
-				
+				pb.setProductCurrent(rs.getInt("package_product_current"));
+				pb.setProductWishCount(rs.getInt("package_product_wish_count"));
 
 				productList.add(pb);
 			}
