@@ -4,6 +4,7 @@
 <%@page import="review.vo.ReviewBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%
 	// 전달받은 request 객체로부터 데이터 가져오기
 	// "pageInfo" 객체와 "articleList" 객체를 request 객체로부터 꺼내서 저장
@@ -15,8 +16,8 @@
 	int startPage = pageInfo.getStartPage();
 	int endPage = pageInfo.getEndPage();
 	int listCount = pageInfo.getListCount();
-
-	// 글검색 Jwoo
+	
+	
 	String search = request.getParameter("search");
 	
 	ReviewBean article = (ReviewBean)request.getAttribute("article");
@@ -28,9 +29,9 @@
 	<!-- 스타일 인클루드 -->
 <jsp:include page="/include/style.jsp"/>
 <style type="text/css">
-div{
-	border: 1px solid red;
-}
+/* div{ */
+/* 	border: 1px solid red; */
+/* } */
 </style>
   </head>
   <body>
@@ -51,20 +52,21 @@ div{
       </div>
     </section>
     <!-- END slider -->
+    
+    <!-- 추천여행지 -->
     <section class="ftco-section bg-light">
 			<%
 			if(articleList != null && listCount > 0) {%>
       <div class="container">
         <div class="row">
 			<!--리스트에서 보여지는 게시물 썸네일 한 덩이 시작 -->
-				<%for(int i=0; i<listCount; i++) {%>
+				<%for(int i=0; i<articleList.size(); i++) {%>
           <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="blog-entry">
               <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="block-20" style="background-image: url('reviewUpload/<%=articleList.get(i).getReview_image()%>');">
               </a>
               <div class="text p-4" >
-              
-               <!--  stars --> 
+             <!--  stars --> 
                <div id="stars"> 
 			<%if(articleList.get(i).getReview_star() == 0) {
 				%><img src="images/rating0.png" align="middle" /><%
@@ -91,16 +93,14 @@ div{
 			}
 			%>
 			</div>
-            <!-- end stars -->  
-              
+            <!-- end stars --> 
                 <div class="meta" onclick="location.href='ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>'">
-<%--                   <div><a href="#"><%=articleList.get(i).getReview_date()%></a></div> --%>
-                  <div><a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>"><%=articleList.get(i).getReview_member_id()%></a></div><!-- 아이디 대신 이름 들어갈 곳 -->
+                  <div><a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>"><%=articleList.get(i).getReview_member_name() %></a></div><!-- 아이디 대신 이름 들어갈 곳 -->
                 </div>
-                <h3 class="heading"><a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>"><%=articleList.get(i).getReview_content()%></a></h3>
+                <h3 class="heading"><a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>"><%=articleList.get(i).getReview_subject()%></a></h3>
                 <p class="clearfix">
                   <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="float-left"><%=articleList.get(i).getReview_date()%></a>
-                  <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="float-right meta-chat"><span class="icon-chat"></span><%=articleList.get(i).getReview_comment_count() %></a>
+                  <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="float-right meta-chat"><span class="icon-chat"></span><%=articleList.get(i).getReview_comment_count() %> </a>
                 </p>
               </div>
             </div>
@@ -109,7 +109,7 @@ div{
           <!-- 리스트에서 보여지는 게시물 썸네일 한 덩이 끝 -->
         </div> <!-- <div class="row">의 끝 -->
         
-         	<!-- 게시글 검색 & 태그-->
+        	<!-- 게시글 검색 & 태그-->
         	<!-- 검색창 축소 및 태그 검색창 정렬 작업 -->
             <div class="sidebar-box-list">
             <div>
@@ -160,7 +160,6 @@ div{
       </div> <!-- <div class="container">의 끝 -->
       <div align="right"><input type="button" value="임시글쓰기" class="btn py-3 px-4 btn-primary" onclick="location.href='./ReviewWriteForm.rv'"></div>
     </section>
-    
 <!--     <li class="active"><span>1</span></li> -->
 
 	<!-- footer 인클루드 -->

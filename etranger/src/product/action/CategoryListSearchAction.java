@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import common.action.Action;
 import common.vo.ActionForward;
 import common.vo.PageInfo;
-import manager.svc.CategoryListService;
 import manager.vo.CategoryBean;
+import product.svc.CategorySearchListService;
+import product.vo.SearchBean;
 
 public class CategoryListSearchAction implements Action {
 
@@ -29,13 +30,22 @@ public class CategoryListSearchAction implements Action {
 		}
 		// 검색정보 파라미터 가져오기
 		String keyword = request.getParameter("keyword");
+//		String keyword = "";
+//		String strKeyword = request.getParameter("keyword");
+//		if(strKeyword!=null) {
+//			keyword = strKeyword;
+//		}
+		
 		// 출발날짜가 선택되지않았을 경우 로컬시간 1일 후로 설정
 		LocalDateTime date = LocalDateTime.now().plusDays(1);
 		String depart_date = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
 		depart_date = request.getParameter("depart_date");
-		
 		String arriv_date = request.getParameter("arriv_date");
-		int guest_count = Integer.parseInt(request.getParameter("guest_count"));
+		String region = request.getParameter("region");
+		String city = request.getParameter("city");
+		
+		
+//		int guest_count = Integer.parseInt(request.getParameter("guest_count"));
 
 		
 		/*
@@ -53,7 +63,6 @@ public class CategoryListSearchAction implements Action {
 			OR package_region LIKE '키워드'
 			OR package_city LIKE '키워드'
 			OR package_theme LIKE '키워드'
-			
 			
 			
 			2. 날짜로 검색
@@ -104,11 +113,11 @@ public class CategoryListSearchAction implements Action {
 		 */
 		
 		
-		CategoryListService categoryListService = new CategoryListService();
-		int listCount = categoryListService.getListCount();
+		CategorySearchListService categorySearchListService = new CategorySearchListService();
+		int listCount = categorySearchListService.getListCount(keyword);
 
 		ArrayList<CategoryBean> categoryList = new ArrayList<CategoryBean>();
-		categoryList = categoryListService.getCategoryList(page, limit);
+		categoryList = categorySearchListService.getCategoryList(page, limit, keyword);
 
 		int maxPage = (int) ((double) listCount / limit + 0.95);
 		int startPage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1;
@@ -116,14 +125,18 @@ public class CategoryListSearchAction implements Action {
 		if (endPage > maxPage) {
 			endPage = maxPage;
 		}
-
+		
+		//SearchBean
+		SearchBean searchBean = new SearchBean(keyword,depart_date, arriv_date,region,city);
+		
 		PageInfo pageInfo = new PageInfo(page, maxPage, startPage, endPage, listCount);
 
+		request.setAttribute("searchBean", searchBean);
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("categoryList", categoryList);
 
 		forward = new ActionForward();
-		forward.setPath("/product/categoryList.jsp");
+		forward.setPath("/product/categorySearchList.jsp");
 
 		return forward;
 	}

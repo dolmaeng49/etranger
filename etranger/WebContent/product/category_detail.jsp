@@ -1,3 +1,7 @@
+<%@page import="java.util.Collection"%>
+<%@page import="java.util.Set"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Collections"%>
 <%@page import="manager.vo.ProductBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="manager.vo.CategoryBean"%>
@@ -25,7 +29,18 @@
 		region_code = pdetail.get(i).getPackage_category_region();
 		city_code = pdetail.get(i).getPackage_category_city();
 	}
-	String member_id = (String) session.getAttribute("member_id");
+	for (int i = 0; i < pdList.size(); i++) {
+		product_num = pdList.get(i).getProductNum();
+	}
+	
+	String member_id = (String)session.getAttribute("member_id");
+	
+	// 세션에서 로그인 회원의 찜목록 받아오기
+	Object memberWishObject = session.getAttribute("member_wishList");
+	ArrayList<String> member_wishList = null;
+	if(session.getAttribute("member_wishList") != null){
+		member_wishList = (ArrayList<String>)memberWishObject;
+	}
 %>
 
 
@@ -35,6 +50,7 @@
 <html lang="en">
 
 <head>
+<<<<<<< HEAD
 	<!-- 스타일 인클루드 -->
 	<jsp:include page="../include/style.jsp" />
 
@@ -42,6 +58,46 @@
 		hr {
 			border-top: 5px solid rgba(0, 0, 0, 0.1);
 		}
+=======
+<script type="text/javascript">
+	function wishFunction(domain,code) {
+		// isOHeart = '0' : 하트 속이 비어있는 상태 , '1' : 속이 꽉 찬 하트
+		var isOHeart = $(domain).attr('id');
+		
+		if(isOHeart=='0') {
+			// ajax로 insertWish DB 작업
+			
+			$(domain).removeClass('fa-heart-o');
+			$(domain).addClass('fa-heart');
+			$(domain).attr('id',"1");
+		} else if(isOHeart=='1') {
+			// ajax로 deleteWish DB 작업
+			
+			$(domain).removeClass('fa-heart');
+			$(domain).addClass('fa-heart-o');
+			$(domain).attr('id',"0");
+		}
+	}
+</script>
+	// 하트를 누르면 호출되는 함수
+	// 파라미터로 해당 패키지카테고리의 package_category_code 를 전달 받음
+// 	function wishFunction(this, code) {
+// 		alert('hihi');
+	// 하트 태그의 이름이 1 이면 속이 찬 하트, 0 이면 속이 빈하트
+// 		var isOHeart = $(this).attr('name');
+// 		alert(isOHeart);
+<script type="text/javascript">
+</script>
+
+
+<!-- 스타일 인클루드 -->
+<jsp:include page="../include/style.jsp" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style type="text/css">
+hr {
+	border-top: 5px solid rgba(0, 0, 0, 0.1);
+}
+>>>>>>> refs/remotes/origin/master
 
 		h2 {
 			color: white;
@@ -168,12 +224,33 @@
 				<div class="writeform-group">
 					<table width="730">
 						<tr>
+<<<<<<< HEAD
 							<td><label for="image">이미지1</label> <a href="#" class="block-20"
 									style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
 							<td><label for="image">이미지2</label> <a href="#" class="block-20"
 									style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
 							<td><label for="image">이미지3</label> <a href="#" class="block-20"
 									style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
+=======
+							<td><%=name%></td>
+							<td><%=theme%></td>
+							<!-- member_wishList 가 null이 아니고 해당 상품번호를 포함하면
+								 => 속이 꽉 찬 하트 -->
+							<td style="text-align: right;">좋아요숫자 <span id="wish_icon">1<i onclick="wishFunction(this,'<%=code%>')"
+								<%if(member_wishList != null && member_wishList.contains("상품번호")) {%>
+									class="fa fa-heart" id="1" 
+								<%} else {%>
+									class="fa fa-heart-o" id="0"
+								<%} %>
+								style="font-size:24px;color:red;"></i></span></td>
+							<!-- 빈하트는 class="fa fa-heart-o" name="0" -->
+							<!-- 꽉찬하트는 class="fa fa-heart" name="1" -->
+						</tr>
+						<tr>
+							<td><label for="image">이미지1</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
+							<td><label for="image">이미지2</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
+							<td><label for="image">이미지3</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
+>>>>>>> refs/remotes/origin/master
 						</tr>
 						<tr>
 							<td colspan="3"><label for="image"></label> <a href="#" class="block-20"

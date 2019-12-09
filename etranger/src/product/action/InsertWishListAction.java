@@ -18,9 +18,11 @@ public class InsertWishListAction implements Action {
 		String member_id = (String)session.getAttribute("member_id");
 		// 찜 버튼을 클릭한 상품(카테고리) category_code 가져오기
 		String category_code = request.getParameter("category_code");
+		
 		/*  wish 테이블 수정
 			product_num => category_code
 			외래키도 같이 바꾸기 */
+		
 		// 서비스 클래스의 addWishList 메서드 호출하여 member_id 와 category_code 전달
 		// wish 테이블 INSERT, product_category.wish_count UPDATE 작업 메서드
 		WishListService wishListService = new WishListService();

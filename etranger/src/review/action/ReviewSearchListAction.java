@@ -34,9 +34,7 @@ public class ReviewSearchListAction implements Action {
 		System.out.println("검색한 게시물 수(Action) " +listCount);
 		
 		ArrayList<ReviewBean> articleList = new ArrayList<ReviewBean>();
-		articleList = reviewSearchListService.getArticleList(page, limit);
-		
-//		int commentNumber = reviewListService.getCommentNumber();
+		articleList = reviewSearchListService.getArticleList(page, limit, search);
 		
 		
 		//페이징

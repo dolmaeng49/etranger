@@ -17,7 +17,7 @@
 	int endPage = pageInfo.getEndPage();
 	int listCount = pageInfo.getListCount();
 	
-	// 글검색 Jwoo
+	
 	String search = request.getParameter("search");
 	
 	ReviewBean article = (ReviewBean)request.getAttribute("article");

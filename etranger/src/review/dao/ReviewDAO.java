@@ -119,12 +119,8 @@ public class ReviewDAO {
 		return articleList;
 	}
 	
+	////////////////////////////////////////////////////////////////////////////////////////
 	
-	//////////////////////////////////Bong 작업영역 끝////////////////////////////////////////////
-	
-	
-	
-	////////////////////////////////JWoo 작업영역 시작/////////////////////////////////////
 	public ReviewBean selectArticle(int review_num) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -178,7 +174,6 @@ public class ReviewDAO {
 		}
 		return updateCount;
 	}
-	
 	
 
 	public int updateArticle(ReviewBean rb) { // 글수정
@@ -268,10 +263,16 @@ public class ReviewDAO {
 		int listCount = 0;
 		try {
 			con=getConnection();
-//			String sql = "select count(*) from board where subject like '%검색어%'";
-			String sql = "select count(*) from review where review_subject like ?";
+			
+			String sql="select count(*) from review"
+					+ " where review_member_name like ? or"
+					+ " where review_subject like ? or"
+					+ " where review_content like ?";
+			
 			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, "%"+search+"%"); // setString 시 '' 자동으로 생김
+			pstmt.setString(1, "%"+search+"%");
+			pstmt.setString(2, "%"+search+"%");
+			pstmt.setString(3, "%"+search+"%");
 			rs=pstmt.executeQuery();
 			if(rs.next()){
 				listCount =  rs.getInt("count(*)");
@@ -287,17 +288,51 @@ public class ReviewDAO {
 		return listCount;		
 		
 	} // end selectListCount(String search)
+	public ArrayList<ReviewBean> selectArticleList(int page, int limit, String search) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<ReviewBean> articleList = new ArrayList<ReviewBean>();
+		
+		
+		int startRow = (page - 1) * 10;	//시작 게시물 번호 계산
+		
+		try {
+			
+			String sql = "select * from review order by review_num desc LIMIT ?,?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, limit);
+			rs=pstmt.executeQuery();
+			
+		while(rs.next()) {
+			ReviewBean rb = new ReviewBean();
+			rb.setReview_num(rs.getInt("review_num"));
+			rb.setReview_member_id(rs.getString("review_member_id"));
+			rb.setReview_subject(rs.getString("review_subject"));
+			rb.setReview_image(rs.getString("review_image"));
+			rb.setReview_content(rs.getString("review_content"));
+			rb.setReview_date(rs.getTimestamp("review_date"));
+			rb.setReview_readcount(rs.getInt("review_readcount"));
+			rb.setReview_package_catagory_code(rs.getString("review_package_category_code"));
+			rb.setReview_member_name(rs.getString("review_member_name"));
+			rb.setReview_star(rs.getInt("review_star"));
+			rb.setReview_comment_count(rs.getInt("review_comment_count"));
+			articleList.add(rb);
+			}
+		} catch (SQLException e) {
+			System.out.println("selectArticleList() 오류! - " + e.getMessage());
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return articleList;
+	}
 	
 	
 	
 	
 	
 	
-	
-	
-	
-	
-	////////////////////////////////JWoo 작업영역 끝/////////////////////////////////////
 	
 	
 	

@@ -23,7 +23,6 @@ public class ReviewDetailAction implements Action {
 		System.out.println("ReviewDetailAction");
 		int review_num = Integer.parseInt(request.getParameter("review_num"));
 		
-		
 
 		String viewerIpAddr = request.getRemoteAddr();	//클라이언트 ip 가져오기
 		
