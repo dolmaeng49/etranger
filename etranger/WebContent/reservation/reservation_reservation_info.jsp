@@ -125,7 +125,7 @@ table.pdList td input {
 						<h3 class="mb-5"></h3>
 					</div>
 
-<%-- <%if(rb.getReservation_category_code()!=null){ %> --%>
+
 					<div class="writeform-group">
 					<div class ="col-md-12">
 						<br>
