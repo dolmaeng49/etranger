@@ -44,7 +44,7 @@ table.reservList {
 	text-align: center;
 	line-height: 1.5;
 	margin: 50px 0px;
-	width: 100%;
+	width: 90%;
 	
 }
 
@@ -136,7 +136,7 @@ font-weight: 700 !important;
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-9">
+			<div class="col-md-10">
 <!-- 고객아이디 예약일(결제시한) 예약번호 예약상품(이름) 예약인원 출발날짜/도착날짜 금액 진행상태 -->
 				<table class="reservList">
 					<tr><th>고객아이디</th>
@@ -160,8 +160,8 @@ font-weight: 700 !important;
 					<td><%=reservList.get(i).getReservation_num() %></td>
 					<td class="left"><%=reservList.get(i).getPackage_category_name() %><br> <%=reservList.get(i).getReservation_category_code() %></td>
 					<td><%=reservList.get(i).getReservation_headcount() %></td>
-					<td>출발&nbsp;<%=reservList.get(i).getPackage_product_depart_date() %><br>도착&nbsp;<%=reservList.get(i).getPackage_product_arriv_date()%></td>
-					<td class="right price"><%=reservList.get(i).getReservation_price() %></td>
+					<td>출발&nbsp;<%=reservList.get(i).getPackage_product_depart_date()%><br>도착&nbsp;<%=reservList.get(i).getPackage_product_arriv_date()%></td>
+					<td class="right price"><%=reservList.get(i).getReservation_price()%></td>
 					<td><%=reservList.get(i).getReservation_pay_way() %></td>
 					<td><%=reservList.get(i).getReservation_progress() %></td>
 					<td><input type="button" value="삭제" onclick="#"> </td>

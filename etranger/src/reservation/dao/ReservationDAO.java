@@ -81,9 +81,20 @@ public class ReservationDAO {
 
 		try {
 			
-//			String sql = "INSERT INTO reservation(reservation_member_id,reservation_product_num,reservation_time,reservation_price,"
-//					+ "reservation_headcount,reservation_pay_way,reservation_ispayment,reservation_category_code)"
-//					+ "VALUES (?,?,CURRENT_TIMESTAMP,?,?,?,?,?)";
+//			+-----------------------------+--------------+------+-----+---------+----------------+
+//			| Field                       | Type         | Null | Key | Default | Extra          |
+//			+-----------------------------+--------------+------+-----+---------+----------------+
+//			| reservation_num             | int(11)      | NO   | PRI | NULL    | auto_increment |
+//			| reservation_category_code   | varchar(100) | YES  | MUL | NULL    |                |
+//			| reservation_member_id       | varchar(12)  | NO   | MUL | NULL    |                |
+//			| reservation_product_num     | varchar(100) | NO   | MUL | NULL    |                |
+//			| reservation_date            | date         | NO   |     | NULL    |                |
+//			| reservation_price           | int(11)      | NO   |     | NULL    |                |
+//			| reservation_headcount       | int(11)      | NO   |     | NULL    |                |
+//			| reservation_pay_way         | varchar(45)  | NO   |     | NULL    |                |
+//			| reservation_progress        | varchar(10)  | YES  |     | NULL    |                |
+//			| reservation_product_current | int(11)      | YES  |     | NULL    |                |
+//			+-----------------------------+--------------+------+-----+---------+----------------+
 			String sql = "INSERT INTO reservation VALUES(null,?,?,?,CURRENT_TIMESTAMP,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			System.out.println("pstmt");
