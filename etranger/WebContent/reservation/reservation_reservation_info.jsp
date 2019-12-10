@@ -44,8 +44,8 @@
 
 
 <%
-	ReservationBean rb = new ReservationBean();
-	rb = (ReservationBean) request.getAttribute("ReservationInfo");
+	ArrayList<ReservationBean> rb = new ArrayList<ReservationBean>();
+	rb = (ArrayList<ReservationBean>) request.getAttribute("ReservationInfo");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,8 +87,6 @@ table.pdList td input {
 </style>
 </head>
 
-
-
 <body>
 
 	<!-- 탑메뉴 인클루드 -->
@@ -120,88 +118,67 @@ table.pdList td input {
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8 ftco-animate">
+				<div class="col-md-10 ftco-animate">
 
 					<!--  글 작성 폼 시작 -->
 					<div class="managerdetailform">
-						<h3 class="mb-5">예약조회</h3>
-					</div>
-
-					<%
-						if (rb.getReservation_category_code() != null) {
-					%>
-
-					<div class="writeform-group">
-						<label for="image">이미지</label><a
-							href="CategoryDetail.pr?package_category_code=<%=rb.getReservation_category_code()%>"
-							class="block-20"
-							style="background-image: url('ManagerImgUpload/<%=rb.getPackage_category_image()%>'
-										);">
-						</a>
+						<h3 class="mb-5"></h3>
 					</div>
 
 
 					<div class="writeform-group">
-						<br> <label for="code">아이디</label><input type="text"
-							class="form-control" name="member_id" id="member_id"
-							value="<%=rb.getReservation_member_id()%>" />
+					<div class ="col-md-12">
+						<br>
+						<h3>
+							<label for="name">예약 상품 리스트</label>
+						</h3>
+						<table class="pdList" id="pdlist">
+							<%
+								if (rb != null) {
+							%>
+							<tr>
+								<th>고객 아이디</th>
+								<th>예약일</th>
+								<th>예약번호</th>
+								<th>출발날짜</th>
+								<th>도착날짜</th>
+								<th>예약상품</th>
+								<th>예약인원</th>
+								<th>금액</th>
+								<th>결제방법</th>
+								<th>진행상태</th>
+
+							</tr>
+							<%
+								for (int i = 0; i < rb.size(); i++) {
+							%>
+							<tr>
+								<td><%=rb.get(i).getReservation_member_id()%></td>
+								<td><%=rb.get(i).getReservation_date()%></td>
+								<td><%=rb.get(i).getReservation_num()%></td>
+								<td><%=rb.get(i).getPackage_product_depart_date()%></td>
+								<td><%=rb.get(i).getPackage_product_arriv_date()%></td>
+								<td><%=rb.get(i).getPackage_category_name()%></td>
+								<td><%=rb.get(i).getReservation_headcount()%></td>
+								<td><%=rb.get(i).getReservation_price()%></td>
+								<td><%=rb.get(i).getReservation_pay_way()%></td>
+								<td><%=rb.get(i).getReservation_progress()%></td>
+							</tr>
+							<%
+								}
+								}
+							%>
+							<label id="newProduct"></label>
+						</table>
+						
 					</div>
-
-
-					<div class="writeform-group">
-						<br> <label for="code">상품코드</label><input type="text"
-							class="form-control" name="category_code" id="category_code"
-							value="<%=rb.getReservation_category_code()%>" />
 					</div>
-
-					<div class="writeform-group">
-						<br> <label for="code">상품이름</label><input type="text"
-							class="form-control" name="category_name()" id="category_name()"
-							value="<%=rb.getPackage_category_name()%>" />
-					</div>
-
-
-					<div class="writeform-group">
-						<br> <label for="code">출발날짜</label><input type="text"
-							class="form-control" name="depart_date" id="depart_date"
-							value="<%=rb.getPackage_product_depart_date()%>" />
-					</div>
-
-
-					<div class="writeform-group">
-						<br> <label for="code">도착날짜</label><input type="text"
-							class="form-control" name="arriv_date" id="arriv_date"
-							value="<%=rb.getPackage_product_arriv_date()%>" />
-					</div>
-
-					<div class="writeform-group">
-						<br> <label for="code">총 인원수</label><input type="text"
-							class="form-control" name="headcount" id="headcount"
-							value="<%=rb.getReservation_headcount()%>" />
-					</div>
-					<div class="writeform-group">
-
-
-						<div class="writeform-group">
-							<br> <label for="code">총 가격</label><input type="text"
-								class="form-control" name="price" id="price"
-								value="<%=rb.getReservation_price()%>" />
-						</div>
-						<div class="writeform-group"></div>
-					</div>
-					<%
-						} else {
-					%>
-					<p>예약상품이 없습니다.</p>
-
-					<%
-						}
-					%>
 				</div>
+<%-- <%}%><% else { %> --%>
+<!-- <div> 예약 상품이 없습니다</div> -->
+<%-- <%} %> --%>
 			</div>
 		</div>
-
-
 	</section>
 
 	<!-- footer 인클루드 -->

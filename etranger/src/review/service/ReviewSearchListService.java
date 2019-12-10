@@ -27,31 +27,17 @@ public class ReviewSearchListService {
 		return listCount;
 	}
 
-	public ArrayList<ReviewBean> getArticleList(int page, int limit) {
+	public ArrayList<ReviewBean> getArticleList(int page, int limit, String search) {
 		Connection con = getConnection();
 		ReviewDAO reviewDAO = ReviewDAO.getInstance();
 		reviewDAO.setConnection(con);
 		ArrayList<ReviewBean> articleList = null;
 		
-		articleList = reviewDAO.selectArticleList(page, limit);
+		articleList = reviewDAO.selectArticleList(page, limit, search);
 		
 		close(con);
 		
 		return articleList;
 	}
-
-	
-//	public int getCommentNumber() {
-//		System.out.println("getCommentCount");
-//		Connection con = getConnection();
-//		ReviewDAO reviewDAO = ReviewDAO.getInstance();
-//		reviewDAO.setConnection(con);
-//		
-//		commentNumber = reviewDAO.getCommentNumber();
-//		
-//		close(con);
-//		
-//		return commentNumber
-//	}
 
 }

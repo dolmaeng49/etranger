@@ -28,6 +28,7 @@ public class ReservationBean {
 	private String package_category_image;
 	private String package_product_arriv_date;
 	private String package_product_depart_date;
+	
 	public int getReservation_num() {
 		return reservation_num;
 	}

@@ -120,7 +120,7 @@
                       
                       <div class="select-wrap col-sm-12 group mb-3">
                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="region" id="" class="form-control"><!--지역명  -->
+                        <select name="guest_count" id="" class="form-control"><!--지역명  -->
                           <option value="0">지역명</option>
                           <option value="1">유럽</option>
                           <option value="2">미주</option>
@@ -131,7 +131,7 @@
                       
                       <div class="select-wrap col-sm-12 group mb-3">
                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="city" id="" class="form-control"><!--도시명  -->
+                        <select name="guest_count" id="" class="form-control"><!--도시명  -->
                           <option value="0">도시명</option>
                           <option value="1">런던</option>
                           <option value="2">파리</option>
@@ -141,7 +141,16 @@
                       </div>
                       
                       <!--  -->
-                      
+                      <div class="select-wrap col-sm-12 group mb-3">
+                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                        <select name="guest_count" id="" class="form-control"><!--인원수  -->
+                          <option value="0">인원수</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4+</option>
+                        </select>
+                      </div>
                       <div class="col-sm-12 group mb-3">
                         <input type="submit" class="search-submit btn btn-primary" value="Find Packages">
                       </div>

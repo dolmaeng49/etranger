@@ -177,6 +177,8 @@ table.pdList td input {
 							<label id="newProduct"></label>
 						</table>
 					</div>
+					
+					
 					<div class="form-group">
 						<input type="button" value="날짜별 패키지상품 추가하기" class="btn py-3 px-4 btn-primary" onclick="product('<%=code%>')">
 					</div>
