@@ -38,6 +38,7 @@ ArrayList<ReservationBean> reservList = (ArrayList<ReservationBean>)request.getA
 	font-size: smaller;
 }
 
+/* 테이블 css */
 table.reservList {
 	border-collapse: separate;
 	border-spacing: 1px;
@@ -64,7 +65,6 @@ table.reservList td {
 	border-bottom: 1px solid #ccc;
 	background: #eee;
 	font-size: smaller;
-	
 }
 
 table.reservList .left{
@@ -164,11 +164,11 @@ font-weight: 700 !important;
 					<td class="right price"><%=reservList.get(i).getReservation_price()%></td>
 					<td><%=reservList.get(i).getReservation_pay_way() %></td>
 					<td><%=reservList.get(i).getReservation_progress() %></td>
-					<td><input type="button" value="삭제" onclick="#"> </td>
+					<td><input type="button" value="삭제" onclick="YesOrNo()"> </td>
 					
 					</tr>
 					<%
-				
+					
 						}
 					}
 					%>
@@ -186,6 +186,18 @@ font-weight: 700 !important;
 	<!-- END slider -->
 
 
+<script>
+function YesOrNo(){
+ if(confirm("정말 삭제하시겠습니까? "))
+ {
+  location.href="managementDelete.ma";
+ }
+ else
+ {
+ alert('아니오를 누르셨습니다');
+ }
+}
+</script> 
 
 
 	<!-- footer 인클루드 -->

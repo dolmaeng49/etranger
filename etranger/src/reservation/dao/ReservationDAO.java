@@ -112,6 +112,21 @@ public class ReservationDAO {
 //			| reservation_progress        | varchar(10)  | YES  |     | NULL    |                |
 //			| reservation_product_current | int(11)      | YES  |     | NULL    |                |
 //			+-----------------------------+--------------+------+-----+---------+----------------+
+			
+//			+-----------------------------+--------------+------+-----+---------+----------------+
+//			| Field                       | Type         | Null | Key | Default | Extra          |
+//			+-----------------------------+--------------+------+-----+---------+----------------+
+//			| reservation_num             | int(11)      | NO   | PRI | NULL    | auto_increment |
+//			| reservation_member_id       | varchar(12)  | NO   | MUL | NULL    |                |
+//			| reservation_product_num     | varchar(100) | NO   | MUL | NULL    |                |
+//			| reservation_category_code   | varchar(100) | NO   | MUL | NULL    |                |
+//			| reservation_date            | date         | NO   |     | NULL    |                |
+//			| reservation_price           | int(11)      | NO   |     | NULL    |                |
+//			| reservation_headcount       | int(11)      | NO   |     | NULL    |                |
+//			| reservation_pay_way         | varchar(45)  | NO   |     | NULL    |                |
+//			| reservation_progress        | varchar(45)  | NO   |     | NULL    |                |
+//			| reservation_product_current | int(11)      | YES  |     | NULL    |                |
+//			+-----------------------------+--------------+------+-----+---------+----------------+
 
 //			String sql = "INSERT INTO reservation(reservation_member_id,reservation_product_num,reservation_time,reservation_price,"
 //					+ "reservation_headcount,reservation_pay_way,reservation_ispayment,reservation_category_code)"
@@ -120,14 +135,14 @@ public class ReservationDAO {
 			String sql = "INSERT INTO reservation VALUES(null,?,?,?,CURRENT_TIMESTAMP,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 
-			pstmt.setString(1, rb.getReservation_category_code());
-			pstmt.setString(2, rb.getReservation_member_id());
-			pstmt.setString(3, rb.getReservation_product_num());
+			pstmt.setString(1, rb.getReservation_member_id());
+			pstmt.setString(2, rb.getReservation_product_num());
+			pstmt.setString(3, rb.getReservation_category_code());
 			pstmt.setInt(4, rb.getReservation_price());
 			pstmt.setInt(5, rb.getReservation_headcount());
 			pstmt.setString(6, rb.getReservation_pay_way());
 			pstmt.setString(7, rb.getReservation_progress());
-
+			
 			insertCount = pstmt.executeUpdate();
 
 //			sql = "UPDATE package_product SET package_product_total = package_product_total - ?, package_product_current = package_product_current + ? WHERE package_product_num = ?";
