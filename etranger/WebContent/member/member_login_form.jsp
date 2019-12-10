@@ -19,17 +19,6 @@
 	.wrap-links {
 		text-align: right;
 	}
-	#test{
-		float: right;
-		border: 1px solid red;
-		width: 170px; height: 400px;
-		position: sticky;
-		top: 100px;
-		right: 200px;
-		bottom: 100px;
-		z-index: -100;
-		
-	}
 	
 </style>
 </head>
@@ -57,12 +46,7 @@
 		</div>
 	</section>
 	<!-- END slider -->
-	
-<!-- floating bar test -->	
-	<div id="test">
-	<input type="text" class="pick_date_input"></div>
-	<div class="pick_start_date"></div>
-<!-- floating bar test -->
+
 	
 <form action="LoginPro.me" method="post">
 	<section class="ftco-section">

@@ -8,6 +8,7 @@
   <head>
 	<!-- 스타일 인클루드 -->
 <jsp:include page="../include/style.jsp"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript">
 <%
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
@@ -17,7 +18,53 @@
 	int startPage = pageInfo.getStartPage();
 	int endPage = pageInfo.getEndPage();
 	int listCount = pageInfo.getListCount();
+	
+	// 세션에서 로그인 회원의 찜목록 받아오기
+	Object memberWishObject = session.getAttribute("member_wishList");
+	ArrayList<String> member_wishList = null;
+	if(session.getAttribute("member_wishList") != null){
+		member_wishList = (ArrayList<String>)memberWishObject;
+	}
 %>
+// 하트를 누르면 호출되는 함수
+// 파라미터로 해당 패키지카테고리의 package_category_code 를 전달 받음
+// 하트 태그의 이름이 1 이면 속이 찬 하트, 0 이면 속이 빈하트
+function wishFunction(domain,code) {
+	// isOHeart = '0' : 하트 속이 비어있는 상태 , '1' : 속이 꽉 찬 하트
+	var isOHeart = $(domain).attr('id');
+	// 표시된 좋아요 숫자를 변수에 저장
+	var wish_count = $('#wish_count').text();
+	
+	if(isOHeart=='0') {
+		// back-end : ajax로 insertWish DB 작업
+		// 액션클래스로 하트가 클릭된 상품(category) 코드 전달
+		$.ajax('InsertWish.pr',{
+			data : {category_code : code},
+			success : function() {
+				// front-end : 하트의 모양을 결정하는 클래스 add & remove, 모양을 저장하는 속성(id) 변경
+				$(domain).removeClass('fa-heart-o');
+				$(domain).addClass('fa-heart');
+				$(domain).attr('id',"1");
+				// 좋아요숫자 표시를 가져와 Number로 형변환 후 1을 더해 다시 표시
+				// DB 에서 가져오는 것 아님, 눈속임. 새로고침하면 DB에서 가져오기 때문에 괜찮음
+				$('#wish_count').text(Number(wish_count)+1);
+			},
+			error : function(){}
+		});
+	} else if(isOHeart=='1') {
+		$.ajax('DeleteWish.pr',{
+			data : {category_code : code},
+			success : function() {
+				$(domain).removeClass('fa-heart');
+				$(domain).addClass('fa-heart-o');
+				$(domain).attr('id',"0");
+				$('#wish_count').text(Number(wish_count)-1);
+			},
+			error : function(){}
+		});
+		
+	}
+}
 </script>
 
   </head>
@@ -54,9 +101,16 @@
                   <div class="text">
                     <span class="price">$399</span>
                     <h3 class="heading"><%=categoryList.get(i).getPackage_category_name()%></h3>
-                    <div class="post-meta">
+                    <div class="post-meta" style="text-align: right;">
 <%--                     <%String content = productList.get(i).getPackage_category_content();%> //.substring(0, Math.min(content.length(), 20)) --%>
-                      <span><%=categoryList.get(i).getPackage_category_content() %></span>
+                      <span>좋아요숫자 <span id="wish_count"><%=categoryList.get(i).getPackage_category_wish_count() %></span>
+								<i onclick="wishFunction(this,'<%=categoryList.get(i).getPackage_category_code()%>')"
+								<%if(member_wishList != null && member_wishList.contains(categoryList.get(i).getPackage_category_code())) {%>
+									class="fa fa-heart" id="1" 
+								<%} else {%>
+									class="fa fa-heart-o" id="0"
+								<%} %>
+								style="font-size:24px;color:red;"></i></span>
                     </div>
                     <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span> <span>500 reviews</span></p>
                   </div>

@@ -14,6 +14,8 @@ import common.vo.ActionForward;
 import product.action.CategoryDetailAction;
 import product.action.CategoryListAction;
 import product.action.CategoryListSearchAction;
+import product.action.DeleteWishAction;
+import product.action.InsertWishAction;
 
 @WebServlet("*.pr") // 서블릿(Controller)이 매핑을 담당할 주소 설정
 public class ProductFrontController extends HttpServlet {
@@ -50,15 +52,22 @@ public class ProductFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (command.equals("/InsertWish.pr")) {
+			action = new InsertWishAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/DeleteWish.pr")) {
+			action = new DeleteWishAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-//			else if (command.equals("/AddWish.pr")) {
-//			action = new AddWishAction();
-//			try {
-//				forward = action.execute(request, response);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
+		
 		
 		// ActionForward 객체의 정보에 따른 포워딩
 		if (forward != null) {

@@ -8,7 +8,7 @@ import common.action.Action;
 import common.vo.ActionForward;
 import product.svc.WishListService;
 
-public class InsertWishListAction implements Action {
+public class InsertWishAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

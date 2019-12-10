@@ -19,6 +19,7 @@
 	String product_num = "";
 	int region_code = 0;
 	int city_code = 0;
+	int wish_count = 0;
 	for (int i = 0; i < pdetail.size(); i++) {
 		code = pdetail.get(i).getPackage_category_code();
 		image = pdetail.get(i).getPackage_category_image();
@@ -27,6 +28,7 @@
 		theme = pdetail.get(i).getPackage_category_theme();
 		region_code = pdetail.get(i).getPackage_category_region();
 		city_code = pdetail.get(i).getPackage_category_city();
+		wish_count = pdetail.get(i).getPackage_category_wish_count();
 	}
 	for (int i = 0; i < pdList.size(); i++) {
 		product_num = pdList.get(i).getProductNum();
@@ -50,33 +52,45 @@
 
 <head>
 <script type="text/javascript">
+	// 하트를 누르면 호출되는 함수
+	// 파라미터로 해당 패키지카테고리의 package_category_code 를 전달 받음
+	// 하트 태그의 이름이 1 이면 속이 찬 하트, 0 이면 속이 빈하트
 	function wishFunction(domain,code) {
 		// isOHeart = '0' : 하트 속이 비어있는 상태 , '1' : 속이 꽉 찬 하트
 		var isOHeart = $(domain).attr('id');
+		// 표시된 좋아요 숫자를 변수에 저장
+		var wish_count = $('#wish_count').text();
 		
 		if(isOHeart=='0') {
-			// ajax로 insertWish DB 작업
-			
-			$(domain).removeClass('fa-heart-o');
-			$(domain).addClass('fa-heart');
-			$(domain).attr('id',"1");
+			// back-end : ajax로 insertWish DB 작업
+			// 액션클래스로 하트가 클릭된 상품(category) 코드 전달
+			$.ajax('InsertWish.pr',{
+				data : {category_code : code},
+				success : function() {
+					// front-end : 하트의 모양을 결정하는 클래스 add & remove, 모양을 저장하는 속성(id) 변경
+					$(domain).removeClass('fa-heart-o');
+					$(domain).addClass('fa-heart');
+					$(domain).attr('id',"1");
+					// 좋아요숫자 표시를 가져와 Number로 형변환 후 1을 더해 다시 표시
+					// DB 에서 가져오는 것 아님, 눈속임. 새로고침하면 DB에서 가져오기 때문에 괜찮음
+					$('#wish_count').text(Number(wish_count)+1);
+				},
+				error : function(){}
+			});
 		} else if(isOHeart=='1') {
-			// ajax로 deleteWish DB 작업
+			$.ajax('DeleteWish.pr',{
+				data : {category_code : code},
+				success : function() {
+					$(domain).removeClass('fa-heart');
+					$(domain).addClass('fa-heart-o');
+					$(domain).attr('id',"0");
+					$('#wish_count').text(Number(wish_count)-1);
+				},
+				error : function(){}
+			});
 			
-			$(domain).removeClass('fa-heart');
-			$(domain).addClass('fa-heart-o');
-			$(domain).attr('id',"0");
 		}
 	}
-</script>
-<script type="text/javascript">
-	// 하트를 누르면 호출되는 함수
-	// 파라미터로 해당 패키지카테고리의 package_category_code 를 전달 받음
-// 	function wishFunction(this, code) {
-// 		alert('hihi');
-	// 하트 태그의 이름이 1 이면 속이 찬 하트, 0 이면 속이 빈하트
-// 		var isOHeart = $(this).attr('name');
-// 		alert(isOHeart);
 </script>
 	<!-- 스타일 인클루드 -->
 	<jsp:include page="../include/style.jsp" />
@@ -203,17 +217,16 @@
 				<div class="writeform-group">
 					<table width="730">
 					<tr>
-							<td><%=name%></td>
-							<td><%=theme%></td>
 							<!-- member_wishList 가 null이 아니고 해당 상품번호를 포함하면
 								 => 속이 꽉 찬 하트 -->
-							<td style="text-align: right;">좋아요숫자 <span id="wish_icon">1<i onclick="wishFunction(this,'<%=code%>')"
-								<%if(member_wishList != null && member_wishList.contains("상품번호")) {%>
+							<td colspan="3" style="text-align: right;">좋아요숫자 <span id="wish_count"><%=wish_count %></span>
+								<i onclick="wishFunction(this,'<%=code%>')"
+								<%if(member_wishList != null && member_wishList.contains(code)) {%>
 									class="fa fa-heart" id="1" 
 								<%} else {%>
 									class="fa fa-heart-o" id="0"
 								<%} %>
-								style="font-size:24px;color:red;"></i></span></td>
+								style="font-size:24px;color:red;"></i></td>
 							<!-- 빈하트는 class="fa fa-heart-o" name="0" -->
 							<!-- 꽉찬하트는 class="fa fa-heart" name="1" -->
 						</tr>

@@ -25,7 +25,7 @@ public class ProductDAO {
 		this.con = con;
 	}
 
-	public int insertWishList(String member_id, String category_code) {
+	public int insertWish(String member_id, String category_code) {
 		PreparedStatement pstmt = null;
 		String sql = "INSERT INTO wish VALUES(?,?,?)";
 		int addCount = 0;
@@ -47,7 +47,7 @@ public class ProductDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<String> member_wishList = new ArrayList<String>();
-		String sql = "SELECT wish_category_code FROM wishr WHERE wish_member_id=?";
+		String sql = "SELECT wish_category_code FROM wish WHERE wish_member_id=?";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_id);
@@ -68,7 +68,8 @@ public class ProductDAO {
 	public int updateCategoryWishCount(String category_code, int wishCount) {
 		PreparedStatement pstmt = null;
 		int updateCount = 0;
-		String sql = "UPDATE product_category SET wish_count=? WHERE wish_category_code=?";
+		String sql = "UPDATE package_category SET package_category_wish_count=package_category_wish_count+?"
+				+ " WHERE package_category_code=?";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, wishCount);
@@ -80,19 +81,18 @@ public class ProductDAO {
 		return updateCount;
 	}
 
-	public int deleteWishList(String member_id, String category_code) {
+	// 아이디와 카테고리 코드를 전달받아 해당 정보와 일치하는 행 삭제
+	public int deleteWish(String member_id, String category_code) {
 		PreparedStatement pstmt = null;
 		String sql = "DELETE FROM wish WHERE wish_member_id=? AND wish_category_code=?";
 		int deleteCount = 0;
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, 0);
-			pstmt.setString(2, member_id);
-			pstmt.setString(3, category_code);
-			
+			pstmt.setString(1, member_id);
+			pstmt.setString(2, category_code);
 			deleteCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("addWishList 실패 : " + e.getMessage());
+			System.out.println("deleteWish 실패 : " + e.getMessage());
 		}
 		
 		return deleteCount;

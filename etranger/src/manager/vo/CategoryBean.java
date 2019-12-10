@@ -17,6 +17,7 @@ public class CategoryBean {
 	private String package_category_name;
 	private String package_category_image;
 	private String package_category_content;
+	private int package_category_wish_count;
 
 //	| package_category_code | 
 //	package_category_name | 
@@ -25,6 +26,14 @@ public class CategoryBean {
 //	package_category_theme | 
 //	package_category_image | 
 //	package_category_content |
+
+	public int getPackage_category_wish_count() {
+		return package_category_wish_count;
+	}
+
+	public void setPackage_category_wish_count(int package_category_wish_count) {
+		this.package_category_wish_count = package_category_wish_count;
+	}
 
 	public int getCityRegionCode() {
 		return cityRegionCode;

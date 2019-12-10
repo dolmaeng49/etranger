@@ -19,7 +19,7 @@ public class WishListService {
 		boolean isSuccess = false;
 		
 		// wish 테이블에 ISERT 작업
-		int insertCount = productDAO.insertWishList(member_id, category_code);
+		int insertCount = productDAO.insertWish(member_id, category_code);
 		
 		if(insertCount > 0) { // INSERT 성공시
 			// product_category 테이블 UPDATE 작업 (wish_count + 1)
@@ -62,7 +62,7 @@ public class WishListService {
 		boolean isSuccess = false;
 		
 		// wish 테이블에 DELETE 작업
-		int deleteCount = productDAO.deleteWishList(member_id, category_code);
+		int deleteCount = productDAO.deleteWish(member_id, category_code);
 		
 		if(deleteCount > 0) { // DELETE 성공시
 			// product_category 테이블 UPDATE 작업 (wish_count - 1)

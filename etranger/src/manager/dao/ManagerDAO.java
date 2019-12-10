@@ -289,6 +289,7 @@ public class ManagerDAO {
 				cb.setPackage_category_content(rs.getString("package_category_content"));
 				cb.setPackage_category_region(rs.getInt("package_category_region"));
 				cb.setPackage_category_city(rs.getInt("package_category_city"));
+				cb.setPackage_category_wish_count(rs.getInt("package_category_wish_count"));
 				productList.add(cb);
 			}
 		} catch (SQLException e) {
@@ -353,6 +354,7 @@ public class ManagerDAO {
 				cb.setPackage_category_content(rs.getString("package_category_content"));
 				cb.setPackage_category_region(rs.getInt("package_category_region"));
 				cb.setPackage_category_city(rs.getInt("package_category_city"));
+				cb.setPackage_category_wish_count(rs.getInt("package_category_wish_count"));
 				
 
 				productDetailList.add(cb);

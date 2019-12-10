@@ -10,8 +10,12 @@ grant all privileges on etranger01.* to etranger@'%' identified by 'etranger1234
 
 // 권한부여 적용
 flush privileges;
-==========================================
 
+최종 수정 날짜 12-10 저녁 6시 : wish 오토인크리먼트 추가
+==========================================
+관리자 계정 생성
+INSERT INTO member VALUES('admin','1234','관리자','관리자',null,null,null,'관리자','관리자','2019-12-10','N',now(),now(),'관리자');
+==========================================
 
 CREATE TABLE `member` (
   `member_id` VARCHAR(12),
@@ -128,7 +132,7 @@ CREATE TABLE `reservation` (
 
 
 CREATE TABLE `wish` (
-  `wish_num` INT NOT NULL,
+  `wish_num` INT NOT NULL AUTO_INCREMENT,
   `wish_member_id` VARCHAR(12) NOT NULL,
   `wish_category_code` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`wish_num`),
