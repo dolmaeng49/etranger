@@ -21,6 +21,8 @@ public class ReservationInsertAction implements Action {
 			PrintWriter out = response.getWriter();
 			String print = "";
 			
+			Timestamp reservation_date = new Timestamp(System.currentTimeMillis());
+			
 			ReservationBean rb = new ReservationBean();
 			rb.setReservation_category_code(request.getParameter("category_code"));
 			rb.setReservation_progress("예약대기");
@@ -29,7 +31,7 @@ public class ReservationInsertAction implements Action {
 			rb.setReservation_price(Integer.parseInt(request.getParameter("price")));
 			rb.setReservation_product_num(request.getParameter("product_num"));
 			rb.setReservation_member_id(request.getParameter("member_id"));
-
+//			rb.setReservation_date(reservation_date);
 			ReservationInsertService ris = new ReservationInsertService();
 			boolean isInsertSuccess = ris.insertReservation(rb);
 
@@ -43,7 +45,7 @@ public class ReservationInsertAction implements Action {
 				} else {
 					System.out.println("action");
 					forward = new ActionForward();
-					forward.setPath("ReservationInfo.rs");
+					forward.setPath("ReservationInfo.rs?member_id="+request.getParameter("member_id"));
 					forward.setRedirect(true);// Redirect 방식 = true, Dispatch 방식 = false 전달
 				}
 			} else {

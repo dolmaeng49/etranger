@@ -113,12 +113,12 @@ public class ReservationDAO {
 
 			insertCount = pstmt.executeUpdate();
 
-			sql = "UPDATE package_product SET package_product_total = package_product_total - ?, package_product_current = package_product_current + ? WHERE package_product_num = ?";
+//			sql = "UPDATE package_product SET package_product_total = package_product_total - ?, package_product_current = package_product_current + ? WHERE package_product_num = ?";
+			sql = "UPDATE package_product SET package_product_current = package_product_current + ? WHERE package_product_num = ?";
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setInt(1, rb.getReservation_headcount());
-			pstmt.setInt(2, rb.getReservation_headcount());
-			pstmt.setString(3, rb.getReservation_product_num());
+			pstmt.setString(2, rb.getReservation_product_num());
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {

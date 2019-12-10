@@ -20,7 +20,6 @@
 	int region_code = 0;
 	int city_code = 0;
 	for (int i = 0; i < pdetail.size(); i++) {
-
 		code = pdetail.get(i).getPackage_category_code();
 		image = pdetail.get(i).getPackage_category_image();
 		name = pdetail.get(i).getPackage_category_name();
@@ -50,15 +49,6 @@
 <html lang="en">
 
 <head>
-<<<<<<< HEAD
-	<!-- 스타일 인클루드 -->
-	<jsp:include page="../include/style.jsp" />
-
-	<style type="text/css">
-		hr {
-			border-top: 5px solid rgba(0, 0, 0, 0.1);
-		}
-=======
 <script type="text/javascript">
 	function wishFunction(domain,code) {
 		// isOHeart = '0' : 하트 속이 비어있는 상태 , '1' : 속이 꽉 찬 하트
@@ -79,6 +69,7 @@
 		}
 	}
 </script>
+<script type="text/javascript">
 	// 하트를 누르면 호출되는 함수
 	// 파라미터로 해당 패키지카테고리의 package_category_code 를 전달 받음
 // 	function wishFunction(this, code) {
@@ -86,32 +77,24 @@
 	// 하트 태그의 이름이 1 이면 속이 찬 하트, 0 이면 속이 빈하트
 // 		var isOHeart = $(this).attr('name');
 // 		alert(isOHeart);
-<script type="text/javascript">
 </script>
-
-
-<!-- 스타일 인클루드 -->
-<jsp:include page="../include/style.jsp" />
+	<!-- 스타일 인클루드 -->
+	<jsp:include page="../include/style.jsp" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style type="text/css">
-hr {
-	border-top: 5px solid rgba(0, 0, 0, 0.1);
-}
->>>>>>> refs/remotes/origin/master
-
+	<style type="text/css">
+		hr {
+			border-top: 5px solid rgba(0, 0, 0, 0.1);
+		}
 		h2 {
 			color: white;
 		}
-
 		h4 {
 			color: white;
 		}
-
 		.sticky {
 			position: sticky;
 			top: 100px;
 		}
-
 		table.pdList {
 			border-collapse: separate;
 			border-spacing: 1px;
@@ -120,7 +103,6 @@ hr {
 			margin: 20px 10px;
 			width: 115%;
 		}
-
 		table.pdList th {
 			width: 155px;
 			font-weight: bold;
@@ -128,7 +110,6 @@ hr {
 			color: #fff;
 			background: #ff5f5f;
 		}
-
 		table.pdList td {
 			width: 155px;
 			vertical-align: top;
@@ -136,11 +117,9 @@ hr {
 			background: #eee;
 			font-size: smaller;
 		}
-
 		table.pdList td input {
 			font-size: smaller;
 		}
-
 		table.pdList th {
 			width: 155px;
 			font-weight: bold;
@@ -223,15 +202,7 @@ hr {
 				<!--  글 작성 폼 시작 -->
 				<div class="writeform-group">
 					<table width="730">
-						<tr>
-<<<<<<< HEAD
-							<td><label for="image">이미지1</label> <a href="#" class="block-20"
-									style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
-							<td><label for="image">이미지2</label> <a href="#" class="block-20"
-									style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
-							<td><label for="image">이미지3</label> <a href="#" class="block-20"
-									style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
-=======
+					<tr>
 							<td><%=name%></td>
 							<td><%=theme%></td>
 							<!-- member_wishList 가 null이 아니고 해당 상품번호를 포함하면
@@ -247,10 +218,12 @@ hr {
 							<!-- 꽉찬하트는 class="fa fa-heart" name="1" -->
 						</tr>
 						<tr>
-							<td><label for="image">이미지1</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
-							<td><label for="image">이미지2</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
-							<td><label for="image">이미지3</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
->>>>>>> refs/remotes/origin/master
+							<td><label for="image">이미지1</label> <a href="#" class="block-20"
+									style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
+							<td><label for="image">이미지2</label> <a href="#" class="block-20"
+									style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
+							<td><label for="image">이미지3</label> <a href="#" class="block-20"
+									style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
 						</tr>
 						<tr>
 							<td colspan="3"><label for="image"></label> <a href="#" class="block-20"
@@ -310,14 +283,14 @@ hr {
 								<th>출발날짜</th>
 								<th>도착날짜</th>
 								<th>가격</th>
-								<th>현재인원/총원</th>
+								<th>현재/남은인원</th>
 							</tr>
 							<tr>
 								<td><%=pdList.get(i).getProductDepartDate()%></td>
 								<td><%=pdList.get(i).getProductArrivDate()%></td>
 								<td><%=pdList.get(i).getProductPrice()%></td>
 								<%
-									if (pdList.get(i).getProductTotal() <= 0) {
+									if (pdList.get(i).getProductTotal() == pdList.get(i).getProductCurrent()) {
 								%>
 								<td><%=pdList.get(i).getProductCurrent()%> / 정원초과</td>
 								<%
@@ -334,7 +307,10 @@ hr {
 										<option value="0">인원수</option>
 										<%
 											int total = 10;
-													int max = pdList.get(i).getProductTotal() < total ? pdList.get(i).getProductTotal() : total;
+													int max = pdList.get(i).getProductTotal()< total ? pdList.get(i).getProductTotal() - pdList.get(i).getProductCurrent() : total;
+													if (max > pdList.get(i).getProductTotal() - pdList.get(i).getProductCurrent()){
+														max = pdList.get(i).getProductTotal() - pdList.get(i).getProductCurrent();
+													}
 													for (int j = 1; j <= max; j++) {
 										%>
 										<option><%=j%></option>
@@ -377,7 +353,6 @@ hr {
 				$('html').animate({ scrollTop: offset.top }, 300);
 			});
 		});
-
 		// 인원수 설정시 총합계 계산, 인원수 미입력, 정원초과시 예약버튼 비활성화
 		function setPeopleCount(pay, count) {
 			var peopleCount = $('#count' + count + ' option:selected').val(); // 선택한 인원수 불러오기
