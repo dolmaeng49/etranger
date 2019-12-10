@@ -306,7 +306,7 @@ public class ManagerDAO {
 
 		PreparedStatement pstmt = null;
 
-		String sql = "INSERT INTO package_product VALUES (?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO package_product VALUES (?,?,?,?,?,?,?)";
 		try {
 			pstmt = con.prepareStatement(sql);
 
@@ -319,7 +319,6 @@ public class ManagerDAO {
 //			pstmt.setInt(2, pb.getProductCurrent());
 			pstmt.setInt(7, 0);
 //			pstmt.setInt(1, pb.getProductWishCount());
-			pstmt.setInt(8, 1);
 
 			insertCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
