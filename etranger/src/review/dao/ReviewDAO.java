@@ -266,8 +266,8 @@ public class ReviewDAO {
 			
 			String sql="select count(*) from review"
 					+ " where review_member_name like ? or"
-					+ " where review_subject like ? or"
-					+ " where review_content like ?";
+					+ " review_subject like ? or"
+					+ " review_content like ?";
 			
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, "%"+search+"%");
@@ -298,10 +298,17 @@ public class ReviewDAO {
 		
 		try {
 			
-			String sql = "select * from review order by review_num desc LIMIT ?,?";
+			String sql = "select * from review"
+					+ " where review_member_name like ? or"
+					+ " review_subject like ? or"
+					+ " review_content like ?"
+					+ " order by review_num desc LIMIT ?,?";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, limit);
+			pstmt.setString(1, "%"+search+"%");
+			pstmt.setString(2, "%"+search+"%");
+			pstmt.setString(3, "%"+search+"%");
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, limit);
 			rs=pstmt.executeQuery();
 			
 		while(rs.next()) {
@@ -320,7 +327,7 @@ public class ReviewDAO {
 			articleList.add(rb);
 			}
 		} catch (SQLException e) {
-			System.out.println("selectArticleList() 오류! - " + e.getMessage());
+			System.out.println("selectArticleList(search) 오류! - " + e.getMessage());
 		}finally {
 			close(rs);
 			close(pstmt);

@@ -11,7 +11,9 @@ import review.vo.ReviewBean;
 
 public class ReviewListService {
 
-	public int getListCount() {
+	public int getListCount()
+	
+	{
 		
 		Connection con =getConnection();
 		ReviewDAO reviewDAO = ReviewDAO.getInstance();
