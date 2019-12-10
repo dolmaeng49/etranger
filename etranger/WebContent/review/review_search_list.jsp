@@ -156,7 +156,7 @@
           </div>
         </div>
         <!-- 페이지 부분 -->
-	<%}else{%><div id="emptyArticle">등록된 글이 없습니다</div><%} %>
+	<%}else{%><div id="emptyArticle">검색결과와 일치하는 리뷰가 없습니다.</div><%} %>
       </div> <!-- <div class="container">의 끝 -->
       <div align="right"><input type="button" value="임시글쓰기" class="btn py-3 px-4 btn-primary" onclick="location.href='./ReviewWriteForm.rv'"></div>
     </section>

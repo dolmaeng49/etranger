@@ -187,9 +187,4 @@ public class ProductDAO {
 		}
 		// selectCategoryList ---
 	
-	
-	
-	
-	
-	
 }
