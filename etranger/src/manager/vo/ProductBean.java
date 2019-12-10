@@ -3,7 +3,6 @@ package manager.vo;
 import java.util.Date;
 
 public class ProductBean {
-	private int productWishCount;
 	private int productCurrent;
 	private int productTotal;
 	private int productPrice;
@@ -11,14 +10,6 @@ public class ProductBean {
 	private String productDepartDate;
 	private String categoryCode;
 	private String productNum;
-
-	public int getProductWishCount() {
-		return productWishCount;
-	}
-
-	public void setProductWishCount(int productWishCount) {
-		this.productWishCount = productWishCount;
-	}
 
 	public int getProductCurrent() {
 		return productCurrent;

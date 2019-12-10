@@ -353,6 +353,7 @@ public class ManagerDAO {
 				cb.setPackage_category_content(rs.getString("package_category_content"));
 				cb.setPackage_category_region(rs.getInt("package_category_region"));
 				cb.setPackage_category_city(rs.getInt("package_category_city"));
+				
 
 				productDetailList.add(cb);
 			}
@@ -396,7 +397,6 @@ public class ManagerDAO {
 				pb.setProductPrice(rs.getInt("package_product_price"));
 				pb.setProductTotal(rs.getInt("package_product_total"));
 				pb.setProductCurrent(rs.getInt("package_product_current"));
-				pb.setProductWishCount(rs.getInt("package_product_wish_count"));
 
 				productList.add(pb);
 			}
