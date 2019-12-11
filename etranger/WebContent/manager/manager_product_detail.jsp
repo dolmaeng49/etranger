@@ -247,7 +247,7 @@ table.pdList td input {
 			}
 		});
 	}
-
+<%-- 	onclick="deleteCode('<%=pdList.get(i).getProductNum()%>')" --%>
 	//상품 삭제
 	function deleteCode(pnum) {
 		var dpcode = $('#deletenum').attr('name');

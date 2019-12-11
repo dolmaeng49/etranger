@@ -12,7 +12,7 @@ import manager.svc.CategoryListService;
 import manager.svc.ReservListService;
 import reservation.vo.ReservationBean;
 
-public class MemberManagementAction implements Action {
+public class ReservManagementAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
