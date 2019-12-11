@@ -112,7 +112,6 @@ public class ProductDAO {
 			
 			String keyword = searchBean.getKeyword();
 			
-			
 			try {
 				String sql = "select count(*) from package_category"
 						+ " where package_category_name like ? or"
