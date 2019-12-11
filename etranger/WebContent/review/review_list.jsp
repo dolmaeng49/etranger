@@ -122,11 +122,12 @@
                 <a href="#" class="tag-cloud-link">Sport</a>
                 <a href="#" class="tag-cloud-link">Tech</a>
                 <a href="#" class="tag-cloud-link">Travel</a>
-              
+              <div id="search">
               <form action="ReviewSearch.rv" method="get" class="search-form-list" name="search">
-                  <input type="text"  name="search" placeholder="Type a keyword and hit enter" style="width: 380px;">
-                  <span class="icon fa fa-search"></span>
+                  <input type="text"  name="search" placeholder="검색어를 입력해주세요!" style="width: 360px;">
+                  <button type="submit"><span class="icon fa fa-search"></span></button>
               </form>
+              </div>
             </div>
             </div>
             </div>

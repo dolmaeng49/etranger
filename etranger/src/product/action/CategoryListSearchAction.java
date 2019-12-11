@@ -112,12 +112,14 @@ public class CategoryListSearchAction implements Action {
 			3. 상품당 리뷰갯수도 비슷한 방법
 		 */
 		
+		//SearchBean
+		SearchBean searchBean = new SearchBean(keyword,depart_date, arriv_date,region,city);
 		
 		CategorySearchListService categorySearchListService = new CategorySearchListService();
-		int listCount = categorySearchListService.getListCount(keyword);
+		int listCount = categorySearchListService.getListCount(searchBean);
 
 		ArrayList<CategoryBean> categoryList = new ArrayList<CategoryBean>();
-		categoryList = categorySearchListService.getCategoryList(page, limit, keyword);
+		categoryList = categorySearchListService.getCategoryList(page, limit, searchBean);
 
 		int maxPage = (int) ((double) listCount / limit + 0.95);
 		int startPage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1;
@@ -126,8 +128,6 @@ public class CategoryListSearchAction implements Action {
 			endPage = maxPage;
 		}
 		
-		//SearchBean
-		SearchBean searchBean = new SearchBean(keyword,depart_date, arriv_date,region,city);
 		
 		PageInfo pageInfo = new PageInfo(page, maxPage, startPage, endPage, listCount);
 

@@ -6,9 +6,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Map;
 
 import manager.vo.CategoryBean;
+import product.vo.SearchBean;
 
 public class ProductDAO {
 	
@@ -102,11 +105,14 @@ public class ProductDAO {
 	//------------------ManagerDAO의 selectListCount, selectCategoryList 불러옴.
 	
 	// --- selectListCount
-		public int selectListCount(String keyword) {
+		public int selectListCount(SearchBean searchBean) {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			int listCount = 0;
-
+			
+			String keyword = searchBean.getKeyword();
+			
+			
 			try {
 				String sql = "select count(*) from package_category"
 						+ " where package_category_name like ? or"
@@ -137,35 +143,106 @@ public class ProductDAO {
 		// selectListCount ---
 	
 		
-		
 		// selectCategoryList ---
-		public ArrayList<CategoryBean> selectCategoryList(int page, int limit, String keyword) {
+		public ArrayList<CategoryBean> selectCategoryList(int page, int limit, SearchBean searchBean) {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			ArrayList<CategoryBean> productList = new ArrayList<CategoryBean>();
-
+			
+			String keyword = searchBean.getKeyword();
+			String depart_date = searchBean.getDepart_date();
+			String arriv_date = searchBean.getArriv_date();
+			String region = searchBean.getRegion();
+			String city = searchBean.getCity();
+			
+			System.out.println("keyword : "+keyword);
+			System.out.println("depart_date : "+depart_date);
+			System.out.println("arriv_date : "+arriv_date);
+			System.out.println("region : "+region);
+			System.out.println("city : "+city);
+			
+			// 검색 조건 입력 여부 배열에 저장
+			boolean[] isNulls = {keyword.length()==0,depart_date.length()==0,arriv_date.length()==0,region.length()==0,city.length()==0};
+			
+			// SQL 구문의 ? 인덱스를 저장하는 변수
+			int index = 1;
+			
+			// 결과를 조회할 첫번째 row 인덱스
 			int startRow = (page - 1) * 8;
+			
 
 			try {
-
-				String sql = "select * from package_category"
-						+ " where package_category_name like ? or"
-						+ " package_category_region like ? or"
-						+ " package_category_city like ? or"
-						+ " package_category_theme like ? or"
-						+ " package_category_content like ?"
-						+ " order by package_category_region desc LIMIT ?,?";
 				
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, "%"+keyword+"%");
-				pstmt.setString(2, "%"+keyword+"%");
-				pstmt.setString(3, "%"+keyword+"%");
-				pstmt.setString(4, "%"+keyword+"%");
-				pstmt.setString(5, "%"+keyword+"%");
-				pstmt.setInt(6, startRow);
-				pstmt.setInt(7, limit);
-				rs = pstmt.executeQuery();
+				String sql = "SELECT * FROM package_product p"
+						+ " JOIN package_category c"
+						+ " ON p.package_category_code = c.package_category_code"
+						+ " WHERE p.package_product_depart_date > ?";
+				if(!isNulls[0]) {
+					// 키워드
+					sql += " OR c.package_category_name like ?"
+						 + " OR c.package_category_theme like ?"
+						 + " OR c.package_category_content like ?";
+				} else if(!isNulls[1]) {
+					// 출발날짜
+					sql += " OR p.package_product_depart_date > ?";
+				} else if(!isNulls[2]) {
+					// 도착날짜
+					sql += " OR p.package_product_arriv_date < ?";
+				} else if(!isNulls[3]) {
+					// 지역
+					sql += " OR c.package_category_region=?";
+				} else if(!isNulls[4]) {
+					// 도시
+					sql += " OR c.package_category_city=?";
+				}
+				// 마지막
+				sql += " order by p.package_product_depart_date LIMIT ?,?";
 
+//				String sql = "select * from package_category"
+//						+ " where package_category_name like ? or"
+//						+ " package_category_region like ? or"
+//						+ " package_category_city like ? or"
+//						+ " package_category_theme like ? or"
+//						+ " package_category_content like ?"
+//						+ " order by package_category_region desc LIMIT ?,?";
+				
+//				pstmt = con.prepareStatement(sql);
+//				pstmt.setString(1, "%"+keyword+"%");
+//				pstmt.setString(2, "%"+keyword+"%");
+//				pstmt.setString(3, "%"+keyword+"%");
+//				pstmt.setString(4, "%"+keyword+"%");
+//				pstmt.setString(5, "%"+keyword+"%");
+//				pstmt.setInt(3, startRow);
+//				pstmt.setInt(4, limit);
+//				rs = pstmt.executeQuery();
+				System.out.println(sql);
+				pstmt = con.prepareStatement(sql);
+				pstmt.setTimestamp(index++, new Timestamp(System.currentTimeMillis()));
+				
+				if(!isNulls[0]) {
+					// 키워드
+					pstmt.setString(index++, "%"+keyword+"%");
+					pstmt.setString(index++, "%"+keyword+"%");
+					pstmt.setString(index++, "%"+keyword+"%");
+				} else if(!isNulls[1]) {
+					// 출발날짜
+					pstmt.setString(index++, depart_date);
+				} else if(!isNulls[2]) {
+					// 도착날짜
+					pstmt.setString(index++, arriv_date);
+				} else if(!isNulls[3]) {
+					// 지역
+					pstmt.setInt(index++, Integer.parseInt(region));
+				} else if(!isNulls[4]) {
+					// 도시
+					pstmt.setInt(index++, Integer.parseInt(city));
+				}
+				// 마지막 공통 작업
+				pstmt.setInt(index++, startRow);
+				pstmt.setInt(index++, limit);
+				System.out.println("마지막 인덱스 + 1 : " + index + "페이지, 리미트 : " + page + limit);
+				rs = pstmt.executeQuery();
+				
 				while (rs.next()) {
 					CategoryBean cb = new CategoryBean();
 					cb.setPackage_category_code(rs.getString("package_category_code"));
@@ -180,8 +257,8 @@ public class ProductDAO {
 			} catch (SQLException e) {
 				System.out.println("selectCategoryList(search) 오류! - " + e.getMessage());
 			} finally {
-				close(rs);
 				close(pstmt);
+				close(rs);
 			}
 			return productList;
 		}
