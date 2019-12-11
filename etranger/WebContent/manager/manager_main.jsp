@@ -81,7 +81,7 @@
 							<span class="icon icon-users"></span>회원관리</li>
 					</ul>
 					<ul class="list-group" id="memberManagement">
-						<li class="list-group-item li_hover member" onclick="location.href='MemberManagement.ma'">
+						<li class="list-group-item li_hover member" onclick="location.href='ReservManagement.ma'">
 							&nbsp;­회원예약</li>
 						<li class="list-group-item li_hover member">&nbsp;­회원등급</li>
 					</ul>

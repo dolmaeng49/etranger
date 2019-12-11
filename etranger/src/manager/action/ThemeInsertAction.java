@@ -26,7 +26,7 @@ public class ThemeInsertAction implements Action {
 		if(!isInsertSuccess) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.print("false");
+			out.print("테마 추가가 실패하였습니다.");
 		}
 		
 		return forward;

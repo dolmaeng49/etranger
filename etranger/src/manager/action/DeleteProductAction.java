@@ -15,7 +15,7 @@ public class DeleteProductAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
 		String deletepcode = request.getParameter("package_product_num");
-		System.out.println(deletepcode);
+//		System.out.println(deletepcode);
 		DeleteProductService deleteservice = new DeleteProductService();
 		 boolean isDeleteSuccess = deleteservice.DeleteProduct(deletepcode);
 		

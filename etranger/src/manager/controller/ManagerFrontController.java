@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import common.action.Action;
 import common.vo.ActionForward;
 import manager.action.ManagerMainAction;
-import manager.action.MemberManagementAction;
 import manager.action.CityInsertAction;
 import manager.action.CitySelectAction;
 import manager.action.ProductListAction;
@@ -25,6 +24,8 @@ import manager.action.CategoryInsertAction;
 import manager.action.ThemeInsertAction;
 import manager.action.RegionInsertAction;
 import manager.action.RegionSelectAction;
+import manager.action.ReservDeleteAction;
+import manager.action.ReservManagementAction;
 import manager.action.ThemeCheckBoxAction;
 import manager.action.ThemeListAction;
 
@@ -160,7 +161,7 @@ public class ManagerFrontController extends HttpServlet {
 			// 상품 삭제
 			else if (command.equals("/DeleteProduct.ma")) {
 				action = new DeleteProductAction();
-				System.out.println("DeleteProduct.ma");
+//				System.out.println("DeleteProduct.ma");
 				try {
 					forward = action.execute(request, response);
 				} catch (Exception e) {
@@ -171,7 +172,7 @@ public class ManagerFrontController extends HttpServlet {
 			// 상품 리스트
 			else if (command.equals("/ProductList.ma")) {
 				action = new ProductListAction();
-				System.out.println("ProductList.ma");
+//				System.out.println("ProductList.ma");
 				try {
 					forward = action.execute(request, response);
 				} catch (Exception e) {
@@ -179,8 +180,8 @@ public class ManagerFrontController extends HttpServlet {
 				}
 			}
 
-			else if (command.equals("/MemberManagement.ma")) {
-				action = new MemberManagementAction();
+			else if (command.equals("/ReservManagement.ma")) {
+				action = new ReservManagementAction();
 
 				try {
 					forward = action.execute(request, response);
@@ -191,6 +192,18 @@ public class ManagerFrontController extends HttpServlet {
 //				forward = new ActionForward();
 //				forward.setPath("/manager/manager_member.jsp");
 			}
+			
+			else if (command.equals("/ReservDelete.ma")) {
+				action = new ReservDeleteAction();
+				System.out.println("ReservDelete.ma");
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			
 
 			if (forward != null) {
 				if (forward.isRedirect()) {
