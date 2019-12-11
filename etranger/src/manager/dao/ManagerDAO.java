@@ -526,6 +526,26 @@ public class ManagerDAO {
 			}
 			return reservList ;
 		}
+		
+		public int deleteReserv(int reservNum) {
+			int deleteCount = 0;
+			PreparedStatement pstmt = null;
+			
+			String sql = "delete from reservation where reservation_num=?";
+		
+				try {
+					pstmt = con.prepareStatement(sql);
+					pstmt.setInt(1, reservNum);
+					deleteCount = pstmt.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}finally {
+					close(pstmt);
+				}
+			
+			
+			return deleteCount;
+		}
 
 	
 	

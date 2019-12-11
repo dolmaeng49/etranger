@@ -5,12 +5,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-
-ArrayList<ReservationBean> reservList = (ArrayList<ReservationBean>)request.getAttribute("reservList");
-
-
-
-
+	ArrayList<ReservationBean> reservList = (ArrayList<ReservationBean>) request.getAttribute("reservList");
+	String code = "";
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +42,6 @@ table.reservList {
 	line-height: 1.5;
 	margin: 50px 0px;
 	width: 90%;
-	
 }
 
 table.reservList th {
@@ -67,20 +62,22 @@ table.reservList td {
 	font-size: smaller;
 }
 
-table.reservList .left{
-text-align: left !important;
+table.reservList .left {
+	text-align: left !important;
 }
-table.reservList .right{
-text-align: right !important;
+
+table.reservList .right {
+	text-align: right !important;
 }
 
 table.reservList td input {
 	font-size: smaller;
 }
-table.reservList .price{
-color: #f47422 !important;
-font-weight: 700 !important;
-} 
+
+table.reservList .price {
+	color: #f47422 !important;
+	font-weight: 700 !important;
+}
 </style>
 </head>
 
@@ -131,50 +128,56 @@ font-weight: 700 !important;
 					</ul>
 					<ul class="list-group" id="memberManagement">
 						<li class="list-group-item li_hover member"
-							onclick="location.href='MemberManagement.ma'">&nbsp;­회원예약</li>
+							onclick="location.href='ReservManagement.ma'">&nbsp;­회원예약</li>
 						<li class="list-group-item li_hover member">&nbsp;­회원등급</li>
 					</ul>
 				</div>
 			</div>
+			
+			<input type="hidden" id="deletenum" name="<%=code%>">
 			<div class="col-md-10">
-<!-- 고객아이디 예약일(결제시한) 예약번호 예약상품(이름) 예약인원 출발날짜/도착날짜 금액 진행상태 -->
+				<!-- 고객아이디 예약일(결제시한) 예약번호 예약상품(이름) 예약인원 출발날짜/도착날짜 금액 진행상태 -->
 				<table class="reservList">
-					<tr><th>고객아이디</th>
-					<th>예약일</th>
-					<th>예약번호</th>
-					<th>예약상품</th>
-					<th>예약인원</th>
-					<th>출발날짜/도착날짜</th>
-					<th>금액</th>
-					<th>결제방법</th>
-					<th>진행상태</th>
-					<th>제어</th>
+					<tr>
+						<th>고객아이디</th>
+						<th>예약일</th>
+						<th>예약번호</th>
+						<th>예약상품</th>
+						<th>예약인원</th>
+						<th>출발날짜/도착날짜</th>
+						<th>금액</th>
+						<th>결제방법</th>
+						<th>진행상태</th>
+						<th>제어</th>
 					</tr>
 					<%
-					if(reservList !=null){
-						for(int i=0; i<reservList.size(); i++){
+						if (reservList != null) {
+							for (int i = 0; i < reservList.size(); i++) {
 					%>
 
-					<tr><td><%=reservList.get(i).getReservation_member_id()%> </td>
-					<td><%=reservList.get(i).getReservation_date() %></td>
-					<td><%=reservList.get(i).getReservation_num() %></td>
-					<td class="left"><%=reservList.get(i).getPackage_category_name() %><br> <%=reservList.get(i).getReservation_category_code() %></td>
-					<td><%=reservList.get(i).getReservation_headcount() %></td>
-					<td>출발&nbsp;<%=reservList.get(i).getPackage_product_depart_date()%><br>도착&nbsp;<%=reservList.get(i).getPackage_product_arriv_date()%></td>
-					<td class="right price"><%=reservList.get(i).getReservation_price()%></td>
-					<td><%=reservList.get(i).getReservation_pay_way() %></td>
-					<td><%=reservList.get(i).getReservation_progress() %></td>
-					<td><input type="button" value="삭제" onclick="YesOrNo()"> </td>
-					
+					<tr>
+						<td><%=reservList.get(i).getReservation_member_id()%></td>
+						<td><%=reservList.get(i).getReservation_date()%></td>
+						<td><%=reservList.get(i).getReservation_num()%></td>
+						<td class="left"><%=reservList.get(i).getPackage_category_name()%><br>
+							<%=reservList.get(i).getReservation_category_code()%></td>
+						<td><%=reservList.get(i).getReservation_headcount()%></td>
+						<td>출발&nbsp;<%=reservList.get(i).getPackage_product_depart_date()%><br>도착&nbsp;<%=reservList.get(i).getPackage_product_arriv_date()%></td>
+						<td class="right price"><%=reservList.get(i).getReservation_price()%></td>
+						<td><%=reservList.get(i).getReservation_pay_way()%></td>
+						<td><%=reservList.get(i).getReservation_progress()%></td>
+						<td><input type="button" value="삭제"
+							onclick="YesOrNo('<%=reservList.get(i).getReservation_num()%>')"></td>
+
 					</tr>
+
 					<%
-					
 						}
-					}
+						}
 					%>
-					
-					
-					
+
+
+
 				</table>
 
 			</div>
@@ -186,18 +189,31 @@ font-weight: 700 !important;
 	<!-- END slider -->
 
 
-<script>
-function YesOrNo(){
- if(confirm("정말 삭제하시겠습니까? "))
- {
-  location.href="managementDelete.ma";
- }
- else
- {
- alert('아니오를 누르셨습니다');
- }
-}
-</script> 
+	<script>
+		//예약 삭제
+		function YesOrNo(rnum) {
+			if (confirm("정말 삭제하시겠습니까? ")) {
+			$.ajax('ReservDelete.ma', {
+				data : {
+					reservation_num : rnum
+				},
+				success : function(sdata) {
+					if (sdata == 'false') {
+						alert('상품삭제 실패!');
+					} 
+					
+					else {
+						location.href = "MemberManagement.ma";
+					}
+				}
+			});
+			
+			} else {
+			}
+			
+		}
+
+	</script>
 
 
 	<!-- footer 인클루드 -->
