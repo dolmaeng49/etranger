@@ -45,8 +45,8 @@ public class MemberFrontController extends HttpServlet {
 		ActionForward forward = null;
 
 		// 추출한 서블릿 주소 매핑
-		// 회원가입
-		if (command.equals("/MemberJoinForm.me")) {
+		
+		if (command.equals("/MemberJoinForm.me")) { // 회원가입
 			forward = new ActionForward();
 			forward.setPath("member/member_join_form.jsp");
 		} else if (command.equals("/MemberIdDupCheck.me")) {
@@ -70,7 +70,7 @@ public class MemberFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 로그인, 로그아웃
+		// 로그인, 로그아웃
 		} else if (command.equals("/LoginForm.me")) {
 			forward = new ActionForward();
 			forward.setPath("member/member_login_form.jsp");
@@ -95,7 +95,7 @@ public class MemberFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 아이디 찾기, 비밀번호 찾기
+		// 아이디 찾기, 비밀번호 찾기
 		} else if (command.equals("/MemberFindIdForm.me")) {
 			forward = new ActionForward();
 			forward.setPath("/member/member_findId_form.jsp");
@@ -123,7 +123,7 @@ public class MemberFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 회원정보 수정, 회원 탈퇴
+		// 회원정보 수정, 회원 탈퇴
 		} else if (command.equals("/MemberDeleteForm.me")) {
 			forward = new ActionForward();
 			forward.setPath("/member/member_delete_form.jsp");
@@ -136,7 +136,6 @@ public class MemberFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else if (command.equals("/MemberModifyForm.me")) {
-			// MemberModifyFormAction 클래스로 이동
 			action = new MemberModifyFormAction();
 			try {
 				forward = action.execute(request, response);
@@ -150,7 +149,6 @@ public class MemberFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-					
 		}
 		
 		
