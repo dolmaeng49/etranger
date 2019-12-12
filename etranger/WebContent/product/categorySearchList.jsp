@@ -120,37 +120,20 @@
                       
                       <div class="select-wrap col-sm-12 group mb-3">
                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="guest_count" id="" class="form-control"><!--지역명  -->
-                          <option value="0">지역명</option>
-                          <option value="1">유럽</option>
-                          <option value="2">미주</option>
-                          <option value="3">아시아</option>
-                          <option value="4">남미</option>
+                        <select name="region" id="selectRegion" class="form-control" onChange="getCity()"><!--지역명  -->
+                        	<option value="">지역선택</option>
                         </select>
                       </div>
                       
                       <div class="select-wrap col-sm-12 group mb-3">
                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="guest_count" id="" class="form-control"><!--도시명  -->
-                          <option value="0">도시명</option>
-                          <option value="1">런던</option>
-                          <option value="2">파리</option>
-                          <option value="3">뮌헨</option>
-                          <option value="4">부에노스아이레스</option>
+                        <select name="city" id="selectCity" class="form-control"><!--도시명  -->
+                        <option value="">도시선택</option>
                         </select>
                       </div>
                       
                       <!--  -->
-                      <div class="select-wrap col-sm-12 group mb-3">
-                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="guest_count" id="" class="form-control"><!--인원수  -->
-                          <option value="0">인원수</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4+</option>
-                        </select>
-                      </div>
+                      
                       <div class="col-sm-12 group mb-3">
                         <input type="submit" class="search-submit btn btn-primary" value="Find Packages">
                       </div>
