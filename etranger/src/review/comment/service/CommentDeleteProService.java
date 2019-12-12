@@ -1,8 +1,8 @@
-package comment.service;
+package review.comment.service;
 import static common.db.JdbcUtil.*;
 import java.sql.Connection;
 
-import comment.dao.CommentDAO;
+import review.comment.dao.CommentDAO;
 
 public class CommentDeleteProService {
 

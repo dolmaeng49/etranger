@@ -1,4 +1,4 @@
-package comment.action;
+package review.comment.action;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import comment.service.CommentListService;
-import comment.vo.CommentBean;
 import common.action.Action;
 import common.vo.ActionForward;
 import common.vo.PageInfo;
+import review.comment.service.CommentListService;
+import review.comment.vo.CommentBean;
 
 public class CommentListAction implements Action {
 

@@ -1,10 +1,10 @@
-package comment.service;
+package review.comment.service;
 import static common.db.JdbcUtil.*;
 
 import java.sql.Connection;
 
-import comment.dao.CommentDAO;
-import comment.vo.CommentBean;
+import review.comment.dao.CommentDAO;
+import review.comment.vo.CommentBean;
 
 public class CommentModifyProService {
 
