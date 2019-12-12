@@ -59,43 +59,25 @@ $(function() {
 		  ['insert', ['link', 'picture', 'video']],
 		  ['view', ['codeview', 'help']]
 		]
-//	  ,
-//		 callbacks: { 
+	  ,
+		 callbacks: { 
 //			 onImageUpload: function(image) {
 //		            uploadImage(image[0]);
 //		        }
 //		 }
-//				onImageUpload: function(files, editor, welEditable) {
-//////					 sendFile(files[0], editor, welEditable);	//ver1
-//////					sendFile(files[0], this);  //ver2
-//		            for (var i = files.length - 1; i >= 0; i--) {	//ver3
-//		            	sendFile(files[i], this);
-//		            }
-//		        }
-//		 }
+				onImageUpload: function(files, editor, welEditable) {
+//					 sendFile(files[0], editor, welEditable);	//ver1
+//					sendFile(files[0], this);  //ver2
+		            for (var i = files.length - 1; i >= 0; i--) {	//ver3
+		            	sendFile(files[i], this);
+		            }
+		        }
+		 }
 	  });
 	});
 
 
 //
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //============================================
 
@@ -109,7 +91,7 @@ $(function() {
 //		cache: false,
 //		contentType: false,
 //		processData: false,
-//		enctype: 'multipart/form-data',
+//
 //		data: data,
 //		type: "get",
 //		success: function(url) {
@@ -128,32 +110,28 @@ $(function() {
 //}
 
 
-
-
-
 //========================================
 
-//function sendFile(file, el) {
-//	var data = new FormData();
-//  	data.append('file', file);
-//  	$.ajax({
-//    	data: data,
-//    	type: "POST",
-//    	url: 'ImageCallback.rv',
-//    	cache: false,
-//    	contentType: false,
-//    	enctype: 'multipart/form-data',
-//    	processData: false,
-//    	success: function(data) {
-//    		alert(data);
-//    		console.log(data);
-////    		editor.insertImage(welEditable,data.url);  //editor가 defined
-////      		$(el).summernote('editor.insertImage', url);	//url이 defined
-//      		$('#test').append('<img src="'+url+'" width="300" height="auto"/>') //업로드 확인용
-//      		
-//    	}
-//  	});
-//};
+function sendFile(file, el) {
+	var data = new FormData();
+  	data.append('file', file);
+  	$.ajax({
+    	data: data,
+    	type: "POST",
+    	url: 'ImageCallback.rv',
+    	cache: false,
+    	contentType: false,
+    	enctype: 'multipart/form-data',
+    	processData: false,
+    	success: function(data) {
+    		$('#test').append('<img src="'+data.url+'" width="300" height="auto"/>') //업로드 확인용
+//    		$('#summernote').summernote("insertNode", image[0]);
+//    		editor.insertImage(welEditable,data.url);  //editor가 defined
+      		$(el).summernote('editor.insertImage', data.url);	//url이 defined
+    		$('#review_image').val(data.fileName);
+    	}
+  	});
+};
 
 //1119 to do 
 //================	
