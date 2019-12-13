@@ -76,6 +76,34 @@ $(function() {
 	  });
 	});
 
+// 관리자페이지 섬머노트
+$(function() {
+	$('#summernoteManager').summernote(
+			{
+				height : 450,
+				width : 720,
+				placeholder : '내용입력',
+				lang : 'ko-KR',
+				focus : true,
+				fontNames : [ '굴림', '바탕', '돋움', '궁서', 'Arial', 'Verdana', 'Courier New', 'Times New Roman' ],
+				toolbar : [ [ 'style', [ 'style' ] ],
+						[ 'font', [ 'bold', 'underline', 'clear' ] ],
+						[ 'fontname', [ 'fontname' ] ],
+						[ 'color', [ 'color' ] ],
+						[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+						[ 'table', [ 'table' ] ],
+						[ 'insert', [ 'link', 'picture', 'video' ] ],
+						[ 'view', [ 'codeview', 'help' ] ] ],
+				callbacks : {
+					onImageUpload : function(files, editor, welEditable) {
+						for (var i = files.length - 1; i >= 0; i--) { // ver3
+							sendFileManager(files[i], this);
+						}
+					}
+				}
+			});
+});
+
 
 //
 
@@ -129,6 +157,27 @@ function sendFile(file, el) {
 //    		editor.insertImage(welEditable,data.url);  //editor가 defined
       		$(el).summernote('editor.insertImage', data.url);	//url이 defined
     		$('#review_image').val(data.fileName);
+    	}
+  	});
+};
+
+// 관리자 페이지 이미지 전송
+function sendFileManager(file, el) {
+	var data = new FormData();
+  	data.append('file', file);
+  	$.ajax({
+    	data: data,
+    	type: "POST",
+    	url: 'ManagerImageCallback.ma',
+    	cache: false,
+    	contentType: false,
+    	enctype: 'multipart/form-data',
+    	processData: false,
+    	success: function(data) {
+//    		$('#summernote').summernote("insertNode", image[0]);
+//    		editor.insertImage(welEditable,data.url);  //editor가 defined
+      		$(el).summernote('editor.insertImage', data.url);	//url이 defined
+//    		$('#Manager_image').val(data.fileName);
     	}
   	});
 };
