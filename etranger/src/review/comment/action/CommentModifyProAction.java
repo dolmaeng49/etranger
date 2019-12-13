@@ -1,14 +1,14 @@
-package comment.action;
+package review.comment.action;
 
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import comment.service.CommentModifyProService;
-import comment.vo.CommentBean;
 import common.action.Action;
 import common.vo.ActionForward;
+import review.comment.service.CommentModifyProService;
+import review.comment.vo.CommentBean;
 
 public class CommentModifyProAction implements Action {
 

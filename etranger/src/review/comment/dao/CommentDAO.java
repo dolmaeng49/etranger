@@ -1,4 +1,4 @@
-package comment.dao;
+package review.comment.dao;
 
 import static common.db.JdbcUtil.*;
 
@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import comment.vo.CommentBean;
+import review.comment.vo.CommentBean;
 
 public class CommentDAO {
 

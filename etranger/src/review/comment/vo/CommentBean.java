@@ -1,4 +1,4 @@
-package comment.vo;
+package review.comment.vo;
 
 import java.sql.Timestamp;
 

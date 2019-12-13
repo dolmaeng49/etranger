@@ -183,7 +183,7 @@ table.pdList .right {
 									<th>금액</th>
 									<th>결제방법</th>
 									<th>진행상태</th>
-
+									<th>리뷰쓰기</th>
 								</tr>
 								<%
 									for (int i = 0; i < rb.size(); i++) {
@@ -213,6 +213,8 @@ table.pdList .right {
 									<%
 										}
 									%>
+									<!--작업 중  -->
+									<td><input type="button" value="리뷰작성" class="btn py-3 px-4 btn-primary" onclick="location.href='./ReviewWriteForm.rv?<%=rb.get(i).getReservation_category_code()%>'"></td>
 								</tr>
 								<%
 									}

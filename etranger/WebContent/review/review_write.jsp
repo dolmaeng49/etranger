@@ -152,12 +152,6 @@ function validCheck() {
 		alert('내용은 10글자 이상 적어주세요 :)');
 		return false;
 	}
-	
-// 	if(img.length==0){
-// 		alert('썸네일로 사용할 이미지를 업로드해주세요 :)');
-// 		return false;
-// 	}
-	
 }
 
 </script>
