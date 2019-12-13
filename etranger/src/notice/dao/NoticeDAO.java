@@ -29,7 +29,7 @@ public class NoticeDAO {
 	public void setConnection(Connection con) {
 		this.con = con;
 	}
-		//////////////////////////////////Bong 작업영역 시작////////////////////////////////////////////
+	// notice 공지사항 
 	public int insertArticle(NoticeBean nb) {
 		PreparedStatement pstmt = null;
 		int insertCount = 0;
@@ -149,7 +149,7 @@ public class NoticeDAO {
 
 
 	public int updateReadcount(int notice_num) {
-		// review_num 에 해당하는 readcount 1 증가
+		// notice_num 에 해당하는 readcount 1 증가
 		PreparedStatement pstmt = null;
 		int updateCount = 0;
 				
@@ -168,118 +168,120 @@ public class NoticeDAO {
 	}
 	
 
-//	public int updateArticle(ReviewBean rb) { // 글수정
-//		PreparedStatement pstmt = null;
-//		int updateCount = 0;
-//		
-//		try {
-//			String sql = "UPDATE review SET review_subject=?, review_image=?, review_content=? WHERE review_num=?";
-//			pstmt = con.prepareStatement(sql);
-//			pstmt.setString(1, rb.getReview_subject());
-//			pstmt.setString(2, rb.getReview_image());
-//			pstmt.setString(3, rb.getReview_content());
-//			pstmt.setInt(4, rb.getReview_num());
-//			updateCount = pstmt.executeUpdate();
-//			
-//		} catch (SQLException e) {
-//			System.out.println("updateArticle() 오류 - " + e.getMessage());
-//		} finally {
-//			close(pstmt);
-//		}
-//		return updateCount;
-//	}	// end updateArticle()
+	public int updateArticle(NoticeBean nb) { // 글수정
+		PreparedStatement pstmt = null;
+		int updateCount = 0;
+		
+		try {
+			String sql = "UPDATE notice SET notice_subject=?, notice_image=?, notice_content=? WHERE notice_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, nb.getNotice_subject());
+			pstmt.setString(2, nb.getNotice_image());
+			pstmt.setString(3, nb.getNotice_content());
+			pstmt.setInt(4, nb.getNotice_num());
+			updateCount = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("updateArticle() 오류 - " + e.getMessage());
+		} finally {
+			close(pstmt);
+		}
+		return updateCount;
+	}	// end updateArticle()
 
 
-	// 글번호 와 글쓴이 일치 여부 확인
-//	public boolean isReviewArticleWriter(int review_num, String review_member_id) {
-//
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null; // 조회할 시 필요함
-//		boolean isArticleWriter = false;
-//		
-//		try {
-//			// review_num이 전달받은 값과 일치하는지 여부 판별
-//			String sql = "SELECT review_member_id FROM review WHERE review_num=?";
-//			pstmt = con.prepareStatement(sql);
-//			pstmt.setInt(1, review_num);
-//			rs = pstmt.executeQuery();
-//			
-//			if(rs.next()) {
-//				
-//			if(review_member_id.equals(rs.getString("review_member_id"))) {
-//				isArticleWriter = true; // 일치시 isArticle 값 true
-//			}
-//			
-//		}
-//			
-//		} catch (SQLException e) {
-//			System.out.println("isReviewArticleWriter() 오류 - " + e.getMessage());
-//		} finally {
-//			close(rs);
-//			close(pstmt);
-//		}
-//		
-//		return isArticleWriter;
-//	} // end isReviewArticleWriter
+	 // 글번호 와 글쓴이 일치 여부 확인
+	public boolean isNoticeArticleWriter(int notice_num, String notice_member_id) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null; // 조회할 시 필요함
+		boolean isArticleWriter = false;
+		
+		try {
+			// review_num이 전달받은 값과 일치하는지 여부 판별
+			String sql = "SELECT notice_member_id FROM notice WHERE notice_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, notice_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				
+			if(notice_member_id.equals(rs.getString("notice_member_id"))) {
+				isArticleWriter = true; // 일치시 isArticle 값 true
+			}
+			
+		}
+			
+		} catch (SQLException e) {
+			System.out.println("isReviewArticleWriter() 오류 - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return isArticleWriter;
+	} // end isNoticeArticleWriter
 
 
 	// 글 삭제
-//	public int deleteArticle(int review_num) {
-//
-//		PreparedStatement pstmt = null;
-//		int deleteCount = 0;
-//		
-//		try {
-//			// review_num 에 해당하는 레코드 삭제
-//			String sql = "DELETE from review WHERE review_num=?";
-//			pstmt = con.prepareStatement(sql);
-//			pstmt.setInt(1, review_num);
-//			deleteCount = pstmt.executeUpdate();
-//		} catch (SQLException e) {
-//			System.out.println("deleteArticle() 오류 - " + e.getMessage());
-//		} finally {
-//			close(pstmt);
-//		}
-//		
-//		return deleteCount;
-//		
-//	} // end deleteArticle
+	public int deleteArticle(int notice_num) {
 
-	// 게시판 글 검색
-//	public int selectListCount(String search) {
-//
-//		Connection con=null;
-//		PreparedStatement pstmt=null;
-//		ResultSet rs=null;
-//		
-//		int listCount = 0;
-//		try {
-//			con=getConnection();
-//			
-//			String sql="select count(*) from review"
-//					+ " where review_member_name like ? or"
-//					+ " where review_subject like ? or"
-//					+ " where review_content like ?";
-//			
-//			pstmt=con.prepareStatement(sql);
-//			pstmt.setString(1, "%"+search+"%");
+		PreparedStatement pstmt = null;
+		int deleteCount = 0;
+		
+		try {
+			// review_num 에 해당하는 레코드 삭제
+			String sql = "DELETE from notice WHERE notice_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, notice_num);
+			deleteCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("deleteArticle() 오류 - " + e.getMessage());
+		} finally {
+			close(pstmt);
+		}
+		
+		return deleteCount;
+		
+	} // end deleteArticle
+
+	// 공지사항 글 검색
+	public int selectListCount(String search) {
+
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		int listCount = 0;
+		try {
+			con=getConnection();
+			
+			String sql="select count(*) from notice where notice_subject like ?";
+//					+ " where notice_member_name like ? or"
+//					+ " where notice_subject like ? or"
+//					+ " where notice_content like ?";
+			
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, "%"+search+"%");
 //			pstmt.setString(2, "%"+search+"%");
 //			pstmt.setString(3, "%"+search+"%");
-//			rs=pstmt.executeQuery();
-//			if(rs.next()){
-//				listCount =  rs.getInt("count(*)");
-//			}
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			if(rs!=null) try {rs.close();}catch(SQLException ex) {}	
-//			if(pstmt!=null) try{pstmt.close();}catch(SQLException ex) {}
-//			if(con!=null) try {con.close();}catch(SQLException ex) {}
-//		}
-//		return listCount;		
-//		
-//	} // end selectListCount(String search)
+			rs=pstmt.executeQuery();
+			if(rs.next()){
+				listCount =  rs.getInt("count(*)");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs!=null) try {rs.close();}catch(SQLException ex) {}	
+			if(pstmt!=null) try{pstmt.close();}catch(SQLException ex) {}
+			if(con!=null) try {con.close();}catch(SQLException ex) {}
+		}
+		return listCount;		
+		
+	} // end selectListCount(String search)
+	
+	
 	public ArrayList<NoticeBean> selectArticleList(int page, int limit, String search) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -290,10 +292,11 @@ public class NoticeDAO {
 		
 		try {
 			
-			String sql = "select * from notice order by notice_num desc LIMIT ?,?";
+			String sql = "select * from notice where notice_subject like ? order by notice_num desc LIMIT ?,?";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, limit);
+			pstmt.setString(1, "%"+search+"%");
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, limit);
 			rs=pstmt.executeQuery();
 			
 		while(rs.next()) {

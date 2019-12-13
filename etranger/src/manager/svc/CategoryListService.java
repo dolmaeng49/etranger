@@ -35,5 +35,31 @@ public class CategoryListService {
 
 		return productList;
 	}
+	
+	public ArrayList<CategoryBean> getpopularList(int page, int limit) {
+		Connection con = getConnection();
+		ManagerDAO managerDAO = ManagerDAO.getInstance();
+		managerDAO.setConnection(con);
+		ArrayList<CategoryBean> popularList = null;
+
+		popularList = managerDAO.selectRecommendedList(page, limit);
+
+		close(con);
+
+		return popularList;
+	}
+	
+	public ArrayList<CategoryBean> getRecommendedList(int page, int limit) {
+		Connection con = getConnection();
+		ManagerDAO managerDAO = ManagerDAO.getInstance();
+		managerDAO.setConnection(con);
+		ArrayList<CategoryBean> recommendedList = null;
+
+		recommendedList = managerDAO.selectCategoryList(page, limit);
+
+		close(con);
+
+		return recommendedList;
+	}
 
 }

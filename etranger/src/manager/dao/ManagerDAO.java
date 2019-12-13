@@ -262,7 +262,6 @@ public class ManagerDAO {
 		}
 		return listCount;
 	}
-	// selectListCount ---
 
 	// --- selectProductList
 	public ArrayList<CategoryBean> selectCategoryList(int page, int limit) {
@@ -301,7 +300,48 @@ public class ManagerDAO {
 		return productList;
 	}
 	// selectProductList ---
+	
+	// --- selectRecommendedList
+		public ArrayList<CategoryBean> selectRecommendedList(int page, int limit) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ArrayList<CategoryBean> productList = new ArrayList<CategoryBean>();
 
+			int startRow = (page - 1) * limit;
+
+			try {
+
+				String sql = "select c.package_category_name, count(*), sum(r.reservation_headcount) AS total_headcount" + 
+						"from reservation r join package_category c" + 
+						"on r.reservation_category_code = c.package_category_code" + 
+						"group by c.package_category_name" + 
+						"order by 3 desc LIMIT ?,?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, limit);
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					CategoryBean cb = new CategoryBean();
+					cb.setPackage_category_code(rs.getString("package_category_code"));
+					cb.setPackage_category_name(rs.getString("package_category_name"));
+					cb.setPackage_category_theme(rs.getString("package_category_theme"));
+					cb.setPackage_category_image(rs.getString("package_category_image"));
+					cb.setPackage_category_content(rs.getString("package_category_content"));
+					cb.setPackage_category_region(rs.getInt("package_category_region"));
+					cb.setPackage_category_city(rs.getInt("package_category_city"));
+					cb.setPackage_category_wish_count(rs.getInt("package_category_wish_count"));
+					productList.add(cb);
+				}
+			} catch (SQLException e) {
+				System.out.println("selectArticleList() 오류! - " + e.getMessage());
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return productList;
+		}
+// --- selectRecommendedList
 	public int ProductInsert(ProductBean pb) {
 		int insertCount = 0;
 
@@ -456,11 +496,11 @@ public class ManagerDAO {
 			while(rs.next()) {
 					System.out.println("rs.next");
 					ProductBean pb = new ProductBean();
-					System.out.println(rs.getString("package_product_num"));
-					System.out.println(rs.getString("package_product_depart_date"));
-					System.out.println(rs.getString("package_product_arriv_date"));
-					System.out.println(rs.getInt("package_product_price"));
-					System.out.println(rs.getInt("package_product_total"));
+//					System.out.println(rs.getString("package_product_num"));
+//					System.out.println(rs.getString("package_product_depart_date"));
+//					System.out.println(rs.getString("package_product_arriv_date"));
+//					System.out.println(rs.getInt("package_product_price"));
+//					System.out.println(rs.getInt("package_product_total"));
 					
 					pb.setProductNum(rs.getString("package_product_num"));
 					pb.setProductDepartDate(rs.getString("package_product_depart_date"));
@@ -490,14 +530,15 @@ public class ManagerDAO {
 			ResultSet rs = null;
 			ArrayList<ReservationBean> reservList = new ArrayList<ReservationBean>();
 			
-			int startRow = (page - 1) * 15;
+			int startRow = (page - 1) * limit;
 
 			try {
-				String sql = "\r\n" + 
-						"SELECT r.reservation_num,r.reservation_category_code,r.reservation_member_id,r.reservation_product_num,r.reservation_date,r.reservation_price,r.reservation_headcount,r.reservation_pay_way,r.reservation_progress,r.reservation_member_id,p.package_product_depart_date,p.package_product_arriv_date,c.package_category_name FROM reservation r JOIN package_product p ON r.reservation_product_num = p.package_product_num JOIN package_category c ON r.reservation_category_code = c.package_category_code";
+				String sql = 
+						"SELECT r.reservation_num,r.reservation_category_code,r.reservation_member_id,r.reservation_product_num,r.reservation_date,r.reservation_price,r.reservation_headcount,r.reservation_pay_way,r.reservation_progress,r.reservation_member_id,p.package_product_depart_date,p.package_product_arriv_date,c.package_category_name FROM reservation r JOIN package_product p ON r.reservation_product_num = p.package_product_num JOIN package_category c ON r.reservation_category_code = c.package_category_code"
+						+" limit ?,?";
 				pstmt = con.prepareStatement(sql);
-//				pstmt.setInt(1, startRow);
-//				pstmt.setInt(2, limit);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, limit);
 				rs = pstmt.executeQuery();
 
 
@@ -565,5 +606,30 @@ public class ManagerDAO {
 			
 			return updateCount;
 		}
-	
+
+
+		// --- selectListCount
+		public int reservListCount() {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			int listCount = 0;
+
+			try {
+				String sql = "select count(*) from reservation";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					listCount = rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				System.out.println("reservListCount() 오류! - " + e.getMessage());
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return listCount;
+		}
+
+
 }

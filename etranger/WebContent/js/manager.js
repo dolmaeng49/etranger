@@ -191,9 +191,7 @@ $('.pList').click(function() {
 });
 
 $("#member").click(function() {
-
-	$("#memberManagement").slideToggle("quick");
-
+		$("#memberManagement").toggle('quick');
 });
 
 $('.dataChart').click(function() {

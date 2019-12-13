@@ -7,80 +7,21 @@
 <%
 	ArrayList<ReservationBean> reservList = (ArrayList<ReservationBean>) request.getAttribute("reservList");
 	String code = "";
+	PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo");
+	int nowPage = pageInfo.getPage();
+	int maxPage = pageInfo.getMaxPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int listCount = pageInfo.getListCount();
 %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <!-- 스타일 include -->
 <jsp:include page="../include/style.jsp" />
-
-<style type="text/css">
-
-/* 사이드바 화면고정 */
-.sticky {
-	position: sticky;
-	top: 100px;
-}
-
-.li_hover:hover {
-	border: 2px solid #ff5f5f;
-	background: transparent;
-	color: #ff5f5f;
-}
-
-.member {
-	font-size: smaller;
-}
-
-/* 테이블 css */
-table.reservList {
-	border-collapse: separate;
-	border-spacing: 1px;
-	text-align: center;
-	line-height: 1.5;
-	margin: 50px 0px;
-	width: 90%;
-}
-
-table.reservList th {
-	width: 0px;
-	padding: 5px;
-	font-weight: bold;
-	vertical-align: top;
-	color: #fff;
-	background: #ff5f5f;
-}
-
-table.reservList td {
-	width: 0px;
-	padding: 5px;
-	vertical-align: center;
-	border-bottom: 1px solid #ccc;
-	background: #eee;
-	font-size: smaller;
-}
-
-table.reservList .left {
-	text-align: left !important;
-}
-
-table.reservList .right {
-	text-align: right !important;
-}
-
-table.reservList td input {
-	font-size: smaller;
-}
-
-table.reservList .price {
-	color: #f47422 !important;
-	font-weight: 700 !important;
-}
-</style>
+<link rel="stylesheet" href="./css/style_management.css" type="text/css">
 </head>
-
 <body>
 	<header>
 		<!-- 탑메뉴 인클루드 -->
@@ -103,6 +44,7 @@ table.reservList .price {
 			</div>
 		</section>
 	</header>
+	<!--side bar -->
 
 	<div class="container-fluid">
 		<div class="row">
@@ -151,11 +93,12 @@ table.reservList .price {
 						<th>제어</th>
 					</tr>
 					<%
-						if (reservList != null) {
+						if (reservList != null && listCount > 0) {
 							for (int i = 0; i < reservList.size(); i++) {
 					%>
 
 					<tr>
+
 						<td><%=reservList.get(i).getReservation_num()%></td>
 						<td><%=reservList.get(i).getReservation_member_id()%></td>
 						<td><%=reservList.get(i).getReservation_date()%></td>
@@ -165,9 +108,7 @@ table.reservList .price {
 						<td>출발&nbsp;<%=reservList.get(i).getPackage_product_depart_date()%><br>도착&nbsp;<%=reservList.get(i).getPackage_product_arriv_date()%></td>
 						<td class="right price"><%=reservList.get(i).getReservation_price()%></td>
 						<td><%=reservList.get(i).getReservation_pay_way()%></td>
-						<td>
-						<select name="progress"
-						
+						<td><select name="progress"
 							onChange="updateYesOrNo(this,'<%=reservList.get(i).getReservation_num()%>')">
 								<option value="<%=reservList.get(i).getReservation_progress()%>"
 									selected><%=reservList.get(i).getReservation_progress()%></option>
@@ -181,23 +122,63 @@ table.reservList .price {
 							onclick="deleteYesOrNo('<%=reservList.get(i).getReservation_num()%>')"></td>
 
 					</tr>
-
 					<%
 						}
 						}
 					%>
 
-
-
 				</table>
+
+				<div class="row mt-5">
+					<div class="col text-center">
+						<div class="block-27">
+							<ul>
+								<%
+									if (nowPage <= 1) {
+								%>
+								<li><a>&lt;</a></li>
+								<%
+									} else {
+								%><li><a href="ReservManagement.ma?page=<%=nowPage - 1%>">&lt;</a></li>
+								<%
+									}
+								%>
+								<%
+									for (int i = startPage; i <= endPage; i++) {
+										if (i == nowPage) {
+								%><li class="active"><span><%=i%></span></li>
+								<%
+									} else {
+								%>
+								<li><a href="ReservManagement.ma?page=<%=i%>"><%=i%></a></li>
+								<%
+									}
+								%>
+								<%
+									}
+								%>
+								<%
+									if (nowPage >= maxPage) {
+								%><li><a>&gt;</a></li>
+								<%
+									} else {
+								%>
+								<li><a href="ReservManagement.ma?page=<%=nowPage + 1%>">&gt;</a></li>
+								<%
+									}
+								%>
+							</ul>
+						</div>
+					</div>
+				</div>
 
 			</div>
 
-
-
 		</div>
 	</div>
-	<!-- END slider -->
+
+
+
 
 
 	<script>
@@ -211,11 +192,11 @@ table.reservList .price {
 					success : function(sdata) {
 						if (sdata == 'false') {
 							alert('예약 삭제가 실패했습니다.');
+						} else {
+							alert('삭제가 완료되었습니다.');
+							location.reload();
 						}
 
-						else {
-							location.href = "MemberManagement.ma";
-						}
 					}
 				});
 
@@ -223,23 +204,26 @@ table.reservList .price {
 			}
 
 		}
-		
-		function updateYesOrNo(rprogress,rnum){
-			if(confirm("변경하시겠습니까?")){
-			$.ajax('ReservUpdate.ma',{
-				data: {
-					reservation_progress : rprogress.value,
-					reservation_num : rnum
-				},
-				success : function(sdata){
-					if(sdata=='false'){
-						alert('예약수정이 실패했습니다.');
+
+		// 예약 진행상태 변경
+		function updateYesOrNo(rprogress, rnum) {
+			if (confirm("변경하시겠습니까?")) {
+				$.ajax('ReservUpdate.ma', {
+					data : {
+						reservation_progress : rprogress.value,
+						reservation_num : rnum
+					},
+					success : function(sdata) {
+						if (sdata == 'false') {
+							alert('진행상태 수정이 실패했습니다.');
+						} else {
+							alert('수정이 완료되었습니다.');
+						}
 					}
-				}
-			});
-					
-			}else{
-				
+				});
+
+			} else {
+
 			}
 		}
 	</script>
