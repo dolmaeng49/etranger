@@ -133,15 +133,15 @@ table.reservList .price {
 					</ul>
 				</div>
 			</div>
-			
+
 			<input type="hidden" id="deletenum" name="<%=code%>">
 			<div class="col-md-10">
 				<!-- 고객아이디 예약일(결제시한) 예약번호 예약상품(이름) 예약인원 출발날짜/도착날짜 금액 진행상태 -->
 				<table class="reservList">
 					<tr>
+						<th>예약번호</th>
 						<th>고객아이디</th>
 						<th>예약일</th>
-						<th>예약번호</th>
 						<th>예약상품</th>
 						<th>예약인원</th>
 						<th>출발날짜/도착날짜</th>
@@ -156,18 +156,29 @@ table.reservList .price {
 					%>
 
 					<tr>
+						<td><%=reservList.get(i).getReservation_num()%></td>
 						<td><%=reservList.get(i).getReservation_member_id()%></td>
 						<td><%=reservList.get(i).getReservation_date()%></td>
-						<td><%=reservList.get(i).getReservation_num()%></td>
 						<td class="left"><%=reservList.get(i).getPackage_category_name()%><br>
 							<%=reservList.get(i).getReservation_category_code()%></td>
 						<td><%=reservList.get(i).getReservation_headcount()%></td>
 						<td>출발&nbsp;<%=reservList.get(i).getPackage_product_depart_date()%><br>도착&nbsp;<%=reservList.get(i).getPackage_product_arriv_date()%></td>
 						<td class="right price"><%=reservList.get(i).getReservation_price()%></td>
 						<td><%=reservList.get(i).getReservation_pay_way()%></td>
-						<td><%=reservList.get(i).getReservation_progress()%></td>
+						<td>
+						<select name="progress"
+						
+							onChange="updateYesOrNo(this,'<%=reservList.get(i).getReservation_num()%>')">
+								<option value="<%=reservList.get(i).getReservation_progress()%>"
+									selected><%=reservList.get(i).getReservation_progress()%></option>
+								<option value="none" disabled>--변경 시 선택--</option>
+								<option value="예약완료">예약완료</option>
+								<option value="예약취소">예약취소</option>
+								<option value="결제완료">결제완료</option>
+								<option value="결제취소">결제취소</option>
+						</select></td>
 						<td><input type="button" value="삭제"
-							onclick="YesOrNo('<%=reservList.get(i).getReservation_num()%>')"></td>
+							onclick="deleteYesOrNo('<%=reservList.get(i).getReservation_num()%>')"></td>
 
 					</tr>
 
@@ -191,28 +202,46 @@ table.reservList .price {
 
 	<script>
 		//예약 삭제
-		function YesOrNo(rnum) {
-			if (confirm("정말 삭제하시겠습니까? ")) {
-			$.ajax('ReservDelete.ma', {
-				data : {
+		function deleteYesOrNo(rnum) {
+			if (confirm("정말 삭제하시겠습니까?")) {
+				$.ajax('ReservDelete.ma', {
+					data : {
+						reservation_num : rnum
+					},
+					success : function(sdata) {
+						if (sdata == 'false') {
+							alert('예약 삭제가 실패했습니다.');
+						}
+
+						else {
+							location.href = "MemberManagement.ma";
+						}
+					}
+				});
+
+			} else {
+			}
+
+		}
+		
+		function updateYesOrNo(rprogress,rnum){
+			if(confirm("변경하시겠습니까?")){
+			$.ajax('ReservUpdate.ma',{
+				data: {
+					reservation_progress : rprogress.value,
 					reservation_num : rnum
 				},
-				success : function(sdata) {
-					if (sdata == 'false') {
-						alert('상품삭제 실패!');
-					} 
-					
-					else {
-						location.href = "MemberManagement.ma";
+				success : function(sdata){
+					if(sdata=='false'){
+						alert('예약수정이 실패했습니다.');
 					}
 				}
 			});
-			
-			} else {
+					
+			}else{
+				
 			}
-			
 		}
-
 	</script>
 
 

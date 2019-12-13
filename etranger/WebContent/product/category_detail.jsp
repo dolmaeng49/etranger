@@ -42,6 +42,13 @@
 	if(session.getAttribute("member_wishList") != null){
 		member_wishList = (ArrayList<String>)memberWishObject;
 	}
+	
+	// 세션에서 로그인 회원의 아이디 가져오기
+	String sid = "";
+	if(session.getAttribute("member_id") != null) {
+		sid = (String)session.getAttribute("member_id");
+	}
+		
 %>
 
 
@@ -56,6 +63,10 @@
 	// 파라미터로 해당 패키지카테고리의 package_category_code 를 전달 받음
 	// 하트 태그의 이름이 1 이면 속이 찬 하트, 0 이면 속이 빈하트
 	function wishFunction(domain,code) {
+		if(!isThereLoginSession()){
+			alert('로그인이 필요합니다!');
+			return;
+		}
 		// isOHeart = '0' : 하트 속이 비어있는 상태 , '1' : 속이 꽉 찬 하트
 		var isOHeart = $(domain).attr('id');
 		// 표시된 좋아요 숫자를 변수에 저장
@@ -90,6 +101,13 @@
 			});
 			
 		}
+	}
+
+	function isThereLoginSession(){
+		if($('#sid').val().length==0){
+			return false;
+		}
+		return true;
 	}
 </script>
 	<!-- 스타일 인클루드 -->
@@ -148,7 +166,7 @@
 <%-- <body onload="checkSession(<%=sid%>)"> --%>
 
 <body>
-
+<input type="hidden" id="sid" value="<%=sid%>">
 	<!-- 탑메뉴 인클루드 -->
 	<jsp:include page="../include/top_menu.jsp" />
 

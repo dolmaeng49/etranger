@@ -7453,11 +7453,16 @@ h1, h2, h3, h4, h5,
     z-index: 0;
     position: relative; }
     .owl-carousel.home-slider .slider-item {
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;
-      height: calc(100vh - 117px);
-      min-height: 700px;
+/*       background-size: cover; */
+/*       background-repeat: no-repeat; */
+/*       background-position: center center; */
+/*       height: calc(100vh - 117px); */
+/*       min-height: 700px; */
+ 	  background-size: cover;
+	  background-repeat: no-repeat;
+	  background-position: center bottom;
+      height: calc(100vh - 360px);
+      min-height: 450px;
       position: relative; }
       .owl-carousel.home-slider .slider-item .overlay {
         position: absolute;

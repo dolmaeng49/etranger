@@ -8,26 +8,29 @@ import javax.servlet.http.HttpServletResponse;
 import common.action.Action;
 import common.vo.ActionForward;
 import manager.svc.ReservDeleteService;
-import reservation.vo.ReservationBean;
+import manager.svc.ReservUpdateService;
 
-public class ReservDeleteAction implements Action {
+public class ReservUpdateAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
 		
-//		ReservationBean rb = new ReservationBean();
-		
+		String reservation_progress = request.getParameter("reservation_progress");
 		int reservNum = Integer.parseInt(request.getParameter("reservation_num"));
+
+		ReservUpdateService reservUpdateService = new ReservUpdateService();
+		boolean isUpdateSuccess = reservUpdateService.updateReserv(reservation_progress, reservNum);
 		
-		ReservDeleteService reservDeleteService = new ReservDeleteService();
-		boolean isDeleteSuccess = reservDeleteService.deleteReserv(reservNum);
-		
-		if(!isDeleteSuccess) {
+		if(!isUpdateSuccess) {
 			response.setContentType("text/html; charser=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.print("예약 삭제가 실패했습니다");
+			out.print("예약 수정이 실패했습니다");
 		}
+		
+		
+		
+		
 		
 		return forward;
 	}

@@ -25,11 +25,22 @@
 	if(session.getAttribute("member_wishList") != null){
 		member_wishList = (ArrayList<String>)memberWishObject;
 	}
+	
+	// 세션에서 로그인 회원의 아이디 가져오기
+	String sid = "";
+	if(session.getAttribute("member_id") != null) {
+		sid = (String)session.getAttribute("member_id");
+	}
+	
 %>
 // 하트를 누르면 호출되는 함수
 // 파라미터로 해당 패키지카테고리의 package_category_code 를 전달 받음
 // 하트 태그의 이름이 1 이면 속이 찬 하트, 0 이면 속이 빈하트
 function wishFunction(domain,code) {
+	if(!isThereLoginSession()){
+		alert('로그인이 필요합니다!');
+		return;
+	}
 	// isOHeart = '0' : 하트 속이 비어있는 상태 , '1' : 속이 꽉 찬 하트
 	var isOHeart = $(domain).attr('id');
 	// 표시된 좋아요 숫자를 변수에 저장
@@ -65,11 +76,19 @@ function wishFunction(domain,code) {
 		
 	}
 }
+
+function isThereLoginSession(){
+	if($('#sid').val().length==0){
+		return false;
+	}
+	return true;
+}
+
 </script>
 
   </head>
   <body>
-    
+<input type="hidden" id="sid" value="<%=sid%>">
 <!-- 탑메뉴 인클루드 -->    
 <jsp:include page="../include/top_menu.jsp"/>
     
@@ -174,23 +193,15 @@ function wishFunction(domain,code) {
                       
                       <div class="select-wrap col-sm-12 group mb-3">
                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="region" id="" class="form-control"><!--지역명  -->
-                          <option value="0">지역명</option>
-                          <option value="1">유럽</option>
-                          <option value="2">미주</option>
-                          <option value="3">아시아</option>
-                          <option value="4">남미</option>
+                        <select name="region" id="selectRegion" class="form-control" onChange="getCity()"><!--지역명  -->
+                        	<option value="">지역선택</option>
                         </select>
                       </div>
                       
                       <div class="select-wrap col-sm-12 group mb-3">
                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="city" id="" class="form-control"><!--도시명  -->
-                          <option value="0">도시명</option>
-                          <option value="1">런던</option>
-                          <option value="2">파리</option>
-                          <option value="3">뮌헨</option>
-                          <option value="4">부에노스아이레스</option>
+                        <select name="city" id="selectCity" class="form-control"><!--도시명  -->
+                        <option value="">도시선택</option>
                         </select>
                       </div>
                       
@@ -246,6 +257,45 @@ function wishFunction(domain,code) {
 
    <!-- loader 인클루드 -->
 <jsp:include page="../include/loader.jsp"/>
+
+<script type="text/javascript">
+
+getRegion();
+
+
+function getRegion() {
+// 	$('#selectRegion').hide();
+	// #selectRegion에 있는 내용 지우기
+	$('#selectRegion').empty();
+	$('#selectRegion').append("<option value=''>지역선택</option>");
+	// JSON으로 가져온 데이터 #SelectRegion에 옵션으로 추가
+	$.getJSON('RegionSelect.ma', function(data) {
+
+		$.each(data, function(index, value) {
+			$('#selectRegion').append(
+					"<option value=" + value.regionCode + "> 지역이름 : " + value.regionName
+							+ "</option>");
+		});
+	});
+}
+
+// 도시 목록 불러오기
+function getCity() {
+	$('#selectCity').empty();
+	var code = $('#selectRegion').val();
+	$('#selectCity').append("<option value=''>도시선택</option>");
+	$.getJSON('CitySelect.ma?code=' + code, function(data) {
+		$.each(data, function(index, value) {
+
+			$('#selectCity').append(
+					"<option value=" + value.cityCode + "> 도시이름 : " + value.cityName
+							+ "</option>");
+		});
+	});
+}
+
+
+</script>
     
   </body>
 </html>

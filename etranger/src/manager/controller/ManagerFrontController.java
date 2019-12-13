@@ -26,6 +26,7 @@ import manager.action.RegionInsertAction;
 import manager.action.RegionSelectAction;
 import manager.action.ReservDeleteAction;
 import manager.action.ReservManagementAction;
+import manager.action.ReservUpdateAction;
 import manager.action.ThemeCheckBoxAction;
 import manager.action.ThemeListAction;
 
@@ -196,6 +197,16 @@ public class ManagerFrontController extends HttpServlet {
 			else if (command.equals("/ReservDelete.ma")) {
 				action = new ReservDeleteAction();
 				System.out.println("ReservDelete.ma");
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			else if (command.equals("/ReservUpdate.ma")) {
+				action = new ReservUpdateAction();
+				System.out.println("ReservUpdate.ma");
 				try {
 					forward = action.execute(request, response);
 				} catch (Exception e) {

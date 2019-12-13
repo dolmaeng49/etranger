@@ -1,4 +1,4 @@
-package comment.controller;
+package review.comment.controller;
 
 import java.io.IOException;
 
@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import comment.action.CommentDeleteProAction;
-import comment.action.CommentModifyProAction;
-import comment.action.CommentReplyProAction;
-import comment.action.CommentListAjax;
-import comment.action.CommentWriteAction;
 import common.action.Action;
 import common.vo.ActionForward;
+import review.comment.action.CommentDeleteProAction;
+import review.comment.action.CommentListAjax;
+import review.comment.action.CommentModifyProAction;
+import review.comment.action.CommentReplyProAction;
+import review.comment.action.CommentWriteAction;
 ;
 
 @WebServlet("*.cm")

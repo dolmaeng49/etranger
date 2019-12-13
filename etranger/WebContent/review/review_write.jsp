@@ -17,6 +17,7 @@ String sessionName = (String)session.getAttribute("member_name");
 if(sessionId==null) {
 	response.sendRedirect("LoginForm.me");
 }
+String code =request.getParameter("code");
 %>
     <section class="home-slider owl-carousel">
       <div class="slider-item" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
@@ -42,9 +43,9 @@ if(sessionId==null) {
               <div class="comment-form-wrap">
                 <h3 class="mb-5">여행후기 작성</h3>
                 <div style="height:90px"></div>
-                <form action="ReviewWritePro.rv" method="post" enctype="multipart/form-data" name="review_write_form" onsubmit="return validCheck()">
+                <form action="ReviewWritePro.rv" method="post" name="review_write_form" onsubmit="return validCheck()">
                 <input type="hidden" name="review_num" value=0>
-				<input type="hidden" name="review_package_category_code" value="1"> <!--추후 카테고리 코드 연동할 것-->
+				<input type="text" name="review_package_category_code" value="<%=code %>">
 				<input type="hidden" name="review_readcount" value=0>
 				<input type="hidden" id="review_star" name="review_star" value=0>
 				<input type="hidden" name="review_member_id" value=<%=sessionId %>>
@@ -73,7 +74,7 @@ if(sessionId==null) {
                     <div id="test"></div>
                   <div class="writeform-group">
                     <label for="image">이미지 첨부</label>
-                    <input id="review_image" name="review_image" type="file" class="form-control" multiple="multiple" accept="image/*"/>
+                    <input id="review_image" name="review_image" type="text" class="form-control" multiple="multiple" accept="image/*"/>
                   </div>
                   <div class="form-group"> 
                     <input type="submit" value="등록" class="btn py-3 px-4 btn-primary">
@@ -152,12 +153,6 @@ function validCheck() {
 		alert('내용은 10글자 이상 적어주세요 :)');
 		return false;
 	}
-	
-// 	if(img.length==0){
-// 		alert('썸네일로 사용할 이미지를 업로드해주세요 :)');
-// 		return false;
-// 	}
-	
 }
 
 </script>

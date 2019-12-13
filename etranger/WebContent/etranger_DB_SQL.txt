@@ -11,7 +11,8 @@ grant all privileges on etranger01.* to etranger@'%' identified by 'etranger1234
 // 권한부여 적용
 flush privileges;
 
-최종 수정 날짜 12-10 저녁 6시 : wish 오토인크리먼트 추가
+				12-10 저녁 6시 : wish 오토인크리먼트 추가
+최종 수정 날짜 12-11 오후 12시 : notice 테이블 추가
 ==========================================
 관리자 계정 생성
 INSERT INTO member VALUES('admin','1234','관리자','관리자',null,null,null,'관리자','관리자','2019-12-10','N',now(),now(),'관리자');
@@ -196,6 +197,21 @@ CREATE TABLE `review_comment` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION);
 
+CREATE TABLE notice (
+	notice_num INT NOT NULL AUTO_INCREMENT,
+	notice_member_id VARCHAR(12) NOT NULL,
+  `notice_subject` VARCHAR(100) NOT NULL,
+  `notice_content` VARCHAR(2000) NOT NULL,
+  `notice_image` VARCHAR(100) NULL,
+  `notice_readcount` INT NOT NULL,
+  `notice_date` DATETIME,
+  PRIMARY KEY (`notice_num`),
+  CONSTRAINT `fk_notice_member1`
+    FOREIGN KEY (`notice_member_id`)
+    REFERENCES `member` (`member_id`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE
+);
     
 
 

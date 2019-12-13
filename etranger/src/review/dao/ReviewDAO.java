@@ -288,6 +288,7 @@ public class ReviewDAO {
 		return listCount;		
 		
 	} // end selectListCount(String search)
+	
 	public ArrayList<ReviewBean> selectArticleList(int page, int limit, String search) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

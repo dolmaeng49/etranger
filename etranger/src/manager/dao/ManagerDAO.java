@@ -270,7 +270,7 @@ public class ManagerDAO {
 		ResultSet rs = null;
 		ArrayList<CategoryBean> productList = new ArrayList<CategoryBean>();
 
-		int startRow = (page - 1) * 8;
+		int startRow = (page - 1) * limit;
 
 		try {
 
@@ -547,32 +547,23 @@ public class ManagerDAO {
 			return deleteCount;
 		}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		public int updateReserv(String reservation_progress, int reservNum) {
+			int updateCount = 0;
+			PreparedStatement pstmt = null;
+			String sql = "UPDATE reservation set reservation_progress=? where reservation_num=?";
+			try {
+				pstmt= con.prepareStatement(sql);
+				pstmt.setString(1,reservation_progress);
+				pstmt.setInt(2, reservNum);
+				updateCount = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			
+			
+			return updateCount;
+		}
 	
 }
