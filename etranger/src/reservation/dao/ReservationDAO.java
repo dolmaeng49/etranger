@@ -31,27 +31,30 @@ public class ReservationDAO {
 		this.con = con;
 	}
 
-	public ArrayList<ReservationBean> ReservationInfo(String id) {
+	public ArrayList<ReservationBean> ReservationInfo(int page, int limit, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		// ReservationBean rb = new ReservationBean();
 		System.out.println(id);
+
+		int startRow = (page - 1) * limit; // 시작 게시물 번호 계산
+
 		ArrayList<ReservationBean> daorb = new ArrayList<ReservationBean>();
 		try {
 
-			String sql = "SELECT rs.reservation_member_id,pc.package_category_name,pc.package_category_image,pd.package_product_arriv_date, " + 
-					"    pd.package_product_depart_date,rs.reservation_headcount,rs.reservation_price,reservation_category_code,rs.reservation_num,"
-					+ "  rs.reservation_pay_way,rs.reservation_progress,rs.reservation_date " + 
-					"    FROM reservation rs JOIN package_category pc " + 
-					"    ON rs.reservation_category_code = pc.package_category_code JOIN package_product pd " + 
-					"    ON rs.reservation_product_num = pd.package_product_num where rs.reservation_member_id=?;";
-				System.out.println("DB");
+			String sql = "SELECT rs.reservation_member_id,pc.package_category_name,pc.package_category_image,pd.package_product_arriv_date, "
+					+ "    pd.package_product_depart_date,rs.reservation_headcount,rs.reservation_price,reservation_category_code,rs.reservation_num,"
+					+ "  rs.reservation_pay_way,rs.reservation_progress,rs.reservation_date "
+					+ "    FROM reservation rs JOIN package_category pc "
+					+ "    ON rs.reservation_category_code = pc.package_category_code JOIN package_product pd "
+					+ "    ON rs.reservation_product_num = pd.package_product_num where rs.reservation_member_id=?"
+					+"ORDER BY rs.reservation_num desc LIMIT ?,?;";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, limit);
 			rs = pstmt.executeQuery();
-			System.out.println("DB2");
 			while (rs.next()) {
-
 				ReservationBean rb = new ReservationBean();
 				rb.setReservation_member_id(rs.getString("reservation_member_id"));
 				rb.setReservation_num(rs.getInt("reservation_num"));
@@ -67,17 +70,6 @@ public class ReservationDAO {
 				rb.setPackage_product_depart_date(rs.getString("package_product_depart_date"));
 				daorb.add(rb);
 			}
-			
-			for(int i=0;i<daorb.size();i++) {
-				
-				System.out.println(daorb.get(i));
-				
-				
-				
-				
-			}
-			
-
 		} catch (SQLException e) {
 
 			System.out.println("selectArticleList() 오류 - " + e.getMessage());
@@ -97,7 +89,6 @@ public class ReservationDAO {
 
 		try {
 
-			
 //			+-----------------------------+--------------+------+-----+---------+----------------+
 //			| Field                       | Type         | Null | Key | Default | Extra          |
 //			+-----------------------------+--------------+------+-----+---------+----------------+
@@ -112,7 +103,7 @@ public class ReservationDAO {
 //			| reservation_progress        | varchar(10)  | YES  |     | NULL    |                |
 //			| reservation_product_current | int(11)      | YES  |     | NULL    |                |
 //			+-----------------------------+--------------+------+-----+---------+----------------+
-			
+
 //			+-----------------------------+--------------+------+-----+---------+----------------+
 //			| Field                       | Type         | Null | Key | Default | Extra          |
 //			+-----------------------------+--------------+------+-----+---------+----------------+
@@ -142,7 +133,7 @@ public class ReservationDAO {
 			pstmt.setInt(5, rb.getReservation_headcount());
 			pstmt.setString(6, rb.getReservation_pay_way());
 			pstmt.setString(7, rb.getReservation_progress());
-			
+
 			insertCount = pstmt.executeUpdate();
 
 //			sql = "UPDATE package_product SET package_product_total = package_product_total - ?, package_product_current = package_product_current + ? WHERE package_product_num = ?";
@@ -161,6 +152,29 @@ public class ReservationDAO {
 		}
 
 		return insertCount;
+	}
+
+	public int selectReservationListCount(String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int listCount = 0;
+
+		try {
+			String sql = "select count(*) from reservation where reservation_member_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				listCount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("selectListCount() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return listCount;
 	}
 
 }

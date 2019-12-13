@@ -270,7 +270,7 @@ public class ManagerDAO {
 		ResultSet rs = null;
 		ArrayList<CategoryBean> productList = new ArrayList<CategoryBean>();
 
-		int startRow = (page - 1) * 8;
+		int startRow = (page - 1) * limit;
 
 		try {
 
@@ -565,33 +565,5 @@ public class ManagerDAO {
 			
 			return updateCount;
 		}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
