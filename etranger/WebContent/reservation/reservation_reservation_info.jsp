@@ -163,14 +163,9 @@ table.pdList .right {
 
 	<section class="ftco-section">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-10 ftco-animate">
-
 					<div class="managerdetailform">
 						<h3 class="mb-5"></h3>
 					</div>
-					<div class="writeform-group">
-						<div class="col-md-12">
 							<h3>
 								<label for="name">예약 상품 리스트</label>
 							</h3>
@@ -276,14 +271,11 @@ table.pdList .right {
 							<%
 								} else {
 							%>
-							<div>예약상품이 없습니다. 예약하러 가시겠습니까?</div>
+							<div>예약상품이 없습니다.</div>
+							<div  style="text-align: center;"><input type="button" class="btn py-2 px-2 btn-primary" value="홈으로" onclick="location.href='./index.jsp'" style="margin-right: 30px;"> <input type="button" class="btn py-2 px-2 btn-primary" value="상품 페이지" onclick="location.href='ProductList.pr'" style="margin-left: 30px;"></div>
 							<%
 								}
 							%>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 	</section>
 	<!-- footer 인클루드 -->
