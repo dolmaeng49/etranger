@@ -566,6 +566,7 @@ public class ManagerDAO {
 			return updateCount;
 		}
 
+
 		// --- selectListCount
 		public int reservListCount() {
 			PreparedStatement pstmt = null;
@@ -589,13 +590,5 @@ public class ManagerDAO {
 			return listCount;
 		}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

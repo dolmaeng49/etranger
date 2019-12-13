@@ -6,12 +6,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import comment.dao.CommentDAO;
-import comment.service.CommentListService;
-import comment.service.CommentModifyFormService;
-import comment.vo.CommentBean;
 import common.action.Action;
 import common.vo.ActionForward;
+import review.comment.dao.CommentDAO;
+import review.comment.service.CommentListService;
+import review.comment.service.CommentModifyFormService;
+import review.comment.vo.CommentBean;
 import review.service.ReviewDetailService;
 import review.vo.ReviewBean;
 

@@ -29,8 +29,6 @@ public class ReservDeleteAction implements Action {
 			out.print("예약 삭제가 실패했습니다");
 		}
 		
-
-		
 		return forward;
 	}
 

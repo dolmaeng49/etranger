@@ -1,4 +1,4 @@
-<%@page import="comment.vo.CommentBean"%>
+<%@page import="review.comment.vo.CommentBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="common.vo.PageInfo"%>
 <%@page import="review.vo.ReviewBean"%>

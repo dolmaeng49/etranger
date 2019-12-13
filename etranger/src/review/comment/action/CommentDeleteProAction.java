@@ -1,13 +1,13 @@
-package comment.action;
+package review.comment.action;
 
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import comment.service.CommentDeleteProService;
 import common.action.Action;
 import common.vo.ActionForward;
+import review.comment.service.CommentDeleteProService;
 
 public class CommentDeleteProAction implements Action {
 

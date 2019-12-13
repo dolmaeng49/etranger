@@ -418,7 +418,7 @@
         %>
             <div class="item">
               <div class="blog-entry">
-                <a href="blog-single.html" class="block-20" style="background-image: url(reviewUpload/<%=rb.getReview_image()%>');">
+                <a href="blog-single.html" class="block-20" style="background-image: url('reviewUpload/<%=rb.getReview_image()%>');">
                 </a>
                 <div class="text p-4">
                   <div class="meta">

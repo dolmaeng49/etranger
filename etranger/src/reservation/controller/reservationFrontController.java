@@ -36,7 +36,7 @@ public class reservationFrontController extends HttpServlet {
 		ActionForward forward = null;
 
 		if (command.equals("/ReservationInfo.rs")) {
-			//MemberReservationInfoAction 클래스로 이동 
+			// MemberReservationInfoAction 클래스로 이동
 			System.out.println("/ReservationInfo.rs");
 			action = new ReservationInfoAction();
 			try {
@@ -45,9 +45,9 @@ public class reservationFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
+
 		else if (command.equals("/ReservationInsert.rs")) {
-			//MemberReservationInfoAction 클래스로 이동 
+			// MemberReservationInfoAction 클래스로 이동
 			System.out.println("/ReservationInsert.rs");
 			action = new ReservationInsertAction();
 			try {
@@ -56,8 +56,6 @@ public class reservationFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
-		
 
 		// ActionForward 객체의 정보에 따른 포워딩
 		if (forward != null) {

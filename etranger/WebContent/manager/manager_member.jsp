@@ -81,9 +81,9 @@
 				<!-- 고객아이디 예약일(결제시한) 예약번호 예약상품(이름) 예약인원 출발날짜/도착날짜 금액 진행상태 -->
 				<table class="reservList">
 					<tr>
+						<th>예약번호</th>
 						<th>고객아이디</th>
 						<th>예약일</th>
-						<th>예약번호</th>
 						<th>예약상품</th>
 						<th>예약인원</th>
 						<th>출발날짜/도착날짜</th>
@@ -98,9 +98,10 @@
 					%>
 
 					<tr>
-						<td class="reservid"><%=reservList.get(i).getReservation_member_id()%></td>
-						<td><%=reservList.get(i).getReservation_date()%></td>
+
 						<td><%=reservList.get(i).getReservation_num()%></td>
+						<td><%=reservList.get(i).getReservation_member_id()%></td>
+						<td><%=reservList.get(i).getReservation_date()%></td>
 						<td class="left"><%=reservList.get(i).getPackage_category_name()%><br>
 							<%=reservList.get(i).getReservation_category_code()%></td>
 						<td><%=reservList.get(i).getReservation_headcount()%></td>
