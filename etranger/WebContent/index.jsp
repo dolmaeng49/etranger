@@ -457,7 +457,7 @@
             </div>
           </div>
           <div class="col-lg-8 p-2 pl-md-5 heading-section">
-            <h2 class="mb-5 p-2 pb-3 ftco-animate">Most Recommended Hotels</h2>
+            <h2 class="mb-5 p-2 pb-3 ftco-animate">Most Recommended Tours</h2>
             <div class="row no-gutters d-flex">
               <div class="col-md-4 ftco-animate">
                 <a href="#" class="block-5" style="background-image: url('images/hotel-1.jpg');">

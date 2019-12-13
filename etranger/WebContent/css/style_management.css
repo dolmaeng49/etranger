@@ -1,0 +1,69 @@
+@charset "UTF-8";
+
+
+/* 사이드바 화면고정 */
+.sticky {
+	position: sticky;
+	top: 100px;
+}
+
+.li_hover:hover {
+	border: 2px solid #ff5f5f;
+	background: transparent;
+	color: #ff5f5f;
+}
+
+.member {
+	font-size: smaller;
+}
+
+/* 테이블 css */
+table.reservList {
+	border-collapse: separate;
+	border-spacing: 1px;
+	text-align: center;
+	line-height: 1.5;
+	margin: 50px 0px;
+	width: 90%;
+}
+
+table.reservList th {
+	width: 0px;
+	padding: 5px;
+	font-weight: bold;
+	vertical-align: top;
+	color: #fff;
+	background: #ff5f5f;
+}
+
+table.reservList td {
+	width: 0px;
+	padding: 5px;
+	vertical-align: center;
+	border-bottom: 1px solid #ccc;
+	background: #eee;
+	font-size: smaller;
+}
+
+table.reservList .left {
+	text-align: left !important;
+}
+
+table.reservList .reservid{
+	text-shadow: black;
+	font-size: 15px;
+	color: #028c33;
+}
+
+table.reservList .right {
+	text-align: right !important;
+}
+
+table.reservList td input {
+	font-size: smaller;
+}
+
+table.reservList .price {
+	color: #fb3737!important;
+	font-weight: 700 !important;
+}
