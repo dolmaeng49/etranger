@@ -10,7 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.action.Action;
 import common.vo.ActionForward;
+import notice.action.NoticeDeleteProAction;
 import notice.action.NoticeListAction;
+import notice.action.NoticeModifyFormAction;
+import notice.action.NoticeModifyProAction;
+import notice.action.NoticeSearchListAction;
 import notice.action.NoticeWriteProAction;
 
 
@@ -44,50 +48,46 @@ public class NoticeFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/NoticeModifyForm.no")){
+			action = new NoticeModifyFormAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/NoticeModifyPro.no")){
+			action = new NoticeModifyProAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-//		else if(command.equals("/ReviewDetail.rv")){
-//			action = new ReviewDetailAction();
-//			try {
-//				forward=action.execute(request, response);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}else if(command.equals("/ReviewModifyForm.rv")){
-//			action = new ReviewModifyFormAction();
-//			try {
-//				forward=action.execute(request, response);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}else if(command.equals("/ReviewModifyPro.rv")){
-//			action = new ReviewModifyProAction();
-//			try {
-//				forward=action.execute(request, response);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}else if(command.equals("/ReviewDeletePro.rv")){
-//			action = new ReviewDeleteProAction();
-//			try {
-//				forward=action.execute(request, response);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}else if(command.equals("/ImageCallback.rv")){
+			else if(command.equals("/NoticeDeletePro.no")){
+			action = new NoticeDeleteProAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+//			else if(command.equals("/ImageCallback.rv")){
 //			action = new ImageCallbackAction();
 //			try {
 //				forward=action.execute(request, response);
 //			} catch (Exception e) {
 //				e.printStackTrace();
 //			}
-//		}else if(command.equals("/ReviewSearch.rv")){
-//			action = new ReviewSearchListAction();
-//			try {
-//				forward=action.execute(request, response);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}else if(command.equals("/ImageCallback.rv")){
+//		}+
+		else if(command.equals("/NoticeSearch.no")){
+			action = new NoticeSearchListAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+//			else if(command.equals("/ImageCallback.rv")){
 //			action = new ImageCallbackAction();
 //			try {
 //				forward=action.execute(request, response);

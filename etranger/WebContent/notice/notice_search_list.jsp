@@ -195,7 +195,6 @@
 
 	<!-- loader 인클루드 -->
 	<jsp:include page="/include/loader.jsp" />
-	 <script src="js/starinsert.js"></script>
 	<script type="text/javascript">
 		$('h3.heading').each(function() {
 			var length = 18; //표시할 글자수 정하기
@@ -209,14 +208,6 @@
 
 		});
 		
-		$('#notice_del_button').click(function () {
-			var delConfirm = confirm('정말 삭제하시겠습니까?');
-			if (delConfirm){
-			}else{
-				return false;
-			}
-			
-		});
 	</script>
 </body>
 </html>
