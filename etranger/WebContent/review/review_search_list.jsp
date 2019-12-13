@@ -55,9 +55,9 @@
     
     <!-- 추천여행지 -->
     <section class="ftco-section bg-light">
+      <div class="container">
 			<%
 			if(articleList != null && listCount > 0) {%>
-      <div class="container">
         <div class="row">
 			<!--리스트에서 보여지는 게시물 썸네일 한 덩이 시작 -->
 				<%for(int i=0; i<articleList.size(); i++) {%>

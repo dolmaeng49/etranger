@@ -121,7 +121,6 @@ function isThereLoginSession(){
                     <span class="price">$399</span>
                     <h3 class="heading"><%=categoryList.get(i).getPackage_category_name()%></h3>
                     <div class="post-meta" style="text-align: right;">
-<%--                     <%String content = productList.get(i).getPackage_category_content();%> //.substring(0, Math.min(content.length(), 20)) --%>
                       <span>좋아요숫자 <span id="wish_count"><%=categoryList.get(i).getPackage_category_wish_count() %></span>
 								<i onclick="wishFunction(this,'<%=categoryList.get(i).getPackage_category_code()%>')"
 								<%if(member_wishList != null && member_wishList.contains(categoryList.get(i).getPackage_category_code())) {%>

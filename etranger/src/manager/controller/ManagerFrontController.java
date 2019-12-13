@@ -43,7 +43,10 @@ public class ManagerFrontController extends HttpServlet {
 		ActionForward forward = null;
 
 		System.out.println(command);
-		if (request.getSession().getAttribute("member_id").equals("admin")) {
+		String member_id = (String)request.getSession().getAttribute("member_id");
+		
+		// 관리자 권한 확인이 필요한 페이지
+		if (member_id != null && member_id.equals("admin")) {
 			// manager_main.jsp 페이지 이동
 			if (command.equals("/ManagerMain.ma")) {
 				action = new ManagerMainAction();
@@ -64,15 +67,6 @@ public class ManagerFrontController extends HttpServlet {
 				}
 			}
 
-			// RegionSelectAction 클래스로 이동
-			else if (command.equals("/RegionSelect.ma")) {
-				action = new RegionSelectAction();
-				try {
-					forward = action.execute(request, response);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
 
 			// CityInsertAction 클래스로 이동
 			else if (command.equals("/CityInsert.ma")) {
@@ -84,15 +78,6 @@ public class ManagerFrontController extends HttpServlet {
 				}
 			}
 
-			// CitySelectAction 클래스로 이동
-			else if (command.equals("/CitySelect.ma")) {
-				action = new CitySelectAction();
-				try {
-					forward = action.execute(request, response);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
 
 			// ManagerThemeInsertAction 클래스로 이동
 			else if (command.equals("/ThemeInsert.ma")) {
@@ -213,8 +198,26 @@ public class ManagerFrontController extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			
-			
+		}
+		// 관리자 권한이 필요없는 페이지
+			// RegionSelectAction 클래스로 이동
+			if (command.equals("/RegionSelect.ma")) {
+				action = new RegionSelectAction();
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			// CitySelectAction 클래스로 이동
+			else if (command.equals("/CitySelect.ma")) {
+				action = new CitySelectAction();
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 
 			if (forward != null) {
 				if (forward.isRedirect()) {
@@ -226,7 +229,7 @@ public class ManagerFrontController extends HttpServlet {
 
 			}
 
-		}
+		
 
 	}
 

@@ -13,7 +13,7 @@ import common.action.Action;
 import common.vo.ActionForward;
 import product.action.CategoryDetailAction;
 import product.action.CategoryListAction;
-import product.action.CategoryListSearchAction;
+import product.action.CategoryListAction;
 import product.action.DeleteWishAction;
 import product.action.InsertWishAction;
 
@@ -39,7 +39,7 @@ public class ProductFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("product/tours.jsp");
 		} else if(command.equals("/CategoryListSearch.pr")) {
-			action = new CategoryListSearchAction();
+			action = new CategoryListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

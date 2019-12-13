@@ -18,6 +18,9 @@ public class CategoryBean {
 	private String package_category_image;
 	private String package_category_content;
 	private int package_category_wish_count;
+	// join 으로 들고올 값들
+	private int review_count;
+	private double review_star_avg;
 
 //	| package_category_code | 
 //	package_category_name | 
@@ -26,6 +29,22 @@ public class CategoryBean {
 //	package_category_theme | 
 //	package_category_image | 
 //	package_category_content |
+
+	public int getReview_count() {
+		return review_count;
+	}
+
+	public void setReview_count(int review_count) {
+		this.review_count = review_count;
+	}
+
+	public double getReview_star_avg() {
+		return review_star_avg;
+	}
+
+	public void setReview_star_avg(double review_star_avg) {
+		this.review_star_avg = review_star_avg;
+	}
 
 	public int getPackage_category_wish_count() {
 		return package_category_wish_count;

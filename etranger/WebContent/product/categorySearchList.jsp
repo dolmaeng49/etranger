@@ -1,3 +1,4 @@
+<%@page import="product.vo.SearchBean"%>
 <%@page import="manager.vo.CategoryBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="common.vo.PageInfo"%>
@@ -12,17 +13,87 @@
 <%
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	ArrayList<CategoryBean> categoryList = (ArrayList<CategoryBean>)request.getAttribute("categoryList");
+	SearchBean searchBean = (SearchBean)request.getAttribute("searchBean");
+	
 	int nowPage = pageInfo.getPage();
 	int maxPage = pageInfo.getMaxPage();
 	int startPage = pageInfo.getStartPage();
 	int endPage = pageInfo.getEndPage();
 	int listCount = pageInfo.getListCount();
+	
+	// 세션에서 로그인 회원의 찜목록 받아오기
+	Object memberWishObject = session.getAttribute("member_wishList");
+	ArrayList<String> member_wishList = null;
+	if(session.getAttribute("member_wishList") != null){
+		member_wishList = (ArrayList<String>)memberWishObject;
+	}
+	
+	// 세션에서 로그인 회원의 아이디 가져오기
+	String sid = "";
+	if(session.getAttribute("member_id") != null) {
+		sid = (String)session.getAttribute("member_id");
+	}
 %>
+
+
+// 하트를 누르면 호출되는 함수
+//파라미터로 해당 패키지카테고리의 package_category_code 를 전달 받음
+//하트 태그의 이름이 1 이면 속이 찬 하트, 0 이면 속이 빈하트
+function wishFunction(domain,code) {
+	if(!isThereLoginSession()){
+		alert('로그인이 필요합니다!');
+		return;
+	}
+	// isOHeart = '0' : 하트 속이 비어있는 상태 , '1' : 속이 꽉 찬 하트
+	var isOHeart = $(domain).attr('id');
+	// 표시된 좋아요 숫자를 변수에 저장
+	var wish_count = $('#wish_count').text();
+	
+	if(isOHeart=='0') {
+		// back-end : ajax로 insertWish DB 작업
+		// 액션클래스로 하트가 클릭된 상품(category) 코드 전달
+		$.ajax('InsertWish.pr',{
+			data : {category_code : code},
+			success : function() {
+				// front-end : 하트의 모양을 결정하는 클래스 add & remove, 모양을 저장하는 속성(id) 변경
+				$(domain).removeClass('fa-heart-o');
+				$(domain).addClass('fa-heart');
+				$(domain).attr('id',"1");
+				// 좋아요숫자 표시를 가져와 Number로 형변환 후 1을 더해 다시 표시
+				// DB 에서 가져오는 것 아님, 눈속임. 새로고침하면 DB에서 가져오기 때문에 괜찮음
+				$('#wish_count').text(Number(wish_count)+1);
+			},
+			error : function(){}
+		});
+	} else if(isOHeart=='1') {
+		$.ajax('DeleteWish.pr',{
+			data : {category_code : code},
+			success : function() {
+				$(domain).removeClass('fa-heart');
+				$(domain).addClass('fa-heart-o');
+				$(domain).attr('id',"0");
+				$('#wish_count').text(Number(wish_count)-1);
+			},
+			error : function(){}
+		});
+		
+	}
+}
+
+function isThereLoginSession(){
+	if($('#sid').val().length==0){
+		return false;
+	}
+	return true;
+}
+
+
+
 </script>
 
   </head>
   <body>
-    
+    <input type="hidden" id="sid" value="<%=sid%>">
 <!-- 탑메뉴 인클루드 -->    
 <jsp:include page="../include/top_menu.jsp"/>
     
@@ -54,11 +125,24 @@
                   <div class="text">
                     <span class="price">$399</span>
                     <h3 class="heading"><%=categoryList.get(i).getPackage_category_name()%></h3>
-                    <div class="post-meta">
-<%--                     <%String content = productList.get(i).getPackage_category_content();%> //.substring(0, Math.min(content.length(), 20)) --%>
-                      <span><%=categoryList.get(i).getPackage_category_content() %></span>
+                    <div class="post-meta" style="text-align: right;">
+                      <span>좋아요숫자 <span id="wish_count"><%=categoryList.get(i).getPackage_category_wish_count() %></span>
+								<i onclick="wishFunction(this,'<%=categoryList.get(i).getPackage_category_code()%>')"
+								<%if(member_wishList != null && member_wishList.contains(categoryList.get(i).getPackage_category_code())) {%>
+									class="fa fa-heart" id="1" 
+								<%} else {%>
+									class="fa fa-heart-o" id="0"
+								<%} %>
+								style="font-size:24px;color:red;"></i></span>
                     </div>
-                    <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span> <span>500 reviews</span></p>
+                    <p class="star-rate">
+                    <%
+                    double avg = categoryList.get(i).getReview_star_avg() / 2;
+                    for(int j = 1; j <= (int)(avg-0.4); j++){%><span class="icon-star"></span><%}
+                    // 
+                    if(avg/1 >= 0.5) { %><span class="icon-star-half-full"></span><% }
+                    %>
+                    <span><%=categoryList.get(i).getReview_count() %> reviews</span></p>
                   </div>
               </div>
             <%}} %>
@@ -79,20 +163,28 @@
 <!-- PageController -->  
             </div>
             <div class="row mt-5">
-              <div class="col text-center">
-                <div class="block-27">
-                  <ul>
-                    <li><a href="#">&lt;</a></li>
-                    <li class="active"><span>1</span></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&gt;</a></li>
-                  </ul>
-                </div>
-              </div>
+          <div class="col text-center">
+            <div class="block-27">
+              <ul>
+            <%if(nowPage<=1){%>
+            <li><a>&lt;</a></li>
+            <%}else
+            {%><li><a href="ReviewList.rv?page=<%=nowPage -1%>">&lt;</a></li><%} %>
+            	<%for(int i=startPage; i<=endPage; i++) {
+            	if(i== nowPage) {%><li class="active"><span><%=i %></span></li>
+            	<%}else{%>
+                <li><a href="ReviewList.rv?page=<%=i%>"><%=i %></a></li>
+                <%}%>
+                <%}%>
+                <%if(nowPage>=maxPage){%><li><a>&gt;</a></li>
+                <%}else{ %>
+                <li><a href="ReviewList.rv?page=<%=nowPage +1%>">&gt;</a></li>
+                <%} %>
+              </ul>
             </div>
+          </div>
+        </div>
+        <!-- 페이지 부분 -->
           </div>
           <!-- END -->
 
@@ -106,20 +198,23 @@
                     <div class="row flex-column"><!-- 검색바 묶음 -->
 
                       <div class="textfield-search col-sm-12 group mb-3">
-                      	<input type="text" class="form-control" placeholder="상품명" name="keyword"></div> <!-- 키워드 검색창 -->
+                      	<input type="text" class="form-control" placeholder="상품명" name="keyword" value="<%=searchBean.getKeyword()%>"></div> <!-- 키워드 검색창 -->
 
                       <div class="check-in col-sm-12 group mb-3">
 <!--                       	<input type="text" id="checkin_date" class="form-control" placeholder="Date for Departure" name="depart_date"> -->
-                      	<input type="text" class="form-control pick_start_date" placeholder="출발 날짜" name="depart_date"><!--출발일 검색  -->
+                      	<input type="text" class="form-control pick_start_date" placeholder="출발 날짜"
+                      	name="depart_date" readonly="readonly" value="<%=searchBean.getDepart_date()%>"><!--출발일 검색  -->
                       </div>
 
                       <div class="check-out col-sm-12 group mb-3">
-                      	<input type="text" id="checkout_date" class="form-control" placeholder="도착 날짜" name="arriv_date"></div> <!--도착일 검색  -->
+                      	<input type="text" id="checkout_date" class="form-control" placeholder="도착 날짜"
+                      	name="arriv_date" readonly="readonly" value="<%=searchBean.getArriv_date()%>"></div> <!--도착일 검색  -->
                       
                       
                       
                       <div class="select-wrap col-sm-12 group mb-3">
                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                        <input type="hidden" id="" value="<%=searchBean.getRegion()%>">
                         <select name="region" id="selectRegion" class="form-control" onChange="getCity()"><!--지역명  -->
                         	<option value="">지역선택</option>
                         </select>
@@ -184,6 +279,39 @@
 
    <!-- loader 인클루드 -->
 <jsp:include page="../include/loader.jsp"/>
+<script type="text/javascript">
+function getRegion() {
+// 	$('#selectRegion').hide();
+	// #selectRegion에 있는 내용 지우기
+	$('#selectRegion').empty();
+	$('#selectRegion').append("<option value=''>지역선택</option>");
+	// JSON으로 가져온 데이터 #SelectRegion에 옵션으로 추가
+	$.getJSON('RegionSelect.ma', function(data) {
+
+		$.each(data, function(index, value) {
+			$('#selectRegion').append(
+					"<option value=" + value.regionCode + "> 지역이름 : " + value.regionName
+							+ "</option>");
+		});
+	});
+}
+
+// 도시 목록 불러오기
+function getCity() {
+	$('#selectCity').empty();
+	var code = $('#selectRegion').val();
+	$('#selectCity').append("<option value=''>도시선택</option>");
+	$.getJSON('CitySelect.ma?code=' + code, function(data) {
+		$.each(data, function(index, value) {
+
+			$('#selectCity').append(
+					"<option value=" + value.cityCode + "> 도시이름 : " + value.cityName
+							+ "</option>");
+		});
+	});
+}
+getRegion(); // 셀렉트박스에 지역코드 출력하는 함수
+</script>
     
   </body>
 </html>
