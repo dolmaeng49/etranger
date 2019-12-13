@@ -11,24 +11,26 @@ import java.util.ArrayList;
 import review.vo.ReviewBean;
 
 public class ReviewDAO {
-	
-	private ReviewDAO() {}
-	
+
+	private ReviewDAO() {
+	}
+
 	private static ReviewDAO instance;
-	
+
 	public static ReviewDAO getInstance() {
-		if(instance== null) {
+		if (instance == null) {
 			instance = new ReviewDAO();
 		}
 		return instance;
 	}
-	
+
 	Connection con;
-	
+
 	public void setConnection(Connection con) {
 		this.con = con;
 	}
-		//////////////////////////////////Bong 작업영역 시작////////////////////////////////////////////
+
+	// 글쓰기
 	public int insertArticle(ReviewBean rb) {
 		PreparedStatement pstmt = null;
 		int insertCount = 0;
@@ -44,7 +46,7 @@ public class ReviewDAO {
 			pstmt.setString(7, rb.getReview_package_catagory_code());
 			pstmt.setInt(8, rb.getReview_star());
 			pstmt.setInt(9, rb.getReview_comment_count());
-		
+
 			insertCount = pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("insertArticle() 오류! - " + e.getMessage());
@@ -54,73 +56,70 @@ public class ReviewDAO {
 		return insertCount;
 	}
 
-
-
+	// 글 개수 가져오기
 	public int selectListCount() {
-		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int listCount = 0;
-		
+
 		try {
-			String sql="select count(*) from review";
+			String sql = "select count(*) from review";
 			pstmt = con.prepareStatement(sql);
-			rs=pstmt.executeQuery();
-			
-			if(rs.next()) {
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
 				listCount = rs.getInt(1);
 			}
 		} catch (SQLException e) {
 			System.out.println("selectListCount() 오류! - " + e.getMessage());
-		}finally {
+		} finally {
 			close(rs);
 			close(pstmt);
 		}
 		return listCount;
 	}
 
-
+	// 글 목록 가져오기
 	public ArrayList<ReviewBean> selectArticleList(int page, int limit) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<ReviewBean> articleList = new ArrayList<ReviewBean>();
-		
-		int startRow = (page - 1) * 10;	//시작 게시물 번호 계산
-		
+
+		int startRow = (page - 1) * 10; // 시작 게시물 번호 계산
+
 		try {
-			
+
 			String sql = "select * from review order by review_num desc LIMIT ?,?";
-			pstmt=con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, limit);
-			rs=pstmt.executeQuery();
-			
-		while(rs.next()) {
-			ReviewBean rb = new ReviewBean();
-			rb.setReview_num(rs.getInt("review_num"));
-			rb.setReview_member_id(rs.getString("review_member_id"));
-			rb.setReview_subject(rs.getString("review_subject"));
-			rb.setReview_image(rs.getString("review_image"));
-			rb.setReview_content(rs.getString("review_content"));
-			rb.setReview_date(rs.getTimestamp("review_date"));
-			rb.setReview_readcount(rs.getInt("review_readcount"));
-			rb.setReview_package_catagory_code(rs.getString("review_package_category_code"));
-			rb.setReview_member_name(rs.getString("review_member_name"));
-			rb.setReview_star(rs.getInt("review_star"));
-			rb.setReview_comment_count(rs.getInt("review_comment_count"));
-			articleList.add(rb);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				ReviewBean rb = new ReviewBean();
+				rb.setReview_num(rs.getInt("review_num"));
+				rb.setReview_member_id(rs.getString("review_member_id"));
+				rb.setReview_subject(rs.getString("review_subject"));
+				rb.setReview_image(rs.getString("review_image"));
+				rb.setReview_content(rs.getString("review_content"));
+				rb.setReview_date(rs.getTimestamp("review_date"));
+				rb.setReview_readcount(rs.getInt("review_readcount"));
+				rb.setReview_package_catagory_code(rs.getString("review_package_category_code"));
+				rb.setReview_member_name(rs.getString("review_member_name"));
+				rb.setReview_star(rs.getInt("review_star"));
+				rb.setReview_comment_count(rs.getInt("review_comment_count"));
+				articleList.add(rb);
 			}
 		} catch (SQLException e) {
 			System.out.println("selectArticleList() 오류! - " + e.getMessage());
-		}finally {
+		} finally {
 			close(rs);
 			close(pstmt);
 		}
 		return articleList;
 	}
-	
-	////////////////////////////////////////////////////////////////////////////////////////
-	
+
+	// 글 가져오기
 	public ReviewBean selectArticle(int review_num) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -130,8 +129,8 @@ public class ReviewDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, review_num);
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				reviewBean = new ReviewBean();
 				reviewBean.setReview_num(rs.getInt("review_num"));
 				reviewBean.setReview_member_id(rs.getString("review_member_id"));
@@ -154,19 +153,17 @@ public class ReviewDAO {
 		return reviewBean;
 	}
 
-
-
+	// 조회수 증가
 	public int updateReadcount(int review_num) {
-		// review_num 에 해당하는 readcount 1 증가
 		PreparedStatement pstmt = null;
 		int updateCount = 0;
-				
+
 		try {
-		String sql = "UPDATE review SET review_readcount=review_readcount+1 WHERE review_num=?";
-		pstmt = con.prepareStatement(sql);
-		pstmt.setInt(1, review_num);
-		updateCount = pstmt.executeUpdate();
-					
+			String sql = "UPDATE review SET review_readcount=review_readcount+1 WHERE review_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, review_num);
+			updateCount = pstmt.executeUpdate();
+
 		} catch (SQLException e) {
 			System.out.println("updateReadcount() 오류 - " + e.getMessage());
 		} finally {
@@ -174,12 +171,12 @@ public class ReviewDAO {
 		}
 		return updateCount;
 	}
-	
 
-	public int updateArticle(ReviewBean rb) { // 글수정
+	// 글 수정
+	public int updateArticle(ReviewBean rb) {
 		PreparedStatement pstmt = null;
 		int updateCount = 0;
-		
+
 		try {
 			String sql = "UPDATE review SET review_subject=?, review_image=?, review_content=? WHERE review_num=?";
 			pstmt = con.prepareStatement(sql);
@@ -188,57 +185,51 @@ public class ReviewDAO {
 			pstmt.setString(3, rb.getReview_content());
 			pstmt.setInt(4, rb.getReview_num());
 			updateCount = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			System.out.println("updateArticle() 오류 - " + e.getMessage());
 		} finally {
 			close(pstmt);
 		}
 		return updateCount;
-	}	// end updateArticle()
+	}
 
-
-	// 글번호 와 글쓴이 일치 여부 확인
+	// 작성자 일치 여부 확인
 	public boolean isReviewArticleWriter(int review_num, String review_member_id) {
-
 		PreparedStatement pstmt = null;
-		ResultSet rs = null; // 조회할 시 필요함
+		ResultSet rs = null;
 		boolean isArticleWriter = false;
-		
+
 		try {
-			// review_num이 전달받은 값과 일치하는지 여부 판별
 			String sql = "SELECT review_member_id FROM review WHERE review_num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, review_num);
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				
-			if(review_member_id.equals(rs.getString("review_member_id"))) {
-				isArticleWriter = true; // 일치시 isArticle 값 true
+
+			if (rs.next()) {
+				if (review_member_id.equals(rs.getString("review_member_id"))) {
+					isArticleWriter = true;
+				}
+
 			}
-			
-		}
-			
+
 		} catch (SQLException e) {
 			System.out.println("isReviewArticleWriter() 오류 - " + e.getMessage());
 		} finally {
 			close(rs);
 			close(pstmt);
 		}
-		
-		return isArticleWriter;
-	} // end isReviewArticleWriter
 
+		return isArticleWriter;
+	}
 
 	// 글 삭제
 	public int deleteArticle(int review_num) {
 
 		PreparedStatement pstmt = null;
 		int deleteCount = 0;
-		
+
 		try {
-			// review_num 에 해당하는 레코드 삭제
 			String sql = "DELETE from review WHERE review_num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, review_num);
@@ -248,101 +239,99 @@ public class ReviewDAO {
 		} finally {
 			close(pstmt);
 		}
-		
+
 		return deleteCount;
-		
-	} // end deleteArticle
+
+	}
 
 	// 게시판 글 검색
 	public int selectListCount(String search) {
 
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
 		int listCount = 0;
 		try {
-			con=getConnection();
-			
-			String sql="select count(*) from review"
-					+ " where review_member_name like ? or"
-					+ " review_subject like ? or"
-					+ " review_content like ?";
-			
-			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, "%"+search+"%");
-			pstmt.setString(2, "%"+search+"%");
-			pstmt.setString(3, "%"+search+"%");
-			rs=pstmt.executeQuery();
-			if(rs.next()){
-				listCount =  rs.getInt("count(*)");
+			con = getConnection();
+
+			String sql = "select count(*) from review" + " where review_member_name like ? or"
+					+ " review_subject like ? or" + " review_content like ?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			pstmt.setString(2, "%" + search + "%");
+			pstmt.setString(3, "%" + search + "%");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				listCount = rs.getInt("count(*)");
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs!=null) try {rs.close();}catch(SQLException ex) {}	
-			if(pstmt!=null) try{pstmt.close();}catch(SQLException ex) {}
-			if(con!=null) try {con.close();}catch(SQLException ex) {}
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
 		}
-		return listCount;		
-		
-	} // end selectListCount(String search)
-	
+		return listCount;
+
+	}
+
+	// 검색 글 리스트 가져오기
 	public ArrayList<ReviewBean> selectArticleList(int page, int limit, String search) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<ReviewBean> articleList = new ArrayList<ReviewBean>();
-		
-		
-		int startRow = (page - 1) * 10;	//시작 게시물 번호 계산
-		
+
+		int startRow = (page - 1) * 10; // 시작 게시물 번호 계산
+
 		try {
-			
-			String sql = "select * from review"
-					+ " where review_member_name like ? or"
-					+ " review_subject like ? or"
-					+ " review_content like ?"
-					+ " order by review_num desc LIMIT ?,?";
-			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, "%"+search+"%");
-			pstmt.setString(2, "%"+search+"%");
-			pstmt.setString(3, "%"+search+"%");
+
+			String sql = "select * from review" + " where review_member_name like ? or" + " review_subject like ? or"
+					+ " review_content like ?" + " order by review_num desc LIMIT ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			pstmt.setString(2, "%" + search + "%");
+			pstmt.setString(3, "%" + search + "%");
 			pstmt.setInt(4, startRow);
 			pstmt.setInt(5, limit);
-			rs=pstmt.executeQuery();
-			
-		while(rs.next()) {
-			ReviewBean rb = new ReviewBean();
-			rb.setReview_num(rs.getInt("review_num"));
-			rb.setReview_member_id(rs.getString("review_member_id"));
-			rb.setReview_subject(rs.getString("review_subject"));
-			rb.setReview_image(rs.getString("review_image"));
-			rb.setReview_content(rs.getString("review_content"));
-			rb.setReview_date(rs.getTimestamp("review_date"));
-			rb.setReview_readcount(rs.getInt("review_readcount"));
-			rb.setReview_package_catagory_code(rs.getString("review_package_category_code"));
-			rb.setReview_member_name(rs.getString("review_member_name"));
-			rb.setReview_star(rs.getInt("review_star"));
-			rb.setReview_comment_count(rs.getInt("review_comment_count"));
-			articleList.add(rb);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				ReviewBean rb = new ReviewBean();
+				rb.setReview_num(rs.getInt("review_num"));
+				rb.setReview_member_id(rs.getString("review_member_id"));
+				rb.setReview_subject(rs.getString("review_subject"));
+				rb.setReview_image(rs.getString("review_image"));
+				rb.setReview_content(rs.getString("review_content"));
+				rb.setReview_date(rs.getTimestamp("review_date"));
+				rb.setReview_readcount(rs.getInt("review_readcount"));
+				rb.setReview_package_catagory_code(rs.getString("review_package_category_code"));
+				rb.setReview_member_name(rs.getString("review_member_name"));
+				rb.setReview_star(rs.getInt("review_star"));
+				rb.setReview_comment_count(rs.getInt("review_comment_count"));
+				articleList.add(rb);
 			}
 		} catch (SQLException e) {
 			System.out.println("selectArticleList(search) 오류! - " + e.getMessage());
-		}finally {
+		} finally {
 			close(rs);
 			close(pstmt);
 		}
 		return articleList;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

@@ -22,7 +22,6 @@
 
 </head>
 <body>
-
 	<!-- 탑메뉴 인클루드 -->
 	<jsp:include page="/include/top_menu.jsp" />
 
@@ -529,7 +528,8 @@
 		<div class="container-fluid">
 			<div class="row justify-content-center mb-5 pb-5">
 				<div class="col-md-7 text-center heading-section ftco-animate">
-					<h2 class="mb-5 p-2 pb-3 ftco-animate">Highly Recommended Tours</h2>
+					<h2 class="mb-5 p-2 pb-3 ftco-animate">Highly Recommended
+						Tours</h2>
 					<div class="row no-gutters d-flex">
 						<div class="col-md-4 ftco-animate">
 							<a href="#" class="block-5"

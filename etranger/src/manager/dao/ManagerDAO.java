@@ -208,7 +208,7 @@ public class ManagerDAO {
 
 		PreparedStatement pstmt = null;
 
-		String sql = "INSERT INTO package_category VALUES (?,?,?,?,?,?,?,0)";
+		String sql = "INSERT INTO package_category VALUES (?,?,?,?,?,?,?,0,0)";
 
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -273,7 +273,7 @@ public class ManagerDAO {
 
 		try {
 
-			String sql = "select * from package_category LIMIT ?,?";
+			String sql = "select * from package_category ORDER BY package_category_num DESC LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, limit);

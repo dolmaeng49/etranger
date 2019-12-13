@@ -20,6 +20,7 @@
 	int region_code = 0;
 	int city_code = 0;
 	int wish_count = 0;
+	
 	for (int i = 0; i < pdetail.size(); i++) {
 		code = pdetail.get(i).getPackage_category_code();
 		image = pdetail.get(i).getPackage_category_image();
@@ -50,9 +51,6 @@
 	}
 		
 %>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -260,8 +258,6 @@
 							<td colspan="3"><label for="image"></label> <a href="#" class="block-20"
 									style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
 						</tr>
-
-
 					</table>
 				</div>
 				<div class="writeform-group">

@@ -36,59 +36,6 @@
 	}
 %>
 
-
-// 하트를 누르면 호출되는 함수
-//파라미터로 해당 패키지카테고리의 package_category_code 를 전달 받음
-//하트 태그의 이름이 1 이면 속이 찬 하트, 0 이면 속이 빈하트
-function wishFunction(domain,code) {
-	if(!isThereLoginSession()){
-		alert('로그인이 필요합니다!');
-		return;
-	}
-	// isOHeart = '0' : 하트 속이 비어있는 상태 , '1' : 속이 꽉 찬 하트
-	var isOHeart = $(domain).attr('id');
-	// 표시된 좋아요 숫자를 변수에 저장
-	var wish_count = $('#wish_count').text();
-	
-	if(isOHeart=='0') {
-		// back-end : ajax로 insertWish DB 작업
-		// 액션클래스로 하트가 클릭된 상품(category) 코드 전달
-		$.ajax('InsertWish.pr',{
-			data : {category_code : code},
-			success : function() {
-				// front-end : 하트의 모양을 결정하는 클래스 add & remove, 모양을 저장하는 속성(id) 변경
-				$(domain).removeClass('fa-heart-o');
-				$(domain).addClass('fa-heart');
-				$(domain).attr('id',"1");
-				// 좋아요숫자 표시를 가져와 Number로 형변환 후 1을 더해 다시 표시
-				// DB 에서 가져오는 것 아님, 눈속임. 새로고침하면 DB에서 가져오기 때문에 괜찮음
-				$('#wish_count').text(Number(wish_count)+1);
-			},
-			error : function(){}
-		});
-	} else if(isOHeart=='1') {
-		$.ajax('DeleteWish.pr',{
-			data : {category_code : code},
-			success : function() {
-				$(domain).removeClass('fa-heart');
-				$(domain).addClass('fa-heart-o');
-				$(domain).attr('id',"0");
-				$('#wish_count').text(Number(wish_count)-1);
-			},
-			error : function(){}
-		});
-		
-	}
-}
-
-function isThereLoginSession(){
-	if($('#sid').val().length==0){
-		return false;
-	}
-	return true;
-}
-
-
 // 하트를 누르면 호출되는 함수
 // 파라미터로 해당 패키지카테고리의 package_category_code 를 전달 받음
 // 하트 태그의 이름이 1 이면 속이 찬 하트, 0 이면 속이 빈하트
@@ -170,7 +117,7 @@ function isThereLoginSession(){
 			<%if (categoryList != null && listCount > 0) { %>
             <%for (int i = 0; i < categoryList.size(); i++) { %>
               <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
-                <a href="CategoryDetail.pr?package_category_code=<%=categoryList.get(i).getPackage_category_code() %>+"&package_category_theme=<%=categoryList.get(i).getPackage_category_theme() %>"
+                <a href="CategoryDetail.pr?package_category_code=<%=categoryList.get(i).getPackage_category_code() %>&package_category_theme=<%=categoryList.get(i).getPackage_category_theme() %>"
                  class="block-5" style="background-image: url('ManagerImgUpload/<%=categoryList.get(i).getPackage_category_image()%>');">
                 </a>
                   <div class="text">
@@ -187,30 +134,23 @@ function isThereLoginSession(){
 								style="font-size:24px;color:red;"></i></span>
                     </div>
                     <p class="star-rate">
-                    <%
-                    double avg = categoryList.get(i).getReview_star_avg() / 2;
-                    for(int j = 1; j <= (int)(avg-0.4); j++){%><span class="icon-star"></span><%}
-                    // 
-                    if(avg/1 >= 0.5) { %><span class="icon-star-half-full"></span><% }
-                    %>
-                    <span><%=categoryList.get(i).getReview_count() %> reviews</span></p>
-                  </div>
-              </div>
-            <%}} %>
-<!-- 상품한칸           
-              <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
-                <a href="#" class="block-5" style="background-image: url('images/tour-1.jpg');">
-                  <div class="text">
-                    <span class="price">$399</span>
-                    <h3 class="heading">Group Tour in Maldives</h3>
-                    <div class="post-meta">
-                      <span>Ameeru Ahmed Magu Male’, Maldives</span>
-                    </div>
-                    <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span> <span>500 reviews</span></p>
-                  </div>
-                </a>
-              </div>
- -->           
+                    <!-- 리뷰 별점 스크립틀릿으로 표시할 부분,  -->
+                    <% // 리뷰 별점 평균 표시, 리뷰 개수 표시
+                    if(categoryList.get(i).getReview_count() != 0){
+	                    double avg = categoryList.get(i).getReview_star_avg() / 2;
+	                    for(int j = 1; j <= (int)(avg-0.4); j++){
+	                    %><span class="icon-star"></span>
+	                    <% }
+		                    if(avg/1 >= 0.5) { 
+		                    %><span class="icon-star-half-full"></span>
+		                    <% }
+	                    %>
+	                    <span><%=categoryList.get(i).getReview_count() %> reviews</span></p>
+	                  </div>
+	              </div>
+	           		 <% 
+           		 }}} %>
+            
 <!-- PageController -->  
             </div>
             <div class="row mt-5">
@@ -284,8 +224,8 @@ function isThereLoginSession(){
                         <input type="submit" class="search-submit btn btn-primary" value="Find Packages">
                       </div>
                     </div>
-                    </form>
                   </div>
+                    </form>
               </div>
             </div>
 
@@ -330,7 +270,7 @@ function isThereLoginSession(){
 
    <!-- loader 인클루드 -->
 <jsp:include page="../include/loader.jsp"/>
-<<<<<<< HEAD
+
 <script type="text/javascript">
 function getRegion() {
 // 	$('#selectRegion').hide();
@@ -363,45 +303,7 @@ function getCity() {
 	});
 }
 getRegion(); // 셀렉트박스에 지역코드 출력하는 함수
-=======
 
-<script type="text/javascript">
-
-getRegion();
-
-
-function getRegion() {
-// 	$('#selectRegion').hide();
-	// #selectRegion에 있는 내용 지우기
-	$('#selectRegion').empty();
-	$('#selectRegion').append("<option value=''>지역선택</option>");
-	// JSON으로 가져온 데이터 #SelectRegion에 옵션으로 추가
-	$.getJSON('RegionSelect.ma', function(data) {
-
-		$.each(data, function(index, value) {
-			$('#selectRegion').append(
-					"<option value=" + value.regionCode + "> 지역이름 : " + value.regionName
-							+ "</option>");
-		});
-	});
-}
-
-// 도시 목록 불러오기
-function getCity() {
-	$('#selectCity').empty();
-	var code = $('#selectRegion').val();
-	$('#selectCity').append("<option value=''>도시선택</option>");
-	$.getJSON('CitySelect.ma?code=' + code, function(data) {
-		$.each(data, function(index, value) {
-
-			$('#selectCity').append(
-					"<option value=" + value.cityCode + "> 도시이름 : " + value.cityName
-							+ "</option>");
-		});
-	});
-}
-
->>>>>>> refs/remotes/origin/master
 </script>
     
   </body>

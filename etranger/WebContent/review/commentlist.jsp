@@ -26,7 +26,6 @@
 <input type="hidden" id="nowPage" value=<%=nowPage %>>
 <input type="hidden" id="cmt_re_num" value=<%=article.getReview_num() %>>
 
-
     <!-- 확인차 text. 나중에 hidden 처리 -->
     
               <div id="forInsert">
@@ -102,7 +101,7 @@
               <%}else{%>
               <h3 class="mb-5" align="center">코멘트를 남기시려면 로그인 해주세요!</h3>
               <%}%>
-<!----------------------------------------------------------------------------------------->
+
       <script src="js/jquery.min.js"></script> 
       <script type="text/javascript">
       $(function(){				//창 열릴때 함수호출

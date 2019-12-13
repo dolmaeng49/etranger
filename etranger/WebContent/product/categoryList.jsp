@@ -76,16 +76,13 @@ function wishFunction(domain,code) {
 		
 	}
 }
-
 function isThereLoginSession(){
 	if($('#sid').val().length==0){
 		return false;
 	}
 	return true;
 }
-
 </script>
-
   </head>
   <body>
 <input type="hidden" id="sid" value="<%=sid%>">
@@ -181,12 +178,11 @@ function isThereLoginSession(){
                       	<input type="text" class="form-control" placeholder="상품명" name="keyword"></div> <!-- 키워드 검색창 -->
 
                       <div class="check-in col-sm-12 group mb-3">
-<!--                       	<input type="text" id="checkin_date" class="form-control" placeholder="Date for Departure" name="depart_date"> -->
-                      	<input type="text" class="form-control pick_start_date" placeholder="출발 날짜" name="depart_date"><!--출발일 검색  -->
+                      	<input type="text" id="checkin_date"class="form-control pick_start_date" placeholder="출발 날짜" name="depart_date" autocomplete="off"><!--출발일 검색  -->
                       </div>
 
                       <div class="check-out col-sm-12 group mb-3">
-                      	<input type="text" id="checkout_date" class="form-control" placeholder="도착 날짜" name="arriv_date"></div> <!--도착일 검색  -->
+                      	<input type="text" id="checkout_date" class="form-control" placeholder="도착 날짜" name="arriv_date" autocomplete="off"></div> <!--도착일 검색  -->
                       
                       
                       
@@ -209,6 +205,7 @@ function isThereLoginSession(){
                       <div class="col-sm-12 group mb-3">
                         <input type="submit" class="search-submit btn btn-primary" value="Find Packages">
                       </div>
+                    </div>
                     </div>
                     </form>
                   </div>
@@ -253,10 +250,8 @@ function isThereLoginSession(){
 
 	<!-- footer 인클루드 -->
 <jsp:include page="../include/footer.jsp"/>
-
    <!-- loader 인클루드 -->
 <jsp:include page="../include/loader.jsp"/>
-
 <script type="text/javascript">
 
 getRegion();
@@ -291,8 +286,6 @@ function getCity() {
 		});
 	});
 }
-
-
 </script>
     
   </body>

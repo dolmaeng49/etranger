@@ -150,11 +150,11 @@ function validCheck() {
 	}if(content.length<10){
 		alert('내용은 10글자 이상 적어주세요 :)');
 		return false;
-	}if(img.length<10){
-		alert('사진을 첨부해주세요!');
-		return false;
 	}
-	
+// 	if(img.length<10){
+// 		alert('사진을 첨부해주세요!');
+// 		return false;
+// 	}
 	
 }
 
