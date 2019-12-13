@@ -160,8 +160,15 @@ public class ProductDAO {
 			System.out.println("region : "+region);
 			System.out.println("city : "+city);
 			
+			// 검색 조건의 length 가 0 일 경우 null 로 대체
+			keyword = keyword.length()==0 ? null : keyword;
+//			depart_date = depart_date.length()==0 ? null : depart_date;
+			arriv_date = arriv_date.length()==0 ? null : arriv_date;
+			region = region.length()==0 ? null : region;
+			city = city.length()==0 ? null : city; 
+			
 			// 검색 조건 입력 여부 배열에 저장
-			boolean[] isNulls = {keyword.length()==0,depart_date.length()==0,arriv_date.length()==0,region.length()==0,city.length()==0};
+			boolean[] isNulls = {keyword==null,arriv_date==null,region==null,city==null};
 			
 			// SQL 구문의 ? 인덱스를 저장하는 변수
 			int index = 1;
@@ -178,21 +185,23 @@ public class ProductDAO {
 						+ " WHERE p.package_product_depart_date > ?";
 				if(!isNulls[0]) {
 					// 키워드
-					sql += " OR c.package_category_name like ?"
+					sql += " AND (c.package_category_name like ?"
 						 + " OR c.package_category_theme like ?"
-						 + " OR c.package_category_content like ?";
-				} else if(!isNulls[1]) {
-					// 출발날짜
-					sql += " OR p.package_product_depart_date > ?";
-				} else if(!isNulls[2]) {
+						 + " OR c.package_category_content like ?)";
+				}
+//				else if(!isNulls[1]) {
+//					// 출발날짜
+//					sql += " OR p.package_product_depart_date > ?";
+//				}
+				else if(!isNulls[1]) {
 					// 도착날짜
-					sql += " OR p.package_product_arriv_date < ?";
-				} else if(!isNulls[3]) {
+					sql += " AND p.package_product_arriv_date < ?";
+				} else if(!isNulls[2]) {
 					// 지역
-					sql += " OR c.package_category_region=?";
-				} else if(!isNulls[4]) {
+					sql += " AND c.package_category_region=?";
+				} else if(!isNulls[3]) {
 					// 도시
-					sql += " OR c.package_category_city=?";
+					sql += " AND c.package_category_city=?";
 				}
 				// 마지막
 				sql += " order by p.package_product_depart_date LIMIT ?,?";
@@ -216,23 +225,26 @@ public class ProductDAO {
 //				rs = pstmt.executeQuery();
 				System.out.println(sql);
 				pstmt = con.prepareStatement(sql);
-				pstmt.setTimestamp(index++, new Timestamp(System.currentTimeMillis()));
+				pstmt.setString(index++, depart_date);
+//				pstmt.setTimestamp(index++, new Timestamp(System.currentTimeMillis()));
 				
 				if(!isNulls[0]) {
 					// 키워드
 					pstmt.setString(index++, "%"+keyword+"%");
 					pstmt.setString(index++, "%"+keyword+"%");
 					pstmt.setString(index++, "%"+keyword+"%");
-				} else if(!isNulls[1]) {
-					// 출발날짜
-					pstmt.setString(index++, depart_date);
-				} else if(!isNulls[2]) {
+				}
+//				else if(!isNulls[1]) {
+//					// 출발날짜
+//					pstmt.setString(index++, depart_date);
+//				}
+				else if(!isNulls[1]) {
 					// 도착날짜
 					pstmt.setString(index++, arriv_date);
-				} else if(!isNulls[3]) {
+				} else if(!isNulls[2]) {
 					// 지역
 					pstmt.setInt(index++, Integer.parseInt(region));
-				} else if(!isNulls[4]) {
+				} else if(!isNulls[3]) {
 					// 도시
 					pstmt.setInt(index++, Integer.parseInt(city));
 				}

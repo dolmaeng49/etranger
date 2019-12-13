@@ -16,7 +16,7 @@ public class ReservListService {
 		ManagerDAO managerDAO = ManagerDAO.getInstance();
 		managerDAO.setConnection(con);
 
-		int listCount = managerDAO.selectListCount();
+		int listCount = managerDAO.reservListCount();
 
 		close(con);
 

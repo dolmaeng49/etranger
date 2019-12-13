@@ -3,248 +3,317 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="common.action.MainPageAction"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-	<!-- 스타일 인클루드 -->
-<jsp:include page="/include/style.jsp"/>
+<head>
+<!-- 스타일 인클루드 -->
+<jsp:include page="/include/style.jsp" />
 <%
 	// 메인페이지 작업처리를 위해 MainPageAction 클래스의 execute() 메서드 호출
 	MainPageAction mainPageAction = new MainPageAction();
 	mainPageAction.execute(request, response);
-	
-	// 
-	ArrayList<CategoryBean> categoryList1 = (ArrayList<CategoryBean>)request.getAttribute("categoryList1");
-	ArrayList<CategoryBean> categoryList2 = (ArrayList<CategoryBean>)request.getAttribute("categoryList2");
-	ArrayList<ReviewBean> reviewList = (ArrayList<ReviewBean>)request.getAttribute("reviewList");
 
+	// 
+	ArrayList<CategoryBean> categoryList1 = (ArrayList<CategoryBean>) request.getAttribute("categoryList1");
+	ArrayList<CategoryBean> categoryList2 = (ArrayList<CategoryBean>) request.getAttribute("categoryList2");
+	ArrayList<ReviewBean> reviewList = (ArrayList<ReviewBean>) request.getAttribute("reviewList");
 %>
 
-  </head>
-  <body>
-    
-<!-- 탑메뉴 인클루드 -->    
-<jsp:include page="/include/top_menu.jsp"/>
-    
-    <section class="home-slider owl-carousel">
-      <div class="slider-item" style="background-image: url('images/bg_4.jpg');">
-        <div class="overlay"></div>
-        <div class="container">
-          <div class="row slider-text align-items-center">
-            <div class="col-md-7 col-sm-12 ftco-animate">
-              <h1 class="mb-3">Experience the best trip ever</h1>
-            </div>
-          </div>
-        </div>
-      </div>
+</head>
+<body>
 
-      <div class="slider-item" style="background-image: url('images/bg_1.jpg');">
-        <div class="overlay"></div>
-        <div class="container">
-          <div class="row slider-text align-items-center">
-            <div class="col-md-7 col-sm-12 ftco-animate">
-              <h1 class="mb-3">Making the most out of your holiday</h1>
-            </div>
-          </div>
-        </div>
-      </div>
+	<!-- 탑메뉴 인클루드 -->
+	<jsp:include page="/include/top_menu.jsp" />
 
-      <div class="slider-item" style="background-image: url('images/bg_3.jpg');">
-        <div class="overlay"></div>
-        <div class="container">
-          <div class="row slider-text align-items-center">
-            <div class="col-md-7 col-sm-12 ftco-animate">
-              <h1 class="mb-3">Travel Operator Just For You</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- END slider -->
+	<section class="home-slider owl-carousel">
 
-    <div class="ftco-section-search">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 tabulation-search">
-            <div class="element-animate">
-              <div class="nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link p-3 active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"><span>01</span> 키워드,날짜</a>
-                <a class="nav-link p-3" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"><span>02</span> 키워드</a>
-                <a class="nav-link p-3" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false"><span>03</span> 날짜,카테</a>
-                <a class="nav-link p-3" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false"><span>04</span> 카테고리</a>
-              </div>
-            </div>
-              
-            <div class="tab-content py-5" id="v-pills-tabContent">
-<!-- 첫번째 검색 탭 (메인 검색 탭) -->            
-              <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                <div class="block-17">
-                  <form action="" method="post" class="d-block d-lg-flex">
-                    <div class="fields d-block d-lg-flex" id="event_period">
+		<div class="slider-item"
+			style="background-image: url('images/bg_main1.jpg');">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row slider-text align-items-center">
+					<div class="col-md-7 col-sm-12 ftco-animate">
+						<h1 class="mb-3">Travel with etranger!</h1>
+					</div>
+				</div>
+			</div>
+		</div>
 
-                      <div class="textfield-search one-third one-third-1"><input type="text" class="form-control" placeholder="Search Keyword"></div>
+		<div class="slider-item"
+			style="background-image: url('images/bg_main2.jpg');">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row slider-text align-items-center">
+					<div class="col-md-7 col-sm-12 ftco-animate">
+						<h1 class="mb-3">Experience the best trip ever</h1>
+					</div>
+				</div>
+			</div>
+		</div>
 
-                      <div class="check-in one-third one-third-1"><input type="text" class="form-control actual_range" placeholder="Check-in date"></div>
+		<div class="slider-item"
+			style="background-image: url('images/bg_main3.jpg');">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row slider-text align-items-center">
+					<div class="col-md-7 col-sm-12 ftco-animate">
+						<h1 class="mb-3">Making the most out of your holiday</h1>
+					</div>
+				</div>
+			</div>
+		</div>
 
-                      <div class="check-out one-third one-third-1"><input type="text" class="form-control actual_range" placeholder="Check-out date"></div>
-<!--                       <div class="select-wrap one-third"> -->
-<!--                         <div class="icon"><span class="ion-ios-arrow-down"></span></div> -->
-<!--                         <select name="" id="" class="form-control"> -->
-<!--                           <option value="">Guest</option> -->
-<!--                           <option value="">1</option> -->
-<!--                           <option value="">2</option> -->
-<!--                           <option value="">3</option> -->
-<!--                           <option value="">4+</option> -->
-<!--                         </select> -->
-<!--                       </div> -->
-                    </div>
-                    <input type="submit" class="search-submit btn btn-primary" value="Find Flights">  
-                  </form>
-                </div>
-              </div>
-<!-- 두번째 검색 탭 -->
-              <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                <div class="block-17">
-                  <form action="" method="post" class="d-block d-lg-flex">
-                    <div class="fields d-block d-lg-flex">
-                      <div class="textfield-search one-third"></div>
-                      <div class="textfield-search one-third"></div>
-                      <div class="textfield-search one-third"><input type="text" class="form-control" placeholder="Search Hotel"></div>
-                    </div>
-                    <input type="submit" class="search-submit btn btn-primary" value="Find Hotels">  
-                  </form>
-                </div>
-              </div>
-<!-- 세번째 검색 탭 -->              
-              <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                <div class="block-17">
-                  <form action="" method="post" class="d-block d-lg-flex">
-                    <div class="fields d-block d-lg-flex" id="event_period2">
+		<div class="slider-item"
+			style="background-image: url('images/bg_main4.jpg');">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row slider-text align-items-center">
+					<div class="col-md-7 col-sm-12 ftco-animate">
+						<h1 class="mb-3">Travel Operator Just For You</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- END slider -->
 
-                      <div class="check-in one-third"><input type="text" class="form-control actual_range2" placeholder="Start date"></div>
+	<div class="ftco-section-search">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 tabulation-search">
+					<div class="element-animate">
+						<div class="nav nav-pills" id="v-pills-tab" role="tablist"
+							aria-orientation="vertical">
+							<a class="nav-link p-3 active" id="v-pills-home-tab"
+								data-toggle="pill" href="#v-pills-home" role="tab"
+								aria-controls="v-pills-home" aria-selected="true"><span>01</span>
+								키워드,날짜</a> <a class="nav-link p-3" id="v-pills-profile-tab"
+								data-toggle="pill" href="#v-pills-profile" role="tab"
+								aria-controls="v-pills-profile" aria-selected="false"><span>02</span>
+								키워드</a> <a class="nav-link p-3" id="v-pills-messages-tab"
+								data-toggle="pill" href="#v-pills-messages" role="tab"
+								aria-controls="v-pills-messages" aria-selected="false"><span>03</span>
+								날짜,카테</a> <a class="nav-link p-3" id="v-pills-settings-tab"
+								data-toggle="pill" href="#v-pills-settings" role="tab"
+								aria-controls="v-pills-settings" aria-selected="false"><span>04</span>
+								카테고리</a>
+						</div>
+					</div>
 
-                      <div class="check-out one-third"><input type="text" class="form-control actual_range2" placeholder="Return date"></div>
-                      <div class="select-wrap one-third one-third-1">
-                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="" id="" class="form-control">
-                          <option value="">지역</option>
-                          <option value="">나중에</option>
-                          <option value="">ul태그</option>
-                          <option value="">li태그</option>
-                          <option value="">로 하면</option>
-                          <option value="">더 이쁠듯</option>
-                          <option value="">드롭다운메뉴</option>
-                        </select>
-                      </div>
-                      <div class="select-wrap one-third one-third-1">
-                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="" id="" class="form-control">
-                          <option value="">도시</option>
-                          <option value="">Suite</option>
-                          <option value="">Super Deluxe</option>
-                          <option value="">Balcony</option>
-                          <option value="">Economy</option>
-                          <option value="">Luxury</option>
-                        </select>
-                      </div>
-                    </div>
-                    <input type="submit" class="search-submit btn btn-primary" value="Find Car">  
-                  </form>
-                </div>
-              </div>
-<!-- 네번째 검색 탭 -->           
-              <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-                <div class="block-17">
-                  <form action="" method="post" class="d-block d-lg-flex">
-                    <div class="fields d-block d-lg-flex">
-                      <div class="textfield-search one-third one-third-1"></div>
+					<div class="tab-content py-5" id="v-pills-tabContent">
+						<!-- 첫번째 검색 탭 (메인 검색 탭) -->
+						<div class="tab-pane fade show active" id="v-pills-home"
+							role="tabpanel" aria-labelledby="v-pills-home-tab">
+							<div class="block-17">
+								<form action="" method="post" class="d-block d-lg-flex">
+									<div class="fields d-block d-lg-flex" id="event_period">
 
-                      <div class="select-wrap one-third one-third-1">
-                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="" id="" class="form-control">
-                          <option value="">지역</option>
-                          <option value="">나중에</option>
-                          <option value="">ul태그</option>
-                          <option value="">li태그</option>
-                          <option value="">로 하면</option>
-                          <option value="">더 이쁠듯</option>
-                          <option value="">드롭다운메뉴</option>
-                        </select>
-                      </div>
-                      <div class="select-wrap one-third one-third-1">
-                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="" id="" class="form-control">
-                          <option value="">도시</option>
-                          <option value="">Suite</option>
-                          <option value="">Super Deluxe</option>
-                          <option value="">Balcony</option>
-                          <option value="">Economy</option>
-                          <option value="">Luxury</option>
-                        </select>
-                      </div>
-                    </div>
-                    <input type="submit" class="search-submit btn btn-primary" value="Find Cruise">  
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-<!-- 검색부분 끝 -->
+										<div class="textfield-search one-third one-third-1">
+											<input type="text" class="form-control"
+												placeholder="Search Keyword">
+										</div>
 
-<!-- 영상 -->
-    <section class="ftco-section-2">
-      <div class="container-fluid d-flex">
-        <div class="section-2-blocks-wrapper row no-gutters">
-          <div class="img col-sm-12 col-lg-6">
-          <video autoplay muted loop id="video" width="950px" height="800px">
-			<source src="images/intro.mp4" type="video/mp4">          
-          </video>
-            <a href="https://vimeo.com/371024892" class="button popup-vimeo"><span class="ion-ios-play"></span></a>
-          </div>
-          <div class="text col-lg-6 ftco-animate">
-            <div class="text-inner align-self-start">
-              
-              <h3>Welcome to Bon Voyage since 1898 established Far far away.</h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+										<div class="check-in one-third one-third-1">
+											<input type="text" class="form-control actual_range"
+												placeholder="Check-in date">
+										</div>
 
-              <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+										<div class="check-out one-third one-third-1">
+											<input type="text" class="form-control actual_range"
+												placeholder="Check-out date">
+										</div>
+										<!--                       <div class="select-wrap one-third"> -->
+										<!--                         <div class="icon"><span class="ion-ios-arrow-down"></span></div> -->
+										<!--                         <select name="" id="" class="form-control"> -->
+										<!--                           <option value="">Guest</option> -->
+										<!--                           <option value="">1</option> -->
+										<!--                           <option value="">2</option> -->
+										<!--                           <option value="">3</option> -->
+										<!--                           <option value="">4+</option> -->
+										<!--                         </select> -->
+										<!--                       </div> -->
+									</div>
+									<input type="submit" class="search-submit btn btn-primary"
+										value="Find Flights">
+								</form>
+							</div>
+						</div>
+						<!-- 두번째 검색 탭 -->
+						<div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+							aria-labelledby="v-pills-profile-tab">
+							<div class="block-17">
+								<form action="" method="post" class="d-block d-lg-flex">
+									<div class="fields d-block d-lg-flex">
+										<div class="textfield-search one-third"></div>
+										<div class="textfield-search one-third"></div>
+										<div class="textfield-search one-third">
+											<input type="text" class="form-control"
+												placeholder="Search Hotel">
+										</div>
+									</div>
+									<input type="submit" class="search-submit btn btn-primary"
+										value="Find Hotels">
+								</form>
+							</div>
+						</div>
+						<!-- 세번째 검색 탭 -->
+						<div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
+							aria-labelledby="v-pills-messages-tab">
+							<div class="block-17">
+								<form action="" method="post" class="d-block d-lg-flex">
+									<div class="fields d-block d-lg-flex" id="event_period2">
 
-<!-- 동그라미 상품 4가지 -->
-    <section class="ftco-section">
-      <div class="container">
-        <div class="row">
-        
-        <%
-        	for(CategoryBean cb : categoryList1){
-        		String detailURL = "CategoryDetail.pr?package_category_code=".concat(cb.getPackage_category_code());
-        		%>
-          <div class="col-lg-3 promo ftco-animate">
-            <a href="<%=detailURL %>" class="promo-img mb-4" style="background-image: url(ManagerImgUpload/<%=cb.getPackage_category_image()%>);"></a>
-            <div class="text text-center">
-              <a href="<%=detailURL %>"><h2><%=cb.getPackage_category_name() %></h2></a>
-              <h3 class="price"><span>from</span> $299</h3>
-              <a href="<%=detailURL %>" class="read">Read more</a>
-            </div>
-          </div>
-          <%
-        	}
-        %>
+										<div class="check-in one-third">
+											<input type="text" class="form-control actual_range2"
+												placeholder="Start date">
+										</div>
 
-        </div>
-      </div>
-    </section>
+										<div class="check-out one-third">
+											<input type="text" class="form-control actual_range2"
+												placeholder="Return date">
+										</div>
+										<div class="select-wrap one-third one-third-1">
+											<div class="icon">
+												<span class="ion-ios-arrow-down"></span>
+											</div>
+											<select name="" id="" class="form-control">
+												<option value="">지역</option>
+												<option value="">나중에</option>
+												<option value="">ul태그</option>
+												<option value="">li태그</option>
+												<option value="">로 하면</option>
+												<option value="">더 이쁠듯</option>
+												<option value="">드롭다운메뉴</option>
+											</select>
+										</div>
+										<div class="select-wrap one-third one-third-1">
+											<div class="icon">
+												<span class="ion-ios-arrow-down"></span>
+											</div>
+											<select name="" id="" class="form-control">
+												<option value="">도시</option>
+												<option value="">Suite</option>
+												<option value="">Super Deluxe</option>
+												<option value="">Balcony</option>
+												<option value="">Economy</option>
+												<option value="">Luxury</option>
+											</select>
+										</div>
+									</div>
+									<input type="submit" class="search-submit btn btn-primary"
+										value="Find Car">
+								</form>
+							</div>
+						</div>
+						<!-- 네번째 검색 탭 -->
+						<div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
+							aria-labelledby="v-pills-settings-tab">
+							<div class="block-17">
+								<form action="" method="post" class="d-block d-lg-flex">
+									<div class="fields d-block d-lg-flex">
+										<div class="textfield-search one-third one-third-1"></div>
 
-<!-- OUR SERVICE? 주석처리 -->
-<!--
+										<div class="select-wrap one-third one-third-1">
+											<div class="icon">
+												<span class="ion-ios-arrow-down"></span>
+											</div>
+											<select name="" id="" class="form-control">
+												<option value="">지역</option>
+												<option value="">나중에</option>
+												<option value="">ul태그</option>
+												<option value="">li태그</option>
+												<option value="">로 하면</option>
+												<option value="">더 이쁠듯</option>
+												<option value="">드롭다운메뉴</option>
+											</select>
+										</div>
+										<div class="select-wrap one-third one-third-1">
+											<div class="icon">
+												<span class="ion-ios-arrow-down"></span>
+											</div>
+											<select name="" id="" class="form-control">
+												<option value="">도시</option>
+												<option value="">Suite</option>
+												<option value="">Super Deluxe</option>
+												<option value="">Balcony</option>
+												<option value="">Economy</option>
+												<option value="">Luxury</option>
+											</select>
+										</div>
+									</div>
+									<input type="submit" class="search-submit btn btn-primary"
+										value="Find Cruise">
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 검색부분 끝 -->
+
+	<!-- 영상 -->
+	<section class="ftco-section-2">
+		<div class="container-fluid d-flex">
+			<div class="section-2-blocks-wrapper row no-gutters">
+				<div class="img col-sm-12 col-lg-6">
+					<video autoplay muted loop id="video" width="950px" height="800px">
+						<source src="images/intro.mp4" type="video/mp4">
+					</video>
+					<a href="https://vimeo.com/371024892" class="button popup-vimeo"><span
+						class="ion-ios-play"></span></a>
+				</div>
+				<div class="text col-lg-6 ftco-animate">
+					<div class="text-inner align-self-start">
+
+						<h3>Welcome to Bon Voyage since 1898 established Far far
+							away.</h3>
+						<p>Far far away, behind the word mountains, far from the
+							countries Vokalia and Consonantia, there live the blind texts.
+							Separated they live in Bookmarksgrove right at the coast of the
+							Semantics, a large language ocean.</p>
+
+						<p>A small river named Duden flows by their place and supplies
+							it with the necessary regelialia. It is a paradisematic country,
+							in which roasted parts of sentences fly into your mouth.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- 동그라미 상품 4가지 -->
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row">
+
+				<%
+					for (CategoryBean cb : categoryList1) {
+						String detailURL = "CategoryDetail.pr?package_category_code=".concat(cb.getPackage_category_code());
+				%>
+				<div class="col-lg-3 promo ftco-animate">
+					<a href="<%=detailURL%>" class="promo-img mb-4"
+						style="background-image: url(ManagerImgUpload/<%=cb.getPackage_category_image()%>);"></a>
+					<div class="text text-center">
+						<a href="<%=detailURL%>"><h2><%=cb.getPackage_category_name()%></h2></a>
+						<h3 class="price">
+							<span>from</span> $299
+						</h3>
+						<a href="<%=detailURL%>" class="read">Read more</a>
+					</div>
+				</div>
+				<%
+					}
+				%>
+
+			</div>
+		</div>
+	</section>
+
+	<!-- OUR SERVICE? 주석처리 -->
+	<!--
     <section class="ftco-section bg-light">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
@@ -294,40 +363,46 @@
       </div>
     </section>
 -->
-<!-- 추천 8개 -->
-    <section class="ftco-section">
-      <div class="container-fluid">
-        <div class="row no-gutters justify-content-center mb-5 pb-5 ftco-animate">
-          <div class="col-md-7 text-center heading-section">
-            <h2>Most Popular Destination</h2>
-          </div>
-        </div>
-        <div class="row no-gutters">
-        <%
-        for(CategoryBean cb : categoryList2){
-        	String detailURL = "CategoryDetail.pr?package_category_code=".concat(cb.getPackage_category_code());
-        %>
-          <div class="col-md-6 col-lg-3 ftco-animate">
-            <a href="<%=detailURL %>" class="block-5" style="background-image: url(ManagerImgUpload/<%=cb.getPackage_category_image()%>);">
-              <div class="text">
-                <span class="price">$399</span>
-                <h3 class="heading"><%=cb.getPackage_category_name() %></h3>
-                <div class="post-meta">
-                  <span>Ameeru Ahmed Magu Male’, Maldives</span>
-                </div>
-                <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span> <span>500 reviews</span></p>
-              </div>
-            </a>
-          </div>
-          <%
-        }
-          %>
-        </div>
-      </div>
-    </section>
-    
-<!-- 리뷰 5개 -->
-<!-- 
+	<!-- 추천 8개 -->
+	<section class="ftco-section">
+		<div class="container-fluid">
+			<div
+				class="row no-gutters justify-content-center mb-5 pb-5 ftco-animate">
+				<div class="col-md-7 text-center heading-section">
+					<h2>Most Popular Destination</h2>
+				</div>
+			</div>
+			<div class="row no-gutters">
+				<%
+					for (CategoryBean cb : categoryList2) {
+						String detailURL = "CategoryDetail.pr?package_category_code=".concat(cb.getPackage_category_code());
+				%>
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<a href="<%=detailURL%>" class="block-5"
+						style="background-image: url(ManagerImgUpload/<%=cb.getPackage_category_image()%>);">
+						<div class="text">
+							<span class="price">$399</span>
+							<h3 class="heading"><%=cb.getPackage_category_name()%></h3>
+							<div class="post-meta">
+								<span>Ameeru Ahmed Magu Male’, Maldives</span>
+							</div>
+							<p class="star-rate">
+								<span class="icon-star"></span><span class="icon-star"></span><span
+									class="icon-star"></span><span class="icon-star"></span><span
+									class="icon-star-half-full"></span> <span>500 reviews</span>
+							</p>
+						</div>
+					</a>
+				</div>
+				<%
+					}
+				%>
+			</div>
+		</div>
+	</section>
+
+	<!-- 리뷰 5개 -->
+	<!-- 
     <section class="ftco-section testimony-section">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
@@ -401,111 +476,123 @@
       </div>
     </section>
      -->
-    
-<!-- 블로그 5개 -->
-    <section class="ftco-section bg-light">
-      <div class="container">
-        <div class="row justify-content-center mb-5 pb-5">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2>Our Blog</h2>
-          </div>
-        </div>
-        <div class="row ftco-animate">
-          <div class="carousel1 owl-carousel ftco-owl">
-             <%
-        for(ReviewBean rb : reviewList){
-        	String detailURL = "ReviewDetail.rv?review_num=" + rb.getReview_num();
-        %>
-            <div class="item">
-              <div class="blog-entry">
-                <a href="blog-single.html" class="block-20" style="background-image: url('reviewUpload/<%=rb.getReview_image()%>');">
-                </a>
-                <div class="text p-4">
-                  <div class="meta">
-                    <div><a href="#"><%=rb.getReview_date() %></a></div>
-                    <div><a href="#"><%=rb.getReview_member_name() %></a></div>
-                  </div>
-                  <h3 class="heading"><a href="detailURL"><%=rb.getReview_subject() %></a></h3>
-                  <p class="clearfix">
-                    <a href="detailURL" class="float-left">Read more</a>
-                    <a href="detailURL" class="float-right meta-chat"><span class="icon-chat"></span> 3</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <%
-        }
-            %>
-          </div>
-        </div>
-      </div>
-    </section>
 
-<!-- 구독, 상품3개 -->
-    <section class="ftco-section">
-      <div class="container-fluid">
-        <div class="row mb-5 pb-5 no-gutters">
-          <div class="col-lg-4 bg-light p-3 p-md-5 d-flex align-items-center heading-section ftco-animate">
-            <div>
-              <h2 class="mb-5 pb-3">Want to get our hottest travel deals top tips and advice? Subscribe us now!</h2>
-              <form action="#" class="subscribe-form">
-                <div class="form-group">
-                  <span class="icon icon-paper-plane"></span>
-                  <input type="text" class="form-control" placeholder="Enter your email address">
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="col-lg-8 p-2 pl-md-5 heading-section">
-            <h2 class="mb-5 p-2 pb-3 ftco-animate">Most Recommended Hotels</h2>
-            <div class="row no-gutters d-flex">
-              <div class="col-md-4 ftco-animate">
-                <a href="#" class="block-5" style="background-image: url('images/hotel-1.jpg');">
-                  <div class="text">
-                    <span class="price">$29/night</span>
-                    <h3 class="heading">Luxe Hotel</h3>
-                    <div class="post-meta">
-                      <span>Ameeru Ahmed Magu Male’, Maldives</span>
-                    </div>
-                    <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span> <span>500 reviews</span></p>
-                  </div>
-                </a>
-              </div>
-              <div class="col-md-4 ftco-animate">
-                <a href="#" class="block-5" style="background-image: url('images/hotel-2.jpg');">
-                  <div class="text">
-                    <span class="price">$29/night</span>
-                    <h3 class="heading">Deluxe Hotel</h3>
-                    <div class="post-meta">
-                      <span>Ameeru Ahmed Magu Male’, Maldives</span>
-                    </div>
-                    <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span> <span>500 reviews</span></p>
-                  </div>
-                </a>
-              </div>
-              <div class="col-md-4 ftco-animate">
-                <a href="#" class="block-5" style="background-image: url('images/hotel-3.jpg');">
-                  <div class="text">
-                    <span class="price">$29/night</span>
-                    <h3 class="heading">Deluxe Hotel</h3>
-                    <div class="post-meta">
-                      <span>Ameeru Ahmed Magu Male’, Maldives</span>
-                    </div>
-                    <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span> <span>500 reviews</span></p>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+	<!-- 블로그 5개 -->
+	<section class="ftco-section bg-light">
+		<div class="container">
+			<div class="row justify-content-center mb-5 pb-5">
+				<div class="col-md-7 text-center heading-section ftco-animate">
+					<h2>Our Blog</h2>
+				</div>
+			</div>
+			<div class="row ftco-animate">
+				<div class="carousel1 owl-carousel ftco-owl">
+					<%
+						for (ReviewBean rb : reviewList) {
+							String detailURL = "ReviewDetail.rv?review_num=" + rb.getReview_num();
+					%>
+					<div class="item">
+						<div class="blog-entry">
+							<a href="blog-single.html" class="block-20"
+								style="background-image: url('reviewUpload/<%=rb.getReview_image()%>');">
+							</a>
+							<div class="text p-4">
+								<div class="meta">
+									<div>
+										<a href="#"><%=rb.getReview_date()%></a>
+									</div>
+									<div>
+										<a href="#"><%=rb.getReview_member_name()%></a>
+									</div>
+								</div>
+								<h3 class="heading">
+									<a href="detailURL"><%=rb.getReview_subject()%></a>
+								</h3>
+								<p class="clearfix">
+									<a href="detailURL" class="float-left">Read more</a> <a
+										href="detailURL" class="float-right meta-chat"><span
+										class="icon-chat"></span> 3</a>
+								</p>
+							</div>
+						</div>
+					</div>
+					<%
+						}
+					%>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- 추천 상품3개 -->
+	<section class="ftco-section">
+		<div class="container-fluid">
+			<div class="row justify-content-center mb-5 pb-5">
+				<div class="col-md-7 text-center heading-section ftco-animate">
+					<h2 class="mb-5 p-2 pb-3 ftco-animate">Highly Recommended Tours</h2>
+					<div class="row no-gutters d-flex">
+						<div class="col-md-4 ftco-animate">
+							<a href="#" class="block-5"
+								style="background-image: url('images/hotel-1.jpg');">
+								<div class="text">
+									<span class="price">$29/night</span>
+									<h3 class="heading">Luxe Hotel</h3>
+									<div class="post-meta">
+										<span>Ameeru Ahmed Magu Male’, Maldives</span>
+									</div>
+									<p class="star-rate">
+										<span class="icon-star"></span><span class="icon-star"></span><span
+											class="icon-star"></span><span class="icon-star"></span><span
+											class="icon-star-half-full"></span> <span>500 reviews</span>
+									</p>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-4 ftco-animate">
+							<a href="#" class="block-5"
+								style="background-image: url('images/hotel-2.jpg');">
+								<div class="text">
+									<span class="price">$29/night</span>
+									<h3 class="heading">Deluxe Hotel</h3>
+									<div class="post-meta">
+										<span>Ameeru Ahmed Magu Male’, Maldives</span>
+									</div>
+									<p class="star-rate">
+										<span class="icon-star"></span><span class="icon-star"></span><span
+											class="icon-star"></span><span class="icon-star"></span><span
+											class="icon-star-half-full"></span> <span>500 reviews</span>
+									</p>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-4 ftco-animate">
+							<a href="#" class="block-5"
+								style="background-image: url('images/hotel-3.jpg');">
+								<div class="text">
+									<span class="price">$29/night</span>
+									<h3 class="heading">Deluxe Hotel</h3>
+									<div class="post-meta">
+										<span>Ameeru Ahmed Magu Male’, Maldives</span>
+									</div>
+									<p class="star-rate">
+										<span class="icon-star"></span><span class="icon-star"></span><span
+											class="icon-star"></span><span class="icon-star"></span><span
+											class="icon-star-half-full"></span> <span>500 reviews</span>
+									</p>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<!-- footer 인클루드 -->
-<jsp:include page="/include/footer.jsp"/>
+	<jsp:include page="/include/footer.jsp" />
 
 	<!-- loader 인클루드 -->
-<jsp:include page="/include/loader.jsp"/>
-    
-  </body>
+	<jsp:include page="/include/loader.jsp" />
+
+</body>
 </html>

@@ -34,6 +34,14 @@ public class MainPageAction implements Action {
 		categoryList = categoryListService.getCategoryList(1, 8);
 		request.setAttribute("categoryList2", categoryList);
 		
+		// 인기순 리스트
+		ArrayList<CategoryBean> popularList = categoryListService.getpopularList(1, 8);
+		request.setAttribute("popularList", popularList);
+		
+		// 추천순 리스트 
+		ArrayList<CategoryBean> RecommendedList = categoryListService.getRecommendedList(1, 3);
+		request.setAttribute("RecommendedList", RecommendedList);
+		
 		
 		ReviewListService reviewListService = new ReviewListService();
 		// 리뷰 5개 조회
