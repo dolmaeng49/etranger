@@ -214,7 +214,7 @@ table.pdList .right {
 										}
 									%>
 									<!--작업 중  -->
-									<td><input type="button" id="category_code" value="리뷰작성" class="btn py-3 px-4 btn-primary" onclick="location.href='./ReviewWriteForm.rv?code=<%=rb.get(i).getReservation_category_code()%>'"></td>
+									<td><input type="button" id="category_code" value="리뷰작성" class="btn py-1 px-2 btn-primary" onclick="location.href='./ReviewWriteForm.rv?code=<%=rb.get(i).getReservation_category_code()%>'"></td>
 								</tr>
 								<%
 									}

@@ -14,7 +14,6 @@ public class ReviewListService {
 	public int getListCount()
 	
 	{
-		
 		Connection con =getConnection();
 		ReviewDAO reviewDAO = ReviewDAO.getInstance();
 		reviewDAO.setConnection(con);

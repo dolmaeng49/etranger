@@ -48,7 +48,7 @@
           <div class="col-md-8 ftco-animate" style="border: 1px solid #f1f1f1;">
 			<div id="article-info">
 			<h2><%=article.getReview_subject() %></h2>
-			<div class="writer"><strong><%=article.getReview_member_id() %><!-- 이름으로 교체할 곳 --></strong> 님</div>
+			<div class="writer"><strong><%=article.getReview_member_name() %></strong> 님</div>
 			</div> <!-- article-info끝 -->
 			<div id="article-content-wrapper">
 			<div class="content-header">

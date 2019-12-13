@@ -31,9 +31,6 @@ public class ReviewWriteProAction implements Action {
 		
 		//ReviewBean 객체 생성
 		
-		System.out.println(request.getParameter("review_member_id"));
-		System.out.println(request.getParameter("review_star"));
-		System.out.println(request.getParameter("review_subject"));
 		
 		rb= new ReviewBean();
 		
@@ -45,13 +42,6 @@ public class ReviewWriteProAction implements Action {
 		rb.setReview_member_name(request.getParameter("review_member_name"));
 		rb.setReview_star(Integer.parseInt(request.getParameter("review_star")));
 		rb.setReview_comment_count(Integer.parseInt(request.getParameter("review_comment_count")));
-		
-		System.out.println("review_package_category_code : "+rb.getReview_package_catagory_code());
-		
-		
-		System.out.println("star: " +rb.getReview_star());
-		System.out.println("content: " +rb.getReview_content());
-		System.out.println("image : " +rb.getReview_image());
 		
 		
 		ReviewWriteProService reviewWriteProService = new ReviewWriteProService();

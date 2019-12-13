@@ -35,11 +35,6 @@ function duplClickCheck() {
 //------------------------------------------
 
 
-
-
-
-//--------------------------------------------------------------------
-
 //-----------------새 댓글 작성
 function addComment() {		
 	if(duplClickCheck()) return;  //광클방지.
@@ -77,9 +72,6 @@ function addComment() {
 }
 
 
-
-
-
 //-------------------------댓글 삭제
 function deleteComment(cnum) {
 	var delConfirm = confirm('정말 삭제하시겠습니까?');
@@ -108,18 +100,15 @@ function deleteComment(cnum) {
 	    	  }
 	      });
 	   }else {
-		   
 	   }
-	
 }
-	
 	
 //---------------------댓글 리스트 불러오기
 function getCommentList() {
 	$.ajax({
 		url:'CommentListAjax.cm',
 		data:{
-			"review_num" : $("#review_num").val(),			// article.get으로 불러오기 위한 값
+			"review_num" : $("#review_num").val(),	// article.get으로 불러오기 위한 값
 			"sessionId"  : $("#sessionId").val(),
 			"sessionName" : $('#sessionName').val()
 		},
@@ -144,7 +133,6 @@ function updateComment(cnum,content){
 }
 
 
-
 // 대댓글 작성폼 열기
 function replyComment(cnum){
 	
@@ -158,7 +146,7 @@ function replyComment(cnum){
 
 //댓글 수정하기
 function updateCommentPro(cnum){
-	if(duplClickCheck()) return;  //광클방지
+	if(duplClickCheck()) return;  //광클방지(3초)
 	2
 	var editContent = $('#editContent').val();
 	

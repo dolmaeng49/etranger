@@ -6,6 +6,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.webkit.ContextMenu.ShowContext;
+
 import common.action.Action;
 import common.vo.ActionForward;
 import review.comment.dao.CommentDAO;
@@ -31,7 +33,8 @@ public class ReviewDetailAction implements Action {
 		ipDupl.setMaxAge(1*24*60*60);	//쿠키 유효기간 설정
 		ipDupl.setPath("/");			//이 쿠키가 유효한 디렉토리 설정(모든 경로에서 접근가능) 
 		response.addCookie(ipDupl);		//클라이언트 응답에 쿠키 추가.
-			
+		
+	
 		
 		Cookie[] cookies = request.getCookies();
 		for(int i = 0; i < cookies.length; i++) { //반복문 돌려서
@@ -39,6 +42,8 @@ public class ReviewDetailAction implements Action {
 				readcountDuplFlag = true;
 			}
 		}
+		
+		System.out.println("viewerIpAddr"+viewerIpAddr);
 		
 		// request 객체를 통해 전달받은 파라미터 가져오기
 		String page = request.getParameter("page"); //게시글의 페이지임.

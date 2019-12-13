@@ -262,7 +262,6 @@ function isThereLoginSession(){
 
 getRegion();
 
-
 function getRegion() {
 // 	$('#selectRegion').hide();
 	// #selectRegion에 있는 내용 지우기

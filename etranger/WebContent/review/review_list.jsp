@@ -17,11 +17,14 @@
 	int endPage = pageInfo.getEndPage();
 	int listCount = pageInfo.getListCount();
 	
-	
 	String search = request.getParameter("search");
 	
 	ReviewBean article = (ReviewBean)request.getAttribute("article");
-	
+
+	String sessionId = null;
+	if(session.getAttribute("member_id")!=null){
+	  sessionId = (String)session.getAttribute("member_id");
+	}
 %>  
 <!DOCTYPE html>
 <html>
@@ -37,7 +40,6 @@
   <body>
 	<!-- 탑메뉴 인클루드 -->    
 <jsp:include page="/include/top_menu.jsp"/>
-    
     <section class="home-slider owl-carousel">
       <div class="slider-item" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
@@ -95,7 +97,7 @@
 			</div>
             <!-- end stars --> 
                 <div class="meta" onclick="location.href='ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>'">
-                  <div><a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>"><%=articleList.get(i).getReview_member_name() %></a></div><!-- 아이디 대신 이름 들어갈 곳 -->
+                  <div><a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>"><%=articleList.get(i).getReview_member_name() %></a></div>
                 </div>
                 <h3 class="heading"><a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>"><%=articleList.get(i).getReview_subject()%></a></h3>
                 <p class="clearfix">
@@ -127,7 +129,7 @@
                 <form action="ReviewSearch.rv" method="get" class="search-form-list" name="search">
                 <fieldset id="search_fieldset" >
                 <input type="text"  id="search_input" name="search" placeholder="Search"  style="width: 100px;">
-                <button type="submit" id="search_button" ><i class="fa fa-search"></i></button>
+                <button type="submit" id="search_button" ><i class="fa fa-search""></i></button>
                 </fieldset>
                 </form>
 <!--                 </div> -->
@@ -170,7 +172,7 @@
         <!-- 페이지 부분 -->
 	<%}else{%><div id="emptyArticle">등록된 글이 없습니다</div><%} %>
       </div> <!-- <div class="container">의 끝 -->
-      <div align="right"><input type="button" value="임시글쓰기" class="btn py-3 px-4 btn-primary" onclick="location.href='./ReviewWriteForm.rv'"></div>
+      <div align="right"><input type="button" id="review_write" value="리뷰 작성" class="btn py-3 px-4 btn-primary"></div>
     </section>
 <!--     <li class="active"><span>1</span></li> -->
 
@@ -179,7 +181,19 @@
 
 	<!-- loader 인클루드 -->
 <jsp:include page="/include/loader.jsp"/>
-    <script type="text/javascript">
+<script type="text/javascript">
+	var sessionId = $('#session_id').val();
+$('#review_write').click(function () {
+		if(sessionId=="null"){
+			alert('먼저 로그인 해주세요!');
+			return false;
+		}else{
+			location.href="./ReservationInfo.rs";
+		}
+		
+		
+	});
+    
 $('h3.heading').each(function(){
 	  var length = 18; //표시할 글자수 정하기
 	  var iframe = "</iframe>"

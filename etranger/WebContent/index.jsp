@@ -77,17 +77,18 @@
             </div>
               
             <div class="tab-content py-5" id="v-pills-tabContent">
+            
 <!-- 첫번째 검색 탭 (메인 검색 탭) -->            
               <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                 <div class="block-17">
                   <form action="" method="post" class="d-block d-lg-flex">
                     <div class="fields d-block d-lg-flex" id="event_period">
 
-                      <div class="textfield-search one-third one-third-1"><input type="text" class="form-control" placeholder="Search Keyword"></div>
+                      <div class="textfield-search one-third one-third-1"><input type="text" class="form-control" placeholder="상품명 검색"></div>
 
-                      <div class="check-in one-third one-third-1"><input type="text" class="form-control actual_range" placeholder="Check-in date"></div>
+                      <div class="check-in one-third one-third-1"><input type="text" class="form-control actual_range" placeholder="출발 날짜"></div>
 
-                      <div class="check-out one-third one-third-1"><input type="text" class="form-control actual_range" placeholder="Check-out date"></div>
+                      <div class="check-out one-third one-third-1"><input type="text" class="form-control actual_range" placeholder="도착 날짜"></div>
 <!--                       <div class="select-wrap one-third"> -->
 <!--                         <div class="icon"><span class="ion-ios-arrow-down"></span></div> -->
 <!--                         <select name="" id="" class="form-control"> -->
@@ -110,9 +111,9 @@
                     <div class="fields d-block d-lg-flex">
                       <div class="textfield-search one-third"></div>
                       <div class="textfield-search one-third"></div>
-                      <div class="textfield-search one-third"><input type="text" class="form-control" placeholder="Search Hotel"></div>
+                      <div class="textfield-search one-third"><input type="text" class="form-control" placeholder="Keyword Search"></div>
                     </div>
-                    <input type="submit" class="search-submit btn btn-primary" value="Find Hotels">  
+                    <input type="submit" class="search-submit btn btn-primary" value="Find Packages">  
                   </form>
                 </div>
               </div>
@@ -122,9 +123,9 @@
                   <form action="" method="post" class="d-block d-lg-flex">
                     <div class="fields d-block d-lg-flex" id="event_period2">
 
-                      <div class="check-in one-third"><input type="text" class="form-control actual_range2" placeholder="Start date"></div>
+                      <div class="check-in one-third"><input type="text" class="form-control actual_range2" placeholder="출발 날짜"></div>
 
-                      <div class="check-out one-third"><input type="text" class="form-control actual_range2" placeholder="Return date"></div>
+                      <div class="check-out one-third"><input type="text" class="form-control actual_range2" placeholder="도착 날짜"></div>
                       <div class="select-wrap one-third one-third-1">
                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                         <select name="" id="" class="form-control">
