@@ -17,6 +17,7 @@ String sessionName = (String)session.getAttribute("member_name");
 if(sessionId==null) {
 	response.sendRedirect("LoginForm.me");
 }
+String code =request.getParameter("code");
 %>
     <section class="home-slider owl-carousel">
       <div class="slider-item" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
@@ -44,7 +45,7 @@ if(sessionId==null) {
                 <div style="height:90px"></div>
                 <form action="ReviewWritePro.rv" method="post" name="review_write_form" onsubmit="return validCheck()">
                 <input type="hidden" name="review_num" value=0>
-				<input type="hidden" name="review_package_category_code" value="1"> <!--추후 카테고리 코드 연동할 것-->
+				<input type="text" name="review_package_category_code" value="<%=code %>">
 				<input type="hidden" name="review_readcount" value=0>
 				<input type="hidden" id="review_star" name="review_star" value=0>
 				<input type="hidden" name="review_member_id" value=<%=sessionId %>>

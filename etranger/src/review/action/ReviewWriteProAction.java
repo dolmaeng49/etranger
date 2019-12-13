@@ -46,6 +46,7 @@ public class ReviewWriteProAction implements Action {
 		rb.setReview_star(Integer.parseInt(request.getParameter("review_star")));
 		rb.setReview_comment_count(Integer.parseInt(request.getParameter("review_comment_count")));
 		
+		System.out.println("review_package_category_code : "+rb.getReview_package_catagory_code());
 		
 		
 		System.out.println("star: " +rb.getReview_star());
