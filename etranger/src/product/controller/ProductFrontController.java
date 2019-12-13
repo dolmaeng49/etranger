@@ -13,6 +13,7 @@ import common.action.Action;
 import common.vo.ActionForward;
 import product.action.CategoryDetailAction;
 import product.action.CategoryListAction;
+import product.action.CategoryListAction_oldVer;
 import product.action.CategoryListAction;
 import product.action.DeleteWishAction;
 import product.action.InsertWishAction;
@@ -29,7 +30,7 @@ public class ProductFrontController extends HttpServlet {
 		
 		// 추출한 서블릿 주소 매핑
 		if(command.equals("/ProductList.pr")) {
-			action = new CategoryListAction();
+			action = new CategoryListAction_oldVer();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

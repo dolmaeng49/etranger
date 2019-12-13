@@ -28,28 +28,6 @@
 
 	<section class="home-slider owl-carousel">
 
-<<<<<<< HEAD
-    <div class="ftco-section-search">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 tabulation-search">
-            <div class="element-animate">
-              <div class="nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link p-3 active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"><span>01</span> 키워드,날짜</a>
-                <a class="nav-link p-3" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"><span>02</span> 키워드</a>
-                <a class="nav-link p-3" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false"><span>03</span> 날짜,카테</a>
-                <a class="nav-link p-3" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false"><span>04</span> 카테고리</a>
-              </div>
-            </div>
-              
-            <div class="tab-content py-5" id="v-pills-tabContent">
-            
-<!-- 첫번째 검색 탭 (메인 검색 탭) -->            
-              <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                <div class="block-17">
-                  <form action="" method="post" class="d-block d-lg-flex">
-                    <div class="fields d-block d-lg-flex" id="event_period">
-=======
 		<div class="slider-item"
 			style="background-image: url('images/bg_main1.jpg');">
 			<div class="overlay"></div>
@@ -61,11 +39,7 @@
 				</div>
 			</div>
 		</div>
->>>>>>> refs/remotes/origin/master
 
-<<<<<<< HEAD
-                      <div class="textfield-search one-third one-third-1"><input type="text" class="form-control" placeholder="상품명 검색"></div>
-=======
 		<div class="slider-item"
 			style="background-image: url('images/bg_main2.jpg');">
 			<div class="overlay"></div>
@@ -77,11 +51,7 @@
 				</div>
 			</div>
 		</div>
->>>>>>> refs/remotes/origin/master
 
-<<<<<<< HEAD
-                      <div class="check-in one-third one-third-1"><input type="text" class="form-control actual_range" placeholder="출발 날짜"></div>
-=======
 		<div class="slider-item"
 			style="background-image: url('images/bg_main3.jpg');">
 			<div class="overlay"></div>
@@ -93,44 +63,7 @@
 				</div>
 			</div>
 		</div>
->>>>>>> refs/remotes/origin/master
 
-<<<<<<< HEAD
-                      <div class="check-out one-third one-third-1"><input type="text" class="form-control actual_range" placeholder="도착 날짜"></div>
-<!--                       <div class="select-wrap one-third"> -->
-<!--                         <div class="icon"><span class="ion-ios-arrow-down"></span></div> -->
-<!--                         <select name="" id="" class="form-control"> -->
-<!--                           <option value="">Guest</option> -->
-<!--                           <option value="">1</option> -->
-<!--                           <option value="">2</option> -->
-<!--                           <option value="">3</option> -->
-<!--                           <option value="">4+</option> -->
-<!--                         </select> -->
-<!--                       </div> -->
-                    </div>
-                    <input type="submit" class="search-submit btn btn-primary" value="Find Flights">  
-                  </form>
-                </div>
-              </div>
-<!-- 두번째 검색 탭 -->
-              <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                <div class="block-17">
-                  <form action="" method="post" class="d-block d-lg-flex">
-                    <div class="fields d-block d-lg-flex">
-                      <div class="textfield-search one-third"></div>
-                      <div class="textfield-search one-third"></div>
-                      <div class="textfield-search one-third"><input type="text" class="form-control" placeholder="Keyword Search"></div>
-                    </div>
-                    <input type="submit" class="search-submit btn btn-primary" value="Find Packages">  
-                  </form>
-                </div>
-              </div>
-<!-- 세번째 검색 탭 -->              
-              <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                <div class="block-17">
-                  <form action="" method="post" class="d-block d-lg-flex">
-                    <div class="fields d-block d-lg-flex" id="event_period2">
-=======
 		<div class="slider-item"
 			style="background-image: url('images/bg_main4.jpg');">
 			<div class="overlay"></div>
@@ -144,11 +77,7 @@
 		</div>
 	</section>
 	<!-- END slider -->
->>>>>>> refs/remotes/origin/master
 
-<<<<<<< HEAD
-                      <div class="check-in one-third"><input type="text" class="form-control actual_range2" placeholder="출발 날짜"></div>
-=======
 	<div class="ftco-section-search">
 		<div class="container">
 			<div class="row">
@@ -171,45 +100,7 @@
 								카테고리</a>
 						</div>
 					</div>
->>>>>>> refs/remotes/origin/master
 
-<<<<<<< HEAD
-                      <div class="check-out one-third"><input type="text" class="form-control actual_range2" placeholder="도착 날짜"></div>
-                      <div class="select-wrap one-third one-third-1">
-                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="" id="" class="form-control">
-                          <option value="">지역</option>
-                          <option value="">나중에</option>
-                          <option value="">ul태그</option>
-                          <option value="">li태그</option>
-                          <option value="">로 하면</option>
-                          <option value="">더 이쁠듯</option>
-                          <option value="">드롭다운메뉴</option>
-                        </select>
-                      </div>
-                      <div class="select-wrap one-third one-third-1">
-                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="" id="" class="form-control">
-                          <option value="">도시</option>
-                          <option value="">Suite</option>
-                          <option value="">Super Deluxe</option>
-                          <option value="">Balcony</option>
-                          <option value="">Economy</option>
-                          <option value="">Luxury</option>
-                        </select>
-                      </div>
-                    </div>
-                    <input type="submit" class="search-submit btn btn-primary" value="Find Car">  
-                  </form>
-                </div>
-              </div>
-<!-- 네번째 검색 탭 -->           
-              <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-                <div class="block-17">
-                  <form action="" method="post" class="d-block d-lg-flex">
-                    <div class="fields d-block d-lg-flex">
-                      <div class="textfield-search one-third one-third-1"></div>
-=======
 					<div class="tab-content py-5" id="v-pills-tabContent">
 						<!-- 첫번째 검색 탭 (메인 검색 탭) -->
 						<div class="tab-pane fade show active" id="v-pills-home"
@@ -217,7 +108,6 @@
 							<div class="block-17">
 								<form action="" method="post" class="d-block d-lg-flex">
 									<div class="fields d-block d-lg-flex" id="event_period">
->>>>>>> refs/remotes/origin/master
 
 										<div class="textfield-search one-third one-third-1">
 											<input type="text" class="form-control"
