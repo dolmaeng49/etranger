@@ -59,12 +59,16 @@ table.pdList td {
 	vertical-align: top;
 	border-bottom: 1px solid #ccc;
 	background: #eee;
-	font-size: smaller;
+	font-size: 0.7em;
 }
 
 table.pdList td input {
 	font-size: smaller;
 }
+.sticky {
+			position: sticky;
+			top: 100px;
+		}
 </style>
 </head>
 <body>
@@ -95,7 +99,7 @@ table.pdList td input {
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8 ftco-animate">
+				<div class="col-md-7 ftco-animate">
 
 					<!--  글 작성 폼 시작 -->
 					<div class="managerdetailform">
@@ -136,11 +140,14 @@ table.pdList td input {
 						<br>
 						<label for="name">상세내용</label>
 						<br>
-						<textarea name="Product_Detail_content" cols="72" rows="20"><%=content%></textarea>
+						<textarea name="Product_Detail_content" cols="70" rows="20" readonly="readonly" style="resize: none;"><%=content%></textarea>
+						<p><%=content %></p>
 					</div>
-
+</div>
 					<input type="hidden" id="deletenum" name="<%=code%>">
 
+						<div class="col-md-5 ftco-animate">
+					<div class="writeform-group sticky">
 					<div class="writeform-group">
 						<br>
 						<h3>
@@ -152,8 +159,7 @@ table.pdList td input {
 							%>
 							<tr>
 								<th>상품코드</th>
-								<th>출발날짜</th>
-								<th>도착날짜</th>
+								<th>출발날짜/도착날짜</th>
 								<th>가격</th>
 								<th>총인원수</th>
 								<th>제어</th>
@@ -163,11 +169,10 @@ table.pdList td input {
 							%>
 							<tr>
 								<td><%=pdList.get(i).getProductNum()%></td>
-								<td><%=pdList.get(i).getProductDepartDate()%></td>
-								<td><%=pdList.get(i).getProductArrivDate()%></td>
+								<td><%=pdList.get(i).getProductDepartDate()%> / <%=pdList.get(i).getProductArrivDate()%></td>
 								<td><%=pdList.get(i).getProductPrice()%></td>
 								<td><%=pdList.get(i).getProductTotal()%></td>
-								<td><input type="button" class="deletecode" value="delete" onclick="deleteCode('<%=pdList.get(i).getProductNum()%>')"></td>
+								<td><input type="button" class="btn py-1 px-2 btn-primary deletecode" value="delete" onclick="deleteCode('<%=pdList.get(i).getProductNum()%>')"></td>
 							</tr>
 							<%
 								}
@@ -178,9 +183,9 @@ table.pdList td input {
 						</table>
 					</div>
 					
-					
+				
 					<div class="form-group">
-						<input type="button" value="날짜별 패키지상품 추가하기" class="btn py-3 px-4 btn-primary" onclick="product('<%=code%>')">
+						<input type="button" value="날짜별 패키지상품 추가하기" class="btn py-2 px-2 btn-primary" onclick="product('<%=code%>')">
 					</div>
 					<div class="form-group" id="addProduct" style="display: none;">
 <!-- 						<form action="ProductInsertPro.ma" method="post"> -->
@@ -203,7 +208,11 @@ table.pdList td input {
 								</tr>
 							</table>
 					</div>
-				</div>
+					</div>
+					</div>
+					
+					
+				
 			</div>
 		</div>
 	</section>

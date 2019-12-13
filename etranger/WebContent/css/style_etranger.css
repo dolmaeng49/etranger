@@ -79,14 +79,11 @@
     background-color: #e6e6e6;
     border-color: #adadad;
 }
-/* #floatMenu { */
-/* 	width:104px;height:48px; background:transparent; margin: 0pt; padding: 0pt;  position:fixed; _position:absolute; _z-index:-1 right: 20px; overflow:hidden; top: 500px; */
-/* } */
+
 
 #floatdiv {
 	position: fixed;
-	_position: absolute;
-	_z-index: -1;
+	z-index: 100;
 	width: 120px;
 	overflow: hidden;
 	right: 1px;
@@ -227,7 +224,6 @@ a.btn {
     font-size: 15px;
     width: 100%;
     float: right;
-    background: #fff;
 }
 
 .search-form-list {  /* review_list.jsp */
@@ -317,6 +313,25 @@ a.btn {
 }
 
 
+.sidebar-box-notice { /* 공지사항 검색 */
+    margin-bottom: 0px;
+    padding: 0px;
+    font-size: 15px;
+    width: 0%;
+    float: right;
+    background: #fff;
+}
+
+
+.search-form-notice { /* 공지사항 검색 */
+    background: #f7f7f7;
+    padding: 0px;
+    width: 400px;
+    float: right;
+    margin-right: 350px;
+}
+
+
 /*review_ searchBar  */
 #search_fieldset {
   position: relative;
@@ -388,6 +403,7 @@ a.btn {
   -webkit-transition: all 0.1s ease-in-out;
           transition: all 0.1s ease-in-out;
 }
+
 
 
 

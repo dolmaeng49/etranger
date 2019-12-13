@@ -16,6 +16,7 @@ import manager.action.CityInsertAction;
 import manager.action.CitySelectAction;
 import manager.action.ProductListAction;
 import manager.action.DeleteProductAction;
+import manager.action.ManagerImageCallbackAction;
 import manager.action.ProductDetailAction;
 import manager.action.ProductInsertAction;
 import manager.action.CategoryListAction;
@@ -29,6 +30,7 @@ import manager.action.ReservManagementAction;
 import manager.action.ReservUpdateAction;
 import manager.action.ThemeCheckBoxAction;
 import manager.action.ThemeListAction;
+import review.action.ImageCallbackAction;
 
 @WebServlet("*.ma")
 public class ManagerFrontController extends HttpServlet {
@@ -194,6 +196,13 @@ public class ManagerFrontController extends HttpServlet {
 				System.out.println("ReservUpdate.ma");
 				try {
 					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else if(command.equals("/ManagerImageCallback.ma")){
+				action = new ManagerImageCallbackAction();
+				try {
+					forward=action.execute(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

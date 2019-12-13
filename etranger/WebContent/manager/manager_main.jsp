@@ -31,7 +31,7 @@
 
 		#memberManagement {
 			font-size: smaller;
-			display: none;
+ 			display: none;  
 		}
 	</style>
 </head>
@@ -184,7 +184,7 @@
 							<div class="col-md-12">
 								<div class="select-wrap one-third theme">
 									<h3 class="h4 mb-4">Content</h3>
-									<textarea id="category_content" name="category_content" rows="20" cols="80"
+									<textarea id="summernoteManager"  name="category_content" rows="20" cols="80"
 										required="required"></textarea>
 
 								</div>

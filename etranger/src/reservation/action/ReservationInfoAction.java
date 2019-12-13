@@ -2,6 +2,7 @@ package reservation.action;
 
 import java.util.ArrayList;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,7 +19,7 @@ public class ReservationInfoAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String id = request.getParameter("member_id");
+		String id = (String) request.getSession().getAttribute("member_id");
 
 		// 페이징 처리
 		int page = 1;
