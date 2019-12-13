@@ -30,7 +30,7 @@ public class ProductFrontController extends HttpServlet {
 		
 		// 추출한 서블릿 주소 매핑
 		if(command.equals("/ProductList.pr")) {
-			action = new CategoryListAction_oldVer();
+			action = new CategoryListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
