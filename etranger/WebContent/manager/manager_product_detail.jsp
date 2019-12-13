@@ -48,15 +48,16 @@ table.pdList th {
 	width: 155px;
 	padding: 10px;
 	font-weight: bold;
-	vertical-align: top;
+	vertical-align: center;
 	color: #fff;
 	background: #ff5f5f;
+	font-size: 0.7em;
 }
 
 table.pdList td {
 	width: 155px;
 	padding: 10px;
-	vertical-align: top;
+	vertical-align: center;
 	border-bottom: 1px solid #ccc;
 	background: #eee;
 	font-size: 0.7em;
@@ -65,11 +66,13 @@ table.pdList td {
 table.pdList td input {
 	font-size: smaller;
 }
+
 .sticky {
-			position: sticky;
-			top: 100px;
-		}
+	position: sticky;
+	top: 100px;
+}
 </style>
+<link rel="stylesheet" href="./css/style_management.css" type="text/css">
 </head>
 <body>
 
@@ -95,11 +98,36 @@ table.pdList td input {
 	</section>
 
 	<!-- END slider -->
-
 	<section class="ftco-section">
+	<div class="col-md-2 sticky" style="float: left;">
+				<div class="panel panel-info sticky" id="leftside">
+					<div class="panel-heading">
+
+						<h3 class="panel-title">Manager Page</h3>
+					</div>
+					<ul class="list-group">
+						<li class="list-group-item active li_hover"
+							onclick="location.href='./index.jsp'"><span
+							class="icon icon-home"></span> 홈</li>
+						<li class="list-group-item li_hover dataChart"
+							onclick="location.href='ManagerMain.ma'"><span
+							class="icon icon-line-chart"></span> 관리자 메인</li>
+						<li class="list-group-item li_hover"
+							onclick="location.href='ManagerMain.ma'"><span
+							class="icon icon-pencil"></span> 상품 등록으로 돌아가기</li>
+						<li class="list-group-item li_hover" id="member"><span
+							class="icon icon-users" ></span>회원관리</li>
+					</ul>
+					<ul class="list-group" id="memberManagement">
+						<li class="list-group-item li_hover member"
+							onclick="location.href='ReservManagement.ma'">&nbsp;­회원예약</li>
+						<li class="list-group-item li_hover member">&nbsp;­회원등급</li>
+					</ul>
+				</div>
+			</div>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-7 ftco-animate">
+				<div class="col-md-8 ftco-animate">
 
 					<!--  글 작성 폼 시작 -->
 					<div class="managerdetailform">
@@ -140,55 +168,53 @@ table.pdList td input {
 						<br>
 						<label for="name">상세내용</label>
 						<br>
-						<textarea name="Product_Detail_content" cols="70" rows="20" readonly="readonly" style="resize: none;"><%=content%></textarea>
-						<p><%=content %></p>
+						<%=content%>
 					</div>
-</div>
-					<input type="hidden" id="deletenum" name="<%=code%>">
+				</div>
+				<input type="hidden" id="deletenum" name="<%=code%>">
 
-						<div class="col-md-5 ftco-animate">
+				<div class="col-md-4 ftco-animate">
 					<div class="writeform-group sticky">
-					<div class="writeform-group">
-						<br>
-						<h3>
-							<label for="name">날짜별 상품</label>
-						</h3>
-						<table class="pdList" id="pdlist">
-							<%
-								if (pdList != null) {
-							%>
-							<tr>
-								<th>상품코드</th>
-								<th>출발날짜/도착날짜</th>
-								<th>가격</th>
-								<th>총인원수</th>
-								<th>제어</th>
-							</tr>
-							<%
-								for (int i = 0; i < pdList.size(); i++) {
-							%>
-							<tr>
-								<td><%=pdList.get(i).getProductNum()%></td>
-								<td><%=pdList.get(i).getProductDepartDate()%> / <%=pdList.get(i).getProductArrivDate()%></td>
-								<td><%=pdList.get(i).getProductPrice()%></td>
-								<td><%=pdList.get(i).getProductTotal()%></td>
-								<td><input type="button" class="btn py-1 px-2 btn-primary deletecode" value="delete" onclick="deleteCode('<%=pdList.get(i).getProductNum()%>')"></td>
-							</tr>
-							<%
-								}
-								}
-							%>
-							
-							<label id="newProduct"></label>
-						</table>
-					</div>
-					
-				
-					<div class="form-group">
-						<input type="button" value="날짜별 패키지상품 추가하기" class="btn py-2 px-2 btn-primary" onclick="product('<%=code%>')">
-					</div>
-					<div class="form-group" id="addProduct" style="display: none;">
-<!-- 						<form action="ProductInsertPro.ma" method="post"> -->
+						<div class="writeform-group">
+							<h3>
+								<label for="name">날짜별 상품</label>
+							</h3>
+							<table class="pdList" id="pdlist">
+								<%
+									if (pdList != null) {
+								%>
+								<tr>
+									<th>상품코드</th>
+									<th>출발날짜/<br>도착날짜</th>
+									<th style="width: 20%;">가격</th>
+									<th style="width: 15%;">인원</th>
+									<th style="width: 10%;">제어</th>
+								</tr>
+								<%
+									for (int i = 0; i < pdList.size(); i++) {
+								%>
+								<tr>
+									<td><%=pdList.get(i).getProductNum()%></td>
+									<td style="font-size: 0.5em;"><%=pdList.get(i).getProductDepartDate()%> / <%=pdList.get(i).getProductArrivDate()%></td>
+									<td><%=pdList.get(i).getProductPrice()%></td>
+									<td><%=pdList.get(i).getProductTotal()%></td>
+									<td><input type="button" class="btn py-1 px-2 btn-primary deletecode" value="delete" onclick="deleteCode('<%=pdList.get(i).getProductNum()%>')"></td>
+								</tr>
+								<%
+									}
+									}
+								%>
+
+								<label id="newProduct"></label>
+							</table>
+						</div>
+
+
+						<div class="form-group">
+							<input type="button" value="날짜별 패키지상품 추가하기" class="btn py-2 px-2 btn-primary" onclick="product('<%=code%>')">
+						</div>
+						<div class="form-group" id="addProduct" style="display: none;">
+							<!-- 						<form action="ProductInsertPro.ma" method="post"> -->
 							<table class="pdList">
 								<tr id="tr_top">
 									<th>상품코드</th>
@@ -196,7 +222,7 @@ table.pdList td input {
 									<th>도착날짜</th>
 									<th>가격</th>
 									<th>총인원수</th>
-									<th>등록</th>
+									<th style="width: 10%;">등록</th>
 								</tr>
 								<tr id="event_period">
 									<td><input type="text" class="form-control" name="package_category_code" id="package_category_code" value="<%=request.getParameter("package_category_code")%>" /></td>
@@ -204,15 +230,15 @@ table.pdList td input {
 									<td><input type="text" class="form-control form-control-shortshort actual_range" id="product_arrivdate" placeholder="arrivdate" name="product_arrivdate" required="required" readonly="readonly"></td>
 									<td><input type="text" class="form-control" name="product_price" id="product_price" placeholder="price" /></td>
 									<td><input type="text" class="form-control" name="product_total" id="product_total" placeholder="total" /></td>
-									<td><input type="button" value="등록" id="product_addbtn" class="btn py-3 px-4 btn-primary" onclick="addProduct()"></td>
+									<td><input type="button" value="등록" id="product_addbtn" class="btn py-2 px-1 btn-primary" onclick="addProduct()"></td>
 								</tr>
 							</table>
+						</div>
 					</div>
-					</div>
-					</div>
-					
-					
-				
+				</div>
+
+
+
 			</div>
 		</div>
 	</section>
@@ -222,8 +248,7 @@ table.pdList td input {
 
 	<!-- loader 인클루드 -->
 	<jsp:include page="../include/loader.jsp" />
-	<!-- js사용 -->
-
+	<script src="js/manager.js"></script>
 </body>
 <script type="text/javascript">
 	// 상품 추가폼 출력
