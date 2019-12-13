@@ -300,7 +300,48 @@ public class ManagerDAO {
 		return productList;
 	}
 	// selectProductList ---
+	
+	// --- selectRecommendedList
+		public ArrayList<CategoryBean> selectRecommendedList(int page, int limit) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ArrayList<CategoryBean> productList = new ArrayList<CategoryBean>();
 
+			int startRow = (page - 1) * limit;
+
+			try {
+
+				String sql = "select c.package_category_name, count(*), sum(r.reservation_headcount) AS total_headcount" + 
+						"from reservation r join package_category c" + 
+						"on r.reservation_category_code = c.package_category_code" + 
+						"group by c.package_category_name" + 
+						"order by 3 desc LIMIT ?,?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, limit);
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					CategoryBean cb = new CategoryBean();
+					cb.setPackage_category_code(rs.getString("package_category_code"));
+					cb.setPackage_category_name(rs.getString("package_category_name"));
+					cb.setPackage_category_theme(rs.getString("package_category_theme"));
+					cb.setPackage_category_image(rs.getString("package_category_image"));
+					cb.setPackage_category_content(rs.getString("package_category_content"));
+					cb.setPackage_category_region(rs.getInt("package_category_region"));
+					cb.setPackage_category_city(rs.getInt("package_category_city"));
+					cb.setPackage_category_wish_count(rs.getInt("package_category_wish_count"));
+					productList.add(cb);
+				}
+			} catch (SQLException e) {
+				System.out.println("selectArticleList() 오류! - " + e.getMessage());
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return productList;
+		}
+// --- selectRecommendedList
 	public int ProductInsert(ProductBean pb) {
 		int insertCount = 0;
 

@@ -42,7 +42,7 @@ public class CategoryListService {
 		managerDAO.setConnection(con);
 		ArrayList<CategoryBean> popularList = null;
 
-		popularList = managerDAO.selectCategoryList(page, limit);
+		popularList = managerDAO.selectRecommendedList(page, limit);
 
 		close(con);
 
