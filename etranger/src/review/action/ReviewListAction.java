@@ -2,7 +2,6 @@ package review.action;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,9 +16,7 @@ public class ReviewListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		System.out.println("ReviewListAction");
 		
-		//페이징 처리
 		int page=1;
 		int limit=12;
 		
@@ -29,7 +26,6 @@ public class ReviewListAction implements Action {
 		
 		ReviewListService reviewListService = new ReviewListService();
 		int listCount = reviewListService.getListCount();
-		System.out.println("총 게시물 수(Action) " +listCount);
 		
 		ArrayList<ReviewBean> articleList = new ArrayList<ReviewBean>();
 		articleList = reviewListService.getArticleList(page, limit);
@@ -41,7 +37,6 @@ public class ReviewListAction implements Action {
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
-		
 		PageInfo pageInfo = new PageInfo(page, maxPage, startPage, endPage, listCount);
 		
 		request.setAttribute("pageInfo", pageInfo);
@@ -49,7 +44,6 @@ public class ReviewListAction implements Action {
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("/review/review_list.jsp");
-		
 		
 		return forward;
 	}

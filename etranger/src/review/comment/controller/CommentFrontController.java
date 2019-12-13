@@ -65,10 +65,6 @@ public class CommentFrontController extends HttpServlet{
 				}
 			}
 			
-			
-			
-			
-			
 			if (forward != null) {
 				if (forward.isRedirect()) { 
 					response.sendRedirect(forward.getPath());
@@ -80,8 +76,6 @@ public class CommentFrontController extends HttpServlet{
 			
 	}
 	
-	
-	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);
@@ -91,8 +85,5 @@ public class CommentFrontController extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);
 	}
-	
-	
-
 
 }
