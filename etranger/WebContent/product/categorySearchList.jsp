@@ -133,6 +133,8 @@ function isThereLoginSession(){
 								<%} %>
 								style="font-size:24px;color:red;"></i></span>
                     </div>
+	                  </div>
+	              </div>
                     <p class="star-rate">
                     <!-- 리뷰 별점 스크립틀릿으로 표시할 부분,  -->
                     <% // 리뷰 별점 평균 표시, 리뷰 개수 표시
@@ -146,8 +148,6 @@ function isThereLoginSession(){
 		                    <% }
 	                    %>
 	                    <span><%=categoryList.get(i).getReview_count() %> reviews</span></p>
-	                  </div>
-	              </div>
 	           		 <% 
            		 }}} %>
             
@@ -192,7 +192,6 @@ function isThereLoginSession(){
                       	<input type="text" class="form-control" placeholder="상품명" name="keyword" value="<%=searchBean.getKeyword()%>"></div> <!-- 키워드 검색창 -->
 
                       <div class="check-in col-sm-12 group mb-3">
-<!--                       	<input type="text" id="checkin_date" class="form-control" placeholder="Date for Departure" name="depart_date"> -->
                       	<input type="text" class="form-control pick_start_date" placeholder="출발 날짜"
                       	name="depart_date" readonly="readonly" value="<%=searchBean.getDepart_date()%>"><!--출발일 검색  -->
                       </div>
@@ -228,7 +227,8 @@ function isThereLoginSession(){
                     </form>
               </div>
             </div>
-
+			
+			<!--작업할 곳  -->
             <div class="sidebar-box ftco-animate">
               <div class="categories">
                 <h3>Categories</h3>
@@ -253,11 +253,7 @@ function isThereLoginSession(){
                 <a href="#" class="tag-cloud-link">Travel</a>
               </div>
             </div>
-
-            <div class="sidebar-box ftco-animate">
-              <h3>Paragraph</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-            </div>
+            
           </div>
 <!-- End of SideBar  -->          
           

@@ -93,11 +93,6 @@
 	padding: 0;
 }
 
-
-
-
-
-
 #article-info {
 	width: 100%;
 	padding: 1em 1em 0.5em;
@@ -229,10 +224,20 @@ a.btn {
 .search-form-list {  /* review_list.jsp */
     background: #f7f7f7;
     padding: 0px;
-    width: 400px;
+    width: 200px;
     float: right;
 }
 
+.search-form-detail {  /* review_detail.jsp */
+    background: #fff;
+    padding: 0px;
+    width: 300px;
+    float: right;
+}
+
+.search_border {  /* review_detail.jsp */
+    border: 1px solid #ccc;
+}
 
 .comment-list .comment-re {
     padding: 0;
@@ -254,7 +259,6 @@ a.btn {
     background: #f4fbff;
 }
 
-
 .starR1{
     background: url('../images/star.png') no-repeat -52px 0;
     background-size: auto 100%;
@@ -275,7 +279,6 @@ a.btn {
 }
 .starR1.on{background-position:0 0;}
 .starR2.on{background-position:-15px 0;}
-
 
 .comment_update_btn,.comment_del_btn{
 	/*우로 정렬  */
