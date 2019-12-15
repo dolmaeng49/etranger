@@ -155,7 +155,7 @@
 												<span class="ion-ios-arrow-down"></span>
 											</div>
 											<select name="region" id="selectRegion" class="form-control" onChange="getCity()">
-                        						<option value="">지역선택</option>
+                        						<option id="bg_gray" value="">지역선택</option>
                         					</select>
 										</div>
 										
@@ -165,7 +165,7 @@
 											</div>
 											<div class="icon"><span class="ion-ios-arrow-down"></span></div>
                         						<select name="city" id="selectCity" class="form-control">
-                        							<option value="">도시선택</option>
+                        							<option id="bg_gray" value="">도시선택</option>
                         						</select>
 										</div>
 									</div>
@@ -213,7 +213,6 @@
 		</div>
 	</div>
 	<!-- 검색부분 끝 -->
-
 	<!-- 영상 -->
 	<section class="ftco-section-2">
 		<div class="container-fluid d-flex">
@@ -248,7 +247,6 @@
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
-
 				<%
 					for (CategoryBean cb : categoryList1) {
 						String detailURL = "CategoryDetail.pr?package_category_code=".concat(cb.getPackage_category_code());
@@ -562,13 +560,13 @@ function getRegion() {
 // 	$('#selectRegion').hide();
 	// #selectRegion에 있는 내용 지우기
 	$('#selectRegion').empty();
-	$('#selectRegion').append("<option value=''>지역선택</option>");
+	$('#selectRegion').append("<option id='bg_gray' value=''>지역선택</option>");
 	// JSON으로 가져온 데이터 #SelectRegion에 옵션으로 추가
 	$.getJSON('RegionSelect.ma', function(data) {
 
 		$.each(data, function(index, value) {
 			$('#selectRegion').append(
-					"<option value=" + value.regionCode + "> 지역이름 : " + value.regionName
+					"<option id='bg_gray' value=" + value.regionCode + "> 지역이름 : " + value.regionName
 							+ "</option>");
 		});
 	});
@@ -578,17 +576,16 @@ function getRegion() {
 function getCity() {
 	$('#selectCity').empty();
 	var code = $('#selectRegion').val();
-	$('#selectCity').append("<option value=''>도시선택</option>");
+	$('#selectCity').append("<option id='bg_gray' value=''>도시선택</option>");
 	$.getJSON('CitySelect.ma?code=' + code, function(data) {
 		$.each(data, function(index, value) {
 
 			$('#selectCity').append(
-					"<option value=" + value.cityCode + "> 도시이름 : " + value.cityName
+					"<option id='bg_gray' value=" + value.cityCode + "> 도시이름 : " + value.cityName
 							+ "</option>");
 		});
 	});
 }
-
 </script>
 	
 </body>

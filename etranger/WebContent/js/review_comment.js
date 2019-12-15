@@ -34,7 +34,6 @@ function duplClickCheck() {
 }
 //------------------------------------------
 
-
 //-----------------새 댓글 작성
 function addComment() {		
 	if(duplClickCheck()) return;  //광클방지.
@@ -70,7 +69,6 @@ function addComment() {
 		    }
 	  });
 }
-
 
 //-------------------------댓글 삭제
 function deleteComment(cnum) {
@@ -131,7 +129,6 @@ function updateComment(cnum,content){
 
 	$('#cb'+cnum).replaceWith(htmls)
 }
-
 
 // 대댓글 작성폼 열기
 function replyComment(cnum){
@@ -211,6 +208,3 @@ function replyCommentPro(cnum){
 });
 	
 }
-
-
-

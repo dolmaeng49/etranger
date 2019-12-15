@@ -255,7 +255,6 @@ function isThereLoginSession(){
 <script type="text/javascript">
 
 getRegion();
-getRegion2();
 
 function getRegion() {
 // 	$('#selectRegion').hide();
@@ -289,36 +288,6 @@ function getCity() {
 }
 
 //
-function getCity2() {
-	$('#selectCity2').empty();
-	var code = $('#selectRegion2').val();
-	$('#selectCity2').append("<option value=''>도시선택</option>");
-	$.getJSON('CitySelect.ma?code=' + code, function(data) {
-		$.each(data, function(index, value) {
-
-			$('#selectCity2').append(
-					"<option value=" + value.cityCode + "> 도시이름 : " + value.cityName
-							+ "</option>");
-		});
-	});
-}
-
-function getRegion2() {
-// 	$('#selectRegion').hide();
-	// #selectRegion에 있는 내용 지우기
-	$('#selectRegion2').empty();
-	$('#selectRegion2').append("<option value=''>지역선택</option>");
-	// JSON으로 가져온 데이터 #SelectRegion에 옵션으로 추가
-	$.getJSON('RegionSelect.ma', function(data) {
-
-		$.each(data, function(index, value) {
-			$('#selectRegion2').append(
-					"<option value=" + value.regionCode + "> 지역이름 : " + value.regionName
-							+ "</option>");
-		});
-	});
-}
-
 </script>
     
   </body>
