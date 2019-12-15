@@ -626,20 +626,21 @@ public class ManagerDAO {
 
 		try {
 
-			String sql = "SELECT cr.category_region_name, pp.package_product_current " 
+			String sql = "SELECT cr.category_region_name, sum(package_product_current) " 
 					+ "FROM package_product pp "
 					+ "JOIN package_category pc ON pp.package_category_code = pc.package_category_code "
-					+ "JOIN category_region cr ON pc.package_category_region = cr.category_region_code";
+					+ "JOIN category_region cr ON pc.package_category_region = cr.category_region_code "
+					+ "GROUP BY pc.package_category_region";
 
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-
+			System.out.println(pstmt);
 			while (rs.next()) {
 				CategoryBean cb = new CategoryBean();
 				cb.setRegionName(rs.getString("cr.category_region_name"));
-				cb.setPackage_product_current(rs.getInt("pp.package_product_current"));
-				
+				cb.setPackage_product_current(rs.getInt(2));
 				regionReservationList.add(cb);
+				System.out.println(cb.getRegionName() + ", " + cb.getPackage_product_current());
 			}
 
 		} catch (SQLException e) {

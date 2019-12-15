@@ -113,17 +113,15 @@
         var myChart = new Chart(ctx2, {
             type: 'bar',	// 그래프 타입
             data: {
-                labels: [label1, label2],
+                labels: [label1],
                 datasets: [{
                     label: '# 지역별 상품 예약 수',			// 그래프 이름
-                    data: [data1, data2],
+                    data: [data1],
                     backgroundColor: [				// 그래프 배경색
                         'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
                     ],
                     borderColor: [					// 그래프 선 색
                         'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
                     ],
                     borderWidth: 1	// 그래프 선 굵기
                 }]

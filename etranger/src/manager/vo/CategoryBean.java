@@ -22,6 +22,7 @@ public class CategoryBean {
 	private int review_count;
 	private double review_star_avg;
 	private int package_product_current;
+	private int min_price;
 
 //	| package_category_code | 
 //	package_category_name | 
@@ -30,6 +31,14 @@ public class CategoryBean {
 //	package_category_theme | 
 //	package_category_image | 
 //	package_category_content |
+
+	public int getMin_price() {
+		return min_price;
+	}
+
+	public void setMin_price(int min_price) {
+		this.min_price = min_price;
+	}
 
 	public int getReview_count() {
 		return review_count;
