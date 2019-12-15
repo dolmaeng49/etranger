@@ -1,16 +1,17 @@
 //히든버튼 생성
-// 	  var hiddenButton = function (context) {
-// 		  var ui = $.summernote.ui;
-// 		  var button = ui.button({
-// 		    contents: '<i class="fa fa-cat"/>',
-// 		    tooltip: 'guess what',
-// 		    click: function () {
-// 		      // invoke insertText method with 'hello' on editor module.
+ 	  var hiddenButton = function (context) {
+ 		  var ui = $.summernote.ui;
+ 		  var button = ui.button({
+ 		    contents: '<i class="fa fa-cat"/>',
+ 		    tooltip: 'guess what',
+ 		    click: function () {
+ 		    	alert("etranger==\"TheBestTeamEver\"");
 // 		      context.invoke('editor.insertText', 'etranger==TheBestTeamEver');
-// 		    }
-// 		  });
-// 		  return button.render();   // return button as jquery object
-// 		}
+// 		      context.invoke('editor.bold');
+ 		    }
+ 		  });
+ 		  return button.render();   // return button as jquery object
+ 		}
 //========================
 //버튼추가시, .summernote 안에 들어갈 속성
 //buttons: {
@@ -38,7 +39,12 @@ $(function() {
 						[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
 						[ 'table', [ 'table' ] ],
 						[ 'insert', [ 'link', 'picture', 'video' ] ],
-						[ 'view', [ 'codeview', 'help' ] ] ],
+						[ 'view', [ 'codeview', 'help' ] ], 
+						['mybutton', ['hidden'] ] ],
+						
+				buttons : {
+					        hidden : hiddenButton
+					    },		
 				callbacks : {
 					onImageUpload : function(files, editor, welEditable) {
 						for (var i = files.length - 1; i >= 0; i--) {

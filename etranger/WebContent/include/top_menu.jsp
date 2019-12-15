@@ -19,7 +19,44 @@
         <%
             if (member_id == null) {
         %>
-        <a href="LoginForm.me">Log In</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="MemberJoinForm.me">Create an Account</a>
+        <a href="#layer2" class="btn-example">Log In</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="MemberJoinForm.me">Create an Account</a>
+        <!--로그인 딤처리 레이어  -->
+   <div class="dim-layer">
+    <div class="dimBg"></div>
+    <div id="layer2" class="pop-layer">
+        <div class="pop-container">
+            <div class="pop-conts">
+                <!--content //-->
+                <form action="LoginPro.me" method="post">
+                <div class="comment-form-wrap pt-5 form-wrap-login">
+						<h3 class="mb-5">Login</h3>
+						<div class="form-group">
+							<label for="id">ID</label><br>
+							<input type="text" class="form-control" id="id" required="required" name="member_id">
+						</div>
+						<div class="form-group">
+							<label for="password">PASSWORD</label><br>
+							<input type="password" class="form-control" id="passwd" required="required" name="member_passwd">
+						</div>
+						<p class="wrap-links"><a href="MemberFindIdForm.me">ID 찾기</a> |
+							<a href="MemberFindPasswdForm.me">P/W 변경</a> |
+							<a href="MemberJoinForm.me">회원가입</a> |</p>
+			 			<div class="form-group form-group-btn">
+							<input type="submit" value="Login" class="btn py-3 px-4 btn-primary">&nbsp;&nbsp;
+						</div>
+					</div>
+                <div class="btn-r">
+                    <a href="#"  id="btnPopUpClose" class="btn py-1 px-2 btn-primary">Close</a>
+                </div>
+			</form>
+                <!--// content-->
+            </div>
+        </div>
+    </div>
+</div>
+        
+        
+        
         <%
             }
             else {

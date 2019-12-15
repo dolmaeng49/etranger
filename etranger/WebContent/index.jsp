@@ -24,7 +24,7 @@
 </head>
 <body>
 	<!-- 탑메뉴 인클루드 -->
-	<jsp:include page="/include/top_menu.jsp" />
+	<jsp:include page="/include/top_menu.jsp"/>
 
 	<section class="home-slider owl-carousel">
 
@@ -359,88 +359,13 @@
 		</div>
 	</section>
 
-	<!-- 리뷰 5개 -->
-	<!-- 
-    <section class="ftco-section testimony-section">
-      <div class="container">
-        <div class="row justify-content-center mb-5 pb-5">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2>Our Satisfied Guests says</h2>
-          </div>
-        </div>
-        <div class="row ftco-animate">
-          <div class="carousel owl-carousel ftco-owl">
-       
-          
-          
-            <div class="item text-center">
-              <div class="testimony-wrap p-4 pb-5">
-                <div class="user-img mb-4" style="background-image: " style="border: 1px solid red;"></div>
-                <div class="text">
-                  <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span></p>
-                  <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  <p class="name"></p>
-                  <span class="position">Guests from Italy</span>
-                </div>
-              </div>
-            </div>
-            
-            <div class="item text-center">
-              <div class="testimony-wrap p-4 pb-5">
-                <div class="user-img mb-4" style="background-image: url(images/person_2.jpg)" style="border: 1px solid red;"></div>
-                <div class="text">
-                  <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span></p>
-                  <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  <p class="name">Dennis Green</p>
-                  <span class="position">Guests from Italy</span>
-                </div>
-              </div>
-            </div>
-            <div class="item text-center">
-              <div class="testimony-wrap p-4 pb-5">
-                <div class="user-img mb-4" style="background-image: url(images/person_3.jpg)" style="border: 1px solid red;"></div>
-                <div class="text">
-                  <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span></p>
-                  <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  <p class="name">Dennis Green</p>
-                  <span class="position">Guests from Italy</span>
-                </div>
-              </div>
-            </div>
-            <div class="item text-center">
-              <div class="testimony-wrap p-4 pb-5">
-                <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)" style="border: 1px solid red;"></div>
-                <div class="text">
-                  <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span></p>
-                  <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  <p class="name">Dennis Green</p>
-                  <span class="position">Guests from Italy</span>
-                </div>
-              </div>
-            </div>
-            <div class="item text-center">
-              <div class="testimony-wrap p-4 pb-5">
-                <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)" style="border: 1px solid red;"></div>
-                <div class="text">
-                  <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span></p>
-                  <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  <p class="name">Dennis Green</p>
-                  <span class="position">Guests from Italy</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-     -->
 
 	<!-- 블로그 5개 -->
 	<section class="ftco-section bg-light">
 		<div class="container">
 			<div class="row justify-content-center mb-5 pb-5">
 				<div class="col-md-7 text-center heading-section ftco-animate">
-					<h2>Our Blog</h2>
+					<h2>Recent Reviews</h2>
 				</div>
 			</div>
 			<div class="row ftco-animate">
@@ -451,24 +376,24 @@
 					%>
 					<div class="item">
 						<div class="blog-entry">
-							<a href="blog-single.html" class="block-20"
+							<a href=<%=detailURL %> class="block-20"
 								style="background-image: url('reviewUpload/<%=rb.getReview_image()%>');">
 							</a>
 							<div class="text p-4">
 								<div class="meta">
 									<div>
-										<a href="#"><%=rb.getReview_date()%></a>
+										<a href="<%=detailURL %>"><%=rb.getReview_date()%></a>
 									</div>
 									<div>
-										<a href="#"><%=rb.getReview_member_name()%></a>
+										<a href="<%=detailURL %>"><%=rb.getReview_member_name()%></a>
 									</div>
 								</div>
 								<h3 class="heading">
-									<a href="detailURL"><%=rb.getReview_subject()%></a>
+									<a href="<%=detailURL %>"><%=rb.getReview_subject()%></a>
 								</h3>
 								<p class="clearfix">
-									<a href="detailURL" class="float-left">Read more</a> <a
-										href="detailURL" class="float-right meta-chat"><span
+									<a href="<%=detailURL %>" class="float-left">Read more</a> <a
+										href="<%=detailURL %>" class="float-right meta-chat"><span
 										class="icon-chat"></span> 3</a>
 								</p>
 							</div>
