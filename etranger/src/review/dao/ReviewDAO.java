@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import review.vo.ReviewBean;
 
@@ -94,7 +96,7 @@ public class ReviewDAO {
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, limit);
 			rs = pstmt.executeQuery();
-
+			
 			while (rs.next()) {
 				ReviewBean rb = new ReviewBean();
 				rb.setReview_num(rs.getInt("review_num"));
@@ -109,7 +111,11 @@ public class ReviewDAO {
 				rb.setReview_star(rs.getInt("review_star"));
 				rb.setReview_comment_count(rs.getInt("review_comment_count"));
 				articleList.add(rb);
+				
 			}
+			
+			
+			
 		} catch (SQLException e) {
 			System.out.println("selectArticleList() 오류! - " + e.getMessage());
 		} finally {

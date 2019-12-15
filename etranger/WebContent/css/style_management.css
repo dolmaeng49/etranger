@@ -8,9 +8,9 @@
 }
 
 .li_hover:hover {
-	border: 2px solid #ff5f5f;
+	border: 2px solid #68c8f2;
 	background: transparent;
-	color: #ff5f5f;
+	color: #68c8f2;
 }
 
 .member {
@@ -33,7 +33,7 @@ table.reservList th {
 	font-weight: bold;
 	vertical-align: top;
 	color: #fff;
-	background: #ff5f5f;
+	background: #68c8f2;
 }
 
 table.reservList td {
@@ -64,6 +64,6 @@ table.reservList td input {
 }
 
 table.reservList .price {
-	color: #fb3737!important;
+	color: #37c2fb!important;
 	font-weight: 700 !important;
 }

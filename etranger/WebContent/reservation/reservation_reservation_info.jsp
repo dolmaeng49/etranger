@@ -107,7 +107,7 @@
 			font-weight: bold;
 			vertical-align: top;
 			color: #fff;
-			background: #ff5f5f;
+			background: #68c8f2;
 		}
 
 		table.pdList td {

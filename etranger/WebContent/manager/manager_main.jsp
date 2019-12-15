@@ -24,9 +24,9 @@
 		}
 
 		.li_hover:hover {
-			border: 2px solid #ff5f5f;
+			border: 2px solid #68c8f2;
 			background: transparent;
-			color: #ff5f5f;
+			color: #68c8f2;
 		}
 
 		#memberManagement {

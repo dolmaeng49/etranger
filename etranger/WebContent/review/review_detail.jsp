@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="review.vo.ReviewBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -10,6 +12,14 @@
 	if(session.getAttribute("member_id")!=null){
 	  sessionId = (String)session.getAttribute("member_id");
 	}
+	
+	//날짜 포맷 판별
+	SimpleDateFormat sdfOrigin=new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat sdfToday=new SimpleDateFormat("HH 시 mm 분");
+	SimpleDateFormat sdfCalculation= new SimpleDateFormat("yyyyMMdd");
+	
+	Calendar calToday = Calendar.getInstance();
+	Calendar calWritingPoint = Calendar.getInstance();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +62,12 @@
 			</div> <!-- article-info끝 -->
 			<div id="article-content-wrapper">
 			<div class="content-header">
-			<div id="article-time"><%=article.getReview_date() %></div>
+			<div id="article-time">
+			<%calWritingPoint.setTime(article.getReview_date());
+    		String today = sdfCalculation.format(calToday.getTime());
+    		String writingPoint = sdfCalculation.format(calWritingPoint.getTime());
+   			String checkedDate=(today.compareTo(writingPoint)==0)?sdfToday.format(article.getReview_date()):sdfOrigin.format(article.getReview_date());%><%=checkedDate %>
+			</div>
 			<div id="article-readcnt">조회수 : <%=article.getReview_readcount() %></div>
 			<div id="article-commentcnt">댓글 : <%=article.getReview_comment_count() %></div>
 			</div><!-- content-header끝 -->

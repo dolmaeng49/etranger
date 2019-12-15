@@ -1,6 +1,7 @@
 package review.comment.action;
 
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +36,9 @@ public class CommentListAjax implements Action {
 
 		PageInfo pageInfo = new PageInfo();
 		int nowPage = pageInfo.getPage();
-
+		
+		SimpleDateFormat sdfComment= new SimpleDateFormat("yyyy-MM-dd일 HH시 mm분");
+		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
@@ -49,7 +52,8 @@ public class CommentListAjax implements Action {
 				if (article.getReview_num() == commentList.get(i).getReview_comment_review_num()) {
 					if (commentList.get(i).getReview_comment_lev() > 0) {
 						out.print("<ul class=\"children\">");
-						out.print("<li class=\"comment-re\" id=cr" + commentList.get(i).getReview_comment_num() + ">");
+						
+						out.print("<a href=\"#\" class=\"rereply-btn\"><i class=\"fa fa-share\"></i></a><li class=\"comment-re\" id=cr" + commentList.get(i).getReview_comment_num() + ">");
 					} else {
 						out.print("<li class=\"comment-parent\" id=cp" + commentList.get(i).getReview_comment_num()
 								+ ">");
@@ -59,7 +63,7 @@ public class CommentListAjax implements Action {
 							+ "<img src=\"images/person_1.jpg\" alt=\"Image placeholder\"></div>"
 							+ "<div class=\"comment-body\" id=cb" + commentList.get(i).getReview_comment_num() + "><h3>"
 							+ commentList.get(i).getReview_comment_member_name() + "</h3>" + "<div class=\"meta\">"
-							+ commentList.get(i).getReview_comment_date() + "</div>" + "<p>"
+							+ sdfComment.format(commentList.get(i).getReview_comment_date()) + "</div>" + "<p>"
 							+ commentList.get(i).getReview_comment_content() + "</p>"
 							+ "<input type=\"hidden\" id=\"nowPage\" name=\"nowPage\" value=" + nowPage + ">"
 							+ "<form action=\"CommentReplyForm.cm\">"
@@ -83,7 +87,7 @@ public class CommentListAjax implements Action {
 					if (commentList.get(i).getReview_comment_lev() < 1) {
 
 						out.print("<a class=\"comment_reply_btn\" href=\"#comment_reply_btn\" onclick=\"replyComment('"
-								+ commentList.get(i).getReview_comment_num() + "'); this.onclick='';\">대댓글</a>");
+								+ commentList.get(i).getReview_comment_num() + "'); this.onclick='';\"><i class=\"fab fa-replyd\">Re</i></a>");
 					}
 					String print2 = "";
 					print2 += "</form><input type=\"hidden\" id=\"cmt_num\" value="
@@ -95,11 +99,11 @@ public class CommentListAjax implements Action {
 					if (sessionId != null) {
 						if (sessionId.equals(commentList.get(i).getReview_comment_member_id())) {
 							String print3 = "";
-							print3 += "<a class=\"comment_update_btn\" href=\"#comment_update_btn\" onclick=\"updateComment('"
+							print3 += "<div id=\"modi_delete\"><a class=\"comment_update_btn\" href=\"#comment_update_btn\" onclick=\"updateComment('"
 									+ commentList.get(i).getReview_comment_num() + "','"
-									+ commentList.get(i).getReview_comment_content() + "')\">수정</a>"
+									+ commentList.get(i).getReview_comment_content() + "')\"><i class=\"fas fa-pencil-alt\"></i>수정</a>&emsp;"
 									+ "<a class=\"comment_del_btn\" href=\"#comment_del_btn\" onclick=\"deleteComment('"
-									+ commentList.get(i).getReview_comment_num() + "')\">삭제</a>";
+									+ commentList.get(i).getReview_comment_num() + "')\"><i class=\"fas fa-trash\"></i>삭제</a></div>";
 							out.print(print3);
 						}
 					}

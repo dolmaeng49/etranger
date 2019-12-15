@@ -114,11 +114,12 @@
 }
 
 #article-content-wrapper {
-	padding: 0 1em 1em
+	padding: 0 1em 1em;
+	border: 1px solid #f1f1f1;
 }
 
 #article-content-wrapper>.content-header {
-	border-top: 2px solid #6441a5;
+	border-top: 2px solid #f1f1f1;
 	background: #efefef;
 	padding: 0.6em 0.8em;
 	height: 40px;
@@ -144,7 +145,7 @@ article-content-wrapper>.content-header>#article-like /* 좋아요 구현할 때
 }
 
 #article-content-wrapper>.content-stararea {
-	border-top: 2px solid #6441a5;
+	border-top: 2px solid #f1f1f1;
 	padding: 0.6em 0.8em;
 }
 

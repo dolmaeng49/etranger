@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="common.vo.PageInfo"%>
 <%@page import="review.dao.ReviewDAO"%>
 <%@page import="java.util.ArrayList"%>
@@ -25,6 +27,14 @@
 	if(session.getAttribute("member_id")!=null){
 	  sessionId = (String)session.getAttribute("member_id");
 	}
+	
+// 	날짜 변환 작업
+
+	SimpleDateFormat sdfOrigin=new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat sdfToday=new SimpleDateFormat("HH 시 mm 분");
+	SimpleDateFormat sdfCalculation= new SimpleDateFormat("yyyyMMdd");
+	
+	Calendar calToday = Calendar.getInstance();
 %>  
 <!DOCTYPE html>
 <html>
@@ -101,7 +111,13 @@
                 </div>
                 <h3 class="heading"><a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>"><%=articleList.get(i).getReview_subject()%></a></h3>
                 <p class="clearfix">
-                  <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="float-left"><%=articleList.get(i).getReview_date()%></a>
+                  <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="float-left">
+                  <% 
+                  Calendar calWritingPoint = Calendar.getInstance();
+                  	calWritingPoint.setTime(articleList.get(i).getReview_date());
+    				String today = sdfCalculation.format(calToday.getTime());
+    				String writingPoint = sdfCalculation.format(calWritingPoint.getTime());
+   					String checkedDate=(today.compareTo(writingPoint)==0)?sdfToday.format(articleList.get(i).getReview_date()):sdfOrigin.format(articleList.get(i).getReview_date());%><%=checkedDate %></a>
                   <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="float-right meta-chat"><span class="icon-chat"></span><%=articleList.get(i).getReview_comment_count() %> </a>
                 </p>
               </div>

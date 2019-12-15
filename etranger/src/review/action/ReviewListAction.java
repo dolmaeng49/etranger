@@ -1,6 +1,8 @@
 package review.action;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,6 +40,32 @@ public class ReviewListAction implements Action {
 			endPage = maxPage;
 		}
 		PageInfo pageInfo = new PageInfo(page, maxPage, startPage, endPage, listCount);
+		
+		
+		//날짜포맷 변환 작업
+		String check = null;
+		
+		SimpleDateFormat sdfOrigin=new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdfToday=new SimpleDateFormat("HH:mm");
+		SimpleDateFormat sdfCalculation= new SimpleDateFormat("yyyyMMdd");
+		
+		Calendar cal = Calendar.getInstance();
+		
+		String writingPoint = sdfCalculation.format(articleList.get(1).getReview_date());
+		System.out.println(writingPoint);
+		
+		String today = sdfCalculation.format(cal.getTime());
+		System.out.println(today);
+		
+		if(today.compareTo(writingPoint)==0) {
+			check =sdfToday.format(articleList.get(listCount).getReview_date());
+		}else {
+			check =sdfOrigin.format(articleList.get(1).getReview_date());
+		}
+		
+		System.out.println(check);
+		
+		request.setAttribute("check", check);
 		
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("articleList", articleList);
