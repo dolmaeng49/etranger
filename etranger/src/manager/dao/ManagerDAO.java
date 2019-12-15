@@ -300,47 +300,47 @@ public class ManagerDAO {
 		return productList;
 	}
 	// selectProductList ---
-	
+
 	// --- selectRecommendedList
-		public ArrayList<CategoryBean> selectRecommendedList(int page, int limit) {
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			ArrayList<CategoryBean> productList = new ArrayList<CategoryBean>();
+	public ArrayList<CategoryBean> selectRecommendedList(int page, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<CategoryBean> productList = new ArrayList<CategoryBean>();
 
-			int startRow = (page - 1) * limit;
+		int startRow = (page - 1) * limit;
 
-			try {
+		try {
 
-				String sql = "select c.package_category_name, count(*), sum(r.reservation_headcount) AS total_headcount" + 
-						"from reservation r join package_category c" + 
-						"on r.reservation_category_code = c.package_category_code" + 
-						"group by c.package_category_name" + 
-						"order by 3 desc LIMIT ?,?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, limit);
-				rs = pstmt.executeQuery();
+			String sql = "select c.package_category_name, count(*), sum(r.reservation_headcount) AS total_headcount"
+					+ "from reservation r join package_category c"
+					+ "on r.reservation_category_code = c.package_category_code" + "group by c.package_category_name"
+					+ "order by 3 desc LIMIT ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, limit);
+			rs = pstmt.executeQuery();
 
-				while (rs.next()) {
-					CategoryBean cb = new CategoryBean();
-					cb.setPackage_category_code(rs.getString("package_category_code"));
-					cb.setPackage_category_name(rs.getString("package_category_name"));
-					cb.setPackage_category_theme(rs.getString("package_category_theme"));
-					cb.setPackage_category_image(rs.getString("package_category_image"));
-					cb.setPackage_category_content(rs.getString("package_category_content"));
-					cb.setPackage_category_region(rs.getInt("package_category_region"));
-					cb.setPackage_category_city(rs.getInt("package_category_city"));
-					cb.setPackage_category_wish_count(rs.getInt("package_category_wish_count"));
-					productList.add(cb);
-				}
-			} catch (SQLException e) {
-				System.out.println("selectArticleList() 오류! - " + e.getMessage());
-			} finally {
-				close(rs);
-				close(pstmt);
+			while (rs.next()) {
+				CategoryBean cb = new CategoryBean();
+				cb.setPackage_category_code(rs.getString("package_category_code"));
+				cb.setPackage_category_name(rs.getString("package_category_name"));
+				cb.setPackage_category_theme(rs.getString("package_category_theme"));
+				cb.setPackage_category_image(rs.getString("package_category_image"));
+				cb.setPackage_category_content(rs.getString("package_category_content"));
+				cb.setPackage_category_region(rs.getInt("package_category_region"));
+				cb.setPackage_category_city(rs.getInt("package_category_city"));
+				cb.setPackage_category_wish_count(rs.getInt("package_category_wish_count"));
+				productList.add(cb);
 			}
-			return productList;
+		} catch (SQLException e) {
+			System.out.println("selectArticleList() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
 		}
+		return productList;
+	}
+
 // --- selectRecommendedList
 	public int ProductInsert(ProductBean pb) {
 		int insertCount = 0;
@@ -395,7 +395,6 @@ public class ManagerDAO {
 				cb.setPackage_category_region(rs.getInt("package_category_region"));
 				cb.setPackage_category_city(rs.getInt("package_category_city"));
 				cb.setPackage_category_wish_count(rs.getInt("package_category_wish_count"));
-				
 
 				productDetailList.add(cb);
 			}
@@ -452,184 +451,204 @@ public class ManagerDAO {
 		return productList;
 	}
 
-	
+	// 상품삭제
+	public int DeleteProduct(String deletepcode) {
+		int deleteCount = 0;
 
-	//상품삭제
-		public int DeleteProduct(String deletepcode) {
-			int deleteCount = 0;
+		PreparedStatement pstmt = null;
 
-			PreparedStatement pstmt = null;
+		String sql = "delete from package_product where package_product_num=?";
+		try {
+			pstmt = con.prepareStatement(sql);
 
-			String sql = "delete from package_product where package_product_num=?";
-			try {
-				pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, deletepcode);
 
-				pstmt.setString(1, deletepcode);
-
-				deleteCount = pstmt.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close(pstmt);
-			}
-			return deleteCount;
+			deleteCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
+		return deleteCount;
+	}
 
-		
-		
-		
-		public ArrayList<ProductBean> DeleteListDAO(String dpcode) {
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			ArrayList<ProductBean> dplist = new ArrayList<ProductBean>();
+	public ArrayList<ProductBean> DeleteListDAO(String dpcode) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<ProductBean> dplist = new ArrayList<ProductBean>();
 
-			System.out.println("ProductBean DeleteList DB");
-			System.out.println("dpcode"+dpcode);
+		System.out.println("ProductBean DeleteList DB");
+		System.out.println("dpcode" + dpcode);
 
-			try {
+		try {
 
-				String sql = "select * from package_product where package_category_code =?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, dpcode);
-				rs = pstmt.executeQuery();
-				
-			while(rs.next()) {
-					System.out.println("rs.next");
-					ProductBean pb = new ProductBean();
+			String sql = "select * from package_product where package_category_code =?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dpcode);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				System.out.println("rs.next");
+				ProductBean pb = new ProductBean();
 //					System.out.println(rs.getString("package_product_num"));
 //					System.out.println(rs.getString("package_product_depart_date"));
 //					System.out.println(rs.getString("package_product_arriv_date"));
 //					System.out.println(rs.getInt("package_product_price"));
 //					System.out.println(rs.getInt("package_product_total"));
-					
-					pb.setProductNum(rs.getString("package_product_num"));
-					pb.setProductDepartDate(rs.getString("package_product_depart_date"));
-					pb.setProductArrivDate(rs.getString("package_product_arriv_date"));
-					pb.setProductPrice(rs.getInt("package_product_price"));
-					pb.setProductTotal(rs.getInt("package_product_total"));
-					pb.setCategoryCode(rs.getString("package_category_code"));
-						
-					
-					dplist.add(pb);
 
-				}
+				pb.setProductNum(rs.getString("package_product_num"));
+				pb.setProductDepartDate(rs.getString("package_product_depart_date"));
+				pb.setProductArrivDate(rs.getString("package_product_arriv_date"));
+				pb.setProductPrice(rs.getInt("package_product_price"));
+				pb.setProductTotal(rs.getInt("package_product_total"));
+				pb.setCategoryCode(rs.getString("package_category_code"));
 
+				dplist.add(pb);
 
-			} catch (SQLException e) {
-				System.out.println("ProductDeleteList() 오류! - " + e.getMessage());
-			} finally {
-				close(rs);
-				close(pstmt);
 			}
-			return dplist;
+
+		} catch (SQLException e) {
+			System.out.println("ProductDeleteList() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
 		}
+		return dplist;
+	}
 
-		// --- selectReservList
-		public ArrayList<ReservationBean> selectReservList(int page, int limit) {
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			ArrayList<ReservationBean> reservList = new ArrayList<ReservationBean>();
-			
-			int startRow = (page - 1) * limit;
+	// --- selectReservList
+	public ArrayList<ReservationBean> selectReservList(int page, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<ReservationBean> reservList = new ArrayList<ReservationBean>();
 
-			try {
-				String sql = 
-						"SELECT r.reservation_num,r.reservation_category_code,r.reservation_member_id,r.reservation_product_num,r.reservation_date,r.reservation_price,r.reservation_headcount,r.reservation_pay_way,r.reservation_progress,r.reservation_member_id,p.package_product_depart_date,p.package_product_arriv_date,c.package_category_name FROM reservation r JOIN package_product p ON r.reservation_product_num = p.package_product_num JOIN package_category c ON r.reservation_category_code = c.package_category_code"
-						+" limit ?,?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, limit);
-				rs = pstmt.executeQuery();
+		int startRow = (page - 1) * limit;
 
+		try {
+			String sql = "SELECT r.reservation_num,r.reservation_category_code,r.reservation_member_id,r.reservation_product_num,r.reservation_date,r.reservation_price,r.reservation_headcount,r.reservation_pay_way,r.reservation_progress,r.reservation_member_id,p.package_product_depart_date,p.package_product_arriv_date,c.package_category_name FROM reservation r JOIN package_product p ON r.reservation_product_num = p.package_product_num JOIN package_category c ON r.reservation_category_code = c.package_category_code"
+					+ " limit ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, limit);
+			rs = pstmt.executeQuery();
 
-
-				while (rs.next()) {
-					//고객아이디 예약일(결제시한) 예약번호 예약상품(이름) 예약인원 출발날짜/도착날짜 금액 진행상태
-					ReservationBean rb = new ReservationBean();
-					rb.setReservation_member_id(rs.getString("reservation_member_id")); // 고객 아이디
-					rb.setReservation_date(rs.getString("reservation_date")); //  예약일
-					rb.setReservation_num(rs.getInt("reservation_num")); // 예약번호
-					rb.setPackage_category_name(rs.getString("package_category_name")); //예약상품
-					rb.setReservation_category_code(rs.getString("reservation_category_code"));
-					rb.setReservation_headcount(rs.getInt("reservation_headcount")); //예약인원
-					rb.setPackage_product_depart_date(rs.getString("package_product_depart_date")); //출발날짜
-					rb.setPackage_product_arriv_date(rs.getString("package_product_arriv_date")); //도착날짜
-					rb.setReservation_price(rs.getInt("reservation_price")); // 가격 
-					rb.setReservation_pay_way(rs.getString("reservation_pay_way"));
-					rb.setReservation_progress(rs.getString("reservation_progress"));
-					reservList.add(rb);
-				}
-			} catch (SQLException e) {
-				System.out.println("selectArticleList() 오류! - " + e.getMessage());
-			} finally {
-				close(rs);
-				close(pstmt);
+			while (rs.next()) {
+				// 고객아이디 예약일(결제시한) 예약번호 예약상품(이름) 예약인원 출발날짜/도착날짜 금액 진행상태
+				ReservationBean rb = new ReservationBean();
+				rb.setReservation_member_id(rs.getString("reservation_member_id")); // 고객 아이디
+				rb.setReservation_date(rs.getString("reservation_date")); // 예약일
+				rb.setReservation_num(rs.getInt("reservation_num")); // 예약번호
+				rb.setPackage_category_name(rs.getString("package_category_name")); // 예약상품
+				rb.setReservation_category_code(rs.getString("reservation_category_code"));
+				rb.setReservation_headcount(rs.getInt("reservation_headcount")); // 예약인원
+				rb.setPackage_product_depart_date(rs.getString("package_product_depart_date")); // 출발날짜
+				rb.setPackage_product_arriv_date(rs.getString("package_product_arriv_date")); // 도착날짜
+				rb.setReservation_price(rs.getInt("reservation_price")); // 가격
+				rb.setReservation_pay_way(rs.getString("reservation_pay_way"));
+				rb.setReservation_progress(rs.getString("reservation_progress"));
+				reservList.add(rb);
 			}
-			return reservList ;
+		} catch (SQLException e) {
+			System.out.println("selectArticleList() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
 		}
-		
-		public int deleteReserv(int reservNum) {
-			int deleteCount = 0;
-			PreparedStatement pstmt = null;
-			
-			String sql = "delete from reservation where reservation_num=?";
-		
-				try {
-					pstmt = con.prepareStatement(sql);
-					pstmt.setInt(1, reservNum);
-					deleteCount = pstmt.executeUpdate();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}finally {
-					close(pstmt);
-				}
-			
-			
-			return deleteCount;
+		return reservList;
+	}
+
+	public int deleteReserv(int reservNum) {
+		int deleteCount = 0;
+		PreparedStatement pstmt = null;
+
+		String sql = "delete from reservation where reservation_num=?";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, reservNum);
+			deleteCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 
-		public int updateReserv(String reservation_progress, int reservNum) {
-			int updateCount = 0;
-			PreparedStatement pstmt = null;
-			String sql = "UPDATE reservation set reservation_progress=? where reservation_num=?";
-			try {
-				pstmt= con.prepareStatement(sql);
-				pstmt.setString(1,reservation_progress);
-				pstmt.setInt(2, reservNum);
-				updateCount = pstmt.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}finally {
-				close(pstmt);
+		return deleteCount;
+	}
+
+	public int updateReserv(String reservation_progress, int reservNum) {
+		int updateCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE reservation set reservation_progress=? where reservation_num=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, reservation_progress);
+			pstmt.setInt(2, reservNum);
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return updateCount;
+	}
+
+	// --- selectListCount
+	public int reservListCount() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int listCount = 0;
+
+		try {
+			String sql = "select count(*) from reservation";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				listCount = rs.getInt(1);
 			}
-			
-			
-			return updateCount;
+		} catch (SQLException e) {
+			System.out.println("reservListCount() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
 		}
+		return listCount;
+	}
 
+	public ArrayList<CategoryBean> RegionReservationCount() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<CategoryBean> regionReservationList = new ArrayList<CategoryBean>();
 
-		// --- selectListCount
-		public int reservListCount() {
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			int listCount = 0;
+		System.out.println("RegionReservationCount DB");
 
-			try {
-				String sql = "select count(*) from reservation";
-				pstmt = con.prepareStatement(sql);
-				rs = pstmt.executeQuery();
+		try {
 
-				if (rs.next()) {
-					listCount = rs.getInt(1);
-				}
-			} catch (SQLException e) {
-				System.out.println("reservListCount() 오류! - " + e.getMessage());
-			} finally {
-				close(rs);
-				close(pstmt);
+			String sql = "SELECT cr.category_region_name, pp.package_product_current " 
+					+ "FROM package_product pp "
+					+ "JOIN package_category pc ON pp.package_category_code = pc.package_category_code "
+					+ "JOIN category_region cr ON pc.package_category_region = cr.category_region_code";
+
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				CategoryBean cb = new CategoryBean();
+				cb.setRegionName(rs.getString("cr.category_region_name"));
+				cb.setPackage_product_current(rs.getInt("pp.package_product_current"));
+				
+				regionReservationList.add(cb);
 			}
-			return listCount;
-		}
 
+		} catch (SQLException e) {
+			System.out.println("RegionReservationCount() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return regionReservationList;
+	}
 
 }

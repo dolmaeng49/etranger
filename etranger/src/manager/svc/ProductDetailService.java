@@ -1,9 +1,6 @@
 package manager.svc;
 
-import static common.db.JdbcUtil.close;
-
-import static common.db.JdbcUtil.getConnection;
-import static common.db.JdbcUtil.rollback;
+import static common.db.JdbcUtil.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;

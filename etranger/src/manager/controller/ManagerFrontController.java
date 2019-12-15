@@ -24,6 +24,7 @@ import manager.action.CategoryInsertAction;
 //import manager.action.ProductListAction;
 import manager.action.ThemeInsertAction;
 import manager.action.RegionInsertAction;
+import manager.action.RegionReservationCountAction;
 import manager.action.RegionSelectAction;
 import manager.action.ReservDeleteAction;
 import manager.action.ReservManagementAction;
@@ -207,6 +208,18 @@ public class ManagerFrontController extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+			
+			// ------------------ datachart ---------------------
+			else if(command.equals("/RegionReservationCount.ma")){
+				action = new RegionReservationCountAction();
+				try {
+					forward=action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			
 		}
 		// 관리자 권한이 필요없는 페이지
 			// RegionSelectAction 클래스로 이동

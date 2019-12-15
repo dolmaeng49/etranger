@@ -11,6 +11,7 @@ import common.vo.ActionForward;
 import common.vo.PageInfo;
 import manager.svc.CategoryListService;
 import manager.svc.RegionListService;
+import manager.svc.RegionReservationCountService;
 import manager.svc.ThemeListService;
 import manager.vo.CategoryBean;
 
@@ -64,6 +65,13 @@ public class ManagerMainAction implements Action {
 		request.setAttribute("categoryList", categoryList);
 		// -------------------
 		
+		// --- 데이터 차트 ---
+		RegionReservationCountService regionReservationCountService = new RegionReservationCountService();
+		ArrayList<CategoryBean> regionReservationList = new ArrayList<CategoryBean>();
+		
+		regionReservationList = regionReservationCountService.getregionReservationList();
+		request.setAttribute("regionReservationList", regionReservationList);
+		// -------------------
 		
 		
 		ActionForward forward = new ActionForward();

@@ -65,7 +65,7 @@ public class CategoryListAction implements Action {
 		}
 		
 		PageInfo pageInfo = new PageInfo(page, maxPage, startPage, endPage, listCount);
-
+		System.out.println(categoryList);
 		request.setAttribute("searchBean", searchBean);
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("categoryList", categoryList);

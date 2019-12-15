@@ -88,7 +88,6 @@ function isThereLoginSession(){
 <input type="hidden" id="sid" value="<%=sid%>">
 <!-- 탑메뉴 인클루드 -->    
 <jsp:include page="../include/top_menu.jsp"/>
-    
     <section class="home-slider owl-carousel">
       <div class="slider-item" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
@@ -108,10 +107,11 @@ function isThereLoginSession(){
         <div class="row">
           <div class="col-lg-8">
             <div class="row">
+    <%=categoryList.get(0).getPackage_category_name() %>
 			<%if (categoryList != null && listCount > 0) { %>
             <%for (int i = 0; i < categoryList.size(); i++) { %>
               <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
-                <a href="CategoryDetail.pr?package_category_code=<%=categoryList.get(i).getPackage_category_code() %>+"&package_category_theme=<%=categoryList.get(i).getPackage_category_theme() %>"
+                <a href="CategoryDetail.pr?package_category_code=<%=categoryList.get(i).getPackage_category_code() %>&package_category_theme=<%=categoryList.get(i).getPackage_category_theme() %>"
                  class="block-5" style="background-image: url('ManagerImgUpload/<%=categoryList.get(i).getPackage_category_image()%>');">
                 </a>
                   <div class="text">

@@ -21,6 +21,7 @@ public class CategoryBean {
 	// join 으로 들고올 값들
 	private int review_count;
 	private double review_star_avg;
+	private int package_product_current;
 
 //	| package_category_code | 
 //	package_category_name | 
@@ -165,6 +166,14 @@ public class CategoryBean {
 
 	public void setPackage_category_content(String package_category_content) {
 		this.package_category_content = package_category_content;
+	}
+
+	public int getPackage_product_current() {
+		return package_product_current;
+	}
+
+	public void setPackage_product_current(int package_product_current) {
+		this.package_product_current = package_product_current;
 	}
 
 }
