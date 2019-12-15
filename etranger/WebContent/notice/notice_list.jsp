@@ -17,9 +17,8 @@
 	int listCount = pageInfo.getListCount();
 
 	String search = request.getParameter("search");
-	String sessionId = (String)session.getAttribute("member_id");
+	String sessionId = (String) session.getAttribute("member_id");
 	NoticeBean article = (NoticeBean) request.getAttribute("article");
-	
 %>
 <!DOCTYPE html>
 <html>
@@ -71,60 +70,71 @@
 								<th>제목</th>
 								<th>날짜</th>
 								<th>글쓴이</th>
-<!-- 								<th>조회수</th> -->
+								<!-- 								<th>조회수</th> -->
 							</tr>
 							<!--리스트에서 보여지는 게시물  한 덩이 시작 -->
-											<%for(int i=0; i<articleList.size(); i++) {%>
-							
+							<%
+								for (int i = 0; i < articleList.size(); i++) {
+							%>
+
 							<tr>
-								<td align="center"><%=articleList.get(i).getNotice_num() %></td>
-								
-								<td align="center"><a data-toggle="collapse" data-parent="#accordian"
-														href="#collapse<%=i%>"><%=articleList.get(i).getNotice_subject() %></a>
-								<div id="collapse<%=i %>" class="panel-collapse collapse in">
-															<div class="panel-body">
-																<br><%=articleList.get(i).getNotice_content() %></div></div></td>
-														
-														
-<%-- 								<td align="center"><a href="NoticeDetail.no?notice_num=<%=articleList.get(i).getNotice_num()%>&page=<%=nowPage %>"><%=articleList.get(i).getNotice_subject()%></a></td> --%>
-								<td align="center"><%=articleList.get(i).getNotice_date() %></td>
-<%-- 								<td align="center"><%=articleList.get(i).getNotice_member_id() %></td> --%> <!-- 멤버 아이디 밑에 etranger 로 대체 -->
-								<td align="center">etranger</td> 
-<%-- 								<td align="center"><%=articleList.get(i).getNotice_readcount() %></td> --%>
-								
-								<% 
-								if(sessionId != null && sessionId.equals("admin")) { 
+								<td align="center"><%=articleList.get(i).getNotice_num()%></td>
+
+								<td align="center"><a data-toggle="collapse"
+									data-parent="#accordian" href="#collapse<%=i%>"><%=articleList.get(i).getNotice_subject()%></a>
+									<div id="collapse<%=i%>" class="panel-collapse collapse in">
+										<div class="panel-body">
+											<br><%=articleList.get(i).getNotice_content()%></div>
+									</div></td>
+
+
+								<%-- 								<td align="center"><a href="NoticeDetail.no?notice_num=<%=articleList.get(i).getNotice_num()%>&page=<%=nowPage %>"><%=articleList.get(i).getNotice_subject()%></a></td> --%>
+								<td align="center"><%=articleList.get(i).getNotice_date()%></td>
+								<%-- 								<td align="center"><%=articleList.get(i).getNotice_member_id() %></td> --%>
+								<!-- 멤버 아이디 밑에 etranger 로 대체 -->
+								<td align="center">etranger</td>
+								<%-- 								<td align="center"><%=articleList.get(i).getNotice_readcount() %></td> --%>
+
+								<%
+									if (sessionId != null && sessionId.equals("admin")) {
 								%>
-								<td class="tagcloud">
-								<a href="NoticeModifyForm.no?notice_num=<%=articleList.get(i).getNotice_num()%>&page=<%=nowPage%>" class="btncontrol btncontrol-sm btn-default"><i class="fa fa-pencil-alt"></i>수정</a>
-								<a id="notice_del_button" href="NoticeDeletePro.no?notice_num=<%=articleList.get(i).getNotice_num() %>&notice_member_id=<%=sessionId %>&page=<%=nowPage%>" class="btncontrol btnforshare-rv btn-default"><i class="fa fa-trash"></i>삭제</a>
-								</td>
-								<%} %>
+								<td class="tagcloud"><a
+									href="NoticeModifyForm.no?notice_num=<%=articleList.get(i).getNotice_num()%>&page=<%=nowPage%>"
+									class="btncontrol btncontrol-sm btn-default"><i
+										class="fa fa-pencil-alt"></i>수정</a> <a id="notice_del_button"
+									href="NoticeDeletePro.no?notice_num=<%=articleList.get(i).getNotice_num()%>&notice_member_id=<%=sessionId%>&page=<%=nowPage%>"
+									class="btncontrol btnforshare-rv btn-default"><i
+										class="fa fa-trash"></i>삭제</a></td>
+								<%
+									}
+								%>
 							</tr>
-							
-				<%}%>
-							
+
+							<%
+								}
+							%>
+
 
 						</tbody>
 					</table>
 				</div>
 			</div>
-				<!--end 리스트에서 보여지는 게시물  한 덩이 시작 -->
+			<!--end 리스트에서 보여지는 게시물  한 덩이 시작 -->
 			<!-- 			 end list -->
 
 			<!-- 게시글 검색 & 태그-->
 			<!-- 검색창 축소 및 태그 검색창 정렬 작업 -->
 			<br>
-			<div class="sidebar-box-notice">
-				<div>
-						<form action="NoticeSearch.no" method="get"
-							class="search-form-notice" name="search">
-							<input type="text" name="search"
-								placeholder="Type a keyword and hit enter" style="width: 380px;">
-							<span class="icon fa fa-search"></span>
-						</form>
-				</div>
-			</div>
+			<form action="NoticeSearch.no" method="get" class="search-form-list"
+				name="search">
+				<fieldset id="search_fieldset">
+					<input type="text" id="search_input" name="search"
+						placeholder="Search" style="width: 100px;">
+					<button type="submit" id="search_button">
+						<i class="fa fa-search"></i>
+					</button>
+				</fieldset>
+			</form>
 			<!-- end 게시글 검색 -->
 
 			<!-- 페이지 부분 -->
@@ -173,20 +183,23 @@
 			<!-- 페이지 부분 -->
 			<%
 				} else {
-			%><div id="emptyArticle">등록된 글이 없습니다</div>
+			%><div id="emptyArticle">등록된 공지사항이 없습니다</div>
 			<%
 				}
 			%>
 		</div>
 		<!-- <div class="container">의 끝 -->
-		<% 
-		if(sessionId != null && sessionId.equals("admin")) { 
+		<%
+			if (sessionId != null && sessionId.equals("admin")) {
 		%>
 		<div align="center">
-			<input type="button" value="공지사항 등록" class="btn py-3 px-4 btn-primary"
+			<input type="button" value="공지사항 등록"
+				class="btn py-3 px-4 btn-primary"
 				onclick="location.href='./NoticeWriteForm.no'">
 		</div>
-		<%} %>
+		<%
+			}
+		%>
 	</section>
 	<!--     <li class="active"><span>1</span></li> -->
 
@@ -195,7 +208,7 @@
 
 	<!-- loader 인클루드 -->
 	<jsp:include page="/include/loader.jsp" />
-	 <script src="js/starinsert.js"></script>
+	<script src="js/starinsert.js"></script>
 	<script type="text/javascript">
 		$('h3.heading').each(function() {
 			var length = 18; //표시할 글자수 정하기
@@ -208,14 +221,14 @@
 			});
 
 		});
-		
-		$('#notice_del_button').click(function () {
+
+		$('#notice_del_button').click(function() {
 			var delConfirm = confirm('정말 삭제하시겠습니까?');
-			if (delConfirm){
-			}else{
+			if (delConfirm) {
+			} else {
 				return false;
 			}
-			
+
 		});
 	</script>
 </body>

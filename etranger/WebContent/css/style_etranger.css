@@ -93,11 +93,6 @@
 	padding: 0;
 }
 
-
-
-
-
-
 #article-info {
 	width: 100%;
 	padding: 1em 1em 0.5em;
@@ -119,11 +114,12 @@
 }
 
 #article-content-wrapper {
-	padding: 0 1em 1em
+	padding: 0 1em 1em;
+	border: 1px solid #f1f1f1;
 }
 
 #article-content-wrapper>.content-header {
-	border-top: 2px solid #6441a5;
+	border-top: 2px solid #f1f1f1;
 	background: #efefef;
 	padding: 0.6em 0.8em;
 	height: 40px;
@@ -149,7 +145,7 @@ article-content-wrapper>.content-header>#article-like /* 좋아요 구현할 때
 }
 
 #article-content-wrapper>.content-stararea {
-	border-top: 2px solid #6441a5;
+	border-top: 2px solid #f1f1f1;
 	padding: 0.6em 0.8em;
 }
 
@@ -229,10 +225,20 @@ a.btn {
 .search-form-list {  /* review_list.jsp */
     background: #f7f7f7;
     padding: 0px;
-    width: 400px;
+    width: 200px;
     float: right;
 }
 
+.search-form-detail {  /* review_detail.jsp */
+    background: #fff;
+    padding: 0px;
+    width: 300px;
+    float: right;
+}
+
+.search_border {  /* review_detail.jsp */
+    border: 1px solid #ccc;
+}
 
 .comment-list .comment-re {
     padding: 0;
@@ -254,7 +260,6 @@ a.btn {
     background: #f4fbff;
 }
 
-
 .starR1{
     background: url('../images/star.png') no-repeat -52px 0;
     background-size: auto 100%;
@@ -275,7 +280,6 @@ a.btn {
 }
 .starR1.on{background-position:0 0;}
 .starR2.on{background-position:-15px 0;}
-
 
 .comment_update_btn,.comment_del_btn{
 	/*우로 정렬  */
@@ -402,6 +406,12 @@ a.btn {
           transition-duration: 0.3s;
   -webkit-transition: all 0.1s ease-in-out;
           transition: all 0.1s ease-in-out;
+}
+
+
+/*메인페이지 검색창 셀렉트박스 배경색 변경 */
+#bg_gray{
+	background-color: #7370704d;
 }
 
 

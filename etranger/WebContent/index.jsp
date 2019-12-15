@@ -18,6 +18,7 @@
 	ArrayList<CategoryBean> categoryList1 = (ArrayList<CategoryBean>) request.getAttribute("categoryList1");
 	ArrayList<CategoryBean> categoryList2 = (ArrayList<CategoryBean>) request.getAttribute("categoryList2");
 	ArrayList<ReviewBean> reviewList = (ArrayList<ReviewBean>) request.getAttribute("reviewList");
+	
 %>
 
 </head>
@@ -86,17 +87,16 @@
 							aria-orientation="vertical">
 							<a class="nav-link p-3 active" id="v-pills-home-tab"
 								data-toggle="pill" href="#v-pills-home" role="tab"
-								aria-controls="v-pills-home" aria-selected="true"><span>01</span>
-								키워드,날짜</a> <a class="nav-link p-3" id="v-pills-profile-tab"
-								data-toggle="pill" href="#v-pills-profile" role="tab"
-								aria-controls="v-pills-profile" aria-selected="false"><span>02</span>
-								키워드</a> <a class="nav-link p-3" id="v-pills-messages-tab"
+								aria-controls="v-pills-home" aria-selected="true">
+								맞춤 검색</a> <a class="nav-link p-3" id="v-pills-messages-tab"
 								data-toggle="pill" href="#v-pills-messages" role="tab"
-								aria-controls="v-pills-messages" aria-selected="false"><span>03</span>
-								날짜,카테</a> <a class="nav-link p-3" id="v-pills-settings-tab"
-								data-toggle="pill" href="#v-pills-settings" role="tab"
-								aria-controls="v-pills-settings" aria-selected="false"><span>04</span>
-								카테고리</a>
+								aria-controls="v-pills-messages" aria-selected="false">
+								상세 검색</a> 
+								
+<!-- 								<a class="nav-link p-3" id="v-pills-settings-tab" -->
+<!-- 								data-toggle="pill" href="#v-pills-settings" role="tab" -->
+<!-- 								aria-controls="v-pills-settings" aria-selected="false"> -->
+<!-- 								여행지 검색</a> -->
 						</div>
 					</div>
 
@@ -105,154 +105,114 @@
 						<div class="tab-pane fade show active" id="v-pills-home"
 							role="tabpanel" aria-labelledby="v-pills-home-tab">
 							<div class="block-17">
-								<form action="" method="post" class="d-block d-lg-flex">
+								<form action="CategoryListSearch.pr" method="post" class="d-block d-lg-flex">
 									<div class="fields d-block d-lg-flex" id="event_period">
 
 										<div class="textfield-search one-third one-third-1">
-											<input type="text" class="form-control"
-												placeholder="Search Keyword">
+											<input type="text" name="keyword"
+											class="form-control"
+												placeholder="키워드 검색">
 										</div>
 
 										<div class="check-in one-third one-third-1">
-											<input type="text" class="form-control actual_range"
-												placeholder="Check-in date">
+											<input type="text" name="depart_date" autocomplete="off"
+											class="form-control actual_range"
+												placeholder="출발일 검색">
 										</div>
 
 										<div class="check-out one-third one-third-1">
-											<input type="text" class="form-control actual_range"
-												placeholder="Check-out date">
+											<input type="text" name="arriv_date" autocomplete="off"
+											class="form-control actual_range"
+												placeholder="도착일 검색">
 										</div>
-										<!--                       <div class="select-wrap one-third"> -->
-										<!--                         <div class="icon"><span class="ion-ios-arrow-down"></span></div> -->
-										<!--                         <select name="" id="" class="form-control"> -->
-										<!--                           <option value="">Guest</option> -->
-										<!--                           <option value="">1</option> -->
-										<!--                           <option value="">2</option> -->
-										<!--                           <option value="">3</option> -->
-										<!--                           <option value="">4+</option> -->
-										<!--                         </select> -->
-										<!--                       </div> -->
 									</div>
 									<input type="submit" class="search-submit btn btn-primary"
-										value="Find Flights">
+										value="검색하기">
 								</form>
 							</div>
 						</div>
 						<!-- 두번째 검색 탭 -->
-						<div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
-							aria-labelledby="v-pills-profile-tab">
+						<div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
+							aria-labelledby="v-pills-messages-tab">
 							<div class="block-17">
-								<form action="" method="post" class="d-block d-lg-flex">
-									<div class="fields d-block d-lg-flex">
-										<div class="textfield-search one-third"></div>
-										<div class="textfield-search one-third"></div>
-										<div class="textfield-search one-third">
-											<input type="text" class="form-control"
-												placeholder="Search Hotel">
+								<form action="CategoryListSearch.pr" method="post" class="d-block d-lg-flex">
+									<div class="fields d-block d-lg-flex" id="event_period2">
+
+										<div class="check-in one-third one-third-1">
+											<input type="text" name="depart_date" autocomplete="off"
+											class="form-control actual_range"
+												placeholder="출발일 검색">
+										</div>
+
+										<div class="check-out one-third one-third-1">
+											<input type="text" name="arriv_date" autocomplete="off"
+											class="form-control actual_range"
+												placeholder="도착일 검색">
+										</div>
+										
+										<div class="select-wrap one-third one-third-1">
+											<div class="icon">
+												<span class="ion-ios-arrow-down"></span>
+											</div>
+											<select name="region" id="selectRegion" class="form-control" onChange="getCity()">
+                        						<option id="bg_gray" value="">지역선택</option>
+                        					</select>
+										</div>
+										
+										<div class="select-wrap one-third one-third-1">
+											<div class="icon">
+												<span class="ion-ios-arrow-down"></span>
+											</div>
+											<div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                        						<select name="city" id="selectCity" class="form-control">
+                        							<option id="bg_gray" value="">도시선택</option>
+                        						</select>
 										</div>
 									</div>
 									<input type="submit" class="search-submit btn btn-primary"
-										value="Find Hotels">
+										value="검색하기">
 								</form>
 							</div>
 						</div>
 						<!-- 세번째 검색 탭 -->
-						<div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
-							aria-labelledby="v-pills-messages-tab">
-							<div class="block-17">
-								<form action="" method="post" class="d-block d-lg-flex">
-									<div class="fields d-block d-lg-flex" id="event_period2">
+<!-- 						<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" -->
+<!-- 							aria-labelledby="v-pills-settings-tab"> -->
+<!-- 							<div class="block-17"> -->
+<!-- 								<form action="" method="post" class="d-block d-lg-flex"> -->
+<!-- 									<div class="fields d-block d-lg-flex"> -->
+<!-- 										<div class="textfield-search one-third one-third-1"></div> -->
 
-										<div class="check-in one-third">
-											<input type="text" class="form-control actual_range2"
-												placeholder="Start date">
-										</div>
-
-										<div class="check-out one-third">
-											<input type="text" class="form-control actual_range2"
-												placeholder="Return date">
-										</div>
-										<div class="select-wrap one-third one-third-1">
-											<div class="icon">
-												<span class="ion-ios-arrow-down"></span>
-											</div>
-											<select name="" id="" class="form-control">
-												<option value="">지역</option>
-												<option value="">나중에</option>
-												<option value="">ul태그</option>
-												<option value="">li태그</option>
-												<option value="">로 하면</option>
-												<option value="">더 이쁠듯</option>
-												<option value="">드롭다운메뉴</option>
-											</select>
-										</div>
-										<div class="select-wrap one-third one-third-1">
-											<div class="icon">
-												<span class="ion-ios-arrow-down"></span>
-											</div>
-											<select name="" id="" class="form-control">
-												<option value="">도시</option>
-												<option value="">Suite</option>
-												<option value="">Super Deluxe</option>
-												<option value="">Balcony</option>
-												<option value="">Economy</option>
-												<option value="">Luxury</option>
-											</select>
-										</div>
-									</div>
-									<input type="submit" class="search-submit btn btn-primary"
-										value="Find Car">
-								</form>
-							</div>
-						</div>
-						<!-- 네번째 검색 탭 -->
-						<div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
-							aria-labelledby="v-pills-settings-tab">
-							<div class="block-17">
-								<form action="" method="post" class="d-block d-lg-flex">
-									<div class="fields d-block d-lg-flex">
-										<div class="textfield-search one-third one-third-1"></div>
-
-										<div class="select-wrap one-third one-third-1">
-											<div class="icon">
-												<span class="ion-ios-arrow-down"></span>
-											</div>
-											<select name="" id="" class="form-control">
-												<option value="">지역</option>
-												<option value="">나중에</option>
-												<option value="">ul태그</option>
-												<option value="">li태그</option>
-												<option value="">로 하면</option>
-												<option value="">더 이쁠듯</option>
-												<option value="">드롭다운메뉴</option>
-											</select>
-										</div>
-										<div class="select-wrap one-third one-third-1">
-											<div class="icon">
-												<span class="ion-ios-arrow-down"></span>
-											</div>
-											<select name="" id="" class="form-control">
-												<option value="">도시</option>
-												<option value="">Suite</option>
-												<option value="">Super Deluxe</option>
-												<option value="">Balcony</option>
-												<option value="">Economy</option>
-												<option value="">Luxury</option>
-											</select>
-										</div>
-									</div>
-									<input type="submit" class="search-submit btn btn-primary"
-										value="Find Cruise">
-								</form>
-							</div>
-						</div>
+<!-- 										<div class="select-wrap one-third one-third-1"> -->
+<!-- 											<div class="icon"> -->
+<!-- 												<span class="ion-ios-arrow-down"></span> -->
+<!-- 											</div> -->
+<!-- 											<select name="region" id="selectRegion" class="form-control" onChange="getCity()"> -->
+<!--                         						<option value="">지역선택</option> -->
+<!--                         					</select> -->
+<!-- 										</div> -->
+										
+<!-- 										<div class="select-wrap one-third one-third-1"> -->
+<!-- 											<div class="icon"> -->
+<!-- 												<span class="ion-ios-arrow-down"></span> -->
+<!-- 											</div> -->
+<!-- 											<div class="icon"><span class="ion-ios-arrow-down"></span></div> -->
+<!--                         						<select name="city" id="selectCity" class="form-control"> -->
+<!--                         							<option value="">도시선택</option> -->
+<!--                         						</select> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									<input type="submit" class="search-submit btn btn-primary" -->
+<!-- 										value="검색하기"> -->
+<!-- 								</form> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+						
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- 검색부분 끝 -->
-
 	<!-- 영상 -->
 	<section class="ftco-section-2">
 		<div class="container-fluid d-flex">
@@ -287,7 +247,6 @@
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
-
 				<%
 					for (CategoryBean cb : categoryList1) {
 						String detailURL = "CategoryDetail.pr?package_category_code=".concat(cb.getPackage_category_code());
@@ -593,6 +552,41 @@
 
 	<!-- loader 인클루드 -->
 	<jsp:include page="/include/loader.jsp" />
+	
+<script type="text/javascript">
+getRegion();
 
+function getRegion() {
+// 	$('#selectRegion').hide();
+	// #selectRegion에 있는 내용 지우기
+	$('#selectRegion').empty();
+	$('#selectRegion').append("<option id='bg_gray' value=''>지역선택</option>");
+	// JSON으로 가져온 데이터 #SelectRegion에 옵션으로 추가
+	$.getJSON('RegionSelect.ma', function(data) {
+
+		$.each(data, function(index, value) {
+			$('#selectRegion').append(
+					"<option id='bg_gray' value=" + value.regionCode + "> 지역이름 : " + value.regionName
+							+ "</option>");
+		});
+	});
+}
+
+// 도시 목록 불러오기
+function getCity() {
+	$('#selectCity').empty();
+	var code = $('#selectRegion').val();
+	$('#selectCity').append("<option id='bg_gray' value=''>도시선택</option>");
+	$.getJSON('CitySelect.ma?code=' + code, function(data) {
+		$.each(data, function(index, value) {
+
+			$('#selectCity').append(
+					"<option id='bg_gray' value=" + value.cityCode + "> 도시이름 : " + value.cityName
+							+ "</option>");
+		});
+	});
+}
+</script>
+	
 </body>
 </html>

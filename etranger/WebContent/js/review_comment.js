@@ -34,7 +34,6 @@ function duplClickCheck() {
 }
 //------------------------------------------
 
-
 //-----------------새 댓글 작성
 function addComment() {		
 	if(duplClickCheck()) return;  //광클방지.
@@ -70,7 +69,6 @@ function addComment() {
 		    }
 	  });
 }
-
 
 //-------------------------댓글 삭제
 function deleteComment(cnum) {
@@ -126,20 +124,19 @@ function updateComment(cnum,content){
 	
 	var htmls="";
 	htmls+='<textarea name="editContent" id="editContent" rows="5" style="width:100%;height:100;border:1;overflow:visible;text-overflow:ellipsis;">'+content+'</textarea>';
-	htmls+='<a href="javascript:void(0)" onClick="updateCommentPro('+cnum+')">저장<a>';
-	htmls+='<a href="javascript:void(0)" onClick="getCommentList()">취소<a>';
+	htmls+='<a href="javascript:void(0)" onClick="getCommentList()"><i class="far fa-window-close"></i>저장<a>&emsp;';
+	htmls+='<a href="javascript:void(0)" onClick="updateCommentPro('+cnum+')"><i class="fas fa-check-circle"></i>취소<a>';
 
 	$('#cb'+cnum).replaceWith(htmls)
 }
-
 
 // 대댓글 작성폼 열기
 function replyComment(cnum){
 	
 	var htmls2="";
 	htmls2+='<textarea name="replyComment" id="replyComment" rows="5" style="width:100%;height:100;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>';
-	htmls2+='<a href="javascript:void(0)" onClick="replyCommentPro('+cnum+')">대댓글 쓰기<a>';
-	htmls2+='<a href="javascript:void(0)" onClick="getCommentList()">취소<a>';
+	htmls2+='<a href="javascript:void(0)" onClick="getCommentList()"><i class="far fa-window-close"></i>저장<a>&emsp;';
+	htmls2+='<a href="javascript:void(0)" onClick="replyCommentPro('+cnum+')"><i class="fas fa-check-circle"></i>취소<a>';
 	
 	$('#forReply'+cnum).append(htmls2)
 }
@@ -211,6 +208,3 @@ function replyCommentPro(cnum){
 });
 	
 }
-
-
-

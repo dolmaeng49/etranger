@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="review.vo.ReviewBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -10,6 +12,14 @@
 	if(session.getAttribute("member_id")!=null){
 	  sessionId = (String)session.getAttribute("member_id");
 	}
+	
+	//날짜 포맷 판별
+	SimpleDateFormat sdfOrigin=new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat sdfToday=new SimpleDateFormat("HH 시 mm 분");
+	SimpleDateFormat sdfCalculation= new SimpleDateFormat("yyyyMMdd");
+	
+	Calendar calToday = Calendar.getInstance();
+	Calendar calWritingPoint = Calendar.getInstance();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,13 +62,19 @@
 			</div> <!-- article-info끝 -->
 			<div id="article-content-wrapper">
 			<div class="content-header">
-			<div id="article-time"><%=article.getReview_date() %></div>
+			<div id="article-time">
+			<%calWritingPoint.setTime(article.getReview_date());
+    		String today = sdfCalculation.format(calToday.getTime());
+    		String writingPoint = sdfCalculation.format(calWritingPoint.getTime());
+   			String checkedDate=(today.compareTo(writingPoint)==0)?sdfToday.format(article.getReview_date()):sdfOrigin.format(article.getReview_date());%><%=checkedDate %>
+			</div>
 			<div id="article-readcnt">조회수 : <%=article.getReview_readcount() %></div>
 			<div id="article-commentcnt">댓글 : <%=article.getReview_comment_count() %></div>
 			</div><!-- content-header끝 -->
 			
 			<div class="content-stararea">
 			<div id="stars"> 
+			<%=((double)article.getReview_star()/2.0) + ""%> 점을 받음!
 			<%if(article.getReview_star() == 0) {
 				%><img src="images/rating0.png" align="middle" /><%
 			} else if(article.getReview_star() == 1) {
@@ -83,7 +99,6 @@
 				%><img src="images/rating10.png" align="middle" /><%
 			}
 			%>
-			<%=(article.getReview_star()/2) + " "%>/ 10
 			</div>
 			</div><!-- content-star끝 -->
 			
@@ -129,14 +144,16 @@
 
           </div> <!-- .col-md-8 -->
           <div class="col-md-4 sidebar">
+          <!--검색창  -->
             <div class="sidebar-box">
-              <form action="ReviewSearch.rv" method="get" class="search-form" name="search">
-                <div class="form-group">
-                  <span class="icon fa fa-search"></span>
-                  <input type="text" name="search" class="form-control" placeholder="Type a keyword and hit enter">
-                </div>
-              </form>
+          <form action="ReviewSearch.rv" method="get" class="search-form-detail" name="search">
+                <fieldset id="search-fieldset-detail" >
+                <input type="text"  id="search_input" class="search_border" name="search" placeholder="Search">
+                <button type="submit" id="search_button" ><i class="fa fa-search"></i></button>
+                </fieldset>
+                </form>
             </div>
+            
             <div class="sidebar-box ftco-animate">
               <div class="categories">
                 <h3>Categories</h3>
@@ -161,11 +178,7 @@
                 <a href="#" class="tag-cloud-link">Travel</a>
               </div>
             </div>
-
-            <div class="sidebar-box ftco-animate">
-              <h3>Paragraph</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-            </div>
+            
           </div>
 
         </div>
