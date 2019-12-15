@@ -107,7 +107,7 @@
 						<td><%=reservList.get(i).getReservation_headcount()%></td>
 						<td>출발&nbsp;<%=reservList.get(i).getPackage_product_depart_date()%><br>도착&nbsp;<%=reservList.get(i).getPackage_product_arriv_date()%></td>
 						<td class="right price"><%=reservList.get(i).getReservation_price()%></td>
-						<td><%=reservList.get(i).getReservation_pay_way()%></td>
+						<td><%=reservList.get(i).getReservation_ispayment()%></td>
 						<td><select name="progress"
 							onChange="updateYesOrNo(this,'<%=reservList.get(i).getReservation_num()%>')">
 								<option value="<%=reservList.get(i).getReservation_progress()%>"
@@ -223,7 +223,7 @@
 				});
 
 			} else {
-
+				// 이건 머지?
 			}
 		}
 	</script>

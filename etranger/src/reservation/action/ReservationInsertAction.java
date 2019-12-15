@@ -26,7 +26,7 @@ public class ReservationInsertAction implements Action {
 			ReservationBean rb = new ReservationBean();
 			rb.setReservation_category_code(request.getParameter("category_code"));
 			rb.setReservation_progress("예약대기");
-			rb.setReservation_pay_way("N");
+			rb.setReservation_ispayment("N");
 			rb.setReservation_headcount(Integer.parseInt(request.getParameter("headCount")));
 			rb.setReservation_price(Integer.parseInt(request.getParameter("price")));
 			rb.setReservation_product_num(request.getParameter("product_num"));

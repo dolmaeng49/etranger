@@ -525,7 +525,7 @@ public class ManagerDAO {
 		int startRow = (page - 1) * limit;
 
 		try {
-			String sql = "SELECT r.reservation_num,r.reservation_category_code,r.reservation_member_id,r.reservation_product_num,r.reservation_date,r.reservation_price,r.reservation_headcount,r.reservation_pay_way,r.reservation_progress,r.reservation_member_id,p.package_product_depart_date,p.package_product_arriv_date,c.package_category_name FROM reservation r JOIN package_product p ON r.reservation_product_num = p.package_product_num JOIN package_category c ON r.reservation_category_code = c.package_category_code"
+			String sql = "SELECT r.reservation_num,r.reservation_category_code,r.reservation_member_id,r.reservation_product_num,r.reservation_date,r.reservation_price,r.reservation_headcount,r.reservation_ispayment,r.reservation_progress,r.reservation_member_id,p.package_product_depart_date,p.package_product_arriv_date,c.package_category_name FROM reservation r JOIN package_product p ON r.reservation_product_num = p.package_product_num JOIN package_category c ON r.reservation_category_code = c.package_category_code"
 					+ " limit ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
@@ -544,7 +544,7 @@ public class ManagerDAO {
 				rb.setPackage_product_depart_date(rs.getString("package_product_depart_date")); // 출발날짜
 				rb.setPackage_product_arriv_date(rs.getString("package_product_arriv_date")); // 도착날짜
 				rb.setReservation_price(rs.getInt("reservation_price")); // 가격
-				rb.setReservation_pay_way(rs.getString("reservation_pay_way"));
+				rb.setReservation_ispayment(rs.getString("reservation_ispayment"));
 				rb.setReservation_progress(rs.getString("reservation_progress"));
 				reservList.add(rb);
 			}
@@ -594,6 +594,24 @@ public class ManagerDAO {
 		return updateCount;
 	}
 
+	public int updateIsReserv(String isReserv, int reservNum) {
+		int updateCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE reservation set reservation_ispayment =? where reservation_num=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, isReserv);
+			pstmt.setInt(2, reservNum);
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return updateCount;
+	}
+
 	// --- selectListCount
 	public int reservListCount() {
 		PreparedStatement pstmt = null;
@@ -626,10 +644,10 @@ public class ManagerDAO {
 
 		try {
 
-			String sql = "SELECT cr.category_region_name, pp.package_product_current " 
-					+ "FROM package_product pp "
+			String sql = "SELECT cr.category_region_name, sum(pp.package_product_current) " + "FROM package_product pp "
 					+ "JOIN package_category pc ON pp.package_category_code = pc.package_category_code "
-					+ "JOIN category_region cr ON pc.package_category_region = cr.category_region_code";
+					+ "JOIN category_region cr ON pc.package_category_region = cr.category_region_code "
+					+ "GROUP BY cr.category_region_name";
 
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -637,8 +655,8 @@ public class ManagerDAO {
 			while (rs.next()) {
 				CategoryBean cb = new CategoryBean();
 				cb.setRegionName(rs.getString("cr.category_region_name"));
-				cb.setPackage_product_current(rs.getInt("pp.package_product_current"));
-				
+				cb.setPackage_product_current(rs.getInt("sum(pp.package_product_current)"));
+
 				regionReservationList.add(cb);
 			}
 

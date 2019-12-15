@@ -16,6 +16,7 @@ import manager.action.CityInsertAction;
 import manager.action.CitySelectAction;
 import manager.action.ProductListAction;
 import manager.action.DeleteProductAction;
+import manager.action.IsReservUpdateAction;
 import manager.action.ManagerImageCallbackAction;
 import manager.action.ProductDetailAction;
 import manager.action.ProductInsertAction;
@@ -46,8 +47,8 @@ public class ManagerFrontController extends HttpServlet {
 		ActionForward forward = null;
 
 		System.out.println(command);
-		String member_id = (String)request.getSession().getAttribute("member_id");
-		
+		String member_id = (String) request.getSession().getAttribute("member_id");
+
 		// 관리자 권한 확인이 필요한 페이지
 		if (member_id != null && member_id.equals("admin")) {
 			// manager_main.jsp 페이지 이동
@@ -70,7 +71,6 @@ public class ManagerFrontController extends HttpServlet {
 				}
 			}
 
-
 			// CityInsertAction 클래스로 이동
 			else if (command.equals("/CityInsert.ma")) {
 				action = new CityInsertAction();
@@ -80,7 +80,6 @@ public class ManagerFrontController extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-
 
 			// ManagerThemeInsertAction 클래스로 이동
 			else if (command.equals("/ThemeInsert.ma")) {
@@ -181,7 +180,7 @@ public class ManagerFrontController extends HttpServlet {
 //				forward = new ActionForward();
 //				forward.setPath("/manager/manager_member.jsp");
 			}
-			
+
 			else if (command.equals("/ReservDelete.ma")) {
 				action = new ReservDeleteAction();
 				System.out.println("ReservDelete.ma");
@@ -191,7 +190,7 @@ public class ManagerFrontController extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			
+
 			else if (command.equals("/ReservUpdate.ma")) {
 				action = new ReservUpdateAction();
 				System.out.println("ReservUpdate.ma");
@@ -200,58 +199,65 @@ public class ManagerFrontController extends HttpServlet {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}else if(command.equals("/ManagerImageCallback.ma")){
+			}
+
+			else if (command.equals("/IsReservUpdate.ma")) {
+				action = new IsReservUpdateAction();
+				System.out.println("ReservUpdate.ma");
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else if (command.equals("/ManagerImageCallback.ma")) {
 				action = new ManagerImageCallbackAction();
 				try {
-					forward=action.execute(request, response);
+					forward = action.execute(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-			
+
 			// ------------------ datachart ---------------------
-			else if(command.equals("/RegionReservationCount.ma")){
+			else if (command.equals("/RegionReservationCount.ma")) {
 				action = new RegionReservationCountAction();
 				try {
-					forward=action.execute(request, response);
+					forward = action.execute(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-			
-			
+
 		}
 		// 관리자 권한이 필요없는 페이지
-			// RegionSelectAction 클래스로 이동
-			if (command.equals("/RegionSelect.ma")) {
-				action = new RegionSelectAction();
-				try {
-					forward = action.execute(request, response);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		// RegionSelectAction 클래스로 이동
+		if (command.equals("/RegionSelect.ma")) {
+			action = new RegionSelectAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			// CitySelectAction 클래스로 이동
-			else if (command.equals("/CitySelect.ma")) {
-				action = new CitySelectAction();
-				try {
-					forward = action.execute(request, response);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		}
+		// CitySelectAction 클래스로 이동
+		else if (command.equals("/CitySelect.ma")) {
+			action = new CitySelectAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
+		}
 
-			if (forward != null) {
-				if (forward.isRedirect()) {
-					response.sendRedirect(forward.getPath());
-				} else {
-					RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
-					dispatcher.forward(request, response);
-				}
-
+		if (forward != null) {
+			if (forward.isRedirect()) {
+				response.sendRedirect(forward.getPath());
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
+				dispatcher.forward(request, response);
 			}
 
-		
+		}
 
 	}
 

@@ -44,7 +44,7 @@ public class ReservationDAO {
 
 			String sql = "SELECT rs.reservation_member_id,pc.package_category_name,pc.package_category_image,pd.package_product_arriv_date, "
 					+ "    pd.package_product_depart_date,rs.reservation_headcount,rs.reservation_price,reservation_category_code,rs.reservation_num,"
-					+ "  rs.reservation_pay_way,rs.reservation_progress,rs.reservation_date "
+					+ "  rs.reservation_ispayment,rs.reservation_progress,rs.reservation_date "
 					+ "    FROM reservation rs JOIN package_category pc "
 					+ "    ON rs.reservation_category_code = pc.package_category_code JOIN package_product pd "
 					+ "    ON rs.reservation_product_num = pd.package_product_num where rs.reservation_member_id=?"
@@ -58,7 +58,7 @@ public class ReservationDAO {
 				ReservationBean rb = new ReservationBean();
 				rb.setReservation_member_id(rs.getString("reservation_member_id"));
 				rb.setReservation_num(rs.getInt("reservation_num"));
-				rb.setReservation_pay_way(rs.getString("reservation_pay_way"));
+				rb.setReservation_ispayment(rs.getString("reservation_ispayment"));
 				rb.setReservation_date(rs.getString("reservation_date"));
 				rb.setReservation_progress(rs.getString("reservation_progress"));
 				rb.setReservation_headcount(rs.getInt("reservation_headcount"));
@@ -131,7 +131,7 @@ public class ReservationDAO {
 			pstmt.setString(3, rb.getReservation_category_code());
 			pstmt.setInt(4, rb.getReservation_price());
 			pstmt.setInt(5, rb.getReservation_headcount());
-			pstmt.setString(6, rb.getReservation_pay_way());
+			pstmt.setString(6, rb.getReservation_ispayment());
 			pstmt.setString(7, rb.getReservation_progress());
 
 			insertCount = pstmt.executeUpdate();

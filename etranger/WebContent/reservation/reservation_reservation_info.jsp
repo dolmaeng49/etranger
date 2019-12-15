@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="member.vo.MemberBean"%>
 <%@page import="common.vo.PageInfo"%>
 <%@page import="reservation.vo.ReservationBean"%>
@@ -47,6 +49,9 @@
 	int startPage = pageInfo.getStartPage();
 	int endPage = pageInfo.getEndPage();
 	int listCount = pageInfo.getListCount();
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	Date day = null;
+	Date today = new Date();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,7 +84,15 @@
 					msg += '고유ID : ' + rsp.imp_uid;
 					msg += '상점 거래ID : ' + rsp.merchant_uid;
 					msg += '결제 금액 : ' + rsp.paid_amount;
-					msg += '카드 승인번호 : ' + rsp.apply_num;
+					msg += '카드 승인번호 : ' + rsp.apply_num
+					
+					$.ajax('IsReservUpdate.ma',{
+						data:{
+							isReserv : "Y",
+							reservNum: $('#reservNum'+count).val()
+						}
+					});
+					
 				} else {
 					var msg = '결제에 실패하였습니다.';
 					msg += '에러내용 : ' + rsp.error_msg;
@@ -113,7 +126,7 @@
 		table.pdList td {
 			width: 0px;
 			padding: 10px;
-			vertical-align: top;
+			vertical-align: center;
 			border-bottom: 1px solid #ccc;
 			background: #eee;
 			font-size: smaller;
@@ -181,7 +194,7 @@ table.pdList .right {
 									<th>예약상품</th>
 									<th>예약인원</th>
 									<th>금액</th>
-									<th>결제방법</th>
+									<th>결제유무</th>
 									<th>진행상태</th>
 									<th>리뷰쓰기</th>
 								</tr>
@@ -189,7 +202,7 @@ table.pdList .right {
 									for (int i = 0; i < rb.size(); i++) {
 								%>
 								<tr>
-									<td><%=rb.get(i).getReservation_num()%></td>
+									<td><%=rb.get(i).getReservation_num()%><input type="hidden" id="reservNum<%=i%>"value="<%=rb.get(i).getReservation_num()%>"></td>
 									<td><input type="hidden" id="memberName<%=i %>" value="<%=memberList.getMember_name()%>"><%=rb.get(i).getReservation_member_id()%>
 									<input type="hidden" id="memberEmail<%=i %>" value="<%=memberList.getMember_email()%>">
 									<input type="hidden" id="memberTel<%=i %>" value="<%=memberList.getMember_num()%>">
@@ -200,21 +213,45 @@ table.pdList .right {
 									<td class="left"><input type="hidden" id="productName<%=i %>" value="<%=rb.get(i).getPackage_category_name()%>"><%=rb.get(i).getPackage_category_name()%></td>
 									<td><%=rb.get(i).getReservation_headcount()%></td>
 									<td class="right price"><input type="hidden" id="price<%=i %>" value="<%=rb.get(i).getReservation_price()%>"><%=rb.get(i).getReservation_price()%></td>
-									<td><%=rb.get(i).getReservation_pay_way()%></td>
+									<td><%=rb.get(i).getReservation_ispayment()%></td>
 									<%
 										if (rb.get(i).getReservation_progress().equals("예약완료")) {
+											
+											if(rb.get(i).getReservation_ispayment().equals("Y")){
+											%>
+											<td style="color: #f47422 !important; font-weight: bold;">결제완료</td>
+									<%
+											}else{
 									%>
 									<td><input type="button" class="btn py-1 px-2 btn-primary" value="결제하기"
 											onclick="requestPay(<%=i %>)"></td>
 									<%
-										} else {
+											}} else {
 									%>
 									<td><%=rb.get(i).getReservation_progress()%></td>
 									<%
 										}
 									%>
 									<!--작업 중  -->
+									<%
+									day = format.parse(rb.get(i).getPackage_product_arriv_date());
+									int compare = day.compareTo(today);
+									if(compare <= 0){
+									%>
 									<td><input type="button" id="category_code" value="리뷰작성" class="btn py-1 px-2 btn-primary" onclick="location.href='./ReviewWriteForm.rv?code=<%=rb.get(i).getReservation_category_code()%>'"></td>
+									<%
+									}else{
+										// Date 형식의 두 날짜를 계산
+										// xxx.getTime() => 해당날짜를 기준으로1970년 00:00:00 부터 몇 초가 흘렀는지 반환
+										// 24*60*60*1000(두 날짜의 차이)를 나누어 일수 반환
+										long calDate = day.getTime()-today.getTime(); 
+										long calDateDay = calDate/(24*60*60*1000);
+										calDateDay = Math.abs(calDateDay);
+									%>
+									<td>
+									<%=calDateDay + 1%>일 후 작성가능
+									</td>
+									<%} %>
 								</tr>
 								<%
 									}
