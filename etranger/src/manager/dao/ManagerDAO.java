@@ -651,13 +651,14 @@ public class ManagerDAO {
 
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-
+			System.out.println(pstmt);
 			while (rs.next()) {
 				CategoryBean cb = new CategoryBean();
 				cb.setRegionName(rs.getString("cr.category_region_name"));
 				cb.setPackage_product_current(rs.getInt("sum(pp.package_product_current)"));
 
 				regionReservationList.add(cb);
+				System.out.println(cb.getRegionName() + ", " + cb.getPackage_product_current());
 			}
 
 		} catch (SQLException e) {

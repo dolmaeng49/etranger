@@ -45,9 +45,9 @@ function wishFunction(domain,code) {
 		return;
 	}
 	// isOHeart = '0' : 하트 속이 비어있는 상태 , '1' : 속이 꽉 찬 하트
-	var isOHeart = $(domain).attr('id');
+	var isOHeart = $(domain).find('i').attr('id');
 	// 표시된 좋아요 숫자를 변수에 저장
-	var wish_count = $('#wish_count').text();
+	var wish_count = $(domain).find('#wish_count').text();
 	
 	if(isOHeart=='0') {
 		// back-end : ajax로 insertWish DB 작업
@@ -56,25 +56,25 @@ function wishFunction(domain,code) {
 			data : {category_code : code},
 			success : function() {
 				// front-end : 하트의 모양을 결정하는 클래스 add & remove, 모양을 저장하는 속성(id) 변경
-				$(domain).removeClass('fa-heart-o');
-				$(domain).addClass('fa-heart');
-				$(domain).attr('id',"1");
+				$(domain).find('i').removeClass('fa-heart-o');
+				$(domain).find('i').addClass('fa-heart');
+				$(domain).find('i').attr('id',"1");
 				// 좋아요숫자 표시를 가져와 Number로 형변환 후 1을 더해 다시 표시
 				// DB 에서 가져오는 것 아님, 눈속임. 새로고침하면 DB에서 가져오기 때문에 괜찮음
-				$('#wish_count').text(Number(wish_count)+1);
+				$(domain).find('#wish_count').text(Number(wish_count)+1);
 			},
-			error : function(){}
+			error : function(){alert("찜 추가 실패!");}
 		});
 	} else if(isOHeart=='1') {
 		$.ajax('DeleteWish.pr',{
 			data : {category_code : code},
 			success : function() {
-				$(domain).removeClass('fa-heart');
-				$(domain).addClass('fa-heart-o');
-				$(domain).attr('id',"0");
-				$('#wish_count').text(Number(wish_count)-1);
+				$(domain).find('i').removeClass('fa-heart');
+				$(domain).find('i').addClass('fa-heart-o');
+				$(domain).find('i').attr('id',"0");
+				$(domain).find('#wish_count').text(Number(wish_count)-1);
 			},
-			error : function(){}
+			error : function(){alert("찜 삭제 실패!");}
 		});
 		
 	}
@@ -86,6 +86,7 @@ function isThereLoginSession(){
 	}
 	return true;
 }
+
 
 </script>
 
@@ -121,11 +122,11 @@ function isThereLoginSession(){
                  class="block-5" style="background-image: url('ManagerImgUpload/<%=categoryList.get(i).getPackage_category_image()%>');">
                 </a>
                   <div class="text">
-                    <span class="price">$399</span>
+                    <span class="price">￦<%=categoryList.get(i).getMin_price() %> ~</span>
                     <h3 class="heading"><%=categoryList.get(i).getPackage_category_name()%></h3>
-                    <div class="post-meta" style="text-align: right;">
+                    <div class="post-meta" style="text-align: right;" onclick="wishFunction(this,'<%=categoryList.get(i).getPackage_category_code()%>')">
                       <span>좋아요숫자 <span id="wish_count"><%=categoryList.get(i).getPackage_category_wish_count() %></span>
-								<i onclick="wishFunction(this,'<%=categoryList.get(i).getPackage_category_code()%>')"
+								<i
 								<%if(member_wishList != null && member_wishList.contains(categoryList.get(i).getPackage_category_code())) {%>
 									class="fa fa-heart" id="1" 
 								<%} else {%>
@@ -133,23 +134,28 @@ function isThereLoginSession(){
 								<%} %>
 								style="font-size:24px;color:red;"></i></span>
                     </div>
-	                  </div>
-	              </div>
                     <p class="star-rate">
                     <!-- 리뷰 별점 스크립틀릿으로 표시할 부분,  -->
                     <% // 리뷰 별점 평균 표시, 리뷰 개수 표시
                     if(categoryList.get(i).getReview_count() != 0){
+                    	// 10점 만점을 5점으로 전환
 	                    double avg = categoryList.get(i).getReview_star_avg() / 2;
-	                    for(int j = 1; j <= (int)(avg-0.4); j++){
-	                    %><span class="icon-star"></span>
+	                    for(int j = 1; j <= (int)(avg+1/3); j++){
+	                    	%><span class="icon-star"></span>
 	                    <% }
-		                    if(avg/1 >= 0.5) { 
-		                    %><span class="icon-star-half-full"></span>
-		                    <% }
+		                if(avg%1 >= 1/3f && avg%1 <= 2/3f) { 
+		                	%><span class="icon-star-half-full"></span>
+		               <% }
+		                for(int j = (int)(avg+0.5); j < 5; j++) {
+		                	%><span class="icon-star-o"></span>
+				        <% }
 	                    %>
 	                    <span><%=categoryList.get(i).getReview_count() %> reviews</span></p>
 	           		 <% 
-           		 }}} %>
+           			}%>
+	                  </div>
+	              </div>
+                   <% }} %>
             
 <!-- PageController -->  
             </div>

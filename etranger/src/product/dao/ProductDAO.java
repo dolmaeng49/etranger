@@ -138,7 +138,7 @@ public class ProductDAO {
 				String sql = "SELECT count(*) FROM package_product p"
 						+ " JOIN package_category c"
 						+ " ON p.package_category_code = c.package_category_code"
-						+ " WHERE p.package_product_depart_date > ?";
+						+ " WHERE p.package_product_depart_date >= ?";
 				if(!isNulls[0]) {
 					// 키워드
 					sql += " AND (c.package_category_name like ?"
@@ -155,6 +155,7 @@ public class ProductDAO {
 					// 도시
 					sql += " AND c.package_category_city=?";
 				}
+				sql += " GROUP BY c.package_category_code";
 
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(index++, depart_date);
@@ -227,18 +228,18 @@ public class ProductDAO {
 			try {
 				// 리뷰 조인부분 주석처리 - 리뷰 없는 카테고리가 조회되지 않음
 				// sql 구문 3줄 set categorybean 2줄 주석처리
-				// category_code 로 review 테이블 조회하는 구문 하나 더 만들어
+				// category_code 로 review 테이블 조회하는 구문 하나 더 만들어 (더 긴 구문으로 한번 더 조회하기 때문에 낭비..)
 				// rs.next 가 있다면 리뷰 개수와 평균 리뷰점수 빈에 담기
 				// 완료 : 뷰페이지에서 리뷰개수, 평균 리뷰점수가 없을 경우 제어 하기
 				String sql = "SELECT c.package_category_code, c.package_category_name, c.package_category_theme, c.package_category_image, c.package_category_content,"
-						+ "c.package_category_region, c.package_category_city"
+						+ "c.package_category_region, c.package_category_city, MIN(p.package_product_price) AS min_price"
 						// 리뷰 조인
-//						+ ", count(review_num) AS review_count, avg(review_star) AS review_star_avg"
+						+ ", count(r.review_num) AS review_count, avg(r.review_star) AS review_star_avg"
 						+ " FROM package_product p"
 						+ " JOIN package_category c"
 						+ " ON p.package_category_code = c.package_category_code"
 						// 리뷰 조인
-//						+ " JOIN review r ON r.review_package_category_code = p.package_category_code"
+						+ " LEFT JOIN review r ON r.review_package_category_code = p.package_category_code"
 						+ " WHERE p.package_product_depart_date > ?";
 				if(!isNulls[0]) {
 					// 키워드
@@ -246,10 +247,6 @@ public class ProductDAO {
 						 + " OR c.package_category_theme like ?"
 						 + " OR c.package_category_content like ?)";
 				}
-//				else if(!isNulls[1]) {
-//					// 출발날짜
-//					sql += " OR p.package_product_depart_date > ?";
-//				}
 				else if(!isNulls[1]) {
 					// 도착날짜
 					sql += " AND p.package_product_arriv_date < ?";
@@ -261,10 +258,9 @@ public class ProductDAO {
 					sql += " AND c.package_category_city=?";
 				}
 				// 마지막
-				sql 
-				// 리뷰조인
-//				+= " GROUP BY c.package_category_code"
-				 += " order by p.package_product_depart_date LIMIT ?,?";
+				sql += " GROUP BY c.package_category_code"
+						+ " ORDER BY p.package_product_depart_date LIMIT ?,?";
+				
 
 //				System.out.println(sql);
 				pstmt = con.prepareStatement(sql);
@@ -275,10 +271,6 @@ public class ProductDAO {
 					pstmt.setString(index++, "%"+keyword+"%");
 					pstmt.setString(index++, "%"+keyword+"%");
 				}
-//				else if(!isNulls[1]) {
-//					// 출발날짜
-//					pstmt.setString(index++, depart_date);
-//				}
 				else if(!isNulls[1]) {
 					// 도착날짜
 					pstmt.setString(index++, arriv_date);
@@ -305,10 +297,20 @@ public class ProductDAO {
 					cb.setPackage_category_content(rs.getString("c.package_category_content"));
 					cb.setPackage_category_region(rs.getInt("c.package_category_region"));
 					cb.setPackage_category_city(rs.getInt("c.package_category_city"));
-//					cb.setReview_count(rs.getInt("review_count"));
-//					cb.setReview_star_avg(rs.getDouble("review_star_avg"));
+					cb.setMin_price(rs.getInt("min_price"));
+					cb.setReview_count(rs.getInt("review_count"));
+					cb.setReview_star_avg(rs.getDouble("review_star_avg"));
 					productList.add(cb);
 				}
+				
+				// 카테고리의 리뷰 조회하기
+//				sql = "SELECT count(reaview_num) AS review_count, avg(review_star) AS review_star_avg"
+//						+ " FROM review WHERE review_package_category_code=?";
+//				pstmt = con.prepareStatement(sql);
+//				pstmt.setString(1, x);
+				// category_code 로 review 테이블 조회하는 구문 하나 더 만들어
+				// rs.next 가 있다면 리뷰 개수와 평균 리뷰점수 빈에 담기
+				
 			} catch (SQLException e) {
 				System.out.println("selectCategoryList(search) 오류! - " + e.getMessage());
 			} finally {

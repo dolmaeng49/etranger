@@ -24,6 +24,7 @@
   <script src="js/summernote-ko-KR.js"></script>
   <script src="js/summernote-fontawesome.js"></script>
   <script src="js/custom-toolbar.js"></script>
+  <script src="js/loginDimlayer.js"></script>
   
   
   
