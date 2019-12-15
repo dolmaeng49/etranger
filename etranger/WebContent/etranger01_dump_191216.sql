@@ -245,7 +245,7 @@ CREATE TABLE `reservation` (
   `reservation_date` date NOT NULL,
   `reservation_price` int(11) NOT NULL,
   `reservation_headcount` int(11) NOT NULL,
-  `reservation_pay_way` varchar(45) NOT NULL,
+  `reservation_ispayment` varchar(10) NOT NULL,
   `reservation_progress` varchar(45) NOT NULL,
   PRIMARY KEY (`reservation_num`),
   KEY `fk_reservation_member1` (`reservation_member_id`),
