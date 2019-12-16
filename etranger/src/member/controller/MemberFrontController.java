@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.action.Action;
+import common.db.InsertProductData;
 import common.vo.ActionForward;
 import member.action.MemberLoginProAction;
 import member.action.MemberLogoutProAction;
