@@ -84,7 +84,7 @@
                 <li class="nav-item"><a href="./ProductList.pr" class="nav-link">Packages</a></li>
                 <li class="nav-item"><a href="./ReviewList.rv" class="nav-link">Review</a></li>
                 <li class="nav-item"><a href="./NoticeList.no" class="nav-link">Notice</a></li>
-                <li class="nav-item"><a href="./Contact.co" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="./contact.jsp" class="nav-link">Contact</a></li>
 
                 <%
                     if (member_id != null && member_id.equals("admin")) {
