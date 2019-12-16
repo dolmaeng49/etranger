@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Collection"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.HashSet"%>
@@ -20,6 +22,10 @@
 	int region_code = 0;
 	int city_code = 0;
 	int wish_count = 0;
+	
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	Date departdate = null;
+	Date today = new Date();
 	
 	for (int i = 0; i < pdetail.size(); i++) {
 		code = pdetail.get(i).getPackage_category_code();
@@ -56,75 +62,77 @@
 <html lang="en">
 
 <head>
-<script type="text/javascript">
-	// 하트를 누르면 호출되는 함수
-	// 파라미터로 해당 패키지카테고리의 package_category_code 를 전달 받음
-	// 하트 태그의 이름이 1 이면 속이 찬 하트, 0 이면 속이 빈하트
-	function wishFunction(domain,code) {
-		if(!isThereLoginSession()){
-			alert('로그인이 필요합니다!');
-			return;
-		}
-		// isOHeart = '0' : 하트 속이 비어있는 상태 , '1' : 속이 꽉 찬 하트
-		var isOHeart = $(domain).attr('id');
-		// 표시된 좋아요 숫자를 변수에 저장
-		var wish_count = $('#wish_count').text();
-		
-		if(isOHeart=='0') {
-			// back-end : ajax로 insertWish DB 작업
-			// 액션클래스로 하트가 클릭된 상품(category) 코드 전달
-			$.ajax('InsertWish.pr',{
-				data : {category_code : code},
-				success : function() {
-					// front-end : 하트의 모양을 결정하는 클래스 add & remove, 모양을 저장하는 속성(id) 변경
-					$(domain).removeClass('fa-heart-o');
-					$(domain).addClass('fa-heart');
-					$(domain).attr('id',"1");
-					// 좋아요숫자 표시를 가져와 Number로 형변환 후 1을 더해 다시 표시
-					// DB 에서 가져오는 것 아님, 눈속임. 새로고침하면 DB에서 가져오기 때문에 괜찮음
-					$('#wish_count').text(Number(wish_count)+1);
-				},
-				error : function(){}
-			});
-		} else if(isOHeart=='1') {
-			$.ajax('DeleteWish.pr',{
-				data : {category_code : code},
-				success : function() {
-					$(domain).removeClass('fa-heart');
-					$(domain).addClass('fa-heart-o');
-					$(domain).attr('id',"0");
-					$('#wish_count').text(Number(wish_count)-1);
-				},
-				error : function(){}
-			});
-			
-		}
-	}
+	<script type="text/javascript">
+		// 하트를 누르면 호출되는 함수
+		// 파라미터로 해당 패키지카테고리의 package_category_code 를 전달 받음
+		// 하트 태그의 이름이 1 이면 속이 찬 하트, 0 이면 속이 빈하트
+		function wishFunction(domain, code) {
+			if (!isThereLoginSession()) {
+				alert('로그인이 필요합니다!');
+				return;
+			}
+			// isOHeart = '0' : 하트 속이 비어있는 상태 , '1' : 속이 꽉 찬 하트
+			var isOHeart = $(domain).attr('id');
+			// 표시된 좋아요 숫자를 변수에 저장
+			var wish_count = $('#wish_count').text();
 
-	function isThereLoginSession(){
-		if($('#sid').val().length==0){
-			return false;
+			if (isOHeart == '0') {
+				// back-end : ajax로 insertWish DB 작업
+				// 액션클래스로 하트가 클릭된 상품(category) 코드 전달
+				$.ajax('InsertWish.pr', {
+					data: { category_code: code },
+					success: function () {
+						// front-end : 하트의 모양을 결정하는 클래스 add & remove, 모양을 저장하는 속성(id) 변경
+						$(domain).removeClass('fa-heart-o');
+						$(domain).addClass('fa-heart');
+						$(domain).attr('id', "1");
+						// 좋아요숫자 표시를 가져와 Number로 형변환 후 1을 더해 다시 표시
+						// DB 에서 가져오는 것 아님, 눈속임. 새로고침하면 DB에서 가져오기 때문에 괜찮음
+						$('#wish_count').text(Number(wish_count) + 1);
+					}
+				});
+			} else if (isOHeart == '1') {
+				$.ajax('DeleteWish.pr', {
+					data: { category_code: code },
+					success: function () {
+						$(domain).removeClass('fa-heart');
+						$(domain).addClass('fa-heart-o');
+						$(domain).attr('id', "0");
+						$('#wish_count').text(Number(wish_count) - 1);
+					}
+				});
+
+			}
 		}
-		return true;
-	}
-</script>
+
+		function isThereLoginSession() {
+			if ($('#sid').val().length == 0) {
+				return false;
+			}
+			return true;
+		}
+	</script>
 	<!-- 스타일 인클루드 -->
 	<jsp:include page="../include/style.jsp" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style type="text/css">
 		hr {
 			border-top: 5px solid rgba(0, 0, 0, 0.1);
 		}
+
 		h2 {
 			color: white;
 		}
+
 		h4 {
 			color: white;
 		}
+
 		.sticky {
 			position: sticky;
 			top: 100px;
 		}
+
 		table.pdList {
 			border-collapse: separate;
 			border-spacing: 1px;
@@ -133,6 +141,7 @@
 			margin: 20px 10px;
 			width: 115%;
 		}
+
 		table.pdList th {
 			width: 155px;
 			font-weight: bold;
@@ -140,6 +149,7 @@
 			color: #fff;
 			background: #ff5f5f;
 		}
+
 		table.pdList td {
 			width: 155px;
 			vertical-align: top;
@@ -147,9 +157,11 @@
 			background: #eee;
 			font-size: smaller;
 		}
+
 		table.pdList td input {
 			font-size: smaller;
 		}
+
 		table.pdList th {
 			width: 155px;
 			font-weight: bold;
@@ -164,7 +176,7 @@
 <%-- <body onload="checkSession(<%=sid%>)"> --%>
 
 <body>
-<input type="hidden" id="sid" value="<%=sid%>">
+	<input type="hidden" id="sid" value="<%=sid%>">
 	<!-- 탑메뉴 인클루드 -->
 	<jsp:include page="../include/top_menu.jsp" />
 
@@ -232,17 +244,15 @@
 				<!--  글 작성 폼 시작 -->
 				<div class="writeform-group">
 					<table width="730">
-					<tr>
+						<tr>
 							<!-- member_wishList 가 null이 아니고 해당 상품번호를 포함하면
 								 => 속이 꽉 찬 하트 -->
-							<td colspan="3" style="text-align: right;">좋아요숫자 <span id="wish_count"><%=wish_count %></span>
+							<td colspan="3" style="text-align: right;">좋아요숫자 <span
+									id="wish_count"><%=wish_count %></span>
 								<i onclick="wishFunction(this,'<%=code%>')"
-								<%if(member_wishList != null && member_wishList.contains(code)) {%>
-									class="fa fa-heart" id="1" 
-								<%} else {%>
-									class="fa fa-heart-o" id="0"
-								<%} %>
-								style="font-size:24px;color:red;"></i></td>
+									<%if(member_wishList != null && member_wishList.contains(code)) {%>
+									class="fa fa-heart" id="1" <%} else {%> class="fa fa-heart-o" id="0" <%} %>
+									style="font-size:24px;color:red;"></i></td>
 							<!-- 빈하트는 class="fa fa-heart-o" name="0" -->
 							<!-- 꽉찬하트는 class="fa fa-heart" name="1" -->
 						</tr>
@@ -301,8 +311,16 @@
 					<!-- 											    <input type="text" class="pick_end_date_input"> -->
 					<input type="button" class="btn py-1 px-2 btn-primary" id="moveReview" value="리뷰보기">
 					<%
+					if(pdList != null){
 						for (int i = 0; i < pdList.size(); i++) {
-							if (pdList != null) {
+							departdate = format.parse(pdList.get(i).getProductDepartDate());
+							int compare = departdate.compareTo(today);
+							// 날짜 지난상품은 표시X
+							// departdate > today : 1
+							// departdate == today : 0
+							// departdate < today : -1
+							// 출발일이 지나기 전에 예약이 가능하므로 출발일 >= 오늘날짜 따라서 compare 가 0보다 크거나 같아야함
+							if (compare > 0 ) {
 					%>
 					<form action="ReservationInsert.rs" method="get">
 						<table class="pdList">
@@ -346,19 +364,22 @@
 										%>
 									</select></td>
 								<td colspan="2">총합계<br> <span id="result<%=i%>"></span></td>
-								<td><input type="submit" class="btn py-1 px-1 btn-primary" id="submitBtn<%=i%>" value="예약하기" disabled="disabled"></td>
+								<td><input type="submit" class="btn py-1 px-1 btn-primary" id="submitBtn<%=i%>"
+										value="예약하기" disabled="disabled"></td>
 							</tr>
 						</table>
 						<!-- 						<input type="hidden" name="headCount" id="headCount"> -->
-						<input type="hidden" name="member_id" value="<%=member_id%>"> 
-						<input type="hidden" name="category_code" value="<%=code%>"> 
+						<input type="hidden" name="member_id" value="<%=member_id%>">
+						<input type="hidden" name="category_code" value="<%=code%>">
 						<input type="hidden" name="price" id="price<%=i%>" value="0">
-						<input type="hidden" name="product_num" id="product_num" value="<%=pdList.get(i).getProductNum()%>">
+						<input type="hidden" name="product_num" id="product_num"
+							value="<%=pdList.get(i).getProductNum()%>">
 						<input type="hidden" name="totalCount" value="<%=pdList.get(i).getProductTotal()%>">
 					</form>
 					<%
 						}
 						}
+					}
 					%>
 				</div>
 			</div>
@@ -384,7 +405,7 @@
 		function setPeopleCount(pay, count) {
 			var peopleCount = $('#count' + count + ' option:selected').val(); // 선택한 인원수 불러오기
 			if (peopleCount == '0') { // 인원수가 0일경우
-				$('#submitBtn' + count).attr('disabled',true); // 예약버튼 비활성화
+				$('#submitBtn' + count).attr('disabled', true); // 예약버튼 비활성화
 				$('#result' + count).html('');
 				$('#price' + count).val('');
 			}
