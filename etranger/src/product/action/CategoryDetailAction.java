@@ -19,6 +19,8 @@ public class CategoryDetailAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+//		int page = 1;
+//		int limit = 2;
 
 		CategoryBean cb = new CategoryBean();
 		cb.setPackage_category_code(request.getParameter("package_category_code"));
@@ -40,28 +42,26 @@ public class CategoryDetailAction implements Action {
 		pdList = prodectDetailService.GetProductList(pb, pcode);
 		request.setAttribute("pdList", pdList);
 		
-		ProductReviewListService productReviewListService = new ProductReviewListService();
-		int listCount = productReviewListService.getListCount(pcode);
-		ArrayList<ReviewBean> reviewList = new ArrayList<ReviewBean>();
-		reviewList = productReviewListService.getReviewList(pcode);
-		
-		int page = 1;
-		int limit = 10;
-
-		if(request.getParameter("page")!=null) {
-			page=Integer.parseInt(request.getParameter("page"));
-		}
-
-		//페이징
-		int maxPage =(int)((double)listCount / limit +0.95);
-		int startPage = ((int)((double)page / 10 +0.9)-1)*10 +1;
-		int endPage = startPage +10 -1;
-		if(endPage > maxPage) {
-			endPage = maxPage;
-		}
-		PageInfo pageInfo = new PageInfo(page, maxPage, startPage, endPage, listCount);
-		request.setAttribute("pageInfo", pageInfo);
-		request.setAttribute("reviewList", reviewList);
+//		ProductReviewListService productReviewListService = new ProductReviewListService();
+//		int listCount = productReviewListService.getListCount(pcode);
+//		ArrayList<ReviewBean> reviewList = new ArrayList<ReviewBean>();
+//		reviewList = productReviewListService.getReviewList(pcode, page, limit);
+//		
+//
+//		if(request.getParameter("page")!=null) {
+//			page=Integer.parseInt(request.getParameter("page"));
+//		}
+//
+//		//페이징
+//		int maxPage =(int)((double)listCount / limit +0.95);
+//		int startPage = ((int)((double)page / 10 +0.9)-1)*10 +1;
+//		int endPage = startPage +10 -1;
+//		if(endPage > maxPage) {
+//			endPage = maxPage;
+//		}
+//		PageInfo pageInfo = new PageInfo(page, maxPage, startPage, endPage, listCount);
+//		request.setAttribute("pageInfo", pageInfo);
+//		request.setAttribute("reviewList", reviewList);
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("/product/category_detail.jsp");

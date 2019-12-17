@@ -366,15 +366,19 @@ public class ReviewDAO {
 		return listCount;
 	}
 	
-	public ArrayList<ReviewBean> selectReviewList(String packageCategoryCode) {
+	public ArrayList<ReviewBean> selectReviewList(String packageCategoryCode, int page, int limit) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<ReviewBean> ReviewList = new ArrayList<ReviewBean>();
+		
+		int startRow = (page - 1) * limit; // 시작 게시물 번호 계산
 
 		try {
-			String sql = "SELECT * FROM review WHERE review_package_category_code = ?";
+			String sql = "SELECT * FROM review WHERE review_package_category_code = ? order by review_num desc LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, packageCategoryCode);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, limit);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

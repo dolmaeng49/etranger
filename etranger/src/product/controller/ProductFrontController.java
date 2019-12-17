@@ -17,6 +17,7 @@ import product.action.CategoryListAction_oldVer;
 import product.action.CategoryListAction;
 import product.action.DeleteWishAction;
 import product.action.InsertWishAction;
+import product.action.ReviewListAction;
 
 @WebServlet("*.pr") // 서블릿(Controller)이 매핑을 담당할 주소 설정
 public class ProductFrontController extends HttpServlet {
@@ -64,6 +65,14 @@ public class ProductFrontController extends HttpServlet {
 			}
 		} else if (command.equals("/DeleteWish.pr")) {
 			action = new DeleteWishAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if (command.equals("/ReviewList.pr")) {
+			action = new ReviewListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

@@ -16,14 +16,14 @@
 <%
 	ArrayList<CategoryBean> pdetail = (ArrayList<CategoryBean>) request.getAttribute("pdetail");
 	ArrayList<ProductBean> pdList = (ArrayList<ProductBean>) request.getAttribute("pdList");
-	ArrayList<ReviewBean> reviewList = (ArrayList<ReviewBean>) request.getAttribute("reviewList");
+// 	ArrayList<ReviewBean> reviewList = (ArrayList<ReviewBean>) request.getAttribute("reviewList");
 	
-	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-	int nowPage = pageInfo.getPage();
-	int maxPage = pageInfo.getMaxPage();
-	int startPage = pageInfo.getStartPage();
-	int endPage = pageInfo.getEndPage();
-	int listCount = pageInfo.getListCount();
+// 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+// 	int nowPage = pageInfo.getPage();
+// 	int maxPage = pageInfo.getMaxPage();
+// 	int startPage = pageInfo.getStartPage();
+// 	int endPage = pageInfo.getEndPage();
+// 	int listCount = pageInfo.getListCount();
 	
 	String code = "";
 	String image = "";
@@ -223,87 +223,14 @@ table.pdList th {
 				<div class="writeform-group">
 					<hr>
 					<%=content%>
+					<hr>
 				</div>
 
 				<!-- 리뷰 시작 -->
+				<input type="hidden" id="categoryCode" value="<%=code %>">
 				<div class="writeform-group" id="review">
-					<hr>
-					<label for="name">리뷰</label>
-					<%
-						if (reviewList != null && listCount > 0) {
-					%>
-					<table border=1>
-						<tr>
-							<th>NO.</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>작성일</th>
-							<th>상품평점</th>
-						</tr>
-						<%
-							for (ReviewBean rl : reviewList) {
-						%>
-						<tr>
-							<td><%=rl.getReview_num()%></td>
-							<td><%=rl.getReview_subject()%></td>
-							<td><%=rl.getReview_member_name()%></td>
-							<td><%=rl.getReview_date()%></td>
-							<td>
-								<div id="stars">
-									<%
-										if (rl.getReview_star() == 0) {
-									%><img src="images/rating0.png" align="middle" />
-									<%
-										} else if (rl.getReview_star() == 1) {
-									%><img src="images/rating01.png" align="middle" />
-									<%
-										} else if (rl.getReview_star() == 2) {
-									%><img src="images/rating02.png" align="middle" />
-									<%
-										} else if (rl.getReview_star() == 3) {
-									%><img src="images/rating03.png" align="middle" />
-									<%
-										} else if (rl.getReview_star() == 4) {
-									%><img src="images/rating04.png" align="middle" />
-									<%
-										} else if (rl.getReview_star() == 5) {
-									%><img src="images/rating05.png" align="middle" />
-									<%
-										} else if (rl.getReview_star() == 6) {
-									%><img src="images/rating06.png" align="middle" />
-									<%
-										} else if (rl.getReview_star() == 7) {
-									%><img src="images/rating07.png" align="middle" />
-									<%
-										} else if (rl.getReview_star() == 8) {
-									%><img src="images/rating08.png" align="middle" />
-									<%
-										} else if (rl.getReview_star() == 9) {
-									%><img src="images/rating09.png" align="middle" />
-									<%
-										} else {
-									%><img src="images/rating10.png" align="middle" />
-									<%
-										}
-									%>
-								</div>
-							</td>
-						</tr>
-						<%
-							}
-						%>
-					</table>
-					<%
-						} else {
-					%>
-					<p>리뷰없음</p>
-					<%
-						}
-					%>
 				</div>
 				<!-- 리뷰 끝 -->
-
-
 
 				<div class="form-group">
 					<!-- 						<input type="button" value="등록" class="btn py-3 px-4 btn-primary" -->
@@ -479,6 +406,23 @@ table.pdList th {
 				return false;
 			}
 			return true;
+		}
+		
+		// 리뷰 리스트 출력
+		var categoryCode = $('#categoryCode').val();
+		$.ajax('ReviewList.pr?package_category_code=' + categoryCode, {
+					success : function(data) {
+						$('#review').html(data);
+					}
+				});
+		
+		// 리뷰 리스트 페이징
+		function pageNum(page) {
+			$.ajax('ReviewList.pr?page=' + page + '&package_category_code=' + categoryCode, {
+				success : function(data) {
+					$('#review').html(data);
+				}
+			});
 		}
 	</script>
 </body>

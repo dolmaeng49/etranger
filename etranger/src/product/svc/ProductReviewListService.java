@@ -21,13 +21,13 @@ public class ProductReviewListService {
 		return listCount;
 	}
 
-	public ArrayList<ReviewBean> getReviewList(String packageCategoryCode) {
+	public ArrayList<ReviewBean> getReviewList(String packageCategoryCode, int page, int limit) {
 		Connection con = getConnection();
 		ReviewDAO reviewDAO = ReviewDAO.getInstance();
 		reviewDAO.setConnection(con);
 		ArrayList<ReviewBean> reviewList = null;
 
-		reviewList = reviewDAO.selectReviewList(packageCategoryCode);
+		reviewList = reviewDAO.selectReviewList(packageCategoryCode, page, limit);
 
 		close(con);
 
