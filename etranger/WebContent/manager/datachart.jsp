@@ -55,12 +55,16 @@
         - 두번째 argument로 그림을 그릴때 필요한 요소들을 모두 넘겨줍니다. 
         */
         // 혼합차트 (막대, 선) 
+        var data1 = document.getElementById("regionCurrent0").value;
+        var data2 = document.getElementById("regionCurrent1").value;
+        var label1 = document.getElementById("regionName0").value;
+        var label2 = document.getElementById("regionName1").value;
         var mixedChart = new Chart(ctx1, {
             type: 'bar',
             data: {
                 datasets: [{
                     label: 'Bar Dataset',
-                    data: [10, 20, 30, 40],
+                    data: [data1, data2, 30, 40],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -91,7 +95,7 @@
                     // this dataset is drawn on top
                     order: 2
                 }],
-                labels: ['1', 'February', 'March', 'April']
+                labels: [label1, label2, 'March', 'April']
             },
             options: {
                 maintainAspectRatio: true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
@@ -106,17 +110,14 @@
         });
         
 		// 막대그래프
-        var data1 = document.getElementById("regionCurrent0").value;
-        var data2 = document.getElementById("regionCurrent1").value;
-        var label1 = document.getElementById("regionName0").value;
-        var label2 = document.getElementById("regionName1").value;
+      
         var myChart = new Chart(ctx2, {
             type: 'bar',	// 그래프 타입
             data: {
-                labels: [label1, label2],
+                labels: [1, 2],
                 datasets: [{
                     label: '# 지역별 상품 예약 수',			// 그래프 이름
-                    data: [data1, data2],
+                    data: [1, 2],
                     backgroundColor: [				// 그래프 배경색
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(255, 99, 132, 0.2)',

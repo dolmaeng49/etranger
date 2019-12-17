@@ -48,7 +48,7 @@ public class ReservationDAO {
 					+ "    FROM reservation rs JOIN package_category pc "
 					+ "    ON rs.reservation_category_code = pc.package_category_code JOIN package_product pd "
 					+ "    ON rs.reservation_product_num = pd.package_product_num where rs.reservation_member_id=?"
-					+"ORDER BY rs.reservation_num desc LIMIT ?,?;";
+					+ "ORDER BY rs.reservation_num desc LIMIT ?,?;";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setInt(2, startRow);

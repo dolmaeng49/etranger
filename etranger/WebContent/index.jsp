@@ -7,13 +7,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style type="text/css">
-.ccc{
-text-align: center;
-align-content: center;
-align-self: center;
-}
-</style>
 <!-- 스타일 인클루드 -->
 <jsp:include page="/include/style.jsp" />
 <%
@@ -181,6 +174,38 @@ align-self: center;
 								</form>
 							</div>
 						</div>
+						<!-- 세번째 검색 탭 -->
+<!-- 						<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" -->
+<!-- 							aria-labelledby="v-pills-settings-tab"> -->
+<!-- 							<div class="block-17"> -->
+<!-- 								<form action="" method="post" class="d-block d-lg-flex"> -->
+<!-- 									<div class="fields d-block d-lg-flex"> -->
+<!-- 										<div class="textfield-search one-third one-third-1"></div> -->
+
+<!-- 										<div class="select-wrap one-third one-third-1"> -->
+<!-- 											<div class="icon"> -->
+<!-- 												<span class="ion-ios-arrow-down"></span> -->
+<!-- 											</div> -->
+<!-- 											<select name="region" id="selectRegion" class="form-control" onChange="getCity()"> -->
+<!--                         						<option value="">지역선택</option> -->
+<!--                         					</select> -->
+<!-- 										</div> -->
+										
+<!-- 										<div class="select-wrap one-third one-third-1"> -->
+<!-- 											<div class="icon"> -->
+<!-- 												<span class="ion-ios-arrow-down"></span> -->
+<!-- 											</div> -->
+<!-- 											<div class="icon"><span class="ion-ios-arrow-down"></span></div> -->
+<!--                         						<select name="city" id="selectCity" class="form-control"> -->
+<!--                         							<option value="">도시선택</option> -->
+<!--                         						</select> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									<input type="submit" class="search-submit btn btn-primary" -->
+<!-- 										value="검색하기"> -->
+<!-- 								</form> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 						
 					</div>
 				</div>
@@ -188,15 +213,36 @@ align-self: center;
 		</div>
 	</div>
 	<!-- 검색부분 끝 -->
-	
-	<!-- 메인 홍보영상-->
+	<!-- 영상 -->
 	<section class="ftco-section-2">
-		<div class="embed-responsive embed-responsive-16by9">
-		<video autoplay muted loop class="embed-responsive-item" >
-		<source src=images/intro.mp4 type=video/mp4>
-		</video>
+		<div class="container-fluid d-flex">
+			<div class="section-2-blocks-wrapper row no-gutters">
+				<div class="img col-sm-12 col-lg-6">
+					<video autoplay muted loop id="video" width="950px" height="800px">
+						<source src="images/intro.mp4" type="video/mp4">
+					</video>
+					<a href="https://vimeo.com/371024892" class="button popup-vimeo"><span
+						class="ion-ios-play"></span></a>
+				</div>
+				<div class="text col-lg-6 ftco-animate">
+					<div class="text-inner align-self-start">
+
+						<h3>Welcome to Bon Voyage since 1898 established Far far
+							away.</h3>
+						<p>Far far away, behind the word mountains, far from the
+							countries Vokalia and Consonantia, there live the blind texts.
+							Separated they live in Bookmarksgrove right at the coast of the
+							Semantics, a large language ocean.</p>
+
+						<p>A small river named Duden flows by their place and supplies
+							it with the necessary regelialia. It is a paradisematic country,
+							in which roasted parts of sentences fly into your mouth.</p>
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
+
 	<!-- 동그라미 상품 4가지 -->
 	<section class="ftco-section">
 		<div class="container">
