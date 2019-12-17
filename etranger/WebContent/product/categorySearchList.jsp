@@ -237,7 +237,7 @@ function isThereLoginSession(){
 			<!--추천 지역 -->
             <div class="sidebar-box ftco-animate">
               <div class="categories">
-                <h3>Categories</h3>
+                <h3>추천 지역</h3>
                 <div id="side_region" class="side_region">
                 
                 </div>
@@ -247,7 +247,7 @@ function isThereLoginSession(){
             
 			<!-- 추천 테마 -->
             <div class="sidebar-box ftco-animate">
-              <h3>Tag Cloud</h3>
+              <h3>추천 테마</h3>
               <div id="side_theme" class="tagcloud">
               </div>
             </div>
