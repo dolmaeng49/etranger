@@ -9,8 +9,9 @@
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Voyage Fellow Tourist</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+              <h2 class="ftco-heading-2">Bonjour tout le monde, Bienvenue!</h2>
+              <p>Thank you for visiting our Web site. You've never seen before like this project. everyone works hard. 
+              부득이한 사정에 의해 여행일정이 변경되는 경우 여행자의 사전 동의를 받습니다.</p>
             </div>
           </div>
           <div class="col-md">
@@ -31,14 +32,13 @@
              <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">Top Deals</h2>
               <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Luxe Hotel</a></li>
-                <li><a href="#" class="py-2 d-block">Venice Tours</a></li>
-                <li><a href="#" class="py-2 d-block">Deluxe Hotels</a></li>
-                <li><a href="#" class="py-2 d-block">Boracay Beach &amp; Resorts</a></li>
+                <li><a href="#" class="py-2 d-block">Europe Tours</a></li>
+                <li><a href="#" class="py-2 d-block">Middle East Tours</a></li>
+                <li><a href="#" class="py-2 d-block">Asia Tours</a></li>
                 <li><a href="#" class="py-2 d-block">Beach &amp; Resorts</a></li>
-                <li><a href="#" class="py-2 d-block">Fuente Villa</a></li>
-                <li><a href="#" class="py-2 d-block">Japan Tours</a></li>
-                <li><a href="#" class="py-2 d-block">Philippines Tours</a></li>
+                <li><a href="#" class="py-2 d-block">Couple Tours</a></li>
+                <li><a href="#" class="py-2 d-block">Family Tours</a></li>
+                <li><a href="#" class="py-2 d-block">Special Tours</a></li>
               </ul>
             </div>
           </div>

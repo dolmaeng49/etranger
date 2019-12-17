@@ -1,3 +1,4 @@
+<%@page import="member.vo.MemberBean"%>
 <%@page import="javafx.geometry.Side"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,7 +14,13 @@
 <jsp:include page="../include/top_menu.jsp"/>
 <%
 String sessionId = (String)session.getAttribute("member_id");
-String sessionName = (String)session.getAttribute("member_name");
+
+MemberBean mb = (MemberBean)session.getAttribute("memberInfo");
+String sessionName = null;
+if (mb != null && mb.getMember_name() != null) {
+	sessionName = mb.getMember_name();
+}
+
 if(sessionId==null) {
 	response.sendRedirect("LoginForm.me");
 }

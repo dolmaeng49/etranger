@@ -88,7 +88,7 @@
 						<th>예약인원</th>
 						<th>출발날짜/도착날짜</th>
 						<th>금액</th>
-						<th>결제방법</th>
+						<th>결제유무</th>
 						<th>진행상태</th>
 						<th>제어</th>
 					</tr>
@@ -119,7 +119,8 @@
 								<option value="결제취소">결제취소</option>
 						</select></td>
 						<td><input type="button" value="삭제"
-							onclick="deleteYesOrNo('<%=reservList.get(i).getReservation_num()%>')"></td>
+							onclick="deleteYesOrNo('<%=reservList.get(i).getReservation_num()%>')"
+							></td>
 
 					</tr>
 					<%

@@ -7,25 +7,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.action.Action;
 import common.vo.ActionForward;
+import common.vo.PageInfo;
 import manager.svc.ProductDetailService;
 import manager.vo.CategoryBean;
 import manager.vo.ProductBean;
+import product.svc.ProductReviewListService;
+import review.vo.ReviewBean;
 
 public class CategoryDetailAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 
-		CategoryBean cb = new CategoryBean(); /*
-												 * 상품리스트에서 넘어오는 값(지역코드,도시코드,테마,상품명,사진,상세내용) 을 저장하고 가져오기위해서 Category_Bean
-												 * 객체 선언
-												 */
-
-		// 저장
-
+		CategoryBean cb = new CategoryBean();
 		cb.setPackage_category_code(request.getParameter("package_category_code"));
 		cb.setPackage_category_theme(request.getParameter("package_category_theme"));
-
+		
 		// 상품코드 저장
 
 		String pcode = cb.getPackage_category_code();
@@ -41,7 +39,30 @@ public class CategoryDetailAction implements Action {
 		ArrayList<ProductBean> pdList = new ArrayList<ProductBean>();
 		pdList = prodectDetailService.GetProductList(pb, pcode);
 		request.setAttribute("pdList", pdList);
+		
+		ProductReviewListService productReviewListService = new ProductReviewListService();
+		int listCount = productReviewListService.getListCount(pcode);
+		ArrayList<ReviewBean> reviewList = new ArrayList<ReviewBean>();
+		reviewList = productReviewListService.getReviewList(pcode);
+		
+		int page = 1;
+		int limit = 10;
 
+		if(request.getParameter("page")!=null) {
+			page=Integer.parseInt(request.getParameter("page"));
+		}
+
+		//페이징
+		int maxPage =(int)((double)listCount / limit +0.95);
+		int startPage = ((int)((double)page / 10 +0.9)-1)*10 +1;
+		int endPage = startPage +10 -1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		PageInfo pageInfo = new PageInfo(page, maxPage, startPage, endPage, listCount);
+		request.setAttribute("pageInfo", pageInfo);
+		request.setAttribute("reviewList", reviewList);
+		
 		ActionForward forward = new ActionForward();
 		forward.setPath("/product/category_detail.jsp");
 

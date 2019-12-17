@@ -321,17 +321,25 @@ public class MemberDAO {
 
 	// 회원 아이디에 해당하는 회원 이름을 리턴하는 메서드
 	// 아이디에 해당하는 정보가 없으면 null 리턴
-	public String getMemberName(String member_id) {
+	public MemberBean getMemberInfo(String member_id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT member_name FROM member WHERE member_id=?";
+		String sql = "SELECT member_name, member_email, member_birth, member_gender, member_grade"
+				+ " FROM member WHERE member_id=?";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_id);
 			rs = pstmt.executeQuery();
 			if (rs.next()) { // 조회결과 존재할 경우
-				// 조회한 회원 이름 리턴
-				return rs.getString(1);
+				MemberBean mb = new MemberBean();
+				mb.setMember_id(member_id);
+				mb.setMember_name(rs.getString(1));
+				mb.setMember_email(rs.getString(2));
+				mb.setMember_birth(rs.getString(3));
+				mb.setMember_gender(rs.getString(4));
+				mb.setMember_grade(rs.getString(5));
+				
+				return mb;
 			}
 		} catch (SQLException e) {
 			System.out.println("getMemberName 실패 : " + e.getMessage());

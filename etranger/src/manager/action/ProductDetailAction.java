@@ -10,6 +10,9 @@ import common.vo.ActionForward;
 import manager.svc.ProductDetailService;
 import manager.vo.CategoryBean;
 import manager.vo.ProductBean;
+import product.svc.ProductReviewListService;
+import review.service.ReviewListService;
+import review.vo.ReviewBean;
 
 public class ProductDetailAction implements Action {
 

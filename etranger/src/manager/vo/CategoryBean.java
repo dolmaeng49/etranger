@@ -20,17 +20,35 @@ public class CategoryBean {
 	private int package_category_wish_count;
 	// join 으로 들고올 값들
 	private int review_count;
-	private double review_star_avg;
-	private int package_product_current;
-	private int min_price;
+	private double review_star_avg; 
+	private int package_product_current; // 현재 인원
+	private int min_price; // 최저가 
+	private int total_headcount; // 카테고리 당 총 예약인원
+	private String min_date; // 날짜 임박
 
-//	| package_category_code | 
+//	package_category_code | 
 //	package_category_name | 
 //	package_category_region | 
 //	package_category_city | 
 //	package_category_theme | 
 //	package_category_image | 
 //	package_category_content |
+
+	public int getTotal_headcount() {
+		return total_headcount;
+	}
+
+	public String getMin_date() {
+		return min_date;
+	}
+
+	public void setMin_date(String min_date) {
+		this.min_date = min_date;
+	}
+
+	public void setTotal_headcount(int total_headcount) {
+		this.total_headcount = total_headcount;
+	}
 
 	public int getMin_price() {
 		return min_price;
