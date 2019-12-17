@@ -1,13 +1,18 @@
 package common.action;
 
+import java.time.LocalDate;
+import java.time.temporal.TemporalField;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import common.vo.ActionForward;
 import manager.svc.CategoryListService;
 import manager.vo.CategoryBean;
+import member.vo.MemberBean;
 import review.service.ReviewListService;
 import review.vo.ReviewBean;
 
@@ -17,29 +22,60 @@ public class MainPageAction implements Action {
 	// 메인페이지가 로드될 때 호출되는 액션클래스 메서드
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		/*
-		 * 메인페이지에 출력까지 연결 완료
-		 * CategoryListService, DAO 에서 추천순/인기순에 따른 메서드 작성 필요 
-		 * 메서드 만들면 이 주석은 지워주세여
-		 */
-
 		// 카테고리 리스트 서비스 객체 생성
 		CategoryListService categoryListService = new CategoryListService();
+		
 		// 동그라미 4개에 출력할 카테고리 리스트 4개 조회하기
-		ArrayList<CategoryBean> newList = categoryListService.getNewList(1, 4);
-		request.setAttribute("newList", newList);
+		ArrayList<CategoryBean> categoryList = categoryListService.getNewList(1, 4);
+		request.setAttribute("newList", categoryList);
 		
 		// 인기순 리스트
-		ArrayList<CategoryBean> popularList = categoryListService.getPopularList(1, 8);
-		request.setAttribute("popularList", popularList);
+		categoryList = categoryListService.getPopularList(1, 8);
+		request.setAttribute("popularList", categoryList);
 		
 		// 추천순 리스트 
-		ArrayList<CategoryBean> recommendedList = categoryListService.getRecommendedList(1, 3);
-		request.setAttribute("recommendedList", recommendedList);
+		categoryList = categoryListService.getRecommendedList(1, 3);
+		request.setAttribute("recommendedList", categoryList);
+		
+		// 세션 객체 받아와 세션에서 로그인한 회원 정보 가져오기
+		HttpSession session = request.getSession();
+		MemberBean memberBean = (MemberBean)session.getAttribute("memberInfo");
+		// 로그인상태일 경우 회원의 연령대, 성별 정보 활용해 추천
+		if(memberBean != null) {
+			// 나이에 따른 birth 검색 구간 설정
+			// 오늘 날짜(long) 에서 회원의 생일(long) 을 빼서 나이를 계산
+			LocalDate birth_date = LocalDate.parse(memberBean.getMember_birth());
+			LocalDate now = LocalDate.now();
+			LocalDate age_date = LocalDate.ofEpochDay(LocalDate.now().toEpochDay() - birth_date.toEpochDay());
+			// EpochDay : 1970년 1월 1일 을 기준으로 이전, 이후의 시간(초)을 long 타입으로 표현 
+			int age = age_date.getYear() - 1970;
+			String search_birth_start = "";
+			String search_birth_end = "";
+			if(age < 30) { // 20대
+				// 현재로부터 20년 전 날짜 부터 30년 전 날짜를 저장
+				search_birth_start = now.minusYears(30).toString();
+				search_birth_end = now.minusYears(20).toString();
+			} else if(age < 40) {
+				search_birth_start = now.minusYears(40).toString();
+				search_birth_end = now.minusYears(30).toString();
+			} else if(age < 50) {
+				search_birth_start = now.minusYears(50).toString();
+				search_birth_end = now.minusYears(40).toString();
+			} else if(age < 60) {
+				search_birth_start = now.minusYears(60).toString();
+				search_birth_end = now.minusYears(50).toString();
+			} else {
+				search_birth_start = now.minusYears(200).toString();
+				search_birth_end = now.minusYears(60).toString();
+			}
+			product.svc.CategoryListService proCateSVC = new product.svc.CategoryListService();
+			categoryList = proCateSVC.getPersonalizedList(1, 4, memberBean.getMember_gender(), search_birth_start, search_birth_end);
+			request.setAttribute("newList", categoryList);
+		}
 		
 		
-		ReviewListService reviewListService = new ReviewListService();
 		// 리뷰 5개 조회
+		ReviewListService reviewListService = new ReviewListService();
 		ArrayList<ReviewBean> reviewList = reviewListService.getArticleList(1, 5);
 		request.setAttribute("reviewList", reviewList);
 		

@@ -1,6 +1,7 @@
 package member.action;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import common.action.Action;
 import common.vo.ActionForward;
 import member.service.MemberLoginProService;
+import member.vo.MemberBean;
 import product.svc.WishListService;
 
 public class MemberLoginProAction implements Action {
@@ -46,16 +48,17 @@ public class MemberLoginProAction implements Action {
 			HttpSession session = request.getSession();
 			// 아이디 세션에 저장
 			session.setAttribute("member_id", member_id);
-			// 아이디에 해당하는 이름(String) 조회, 세션에 저장
-			// member_name, member_email, member_birth, member_gender, member_grade
-			// 5 개의 정보 저장되어 있음
-			session.setAttribute("memberInfo", memberLoginProService.getMemberInfo(member_id));
 			
+			// member_name, member_email, member_birth, member_gender, member_grade
+			MemberBean memberInfo = memberLoginProService.getMemberInfo(member_id);
+			// 5 개의 정보 저장되어 있음
+			session.setAttribute("memberInfo", memberInfo);
 			
 			// 아이디에 해당하는 찜목록(ArrayList<String>) 조회, 세션에 저장
 			// 찜목록이 없을 경우 ArrayList의 size = 0
 			WishListService wishListService = new WishListService();
-			session.setAttribute("member_wishList", wishListService.getMemberWishList(member_id));
+			ArrayList<String> member_wishList = wishListService.getMemberWishList(member_id);
+			session.setAttribute("member_wishList", member_wishList);
 			
 			forward = new ActionForward();
 			forward.setPath("index.jsp");
