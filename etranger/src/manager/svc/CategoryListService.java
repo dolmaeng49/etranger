@@ -36,30 +36,46 @@ public class CategoryListService {
 		return productList;
 	}
 	
-	public ArrayList<CategoryBean> getpopularList(int page, int limit) {
+	// 최신순
+	public ArrayList<CategoryBean> getNewList(int page, int limit) {
+		Connection con = getConnection();
+		ManagerDAO managerDAO = ManagerDAO.getInstance();
+		managerDAO.setConnection(con);
+		ArrayList<CategoryBean> newList = null;
+
+		newList = managerDAO.selectNewList(page, limit);
+
+		close(con);
+
+		return newList;
+	}
+	// 인기순
+	public ArrayList<CategoryBean> getPopularList(int page, int limit) {
 		Connection con = getConnection();
 		ManagerDAO managerDAO = ManagerDAO.getInstance();
 		managerDAO.setConnection(con);
 		ArrayList<CategoryBean> popularList = null;
-
-		popularList = managerDAO.selectRecommendedList(page, limit);
+		
+		popularList = managerDAO.selectPopularList(page, limit);
 
 		close(con);
 
 		return popularList;
 	}
 	
+	// 추천순 (떨이상품) 
 	public ArrayList<CategoryBean> getRecommendedList(int page, int limit) {
 		Connection con = getConnection();
 		ManagerDAO managerDAO = ManagerDAO.getInstance();
 		managerDAO.setConnection(con);
 		ArrayList<CategoryBean> recommendedList = null;
 
-		recommendedList = managerDAO.selectCategoryList(page, limit);
+		recommendedList = managerDAO.selectRecommendedList(page, limit);
 
 		close(con);
 
 		return recommendedList;
 	}
+
 
 }

@@ -119,7 +119,8 @@
 								<option value="결제취소">결제취소</option>
 						</select></td>
 						<td><input type="button" value="삭제"
-							onclick="deleteYesOrNo('<%=reservList.get(i).getReservation_num()%>')"></td>
+							onclick="deleteYesOrNo('<%=reservList.get(i).getReservation_num()%>')"
+							></td>
 
 					</tr>
 					<%

@@ -149,19 +149,22 @@
 								<div class="select-wrap one-third theme">
 									<br>
 									<h3 class="h4 mb-4">Theme</h3>
-									<div id="test">
+									<div class="btn-group-toggle pb-1" data-toggle="buttons">
 										<%
 											for (int i = 0; i < themeList.size(); i++) {
 										%>
-										<label id="newTheme"> <input type="checkbox" name="theme"
+										<label class="btn btn-outline-info btn-sm">
+										<input type="checkbox" name="theme" class="custom-control-input"
 												value="<%=themeList.get(i).getThemeName()%>"><%=themeList.get(i).getThemeName()%>
-										</label>
+												</label>
+										
 										<%
 											}
 										%>
 									</div>
+									
 									<div class="col-md-12">
-										<input type="button" id="theme_addbtn" value="테마추가" class="btn btn-primary"
+										<input type="button" id="theme_addbtn" value="테마추가" class="btn btn-info"
 											onclick="check()">
 										<div class="form-group" id="addTheme" style="display: none;">
 
