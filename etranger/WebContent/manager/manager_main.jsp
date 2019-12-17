@@ -149,15 +149,16 @@
 								<div class="select-wrap one-third theme">
 									<br>
 									<h3 class="h4 mb-4">Theme</h3>
-									<div class="btn-group-toggle pb-1" data-toggle="buttons">
+									<div class="btn-group-toggle pb-1" data-toggle="buttons" id="ThemeBox">
 										<%
 											for (int i = 0; i < themeList.size(); i++) {
 										%>
-										<label class="btn btn-outline-info btn-sm">
+									
+										<label class="btn btn-outline-info btn-sm" id="newTheme">
 										<input type="checkbox" name="theme" class="custom-control-input"
 												value="<%=themeList.get(i).getThemeName()%>"><%=themeList.get(i).getThemeName()%>
-												</label>
-										
+										</label>
+											
 										<%
 											}
 										%>
@@ -165,7 +166,8 @@
 									
 									<div class="col-md-12">
 										<input type="button" id="theme_addbtn" value="테마추가" class="btn btn-info"
-											onclick="check()">
+											onclick="check()" data-toggle="tooltip" data-placement="right" title="엔터키로 추가할 수 있습니다."
+											>
 										<div class="form-group" id="addTheme" style="display: none;">
 
 											<input type="text" size="20" id="theme_addbox" onkeydown="enterKey(this);">
@@ -174,10 +176,16 @@
 									</div>
 								</div>
 							</div>
+							
+							<script>
+							$(function () {
+								$('[data-toggle="tooltip"]').tooltip()
+								})
+							</script>
 							<!-- package_category_name -->
 							<div class="col-md-6">
 								<div class="select-wrap one-third theme">
-									<h3 class="h4 mb-12">Name</h3>
+									<h3 class="h4 mb-12 mt-3">Name</h3>
 									<input type="text" id="category_name" name="category_name" required="required"
 										size="80">
 
@@ -186,7 +194,7 @@
 							<!-- package_category_content -->
 							<div class="col-md-12">
 								<div class="select-wrap one-third theme">
-									<h3 class="h4 mb-4">Content</h3>
+									<h3 class="h4 mb-4 mt-3">Content</h3>
 									<textarea id="summernoteManager"  name="category_content" rows="20" cols="80"
 										required="required"></textarea>
 
@@ -195,8 +203,13 @@
 							<!-- package_category_image -->
 							<div class="col-md-12">
 								<div class="select-wrap one-third theme">
-									<h3 class="h4 mb-4">Img</h3>
-									<input multiple="multiple" type="file" name="category_image" required="required" />
+								
+									<h3 class="h4 mb-4 mt-3" >Img</h3>
+									<div class="custom-file" style="width: 60%">
+									<input multiple="multiple" type="file" name="category_image" required="required" class="custom-file-input" id="customFile"/>
+									 <label class="custom-file-label" for="customFile">Choose image file</label>
+									</div>
+								
 								</div>
 							</div>
 							<input style="VISIBILITY: hidden; WIDTH: 0px">

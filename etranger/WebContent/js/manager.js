@@ -56,16 +56,16 @@ function getCity() {
 
 function getTheme() {
 	$('#addTheme').hide();
-	$('#test').empty(); // #newTheme에 있는 내용 지우기
+	$('#ThemeBox').empty(); // #newTheme에 있는 내용 지우기
 	$('#theme_addbox').val("");
 	// <label id="newTheme">에 추가
 	$.getJSON('ThemeCheckBox.ma', function(data) {
 		$.each(data, function(index, value) {
-			$('#test').append(
-					'<label id="newTheme">'
-							+ '<input type="checkbox" name="theme" value="'
+			$('#ThemeBox').append(
+					'<label class="btn btn-outline-info btn-sm" id="newTheme" >'
+							+ '<input type="checkbox" name="theme" class="custom-control-input" value="'
 							+ value.themeName + '">' + value.themeName
-							+ '&nbsp; </label>');
+							+ '</label>&nbsp;');
 		});
 	});
 }
@@ -223,3 +223,7 @@ function captureReturnKey(e) {
     if(e.keyCode==13 && e.srcElement.type != 'textarea')
     return false;
 }
+
+
+
+
