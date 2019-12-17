@@ -77,5 +77,5 @@ public class CategoryListService {
 		return recommendedList;
 	}
 
-
+	
 }

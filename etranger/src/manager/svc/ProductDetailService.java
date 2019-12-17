@@ -11,7 +11,7 @@ import manager.vo.ProductBean;
 
 public class ProductDetailService {
 
-	public ArrayList<CategoryBean> GetProductDetailList(CategoryBean cb, String pcode) {
+	public ArrayList<CategoryBean> GetProductDetailList(String pcode) {
 
 		System.out.println("ProductDetailService");
 

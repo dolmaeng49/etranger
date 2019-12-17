@@ -3,8 +3,13 @@
 <%@page import="manager.vo.CategoryBean"%>
 <%@page import="java.util.Locale.Category"%>
 <%@page import="manager.dao.ManagerDAO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%
+
+// 패키지 카테고리 상세내용 불러오기 & 제목 내용 수정 기능
+// 패키지상품 insert & delete 
+
 	ArrayList<CategoryBean> regionList = (ArrayList<CategoryBean>) request.getAttribute("regionList");
 	ArrayList<CategoryBean> themeList = (ArrayList<CategoryBean>) request.getAttribute("themeList");
 	ArrayList<CategoryBean> productList = (ArrayList<CategoryBean>) request.getAttribute("productList");
@@ -15,8 +20,8 @@
 	String name = "";
 	String content = "";
 	String theme = "";
-	int region_code = 0;
-	int city_code = 0;
+	int region = 0;
+	int city = 0;
 	for (int i = 0; i < pdetail.size(); i++) {
 
 		code = pdetail.get(i).getPackage_category_code();
@@ -24,8 +29,8 @@
 		name = pdetail.get(i).getPackage_category_name();
 		content = pdetail.get(i).getPackage_category_content();
 		theme = pdetail.get(i).getPackage_category_theme();
-		region_code = pdetail.get(i).getPackage_category_region();
-		city_code = pdetail.get(i).getPackage_category_city();
+		region = pdetail.get(i).getPackage_category_region();
+		city = pdetail.get(i).getPackage_category_city();
 	}
 %>
 <!DOCTYPE html>
@@ -80,17 +85,28 @@ table.pdList td input {
 	<jsp:include page="../include/top_menu.jsp" />
 
 	<section class="home-slider owl-carousel">
-		<div class="slider-item" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+		<div class="slider-item"
+			style="background-image: url('images/bg_3.jpg');"
+			data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row slider-text align-items-center">
 					<div class="col-md-7 col-sm-12 ftco-animate">
 						<p class="breadcrumbs">
-							<span class="mr-2"><a href="../main/index.jsp"></a></span> <span><a href="blog.html"></a></span> <span></span>
+							<span class="mr-2"><a href="../main/index.jsp"></a></span> <span><a
+								href="blog.html"></a></span> <span></span>
 						</p>
-						<h1 class="mb-3">상품 상세페이지</h1>
-						<br>
+						<h1 class="mb-3">카테고리 상세내용&amp;패키지상품 추가</h1>
 
+<!-- package_category_code       | varchar(100)  | NO   | PRI | NULL    |                | -->
+<!-- package_category_name       | varchar(50)   | NO   | UNI | NULL    |                | -->
+<!-- package_category_region     | int(11)       | NO   | MUL | NULL    |                | -->
+<!-- package_category_city       | int(11)       | NO   | MUL | NULL    |                | -->
+<!-- package_category_theme      | varchar(100)  | YES  |     | NULL    |                | -->
+<!-- package_category_image      | varchar(100)  | NO   |     | NULL    |                | -->
+<!-- package_category_content    | varchar(2000) | NO   |     | NULL    |                | -->
+
+						<br>
 					</div>
 				</div>
 			</div>
@@ -99,85 +115,113 @@ table.pdList td input {
 
 	<!-- END slider -->
 	<section class="ftco-section">
-	<div class="col-md-2 sticky" style="float: left;">
-				<div class="panel panel-info sticky" id="leftside">
-					<div class="panel-heading">
+		<div class="col-md-2 sticky" style="float: left;">
+			<div class="panel panel-info sticky" id="leftside">
+				<div class="panel-heading">
 
-						<h3 class="panel-title">Manager Page</h3>
-					</div>
-					<ul class="list-group">
-						<li class="list-group-item active li_hover"
-							onclick="location.href='./index.jsp'"><span
-							class="icon icon-home"></span> 홈</li>
-						<li class="list-group-item li_hover dataChart"
-							onclick="location.href='ManagerMain.ma'"><span
-							class="icon icon-line-chart"></span> 관리자 메인</li>
-						<li class="list-group-item li_hover"
-							onclick="location.href='ManagerMain.ma'"><span
-							class="icon icon-pencil"></span> 상품 등록으로 돌아가기</li>
-						<li class="list-group-item li_hover" id="member"><span
-							class="icon icon-users" ></span>회원관리</li>
-					</ul>
-					<ul class="list-group" id="memberManagement">
-						<li class="list-group-item li_hover member"
-							onclick="location.href='ReservManagement.ma'">&nbsp;­회원예약</li>
-						<li class="list-group-item li_hover member">&nbsp;­회원등급</li>
-					</ul>
+					<h3 class="panel-title">Manager Page</h3>
 				</div>
+				<ul class="list-group">
+					<li class="list-group-item active li_hover"
+						onclick="location.href='./index.jsp'"><span
+						class="icon icon-home"></span> 홈</li>
+					<li class="list-group-item li_hover dataChart"
+						onclick="location.href='ManagerMain.ma'"><span
+						class="icon icon-line-chart"></span> 관리자 메인</li>
+					<li class="list-group-item li_hover"
+						onclick="location.href='ManagerMain.ma'"><span
+						class="icon icon-pencil"></span> 카테고리 등록&amp;수정 돌아가기</li>
+					<li class="list-group-item li_hover" id="member"><span
+						class="icon icon-users"></span>회원관리</li>
+				</ul>
+				<ul class="list-group" id="memberManagement">
+					<li class="list-group-item li_hover member"
+						onclick="location.href='ReservManagement.ma'">&nbsp;­회원예약</li>
+					<li class="list-group-item li_hover member">&nbsp;­회원등급</li>
+				</ul>
 			</div>
+		</div>
 		<div class="container">
 			<div class="row">
+				<!--  카테고리 디테일 & 수정 폼 시작 -->
 				<div class="col-md-8 ftco-animate">
+					<form action="CategoryUpdate.ma" class="p-5 bg-light" method="post" enctype="multipart/form-data">
+						<div class="managerdetailform">
+							<h3 class="mb-5">카테고리 상세내용</h3>
+						</div>
 
-					<!--  글 작성 폼 시작 -->
-					<div class="managerdetailform">
-						<h3 class="mb-5">상품 상세 페이지</h3>
-					</div>
+						<div class="writeform-group">
+							<label for="image">이미지</label><a href="#" class="block-20"
+								style="background-image: url('ManagerImgUpload/<%=image%>');">
+							</a>
+						</div>
 
-					<div class="writeform-group">
-						<label for="image">이미지</label><a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>'
-										);"> </a>
-					</div>
+						<div class="writeform-group">
+							<br> <label for="code">상품코드</label><input type="text"
+								class="form-control" name="category_code" id="product_code_id"
+								value="<%=code%>"  readonly/>
+						</div>
 
-					<div class="writeform-group">
 						<br>
-						<label for="code">상품코드</label><input type="text" class="form-control" name="product_code" id="product_code_id" value="<%=code%>" />
-					</div>
+						<div class="writeform-group">
+							<label for="code">지역코드</label><input type="text"
+								class="form-control" name="category_region"
+								id="product_region_code_id" value="<%=region%>" readonly/>
+						</div>
 
-					<br>
-					<div class="writeform-group">
-						<label for="code">지역코드</label><input type="text" class="form-control" name="product_region_code" id="product_region_code_id" value="<%=region_code%>" />
-					</div>
-
-					<br>
-					<div class="writeform-group">
-						<label for="code">도시코드</label><input type="text" class="form-control" name="product_city_code" id="product_city_code_id" value="<%=city_code%>" />
-					</div>
-
-					<br>
-					<div class="writeform-group">
-						<label for="name">상품명</label> <input type="text" class="form-control" name="product_name" id="product_name_id" value="<%=name%>" />
-					</div>
-
-					<br>
-					<div class="writeform-group">
-						<label for="name">상품테마</label> <input type="text" class="form-control" name="product_theme" id="product_theme_id" value="<%=theme%>" />
-					</div>
-
-					<div class="writeform-group">
 						<br>
-						<label for="name">상세내용</label>
+						<div class="writeform-group">
+							<label for="code">도시코드</label><input type="text"
+								class="form-control" name="category_city"
+								id="product_city_code_id" value="<%=city%>" readonly />
+						</div>
+
 						<br>
-						<%=content%>
-					</div>
+						<div class="writeform-group">
+							<label for="name">상품테마</label> <input type="text"
+								class="form-control" name="category_theme" id="product_theme_id"
+								value="<%=theme%>" readonly/>
+						</div>
+						
+						<br>
+						<div class="writeform-group">
+							<label for="name">상품명</label> <input type="text"
+								class="form-control" name="category_name" id="product_name_id"
+								value="<%=name%>" />
+						</div>
+
+						<div class="writeform-group">
+							<br> <label for="name">상세내용</label> <br>
+							<textarea id="summernoteManager"  name="category_content" rows="20" cols="80"
+										required="required">
+								<%=content%>
+							</textarea>
+						</div>
+						
+						
+						<div class="custom-file mt-3"  style="width: 100%">
+								<label for="name">img</label>
+								<input multiple="multiple" type="file" name="category_image" required="required" class="custom-file-input" id="customFile" value="<%=image%>"/>
+									<label class="custom-file-label" for="customFile">change image file</label>
+						</div>
+						
+						<input type="submit" class="btn btn-outline-dark btn-lg mt-3 mb-3" value="수정하기" >
+					</form>
 				</div>
+				<!--  카테고리 수정 폼 끝 -->
+				
+				
+				
+				
+				
+				
 				<input type="hidden" id="deletenum" name="<%=code%>">
 
 				<div class="col-md-4 ftco-animate">
 					<div class="writeform-group sticky">
 						<div class="writeform-group">
 							<h3>
-								<label for="name">날짜별 상품</label>
+								<label for="name" class="mt-5">패키지상품 리스트</label>
 							</h3>
 							<table class="pdList" id="pdlist">
 								<%
@@ -185,7 +229,8 @@ table.pdList td input {
 								%>
 								<tr>
 									<th>상품코드</th>
-									<th>출발날짜/<br>도착날짜</th>
+									<th>출발날짜/<br>도착날짜
+									</th>
 									<th style="width: 20%;">가격</th>
 									<th style="width: 15%;">인원</th>
 									<th style="width: 10%;">제어</th>
@@ -195,10 +240,13 @@ table.pdList td input {
 								%>
 								<tr>
 									<td><%=pdList.get(i).getProductNum()%></td>
-									<td style="font-size: 0.5em;"><%=pdList.get(i).getProductDepartDate()%> / <%=pdList.get(i).getProductArrivDate()%></td>
+									<td style="font-size: 0.5em;"><%=pdList.get(i).getProductDepartDate()%>
+										/ <%=pdList.get(i).getProductArrivDate()%></td>
 									<td><%=pdList.get(i).getProductPrice()%></td>
 									<td><%=pdList.get(i).getProductTotal()%></td>
-									<td><input type="button" class="btn py-1 px-2 btn-primary deletecode" value="delete" onclick="deleteCode('<%=pdList.get(i).getProductNum()%>')"></td>
+									<td><input type="button"
+										class="btn py-1 px-2 btn-primary deletecode" value="delete"
+										onclick="deleteCode('<%=pdList.get(i).getProductNum()%>')"></td>
 								</tr>
 								<%
 									}
@@ -211,7 +259,8 @@ table.pdList td input {
 
 
 						<div class="form-group">
-							<input type="button" value="날짜별 패키지상품 추가하기" class="btn py-2 px-2 btn-primary" onclick="product('<%=code%>')">
+							<input type="button" value="날짜별 패키지상품 추가하기"
+								class="btn py-2 px-2 btn-primary" onclick="product('<%=code%>')">
 						</div>
 						<div class="form-group" id="addProduct" style="display: none;">
 							<!-- 						<form action="ProductInsertPro.ma" method="post"> -->
@@ -225,12 +274,25 @@ table.pdList td input {
 									<th style="width: 10%;">등록</th>
 								</tr>
 								<tr id="event_period">
-									<td><input type="text" class="form-control" name="package_category_code" id="package_category_code" value="<%=request.getParameter("package_category_code")%>" /></td>
-									<td><input type="text" class="form-control form-control-shortshort actual_range" id="product_depardate" placeholder="depardate" name="product_depardate" required="required" readonly="readonly"></td>
-									<td><input type="text" class="form-control form-control-shortshort actual_range" id="product_arrivdate" placeholder="arrivdate" name="product_arrivdate" required="required" readonly="readonly"></td>
-									<td><input type="text" class="form-control" name="product_price" id="product_price" placeholder="price" /></td>
-									<td><input type="text" class="form-control" name="product_total" id="product_total" placeholder="total" /></td>
-									<td><input type="button" value="등록" id="product_addbtn" class="btn py-2 px-1 btn-primary" onclick="addProduct()"></td>
+									<td><input type="text" class="form-control"
+										name="package_category_code" id="package_category_code"
+										value="<%=request.getParameter("package_category_code")%>" /></td>
+									<td><input type="text"
+										class="form-control form-control-shortshort actual_range"
+										id="product_depardate" placeholder="depardate"
+										name="product_depardate" required="required"
+										readonly="readonly"></td>
+									<td><input type="text"
+										class="form-control form-control-shortshort actual_range"
+										id="product_arrivdate" placeholder="arrivdate"
+										name="product_arrivdate" required="required"
+										readonly="readonly"></td>
+									<td><input type="text" class="form-control"
+										name="product_price" id="product_price" placeholder="price" /></td>
+									<td><input type="text" class="form-control"
+										name="product_total" id="product_total" placeholder="total" /></td>
+									<td><input type="button" value="등록" id="product_addbtn"
+										class="btn py-2 px-1 btn-primary" onclick="addProduct()"></td>
 								</tr>
 							</table>
 						</div>

@@ -73,9 +73,8 @@
 						<li class="list-group-item li_hover dataChart"><span class="icon icon-line-chart"></span> 관리자 메인
 						</li>
 						<li class="list-group-item li_hover" onclick="showCategoryInsert()"><span
-								class="icon icon-pencil"></span> 상품 분류 등록</li>
-						<li class="list-group-item li_hover pList"><span class="icon icon-add_shopping_cart"></span> 상품
-							상세 등록</li>
+								class="icon icon-pencil"></span> 카테고리 등록</li>
+						<li class="list-group-item li_hover pList"><span class="icon icon-add_shopping_cart"></span> 투어상품 등록</li>
 
 						<li class="list-group-item li_hover" id="member">
 							<span class="icon icon-users"></span>회원관리</li>
@@ -209,6 +208,7 @@
 									<input multiple="multiple" type="file" name="category_image" required="required" class="custom-file-input" id="customFile"/>
 									 <label class="custom-file-label" for="customFile">Choose image file</label>
 									</div>
+									
 								
 								</div>
 							</div>

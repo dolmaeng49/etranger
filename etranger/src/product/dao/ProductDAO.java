@@ -77,6 +77,7 @@ public class ProductDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, wishCount);
 			pstmt.setString(2, category_code);
+			System.out.println(pstmt);
 			updateCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("updateCategoryWishCount 실패 : " + e.getMessage());
@@ -226,19 +227,15 @@ public class ProductDAO {
 			
 
 			try {
-				// 리뷰 조인부분 주석처리 - 리뷰 없는 카테고리가 조회되지 않음
-				// sql 구문 3줄 set categorybean 2줄 주석처리
-				// category_code 로 review 테이블 조회하는 구문 하나 더 만들어 (더 긴 구문으로 한번 더 조회하기 때문에 낭비..)
-				// rs.next 가 있다면 리뷰 개수와 평균 리뷰점수 빈에 담기
-				// 완료 : 뷰페이지에서 리뷰개수, 평균 리뷰점수가 없을 경우 제어 하기
+				// 입력 받은 검색어에 따른 카테고리 리스트 조회
 				String sql = "SELECT c.package_category_code, c.package_category_name, c.package_category_theme, c.package_category_image, c.package_category_content,"
 						+ "c.package_category_region, c.package_category_city, MIN(p.package_product_price) AS min_price"
-						// 리뷰 조인
 						+ ", count(r.review_num) AS review_count, avg(r.review_star) AS review_star_avg"
 						+ " FROM package_product p"
+						// 조인
 						+ " JOIN package_category c"
 						+ " ON p.package_category_code = c.package_category_code"
-						// 리뷰 조인
+						// 리뷰 LEFT 조인 : 뷰페이지에서 리뷰 없을 경우(null) 제어 필요
 						+ " LEFT JOIN review r ON r.review_package_category_code = p.package_category_code"
 						+ " WHERE p.package_product_depart_date > ?";
 				if(!isNulls[0]) {
@@ -258,8 +255,7 @@ public class ProductDAO {
 					sql += " AND c.package_category_city=?";
 				}
 				// 마지막
-				sql += " GROUP BY c.package_category_code"
-						+ " ORDER BY p.package_product_depart_date LIMIT ?,?";
+				sql += " GROUP BY c.package_category_code ORDER BY p.package_product_depart_date LIMIT ?,?";
 				
 
 //				System.out.println(sql);
@@ -320,5 +316,60 @@ public class ProductDAO {
 			return productList;
 		}
 		// selectCategoryList ---
-	
+
+		// 메인페이지 로그인한 회원의 정보로 상품을 조회하는 메서드
+		public ArrayList<CategoryBean> selectPersonalizedList(int page, int limit, String gender, String search_birth_start,
+				String search_birth_end) {
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ArrayList<CategoryBean> productList = new ArrayList<CategoryBean>();
+
+			int startRow = (page - 1) * limit;
+
+			try {
+
+				String sql = "SELECT c.package_category_code, c.package_category_name, c.package_category_image, c.package_category_content,"
+						+ " MIN(p.package_product_price) AS min_price, COUNT(r.review_num) AS review_count, COUNT(rs.reservation_num) AS rsv_count,"
+						+ " AVG(r.review_star) AS review_star_avg"
+						+ " FROM package_product p"
+						// 조인
+						+ " JOIN package_category c"
+						+ " ON p.package_category_code = c.package_category_code"
+						// 예약 테이블 조인
+						+ " LEFT JOIN reservation rs ON rs.reservation_category_code = c.package_category_code"
+						// 멤버테이블 x 예약 테이블 조인
+						+ " LEFT JOIN member m ON rs.reservation_member_id = m.member_id"
+						// 리뷰 LEFT 조인 : 뷰페이지에서 리뷰 없을 경우(null) 제어 필요
+						+ " LEFT JOIN review r ON r.review_package_category_code = p.package_category_code"
+						// 조회 조건
+						+ " WHERE p.package_product_depart_date > now()"
+						+ " AND m.member_birth>? AND m.member_birth<?"
+						+ " AND m.member_gender=?"
+						+ " GROUP BY c.package_category_code ORDER BY rsv_count DESC LIMIT ?,?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, search_birth_start);
+				pstmt.setString(2, search_birth_end);
+				pstmt.setString(3, gender);
+				pstmt.setInt(4, startRow);
+				pstmt.setInt(5, limit);
+				rs = pstmt.executeQuery();
+//				System.out.println(pstmt);
+				while (rs.next()) {
+					CategoryBean cb = new CategoryBean();
+					cb.setPackage_category_code(rs.getString("package_category_code"));
+					cb.setPackage_category_name(rs.getString("package_category_name"));
+					cb.setPackage_category_image(rs.getString("package_category_image"));
+					cb.setMin_price(rs.getInt("min_price"));
+					productList.add(cb);
+				}
+			} catch (SQLException e) {
+				System.out.println("selectNewList() 오류! - " + e.getMessage());
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return productList;
+		}
+
 }
