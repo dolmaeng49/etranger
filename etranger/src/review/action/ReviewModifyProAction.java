@@ -21,25 +21,17 @@ public class ReviewModifyProAction implements Action {
 		ActionForward forward = null;
 		ReviewBean rb = null;
 
-		String realFolder = "";
-		String saveFolder = "/reviewUpload";
-		int fileSize = 10 * 1024 * 1024;
 
-		ServletContext context = request.getServletContext();
-		realFolder = context.getRealPath(saveFolder);
-
-		MultipartRequest multi = new MultipartRequest(request, realFolder, fileSize, "UTF-8",
-				new DefaultFileRenamePolicy());
-
-		int review_num = Integer.parseInt(multi.getParameter("review_num"));
-		String page = multi.getParameter("page");
+		int review_num = Integer.parseInt(request.getParameter("review_num"));
+		String page = request.getParameter("page");
 
 		rb = new ReviewBean();
 		rb.setReview_num(review_num);
-		rb.setReview_member_id(multi.getParameter("review_member_id"));
-		rb.setReview_subject(multi.getParameter("subject"));
-		rb.setReview_content(multi.getParameter("content"));
-		rb.setReview_image(multi.getOriginalFileName((String) multi.getFileNames().nextElement()));
+		rb.setReview_member_id(request.getParameter("review_member_id"));
+		rb.setReview_subject(request.getParameter("review_subject"));
+		rb.setReview_content(request.getParameter("review_content"));
+		rb.setReview_image(request.getParameter("review_image"));
+		rb.setReview_star(Integer.parseInt(request.getParameter("review_star")));
 
 		ReviewModifyProService reviewModifyProService = new ReviewModifyProService();
 

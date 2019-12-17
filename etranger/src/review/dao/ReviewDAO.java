@@ -182,12 +182,13 @@ public class ReviewDAO {
 		int updateCount = 0;
 
 		try {
-			String sql = "UPDATE review SET review_subject=?, review_image=?, review_content=? WHERE review_num=?";
+			String sql = "UPDATE review SET review_subject=?, review_image=?, review_content=?, review_star=? WHERE review_num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, rb.getReview_subject());
 			pstmt.setString(2, rb.getReview_image());
 			pstmt.setString(3, rb.getReview_content());
-			pstmt.setInt(4, rb.getReview_num());
+			pstmt.setInt(4, rb.getReview_star());
+			pstmt.setInt(5, rb.getReview_num());
 			updateCount = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -336,6 +337,70 @@ public class ReviewDAO {
 			close(pstmt);
 		}
 		return articleList;
+	}
+
+	
+	
+	
+	// ============= CategoryDetail =========================
+	
+	public int selectProductListCount(String packageCategoryCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int listCount = 0;
+
+		try {
+			String sql = "select count(*) from review where review_package_category_code = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, packageCategoryCode);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				listCount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("selectListCount() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return listCount;
+	}
+	
+	public ArrayList<ReviewBean> selectReviewList(String packageCategoryCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<ReviewBean> ReviewList = new ArrayList<ReviewBean>();
+
+		try {
+			String sql = "SELECT * FROM review WHERE review_package_category_code = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, packageCategoryCode);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				ReviewBean rb = new ReviewBean();
+				rb.setReview_num(rs.getInt("review_num"));
+				rb.setReview_member_id(rs.getString("review_member_id"));
+				rb.setReview_subject(rs.getString("review_subject"));
+				rb.setReview_image(rs.getString("review_image"));
+				rb.setReview_content(rs.getString("review_content"));
+				rb.setReview_date(rs.getTimestamp("review_date"));
+				rb.setReview_readcount(rs.getInt("review_readcount"));
+				rb.setReview_package_catagory_code(rs.getString("review_package_category_code"));
+				rb.setReview_member_name(rs.getString("review_member_name"));
+				rb.setReview_star(rs.getInt("review_star"));
+				rb.setReview_comment_count(rs.getInt("review_comment_count"));
+				ReviewList.add(rb);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("selectReviewList(packageCategoryCode) 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return ReviewList;
 	}
 
 }

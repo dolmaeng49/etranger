@@ -22,7 +22,6 @@ align-self: center;
    // 메인페이지 작업처리를 위해 MainPageAction 클래스의 execute() 메서드 호출
    MainPageAction mainPageAction = new MainPageAction();
    mainPageAction.execute(request, response);
-
    // 
    ArrayList<CategoryBean> newList = (ArrayList<CategoryBean>) request.getAttribute("newList");
    ArrayList<CategoryBean> popularList =  (ArrayList<CategoryBean>) request.getAttribute("popularList");
@@ -322,7 +321,6 @@ align-self: center;
               </div>
             </div>    
           </div>
-
           <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services d-block text-center">
               <div class="d-flex justify-content-center"><div class="icon d-flex justify-content-center mb-3"><span class="align-self-center flaticon-map-of-roads"></span></div></div>
@@ -525,7 +523,6 @@ align-self: center;
 
    <script type="text/javascript">
       getRegion();
-
       function getRegion() {
          //    $('#selectRegion').hide();
          // #selectRegion에 있는 내용 지우기
@@ -534,7 +531,6 @@ align-self: center;
                "<option id='bg_gray' value=''>지역선택</option>");
          // JSON으로 가져온 데이터 #SelectRegion에 옵션으로 추가
          $.getJSON('RegionSelect.ma', function(data) {
-
             $.each(data, function(index, value) {
                $('#selectRegion').append(
                      "<option id='bg_gray' value=" + value.regionCode + "> 지역이름 : "
@@ -542,7 +538,6 @@ align-self: center;
             });
          });
       }
-
       // 도시 목록 불러오기
       function getCity() {
          $('#selectCity').empty();
@@ -551,7 +546,6 @@ align-self: center;
                "<option id='bg_gray' value=''>도시선택</option>");
          $.getJSON('CitySelect.ma?code=' + code, function(data) {
             $.each(data, function(index, value) {
-
                $('#selectCity').append(
                      "<option id='bg_gray' value=" + value.cityCode + "> 도시이름 : "
                            + value.cityName + "</option>");
