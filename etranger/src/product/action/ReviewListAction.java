@@ -1,6 +1,7 @@
 package product.action;
 
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,10 @@ public class ReviewListAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int page = 1;
 		int limit = 10;
-
+		
+		// 날짜 형식 변환
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
@@ -45,12 +49,12 @@ public class ReviewListAction implements Action {
 		startPage = pageInfo.getStartPage();
 		endPage = pageInfo.getEndPage();
 		listCount = pageInfo.getListCount();
-
+		
+		// Ajax 로 리스트 뿌리기
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
 		String op = "";
-
 		if (reviewList != null && listCount > 0) {
 			op += "<table class=\"table table-hover\">" 
 					+"<thead>"
@@ -65,9 +69,9 @@ public class ReviewListAction implements Action {
 			for (ReviewBean rl : reviewList) {
 				op += "<tr>" 
 						+ "<td>" + rl.getReview_num() + "</td>" 
-						+ "<td>" + rl.getReview_subject() + "</td>"
+						+ "<td><a href= \"ReviewDetail.rv?review_num=" + rl.getReview_num() + "&page=" + nowPage + "\">"	+ rl.getReview_subject() + "</a></td>"
 						+ "<td>" + rl.getReview_member_name() + "</td>" 
-						+ "<td>" + rl.getReview_date() + "</td>"
+						+ "<td>" + date.format(rl.getReview_date()) + "</td>"
 						+ "<td>" + "<div id=\"stars\">";
 				if (rl.getReview_star() == 0) {
 					op += "<img src=\"images/rating0.png\" align=\"middle\" />";
@@ -98,6 +102,7 @@ public class ReviewListAction implements Action {
 			}
 			op += "</table>"
 			
+			// 페이지 버튼
 			+"<div class=\"row mt-5\">"
 			+"<div class=\"col text-center\">"
 			+"<div class=\"block-27\">"
