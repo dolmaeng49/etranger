@@ -11,7 +11,6 @@
 	margin: 0 0 50px 50px;
 }
 
-
 .text-muted1 {
 	color: #b3b3b3;
 }
