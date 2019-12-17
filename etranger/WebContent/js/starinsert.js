@@ -15,3 +15,4 @@ $('#notice_del_button').click(function () {
 	}
 	
 });
+

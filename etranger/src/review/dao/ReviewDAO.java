@@ -182,12 +182,13 @@ public class ReviewDAO {
 		int updateCount = 0;
 
 		try {
-			String sql = "UPDATE review SET review_subject=?, review_image=?, review_content=? WHERE review_num=?";
+			String sql = "UPDATE review SET review_subject=?, review_image=?, review_content=?, review_star=? WHERE review_num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, rb.getReview_subject());
 			pstmt.setString(2, rb.getReview_image());
 			pstmt.setString(3, rb.getReview_content());
-			pstmt.setInt(4, rb.getReview_num());
+			pstmt.setInt(4, rb.getReview_star());
+			pstmt.setInt(5, rb.getReview_num());
 			updateCount = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
