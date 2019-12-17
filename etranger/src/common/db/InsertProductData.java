@@ -154,6 +154,20 @@ public class InsertProductData {
 				String member_id = "test" + (i + 1);
 				String member_name = firstNames[random.nextInt(firstNames.length - 1)]
 						+ lastNames[random.nextInt(lastNames.length - 1)];
+				StringBuffer birth = new StringBuffer();
+				double random_age = random.nextDouble();
+				if(random_age < 0.2) { // 20대
+					birth = birth.append(19).append((90 + random.nextInt(9))).append("-12-10");
+				} else if(random_age < 0.5) { // 30대
+					birth = birth.append(19).append((80 + random.nextInt(10))).append("-12-10");
+				} else if(random_age < 0.8) { // 40대
+					birth = birth.append(19).append((70 + random.nextInt(9))).append("-12-10");
+				} else if(random_age < 0.95) { // 50대
+					birth = birth.append(19).append((60 + random.nextInt(9))).append("-12-10");
+				} else { // 60대 이상
+					birth = birth.append(19).append((50 + random.nextInt(9))).append("-12-10");
+				}
+				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, member_id);
 				pstmt.setString(2, "1234");
@@ -161,7 +175,7 @@ public class InsertProductData {
 				pstmt.setString(4, "아이티윌부산");
 				pstmt.setString(5, "01022673405");
 				pstmt.setString(6, "etrangermanager@gmail.com");
-				pstmt.setString(7, "1990-12-10");
+				pstmt.setString(7, birth.toString());
 				pstmt.setString(8, random.nextBoolean() == true ? "m" : "f");
 				pstmt.setString(9, "test_acount");
 //				System.out.println(pstmt);

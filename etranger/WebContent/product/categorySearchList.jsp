@@ -125,7 +125,7 @@ function isThereLoginSession(){
                     <span class="price">￦<%=categoryList.get(i).getMin_price() %> ~</span>
                     <h3 class="heading"><%=categoryList.get(i).getPackage_category_name()%></h3>
                     <div class="post-meta" style="text-align: right;" onclick="wishFunction(this,'<%=categoryList.get(i).getPackage_category_code()%>')">
-                      <span>좋아요숫자 <span id="wish_count"><%=categoryList.get(i).getPackage_category_wish_count() %></span>
+                      <span>찜숫자 <span id="wish_count"><%=categoryList.get(i).getPackage_category_wish_count() %></span>
 								<i
 								<%if(member_wishList != null && member_wishList.contains(categoryList.get(i).getPackage_category_code())) {%>
 									class="fa fa-heart" id="1" 
@@ -210,7 +210,6 @@ function isThereLoginSession(){
                       
                       <div class="select-wrap col-sm-12 group mb-3">
                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <input type="hidden" id="" value="<%=searchBean.getRegion()%>">
                         <select name="region" id="selectRegion" class="form-control" onChange="getCity()"><!--지역명  -->
                         	<option value="">지역선택</option>
                         </select>
@@ -223,6 +222,8 @@ function isThereLoginSession(){
                         </select>
                       </div>
                       
+                        <input type="text" id="region_code_search" value="<%=searchBean.getRegion()%>">
+                        <input type="text" id="city_code_search" value="<%=searchBean.getCity()%>">
                       <!--  -->
                       
                       <div class="col-sm-12 group mb-3">
@@ -307,29 +308,45 @@ $('#side_theme').empty();
 
 
 function getRegion() {
-// 	$('#selectRegion').hide();
+	// 검색한 지역코드 가져오기(Number 타입으로 형변환)
+	var region_code_search = Number($('#region_code_search').val());
+	
 	// #selectRegion에 있는 내용 지우기
 	$('#selectRegion').empty();
 	$('#selectRegion').append("<option value=''>지역선택</option>");
 	// JSON으로 가져온 데이터 #SelectRegion에 옵션으로 추가
 	$.getJSON('RegionSelect.ma', function(data) {
-
 		$.each(data, function(index, value) {
-			$('#selectRegion').append(
-					"<option value=" + value.regionCode + "> 지역이름 : " + value.regionName
-							+ "</option>");
+			// 검색한 지역 코드가 있을 경우 해당 지역 코드가 선택되도록 selected 속성 추가
+			if(region_code_search != null && region_code_search == value.regionCode){
+				$('#selectRegion').append(
+						'<option value=' + value.regionCode + ' selected="selected"> 지역이름 : ' + value.regionName
+								+ '</option>');
+			} else {
+				$('#selectRegion').append(
+						"<option value=" + value.regionCode + "> 지역이름 : " + value.regionName
+								+ "</option>");
+			}
 		});
 	});
 }
 
 // 도시 목록 불러오기
 function getCity() {
-	$('#selectCity').empty();
 	var code = $('#selectRegion').val();
+	var city_code_search = Number($('#region_code_search').val());
+	
+	$('#selectCity').empty();
 	$('#selectCity').append("<option value=''>도시선택</option>");
+	
 	$.getJSON('CitySelect.ma?code=' + code, function(data) {
 		$.each(data, function(index, value) {
-
+			// 검색한 도시 코드가 있을 경우 해당 지역 코드가 선택되도록 selected 속성 추가
+			if(city_code_search != null && city_code_search == value.cityCode){
+				$('#selectCity').append(
+						'<option value=' + value.cityCode + ' selected="selected"> 도시이름 : ' + value.cityName
+						+ '</option>');
+			}
 			$('#selectCity').append(
 					"<option value=" + value.cityCode + "> 도시이름 : " + value.cityName
 							+ "</option>");
