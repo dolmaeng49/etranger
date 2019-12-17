@@ -64,7 +64,7 @@
 							class="icon icon-line-chart"></span> 관리자 메인</li>
 						<li class="list-group-item li_hover"
 							onclick="location.href='ManagerMain.ma'"><span
-							class="icon icon-pencil"></span> 상품 등록으로 돌아가기</li>
+							class="icon icon-pencil"></span> 카테고리 등록&amp;수정 돌아가기</li>
 						<li class="list-group-item li_hover" id="member"><span
 							class="icon icon-users"></span>회원관리</li>
 					</ul>
