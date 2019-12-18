@@ -102,18 +102,18 @@ h1 {
 					<div class="row">
 						<div class="col-sm-4">
 							<div class="team-member">
-								<img class="mx-auto rounded-circle" src="./images/image_7.jpg"
+								<img class="mx-auto rounded-circle" src="./images/et_jongwoo.png"
 									alt="">
 								<h4 class="section-subheading text-muted">김종우</h4>
-								<p class="text-muted1"></p>
+								<p class="text-muted1">Kim JongWoo</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
-								<p class="text-muted1" style="margin-top: -21px;">sewoong0409@naver.com</p>
+								<p class="text-muted1" style="margin-top: -21px;">.com</p>
 
 							</div>
 						</div>
 						<div class="col-sm-4">
 							<div class="team-member">
-								<img class="mx-auto rounded-circle" src="./images/image_7.jpg"
+								<img class="mx-auto rounded-circle" src="./images/et_eunji.png"
 									" alt="">
 								<h4 class="section-subheading text-muted">서은지</h4>
 								<p class="text-muted1">Choe YeongBi</p>
@@ -124,7 +124,7 @@ h1 {
 						</div>
 						<div class="col-sm-4">
 							<div class="team-member">
-								<img class="mx-auto rounded-circle" src="./images/image_7.jpg"
+								<img class="mx-auto rounded-circle" src="./images/et_boss.png"
 									" alt="">
 								<h4 class="section-subheading text-muted">신동명</h4>
 								<p class="text-muted1">Ji YiDeum</p>
@@ -135,7 +135,7 @@ h1 {
 						</div>
 						<div class="col-sm-4">
 							<div class="team-member">
-								<img class="mx-auto rounded-circle" src="./images/image_7.jpg"
+								<img class="mx-auto rounded-circle" src="./images/et_jinwoo.png"
 									" alt="">
 								<h4 class="section-subheading text-muted">조진우</h4>
 								<p class="text-muted1">Shin MiSong</p>
@@ -146,7 +146,7 @@ h1 {
 						</div>
 						<div class="col-sm-4">
 							<div class="team-member">
-								<img class="mx-auto rounded-circle" src="./images/image_7.jpg"
+								<img class="mx-auto rounded-circle" src="./images/et_soobong.png"
 									" alt="">
 								<h4 class="section-subheading text-muted">최수봉</h4>
 								<p class="text-muted1">Kwon KyoungMin</p>
@@ -157,7 +157,7 @@ h1 {
 						</div>
 						<div class="col-sm-4">
 							<div class="team-member">
-								<img class="mx-auto rounded-circle" src="./images/image_7.jpg"
+								<img class="mx-auto rounded-circle" src="./images/et_hunwoo.png"
 									" alt="">
 								<h4 class="section-subheading text-muted">하헌우</h4>
 								<p class="text-muted1">Song JuYeong</p>
@@ -169,7 +169,7 @@ h1 {
 						</div>
 						<div class="col-sm-4">
 							<div class="team-member">
-								<img class="mx-auto rounded-circle" src="./images/image_7.jpg"
+								<img class="mx-auto rounded-circle" src="./images/et_eunb.png"
 									" alt="">
 								<h4 class="section-subheading text-muted">홍은비</h4>
 								<p class="text-muted1">Han SungMin</p>
@@ -180,7 +180,7 @@ h1 {
 						</div>
 						<div class="col-sm-4">
 							<div class="team-member">
-								<img class="mx-auto rounded-circle" src="./images/image_7.jpg"
+								<img class="mx-auto rounded-circle" src="./images/et_tutor.png"
 									" alt="">
 								<h4 class="section-subheading text-muted">홍진숙</h4>
 								<p class="text-muted1">Lee KiHong</p>
@@ -244,40 +244,37 @@ h1 {
 						<div class="col mb-2 d-flex py-2" style="background: white; padding-left: 8rem;">
 							<div class="align-self-center">
 							<div class="form-group">
-								<input type="submit" value="문의하기" class="btn btn-primary py-3 px-4">
+							<a href="#layer2Email" class="btn_email">Contact Us</a>
 							</div>
 							</div>
 						</div>
 						<!--  -->
-						 <!--로그인 딤처리 레이어  -->
-   <div class="dim-layer">
-    <div class="dimBg"></div>
-    <div id="layer2" class="pop-layer">
-        <div class="pop-container">
-            <div class="pop-conts">
+						 <!--문의메일 딤처리 레이어  -->
+   <div class="dim-layerEmail">
+    <div class="dimBgEmail"></div>
+    <div id="layer2Email" class="pop-layerEmail">
+        <div class="pop-containerEmail">
+            <div class="pop-contsEmail">
                 <!--content //-->
-                <form action="LoginPro.me" method="post">
-                <div class="comment-form-wrap pt-5 form-wrap-login">
-						<h3 class="mb-5">Login</h3>
-						<div class="form-group">
-							<label for="id">ID</label><br>
-							<input type="text" class="form-control" id="id" required="required" name="member_id">
-						</div>
-						<div class="form-group">
-							<label for="password">PASSWORD</label><br>
-							<input type="password" class="form-control" id="passwd" required="required" name="member_passwd">
-						</div>
-						<p class="wrap-links"><a href="MemberFindIdForm.me">ID 찾기</a> |
-							<a href="MemberFindPasswdForm.me">P/W 변경</a> |
-							<a href="MemberJoinForm.me">회원가입</a> |</p>
-			 			<div class="form-group form-group-btn">
-							<input type="submit" value="Login" class="btn py-3 px-4 btn-primary">&nbsp;&nbsp;
-						</div>
-					</div>
-                <div class="btn-r">
-                    <a href="#"  id="btnPopUpClose" class="btn py-1 px-2 btn-primary">Close</a>
+                <form action="ContactEmail.ma" method="post" name="contact_mail_form" onsubmit="return validEmail()">
+							<div class="form-group">
+								<input type="text" class="form-contact" id="receiveEmail" name="receiveEmail" placeholder="회신받을 메일주소">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-contact" id="subject" name="subject" placeholder="문의 제목">
+							</div>
+							<div class="form-group">
+								<textarea name="content" id="content" cols="20" rows="7" class="form-contact2"
+									placeholder="문의하실 내용을 적어주세요 :)"></textarea>
+							</div>
+							<div class="form-group">
+								<input type="submit" value="문의하기"
+									 class="btn btn-primary py-3 px-5">
+							</div>
+							<div class="btn-rEmail">
+                    <a href="#"  id="btnPopUpCloseEmail" class="btn py-1 px-2 btn-primary">Close</a>
                 </div>
-			</form>
+						</form>
                 <!--// content-->
             </div>
         </div>
@@ -287,29 +284,7 @@ h1 {
 					</div>
 				</div>
 			</div>
-			<div class="row mt-5">
-				<!--3행 시작  -->
-
-				<!--메일보내기 자리  -->
-				<div class="col-md-12" style="text-align: center;">
-						<form action="ContactEmail.ma" method="post" name="contact_mail_form" onsubmit="return validEmail()">
-							<div class="form-group">
-								<input type="text" class="form-contact" id="receiveEmail" name="receiveEmail" placeholder="회신받을 메일주소">
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-contact" id="subject" name="subject" placeholder="문의 제목">
-							</div>
-							<div class="form-group">
-								<textarea name="content" id="content" cols="30" rows="7" class="form-contact2"
-									placeholder="문의하실 내용을 적어주세요 :)"></textarea>
-							</div>
-							<div class="form-group">
-								<input type="submit" value="문의하기"
-									class="btn btn-primary py-3 px-5">
-							</div>
-						</form>
-				</div>
-			</div>
+			
 		</div>
 	</section>
 
