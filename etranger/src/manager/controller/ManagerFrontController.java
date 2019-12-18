@@ -21,6 +21,7 @@ import manager.action.ManagerImageCallbackAction;
 import manager.action.ProductDetailAction;
 import manager.action.ProductInsertAction;
 import manager.action.CategoryListAction;
+import manager.action.CategoryUpdateAction;
 import manager.action.CategoryInsertAction;
 //import manager.action.ProductListAction;
 import manager.action.ThemeInsertAction;
@@ -104,6 +105,17 @@ public class ManagerFrontController extends HttpServlet {
 			// CategoryInsertAction 클래스로 이동
 			else if (command.equals("/CategoryInsert.ma")) {
 				action = new CategoryInsertAction();
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			// CategoryInsertAction 클래스로 이동
+			else if (command.equals("/CategoryUpdate.ma")) {
+//				System.out.println("CategoryUpdate controller");
+				action = new CategoryUpdateAction();
 				try {
 					forward = action.execute(request, response);
 				} catch (Exception e) {

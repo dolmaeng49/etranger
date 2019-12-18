@@ -171,7 +171,7 @@
                       <!-- 페이지 이동할 때 검색 정보를 다음 페이지로 전달하기 위한 input[type="hidden"] 태그들 -->
                         <input type="hidden" id="region_code_search" value="<%=searchBean.getRegion()%>">
                         <input type="hidden" id="city_code_search" value="<%=searchBean.getCity()%>">
-                        <input type="text" id="fowarding_page" name="page" value="1">
+                        <input type="hidden" id="fowarding_page" name="page" value="1">
                       <!--  -->
                       
                       <div class="col-sm-12 group mb-3">
@@ -186,7 +186,7 @@
 			<!--추천 지역 -->
             <div class="sidebar-box ftco-animate">
               <div class="categories">
-                <h3>Regions</h3>
+                <h3>추천 지역</h3>
                 <div id="side_region" class="side_region">
                 
                 </div>
@@ -196,7 +196,7 @@
             
 			<!-- 추천 테마 -->
             <div class="sidebar-box ftco-animate">
-              <h3>Tag Cloud</h3>
+              <h3>추천 테마</h3>
               <div id="side_theme" class="tagcloud">
               </div>
             </div>

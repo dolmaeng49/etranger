@@ -154,30 +154,24 @@
                 </form>
             </div>
             
+            <!--추천 지역 -->
             <div class="sidebar-box ftco-animate">
               <div class="categories">
-                <h3>Categories</h3>
-                <li><a href="#">Tours <span>(12)</span></a></li>
-                <li><a href="#">Hotels <span>(22)</span></a></li>
-                <li><a href="#">Cruises <span>(37)</span></a></li>
-                <li><a href="#">Restaurant <span>(42)</span></a></li>
-                <li><a href="#">Destination <span>(14)</span></a></li>
+                <h3>추천 지역</h3>
+                <div id="side_region" class="side_region">
+                
+                </div>
               </div>
             </div>
-
+            <!--  -->
+            
+			<!-- 추천 테마 -->
             <div class="sidebar-box ftco-animate">
-              <h3>Tag Cloud</h3>
-              <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">Life</a>
-                <a href="#" class="tag-cloud-link">Sport</a>
-                <a href="#" class="tag-cloud-link">Tech</a>
-                <a href="#" class="tag-cloud-link">Travel</a>
-                <a href="#" class="tag-cloud-link">Life</a>
-                <a href="#" class="tag-cloud-link">Sport</a>
-                <a href="#" class="tag-cloud-link">Tech</a>
-                <a href="#" class="tag-cloud-link">Travel</a>
+              <h3>추천 테마</h3>
+              <div id="side_theme" class="tagcloud">
               </div>
             </div>
+            <!--  -->
             
           </div>
 
@@ -190,6 +184,41 @@
 
 	<!-- loader 인클루드 -->
 <jsp:include page="../include/loader.jsp"/>
+<script type="text/javascript">
+displaySideRegion();
+displaySideTheme();
+
+// 사이드바 추천 지역 
+function displaySideRegion() {
+	
+	$('#side_region').empty();
+	// JSON으로 가져온 데이터 #side_region에 뿌려주기
+	$.getJSON('RegionSelect.ma', function(data) {
+
+		$.each(data, function(index, value) {
+			$('#side_region').append(
+					"<li><a href='CategoryListSearch.pr?region="+value.regionCode+"'>" + value.regionName + "</a></li>");
+		});
+	});
+}
+
+//사이드바 추천 테마
+
+function displaySideTheme() {
+	
+$('#side_theme').empty();
+	// JSON으로 가져온 데이터 #side_theme에 뿌려주기
+	$.getJSON('ThemeCheckBox.ma', function(data) {
+
+		$.each(data, function(index, value) {
+			$('#side_theme').append(
+					"<a href='CategoryListSearch.pr?keyword="+ value.themeName +"' class='tag-cloud-link'>" +value.themeName + "</a>");
+		});
+	});
+	
+}
+
+</script>
     
   </body>
 </html>

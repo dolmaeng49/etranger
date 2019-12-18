@@ -228,11 +228,19 @@ align-self: center;
       <div class="container-fluid d-flex">
          <div class="section-2-blocks-wrapper row no-gutters">
             <div class="img col-sm-12 col-lg-6">
-               <video autoplay muted loop id="video" width="950px" height="800px">
-                  <source src="images/intro.mp4" type="video/mp4">
-               </video>
-               <a href="https://vimeo.com/371024892" class="button popup-vimeo"><span
-                  class="ion-ios-play"></span></a>
+            <div class="embed-responsive embed-responsive-16by9" style="margin-top: 8.3rem;">
+						<video autoplay muted loop class="embed-responsive-item">
+							<source src="images/intro.mp4" type="video/mp4">
+						</video>
+					</div>
+            
+<!--                <video autoplay muted loop id="video" width="950px" height="800px"> -->
+<!--                   <source src="images/intro.mp4" type="video/mp4"> -->
+<!--                </video> -->
+               
+<!--                <a href="https://vimeo.com/371024892" class="button popup-vimeo"><span -->
+<!--                   class="ion-ios-play"></span></a> -->
+                  
             </div>
             <div class="text col-lg-6 ftco-animate">
                <div class="text-inner align-self-start">

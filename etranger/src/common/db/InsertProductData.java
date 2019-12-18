@@ -179,37 +179,40 @@ public class InsertProductData {
 				pstmt.setString(8, random.nextBoolean() == true ? "m" : "f");
 				pstmt.setString(9, "test_acount");
 //				System.out.println(pstmt);
-				int insertMemberCount = pstmt.executeUpdate();
-				if(insertMemberCount > 0) {commit(con);};
+//				int insertMemberCount = pstmt.executeUpdate();
+//				if(insertMemberCount > 0) {commit(con);};
 				
 				// 예약하기 & 리뷰쓰기
 				// 예약할 프로덕트 개수
 				int reservCount = random.nextInt(6);
 				// 존재하는 프로덕트 개수가 적을 경우
 				reservCount = reservCount > products.size() ? products.size() : reservCount; 
-//				System.out.println("예약할 개수 : " + reservCount);
-				Set<Integer> index = new HashSet<Integer>();
+				System.out.println("예약할 개수 : " + reservCount);
+				Set<Integer> index_set = new HashSet<Integer>();
 				// 예약할 개수 만큼의 인덱스 생성
-				while(index.size() < reservCount) {
-					index.add(random.nextInt(products.size()));
+				while(index_set.size() < reservCount) {
+					index_set.add(random.nextInt(products.size()));
 				}
+				Iterator<Integer> itr = index_set.iterator();
 				for(int k = 0; k < reservCount; k++) {
+					int index = itr.next();
+					System.out.println(products.get(index).getProductNum());
 					sql = "INSERT INTO reservation VALUES(null,?,?,?,?,?,?,?,?)";
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, member_id);
-					pstmt.setString(2, products.get(k).getProductNum());
-					pstmt.setString(3, products.get(k).getCategoryCode());
+					pstmt.setString(2, products.get(index).getProductNum());
+					pstmt.setString(3, products.get(index).getCategoryCode());
 					// 예약날짜는 출발날짜의 7일 전으로 설정
-					pstmt.setString(4, LocalDate.parse(products.get(k).getProductDepartDate()).minusDays(7).toString());
+					pstmt.setString(4, LocalDate.parse(products.get(index).getProductDepartDate()).minusDays(7).toString());
 					// 예약 인원 1 ~ 5 명
 					int headCount = 1 + random.nextInt(4);
-					pstmt.setInt(5, products.get(k).getProductPrice() * headCount);
+					pstmt.setInt(5, products.get(index).getProductPrice() * headCount);
 					pstmt.setInt(6, headCount);
 					pstmt.setString(7, "Y");
 					pstmt.setString(8, "결제완료");
 //					System.out.println(pstmt);
-					int insertReservCount = pstmt.executeUpdate();
-					if(insertReservCount > 0) {commit(con);};
+//					int insertReservCount = pstmt.executeUpdate();
+//					if(insertReservCount > 0) {commit(con);};
 					
 					// 리뷰쓰기 구매자의 30%만 리뷰 쓰도록
 					if(random.nextDouble() < 0.3) {
@@ -225,8 +228,8 @@ public class InsertProductData {
 						// 4 ~ 10 별점
 						pstmt.setInt(8, 4 + random.nextInt(6));
 //						System.out.println(pstmt);
-						int insertReviewCount = pstmt.executeUpdate();
-						if(insertReviewCount > 0) {commit(con);};
+//						int insertReviewCount = pstmt.executeUpdate();
+//						if(insertReviewCount > 0) {commit(con);};
 					}
 				}
 			} catch (SQLException e) {

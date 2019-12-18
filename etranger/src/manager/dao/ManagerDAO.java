@@ -240,6 +240,30 @@ public class ManagerDAO {
 		return insertCount;
 	}
 	// insertCategory ---
+	
+	// updateCategory ---
+	public int CategoryUpdate(CategoryBean cb) {
+//		System.out.println("카테고리업뎃");
+		int updateCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE package_category SET package_category_name=?, package_category_content=?, package_category_image=? WHERE package_category_code=?;";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, cb.getPackage_category_name());
+			pstmt.setString(2, cb.getPackage_category_content());			
+			pstmt.setString(3, cb.getPackage_category_image());
+			pstmt.setString(4, cb.getPackage_category_code());
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return updateCount;
+	}
+	
+	
 
 	// --- selectListCount
 	public int selectListCount() {
@@ -742,5 +766,7 @@ public class ManagerDAO {
 		}
 		return regionReservationList;
 	}
+
+
 
 }

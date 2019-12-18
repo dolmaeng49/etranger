@@ -1,7 +1,6 @@
 package manager.action;
 
 import java.io.PrintWriter;
-import java.util.Enumeration;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -12,23 +11,22 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import common.action.Action;
 import common.vo.ActionForward;
-import manager.svc.CategoryInsertService;
+import manager.svc.CategoryUpdateService;
+import manager.svc.ReservUpdateService;
 import manager.vo.CategoryBean;
+import review.service.ReviewModifyProService;
 
-public class CategoryInsertAction implements Action {
+public class CategoryUpdateAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
 		CategoryBean cb = null;
-
-//		System.out.println("CategoryInsertAction!");
 		String realFolder = ""; // 실제 경로
 		String saveFolder = "/ManagerImgUpload"; // 가상 경로
 		int fileSize = 100 * 1024 * 1024; // 100MB 크기 지정
 		ServletContext context = request.getServletContext();// 실제 폴더 위치
 		realFolder = context.getRealPath(saveFolder); // 실제 경로
-
 		MultipartRequest multi = new MultipartRequest(request, // request 객체
 				realFolder, // 실제 업로드 폴더 경로
 				fileSize, // 파일 크기
@@ -39,39 +37,37 @@ public class CategoryInsertAction implements Action {
 		// 전달받은 데이터를 저장할 CategoryBean 객체생성
 		cb = new CategoryBean();
 		
-		int category_citycode = Integer.parseInt(multi.getParameter("category_citycode"));
-		int category_regioncode = Integer.parseInt(multi.getParameter("category_regioncode"));
-		cb.setPackage_category_city(category_citycode);
-		cb.setPackage_category_region(category_regioncode);
+		String package_category_code = multi.getParameter("category_code");
+		String package_category_theme= multi.getParameter("category_theme");
+		cb.setPackage_category_code(package_category_code);
 		cb.setPackage_category_name(multi.getParameter("category_name"));
 		cb.setPackage_category_content(multi.getParameter("category_content"));
 		cb.setPackage_category_image(multi.getOriginalFileName((String)multi.getFileNames().nextElement()));
+
+		CategoryUpdateService categoryUpdateService = new CategoryUpdateService();
+		boolean isUpdateSuccess = categoryUpdateService.updateCategory(cb);
 		
-		
-		// 테마 처리
-		String addTheme = "";
-		String s = "!";
-		for (int i = 0; i < multi.getParameterValues("theme").length; i++) {
-
-			addTheme += (s + (multi.getParameterValues("theme")[i]));
-		}
-
-		CategoryInsertService cis = new CategoryInsertService();
-		boolean isInsertSuccess = cis.InsertCategory(cb, addTheme);
-
-		if (!isInsertSuccess) {
-			response.setContentType("text/html; charset=UTF-8");
+		if (!isUpdateSuccess) {
+			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('상품분류 등록 실패!')");
+			out.println("alert('글 수정 실패!');");
 			out.println("history.back()");
 			out.println("</script>");
+
 		} else {
 			forward = new ActionForward();
-			forward.setPath("ManagerMain.ma");
-			forward.setRedirect(true);
-		}
 
+
+			String path= "ProductDetail.ma?package_category_code="+package_category_code+"&package_category_theme=" + package_category_theme;
+			forward.setPath(path);
+			
+//			ProductDetail.ma?package_category_code="
+//					+ productList.get(i).getPackage_category_code() + "&package_category_theme="
+			
+		}
+		
+		
 		return forward;
 	}
 
