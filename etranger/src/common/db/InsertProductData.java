@@ -108,8 +108,6 @@ public class InsertProductData {
 		ResultSet rs = null;
 		String sql = "";
 		
-		ReservationBean rsvBean = new ReservationBean();
-		ReservationInsertService ris = new ReservationInsertService();
 		Random random = new Random();
 		
 		ArrayList<ProductBean> products = new ArrayList<ProductBean>(); 

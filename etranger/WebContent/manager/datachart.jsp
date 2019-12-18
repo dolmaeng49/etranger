@@ -74,7 +74,7 @@
         var bgcolor = [];
         var bcolor = [];
         
-        for (var i=0;i<2;i++){
+        for (var i=0;i<<%=regionReservationList.size()%>;i++){
         	var color1=Math.floor(Math.random() * 256);
             var color2=Math.floor(Math.random() * 256);
             var color3=Math.floor(Math.random() * 256);
