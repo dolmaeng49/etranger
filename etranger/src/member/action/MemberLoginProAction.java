@@ -2,6 +2,7 @@ package member.action;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,9 +51,9 @@ public class MemberLoginProAction implements Action {
 			session.setAttribute("member_id", member_id);
 			
 			// member_name, member_email, member_birth, member_gender, member_grade
-			MemberBean memberInfo = memberLoginProService.getMemberInfo(member_id);
 			// 5 개의 정보 저장되어 있음
-			session.setAttribute("memberInfo", memberInfo);
+			MemberBean memberBean = memberLoginProService.getMemberInfo(member_id);
+			session.setAttribute("member_name", memberBean.getMember_name());
 			
 			// 아이디에 해당하는 찜목록(ArrayList<String>) 조회, 세션에 저장
 			// 찜목록이 없을 경우 ArrayList의 size = 0

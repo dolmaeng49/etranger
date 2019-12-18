@@ -28,6 +28,7 @@ align-self: center;
    ArrayList<CategoryBean> recommendedList =  (ArrayList<CategoryBean>) request.getAttribute("recommendedList");
    ArrayList<ReviewBean> reviewList = (ArrayList<ReviewBean>) request.getAttribute("reviewList");
    
+   String newList_name = (String)request.getAttribute("newList_name");
 %>
 
 </head>
@@ -348,7 +349,7 @@ align-self: center;
          <div
             class="row no-gutters justify-content-center mb-5 pb-5 ftco-animate">
             <div class="col-md-7 text-center heading-section">
-               <h2>Most Popular Destination</h2>
+               <h2><%=newList_name %></h2>
             </div>
          </div>
          <div class="row no-gutters">
