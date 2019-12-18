@@ -11,6 +11,18 @@ import product.dao.ProductDAO;
 import product.vo.SearchBean;
 
 public class CategoryListService {
+	
+	public int getListCount(SearchBean searchBean) {
+		Connection con = getConnection();
+		ProductDAO productDAO = ProductDAO.getInstance();
+		productDAO.setConnection(con);
+	
+		int listCount = productDAO.selectListCount(searchBean);
+	
+		close(con);
+	
+		return listCount;
+	}
 
 	public ArrayList<CategoryBean> getCategoryList(int page, int limit, SearchBean searchBean) {
 		Connection con = getConnection();
@@ -23,7 +35,6 @@ public class CategoryListService {
 
 		return productList;
 	}
-	
 	
 	// 로그인 회원의 성별, 연령대 정보를 활용한 추천 리스트
 	public ArrayList<CategoryBean> getPersonalizedList(int page, int limit, String gender, String search_birth_start, String search_birth_end) {

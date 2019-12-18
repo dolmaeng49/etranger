@@ -361,10 +361,8 @@ align-self: center;
                      <div class="post-meta">
                         <% String code = cb.getPackage_category_code();
                            code = code.substring(code.indexOf("!")); // category code 느낌표 없애기
-                           String[] codes = code.split("!"); 
-                           for(String cd : codes) {
-                           %><span><%=cd %></span>
-                        <% } %>
+                           %><span><%=code.replace('!', '#') %></span> 
+                           
 
                      </div>
                      <p class="star-rate">
@@ -457,11 +455,7 @@ align-self: center;
                            <div class="post-meta">
                               <%
                                  String code = cb.getPackage_category_code();
-                                 code = code.substring(code.indexOf("!"));
-                                 String[] codes = code.split("!");
-                                 for (String cd : codes) {
-                           %><span><%=cd%></span>
-                              <% } %>
+                                 %><span><%=code.substring(code.indexOf("!")).replace('!', '#') %></span>
                            </div>
                            <p class="star-rate">
                               <span class="icon-star"></span><span class="icon-star"></span><span
