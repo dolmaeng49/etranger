@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import manager.vo.CategoryBean;
+import manager.vo.DatachartBean;
 import manager.vo.ProductBean;
 import reservation.vo.ReservationBean;
 import review.vo.ReviewBean;
@@ -708,31 +709,60 @@ public class ManagerDAO {
 		return listCount;
 	}
 
-	public ArrayList<CategoryBean> RegionReservationCount() {
+	// =========================== 시각화 =================================
+	
+	// 전체 판매량, 매출액
+	public DatachartBean TotalSales() {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<CategoryBean> regionReservationList = new ArrayList<CategoryBean>();
+		DatachartBean db =null;
+		
+		try {
+			String sql = "SELECT SUM(reservation_price), COUNT(*) FROM reservation";
+			
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				db = new DatachartBean();
+				db.setSalesVolume(rs.getInt("SUM(reservation_price)"));
+				db.setSales(rs.getInt("COUNT(*)"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return db;
+	}
+	
+	// 지역별 상품예약 수
+	public ArrayList RegionReservationCount() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList categoryRegionName = new ArrayList();	// 지역이름
+		ArrayList packageProductCurrent = new ArrayList(); // 지역별 예약상품 수
+		ArrayList regionReservationList = new ArrayList(); // 지역이름, 지역별 예약상품 수 저장
 
 		System.out.println("RegionReservationCount DB");
 
 		try {
 
-			String sql = "SELECT cr.category_region_name, sum(pp.package_product_current) " + "FROM package_product pp "
-					+ "JOIN package_category pc ON pp.package_category_code = pc.package_category_code "
-					+ "JOIN category_region cr ON pc.package_category_region = cr.category_region_code "
-					+ "GROUP BY cr.category_region_name";
+			String sql = "SELECT cr.category_region_name , sum(pp.package_product_current) " 
+						+ "FROM package_product pp "
+						+ "JOIN package_category pc ON pp.package_category_code = pc.package_category_code "
+						+ "JOIN category_region cr ON pc.package_category_region = cr.category_region_code "
+						+ "GROUP BY cr.category_region_name";
 
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			System.out.println(pstmt);
-			while (rs.next()) {
-				CategoryBean cb = new CategoryBean();
-				cb.setRegionName(rs.getString("cr.category_region_name"));
-				cb.setPackage_product_current(rs.getInt("sum(pp.package_product_current)"));
 
-				regionReservationList.add(cb);
-				System.out.println(cb.getRegionName() + ", " + cb.getPackage_product_current());
+			while (rs.next()) {
+				categoryRegionName.add("\""+rs.getString("cr.category_region_name")+"\"");
+				packageProductCurrent.add(rs.getInt("sum(pp.package_product_current)"));
+				
 			}
+			regionReservationList.add(categoryRegionName);
+			regionReservationList.add(packageProductCurrent);
 
 		} catch (SQLException e) {
 			System.out.println("RegionReservationCount() 오류! - " + e.getMessage());
@@ -742,5 +772,107 @@ public class ManagerDAO {
 		}
 		return regionReservationList;
 	}
+	
+	// 일별 결제건수, 금액
+	public ArrayList TotalPayCount() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList totalPayCount = new ArrayList();
+		ArrayList reservationDate = new ArrayList();
+		ArrayList reservationPrice = new ArrayList();
+		ArrayList paymentNum = new ArrayList();
 
+		try {
+			String sql = "SELECT reservation_date, sum(reservation_price), count(*) FROM reservation GROUP BY reservation_date LIMIT 0,30";
+
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				reservationDate.add("\""+rs.getString("reservation_date")+"\"");
+				reservationPrice.add(rs.getInt("sum(reservation_price)"));
+				paymentNum.add(rs.getInt("count(*)"));
+			}
+			
+			totalPayCount.add(reservationDate);
+			totalPayCount.add(reservationPrice);
+			totalPayCount.add(paymentNum);
+			
+		} catch (SQLException e) {
+			System.out.println("RegionReservationCount() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return totalPayCount;
+	}
+
+	public ArrayList GenderPayment() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList genderPayment = new ArrayList();
+		ArrayList gender = new ArrayList();
+		ArrayList payment = new ArrayList();
+
+		try {
+			String sql = "SELECT m.member_gender, sum(r.reservation_price) "
+						+ "FROM member m " 
+						+ "JOIN reservation r ON m.member_id = r.reservation_member_id "
+						+ "WHERE m.member_gender = 'm' OR m.member_gender = 'f' " 
+						+ "GROUP BY m.member_gender";
+
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+//				gender.add("\""+rs.getString("reservation_date")+"\"");
+				payment.add(rs.getInt("sum(r.reservation_price)"));
+			}
+			
+//			genderPayment.add(gender);
+			genderPayment.add(payment);
+			
+		} catch (SQLException e) {
+			System.out.println("RegionReservationCount() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return genderPayment;
+	}
+
+//	public ArrayList<CategoryBean> TotalPayCount() {
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		ArrayList<CategoryBean> totalPayCount = new ArrayList<CategoryBean>();
+//
+//		System.out.println("RegionReservationCount DB");
+//
+//		try {
+//
+//			String sql = "SELECT reservation_date, sum(reservation_price), count(*) FROM reservation GROUP BY reservation_date";
+//
+//			pstmt = con.prepareStatement(sql);
+//			rs = pstmt.executeQuery();
+//
+//			while (rs.next()) {
+//				CategoryBean cb = new CategoryBean();
+//				cb.setReservation_date(rs.getString("reservation_date"));
+//				cb.setTotal_price(rs.getInt("sum(reservation_price)"));
+//				cb.setPayment_num(rs.getInt("count(*)"));
+//
+//				totalPayCount.add(cb);
+//			}
+//
+//		} catch (SQLException e) {
+//			System.out.println("RegionReservationCount() 오류! - " + e.getMessage());
+//		} finally {
+//			close(rs);
+//			close(pstmt);
+//		}
+//		return totalPayCount;
+//	}
+
+	
+	
 }
