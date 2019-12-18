@@ -53,10 +53,7 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
-=======
-        
->>>>>>> refs/remotes/origin/master
+
         <%
             }
             else {
