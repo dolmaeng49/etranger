@@ -406,5 +406,34 @@ public class ReviewDAO {
 		}
 		return ReviewList;
 	}
+	
+	
+	//패지키 하나당 리뷰 1개 작성을 위한 리뷰 중복체크
+	public boolean duplicateCheck(String review_member_id, String review_package_category_code) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean duplicateCheck = false;
+		try {
+			String sql = "SELECT count(*) from review WHERE review_member_id =? AND review_package_category_code=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, review_member_id);
+			pstmt.setString(2, review_package_category_code);
+			
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				duplicateCheck=true;
+			}
+		} catch (SQLException e) {
+			System.out.println("duplicateCheck() 오류 - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		
+		return duplicateCheck;
+	}
 
 }

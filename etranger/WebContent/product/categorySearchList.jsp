@@ -238,7 +238,7 @@ function displaySideRegion() {
 function displaySideTheme() {
 	$('#side_theme').empty();
 	// JSON으로 가져온 데이터 #side_theme에 뿌려주기
-	$.getJSON('ThemeCheckBox.ma', function(data) {
+	$.getJSON('GetThemeListAjax.ma', function(data) {
 
 		$.each(data, function(index, value) {
 			$('#side_theme').append(
@@ -351,8 +351,6 @@ function pageForward(forwarding_page) {
 	$('#fowarding_page').val(forwarding_page);
 	$('#categorySearchForm').submit();
 }
-
-
 </script>
   </body>
 </html>

@@ -61,7 +61,7 @@ public class CommentListAjax implements Action {
 					}
 					String print1 = "";
 					print1 += "<div class=\"vcard bio\">"
-							+ "<img src=\"images/person_1.jpg\" alt=\"Image placeholder\"></div>"
+							+ "<img src=\"images/comment1.jpg\" alt=\"Image placeholder\"></div>"
 							+ "<div class=\"comment-body\" id=cb" + commentList.get(i).getReview_comment_num() + "><h3>"
 							+ commentList.get(i).getReview_comment_member_name() + "</h3>" + "<div class=\"meta\">"
 							+ sdfComment.format(commentList.get(i).getReview_comment_date()) + "</div>" + "<p>"

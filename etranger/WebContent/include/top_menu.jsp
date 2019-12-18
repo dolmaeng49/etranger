@@ -6,10 +6,9 @@
     if (session.getAttribute("member_id") != null) {
         member_id = (String) session.getAttribute("member_id");
     }
-    MemberBean mb = (MemberBean)session.getAttribute("memberInfo");
     String member_name = null;
-    if (mb != null && mb.getMember_name() != null) {
-        member_name = mb.getMember_name();
+    if (session.getAttribute("member_name") != null) {
+        member_name = (String)session.getAttribute("member_name");
     }
 %>
 
@@ -54,9 +53,7 @@
         </div>
     </div>
 </div>
-        
-        
-        
+
         <%
             }
             else {

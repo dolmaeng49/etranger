@@ -20,7 +20,7 @@ public class ProductInsertAction implements Action {
 
 		ProductBean pb = new ProductBean();
 		pb.setCategoryCode(request.getParameter("package_category_code"));
-		pb.setProductNum(request.getParameter("package_category_code") + request.getParameter("product_arrivdate"));
+		pb.setProductNum(request.getParameter("package_category_code") + request.getParameter("product_departdate"));
 		pb.setProductDepartDate(request.getParameter("product_depardate"));
 		pb.setProductArrivDate(request.getParameter("product_arrivdate"));
 		pb.setProductPrice(Integer.parseInt(request.getParameter("product_price")));

@@ -14,43 +14,37 @@
              <br> 부득이한 사정에 의해 여행일정이 변경되는 경우 여행자의 사전 동의를 받습니다.</p>
             </div>
           </div>
+          
+              <!--추천 지역  -->
           <div class="col-md">
              <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Book Now</h2>
-              <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Best Tour</a></li>
-                <li><a href="#" class="py-2 d-block">Honeymoon Tour</a></li>
-                <li><a href="#" class="py-2 d-block">Mukbang Tour</a></li>
-                <li><a href="#" class="py-2 d-block">Car Rent</a></li>
-                <li><a href="#" class="py-2 d-block">Beach &amp; Resorts</a></li>
-                <li><a href="#" class="py-2 d-block">Mountains</a></li>
-                <li><a href="#" class="py-2 d-block">Cruises</a></li>
+             <h2 class="ftco-heading-2">추천 지역</h2>
+              <ul class="list-unstyled" id="footer_region">
               </ul>
             </div>
           </div>
+              <!--  -->
+          
+          <!--추천 테마  -->
           <div class="col-md">
              <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Top Deals</h2>
-              <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Europe Tours</a></li>
-                <li><a href="#" class="py-2 d-block">Middle East Tours</a></li>
-                <li><a href="#" class="py-2 d-block">Asia Tours</a></li>
-                <li><a href="#" class="py-2 d-block">Beach &amp; Resorts</a></li>
-                <li><a href="#" class="py-2 d-block">Couple Tours</a></li>
-                <li><a href="#" class="py-2 d-block">Family Tours</a></li>
-                <li><a href="#" class="py-2 d-block">Special Tours</a></li>
+              <h2 class="ftco-heading-2">추천 테마</h2>
+              <ul class="list-unstyled" id="footer_theme">
+                
               </ul>
             </div>
           </div>
+          <!--  -->
+          
           <div class="col-md">
              <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">Contact Information</h2>
               <ul class="list-unstyled">
 
-                <li><a href="#" class="py-2 d-block"> <span class="icon icon-map-marker">부산 부산진구 부전동 112-3</span></a></li>
-                <li><a href="#" class="py-2 d-block"><span class="icon icon-phone">051)803-0909</span></a></li>
-                <li><a href="#" class="py-2 d-block"><span class="icon icon-web">etranger.com</span></a></li>
-                <li><a href="#" class="py-2 d-block"><span class="icon icon-envelope">etrangermanager@gmail.com</span></a></li>
+                <li><a href="./contact.jsp" class="py-2 d-block"> <span class="icon icon-map-marker">부산 부산진구 부전동 112-3</span></a></li>
+                <li><a href="./contact.jsp" class="py-2 d-block"><span class="icon icon-phone">051)803-0909</span></a></li>
+                <li><a href="./contact.jsp" class="py-2 d-block"><span class="icon icon-web">etranger.com</span></a></li>
+                <li><a href="./contact.jsp" class="py-2 d-block"><span class="icon icon-envelope">etrangermanager@gmail.com</span></a></li>
               </ul>
             </div>
           </div>
@@ -76,4 +70,38 @@
           </div>
         </div>
       </div>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript">
+
+displayFooterRegion();
+displayFooterTheme();
+
+//푸터 추천 지역 
+function displayFooterRegion() {
+	$('#footer_region').empty();
+	// JSON으로 가져온 데이터 #side_region에 뿌려주기
+	$.getJSON('RegionSelect.ma', function(data) {
+		$.each(data, function(index, value) {
+			$('#footer_region').append(
+					"<li><a href='CategoryListSearch.pr?region="+value.regionCode+"'>" + value.regionName + "</a></li>");
+		});
+	});
+}
+
+//푸터 추천 테마
+function displayFooterTheme() {
+	
+$('#footer_theme').empty();
+	// JSON으로 가져온 데이터 #side_theme에 뿌려주기
+	$.getJSON('GetThemeListAjax.ma', function(data) {
+
+		$.each(data, function(index, value) {
+			$('#footer_theme').append(
+					"<li><a href='CategoryListSearch.pr?keyword="+ value.themeName +"'>" + value.themeName + "</a></li>");
+		});
+	});
+	
+}
+      
+</script>
     </footer>

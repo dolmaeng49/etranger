@@ -70,17 +70,7 @@
         var ctx2 = document.getElementById("myChart2").getContext('2d');
         var ctx3 = document.getElementById("myChart3").getContext('2d');
         var ctx4 = document.getElementById("myChart4").getContext('2d');
-        
-        var bgcolor = [];
-        var bcolor = [];
-        
-        for (var i=0;i<<%=regionReservationList.size()%>;i++){
-        	var color1=Math.floor(Math.random() * 256);
-            var color2=Math.floor(Math.random() * 256);
-            var color3=Math.floor(Math.random() * 256);
-        	bgcolor[i] = 'rgba('+color1+','+color2+','+color3+',0.5)';
-        	bcolor[i] = 'rgba('+color1+','+color2+','+color3+',1)';
-        }
+
         /*
         - Chart를 생성하면서, 
         - ctx를 첫번째 argument로 넘겨주고, 
@@ -144,7 +134,7 @@
                         position: 'left',
                         ticks: {
                             beginAtZero: true,
-                            stepSize: 1,
+                            stepSize: 10,
                             userCallback: function(value, index, values){
                             	return value.toLocaleString() + '건';
                             }
@@ -155,6 +145,18 @@
         });
         
         // 원그래프1
+        
+        var bgcolor = [];
+        var bcolor = [];
+        
+        for (var i=0; i < <%=regionReservationList.size() + 1%> ; i++){
+        	var color1=Math.floor(Math.random() * 256);
+            var color2=Math.floor(Math.random() * 256);
+            var color3=Math.floor(Math.random() * 256);
+        	bgcolor[i] = 'rgba('+color1+','+color2+','+color3+',0.5)';
+        	bcolor[i] = 'rgba('+color1+','+color2+','+color3+',1)';
+        }
+        
         var myChart2 = new Chart(ctx2, {
         	plugins: [{
         		// 그래프 안에 제목표시
@@ -205,7 +207,7 @@
         	}],
             type: 'doughnut',
             data: {
-            		    	labels: <%=regionReservationList.get(0)%> ,
+            		    	labels: <%=regionReservationList.get(0)%>,
             		    datasets: [{
             		        data: <%=regionReservationList.get(1)%>,
             		        backgroundColor: bgcolor,
