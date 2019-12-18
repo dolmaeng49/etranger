@@ -767,6 +767,37 @@ public class ManagerDAO {
 		return regionReservationList;
 	}
 
+	public ArrayList<CategoryBean> selectThemeListLimit() {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		ArrayList<CategoryBean> themeList = new ArrayList<CategoryBean>();
+
+		try {
+
+			String sql = "SELECT category_theme_code, category_theme_name FROM category_theme ORDER BY category_theme_code DESC LIMIT 10";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				CategoryBean cb = new CategoryBean();
+				cb.setThemeCode(rs.getInt("category_theme_code"));
+				cb.setThemeName(rs.getString("category_theme_name"));
+
+				themeList.add(cb);
+			}
+		} catch (SQLException e) {
+
+			System.out.println("selectThemeListLimit() 오류 - " + e.getMessage());
+
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return themeList;
+	}
+
 
 
 }

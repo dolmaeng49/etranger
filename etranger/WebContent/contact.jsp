@@ -11,18 +11,17 @@
 	margin: 0 0 50px 50px;
 }
 
-
 .text-muted1 {
 	color: #b3b3b3;
 }
 
 #mail {
 	backgound: #3e3e2422;
-	border-top: 1.5px solid #C49B63 !important;
+	border-top: 1.5px solid #6bccc3 !important;
 }
 
 section h2.section-heading {
-	border-bottom: 1px solid #c49b63;
+	border-bottom: 1px solid #6bccc3;
 }
 
 h1 {
@@ -46,7 +45,6 @@ h1 {
 
 </head>
 <body>
-
 	<!-- 탑메뉴 인클루드 -->
 	<jsp:include page="/include/top_menu.jsp" />
 

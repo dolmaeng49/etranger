@@ -1,6 +1,9 @@
 package review.service;
 
 import java.sql.Connection;
+
+import member.dao.MemberDAO;
+
 import static common.db.JdbcUtil.*;
 
 import review.dao.ReviewDAO;
@@ -26,6 +29,18 @@ public class ReviewWriteProService {
 		close(con);
 
 		return isWriteSuccess;
+	}
+
+	public boolean duplicateCheck(String review_member_id, String review_package_category_code) {
+		Connection con = getConnection();
+		ReviewDAO reviewDAO = ReviewDAO.getInstance();
+		reviewDAO.setConnection(con);
+		
+		boolean duplicateCheck = reviewDAO.duplicateCheck(review_member_id, review_package_category_code);
+		
+		close(con);
+		
+		return duplicateCheck;
 	}
 
 }

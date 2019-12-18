@@ -228,16 +228,11 @@ align-self: center;
       <div class="container-fluid d-flex">
          <div class="section-2-blocks-wrapper row no-gutters">
             <div class="img col-sm-12 col-lg-6">
-            <div class="embed-responsive embed-responsive-16by9" style="margin-top: 8.3rem;">
+            <div class="embed-responsive embed-responsive-16by9" style="margin-top: 9rem;">
 						<video autoplay muted loop class="embed-responsive-item">
 							<source src="images/intro.mp4" type="video/mp4">
 						</video>
 					</div>
-            
-<!--                <video autoplay muted loop id="video" width="950px" height="800px"> -->
-<!--                   <source src="images/intro.mp4" type="video/mp4"> -->
-<!--                </video> -->
-               
 <!--                <a href="https://vimeo.com/371024892" class="button popup-vimeo"><span -->
 <!--                   class="ion-ios-play"></span></a> -->
                   
@@ -252,7 +247,7 @@ align-self: center;
                      We all agree to say for sure. you know. that's why we decided our team name to etranger.
                      </p>
 
-                  <p>모두들 안녕하세요, étranger 웹사이트에 오신 것을 환영합니다. 여행을 계획하고 계신가요? 에트랑제와 함께 
+                  <p>모두 안녕하세요, étranger 웹사이트에 오신 것을 환영합니다. 여행을 계획하고 계신가요? 에트랑제와 함께 
                   믿음직한 가이드와 합리적인 가격으로 여행을 떠나보세요. 저희는 업계 최저 수수료를 추구합니다. 
                   2030년 글로벌 No.1 문화관광 유통그룹으로 발돋움하기위해 고객에게 세계 최고의 문화관광 유통 서비스를 제공하는 기업으로 성장하겠습니다. </p>
                </div>

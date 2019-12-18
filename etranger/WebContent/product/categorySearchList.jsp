@@ -292,7 +292,7 @@ function displaySideTheme() {
 	
 $('#side_theme').empty();
 	// JSON으로 가져온 데이터 #side_theme에 뿌려주기
-	$.getJSON('ThemeCheckBox.ma', function(data) {
+	$.getJSON('GetThemeListAjax.ma', function(data) {
 
 		$.each(data, function(index, value) {
 			$('#side_theme').append(
@@ -301,11 +301,6 @@ $('#side_theme').empty();
 	});
 	
 }
-
-
-
-
-
 
 function getRegion() {
 	// 검색한 지역코드 가져오기(Number 타입으로 형변환)
@@ -354,8 +349,6 @@ function getCity() {
 	});
 }
 getRegion(); // 셀렉트박스에 지역코드 출력하는 함수
-
-
 
 </script>
   </body>
