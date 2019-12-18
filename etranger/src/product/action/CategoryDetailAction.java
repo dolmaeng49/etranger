@@ -31,15 +31,15 @@ public class CategoryDetailAction implements Action {
 		String pcode = cb.getPackage_category_code();
 
 		// 상품리스트에서 선택된 상품에대한 상세리스트를 가져옴
-		ProductDetailService prodectDetailService = new ProductDetailService();
+		ProductDetailService productDetailService = new ProductDetailService();
 		ArrayList<CategoryBean> pdetail = null;
 
-		pdetail = prodectDetailService.GetProductDetailList(cb, pcode);
+		pdetail = productDetailService.GetProductDetailList(pcode);
 		request.setAttribute("pdetail", pdetail);
 
 		ProductBean pb = new ProductBean();
 		ArrayList<ProductBean> pdList = new ArrayList<ProductBean>();
-		pdList = prodectDetailService.GetProductList(pb, pcode);
+		pdList = productDetailService.GetProductList(pb, pcode);
 		request.setAttribute("pdList", pdList);
 		
 //		ProductReviewListService productReviewListService = new ProductReviewListService();

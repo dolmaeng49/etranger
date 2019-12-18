@@ -78,7 +78,7 @@ $(function() {
 	$('#summernoteManager').summernote(
 			{
 				height : 450,
-				width : 720,
+				width : 650,
 				placeholder : '내용입력',
 				lang : 'ko-KR',
 				focus : true,

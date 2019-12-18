@@ -241,6 +241,30 @@ public class ManagerDAO {
 		return insertCount;
 	}
 	// insertCategory ---
+	
+	// updateCategory ---
+	public int CategoryUpdate(CategoryBean cb) {
+//		System.out.println("카테고리업뎃");
+		int updateCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE package_category SET package_category_name=?, package_category_content=?, package_category_image=? WHERE package_category_code=?;";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, cb.getPackage_category_name());
+			pstmt.setString(2, cb.getPackage_category_content());			
+			pstmt.setString(3, cb.getPackage_category_image());
+			pstmt.setString(4, cb.getPackage_category_code());
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return updateCount;
+	}
+	
+	
 
 	// --- selectListCount
 	public int selectListCount() {
@@ -356,8 +380,25 @@ public class ManagerDAO {
 //					+ "group by c.package_category_name"  // package_category_name 별로 상품을 그룹으로 묶어준다.
 //					+ "order by 6 DESC LIMIT ?,?"; // 카테고리별로 예약한 인원수가 많은 순(total_headcount)으로 정렬. 
 			
-			String sql = "select c.package_category_code, c.package_category_name, c.package_category_image, count(*), sum(r.reservation_headcount) AS total_headcount, MIN(p.package_product_price) AS min_price from reservation r join package_category c on r.reservation_category_code = c.package_category_code join package_product p on p.package_category_code = c.package_category_code group by c.package_category_name order by 5 DESC LIMIT ?,?";
+//			select c.package_category_code, c.package_category_name, 
+//			c.package_category_image, count(*), 
+//			sum(r.reservation_headcount) AS total_headcount, 
+//			MIN(p.package_product_price) AS min_price,
+//			count(r.review_num) AS review_count, avg(r.review_star) AS review_star_avg
+//			from reservation r 
+//			join package_category c on r.reservation_category_code = c.package_category_code 
+//			join package_product p on p.package_category_code = c.package_category_code 
+//			LEFT JOIN review r ON r.review_package_category_code = p.package_category_code
+//			group by c.package_category_name order by 5 DESC LIMIT ?,?
 			
+		//	String sql = "select c.package_category_code, c.package_category_name, c.package_category_image, count(*), sum(r.reservation_headcount) AS total_headcount, MIN(p.package_product_price) AS min_price from reservation r join package_category c on r.reservation_category_code = c.package_category_code join package_product p on p.package_category_code = c.package_category_code group by c.package_category_name order by 5 DESC LIMIT ?,?";
+			String sql = "select c.package_category_code, c.package_category_name,c.package_category_image, count(*),"
+					+ "sum(r.reservation_headcount) AS total_headcount, MIN(p.package_product_price) AS min_price,"
+					+"count(rv.review_num) AS review_count, avg(rv.review_star) AS review_star_avg from reservation r "
+					+"join package_category c on r.reservation_category_code = c.package_category_code "
+					+"join package_product p on p.package_category_code = c.package_category_code "
+					+"LEFT JOIN review rv ON rv.review_package_category_code = p.package_category_code "
+					+"group by c.package_category_name order by 5 DESC LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, limit);
@@ -369,6 +410,8 @@ public class ManagerDAO {
 				cb.setPackage_category_image(rs.getString("package_category_image"));
 				cb.setTotal_headcount(rs.getInt("total_headcount"));
 				cb.setMin_price(rs.getInt("min_price"));
+				cb.setReview_count(rs.getInt("review_count"));
+				cb.setReview_star_avg(rs.getDouble("review_star_avg"));
 				popularList.add(cb);
 			}
 		} catch (
@@ -390,8 +433,23 @@ public class ManagerDAO {
 		int startRow = (page - 1) * limit;
 
 		try {
+			
+//			select c.package_category_code, c.package_category_name, c.package_category_image,
+//			MIN(p.package_product_price) AS min_price, MIN(p.package_product_depart_date) AS min_date,
+//			count(rv.review_num) AS review_count, avg(rv.review_star) AS review_star_avg from package_category c 
+//			join package_product p on p.package_category_code = c.package_category_code 
+//			LEFT JOIN review rv ON rv.review_package_category_code = p.package_category_code 
+//			group by c.package_category_name order by 5 ASC LIMIT ?,?
 
-			String sql = "select c.package_category_code, c.package_category_name, c.package_category_image, MIN(p.package_product_price) AS min_price, MIN(p.package_product_depart_date) AS min_date from package_category c join package_product p on p.package_category_code = c.package_category_code group by c.package_category_name order by 5 ASC LIMIT ?,?";
+//			String sql = "select c.package_category_code, c.package_category_name, c.package_category_image, MIN(p.package_product_price) AS min_price, MIN(p.package_product_depart_date) AS min_date from package_category c join package_product p on p.package_category_code = c.package_category_code group by c.package_category_name order by 5 ASC LIMIT ?,?";
+			String sql = "select c.package_category_code, c.package_category_name, c.package_category_image,"
+					+"MIN(p.package_product_price) AS min_price, MIN(p.package_product_depart_date) AS min_date,"
+					+"count(rv.review_num) AS review_count, avg(rv.review_star) AS review_star_avg from package_category c "
+					+"join package_product p on p.package_category_code = c.package_category_code "
+					+"LEFT JOIN review rv ON rv.review_package_category_code = p.package_category_code "
+					+"group by c.package_category_name order by 5 ASC LIMIT ?,?";
+					
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, limit);
@@ -404,6 +462,8 @@ public class ManagerDAO {
 				cb.setPackage_category_image(rs.getString("package_category_image"));
 				cb.setMin_price(rs.getInt("min_price"));
 				cb.setMin_date(rs.getString("min_date"));
+				cb.setReview_count(rs.getInt("review_count"));
+				cb.setReview_star_avg(rs.getDouble("review_star_avg"));
 				productList.add(cb);
 			}
 		} catch (SQLException e) {

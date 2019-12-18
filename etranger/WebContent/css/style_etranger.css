@@ -414,6 +414,26 @@ a.btn {
 	background-color: #3da9ff;
 }
 
+.form-contact{
+    height: 52px !important;
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 18px;
+    border-radius: 0px;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    width: 500px;
+}
+
+.form-contact2{
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 18px;
+    border-radius: 0px;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    width: 500px;
+}
 
 
 

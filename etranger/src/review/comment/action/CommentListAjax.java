@@ -22,7 +22,8 @@ public class CommentListAjax implements Action {
 		request.setCharacterEncoding("UTF-8");
 
 		int review_num = Integer.parseInt(request.getParameter("review_num"));
-		String sessionId = request.getParameter("sessionId");
+		String sessionId = (String)request.getSession().getAttribute("member_id");
+//		String sessionName=(String)request.getSession().getAttribute("member_name");
 		String sessionName = request.getParameter("sessionName");
 
 		CommentListService commentListService = new CommentListService();
@@ -84,11 +85,14 @@ public class CommentListAjax implements Action {
 							+ "<input type=\"hidden\" id=\"review_comment_seq\" name=\"review_comment_seq\" value="
 							+ commentList.get(i).getReview_comment_seq() + ">";
 					out.print(print1);
+					System.out.println(sessionId);
+					System.out.println(sessionName);
 					if (sessionId != null) {
 					if (commentList.get(i).getReview_comment_lev() < 1) {
-
+						
 						out.print("<a class=\"comment_reply_btn\" href=\"#comment_reply_btn\" onclick=\"replyComment('"
 								+ commentList.get(i).getReview_comment_num() + "'); this.onclick='';\"><i class=\"fab fa-replyd\">Re</i></a>");
+							
 						}
 					}
 					String print2 = "";
