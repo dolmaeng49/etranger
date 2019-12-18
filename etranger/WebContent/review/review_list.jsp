@@ -41,15 +41,12 @@
   <head>
 	<!-- 스타일 인클루드 -->
 <jsp:include page="/include/style.jsp"/>
-<style type="text/css">
-/* div{ */
-/* 	border: 1px solid red; */
-/* } */
-</style>
   </head>
   <body>
 	<!-- 탑메뉴 인클루드 -->    
 <jsp:include page="/include/top_menu.jsp"/>
+<input type="hidden" id="session_Id" value=<%=sessionId %>>
+
     <section class="home-slider owl-carousel">
       <div class="slider-item" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
@@ -77,7 +74,7 @@
 				
 				%>
           <div class="col-md-6 col-lg-3 ftco-animate">
-            <div class="blog-entry">
+            <div class="blog-entry" onclick="location.href='ReviewDetail.rv?review_num=<%=rb.getReview_num()%>&page=<%=nowPage %>'">
               <a href="ReviewDetail.rv?review_num=<%=rb.getReview_num()%>&page=<%=nowPage %>" class="block-20" style="background-image: url('reviewUpload/<%=rb.getReview_image()%>');">
               </a>
               <div class="text p-4" >
@@ -192,7 +189,7 @@
 	<!-- loader 인클루드 -->
 <jsp:include page="/include/loader.jsp"/>
 <script type="text/javascript">
-	var sessionId = $('#session_id').val();
+	var sessionId = $('#session_Id').val();
 $('#review_write').click(function () {
 		if(sessionId=="null"){
 			alert('먼저 로그인 해주세요!');
@@ -200,7 +197,6 @@ $('#review_write').click(function () {
 		}else{
 			location.href="./ReservationInfo.rs";
 		}
-		
 		
 	});
     

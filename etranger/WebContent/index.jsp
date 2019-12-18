@@ -9,13 +9,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style type="text/css">
-.ccc{
-text-align: center;
-align-content: center;
-align-self: center;
-}
-</style>
 <!-- 스타일 인클루드 -->
 <jsp:include page="/include/style.jsp" />
 <%
@@ -229,16 +222,12 @@ align-self: center;
       <div class="container-fluid d-flex">
          <div class="section-2-blocks-wrapper row no-gutters">
             <div class="img col-sm-12 col-lg-6">
-            <div class="embed-responsive embed-responsive-16by9" style="margin-top: 8.3rem;">
+
+            <div class="embed-responsive embed-responsive-16by9" style="margin-top: 9rem;">
 						<video autoplay muted loop class="embed-responsive-item">
 							<source src="images/intro.mp4" type="video/mp4">
 						</video>
 					</div>
-            
-<!--                <video autoplay muted loop id="video" width="950px" height="800px"> -->
-<!--                   <source src="images/intro.mp4" type="video/mp4"> -->
-<!--                </video> -->
-               
 <!--                <a href="https://vimeo.com/371024892" class="button popup-vimeo"><span -->
 <!--                   class="ion-ios-play"></span></a> -->
                   
@@ -246,16 +235,19 @@ align-self: center;
             <div class="text col-lg-6 ftco-animate">
                <div class="text-inner align-self-start">
 
-                  <h3>Bonjour tout le monde, Bienvenue! vous pouvez voyager avec l'étranger?</h3>
-                  <p> We are the best team You've ever seen. 
-                     We were established for 6 month ago. Albert Camus, he is the muse of us. 
-                     We feel we're the completely etranger when we're in the foreign country. 
-                     We all agree to say for sure. you know. that's why we decided our team name to etranger.
-                     </p>
+                  <h3>Bonjour tout le monde, Bienvenue! vous pouvez voyager
+                     avec l'étranger?</h3>
+                  <p>We are the best team You've ever seen. We were established
+                     for 6 month ago. Albert Camus, he is the muse of us. We feel
+                     we're the completely etranger when we're in the foreign country.
+                     We all agree to say for sure. you know. that's why we decided our
+                     team name to etranger.</p>
 
-                  <p>모두들 안녕하세요, étranger 웹사이트에 오신 것을 환영합니다. 여행을 계획하고 계신가요? 에트랑제와 함께 
-                  믿음직한 가이드와 합리적인 가격으로 여행을 떠나보세요. 저희는 업계 최저 수수료를 추구합니다. 
-                  2030년 글로벌 No.1 문화관광 유통그룹으로 발돋움하기위해 고객에게 세계 최고의 문화관광 유통 서비스를 제공하는 기업으로 성장하겠습니다. </p>
+                  <p>모두들 안녕하세요, étranger 웹사이트에 오신 것을 환영합니다. 여행을 계획하고 계신가요? 에트랑제와
+                     함께 믿음직한 가이드와 합리적인 가격으로 여행을 떠나보세요. 저희는 업계 최저 수수료를 추구합니다. 2030년 글로벌
+                     No.1 문화관광 유통그룹으로 발돋움하기위해 고객에게 세계 최고의 문화관광 유통 서비스를 제공하는 기업으로
+                     성장하겠습니다.</p>
+
                </div>
             </div>
          </div>
@@ -275,13 +267,14 @@ align-self: center;
                <div class="text text-center">
                   <a href="<%=detailURL%>"><h2><%=cb.getPackage_category_name()%></h2></a>
                   <h3 class="price">
-                  <% 
-                  int price = cb.getMin_price(); 
-                  String prices = String.format("%,d", price); // 천단위 , 표시
-                  %>
-                     <span>from</span> <%=prices%>￦
+                     <%
+                        int price = cb.getMin_price();
+                           String prices = String.format("%,d", price); // 천단위 , 표시
+                     %>
+                     <span>from</span>
+                     <%=prices%>￦
                   </h3>
-                  
+
                   <a href="<%=detailURL%>" class="read">Read more</a>
                </div>
             </div>
@@ -369,21 +362,45 @@ align-self: center;
                      <h3 class="heading"><%=cb.getPackage_category_name()%></h3>
                      <div class="post-meta">
                         <% String code = cb.getPackage_category_code();
-                           code = code.substring(code.indexOf("!")); // category code 느낌표 없애기
+                        	if(code.contains("!")){
+                        		  code = code.substring(code.indexOf("!")); // category code 느낌표 없애기		
+                        	}
+                         
                            %><span><%=code.replace('!', '#') %></span> 
                            
 
                      </div>
                      <p class="star-rate">
-                        <span class="icon-star"></span><span class="icon-star"></span><span
-                           class="icon-star"></span><span class="icon-star"></span><span
-                           class="icon-star-half-full"></span> <span>500 reviews</span>
+                        <!-- 리뷰 별점 스크립틀릿으로 표시할 부분,  -->
+                        <%
+                           // 리뷰 별점 평균 표시, 리뷰 개수 표시
+                              if (cb.getReview_count() != 0) {
+                                 // 10점 만점을 5점으로 전환
+                                 double avg = cb.getReview_star_avg() / 2;
+                                 for (int j = 1; j <= (int) (avg + 1 / 3); j++) {
+                        %><span class="icon-star"></span>
+                        <%
+                           }
+                                 if (avg % 1 >= 1 / 3f && avg % 1 <= 2 / 3f) {
+                        %><span class="icon-star-half-full"></span>
+                        <%
+                           }
+                                 for (int j = (int) (avg + 0.5); j < 5; j++) {
+                        %><span class="icon-star-o"></span>
+                        <%
+                           }
+                        %>
+                        <span><%=cb.getReview_count()%> reviews</span>
                      </p>
+                     <%
+                        }
+                     %>
                   </div>
                </a>
             </div>
             <%
                }
+            
             %>
          </div>
       </div>
@@ -406,24 +423,24 @@ align-self: center;
                %>
                <div class="item">
                   <div class="blog-entry">
-                     <a href=<%=detailURL %> class="block-20"
+                     <a href=<%=detailURL%> class="block-20"
                         style="background-image: url('reviewUpload/<%=rb.getReview_image()%>');">
                      </a>
                      <div class="text p-4">
                         <div class="meta">
                            <div>
-                              <a href="<%=detailURL %>"><%=rb.getReview_date()%></a>
+                              <a href="<%=detailURL%>"><%=rb.getReview_date()%></a>
                            </div>
                            <div>
-                              <a href="<%=detailURL %>"><%=rb.getReview_member_name()%></a>
+                              <a href="<%=detailURL%>"><%=rb.getReview_member_name()%></a>
                            </div>
                         </div>
                         <h3 class="heading">
-                           <a href="<%=detailURL %>"><%=rb.getReview_subject()%></a>
+                           <a href="<%=detailURL%>"><%=rb.getReview_subject()%></a>
                         </h3>
                         <p class="clearfix">
-                           <a href="<%=detailURL %>" class="float-left">Read more</a> <a
-                              href="<%=detailURL %>" class="float-right meta-chat"><span
+                           <a href="<%=detailURL%>" class="float-left">Read more</a> <a
+                              href="<%=detailURL%>" class="float-right meta-chat"><span
                               class="icon-chat"></span> 3</a>
                         </p>
                      </div>
@@ -444,40 +461,66 @@ align-self: center;
             <div class="col-md-7 text-center heading-section ftco-animate">
                <h2 class="mb-1 p-2 pb-3 ftco-animate">Highly Recommended
                   Tours</h2>
-                  <h5 class="mb-3 p-2 pb-3 ftco-animate">어디로가야할지 아직 못정하셨나요?</h5>
+               <h5 class="mb-3 p-2 pb-3 ftco-animate">어디로가야할지 아직 못정하셨나요?</h5>
 
                <div class="row no-gutters d-flex">
                   <%
-         for (CategoryBean cb : recommendedList) {
-            String detailURL = "CategoryDetail.pr?package_category_code=".concat(cb.getPackage_category_code());
-      %>
+                     for (CategoryBean cb : recommendedList) {
+                        String detailURL = "CategoryDetail.pr?package_category_code=".concat(cb.getPackage_category_code());
+                  %>
                   <div class="col-md-4 ftco-animate">
                      <a href="<%=detailURL%>" class="block-5"
                         style="background-image: url(ManagerImgUpload/<%=cb.getPackage_category_image()%>);">
                         <div class="text">
-                           <% 
-                              int price = cb.getMin_price(); 
-                              String prices = String.format("%,d", price); // 천단위 , 표시
+                           <%
+                              int price = cb.getMin_price();
+                                 String prices = String.format("%,d", price); // 천단위 , 표시
                            %>
                            <span class="price"><%=prices%>&nbsp;￦부터</span>
                            <h3 class="heading"><%=cb.getPackage_category_name()%></h3>
                            <div class="post-meta">
                               <%
                                  String code = cb.getPackage_category_code();
-                                 %><span><%=code.substring(code.indexOf("!")).replace('!', '#') %></span>
+                                    code = code.substring(code.indexOf("!"));
+                                    String[] codes = code.split("!");
+                                    for (String cd : codes) {
+                              %><span><%=cd%></span>
+                              <%
+                                 }
+                              %>
                            </div>
                            <p class="star-rate">
-                              <span class="icon-star"></span><span class="icon-star"></span><span
-                                 class="icon-star"></span><span class="icon-star"></span><span
-                                 class="icon-star-half-full"></span> <span>500 reviews</span>
+                              <!-- 리뷰 별점 스크립틀릿으로 표시할 부분,  -->
+                              <%
+                                 // 리뷰 별점 평균 표시, 리뷰 개수 표시
+                                    if (cb.getReview_count() != 0) {
+                                       // 10점 만점을 5점으로 전환
+                                       double avg = cb.getReview_star_avg() / 2;
+                                       for (int j = 1; j <= (int) (avg + 1 / 3); j++) {
+                              %><span class="icon-star"></span>
+                              <%
+                                 }
+                                       if (avg % 1 >= 1 / 3f && avg % 1 <= 2 / 3f) {
+                              %><span class="icon-star-half-full"></span>
+                              <%
+                                 }
+                                       for (int j = (int) (avg + 0.5); j < 5; j++) {
+                              %><span class="icon-star-o"></span>
+                              <%
+                                 }
+                              %>
+                              <span><%=cb.getReview_count()%> reviews</span>
                            </p>
+                           <%
+                              }
+                           %>
                         </div>
                      </a>
                   </div>
-                        <%
-                           }
-                              %>
-                  
+                  <%
+                     }
+                  %>
+
                   <!--                   <div class="col-md-4 ftco-animate"> -->
                   <!--                      <a href="#" class="block-5" -->
                   <!--                         style="background-image: url('images/hotel-2.jpg');"> -->

@@ -311,7 +311,7 @@ table.pdList .right {
 							<%
 								} else {
 							%>
-							<div>예약상품이 없습니다.</div>
+							<div style="margin-bottom: 2rem;">예약하신 상품이 없습니다. 리뷰를 작성할 구매이력이 존재하지 않습니다.</div>
 							<div  style="text-align: center;"><input type="button" class="btn py-2 px-2 btn-primary" value="홈으로" onclick="location.href='./index.jsp'" style="margin-right: 30px;"> <input type="button" class="btn py-2 px-2 btn-primary" value="상품 페이지" onclick="location.href='ProductList.pr'" style="margin-left: 30px;"></div>
 							<%
 								}

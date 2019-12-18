@@ -15,7 +15,9 @@ import manager.action.ManagerMainAction;
 import manager.action.CityInsertAction;
 import manager.action.CitySelectAction;
 import manager.action.ProductListAction;
+import manager.action.ReceiveEmailAction;
 import manager.action.DeleteProductAction;
+import manager.action.GetThemeListAjaxAction;
 import manager.action.IsReservUpdateAction;
 import manager.action.ManagerImageCallbackAction;
 import manager.action.ProductDetailAction;
@@ -26,7 +28,6 @@ import manager.action.CategoryInsertAction;
 //import manager.action.ProductListAction;
 import manager.action.ThemeInsertAction;
 import manager.action.RegionInsertAction;
-import manager.action.RegionReservationCountAction;
 import manager.action.RegionSelectAction;
 import manager.action.ReservDeleteAction;
 import manager.action.ReservManagementAction;
@@ -91,17 +92,7 @@ public class ManagerFrontController extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-
-			// ThemeCheckBoxAction 클래스로 이동
-			else if (command.equals("/ThemeCheckBox.ma")) {
-				action = new ThemeCheckBoxAction();
-				try {
-					forward = action.execute(request, response);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-
+			
 			// CategoryInsertAction 클래스로 이동
 			else if (command.equals("/CategoryInsert.ma")) {
 				action = new CategoryInsertAction();
@@ -231,14 +222,14 @@ public class ManagerFrontController extends HttpServlet {
 			}
 
 			// ------------------ datachart ---------------------
-			else if (command.equals("/RegionReservationCount.ma")) {
-				action = new RegionReservationCountAction();
-				try {
-					forward = action.execute(request, response);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
+//			else if (command.equals("/RegionReservationCount.ma")) {
+//				action = new RegionReservationCountAction();
+//				try {
+//					forward = action.execute(request, response);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
 
 		}
 		// 관리자 권한이 필요없는 페이지
@@ -260,6 +251,35 @@ public class ManagerFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+
+		// ThemeCheckBoxAction 클래스로 이동
+		else if (command.equals("/ThemeCheckBox.ma")) {
+			action = new ThemeCheckBoxAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		//side bar, footer에 뿌려줄 용도의 Action. Limit 10
+		}else if (command.equals("/GetThemeListAjax.ma")) {
+			action = new GetThemeListAjaxAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if (command.equals("/ContactEmail.ma")) {
+			action = new ReceiveEmailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		
+		
 
 		if (forward != null) {
 			if (forward.isRedirect()) {

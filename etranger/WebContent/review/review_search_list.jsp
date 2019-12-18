@@ -160,7 +160,7 @@
         <!-- 페이지 부분 -->
 	<%}else{%><div id="emptyArticle">검색결과와 일치하는 리뷰가 없습니다.</div><%} %>
       </div> <!-- <div class="container">의 끝 -->
-      <div align="right"><input type="button" value="임시글쓰기" class="btn py-3 px-4 btn-primary" onclick="location.href='./ReviewWriteForm.rv'"></div>
+      <div align="right"><input type="button" id="review_write" value="리뷰 작성" class="btn py-3 px-4 btn-primary"></div>
     </section>
 <!--     <li class="active"><span>1</span></li> -->
 
@@ -169,7 +169,19 @@
 
 	<!-- loader 인클루드 -->
 <jsp:include page="/include/loader.jsp"/>
-    <script type="text/javascript">
+<script type="text/javascript">
+	var sessionId = $('#session_id').val();
+$('#review_write').click(function () {
+		if(sessionId=="null"){
+			alert('먼저 로그인 해주세요!');
+			return false;
+		}else{
+			location.href="./ReservationInfo.rs";
+		}
+		
+		
+	});
+    
 $('h3.heading').each(function(){
 	  var length = 18; //표시할 글자수 정하기
 	  var iframe = "</iframe>"

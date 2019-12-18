@@ -26,11 +26,6 @@
   <head>
 	<!-- 스타일 인클루드 -->
 <jsp:include page="../include/style.jsp"/>
-<style type="text/css">
-/* div{ */
-/* 	border: 1px solid red; */
-/* } */
-</style>
   </head>
   <body>
 	<!-- 탑메뉴 인클루드 -->    
@@ -74,7 +69,6 @@
 			
 			<div class="content-stararea">
 			<div id="stars"> 
-			<%=((double)article.getReview_star()/2.0) + ""%> 점을 받음!
 			<%if(article.getReview_star() == 0) {
 				%><img src="images/rating0.png" align="middle" /><%
 			} else if(article.getReview_star() == 1) {
@@ -105,7 +99,17 @@
 			<div class="content-view">
 <%-- 			<p><img src="reviewUpload/<%=article.getReview_image()%>" style="max-width: 100%; height: auto;"></p> --%>
 			<p><%=article.getReview_content() %></p>
-			</div><!-- content-view끝 -->
+			<!--레이아웃 위한 pre 삽입  -->
+			<pre>
+			
+
+
+		
+			
+			</pre>
+			</div>
+			<!-- content-view끝 -->
+			<!-- 좋아요 기능(미구현)  -->
 <!-- 			<div class="like-area"> -->
 <!-- 			<button type="button" class="btnreview btnreview-outline-success vote-btn"> -->
 <!-- 			<i class="fa fa-thumbs-up"></i> 추천 <span id="up">ajax로 뿌려줄 값(누적 추천수)들어갈 곳</span></button> -->
@@ -208,15 +212,15 @@ function displaySideTheme() {
 	
 $('#side_theme').empty();
 	// JSON으로 가져온 데이터 #side_theme에 뿌려주기
-	$.getJSON('ThemeCheckBox.ma', function(data) {
+	$.getJSON('GetThemeListAjax.ma', function(data) {
 
 		$.each(data, function(index, value) {
 			$('#side_theme').append(
 					"<a href='CategoryListSearch.pr?keyword="+ value.themeName +"' class='tag-cloud-link'>" +value.themeName + "</a>");
 		});
 	});
-	
 }
+
 
 </script>
     

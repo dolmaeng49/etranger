@@ -23,9 +23,12 @@ public class CategoryBean {
 	private double review_star_avg; 
 	private int package_product_current; // 현재 인원
 	private int min_price; // 최저가 
-	private int total_headcount; // 카테고리 당 총 예약인원
 	private String min_date; // 날짜 임박
-
+	private int total_headcount; // 카테고리 당 총 예약인원 (시각화 할때 씀)
+	private int total_price; // 총 결제금액 (시각화 할때 씀)
+	private int payment_num; // 총 결제건수 (시각화 할때 씀)
+	private String reservation_date;
+	
 //	package_category_code | 
 //	package_category_name | 
 //	package_category_region | 
@@ -201,6 +204,30 @@ public class CategoryBean {
 
 	public void setPackage_product_current(int package_product_current) {
 		this.package_product_current = package_product_current;
+	}
+
+	public int getTotal_price() {
+		return total_price;
+	}
+
+	public void setTotal_price(int total_price) {
+		this.total_price = total_price;
+	}
+
+	public int getPayment_num() {
+		return payment_num;
+	}
+
+	public void setPayment_num(int payment_num) {
+		this.payment_num = payment_num;
+	}
+
+	public String getReservation_date() {
+		return reservation_date;
+	}
+
+	public void setReservation_date(String reservation_date) {
+		this.reservation_date = reservation_date;
 	}
 
 }
