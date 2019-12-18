@@ -264,6 +264,25 @@ public class ManagerDAO {
 		return updateCount;
 	}
 	
+	public int deleteCategory(String code) {
+		int deleteCount = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = "delete from package_category where package_category_code=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, code);
+			deleteCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return deleteCount;
+	}
+	
 	
 
 	// --- selectListCount
@@ -900,6 +919,7 @@ public class ManagerDAO {
 		}
 		return genderPayment;
 	}
+
 
 //	public ArrayList<CategoryBean> TotalPayCount() {
 //		PreparedStatement pstmt = null;
