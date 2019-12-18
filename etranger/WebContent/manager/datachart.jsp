@@ -70,8 +70,7 @@
         var ctx2 = document.getElementById("myChart2").getContext('2d');
         var ctx3 = document.getElementById("myChart3").getContext('2d');
         var ctx4 = document.getElementById("myChart4").getContext('2d');
-        
-        
+
         /*
         - Chart를 생성하면서, 
         - ctx를 첫번째 argument로 넘겨주고, 

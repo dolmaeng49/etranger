@@ -346,7 +346,7 @@
             </div>
          </div>
          <div class="row no-gutters">
-            <%
+            <% 
                for (CategoryBean cb : popularList) {
                   String detailURL = "CategoryDetail.pr?package_category_code=".concat(cb.getPackage_category_code());
             %>
@@ -362,7 +362,10 @@
                      <h3 class="heading"><%=cb.getPackage_category_name()%></h3>
                      <div class="post-meta">
                         <% String code = cb.getPackage_category_code();
-                           code = code.substring(code.indexOf("!")); // category code 느낌표 없애기
+                        	if(code.contains("!")){
+                        		  code = code.substring(code.indexOf("!")); // category code 느낌표 없애기		
+                        	}
+                         
                            %><span><%=code.replace('!', '#') %></span> 
                            
 
@@ -397,6 +400,7 @@
             </div>
             <%
                }
+            
             %>
          </div>
       </div>
