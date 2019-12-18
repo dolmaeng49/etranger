@@ -4,13 +4,6 @@
 <%@page import="common.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-	<!-- 스타일 인클루드 -->
-<jsp:include page="../include/style.jsp"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script type="text/javascript">
 <%
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	ArrayList<CategoryBean> categoryList = (ArrayList<CategoryBean>)request.getAttribute("categoryList");
@@ -35,60 +28,12 @@
 		sid = (String)session.getAttribute("member_id");
 	}
 %>
-
-// 하트를 누르면 호출되는 함수
-// 파라미터로 해당 패키지카테고리의 package_category_code 를 전달 받음
-// 하트 태그의 이름이 1 이면 속이 찬 하트, 0 이면 속이 빈하트
-function wishFunction(domain,code) {
-	if(!isThereLoginSession()){
-		alert('로그인이 필요합니다!');
-		return;
-	}
-	// isOHeart = '0' : 하트 속이 비어있는 상태 , '1' : 속이 꽉 찬 하트
-	var isOHeart = $(domain).find('i').attr('id');
-	// 표시된 좋아요 숫자를 변수에 저장
-	var wish_count = $(domain).find('#wish_count').text();
-	
-	if(isOHeart=='0') {
-		// back-end : ajax로 insertWish DB 작업
-		// 액션클래스로 하트가 클릭된 상품(category) 코드 전달
-		$.ajax('InsertWish.pr',{
-			data : {category_code : code},
-			success : function() {
-				// front-end : 하트의 모양을 결정하는 클래스 add & remove, 모양을 저장하는 속성(id) 변경
-				$(domain).find('i').removeClass('fa-heart-o');
-				$(domain).find('i').addClass('fa-heart');
-				$(domain).find('i').attr('id',"1");
-				// 좋아요숫자 표시를 가져와 Number로 형변환 후 1을 더해 다시 표시
-				// DB 에서 가져오는 것 아님, 눈속임. 새로고침하면 DB에서 가져오기 때문에 괜찮음
-				$(domain).find('#wish_count').text(Number(wish_count)+1);
-			},
-			error : function(){alert("찜 추가 실패!");}
-		});
-	} else if(isOHeart=='1') {
-		$.ajax('DeleteWish.pr',{
-			data : {category_code : code},
-			success : function() {
-				$(domain).find('i').removeClass('fa-heart');
-				$(domain).find('i').addClass('fa-heart-o');
-				$(domain).find('i').attr('id',"0");
-				$(domain).find('#wish_count').text(Number(wish_count)-1);
-			},
-			error : function(){alert("찜 삭제 실패!");}
-		});
-		
-	}
-}
-
-function isThereLoginSession(){
-	if($('#sid').val().length==0){
-		return false;
-	}
-	return true;
-}
-
-
-</script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<!-- 스타일 인클루드 -->
+<jsp:include page="../include/style.jsp"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   </head>
   <body>
@@ -163,25 +108,27 @@ function isThereLoginSession(){
           <div class="col text-center">
             <div class="block-27">
               <ul>
-            <%if(nowPage<=1){%>
+            <%if(nowPage <= 1){%>
             <li><a>&lt;</a></li>
             <%}else
-            {%><li><a href="ReviewList.rv?page=<%=nowPage -1%>">&lt;</a></li><%} %>
+            {%><li><a href="javascript:void(0);" onclick="pageForward('<%=nowPage - 1%>'); return false;">&lt;</a></li><%} %>
             	<%for(int i=startPage; i<=endPage; i++) {
-            	if(i== nowPage) {%><li class="active"><span><%=i %></span></li>
-            	<%}else{%>
-                <li><a href="ReviewList.rv?page=<%=i%>"><%=i %></a></li>
+	            	if(i== nowPage) {
+	            		%><li class="active"><span><%=i %></span></li>
+	            	<%}else{%>
+	                	<li><a href="javascript:void(0);" onclick="pageForward('<%=i%>'); return false;"><%=i %></a></li>
+	                <%}%>
                 <%}%>
-                <%}%>
-                <%if(nowPage>=maxPage){%><li><a>&gt;</a></li>
+                <%if(nowPage >= maxPage){
+                	%><li><a>&gt;</a></li>
                 <%}else{ %>
-                <li><a href="ReviewList.rv?page=<%=nowPage +1%>">&gt;</a></li>
+                	<li><a href="javascript:void(0);" onclick="pageForward('<%=nowPage + 1%>'); return false;">&gt;</a></li>
                 <%} %>
               </ul>
             </div>
           </div>
         </div>
-        <!-- 페이지 부분 -->
+        <!-- PageController 끝 -->
           </div>
           <!-- END -->
 
@@ -190,7 +137,7 @@ function isThereLoginSession(){
             <div class="sidebar-box ftco-animate">  
               <div class="search-tours bg-light p-4"><!-- -->
                 <h3>Find your tour</h3>
-                <form action="CategoryListSearch.pr" method="post">
+                <form action="CategoryListSearch.pr" method="post" id="categorySearchForm">
                   <div class="fields">
                     <div class="row flex-column"><!-- 검색바 묶음 -->
 
@@ -221,9 +168,10 @@ function isThereLoginSession(){
                         <option value="">도시선택</option>
                         </select>
                       </div>
-                      
-                        <input type="text" id="region_code_search" value="<%=searchBean.getRegion()%>">
-                        <input type="text" id="city_code_search" value="<%=searchBean.getCity()%>">
+                      <!-- 페이지 이동할 때 검색 정보를 다음 페이지로 전달하기 위한 input[type="hidden"] 태그들 -->
+                        <input type="hidden" id="region_code_search" value="<%=searchBean.getRegion()%>">
+                        <input type="hidden" id="city_code_search" value="<%=searchBean.getCity()%>">
+                        <input type="hidden" id="fowarding_page" name="page" value="1">
                       <!--  -->
                       
                       <div class="col-sm-12 group mb-3">
@@ -238,7 +186,7 @@ function isThereLoginSession(){
 			<!--추천 지역 -->
             <div class="sidebar-box ftco-animate">
               <div class="categories">
-                <h3>Categories</h3>
+                <h3>추천 지역</h3>
                 <div id="side_region" class="side_region">
                 
                 </div>
@@ -248,7 +196,7 @@ function isThereLoginSession(){
             
 			<!-- 추천 테마 -->
             <div class="sidebar-box ftco-animate">
-              <h3>Tag Cloud</h3>
+              <h3>추천 테마</h3>
               <div id="side_theme" class="tagcloud">
               </div>
             </div>
@@ -287,10 +235,8 @@ function displaySideRegion() {
 }
 
 //사이드바 추천 테마
-
 function displaySideTheme() {
-	
-$('#side_theme').empty();
+	$('#side_theme').empty();
 	// JSON으로 가져온 데이터 #side_theme에 뿌려주기
 	$.getJSON('ThemeCheckBox.ma', function(data) {
 
@@ -299,33 +245,29 @@ $('#side_theme').empty();
 					"<a href='CategoryListSearch.pr?keyword="+ value.themeName +"' class='tag-cloud-link'>" +value.themeName + "</a>");
 		});
 	});
-	
 }
-
-
-
-
-
 
 function getRegion() {
 	// 검색한 지역코드 가져오기(Number 타입으로 형변환)
 	var region_code_search = Number($('#region_code_search').val());
-	
+	var city_code_search = Number($('#region_code_search').val());
 	// #selectRegion에 있는 내용 지우기
 	$('#selectRegion').empty();
 	$('#selectRegion').append("<option value=''>지역선택</option>");
 	// JSON으로 가져온 데이터 #SelectRegion에 옵션으로 추가
 	$.getJSON('RegionSelect.ma', function(data) {
 		$.each(data, function(index, value) {
+			// JSON 형태로 받은 지역 코드, 이름을 <option> 태그 형태로 출력
 			// 검색한 지역 코드가 있을 경우 해당 지역 코드가 선택되도록 selected 속성 추가
 			if(region_code_search != null && region_code_search == value.regionCode){
-				$('#selectRegion').append(
-						'<option value=' + value.regionCode + ' selected="selected"> 지역이름 : ' + value.regionName
-								+ '</option>');
+				$('#selectRegion').append('<option value=' + value.regionCode + ' selected="selected"> 지역이름 : '
+						+ value.regionName + '</option>');
+				if(city_code_search != null){
+					getCity(); // 도시코드도 입력된 경우 getCity() 함수 호출
+				}
 			} else {
-				$('#selectRegion').append(
-						"<option value=" + value.regionCode + "> 지역이름 : " + value.regionName
-								+ "</option>");
+				$('#selectRegion').append("<option value=" + value.regionCode + "> 지역이름 : "
+						+ value.regionName + "</option>");
 			}
 		});
 	});
@@ -343,18 +285,72 @@ function getCity() {
 		$.each(data, function(index, value) {
 			// 검색한 도시 코드가 있을 경우 해당 지역 코드가 선택되도록 selected 속성 추가
 			if(city_code_search != null && city_code_search == value.cityCode){
-				$('#selectCity').append(
-						'<option value=' + value.cityCode + ' selected="selected"> 도시이름 : ' + value.cityName
-						+ '</option>');
+				$('#selectCity').append('<option value=' + value.cityCode + ' selected="selected"> 도시이름 : '
+						+ value.cityName + '</option>');
 			}
-			$('#selectCity').append(
-					"<option value=" + value.cityCode + "> 도시이름 : " + value.cityName
-							+ "</option>");
+			$('#selectCity').append("<option value=" + value.cityCode + "> 도시이름 : "
+					+ value.cityName + "</option>");
 		});
 	});
 }
-getRegion(); // 셀렉트박스에 지역코드 출력하는 함수
 
+getRegion(); // 페이지 로드될 때 함수 호출
+
+// 하트를 누르면 호출되는 함수
+// 파라미터로 해당 패키지카테고리의 package_category_code 를 전달 받음
+// 하트 태그의 이름이 1 이면 속이 찬 하트, 0 이면 속이 빈하트
+function wishFunction(domain,code) {
+	if(!isThereLoginSession()){
+		alert('로그인이 필요합니다!');
+		return;
+	}
+	// isOHeart = '0' : 하트 속이 비어있는 상태 , '1' : 속이 꽉 찬 하트
+	var isOHeart = $(domain).find('i').attr('id');
+	// 표시된 좋아요 숫자를 변수에 저장
+	var wish_count = $(domain).find('#wish_count').text();
+	
+	if(isOHeart=='0') {
+		// back-end : ajax로 insertWish DB 작업
+		// 액션클래스로 하트가 클릭된 상품(category) 코드 전달
+		$.ajax('InsertWish.pr',{
+			data : {category_code : code},
+			success : function() {
+				// front-end : 하트의 모양을 결정하는 클래스 add & remove, 모양을 저장하는 속성(id) 변경
+				$(domain).find('i').removeClass('fa-heart-o');
+				$(domain).find('i').addClass('fa-heart');
+				$(domain).find('i').attr('id',"1");
+				// 좋아요숫자 표시를 가져와 Number로 형변환 후 1을 더해 다시 표시
+				// DB 에서 가져오는 것 아님, 눈속임. 새로고침하면 DB에서 가져오기 때문에 큰 문제 없음. 더 좋은 방법 있으면,,
+				$(domain).find('#wish_count').text(Number(wish_count)+1);
+			},
+			error : function(){alert("찜 추가 실패!");}
+		});
+	} else if(isOHeart=='1') {
+		$.ajax('DeleteWish.pr',{
+			data : {category_code : code},
+			success : function() {
+				$(domain).find('i').removeClass('fa-heart');
+				$(domain).find('i').addClass('fa-heart-o');
+				$(domain).find('i').attr('id',"0");
+				$(domain).find('#wish_count').text(Number(wish_count)-1);
+			},
+			error : function(){alert("찜 삭제 실패!");}
+		});
+		
+	}
+}
+
+function isThereLoginSession(){
+	if($('#sid').val().length==0){
+		return false;
+	}
+	return true;
+}
+
+function pageForward(forwarding_page) {
+	$('#fowarding_page').val(forwarding_page);
+	$('#categorySearchForm').submit();
+}
 
 
 </script>

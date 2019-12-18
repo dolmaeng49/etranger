@@ -25,7 +25,7 @@
 %>
 <!-- ajax 송신 위한 값 저장 -->
 <input type="hidden" id="sessionName" value=<%=sessionName %>>
-<input type="hidden" id="sessionId" value=<%=sessionId %>>
+<input type="hidden" id="sessionId" value=<%=sessionId %>> <!--request로 받지 않고, getSession()  -->
 <input type="hidden" id="nowPage" value=<%=nowPage %>>
 <input type="hidden" id="cmt_re_num" value=<%=article.getReview_num() %>>
 

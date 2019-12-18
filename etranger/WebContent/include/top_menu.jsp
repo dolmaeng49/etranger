@@ -2,9 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
-    //현재 세션 객체에 "sid"세션값이 존재할 경우 String 타입 변수 sid에 저장
     String member_id = null;
-
     if (session.getAttribute("member_id") != null) {
         member_id = (String) session.getAttribute("member_id");
     }

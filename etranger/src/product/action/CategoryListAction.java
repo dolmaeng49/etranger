@@ -11,7 +11,7 @@ import common.action.Action;
 import common.vo.ActionForward;
 import common.vo.PageInfo;
 import manager.vo.CategoryBean;
-import product.svc.CategorySearchListService;
+import product.svc.CategoryListService;
 import product.vo.SearchBean;
 
 public class CategoryListAction implements Action {
@@ -23,7 +23,7 @@ public class CategoryListAction implements Action {
 		// 페이징 처리
 		int page = 1;
 		int limit = 8;
-		
+		System.out.println(request.getParameter("page"));
 		// 페이지 정보 파라미터를 받은 경우
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
@@ -51,11 +51,10 @@ public class CategoryListAction implements Action {
 		//SearchBean
 		SearchBean searchBean = new SearchBean(keyword,depart_date, arriv_date,region,city);
 		
-		CategorySearchListService categorySearchListService = new CategorySearchListService();
-		int listCount = categorySearchListService.getListCount(searchBean);
-
-		ArrayList<CategoryBean> categoryList = new ArrayList<CategoryBean>();
-		categoryList = categorySearchListService.getCategoryList(page, limit, searchBean);
+		CategoryListService categoryListService = new CategoryListService();
+		int listCount = categoryListService.getListCount(searchBean);
+		
+		ArrayList<CategoryBean> categoryList = categoryListService.getCategoryList(page, limit, searchBean);
 
 		int maxPage = (int) ((double) listCount / limit + 0.95);
 		int startPage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1;
@@ -65,7 +64,7 @@ public class CategoryListAction implements Action {
 		}
 		
 		PageInfo pageInfo = new PageInfo(page, maxPage, startPage, endPage, listCount);
-		System.out.println(categoryList);
+		
 		request.setAttribute("searchBean", searchBean);
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("categoryList", categoryList);
