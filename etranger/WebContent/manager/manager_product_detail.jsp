@@ -46,7 +46,7 @@ table.pdList {
 	text-align: center;
 	line-height: 1.5;
 	margin: 20px 10px;
-	width: 115%;
+	width: 90%;
 }
 
 table.pdList th {
@@ -223,23 +223,26 @@ table.pdList td input {
 							<h3>
 								<label for="name" class="mt-5">패키지상품 리스트</label>
 							</h3>
+							
+							<div style="overflow-y: scroll; height: 500px;">
 							<table class="pdList" id="pdlist">
 								<%
 									if (pdList != null) {
 								%>
 								<tr>
-									<th>상품코드</th>
+<!-- 									<th>상품코드</th> -->
 									<th>출발날짜/<br>도착날짜
 									</th>
 									<th style="width: 20%;">가격</th>
 									<th style="width: 15%;">인원</th>
 									<th style="width: 10%;">제어</th>
 								</tr>
+								
 								<%
 									for (int i = 0; i < pdList.size(); i++) {
 								%>
 								<tr>
-									<td><%=pdList.get(i).getProductNum()%></td>
+<%-- 									<td><%=pdList.get(i).getProductNum()%></td> --%>
 									<td style="font-size: 0.5em;"><%=pdList.get(i).getProductDepartDate()%>
 										/ <%=pdList.get(i).getProductArrivDate()%></td>
 									<td><%=pdList.get(i).getProductPrice()%></td>
@@ -255,10 +258,12 @@ table.pdList td input {
 
 								<label id="newProduct"></label>
 							</table>
+							</div>
+						
 						</div>
 
 
-						<div class="form-group">
+						<div class="form-group mt-3">
 							<input type="button" value="날짜별 패키지상품 추가하기"
 								class="btn py-2 px-2 btn-primary" onclick="product('<%=code%>')">
 						</div>
