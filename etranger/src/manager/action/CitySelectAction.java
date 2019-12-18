@@ -34,13 +34,10 @@ public class CitySelectAction implements Action {
 			cityList.add(cl);
 		}
 		
-//		System.out.println(cityList);
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		// toJSONString
-//		out.print(JSONArray.toJSONString(articleList));
 		out.print(cityList);
 		
 		ActionForward forward = null;

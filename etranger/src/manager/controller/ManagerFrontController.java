@@ -15,6 +15,7 @@ import manager.action.ManagerMainAction;
 import manager.action.CityInsertAction;
 import manager.action.CitySelectAction;
 import manager.action.ProductListAction;
+import manager.action.ReceiveEmailAction;
 import manager.action.DeleteProductAction;
 import manager.action.GetThemeListAjaxAction;
 import manager.action.IsReservUpdateAction;
@@ -264,6 +265,13 @@ public class ManagerFrontController extends HttpServlet {
 		//side bar, footer에 뿌려줄 용도의 Action. Limit 10
 		}else if (command.equals("/GetThemeListAjax.ma")) {
 			action = new GetThemeListAjaxAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if (command.equals("/ContactEmail.ma")) {
+			action = new ReceiveEmailAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
