@@ -46,7 +46,11 @@ table.pdList {
 	text-align: center;
 	line-height: 1.5;
 	margin: 20px 10px;
-	width: 115%;
+	width: 90%;
+}
+
+table.Add {
+width: 115%;
 }
 
 table.pdList th {
@@ -223,25 +227,28 @@ table.pdList td input {
 							<h3>
 								<label for="name" class="mt-5">패키지상품 리스트</label>
 							</h3>
+							
+							<div style="overflow-y: scroll; height: 500px;">
 							<table class="pdList" id="pdlist">
 								<%
 									if (pdList != null) {
 								%>
 								<tr>
-									<th>상품코드</th>
+<!-- 									<th>상품코드</th> -->
 									<th>출발날짜/<br>도착날짜
 									</th>
 									<th style="width: 20%;">가격</th>
 									<th style="width: 15%;">인원</th>
 									<th style="width: 10%;">제어</th>
 								</tr>
+								
 								<%
 									for (int i = 0; i < pdList.size(); i++) {
 								%>
 								<tr>
-									<td><%=pdList.get(i).getProductNum()%></td>
+<%-- 									<td><%=pdList.get(i).getProductNum()%></td> --%>
 									<td style="font-size: 0.5em;"><%=pdList.get(i).getProductDepartDate()%>
-										/ <%=pdList.get(i).getProductArrivDate()%></td>
+										/ <br><%=pdList.get(i).getProductArrivDate()%></td>
 									<td><%=pdList.get(i).getProductPrice()%></td>
 									<td><%=pdList.get(i).getProductTotal()%></td>
 									<td><input type="button"
@@ -255,18 +262,21 @@ table.pdList td input {
 
 								<label id="newProduct"></label>
 							</table>
+							</div>
+						
 						</div>
 
 
-						<div class="form-group">
+						<div class="form-group mt-3">
 							<input type="button" value="날짜별 패키지상품 추가하기"
 								class="btn py-2 px-2 btn-primary" onclick="product('<%=code%>')">
 						</div>
 						<div class="form-group" id="addProduct" style="display: none;">
 							<!-- 						<form action="ProductInsertPro.ma" method="post"> -->
-							<table class="pdList">
+							<table class="pdList Add">
+							
 								<tr id="tr_top">
-									<th>상품코드</th>
+								
 									<th>출발날짜</th>
 									<th>도착날짜</th>
 									<th>가격</th>
@@ -274,10 +284,9 @@ table.pdList td input {
 									<th style="width: 10%;">등록</th>
 								</tr>
 								<tr id="event_period">
-									<td><input type="text" class="form-control"
-										name="package_category_code" id="package_category_code"
-										value="<%=request.getParameter("package_category_code")%>" /></td>
-									<td><input type="text"
+									<td>
+									<input type="hidden" value="<%=code %>" id="package_category_code">
+										<input type="text"
 										class="form-control form-control-shortshort actual_range"
 										id="product_depardate" placeholder="depardate"
 										name="product_depardate" required="required"
@@ -385,27 +394,30 @@ function getProduct() {
 
 
 
-
+// <th style="width: 20%;">가격</th>
+// <th style="width: 15%;">인원</th>
+// <th style="width: 10%;">제어</th>
 	// 상품 리스트 불러오기 
 	function getProductList(dpcode) {
 		$('#pdlist').empty();
 		$('#pdlist').append("<tr>" +
-			"<th>상품코드</th>" +
-			"<th>출발날짜</th>" +
-			"<th>도착날짜</th>" +
-			"<th>가격</th>" +
-			"<th>총인원수</th>" +
-			"<th>제어</th>" +
+// 			"<th>상품코드</th>" +
+			"<th>출발날짜/도착날짜</th>" +
+// 			"<th>도착날짜</th>" +
+			"<th style=\"width: 20%;\">가격</th>" +
+			"<th style=\"width: 15%;\">총인원수</th>" +
+			"<th style=\"width: 10%;\">제어</th>" +
 			"</tr>");
 		$.getJSON('ProductList.ma?dpcode=' + dpcode, function (data) {
 			$.each(data, function (index, item) {
 				$('#pdlist').append(
-					"<tr><td>" + item.product_num + "</td>" +
-					"<td>" + item.productDepartDate + "</td>" +
-					"<td>" + item.productArrivDate + "</td>" +
+					"<tr>"+
+// 					<td>" + item.product_num + "</td>" +
+					"<td>" + item.productDepartDate + "/<br>"+ item.productArrivDate+"</td>" +
+// 					"<td>" + item.productArrivDate + "</td>" +
 					"<td>" + item.productPrice + "</td>" +
 					"<td>" + item.productTotal + "</td>" +																	
-					"<td>" + '<input type="button" id="deletecode" value="delete" onclick="deleteCode('+"'" +item.product_num +"'"+')">'
+					"<td>" + '<input type="button" class="btn py-1 px-2 btn-primary deletecode" id="deletecode" value="delete" onclick="deleteCode('+"'" +item.product_num +"'"+')">'
 					+'</td></tr>'
 				);
 			});

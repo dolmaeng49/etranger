@@ -136,7 +136,7 @@ public class ProductDAO {
 
 			try {
 				
-				String sql = "SELECT count(*) FROM package_product p"
+				String sql = "SELECT COUNT(DISTINCT c.package_category_code) FROM package_product p"
 						+ " JOIN package_category c"
 						+ " ON p.package_category_code = c.package_category_code"
 						+ " WHERE p.package_product_depart_date >= ?";
@@ -145,8 +145,7 @@ public class ProductDAO {
 					sql += " AND (c.package_category_name like ?"
 						 + " OR c.package_category_theme like ?"
 						 + " OR c.package_category_content like ?)";
-				}
-				else if(!isNulls[1]) {
+				} else if(!isNulls[1]) {
 					// 도착날짜
 					sql += " AND p.package_product_arriv_date < ?";
 				} else if(!isNulls[2]) {
@@ -156,7 +155,6 @@ public class ProductDAO {
 					// 도시
 					sql += " AND c.package_category_city=?";
 				}
-				sql += " GROUP BY c.package_category_code";
 
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(index++, depart_date);
@@ -177,7 +175,7 @@ public class ProductDAO {
 					pstmt.setInt(index++, Integer.parseInt(city));
 				}
 				rs = pstmt.executeQuery();
-
+				// 
 				if (rs.next()) {
 					listCount = rs.getInt(1);
 				}
@@ -210,11 +208,11 @@ public class ProductDAO {
 			region = region == null ? "" : region;
 			city = city == null ? "" : city; 
 			
-			System.out.println("keyword : "+keyword);
-			System.out.println("depart_date : "+depart_date);
-			System.out.println("arriv_date : "+arriv_date);
-			System.out.println("region : "+region);
-			System.out.println("city : "+city);
+//			System.out.println("keyword : "+keyword);
+//			System.out.println("depart_date : "+depart_date);
+//			System.out.println("arriv_date : "+arriv_date);
+//			System.out.println("region : "+region);
+//			System.out.println("city : "+city);
 			
 			// 검색 조건 입력 여부 배열에 저장
 			boolean[] isNulls = {keyword.length()==0,arriv_date.length()==0,region.length()==0,city.length()==0};
@@ -229,7 +227,7 @@ public class ProductDAO {
 			try {
 				// 입력 받은 검색어에 따른 카테고리 리스트 조회
 				String sql = "SELECT c.package_category_code, c.package_category_name, c.package_category_theme, c.package_category_image, c.package_category_content,"
-						+ "c.package_category_region, c.package_category_city, MIN(p.package_product_price) AS min_price"
+						+ "c.package_category_region, c.package_category_city, c.package_category_wish_count, MIN(p.package_product_price) AS min_price"
 						+ ", count(r.review_num) AS review_count, avg(r.review_star) AS review_star_avg"
 						+ " FROM package_product p"
 						// 조인
@@ -280,8 +278,8 @@ public class ProductDAO {
 				// 마지막 공통 작업
 				pstmt.setInt(index++, startRow);
 				pstmt.setInt(index++, limit);
-				System.out.println("startRow from dao : " + startRow + "depart_date : " + depart_date + "limit : " + limit);
-				System.out.println(pstmt);
+//				System.out.println("startRow from dao : " + startRow + "depart_date : " + depart_date + "limit : " + limit);
+//				System.out.println(pstmt);
 				rs = pstmt.executeQuery();
 				
 				while (rs.next()) {
@@ -293,6 +291,7 @@ public class ProductDAO {
 					cb.setPackage_category_content(rs.getString("c.package_category_content"));
 					cb.setPackage_category_region(rs.getInt("c.package_category_region"));
 					cb.setPackage_category_city(rs.getInt("c.package_category_city"));
+					cb.setPackage_category_wish_count(rs.getInt("c.package_category_wish_count"));
 					cb.setMin_price(rs.getInt("min_price"));
 					cb.setReview_count(rs.getInt("review_count"));
 					cb.setReview_star_avg(rs.getDouble("review_star_avg"));

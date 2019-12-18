@@ -108,8 +108,6 @@ public class InsertProductData {
 		ResultSet rs = null;
 		String sql = "";
 		
-		ReservationBean rsvBean = new ReservationBean();
-		ReservationInsertService ris = new ReservationInsertService();
 		Random random = new Random();
 		
 		ArrayList<ProductBean> products = new ArrayList<ProductBean>(); 
@@ -179,8 +177,8 @@ public class InsertProductData {
 				pstmt.setString(8, random.nextBoolean() == true ? "m" : "f");
 				pstmt.setString(9, "test_acount");
 //				System.out.println(pstmt);
-//				int insertMemberCount = pstmt.executeUpdate();
-//				if(insertMemberCount > 0) {commit(con);};
+				int insertMemberCount = pstmt.executeUpdate();
+				if(insertMemberCount > 0) {commit(con);};
 				
 				// 예약하기 & 리뷰쓰기
 				// 예약할 프로덕트 개수
@@ -211,8 +209,8 @@ public class InsertProductData {
 					pstmt.setString(7, "Y");
 					pstmt.setString(8, "결제완료");
 //					System.out.println(pstmt);
-//					int insertReservCount = pstmt.executeUpdate();
-//					if(insertReservCount > 0) {commit(con);};
+					int insertReservCount = pstmt.executeUpdate();
+					if(insertReservCount > 0) {commit(con);};
 					
 					// 리뷰쓰기 구매자의 30%만 리뷰 쓰도록
 					if(random.nextDouble() < 0.3) {
@@ -228,8 +226,8 @@ public class InsertProductData {
 						// 4 ~ 10 별점
 						pstmt.setInt(8, 4 + random.nextInt(6));
 //						System.out.println(pstmt);
-//						int insertReviewCount = pstmt.executeUpdate();
-//						if(insertReviewCount > 0) {commit(con);};
+						int insertReviewCount = pstmt.executeUpdate();
+						if(insertReviewCount > 0) {commit(con);};
 					}
 				}
 			} catch (SQLException e) {

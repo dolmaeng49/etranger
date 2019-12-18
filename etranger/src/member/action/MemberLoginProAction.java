@@ -59,6 +59,8 @@ public class MemberLoginProAction implements Action {
 			WishListService wishListService = new WishListService();
 			ArrayList<String> member_wishList = wishListService.getMemberWishList(member_id);
 			session.setAttribute("member_wishList", member_wishList);
+			session.setMaxInactiveInterval(1800);
+			
 			
 			forward = new ActionForward();
 			forward.setPath("index.jsp");

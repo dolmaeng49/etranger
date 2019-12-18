@@ -13,8 +13,6 @@ import common.action.Action;
 import common.vo.ActionForward;
 import product.action.CategoryDetailAction;
 import product.action.CategoryListAction;
-import product.action.CategoryListAction_oldVer;
-import product.action.CategoryListAction;
 import product.action.DeleteWishAction;
 import product.action.InsertWishAction;
 import product.action.ReviewListAction;
