@@ -807,10 +807,11 @@ public class ManagerDAO {
 
 		try {
 
-			String sql = "SELECT cr.category_region_name , sum(pp.package_product_current) " 
+			String sql = "SELECT cr.category_region_name ,sum(r.reservation_headcount) "
 						+ "FROM package_product pp "
 						+ "JOIN package_category pc ON pp.package_category_code = pc.package_category_code "
 						+ "JOIN category_region cr ON pc.package_category_region = cr.category_region_code "
+						+ "JOIN reservation r ON pp.package_category_code = r.reservation_category_code "
 						+ "GROUP BY cr.category_region_name";
 
 			pstmt = con.prepareStatement(sql);
@@ -818,7 +819,7 @@ public class ManagerDAO {
 
 			while (rs.next()) {
 				categoryRegionName.add("\""+rs.getString("cr.category_region_name")+"\"");
-				packageProductCurrent.add(rs.getInt("sum(pp.package_product_current)"));
+				packageProductCurrent.add(rs.getInt("sum(r.reservation_headcount)"));
 				
 			}
 			regionReservationList.add(categoryRegionName);
@@ -900,39 +901,5 @@ public class ManagerDAO {
 		}
 		return genderPayment;
 	}
-
-//	public ArrayList<CategoryBean> TotalPayCount() {
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		ArrayList<CategoryBean> totalPayCount = new ArrayList<CategoryBean>();
-//
-//		System.out.println("RegionReservationCount DB");
-//
-//		try {
-//
-//			String sql = "SELECT reservation_date, sum(reservation_price), count(*) FROM reservation GROUP BY reservation_date";
-//
-//			pstmt = con.prepareStatement(sql);
-//			rs = pstmt.executeQuery();
-//
-//			while (rs.next()) {
-//				CategoryBean cb = new CategoryBean();
-//				cb.setReservation_date(rs.getString("reservation_date"));
-//				cb.setTotal_price(rs.getInt("sum(reservation_price)"));
-//				cb.setPayment_num(rs.getInt("count(*)"));
-//
-//				totalPayCount.add(cb);
-//			}
-//
-//		} catch (SQLException e) {
-//			System.out.println("RegionReservationCount() 오류! - " + e.getMessage());
-//		} finally {
-//			close(rs);
-//			close(pstmt);
-//		}
-//		return totalPayCount;
-//	}
-
-	
 	
 }
