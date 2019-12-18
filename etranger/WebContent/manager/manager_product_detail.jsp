@@ -210,15 +210,10 @@ table.pdList td input {
 						</div>
 						
 						<input type="submit" class="btn btn-outline-dark btn-lg mt-3 mb-3" value="수정하기" >
+						<input type="Button" class="btn btn-outline-dark btn-lg mt-3 mb-3" value="삭제하기" onclick="location.href='CategoryDelete.ma?package_category_code=<%=code %>'" >
 					</form>
 				</div>
 				<!--  카테고리 수정 폼 끝 -->
-				
-				
-				
-				
-				
-				
 				<input type="hidden" id="deletenum" name="<%=code%>">
 
 				<div class="col-md-4 ftco-animate">

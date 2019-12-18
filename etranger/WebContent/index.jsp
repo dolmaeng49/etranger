@@ -9,17 +9,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <!-- 스타일 인클루드 -->
 <jsp:include page="/include/style.jsp" />
 <%
+
    // 메인페이지 작업처리를 위해 MainPageAction 클래스의 execute() 메서드 호출
    MainPageAction mainPageAction = new MainPageAction();
    mainPageAction.execute(request, response);
    // 
    ArrayList<CategoryBean> newList = (ArrayList<CategoryBean>) request.getAttribute("newList");
-   ArrayList<CategoryBean> popularList = (ArrayList<CategoryBean>) request.getAttribute("popularList");
-   ArrayList<CategoryBean> recommendedList = (ArrayList<CategoryBean>) request.getAttribute("recommendedList");
+   ArrayList<CategoryBean> popularList =  (ArrayList<CategoryBean>) request.getAttribute("popularList");
+   ArrayList<CategoryBean> recommendedList =  (ArrayList<CategoryBean>) request.getAttribute("recommendedList");
    ArrayList<ReviewBean> reviewList = (ArrayList<ReviewBean>) request.getAttribute("reviewList");
+   
+   String newList_name = (String)request.getAttribute("newList_name");
+
 %>
 
 </head>
@@ -214,7 +219,7 @@
       </div>
    </div>
    <!-- 검색부분 끝 -->
-
+   
    <!-- 메인 홍보영상-->
    <section class="ftco-section-2">
       <div class="container-fluid d-flex">
@@ -222,10 +227,10 @@
             <div class="img col-sm-12 col-lg-6">
 
             <div class="embed-responsive embed-responsive-16by9" style="margin-top: 9rem;">
-						<video autoplay muted loop class="embed-responsive-item">
-							<source src="images/intro.mp4" type="video/mp4">
-						</video>
-					</div>
+                  <video autoplay muted loop class="embed-responsive-item">
+                     <source src="images/intro.mp4" type="video/mp4">
+                  </video>
+               </div>
 <!--                <a href="https://vimeo.com/371024892" class="button popup-vimeo"><span -->
 <!--                   class="ion-ios-play"></span></a> -->
                   
@@ -245,7 +250,6 @@
                      함께 믿음직한 가이드와 합리적인 가격으로 여행을 떠나보세요. 저희는 업계 최저 수수료를 추구합니다. 2030년 글로벌
                      No.1 문화관광 유통그룹으로 발돋움하기위해 고객에게 세계 최고의 문화관광 유통 서비스를 제공하는 기업으로
                      성장하겠습니다.</p>
-
                </div>
             </div>
          </div>
@@ -340,11 +344,11 @@
          <div
             class="row no-gutters justify-content-center mb-5 pb-5 ftco-animate">
             <div class="col-md-7 text-center heading-section">
-               <h2>Most Popular Destination</h2>
+               <h2><%=newList_name %></h2>
             </div>
          </div>
          <div class="row no-gutters">
-            <% 
+            <%
                for (CategoryBean cb : popularList) {
                   String detailURL = "CategoryDetail.pr?package_category_code=".concat(cb.getPackage_category_code());
             %>
@@ -360,9 +364,9 @@
                      <h3 class="heading"><%=cb.getPackage_category_name()%></h3>
                      <div class="post-meta">
                         <% String code = cb.getPackage_category_code();
-                        	if(code.contains("!")){
-                        		  code = code.substring(code.indexOf("!")); // category code 느낌표 없애기		
-                        	}
+                           if(code.contains("!")){
+                                code = code.substring(code.indexOf("!")); // category code 느낌표 없애기      
+                           }
                          
                            %><span><%=code.replace('!', '#') %></span> 
                            
@@ -479,13 +483,10 @@
                            <div class="post-meta">
                               <%
                                  String code = cb.getPackage_category_code();
-                                    code = code.substring(code.indexOf("!"));
-                                    String[] codes = code.split("!");
-                                    for (String cd : codes) {
-                              %><span><%=cd%></span>
-                              <%
-                                 }
-                              %>
+                                    if (code.contains("!")) {
+                                       code = code.substring(code.indexOf("!")); // category code 느낌표 없애기      
+                                    }
+                              %><span><%=code.replace('!', '#')%></span>
                            </div>
                            <p class="star-rate">
                               <!-- 리뷰 별점 스크립틀릿으로 표시할 부분,  -->
