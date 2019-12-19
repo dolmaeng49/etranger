@@ -6,9 +6,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-
-// 패키지 카테고리 상세내용 불러오기 & 제목 내용 수정 기능
-// 패키지상품 insert & delete 
+	// 패키지 카테고리 상세내용 불러오기 & 제목 내용 수정 기능
+	// 패키지상품 insert & delete 
 
 	ArrayList<CategoryBean> regionList = (ArrayList<CategoryBean>) request.getAttribute("regionList");
 	ArrayList<CategoryBean> themeList = (ArrayList<CategoryBean>) request.getAttribute("themeList");
@@ -61,7 +60,7 @@ table.pdList {
 }
 
 table.Add {
-width: 115%;
+	width: 115%;
 }
 
 table.pdList th {
@@ -113,13 +112,13 @@ table.pdList td input {
 						</p>
 						<h1 class="mb-3">카테고리 상세내용&amp;패키지상품 추가</h1>
 
-<!-- package_category_code       | varchar(100)  | NO   | PRI | NULL    |                | -->
-<!-- package_category_name       | varchar(50)   | NO   | UNI | NULL    |                | -->
-<!-- package_category_region     | int(11)       | NO   | MUL | NULL    |                | -->
-<!-- package_category_city       | int(11)       | NO   | MUL | NULL    |                | -->
-<!-- package_category_theme      | varchar(100)  | YES  |     | NULL    |                | -->
-<!-- package_category_image      | varchar(100)  | NO   |     | NULL    |                | -->
-<!-- package_category_content    | varchar(2000) | NO   |     | NULL    |                | -->
+						<!-- package_category_code       | varchar(100)  | NO   | PRI | NULL    |                | -->
+						<!-- package_category_name       | varchar(50)   | NO   | UNI | NULL    |                | -->
+						<!-- package_category_region     | int(11)       | NO   | MUL | NULL    |                | -->
+						<!-- package_category_city       | int(11)       | NO   | MUL | NULL    |                | -->
+						<!-- package_category_theme      | varchar(100)  | YES  |     | NULL    |                | -->
+						<!-- package_category_image      | varchar(100)  | NO   |     | NULL    |                | -->
+						<!-- package_category_content    | varchar(2000) | NO   |     | NULL    |                | -->
 
 						<br>
 					</div>
@@ -146,21 +145,24 @@ table.pdList td input {
 					<li class="list-group-item li_hover"
 						onclick="location.href='ManagerMain.ma'"><span
 						class="icon icon-pencil"></span> 카테고리 등록&amp;수정 돌아가기</li>
-					<li class="list-group-item li_hover" id="member"><span
-						class="icon icon-users"></span>회원관리</li>
+					
+					<li class="list-group-item li_hover dropdown" id="dropdownMenuButton" 
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span class="icon icon-users"></span>회원관리
+						</li>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> 
+						<a class="dropdown-item" href="ReservManagement.ma">예약목록</a> 
+						</div>
 				</ul>
-				<ul class="list-group" id="memberManagement">
-					<li class="list-group-item li_hover member"
-						onclick="location.href='ReservManagement.ma'">&nbsp;­회원예약</li>
-					<li class="list-group-item li_hover member">&nbsp;­회원등급</li>
-				</ul>
+
 			</div>
 		</div>
 		<div class="container">
 			<div class="row">
 				<!--  카테고리 디테일 & 수정 폼 시작 -->
 				<div class="col-md-8 ftco-animate">
-					<form action="CategoryUpdate.ma" class="p-5 bg-light" method="post" enctype="multipart/form-data">
+					<form action="CategoryUpdate.ma" class="p-5 bg-light" method="post"
+						enctype="multipart/form-data">
 						<div class="managerdetailform">
 							<h3 class="mb-5">카테고리 상세내용</h3>
 						</div>
@@ -174,14 +176,14 @@ table.pdList td input {
 						<div class="writeform-group">
 							<br> <label for="code">상품코드</label><input type="text"
 								class="form-control" name="category_code" id="product_code_id"
-								value="<%=code%>"  readonly/>
+								value="<%=code%>" readonly />
 						</div>
 
 						<br>
 						<div class="writeform-group">
 							<label for="code">지역코드</label><input type="text"
 								class="form-control" name="category_region"
-								id="product_region_code_id" value="<%=region%>" readonly/>
+								id="product_region_code_id" value="<%=region%>" readonly />
 						</div>
 
 						<br>
@@ -195,9 +197,9 @@ table.pdList td input {
 						<div class="writeform-group">
 							<label for="name">상품테마</label> <input type="text"
 								class="form-control" name="category_theme" id="product_theme_id"
-								value="<%=theme%>" readonly/>
+								value="<%=theme%>" readonly />
 						</div>
-						
+
 						<br>
 						<div class="writeform-group">
 							<label for="name">상품명</label> <input type="text"
@@ -207,21 +209,36 @@ table.pdList td input {
 
 						<div class="writeform-group">
 							<br> <label for="name">상세내용</label> <br>
-							<textarea id="summernoteManager"  name="category_content" rows="20" cols="80"
-										required="required">
+							<textarea id="summernoteManager" name="category_content"
+								rows="20" cols="80" required="required">
 								<%=content%>
 							</textarea>
 						</div>
+<<<<<<< HEAD
 						
 						
 						<div class="custom-file mt-3"  style="width: 100%">
 								<label for="name">img</label>
 								<input multiple="multiple" type="hidden" name="category_image" required="required" class="custom-file-input" id="customFile" value="<%=image%>"/>
 									<label class="custom-file-label" for="customFile">change image file</label>
+=======
+
+
+						<div class="custom-file mt-3" style="width: 100%">
+							<label for="name">img</label> <input multiple="multiple"
+								type="file" name="category_image" required="required"
+								class="custom-file-input" id="customFile" value="<%=image%>" />
+							<label class="custom-file-label" for="customFile">change
+								image file</label>
+>>>>>>> refs/remotes/origin/master
 						</div>
-						
-						<input type="submit" class="btn btn-outline-dark btn-lg mt-3 mb-3" value="수정하기" >
-						<input type="Button" class="btn btn-outline-dark btn-lg mt-3 mb-3" value="삭제하기" onclick="location.href='CategoryDelete.ma?package_category_code=<%=code %>'" >
+
+						<input type="submit" class="btn btn-outline-dark btn-lg mt-3 mb-3"
+							value="수정하기"> <input type="Button"
+							class="btn btn-outline-dark btn-lg mt-3 mb-3" value="삭제하기"
+							class="btn btn-info" data-toggle="tooltip"
+							data-placement="bottom" title="예약이 없을 때만 삭제가능"
+							onclick="location.href='CategoryDelete.ma?package_category_code=<%=code%>'">
 					</form>
 				</div>
 				<!--  카테고리 수정 폼 끝 -->
@@ -233,43 +250,48 @@ table.pdList td input {
 							<h3>
 								<label for="name" class="mt-5">패키지상품 리스트</label>
 							</h3>
-							
-							<div style="overflow-y: scroll; height: 500px;">
-							<table class="pdList" id="pdlist">
-								<%
-									if (pdList != null) {
-								%>
-								<tr>
-<!-- 									<th>상품코드</th> -->
-									<th>출발날짜/<br>도착날짜
-									</th>
-									<th style="width: 20%;">가격</th>
-									<th style="width: 15%;">인원</th>
-									<th style="width: 10%;">제어</th>
-								</tr>
-								
-								<%
-									for (int i = 0; i < pdList.size(); i++) {
-								%>
-								<tr>
-<%-- 									<td><%=pdList.get(i).getProductNum()%></td> --%>
-									<td style="font-size: 0.5em;"><%=pdList.get(i).getProductDepartDate()%>
-										/ <br><%=pdList.get(i).getProductArrivDate()%></td>
-									<td><%=pdList.get(i).getProductPrice()%></td>
-									<td><%=pdList.get(i).getProductTotal()%></td>
-									<td><input type="button"
-										class="btn py-1 px-2 btn-primary deletecode" value="delete"
-										onclick="deleteCode('<%=pdList.get(i).getProductNum()%>')"></td>
-								</tr>
-								<%
-									}
-									}
-								%>
 
-								<label id="newProduct"></label>
-							</table>
+							<div style="overflow-y: scroll; height: 500px;">
+								<table class="pdList" id="pdlist">
+									<%
+										if (pdList != null && pdList.size() > 0) {
+									%>
+									<tr>
+										<!-- 									<th>상품코드</th> -->
+										<th>출발날짜/<br>도착날짜
+										</th>
+										<th style="width: 20%;">가격</th>
+										<th style="width: 15%;">인원</th>
+										<th style="width: 10%;">제어</th>
+									</tr>
+
+									<%
+										for (int i = 0; i < pdList.size(); i++) {
+									%>
+									<tr>
+										<%-- 									<td><%=pdList.get(i).getProductNum()%></td> --%>
+										<td style="font-size: 0.5em;"><%=pdList.get(i).getProductDepartDate()%>
+											/ <br><%=pdList.get(i).getProductArrivDate()%></td>
+										<td><%=pdList.get(i).getProductPrice()%></td>
+										<td><%=pdList.get(i).getProductTotal()%></td>
+										<td><input type="button"
+											class="btn py-1 px-2 btn-primary deletecode" value="delete"
+											onclick="deleteCode('<%=pdList.get(i).getProductNum()%>')"></td>
+									</tr>
+									<%
+										}
+										} else {
+									%><tr>
+										<td>패키지상품을 등록한 날짜가 없습니다.</td>
+									</tr>
+									<%
+										}
+									%>
+
+									<label id="newProduct"></label>
+								</table>
 							</div>
-						
+
 						</div>
 
 
@@ -280,9 +302,9 @@ table.pdList td input {
 						<div class="form-group" id="addProduct" style="display: none;">
 							<!-- 						<form action="ProductInsertPro.ma" method="post"> -->
 							<table class="pdList Add">
-							
+
 								<tr id="tr_top">
-								
+
 									<th>출발날짜</th>
 									<th>도착날짜</th>
 									<th>가격</th>
@@ -290,9 +312,8 @@ table.pdList td input {
 									<th style="width: 10%;">등록</th>
 								</tr>
 								<tr id="event_period">
-									<td>
-									<input type="hidden" value="<%=code %>" id="package_category_code">
-										<input type="text"
+									<td><input type="hidden" value="<%=code%>"
+										id="package_category_code"> <input type="text"
 										class="form-control form-control-shortshort actual_range"
 										id="product_depardate" placeholder="depardate"
 										name="product_depardate" required="required"

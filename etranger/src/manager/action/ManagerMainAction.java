@@ -103,6 +103,7 @@ public class ManagerMainAction implements Action {
 		request.setAttribute("mostProduct", mostProduct);
 		// -------------------------------------------------------------------------
 
+		
 		// ==================================================================================================
 
 		ActionForward forward = new ActionForward();
