@@ -20,3 +20,4 @@
     <link rel="stylesheet" href="css/loginDimlayer.css">
     <link rel="stylesheet" href="css/emailDimlayer.css">
     <link rel="stylesheet" href="css/reviewDeleteDimlayer.css">
+    <link rel="stylesheet" href="css/withdrawalDimlayer.css">

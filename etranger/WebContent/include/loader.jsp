@@ -24,6 +24,7 @@
   <script src="js/loginDimlayer.js"></script>
   <script src="js/emailDimlayer.js"></script>
   <script src="js/reviewDeleteDimlayer.js"></script>
+  <script src="js/withdrawalDimlayer.js"></script>
   
   
   
