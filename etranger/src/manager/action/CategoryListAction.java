@@ -48,76 +48,79 @@ public class CategoryListAction implements Action {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		out.print("<section id=\"productInsert\" \">");
-		out.print("<section class=\"ftco-section bg-light\">");
-		out.print("<h1>분류 리스트</h1>");
+		String op = "";
+		
+		op += "<section id=\"productInsert\" \">"
+			+ "<section class=\"ftco-section bg-light\">"
+			+ "<h1>분류 리스트</h1>";
 		if (productList != null && listCount > 0) {
-			out.print("<div class=\"container\">");
-			out.print("<div class=\"row\">");
+			op += "<div class=\"container\">"
+			+ "<div class=\"row\">";
 			for (int i = 0; i < productList.size(); i++) {
-				out.print("<div class=\"col-md-6 col-lg-3\">");
-				out.print("<div class=\"blog-entry\">");
-				out.print("<a href=\"ProductDetail.ma?package_category_code="
+				op += "<div class=\"col-md-6 col-lg-3\">"
+				+ "<div class=\"blog-entry\">"
+				+ "<a href=\"ProductDetail.ma?package_category_code="
 						+ productList.get(i).getPackage_category_code() + "&package_category_theme="
 						+ productList.get(i).getPackage_category_theme() + "\"class=\"block-20\""
 						+ "style=\"background-image: url('ManagerImgUpload/"
-						+ productList.get(i).getPackage_category_image() + "')\"></a>");
-				out.print("<div class=\"text p-4\">");
-				out.print("<div class=\"meta\">");
-				out.print("<div>");
-				out.print("<a href=\"#\">July 6, 2018</a>");
-				out.print("</div>");
-				out.print("<div>");
-				out.print("<a href=\"#\">Admin</a>");
-				out.print("</div>");
-				out.print("</div>");
-				out.print("<h3 class=\"heading\">");
-				out.print("<a href=\"ProductDetail.ma?package_category_code="
+						+ productList.get(i).getPackage_category_image() + "')\"></a>"
+				+ "<div class=\"text p-4\">"
+				+ "<div class=\"meta\">"
+				+ "<div>"
+				+ "<a href=\"#\">July 6, 2018</a>"
+				+ "</div>"
+				+ "<div>"
+				+ "<a href=\"#\">Admin</a>"
+				+ "</div>"
+				+ "</div>"
+				+ "<h3 class=\"heading\">"
+				+ "<a href=\"ProductDetail.ma?package_category_code="
 						+ productList.get(i).getPackage_category_code() + "&package_category_theme="
 						+ productList.get(i).getPackage_category_theme() + "\">"
-						+ productList.get(i).getPackage_category_name() + "</a>");
-				out.print("</h3>");
-				out.print("<p class=\"clearfix\">");
-				out.print(
-						"<a href=\"#\" class=\"float-left\">Read more</a> <a href=\"#\" class=\"float-right meta-chat\"><span class=\"icon-chat\"></span> 3</a>");
-				out.print("</p>");
-				out.print("</div>");
-				out.print("</div>");
-				out.print("</div>");
+						+ productList.get(i).getPackage_category_name() + "</a>"
+				+ "</h3>"
+				+ "<p class=\"clearfix\">"
+				+ "<a href=\"#\" class=\"float-left\">Read more</a> <a href=\"#\" class=\"float-right meta-chat\"><span class=\"icon-chat\"></span> 3</a>"
+				+ "</p>"
+				+ "</div>"
+				+ "</div>"
+				+ "</div>";
 			}
-			out.print("</div>");
-			out.print("<div class=\"row mt-5\">");
-			out.print("<div class=\"col text-center\">");
-			out.print("<div class=\"block-27\">");
-			out.print("<ul>");
+			op += "</div>"
+			+ "<div class=\"row mt-5\">"
+			+ "<div class=\"col text-center\">"
+			+ "<div class=\"block-27\">"
+			+ "<ul>";
 			if (nowPage <= 1) {
-				out.print("<li><a>&lt;</a></li>");
+				op += "<li><a>&lt;</a></li>";
 			} else {
-				out.print("<li class=\"active\" style=\"cursor: pointer;\"><a onclick=\"pageNum(" + (nowPage - 1) + ")\"" + "\">&lt;</a></li>");
+				op += "<li class=\"active\" style=\"cursor: pointer;\"><a onclick=\"pageNum(" + (nowPage - 1) + ")\"" + "\">&lt;</a></li>";
 			}
 			for (int i = startPage; i <= endPage; i++) {
 				if (i == nowPage) {
-					out.print("<li href=\"#\" class=\"active\" style=\"cursor: pointer;\"><span>" + i + "</span></li>");
+					op += "<li href=\"#\" class=\"active\" style=\"cursor: pointer;\"><span>" + i + "</span></li>";
 				} else {
-					out.print("<li><a onclick=\"pageNum(" + i + ")\" style=\"cursor: pointer;\">" + i + "</a></li>");
+					op += "<li><a onclick=\"pageNum(" + i + ")\" style=\"cursor: pointer;\">" + i + "</a></li>";
 				}
 			}
 			if (nowPage >= maxPage) {
-				out.print("<li><a>&gt;</a></li>");
+				op += "<li><a>&gt;</a></li>";
 			} else {
-				out.print("<li class=\"active\"><a onclick=\"pageNum(" + (nowPage + 1) + ")\" style=\"cursor: pointer;\"" + "\">&gt;</a></li>");
+				op += "<li class=\"active\"><a onclick=\"pageNum(" + (nowPage + 1) + ")\" style=\"cursor: pointer;\"" + "\">&gt;</a></li>";
 			}
-			out.print("</ul>");
-			out.print("</div>");
-			out.print("</div>");
-			out.print("</div>");
+			op += "</ul>"
+			+ "</div>"
+			+ "</div>"
+			+ "</div>";
 		} else {
-			out.println("<div id=\"emptyArticle\">등록된 글이 없습니다</div>");
+			op += "<div id=\"emptyArticle\">등록된 글이 없습니다</div>";
 		}
-		out.print("</div>");
-		out.print("</section>");
-		out.print("</section>");
-		out.print("<script src=\"js/manager.js\"></script>");
+		op += "</div>"
+		+ "</section>"
+		+ "</section>"
+		+ "<script src=\"js/manager.js\"></script>";
+		
+		out.print(op);
 		return null;
 	}
 

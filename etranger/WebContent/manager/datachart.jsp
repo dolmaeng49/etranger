@@ -8,6 +8,7 @@
 	ArrayList<ArrayList> regionReservationList = (ArrayList<ArrayList>) request.getAttribute("regionReservationList");
 	ArrayList<ArrayList> totalPayCount = (ArrayList<ArrayList>) request.getAttribute("totalPayCount");
 	ArrayList<ArrayList> genderPayment = (ArrayList<ArrayList>) request.getAttribute("genderPayment");
+	ArrayList<ArrayList> mostProduct = (ArrayList<ArrayList>) request.getAttribute("mostProduct");
 %>
 <!DOCTYPE html>
 <html>
@@ -57,14 +58,33 @@
 			<canvas id="myChart3"></canvas>
 		</div>
 	</div>
-
+	
 	<div class="row">
-		<div class="col-6">
-			<h1 style="text-align: center;">표4</h1>
+	<input type="button" onclick="changeAge(20)">
+
+<!-- 		<div class="col-5"> -->
+<!-- 			<table border="1" id="mostpick"> -->
+<!-- 			<tr><th>상품이름</th><th>예약건수</th></tr> -->
+<!-- 			<tr><td>1</td><td>1</td></tr> -->
+<!-- 			<tr><td>1</td><td>1</td></tr> -->
+<!-- 			</table> -->
+<!-- 		</div> -->
+		<div class="col-7">
 			<canvas id="myChart4"></canvas>
 		</div>
 	</div>
+	<div class="row">
+		
+	</div>
 	<script>
+	
+	function changeAge(age) {
+		$.ajax('ChangeAge.ma?age='+age,{
+			success : function(sdata) {
+				$('#mostpick').html(sdata);
+			}
+		});
+	}
         // 컨텍스트 호출
         var ctx1 = document.getElementById("myChart1").getContext('2d');
         var ctx2 = document.getElementById("myChart2").getContext('2d');
@@ -88,7 +108,6 @@
                     data: <%=totalPayCount.get(1)%>,
                     type: 'line',
                     fill: false,	// 채우기 없음
-                    borderColor:'rgba(250, 114, 104, 1)',
                     borderColor:'rgba(250, 114, 104, 1)',
                     borderWidth: 5,
                     order: 1
@@ -149,7 +168,7 @@
         var bgcolor = [];
         var bcolor = [];
         
-        for (var i=0; i < <%=regionReservationList.size() + 1%> ; i++){
+        for (var i=0; i < <%=regionReservationList.get(0).size()%> ; i++){
         	var color1=Math.floor(Math.random() * 256);
             var color2=Math.floor(Math.random() * 256);
             var color3=Math.floor(Math.random() * 256);
@@ -193,7 +212,7 @@
           				  var fontFamily = 'Helvetica Neue';
           				  ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
           				  // Just naively convert to string for now
-          				  var dataString = dataset.data[index].toString();
+          				  var dataString = dataset.data[index].toLocaleString() + '건';
           				  // Make sure alignment settings are correct
           				  ctx.textAlign = 'center';
           				  ctx.textBaseline = 'middle';
@@ -215,7 +234,17 @@
             		    }],
             },
             options: {
-            	maintainAspectRatio: true
+            	maintainAspectRatio: true,
+            	tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                            return value.toLocaleString();
+                        }
+                  }
+                 }
             }
         });
         
@@ -236,7 +265,7 @@
           				  var fontFamily = 'Helvetica Neue';
           				  ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
           				  // Just naively convert to string for now
-          				  var dataString = dataset.data[index].toLocaleString();
+          				  var dataString = '￦ ' + dataset.data[index].toLocaleString();
           				  // Make sure alignment settings are correct
           				  ctx.textAlign = 'center';
           				  ctx.textBaseline = 'middle';
@@ -254,7 +283,6 @@
             		    datasets: [{
             		        data: <%=genderPayment.get(0)%>,
             		        backgroundColor: ['rgb(247, 202, 201, 1)', 'rgb(145, 168, 208, 1)'],
-//             		        bodergroundColor: bcolor
             		    }],
             },
             options: {
@@ -265,45 +293,47 @@
                     callbacks: {
                         label: function(tooltipItem, data) {
                             var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                            return value.toLocaleString();
+                            return '￦ ' + value.toLocaleString();
                         }
                   }
                  }
             }
         });
-        
-		// 막대그래프
-//         var myChart3 = new Chart(ctx3, {
-//             type: 'bar',	// 그래프 타입
-//             data: {
-<%--                 labels: <%=regionReservationList2.get(0)%>, --%>
-//                 datasets: [{
-//                     label: '# 지역별 상품 예약 수',			// 그래프 이름
-<%--                     data: <%=regionReservationList2.get(1)%>, --%>
-//                     backgroundColor: [				// 그래프 배경색
-//                         'rgba(255, 99, 132, 0.2)',
-//                         'rgba(255, 99, 132, 0.2)',
-//                     ],
-//                     borderColor: [					// 그래프 선 색
-//                         'rgba(255,99,132,1)',
-//                         'rgba(255,99,132,1)',
-//                     ],
-//                     borderWidth: 1	// 그래프 선 굵기
-//                 }]
-//             },
-//             options: {
-//                 maintainAspectRatio: true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
-//                 scales: {
-//                     yAxes: [{
-//                         ticks: {
-//                             beginAtZero: true
-//                         }
-//                     }]
-//                 }
-//             }
-//         });
-
-        
+       
+		//막대그래프
+       var bgcolor1 = [];
+       var bcolor1 = [];
+		for (var i=0; i < <%=mostProduct.get(0).size()%> ; i++){
+        	var color1=Math.floor(Math.random() * 256);
+            var color2=Math.floor(Math.random() * 256);
+            var color3=Math.floor(Math.random() * 256);
+        	bgcolor1[i] = 'rgba('+color1+','+color2+','+color3+',0.7)';
+        	bcolor1[i] = 'rgba('+color1+','+color2+','+color3+',1)';
+        }
+		
+        var myChart4 = new Chart(ctx4, {
+            type: 'bar',	// 그래프 타입
+            data: {
+                labels:<%=mostProduct.get(0)%>,
+                datasets: [{
+                    label:  '인기 판매상품',			// 그래프 이름
+                    data: <%=mostProduct.get(1)%>,
+                    backgroundColor: bgcolor1,
+                    borderColor: bcolor1,
+                    borderWidth: 1	// 그래프 선 굵기
+                }]
+            },
+            options: {
+                maintainAspectRatio: true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
     </script>
 	
 </body>

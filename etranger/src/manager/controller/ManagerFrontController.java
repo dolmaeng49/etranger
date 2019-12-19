@@ -24,6 +24,7 @@ import manager.action.ProductDetailAction;
 import manager.action.ProductInsertAction;
 import manager.action.CategoryListAction;
 import manager.action.CategoryUpdateAction;
+import manager.action.CategoryDeleteAction;
 import manager.action.CategoryInsertAction;
 //import manager.action.ProductListAction;
 import manager.action.ThemeInsertAction;
@@ -34,6 +35,7 @@ import manager.action.ReservManagementAction;
 import manager.action.ReservUpdateAction;
 import manager.action.ThemeCheckBoxAction;
 import manager.action.ThemeListAction;
+//import manager.action.changeAge;
 import review.action.ImageCallbackAction;
 
 @WebServlet("*.ma")
@@ -106,6 +108,16 @@ public class ManagerFrontController extends HttpServlet {
 			else if (command.equals("/CategoryUpdate.ma")) {
 //				System.out.println("CategoryUpdate controller");
 				action = new CategoryUpdateAction();
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			else if (command.equals("/CategoryDelete.ma")) {
+//				System.out.println("CategoryUpdate controller");
+				action = new CategoryDeleteAction();
 				try {
 					forward = action.execute(request, response);
 				} catch (Exception e) {
@@ -219,7 +231,7 @@ public class ManagerFrontController extends HttpServlet {
 
 			// ------------------ datachart ---------------------
 //			else if (command.equals("/RegionReservationCount.ma")) {
-//				action = new RegionReservationCountAction();
+//				action = new changeAge();
 //				try {
 //					forward = action.execute(request, response);
 //				} catch (Exception e) {

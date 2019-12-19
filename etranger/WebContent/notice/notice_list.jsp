@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="notice.vo.NoticeBean"%>
 <%@page import="common.vo.PageInfo"%>
 <%@page import="java.util.ArrayList"%>
@@ -19,17 +21,22 @@
 	String search = request.getParameter("search");
 	String sessionId = (String) session.getAttribute("member_id");
 	NoticeBean article = (NoticeBean) request.getAttribute("article");
+	
+	
+// 	날짜 변환 작업
+
+	SimpleDateFormat sdfOrigin=new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat sdfToday=new SimpleDateFormat("HH 시 mm 분");
+	SimpleDateFormat sdfCalculation= new SimpleDateFormat("yyyyMMdd");
+	
+	Calendar calToday = Calendar.getInstance();
+	
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <!-- 스타일 인클루드 -->
 <jsp:include page="/include/style.jsp" />
-<style type="text/css">
-/* div{ */
-/* 	border: 1px solid red; */
-/* } */
-</style>
 </head>
 <body>
 	<!-- 탑메뉴 인클루드 -->
@@ -69,14 +76,11 @@
 								<th>번호</th>
 								<th>제목</th>
 								<th>날짜</th>
-								<th>글쓴이</th>
-								<!-- 								<th>조회수</th> -->
 							</tr>
 							<!--리스트에서 보여지는 게시물  한 덩이 시작 -->
 							<%
 								for (int i = 0; i < articleList.size(); i++) {
 							%>
-
 							<tr>
 								<td align="center"><%=articleList.get(i).getNotice_num()%></td>
 
@@ -86,15 +90,14 @@
 										<div class="panel-body">
 											<br><%=articleList.get(i).getNotice_content()%></div>
 									</div></td>
-
-
-								<%-- 								<td align="center"><a href="NoticeDetail.no?notice_num=<%=articleList.get(i).getNotice_num()%>&page=<%=nowPage %>"><%=articleList.get(i).getNotice_subject()%></a></td> --%>
-								<td align="center"><%=articleList.get(i).getNotice_date()%></td>
-								<%-- 								<td align="center"><%=articleList.get(i).getNotice_member_id() %></td> --%>
-								<!-- 멤버 아이디 밑에 etranger 로 대체 -->
-								<td align="center">etranger</td>
-								<%-- 								<td align="center"><%=articleList.get(i).getNotice_readcount() %></td> --%>
-
+								<td align="center">
+								<%
+								Calendar calWritingPoint = Calendar.getInstance();
+			                  	calWritingPoint.setTime(articleList.get(i).getNotice_date());
+			    				String today = sdfCalculation.format(calToday.getTime());
+			    				String writingPoint = sdfCalculation.format(calWritingPoint.getTime());
+			   					String checkedDate=(today.compareTo(writingPoint)==0)?sdfToday.format(articleList.get(i).getNotice_date()):sdfOrigin.format(articleList.get(i).getNotice_date());%>
+								<%=checkedDate%></td>
 								<%
 									if (sessionId != null && sessionId.equals("admin")) {
 								%>
@@ -119,7 +122,7 @@
 					</table>
 				</div>
 			</div>
-			<!--end 리스트에서 보여지는 게시물  한 덩이 시작 -->
+			<!--end 리스트에서 보여지는 게시물  한 덩이 끝 -->
 			<!-- 			 end list -->
 
 			<!-- 게시글 검색 & 태그-->

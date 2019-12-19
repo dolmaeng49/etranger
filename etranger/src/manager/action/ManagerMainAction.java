@@ -66,33 +66,41 @@ public class ManagerMainAction implements Action {
 		request.setAttribute("categoryList", categoryList);
 		// -------------------
 
-		// ============= 시각화 =============================================================================
+		// ============= 시각화
+		// =============================================================================
 		DataChartService dataChartService = new DataChartService();
 
-		// -------------------- (전체 판매량, 매출액) --------------------
+		// -------------------- (전체 판매량, 매출액) ------------------------------
 		DatachartBean totalSales = new DatachartBean();
 		totalSales = dataChartService.getTotalSalesCount();
 		request.setAttribute("totalSales", totalSales);
 
-		// -------------------- (지역별 상품예약 수) --------------------
+		// -------------------- (지역별 상품예약 수) -------------------------------
 		ArrayList regionReservationList = new ArrayList();
 
 		regionReservationList = dataChartService.getregionReservationList();
 		request.setAttribute("regionReservationList", regionReservationList);
 		// -------------------------------------------------------------------------
 
-		// -------------------- (일별 결제건수, 금액) --------------------
+		// -------------------- (일별 결제건수, 금액) ------------------------------
 		ArrayList totalPayCount = new ArrayList();
 
 		totalPayCount = dataChartService.getTotalPayCount();
 		request.setAttribute("totalPayCount", totalPayCount);
 		// -------------------------------------------------------------------------
 
-		// -------------------- 성별 총 결제금액 --------------------
+		// -------------------- 성별 총 결제금액 -----------------------------------
 		ArrayList genderPayment = new ArrayList();
 
 		genderPayment = dataChartService.getGenderPayment();
 		request.setAttribute("genderPayment", genderPayment);
+		// -------------------------------------------------------------------------
+
+		// -------------------- 성별&연령대에 따른 최다 구매 상품 ------------------
+		ArrayList mostProduct = new ArrayList();
+		
+		mostProduct = dataChartService.getMostProduct();
+		request.setAttribute("mostProduct", mostProduct);
 		// -------------------------------------------------------------------------
 
 		// ==================================================================================================

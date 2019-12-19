@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.StringTokenizer"%>
 <%@page import="review.vo.ReviewBean"%>
@@ -9,9 +11,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <!-- 스타일 인클루드 -->
 <jsp:include page="/include/style.jsp" />
 <%
+
    // 메인페이지 작업처리를 위해 MainPageAction 클래스의 execute() 메서드 호출
    MainPageAction mainPageAction = new MainPageAction();
    mainPageAction.execute(request, response);
@@ -22,6 +26,14 @@
    ArrayList<ReviewBean> reviewList = (ArrayList<ReviewBean>) request.getAttribute("reviewList");
    
    String newList_name = (String)request.getAttribute("newList_name");
+
+   
+//	날짜 변환 작업
+	SimpleDateFormat sdfOrigin=new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat sdfToday=new SimpleDateFormat("HH 시 mm 분");
+	SimpleDateFormat sdfCalculation= new SimpleDateFormat("yyyyMMdd");
+	
+	Calendar calToday = Calendar.getInstance();
 %>
 
 </head>
@@ -95,11 +107,6 @@
                         data-toggle="pill" href="#v-pills-messages" role="tab"
                         aria-controls="v-pills-messages" aria-selected="false"> 상세
                         검색</a>
-
-                     <!--                         <a class="nav-link p-3" id="v-pills-settings-tab" -->
-                     <!--                         data-toggle="pill" href="#v-pills-settings" role="tab" -->
-                     <!--                         aria-controls="v-pills-settings" aria-selected="false"> -->
-                     <!--                         여행지 검색</a> -->
                   </div>
                </div>
 
@@ -177,38 +184,6 @@
                         </form>
                      </div>
                   </div>
-                  <!-- 세번째 검색 탭 -->
-                  <!--                   <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" -->
-                  <!--                      aria-labelledby="v-pills-settings-tab"> -->
-                  <!--                      <div class="block-17"> -->
-                  <!--                         <form action="" method="post" class="d-block d-lg-flex"> -->
-                  <!--                            <div class="fields d-block d-lg-flex"> -->
-                  <!--                               <div class="textfield-search one-third one-third-1"></div> -->
-
-                  <!--                               <div class="select-wrap one-third one-third-1"> -->
-                  <!--                                  <div class="icon"> -->
-                  <!--                                     <span class="ion-ios-arrow-down"></span> -->
-                  <!--                                  </div> -->
-                  <!--                                  <select name="region" id="selectRegion" class="form-control" onChange="getCity()"> -->
-                  <!--                                           <option value="">지역선택</option> -->
-                  <!--                                        </select> -->
-                  <!--                               </div> -->
-
-                  <!--                               <div class="select-wrap one-third one-third-1"> -->
-                  <!--                                  <div class="icon"> -->
-                  <!--                                     <span class="ion-ios-arrow-down"></span> -->
-                  <!--                                  </div> -->
-                  <!--                                  <div class="icon"><span class="ion-ios-arrow-down"></span></div> -->
-                  <!--                                           <select name="city" id="selectCity" class="form-control"> -->
-                  <!--                                              <option value="">도시선택</option> -->
-                  <!--                                           </select> -->
-                  <!--                               </div> -->
-                  <!--                            </div> -->
-                  <!--                            <input type="submit" class="search-submit btn btn-primary" -->
-                  <!--                               value="검색하기"> -->
-                  <!--                         </form> -->
-                  <!--                      </div> -->
-                  <!--                   </div> -->
 
                </div>
             </div>
@@ -224,10 +199,10 @@
             <div class="img col-sm-12 col-lg-6">
 
             <div class="embed-responsive embed-responsive-16by9" style="margin-top: 9rem;">
-						<video autoplay muted loop class="embed-responsive-item">
-							<source src="images/intro.mp4" type="video/mp4">
-						</video>
-					</div>
+                  <video autoplay muted loop class="embed-responsive-item">
+                     <source src="images/intro.mp4" type="video/mp4">
+                  </video>
+               </div>
 <!--                <a href="https://vimeo.com/371024892" class="button popup-vimeo"><span -->
 <!--                   class="ion-ios-play"></span></a> -->
                   
@@ -247,7 +222,6 @@
                      함께 믿음직한 가이드와 합리적인 가격으로 여행을 떠나보세요. 저희는 업계 최저 수수료를 추구합니다. 2030년 글로벌
                      No.1 문화관광 유통그룹으로 발돋움하기위해 고객에게 세계 최고의 문화관광 유통 서비스를 제공하는 기업으로
                      성장하겠습니다.</p>
-
                </div>
             </div>
          </div>
@@ -285,57 +259,6 @@
          </div>
       </div>
    </section>
-
-   <!-- OUR SERVICE? 주석처리 -->
-   <!--
-    <section class="ftco-section bg-light">
-      <div class="container">
-        <div class="row justify-content-center mb-5 pb-5">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2>Our Services</h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block text-center">
-              <div class="d-flex justify-content-center"><div class="icon d-flex justify-content-center mb-3"><span class="align-self-center flaticon-sailboat"></span></div></div>
-              <div class="media-body p-2">
-                <h3 class="heading">Special Activities</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block text-center">
-              <div class="d-flex justify-content-center"><div class="icon d-flex justify-content-center mb-3"><span class="align-self-center flaticon-around"></span></div></div>
-              <div class="media-body p-2">
-                <h3 class="heading">Travel Arrangements</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block text-center">
-              <div class="d-flex justify-content-center"><div class="icon d-flex justify-content-center mb-3"><span class="align-self-center flaticon-compass"></span></div></div>
-              <div class="media-body p-2">
-                <h3 class="heading">Private Guide</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-              </div>
-            </div>    
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block text-center">
-              <div class="d-flex justify-content-center"><div class="icon d-flex justify-content-center mb-3"><span class="align-self-center flaticon-map-of-roads"></span></div></div>
-              <div class="media-body p-2">
-                <h3 class="heading">Location Manager</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-              </div>
-            </div>      
-          </div>
-        </div>
-      </div>
-    </section>
--->
    <!-- 추천 8개 -->
    <section class="ftco-section">
       <div class="container-fluid">
@@ -362,9 +285,9 @@
                      <h3 class="heading"><%=cb.getPackage_category_name()%></h3>
                      <div class="post-meta">
                         <% String code = cb.getPackage_category_code();
-                        	if(code.contains("!")){
-                        		  code = code.substring(code.indexOf("!")); // category code 느낌표 없애기		
-                        	}
+                           if(code.contains("!")){
+                                code = code.substring(code.indexOf("!")); // category code 느낌표 없애기      
+                           }
                          
                            %><span><%=code.replace('!', '#') %></span> 
                            
@@ -429,7 +352,15 @@
                      <div class="text p-4">
                         <div class="meta">
                            <div>
-                              <a href="<%=detailURL%>"><%=rb.getReview_date()%></a>
+                              <a href="<%=detailURL%>">
+                              <% 
+                              //날짜 포맷 변경
+                  Calendar calWritingPoint = Calendar.getInstance();
+                  	calWritingPoint.setTime(rb.getReview_date());
+    				String today = sdfCalculation.format(calToday.getTime());
+    				String writingPoint = sdfCalculation.format(calWritingPoint.getTime());
+   					String checkedDate=(today.compareTo(writingPoint)==0)?sdfToday.format(rb.getReview_date()):sdfOrigin.format(rb.getReview_date());%>
+   					<%=checkedDate %></a>
                            </div>
                            <div>
                               <a href="<%=detailURL%>"><%=rb.getReview_member_name()%></a>
@@ -461,7 +392,7 @@
             <div class="col-md-7 text-center heading-section ftco-animate">
                <h2 class="mb-1 p-2 pb-3 ftco-animate">Highly Recommended
                   Tours</h2>
-               <h5 class="mb-3 p-2 pb-3 ftco-animate">어디로가야할지 아직 못정하셨나요?</h5>
+               <h5 class="mb-3 p-2 pb-3 ftco-animate">어디로 가야 할지 아직 못 정하셨나요?</h5>
 
                <div class="row no-gutters d-flex">
                   <%
@@ -481,13 +412,10 @@
                            <div class="post-meta">
                               <%
                                  String code = cb.getPackage_category_code();
-                                    code = code.substring(code.indexOf("!"));
-                                    String[] codes = code.split("!");
-                                    for (String cd : codes) {
-                              %><span><%=cd%></span>
-                              <%
-                                 }
-                              %>
+                                    if (code.contains("!")) {
+                                       code = code.substring(code.indexOf("!")); // category code 느낌표 없애기      
+                                    }
+                              %><span><%=code.replace('!', '#')%></span>
                            </div>
                            <p class="star-rate">
                               <!-- 리뷰 별점 스크립틀릿으로 표시할 부분,  -->
@@ -520,41 +448,6 @@
                   <%
                      }
                   %>
-
-                  <!--                   <div class="col-md-4 ftco-animate"> -->
-                  <!--                      <a href="#" class="block-5" -->
-                  <!--                         style="background-image: url('images/hotel-2.jpg');"> -->
-                  <!--                         <div class="text"> -->
-                  <!--                            <span class="price">$29/night</span> -->
-                  <!--                            <h3 class="heading">Deluxe Hotel</h3> -->
-                  <!--                            <div class="post-meta"> -->
-                  <!--                               <span>Ameeru Ahmed Magu Male’, Maldives</span> -->
-                  <!--                            </div> -->
-                  <!--                            <p class="star-rate"> -->
-                  <!--                               <span class="icon-star"></span><span class="icon-star"></span><span -->
-                  <!--                                  class="icon-star"></span><span class="icon-star"></span><span -->
-                  <!--                                  class="icon-star-half-full"></span> <span>500 reviews</span> -->
-                  <!--                            </p> -->
-                  <!--                         </div> -->
-                  <!--                      </a> -->
-                  <!--                   </div> -->
-                  <!--                   <div class="col-md-4 ftco-animate"> -->
-                  <!--                      <a href="#" class="block-5" -->
-                  <!--                         style="background-image: url('images/hotel-3.jpg');"> -->
-                  <!--                         <div class="text"> -->
-                  <!--                            <span class="price">$29/night</span> -->
-                  <!--                            <h3 class="heading">Deluxe Hotel</h3> -->
-                  <!--                            <div class="post-meta"> -->
-                  <!--                               <span>Ameeru Ahmed Magu Male’, Maldives</span> -->
-                  <!--                            </div> -->
-                  <!--                            <p class="star-rate"> -->
-                  <!--                               <span class="icon-star"></span><span class="icon-star"></span><span -->
-                  <!--                                  class="icon-star"></span><span class="icon-star"></span><span -->
-                  <!--                                  class="icon-star-half-full"></span> <span>500 reviews</span> -->
-                  <!--                            </p> -->
-                  <!--                         </div> -->
-                  <!--                      </a> -->
-                  <!--                   </div> -->
                </div>
             </div>
          </div>
