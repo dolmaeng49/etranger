@@ -5,6 +5,13 @@
 <%
  	String member_id = request.getParameter("member_id");
     MemberBean memberBean=(MemberBean)request.getAttribute("memberBean");
+    
+    
+    String delete_id = null; 
+	if(session.getAttribute("member_id")!=null){
+		delete_id = (String)session.getAttribute("member_id");
+	}
+    
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -162,8 +169,9 @@
 							<!-- 버튼 -->
 							<div class="form-group">
 								<input type="submit" value="수정완료" class="btn btn-primary py-3 px-5">
-								<input type="button" value="탈퇴하기" class="btn btn-primary py-3 px-5"
-									onclick="location.href='MemberDeleteForm.me'">
+<!-- 								<input type="button" value="탈퇴하기" class="btn btn-primary py-3 px-5" id="withdrawal" onclick="location.href='layer2Withdrawal'"> -->
+							<a href="#layer2Withdrawal" id="withdrawal" class="btn btn-primary py-3 px-5">탈퇴하기</a>
+							
 							</div>
 					</div>
 				</div>
@@ -171,6 +179,39 @@
 			</div>
 		</section>
 	</form>
+	<!-- 딤 시작 -->
+	<div class="dim-layerWithdrawal">
+							<div class="dimBgWithdrawal"></div>
+							<div id="layer2Withdrawal" class="pop-layerWithdrawal">
+								<div class="pop-containerWithdrawal">
+									<div class="pop-contsWithdrawal">
+										<!--content //-->
+										<form action="MemberDeletePro.me" method="post">
+	<div class="comment-form-wrap pt-5 form-wrap-login">
+						<h3 class="mb-5">회원 탈퇴</h3>
+						<div class="form-group">
+							<label for="id">ID</label><br>
+							<input type="text" class="form-control" required="required" name="member_id" value="<%=delete_id%>" readonly="readonly">
+						</div>
+						<div class="form-group">
+							<label for="password">PASSWORD</label><br>
+							<input type="password" class="form-control" required="required" name="member_passwd">
+						</div>
+			 			<div class="form-group form-group-btn">
+							<input type="submit" value="탈퇴하기" class="btn py-3 px-4 btn-primary">&nbsp;&nbsp;
+						</div>
+						<div class="btn-rWithdrawal">
+												<a href="#" id="btnPopUpCloseWithdrawal"
+													class="btn py-1 px-2 btn-primary">창 닫기</a>
+											</div>
+					</div>
+	</form>
+										<!--// content-->
+									</div>
+								</div>
+							</div>
+						</div>
+	<!-- 딤 끝 -->
 
 	<!-- footer 인클루드 -->
 	<jsp:include page="/include/footer.jsp" />

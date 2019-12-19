@@ -208,12 +208,12 @@ table.pdList th {
 							<!-- 꽉찬하트는 class="fa fa-heart" name="1" -->
 						</tr>
 						<tr>
-							<td><label for="image">이미지1</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=imgs[1]%>');"> </a></td>
-							<td><label for="image">이미지2</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=imgs[2]%>');"> </a></td>
-							<td><label for="image">이미지3</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=imgs[3]%>');"> </a></td>
+							<td colspan="3"><a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=imgs[0]%>');"> </a></td>
 						</tr>
 						<tr>
-							<td colspan="3"><label for="image"></label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=imgs[0]%>');"> </a></td>
+							<td><a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=imgs[1]%>');"> </a></td>
+							<td><a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=imgs[2]%>');"> </a></td>
+							<td><a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=imgs[3]%>');"> </a></td>
 						</tr>
 					</table>
 				</div>
