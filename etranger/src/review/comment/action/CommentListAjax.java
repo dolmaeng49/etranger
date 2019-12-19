@@ -23,8 +23,7 @@ public class CommentListAjax implements Action {
 
 		int review_num = Integer.parseInt(request.getParameter("review_num"));
 		String sessionId = (String)request.getSession().getAttribute("member_id");
-//		String sessionName=(String)request.getSession().getAttribute("member_name");
-		String sessionName = request.getParameter("sessionName");
+		String sessionName=(String)request.getSession().getAttribute("member_name");
 
 		CommentListService commentListService = new CommentListService();
 		int listCount = commentListService.getCommentCount();

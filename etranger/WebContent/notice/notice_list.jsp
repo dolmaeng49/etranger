@@ -223,15 +223,6 @@
 			});
 
 		});
-
-		$('#notice_del_button').click(function() {
-			var delConfirm = confirm('정말 삭제하시겠습니까?');
-			if (delConfirm) {
-			} else {
-				return false;
-			}
-
-		});
 	</script>
 </body>
 </html>
