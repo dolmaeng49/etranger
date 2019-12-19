@@ -37,7 +37,7 @@
         <div class="container">
           <div class="row slider-text align-items-center">
             <div class="col-md-7 col-sm-12 ftco-animate">
-              <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span><a href="blog.html">Blog</a></span> <span>Single Blog</span></p>
+              <p class="breadcrumbs"><span class="mr-2"><a href="./index.jsp">Home</a></span> <span><a href="blog.html">Blog</a></span> <span>Single Blog</span></p>
               <h1 class="mb-3">Blog details</h1>
             </div>
           </div>
@@ -115,14 +115,13 @@
 <!-- 			<i class="fa fa-thumbs-up"></i> 추천 <span id="up">ajax로 뿌려줄 값(누적 추천수)들어갈 곳</span></button> -->
 <!-- 			</div>like-area끝 -->
 			<div class="content-footer">
-			
 				<%
    					if(sessionId != null) { // 세션값 아이디 가 있을시
 					if(sessionId.equals(article.getReview_member_id())) { // 글쓴이와 일치 할경우
 					%>
 					<div id="modi-del">
 					<a href="ReviewModifyForm.rv?review_num=<%=article.getReview_num()%>&page=<%=nowPage%>" class="btncontrol btncontrol-sm btn-default"><i class="fa fa-pencil-alt"></i>수정</a>
-					<a id="review_del_button" href="ReviewDeletePro.rv?review_num=<%=article.getReview_num() %>&review_member_id=<%=sessionId %>&page=<%=nowPage%>" class="btncontrol btnforshare-rv btn-default"><i class="fa fa-trash"></i>삭제</a>
+					<a id="btn_ReviewDelete" href="#layer2ReviewDelete" class="btncontrol btnforshare-rv btn-default"><i class="fa fa-trash"></i>삭제</a>
    					</div>
    					<%
 					}
@@ -181,6 +180,26 @@
 
         </div>
       </div>
+      <!--삭제확인 딤처리 레이어  -->
+						<div class="dim-layerReviewDelete">
+							<div class="dimBgReviewDelete"></div>
+							<div id="layer2ReviewDelete" class="pop-layerReviewDelete">
+								<div class="pop-containerReviewDelete">
+									<div class="pop-contsReviewDelete">
+										<!--content //-->
+										<div class="form-group form-group-btn">
+											<input type="submit" value="삭제하기" class="btn py-2 px-3 btn-primary" onclick="location.href='ReviewDeletePro.rv?review_num=<%=article.getReview_num() %>&review_member_id=<%=sessionId %>&page=<%=nowPage%>'">&nbsp;&nbsp;
+										</div>
+										<div class="btn-rReviewDelete">
+												<a href="#" id="btnPopUpCloseReviewDelete"
+													class="btn py-1 px-2 btn-primary">취소</a>
+											</div>
+										<!--// content-->
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- 삭제확인  -->
     </section> <!-- .section -->
 
 	<!-- footer 인클루드 -->

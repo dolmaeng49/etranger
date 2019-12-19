@@ -410,13 +410,13 @@ public class ProductDAO {
 				
 				String sql = "SELECT c.package_category_code, c.package_category_name, c.package_category_theme, c.package_category_image, c.package_category_content," 
 						+ " c.package_category_region, c.package_category_city, c.package_category_wish_count, MIN(p.package_product_price) AS min_price," 
-						+ " count(r.review_num) AS review_count, avg(r.review_star) AS review_star_avg"
-						+ " FROM package_category c JOIN package_product p"
-						+ " ON p.package_category_code = c.package_category_code"
+						+ " COUNT(DISTINCT r.review_num) AS review_count, avg(r.review_star) AS review_star_avg"
+						+ " FROM package_category c"
+						+ " JOIN package_product p ON p.package_category_code = c.package_category_code"
 						+ " LEFT JOIN review r ON r.review_package_category_code = c.package_category_code"
-						+ " JOIN wish w"
-						+ " ON w.wish_category_code = c.package_category_code"
-						+ " WHERE w.wish_member_id=?";
+						+ " JOIN wish w ON w.wish_category_code = c.package_category_code"
+						+ " WHERE w.wish_member_id=?"
+						+ " GROUP BY c.package_category_code";
 
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, member_id);

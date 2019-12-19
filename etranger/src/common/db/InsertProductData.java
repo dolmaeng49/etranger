@@ -19,21 +19,22 @@ import reservation.service.ReservationInsertService;
 import reservation.vo.ReservationBean;
 
 public class InsertProductData {
-	// insertMembers() 로 생성한 회원정보 지우기
-	// => DELETE FROM review WHERE review_member_id LIKE 'test%';
-	// -> DELETE FROM reservation WHERE reservation_member_id LIKE 'test%';
-	// => DELETE FROM member WHERE member_id LIKE 'test%';
-	// 순서대로
-	
+	// insertMembers() 로 생성한 회원정보 지우기 (리뷰, 예약정보 포함)
+	/*
+	 => DELETE FROM review WHERE review_member_id LIKE 'test%';
+		DELETE FROM reservation WHERE reservation_member_id LIKE 'test%';
+		DELETE FROM member WHERE member_id LIKE 'test%';
+	*///순서대로
+	 
 	// insertProducts() 는 모두 지우는 방법 뿐임,, 
 	// => 아니면 관리자 페이지에서 수동으로,,
 	
 	
 	
 
+	// package_product 의 데이터를 임의로 생성하는 메서드
+	// packate_category 의 데이터가 미리 입력되어 있어야 함
 	public int insertProducts() {
-		// package_product 의 데이터를 임의로 생성하는 메서드
-		// packate_category 의 데이터가 미리 입력되어 있어야 함
 		
 		// 커넥션풀에서 커넥션 가져오기
 		Connection con = getConnection();
@@ -49,19 +50,22 @@ public class InsertProductData {
 			rs = pstmt.executeQuery();
 			long min_date = Date.UTC(2017-1900, 12-1, 1, 0, 0, 0);
 			long max_date = Date.UTC(2020-1900, 3-1, 31, 0, 0, 0);
+			int i = 1;
+			// 조회한 카테고리 코드 하나마다 반복 수행
 			while (rs.next()) {
+				System.out.println(i++ + "번째 package_category 작업중...");
 				String category_code = rs.getString(1);
-//				category_codes.add(category_code);
+				// 카테고리 하나에 생성할 프로덕트 수
 				int productCount = 5 + random.nextInt(15);
-				Set<Date> depart_dates = new HashSet<Date>();
 				// 중복없이 5~20개의 날짜 생성
+				Set<Date> depart_dates = new HashSet<Date>();
 				while (depart_dates.size() < productCount) {
 					// 2017.12.1 ~ 2020.3.31 사이의 날짜(long) 생성
 					depart_dates.add(new Date(min_date + (long)(random.nextDouble() * (max_date - min_date))));
 				}
 				// Set -> Iterator 형변환
 				Iterator<Date> itr = depart_dates.iterator();
-				// 패키지 기간 4 ~ 9
+				// 패키지 기간 4 ~ 9 일
 				int days = 4 + random.nextInt(5);
 				
 				// 카테고리 하나당 5 ~ 20 개의 프로덕트 생성
@@ -74,7 +78,9 @@ public class InsertProductData {
 					pstmt.setString(2, category_code);
 					pstmt.setDate(3, depart_date);
 					pstmt.setDate(4, new Date(arriv_date.getYear()-1900, arriv_date.getMonthValue()-1, arriv_date.getDayOfMonth()));
+					// 30 ~ 180 만원 가격
 					pstmt.setInt(5, (random.nextInt(150) + 30) * 10000);
+					// 10 ~ 40 명 인원
 					pstmt.setInt(6, random.nextInt(30) + 10);
 					pstmt.setInt(7, 0);
 //					System.out.println(pstmt);
@@ -95,12 +101,19 @@ public class InsertProductData {
 		return 0;
 	}
 	
+	// 파라미터로 전달받은 수 만큼의 더미 회원 정보 생성
+	// 회원 id : test1 ~ testN
+	// DB에 있는 프로덕트 예약, 리뷰 작성까지 All-in-One
 	public int insertMembers(int numberOfMembers) {
 		// 커넥션풀에서 커넥션 가져오기
 		Connection con = getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
+		
+		int insertReviewCount = 0;
+		int insertMemberCount = 0;
+		int insertReservCount = 0;
 		
 		Random random = new Random();
 		
@@ -139,6 +152,7 @@ public class InsertProductData {
 		};
 		
 		for(int i = 0; i < numberOfMembers; i++) {
+			if((i + 1) % 10 == 0) {System.out.println((i + 1) + "번째 회원 정보 생성중...");};
 			// 회원 생성
 			sql = "INSERT INTO member VALUES(?,?,?,?,NULL,NULL,NULL,?,?,?,?,now(),now(),?)";
 			try {
@@ -170,8 +184,7 @@ public class InsertProductData {
 				pstmt.setString(8, random.nextBoolean() == true ? "m" : "f");
 				pstmt.setString(9, "test_acount");
 //				System.out.println(pstmt);
-				int insertMemberCount = pstmt.executeUpdate();
-				if(insertMemberCount > 0) {commit(con);};
+				insertMemberCount += pstmt.executeUpdate();
 				
 				// 예약하기 & 리뷰쓰기
 				// 예약할 프로덕트 개수
@@ -200,8 +213,7 @@ public class InsertProductData {
 					pstmt.setString(7, "Y");
 					pstmt.setString(8, "결제완료");
 //					System.out.println(pstmt);
-					int insertReservCount = pstmt.executeUpdate();
-					if(insertReservCount > 0) {commit(con);};
+					insertReservCount += pstmt.executeUpdate();
 					
 					// 리뷰쓰기 구매자의 30%만 리뷰 쓰도록
 					if(random.nextDouble() < 0.3) {
@@ -213,14 +225,14 @@ public class InsertProductData {
 						pstmt.setString(4, "Review Test Data");
 						pstmt.setString(5, "bg_88.jpg");
 						pstmt.setString(6, "Review Test Data");
-						pstmt.setString(7, products.get(k).getCategoryCode());
+						pstmt.setString(7, products.get(index).getCategoryCode());
 						// 4 ~ 10 별점
-						pstmt.setInt(8, 4 + random.nextInt(6));
+						pstmt.setInt(8, 5 + random.nextInt(6));
 //						System.out.println(pstmt);
-						int insertReviewCount = pstmt.executeUpdate();
-						if(insertReviewCount > 0) {commit(con);};
+						insertReviewCount += pstmt.executeUpdate();
 					}
 				}
+				if(insertReviewCount > 0 && insertMemberCount > 0 && insertReservCount > 0) {commit(con);};
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
@@ -228,37 +240,6 @@ public class InsertProductData {
 			}
 			
 		}
-		
-		/*
-		 *  +---------------------------+--------------+------+-----+---------+----------------+
-			| Field                     | Type         | Null | Key | Default | Extra          |
-			+---------------------------+--------------+------+-----+---------+----------------+
-			| reservation_num           | int(11)      | NO   | PRI | NULL    | auto_increment |
-			| reservation_member_id     | varchar(12)  | NO   | MUL | NULL    |                |
-			| reservation_product_num   | varchar(100) | NO   | MUL | NULL    |                |
-			| reservation_category_code | varchar(100) | NO   | MUL | NULL    |                |
-			| reservation_date          | date         | NO   |     | NULL    |                |
-			| reservation_price         | int(11)      | NO   |     | NULL    |                |
-			| reservation_headcount     | int(11)      | NO   |     | NULL    |                |
-			| reservation_ispayment     | varchar(45)  | YES  |     | NULL    |                |
-			| reservation_progress      | varchar(45)  | NO   |     | NULL    |                |
-			+---------------------------+--------------+------+-----+---------+----------------+
-			+------------------------------+---------------+------+-----+---------+----------------+
-			| Field                        | Type          | Null | Key | Default | Extra          |
-			+------------------------------+---------------+------+-----+---------+----------------+
-			| review_num                   | int(11)       | NO   | PRI | NULL    | auto_increment |
-			| review_member_id             | varchar(12)   | NO   | MUL | NULL    |                |
-			| review_member_name           | varchar(15)   | NO   |     | NULL    |                |
-			| review_subject               | varchar(100)  | NO   |     | NULL    |                |
-			| review_image                 | varchar(100)  | NO   |     | NULL    |                |
-			| review_content               | varchar(2000) | NO   |     | NULL    |                |
-			| review_date                  | datetime      | YES  |     | NULL    |                |
-			| review_readcount             | int(11)       | NO   |     | NULL    |                |
-			| review_package_category_code | varchar(100)  | NO   | MUL | NULL    |                |
-			| review_star                  | int(11)       | NO   |     | 0       |                |
-			| review_comment_count         | int(11)       | YES  |     | 0       |                |
-			+------------------------------+---------------+------+-----+---------+----------------+
-		 */
 		
 		return 0;
 	}

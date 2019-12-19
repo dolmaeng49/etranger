@@ -23,6 +23,7 @@
   <script src="js/custom-toolbar.js"></script>
   <script src="js/loginDimlayer.js"></script>
   <script src="js/emailDimlayer.js"></script>
+  <script src="js/reviewDeleteDimlayer.js"></script>
   
   
   

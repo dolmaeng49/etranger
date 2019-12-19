@@ -6,12 +6,11 @@
  		    tooltip: 'guess what',
  		    click: function () {
  		    	alert("etranger==\"TheBestTeamEver\"");
-// 		      context.invoke('editor.insertText', 'etranger==TheBestTeamEver');
-// 		      context.invoke('editor.bold');
  		    }
  		  });
  		  return button.render();   // return button as jquery object
  		}
+ 	  
 //========================
 //버튼추가시, .summernote 안에 들어갈 속성
 //buttons: {
@@ -114,7 +113,7 @@ function sendFileManager(file, el) {
     	enctype: 'multipart/form-data',
     	processData: false,
     	success: function(data) {
-      	$(el).summernote('editor.insertImage', data.url);
+	      	$(el).summernote('editor.insertImage', data.url);
     	}
   	});
 };

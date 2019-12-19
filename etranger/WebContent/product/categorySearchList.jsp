@@ -80,24 +80,30 @@
 								style="font-size:24px;color:red;"></i></span>
                     </div>
                     <p class="star-rate">
-                    <!-- 리뷰 별점 스크립틀릿으로 표시할 부분,  -->
-                    <% // 리뷰 별점 평균 표시, 리뷰 개수 표시
-                    if(categoryList.get(i).getReview_count() != 0){
-                    	// 10점 만점을 5점으로 전환
-	                    double avg = categoryList.get(i).getReview_star_avg() / 2;
-	                    for(int j = 1; j <= (int)(avg+1/3); j++){
-	                    	%><span class="icon-star"></span>
-	                    <% }
-		                if(avg%1 >= 1/3f && avg%1 <= 2/3f) { 
-		                	%><span class="icon-star-half-full"></span>
-		               <% }
-		                for(int j = (int)(avg+0.5); j < 5; j++) {
-		                	%><span class="icon-star-o"></span>
-				        <% }
-	                    %>
-	                    <span><%=categoryList.get(i).getReview_count() %> reviews</span></p>
-	           		 <% 
-           			}%>
+                        <!-- 리뷰 별점 스크립틀릿으로 표시할 부분,  -->
+                        <%
+                           // 리뷰 별점 평균 표시, 리뷰 개수 표시
+                              if (categoryList.get(i).getReview_count() != 0) {
+                                 // 10점 만점 평균 별점 반올림 처리
+                                 byte avg_int = (byte)Math.round(categoryList.get(i).getReview_star_avg());
+                                 for (int j = 1; j <= avg_int / 2; j++) {
+                        %><span class="icon-star"></span>
+                        <%
+                           }
+                                 if (avg_int % 2f >= 0.4) {
+                        %><span class="icon-star-half-full"></span>
+                        <%
+                           }
+                                 for (int j = (int) ((avg_int + 1) / 2); j < 5; j++) {
+                        %><span class="icon-star-o"></span>
+                        <%
+                           }
+                        %>
+                        <span><%=categoryList.get(i).getReview_count()%> reviews</span>
+                     <%
+                        }
+                     %>
+                     </p>
 	                  </div>
 	              </div>
                    <% }} %>

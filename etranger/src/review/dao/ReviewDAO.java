@@ -408,7 +408,7 @@ public class ReviewDAO {
 	}
 	
 	
-	//패지키 하나당 리뷰 1개 작성을 위한 리뷰 중복체크
+	//패키지 하나당 리뷰 1개 작성을 위한 리뷰 중복체크
 	public boolean duplicateCheck(String review_member_id, String review_package_category_code) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -421,7 +421,7 @@ public class ReviewDAO {
 			
 			rs = pstmt.executeQuery();
 
-			if (rs.next()) {
+			if (rs.next() && rs.getInt(1) > 0) {
 				duplicateCheck=true;
 			}
 		} catch (SQLException e) {

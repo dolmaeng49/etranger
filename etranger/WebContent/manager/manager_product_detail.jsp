@@ -12,24 +12,35 @@
 	ArrayList<CategoryBean> regionList = (ArrayList<CategoryBean>) request.getAttribute("regionList");
 	ArrayList<CategoryBean> themeList = (ArrayList<CategoryBean>) request.getAttribute("themeList");
 	ArrayList<CategoryBean> productList = (ArrayList<CategoryBean>) request.getAttribute("productList");
-	ArrayList<CategoryBean> pdetail = (ArrayList<CategoryBean>) request.getAttribute("pdetail");
+	CategoryBean pdetail = (CategoryBean) request.getAttribute("pdetail");
 	ArrayList<ProductBean> pdList = (ArrayList<ProductBean>) request.getAttribute("pdList");
 	String code = "";
 	String image = "";
+	String[] imgs = new String[4];
 	String name = "";
 	String content = "";
 	String theme = "";
 	int region = 0;
 	int city = 0;
-	for (int i = 0; i < pdetail.size(); i++) {
-
-		code = pdetail.get(i).getPackage_category_code();
-		image = pdetail.get(i).getPackage_category_image();
-		name = pdetail.get(i).getPackage_category_name();
-		content = pdetail.get(i).getPackage_category_content();
-		theme = pdetail.get(i).getPackage_category_theme();
-		region = pdetail.get(i).getPackage_category_region();
-		city = pdetail.get(i).getPackage_category_city();
+	
+	if (pdetail != null) {
+		code = pdetail.getPackage_category_code();
+		image = pdetail.getPackage_category_image();
+		String[] DBimgs = image.split("\\*");
+		for(int j = 0; j < 4; j++) {
+			// 4장의 사진을 탑슬라이더에 뿌려줌
+			// 업로드된 사진이 4장이 안 될 경우 대비 
+			if(DBimgs.length < j + 1) {
+				imgs[j] = imgs[j - 1]; 
+			} else {
+				imgs[j] = DBimgs[j];
+			}
+		}
+		name = pdetail.getPackage_category_name();
+		content = pdetail.getPackage_category_content();
+		theme = pdetail.getPackage_category_theme();
+		region = pdetail.getPackage_category_region();
+		city = pdetail.getPackage_category_city();
 	}
 %>
 <!DOCTYPE html>
@@ -96,7 +107,7 @@ table.pdList td input {
 				<div class="row slider-text align-items-center">
 					<div class="col-md-7 col-sm-12 ftco-animate">
 						<p class="breadcrumbs">
-							<span class="mr-2"><a href="../main/index.jsp"></a></span> <span><a
+							<span class="mr-2"><a href="./index.jsp"></a></span> <span><a
 								href="blog.html"></a></span> <span></span>
 						</p>
 						<h1 class="mb-3">카테고리 상세내용&amp;패키지상품 추가</h1>
@@ -158,7 +169,7 @@ table.pdList td input {
 
 						<div class="writeform-group">
 							<label for="image">이미지</label><a href="#" class="block-20"
-								style="background-image: url('ManagerImgUpload/<%=image%>');">
+								style="background-image: url('ManagerImgUpload/<%=imgs[0]%>');">
 							</a>
 						</div>
 
@@ -203,6 +214,14 @@ table.pdList td input {
 								<%=content%>
 							</textarea>
 						</div>
+<<<<<<< HEAD
+						
+						
+						<div class="custom-file mt-3"  style="width: 100%">
+								<label for="name">img</label>
+								<input multiple="multiple" type="hidden" name="category_image" required="required" class="custom-file-input" id="customFile" value="<%=image%>"/>
+									<label class="custom-file-label" for="customFile">change image file</label>
+=======
 
 
 						<div class="custom-file mt-3" style="width: 100%">
@@ -211,6 +230,7 @@ table.pdList td input {
 								class="custom-file-input" id="customFile" value="<%=image%>" />
 							<label class="custom-file-label" for="customFile">change
 								image file</label>
+>>>>>>> refs/remotes/origin/master
 						</div>
 
 						<input type="submit" class="btn btn-outline-dark btn-lg mt-3 mb-3"

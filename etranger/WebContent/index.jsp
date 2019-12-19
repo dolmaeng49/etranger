@@ -15,7 +15,6 @@
 <!-- 스타일 인클루드 -->
 <jsp:include page="/include/style.jsp" />
 <%
-
    // 메인페이지 작업처리를 위해 MainPageAction 클래스의 execute() 메서드 호출
    MainPageAction mainPageAction = new MainPageAction();
    mainPageAction.execute(request, response);
@@ -35,7 +34,6 @@
 	
 	Calendar calToday = Calendar.getInstance();
 %>
-
 </head>
 <body>
    <!-- 탑메뉴 인클루드 -->
@@ -197,14 +195,14 @@
       <div class="container-fluid d-flex">
          <div class="section-2-blocks-wrapper row no-gutters">
             <div class="img col-sm-12 col-lg-6">
-
-            <div class="embed-responsive embed-responsive-16by9" style="margin-top: 9rem;">
+			
+            <div class="embed-responsive embed-responsive-16by9" style="margin-top: 7rem;">
                   <video autoplay muted loop class="embed-responsive-item">
                      <source src="images/intro.mp4" type="video/mp4">
                   </video>
                </div>
-<!--                <a href="https://vimeo.com/371024892" class="button popup-vimeo"><span -->
-<!--                   class="ion-ios-play"></span></a> -->
+               <a href="https://vimeo.com/371024892" class="button popup-vimeo"  style="height: auto; width: auto;" ><span
+                  class="ion-ios-play"></span></a>
                   
             </div>
             <div class="text col-lg-6 ftco-animate">
@@ -218,7 +216,7 @@
                      We all agree to say for sure. you know. that's why we decided our
                      team name to etranger.</p>
 
-                  <p>모두들 안녕하세요, étranger 웹사이트에 오신 것을 환영합니다. 여행을 계획하고 계신가요? 에트랑제와
+                  <p>모두 안녕하세요! étranger 웹사이트에 오신 것을 환영합니다. 여행을 계획하고 계신가요? 에트랑제와
                      함께 믿음직한 가이드와 합리적인 가격으로 여행을 떠나보세요. 저희는 업계 최저 수수료를 추구합니다. 2030년 글로벌
                      No.1 문화관광 유통그룹으로 발돋움하기위해 고객에게 세계 최고의 문화관광 유통 서비스를 제공하는 기업으로
                      성장하겠습니다.</p>
@@ -290,7 +288,6 @@
                            }
                          
                            %><span><%=code.replace('!', '#') %></span> 
-                           
 
                      </div>
                      <p class="star-rate">
@@ -298,26 +295,26 @@
                         <%
                            // 리뷰 별점 평균 표시, 리뷰 개수 표시
                               if (cb.getReview_count() != 0) {
-                                 // 10점 만점을 5점으로 전환
-                                 double avg = cb.getReview_star_avg() / 2;
-                                 for (int j = 1; j <= (int) (avg + 1 / 3); j++) {
+                                 // 10점 만점 평균 별점 반올림 처리
+                                 byte avg_int = (byte)Math.round(cb.getReview_star_avg());
+                                 for (int j = 1; j <= avg_int / 2; j++) {
                         %><span class="icon-star"></span>
                         <%
                            }
-                                 if (avg % 1 >= 1 / 3f && avg % 1 <= 2 / 3f) {
+                                 if (avg_int % 2f >= 0.4) {
                         %><span class="icon-star-half-full"></span>
                         <%
                            }
-                                 for (int j = (int) (avg + 0.5); j < 5; j++) {
+                                 for (int j = (int) ((avg_int + 1) / 2); j < 5; j++) {
                         %><span class="icon-star-o"></span>
                         <%
                            }
                         %>
                         <span><%=cb.getReview_count()%> reviews</span>
-                     </p>
                      <%
                         }
                      %>
+                     </p>
                   </div>
                </a>
             </div>
@@ -328,7 +325,6 @@
          </div>
       </div>
    </section>
-
 
    <!-- 블로그 5개 -->
    <section class="ftco-section bg-light">
@@ -418,36 +414,37 @@
                               %><span><%=code.replace('!', '#')%></span>
                            </div>
                            <p class="star-rate">
-                              <!-- 리뷰 별점 스크립틀릿으로 표시할 부분,  -->
-                              <%
-                                 // 리뷰 별점 평균 표시, 리뷰 개수 표시
-                                    if (cb.getReview_count() != 0) {
-                                       // 10점 만점을 5점으로 전환
-                                       double avg = cb.getReview_star_avg() / 2;
-                                       for (int j = 1; j <= (int) (avg + 1 / 3); j++) {
-                              %><span class="icon-star"></span>
-                              <%
-                                 }
-                                       if (avg % 1 >= 1 / 3f && avg % 1 <= 2 / 3f) {
-                              %><span class="icon-star-half-full"></span>
-                              <%
-                                 }
-                                       for (int j = (int) (avg + 0.5); j < 5; j++) {
-                              %><span class="icon-star-o"></span>
-                              <%
-                                 }
-                              %>
-                              <span><%=cb.getReview_count()%> reviews</span>
-                           </p>
-                           <%
-                              }
-                           %>
+                        <!-- 리뷰 별점 스크립틀릿으로 표시할 부분,  -->
+                        <%
+                           // 리뷰 별점 평균 표시, 리뷰 개수 표시
+                              if (cb.getReview_count() != 0) {
+                                 // 10점 만점 평균 별점 반올림 처리
+                                 byte avg_int = (byte)Math.round(cb.getReview_star_avg());
+                                 for (int j = 1; j <= avg_int / 2; j++) {
+                        %><span class="icon-star"></span>
+                        <%
+                           }
+                                 if (avg_int % 2f >= 0.4) {
+                        %><span class="icon-star-half-full"></span>
+                        <%
+                           }
+                                 for (int j = (int) ((avg_int + 1) / 2); j < 5; j++) {
+                        %><span class="icon-star-o"></span>
+                        <%
+                           }
+                        %>
+                        <span><%=cb.getReview_count()%> reviews</span>
+                     <%
+                        }
+                     %>
+                     </p>
                         </div>
                      </a>
                   </div>
                   <%
                      }
                   %>
+                  
                </div>
             </div>
          </div>
