@@ -210,7 +210,9 @@ table.pdList td input {
 						</div>
 						
 						<input type="submit" class="btn btn-outline-dark btn-lg mt-3 mb-3" value="수정하기" >
-						<input type="Button" class="btn btn-outline-dark btn-lg mt-3 mb-3" value="삭제하기" onclick="location.href='CategoryDelete.ma?package_category_code=<%=code %>'" >
+						<input type="Button" class="btn btn-outline-dark btn-lg mt-3 mb-3" value="삭제하기" 
+								class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="예약이 없을 때만 삭제가능"
+								onclick="location.href='CategoryDelete.ma?package_category_code=<%=code %>'" >
 					</form>
 				</div>
 				<!--  카테고리 수정 폼 끝 -->
@@ -226,7 +228,7 @@ table.pdList td input {
 							<div style="overflow-y: scroll; height: 500px;">
 							<table class="pdList" id="pdlist">
 								<%
-									if (pdList != null) {
+									if (pdList != null && pdList.size()>0) {
 								%>
 								<tr>
 <!-- 									<th>상품코드</th> -->
@@ -252,6 +254,8 @@ table.pdList td input {
 								</tr>
 								<%
 									}
+									}else{
+										%><tr><td> 패키지상품을 등록한 날짜가 없습니다.</td></tr><%
 									}
 								%>
 
