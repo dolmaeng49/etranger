@@ -17,6 +17,7 @@ import member.action.MemberModifyFormAction;
 import member.action.MemberModifyProAction;
 import member.action.MemberResetPasswdFormAction;
 import member.action.MemberResetPasswdProAction;
+import product.action.WishCategoryListAction;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -145,6 +146,13 @@ public class MemberFrontController extends HttpServlet {
 			}
 		} else if (command.equals("/MemberModifyPro.me")) {
 			action = new MemberModifyProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/WishCategoryList.me")) {
+			action = new WishCategoryListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

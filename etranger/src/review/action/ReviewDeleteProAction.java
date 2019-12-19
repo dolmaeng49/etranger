@@ -18,7 +18,6 @@ public class ReviewDeleteProAction implements Action {
 		int review_num = Integer.parseInt(request.getParameter("review_num"));
 		String review_member_id = (String) request.getParameter("review_member_id");
 		String page = request.getParameter("page");
-		System.out.println(review_num + review_member_id + page);
 
 		ReviewDeleteProService reviewDeleteProService = new ReviewDeleteProService();
 		boolean isRightUser = reviewDeleteProService.isArticleWriter(review_num, review_member_id);

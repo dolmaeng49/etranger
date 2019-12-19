@@ -10,7 +10,6 @@ import notice.vo.NoticeBean;
 public class NoticeModifyProService {
 
 	public boolean modifyArticle(NoticeBean nb) {
-		System.out.println("NoticeModifyProService - modifyArticle");
 		boolean isModifySuccess = false;
 		
 		Connection con = getConnection();

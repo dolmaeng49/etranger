@@ -122,12 +122,6 @@ public class ProductDAO {
 			region = region == null ? "" : region;
 			city = city == null ? "" : city; 
 			
-			System.out.println("keyword : "+keyword);
-			System.out.println("depart_date : "+depart_date);
-			System.out.println("arriv_date : "+arriv_date);
-			System.out.println("region : "+region);
-			System.out.println("city : "+city);
-			
 			// 검색 조건 입력 여부 배열에 저장
 			boolean[] isNulls = {keyword.length()==0,arriv_date.length()==0,region.length()==0,city.length()==0};
 			
@@ -369,6 +363,87 @@ public class ProductDAO {
 				close(pstmt);
 			}
 			return productList;
+		}
+
+		public int selectWishListCount(String member_id) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			int listCount = 0;
+			
+			// SQL 구문의 ? 인덱스를 저장하는 변수
+			int index = 1;
+
+			try {
+				
+				String sql = "SELECT COUNT(DISTINCT c.package_category_code) FROM package_product p"
+						+ " JOIN package_category c"
+						+ " ON p.package_category_code = c.package_category_code"
+						+ " JOIN wish w"
+						+ " ON w.wish_category_code = c.package_category_code"
+						+ " WHERE p.package_product_depart_date >= now()"
+						+ " AND w.wish_member_id=?";
+
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, member_id);
+				rs = pstmt.executeQuery();
+				
+				if (rs.next()) {
+					listCount = rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				System.out.println("selectListCount(String keyword) 오류! - " + e.getMessage());
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return listCount;
+		}
+
+		public CategoryBean[] selectWishCategoryList(int page, int limit, String member_id) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			int listCount = 0;
+			
+			CategoryBean[] cbArr = new CategoryBean[limit];
+
+			try {
+				
+				String sql = "SELECT c.package_category_code, c.package_category_name, c.package_category_theme, c.package_category_image, c.package_category_content," 
+						+ " c.package_category_region, c.package_category_city, c.package_category_wish_count, MIN(p.package_product_price) AS min_price," 
+						+ " count(r.review_num) AS review_count, avg(r.review_star) AS review_star_avg"
+						+ " FROM package_category c JOIN package_product p"
+						+ " ON p.package_category_code = c.package_category_code"
+						+ " LEFT JOIN review r ON r.review_package_category_code = c.package_category_code"
+						+ " JOIN wish w"
+						+ " ON w.wish_category_code = c.package_category_code"
+						+ " WHERE w.wish_member_id=?";
+
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, member_id);
+				rs = pstmt.executeQuery();
+				int index = 0;
+				while (rs.next()) {
+					CategoryBean cb = new CategoryBean();
+					cb.setPackage_category_code(rs.getString("c.package_category_code"));
+					cb.setPackage_category_name(rs.getString("c.package_category_name"));
+					cb.setPackage_category_theme(rs.getString("c.package_category_theme"));
+					cb.setPackage_category_image(rs.getString("c.package_category_image"));
+					cb.setPackage_category_content(rs.getString("c.package_category_content"));
+					cb.setPackage_category_region(rs.getInt("c.package_category_region"));
+					cb.setPackage_category_city(rs.getInt("c.package_category_city"));
+					cb.setPackage_category_wish_count(rs.getInt("c.package_category_wish_count"));
+					cb.setMin_price(rs.getInt("min_price"));
+					cb.setReview_count(rs.getInt("review_count"));
+					cb.setReview_star_avg(rs.getDouble("review_star_avg"));
+					cbArr[index++] = cb;
+				}
+			} catch (SQLException e) {
+				System.out.println("selectListCount(String keyword) 오류! - " + e.getMessage());
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return cbArr;
 		}
 
 }

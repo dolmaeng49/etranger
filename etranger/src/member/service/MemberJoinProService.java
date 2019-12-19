@@ -8,7 +8,6 @@ import member.vo.MemberBean;
 public class MemberJoinProService {
 
 	public boolean registMember(MemberBean memberBean) {
-		System.out.println("MemberJoinProService");
 		boolean isWriteSuccess = false; 
 		
 		Connection con = getConnection();

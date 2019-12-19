@@ -31,7 +31,6 @@ public class ReservationInfoAction implements Action {
 
 		ReservationInfoService reservaitonInfoListService = new ReservationInfoService();
 		int listCount = reservaitonInfoListService.getListCount(id);
-		System.out.println("총 게시물 수(Action) " + listCount);
 
 		ReservationBean rbb = new ReservationBean();
 		ArrayList<ReservationBean> rb = new ArrayList<ReservationBean>();

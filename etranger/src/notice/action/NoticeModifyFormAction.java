@@ -15,7 +15,6 @@ public class NoticeModifyFormAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// 수정할 게시물의 상세 내역을 가져와서 리턴하여 뷰 페이지에서 폼에 상세 내역 출력
-		System.out.println("NoticeModifyFormAction");
 		
 		// request 객체를 통해 전달받은 파라미터(review_num) 가져오기
 		int notice_num = Integer.parseInt(request.getParameter("notice_num"));

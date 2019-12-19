@@ -39,7 +39,7 @@ public class MainPageAction implements Action {
 		String member_id = (String)session.getAttribute("member_id");
 		// 동그라미 4개에 출력할 카테고리 리스트 4개 조회하기
 		// 로그인상태일 경우 회원의 연령대, 성별 정보 활용해 추천
-		if(member_id != null) {
+		if(member_id != null && !member_id.equals("admin")) {
 			MemberLoginProService memberLoginProService = new MemberLoginProService();
 			// member_name, member_email, member_birth, member_gender, member_grade 5 개의 정보 저장되어 있음
 			MemberBean memberBean = memberLoginProService.getMemberInfo(member_id);
@@ -79,7 +79,7 @@ public class MainPageAction implements Action {
 			product.svc.CategoryListService proCateSVC = new product.svc.CategoryListService();
 			categoryList = proCateSVC.getPersonalizedList(1, 4, gender, search_birth_start, search_birth_end);
 			StringBuffer newList_name = new StringBuffer();
-			newList_name.append(ageRange).append(" 대 ").append(gender == "m" ? '남' : '여').append("성이 많이 구매한 상품");
+			newList_name.append(ageRange).append(" 대 ").append(gender.equalsIgnoreCase("m") ? '남' : '여').append("성이 많이 구매한 상품");
 			
 			request.setAttribute("newList", categoryList);
 			request.setAttribute("newList_name", newList_name.toString());

@@ -13,8 +13,6 @@ public class ProductDetailService {
 
 	public ArrayList<CategoryBean> GetProductDetailList(String pcode) {
 
-		System.out.println("ProductDetailService");
-
 		Connection con = getConnection();
 		ManagerDAO managerDAO = ManagerDAO.getInstance();
 		managerDAO.setConnection(con);
@@ -30,9 +28,7 @@ public class ProductDetailService {
 
 	}
 
-	public ArrayList<ProductBean> GetProductList(ProductBean pb, String pcode) {
-
-		System.out.println("GetProductList Service");
+	public ArrayList<ProductBean> GetProductList(String pcode) {
 
 		Connection con = getConnection();
 		ManagerDAO managerDAO = ManagerDAO.getInstance();

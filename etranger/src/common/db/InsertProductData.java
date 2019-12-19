@@ -32,7 +32,6 @@ public class InsertProductData {
 	
 
 	public int insertProducts() {
-		System.out.println("insertProducts");
 		// package_product 의 데이터를 임의로 생성하는 메서드
 		// packate_category 의 데이터가 미리 입력되어 있어야 함
 		
@@ -49,7 +48,7 @@ public class InsertProductData {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			long min_date = Date.UTC(2017-1900, 12-1, 1, 0, 0, 0);
-			long max_date = Date.UTC(2019-1900, 3-1, 31, 0, 0, 0);
+			long max_date = Date.UTC(2020-1900, 3-1, 31, 0, 0, 0);
 			while (rs.next()) {
 				String category_code = rs.getString(1);
 //				category_codes.add(category_code);
@@ -57,15 +56,11 @@ public class InsertProductData {
 				Set<Date> depart_dates = new HashSet<Date>();
 				// 중복없이 5~20개의 날짜 생성
 				while (depart_dates.size() < productCount) {
-					// 2017.12.1 ~ 2019.3.31 사이의 날짜(long) 생성
+					// 2017.12.1 ~ 2020.3.31 사이의 날짜(long) 생성
 					depart_dates.add(new Date(min_date + (long)(random.nextDouble() * (max_date - min_date))));
 				}
-				System.out.println("생성할 프로덕트 수" + depart_dates.size());
 				// Set -> Iterator 형변환
 				Iterator<Date> itr = depart_dates.iterator();
-//				while (itr.hasNext()) {
-//					System.out.println(itr.next());
-//				}
 				// 패키지 기간 4 ~ 9
 				int days = 4 + random.nextInt(5);
 				
@@ -101,7 +96,6 @@ public class InsertProductData {
 	}
 	
 	public int insertMembers(int numberOfMembers) {
-//		System.out.println("insertMembers() 호출됨");
 		// 커넥션풀에서 커넥션 가져오기
 		Connection con = getConnection();
 		PreparedStatement pstmt = null;
@@ -134,7 +128,6 @@ public class InsertProductData {
 			close(rs);
 			close(pstmt);
 		}
-//		System.out.println("프로덕트 정보 저장 완료 : " + products.size() + " 개");
 		
 		String[] firstNames = {
 				"김","김","김","박","박","서","손","송","신","오","우",
@@ -185,7 +178,6 @@ public class InsertProductData {
 				int reservCount = random.nextInt(6);
 				// 존재하는 프로덕트 개수가 적을 경우
 				reservCount = reservCount > products.size() ? products.size() : reservCount; 
-				System.out.println("예약할 개수 : " + reservCount);
 				Set<Integer> index_set = new HashSet<Integer>();
 				// 예약할 개수 만큼의 인덱스 생성
 				while(index_set.size() < reservCount) {
@@ -194,7 +186,6 @@ public class InsertProductData {
 				Iterator<Integer> itr = index_set.iterator();
 				for(int k = 0; k < reservCount; k++) {
 					int index = itr.next();
-					System.out.println(products.get(index).getProductNum());
 					sql = "INSERT INTO reservation VALUES(null,?,?,?,?,?,?,?,?)";
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, member_id);

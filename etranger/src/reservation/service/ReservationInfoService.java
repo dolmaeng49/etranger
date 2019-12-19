@@ -24,15 +24,12 @@ public class ReservationInfoService {
 
 		int listCount = reservationDAO.selectReservationListCount(id);
 
-		System.out.println("총 게시물 수(reservation) : " + listCount);
-
 		close(con);
 
 		return listCount;
 	}
 
 	public ArrayList<ReservationBean> ReservationInfo(int page, int limit, String id) {
-		System.out.println("/MemberReservationService.me");
 		Connection con = getConnection();
 		ReservationDAO reservationDAO = ReservationDAO.getInstance();
 		reservationDAO.setConnection(con);

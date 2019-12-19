@@ -26,7 +26,6 @@ public class NoticeWriteProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("NoticeWriteProAction");
 		
 		ActionForward forward = null;
 		
@@ -54,9 +53,6 @@ public class NoticeWriteProAction implements Action {
 		nb.setNotice_subject(multi.getParameter("notice_subject"));
 		nb.setNotice_content(multi.getParameter("notice_content"));
 		nb.setNotice_image(multi.getOriginalFileName((String)multi.getFileNames().nextElement()));
-		
-		System.out.println("content: " +nb.getNotice_content());
-		
 		
 		NoticeWriteProService noticeWriteProService = new NoticeWriteProService();
 		

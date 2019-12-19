@@ -37,7 +37,6 @@ public class reservationFrontController extends HttpServlet {
 
 		if (command.equals("/ReservationInfo.rs")) {
 			// MemberReservationInfoAction 클래스로 이동
-			System.out.println("/ReservationInfo.rs");
 			action = new ReservationInfoAction();
 			try {
 				forward = action.execute(request, response);
@@ -48,7 +47,6 @@ public class reservationFrontController extends HttpServlet {
 
 		else if (command.equals("/ReservationInsert.rs")) {
 			// MemberReservationInfoAction 클래스로 이동
-			System.out.println("/ReservationInsert.rs");
 			action = new ReservationInsertAction();
 			try {
 				forward = action.execute(request, response);

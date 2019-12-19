@@ -19,7 +19,6 @@ public class MemberJoinProAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward;
 		forward = null;
-		System.out.println("MemberJoinProAction");
 		
 		Timestamp leg_date = new Timestamp(System.currentTimeMillis());
 		

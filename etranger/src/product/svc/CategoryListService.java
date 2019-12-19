@@ -49,6 +49,30 @@ public class CategoryListService {
 
 		return newList;
 	}
+
+	public int getWishListCount(String member_id) {
+		Connection con = getConnection();
+		ProductDAO productDAO = ProductDAO.getInstance();
+		productDAO.setConnection(con);
+	
+		int listCount = productDAO.selectWishListCount(member_id);
+	
+		close(con);
+	
+		return listCount;
+	}
+
+	public CategoryBean[] getWishCategoryList(int page, int limit, String member_id) {
+		Connection con = getConnection();
+		ProductDAO productDAO = ProductDAO.getInstance();
+		productDAO.setConnection(con);
+		CategoryBean[] wishCategoryList = null;
+		wishCategoryList = productDAO.selectWishCategoryList(page, limit, member_id);
+
+		close(con);
+
+		return wishCategoryList;
+	}
 	
 
 }
