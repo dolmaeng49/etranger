@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.StringTokenizer"%>
 <%@page import="review.vo.ReviewBean"%>
@@ -24,6 +26,13 @@
    
    String newList_name = (String)request.getAttribute("newList_name");
 
+   
+//	날짜 변환 작업
+	SimpleDateFormat sdfOrigin=new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat sdfToday=new SimpleDateFormat("HH 시 mm 분");
+	SimpleDateFormat sdfCalculation= new SimpleDateFormat("yyyyMMdd");
+	
+	Calendar calToday = Calendar.getInstance();
 %>
 </head>
 <body>
@@ -339,7 +348,15 @@
                      <div class="text p-4">
                         <div class="meta">
                            <div>
-                              <a href="<%=detailURL%>"><%=rb.getReview_date()%></a>
+                              <a href="<%=detailURL%>">
+                              <% 
+                              //날짜 포맷 변경
+                  Calendar calWritingPoint = Calendar.getInstance();
+                  	calWritingPoint.setTime(rb.getReview_date());
+    				String today = sdfCalculation.format(calToday.getTime());
+    				String writingPoint = sdfCalculation.format(calWritingPoint.getTime());
+   					String checkedDate=(today.compareTo(writingPoint)==0)?sdfToday.format(rb.getReview_date()):sdfOrigin.format(rb.getReview_date());%>
+   					<%=checkedDate %></a>
                            </div>
                            <div>
                               <a href="<%=detailURL%>"><%=rb.getReview_member_name()%></a>
@@ -371,7 +388,7 @@
             <div class="col-md-7 text-center heading-section ftco-animate">
                <h2 class="mb-1 p-2 pb-3 ftco-animate">Highly Recommended
                   Tours</h2>
-               <h5 class="mb-3 p-2 pb-3 ftco-animate">어디로 가야할지 아직 못 정하셨나요?</h5>
+               <h5 class="mb-3 p-2 pb-3 ftco-animate">어디로 가야 할지 아직 못 정하셨나요?</h5>
 
                <div class="row no-gutters d-flex">
                   <%

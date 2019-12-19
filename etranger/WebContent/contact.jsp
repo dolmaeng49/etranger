@@ -114,7 +114,7 @@ h1 {
 								<img class="mx-auto rounded-circle" src="./images/et_eunji.png"
 									" alt="">
 								<h4 class="section-subheading text-muted">서은지</h4>
-								<p class="text-muted1">Choe YeongBi</p>
+								<p class="text-muted1">Seo Eunji</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
 								<p class="text-muted1" style="margin-top: -21px;">cyeongb@gmail.com</p>
 
@@ -125,7 +125,7 @@ h1 {
 								<img class="mx-auto rounded-circle" src="./images/et_boss.png"
 									" alt="">
 								<h4 class="section-subheading text-muted">신동명</h4>
-								<p class="text-muted1">Ji YiDeum</p>
+								<p class="text-muted1">Shin Dongmyeong</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
 								<p class="text-muted1" style="margin-top: -21px;">game9um@gmail.com</p>
 
@@ -135,8 +135,8 @@ h1 {
 							<div class="team-member">
 								<img class="mx-auto rounded-circle" src="./images/et_jinwoo.png"
 									" alt="">
-								<h4 class="section-subheading text-muted">조진우</h4>
-								<p class="text-muted1">Shin MiSong</p>
+								<h4 class="section-subheading text-muted">Jo Jinwoo</h4>
+								<p class="text-muted1"></p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
 								<p class="text-muted1" style="margin-top: -21px;">fhdgofhdgo@naver.com</p>
 
@@ -147,7 +147,7 @@ h1 {
 								<img class="mx-auto rounded-circle"
 									src="./images/et_soobong.png" " alt="">
 								<h4 class="section-subheading text-muted">최수봉</h4>
-								<p class="text-muted1">Kwon KyoungMin</p>
+								<p class="text-muted1">Choi soobong</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
 								<p class="text-muted1" style="margin-top: -21px;">kkmkwon@naver.com</p>
 
@@ -157,8 +157,8 @@ h1 {
 							<div class="team-member">
 								<img class="mx-auto rounded-circle" src="./images/et_hunwoo.png"
 									" alt="">
-								<h4 class="section-subheading text-muted">하헌우</h4>
-								<p class="text-muted1">Song JuYeong</p>
+								<h4 class="section-subheading text-muted">Ha Hunwoo</h4>
+								<p class="text-muted1">Ha</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
 								<p class="text-muted1" style="margin-top: -21px;">saruru1@naver.com</p>
 
@@ -170,7 +170,7 @@ h1 {
 								<img class="mx-auto rounded-circle" src="./images/et_eunb.png"
 									" alt="">
 								<h4 class="section-subheading text-muted">홍은비</h4>
-								<p class="text-muted1">Han SungMin</p>
+								<p class="text-muted1">Hong EunB</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
 								<p class="text-muted1" style="margin-top: -21px;">gkstyd1313@naver.com</p>
 
@@ -181,7 +181,7 @@ h1 {
 								<img class="mx-auto rounded-circle" src="./images/et_tutor.png"
 									" alt="">
 								<h4 class="section-subheading text-muted">홍진숙</h4>
-								<p class="text-muted1">Lee KiHong</p>
+								<p class="text-muted1">Hong Jinsuk</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
 								<p class="text-muted1" style="margin-top: -21px;">ghlee@imsolutions.co.kr</p>
 

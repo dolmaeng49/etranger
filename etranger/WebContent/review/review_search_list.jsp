@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="common.vo.PageInfo"%>
 <%@page import="review.dao.ReviewDAO"%>
 <%@page import="java.util.ArrayList"%>
@@ -21,6 +23,19 @@
 	String search = request.getParameter("search");
 	
 	ReviewBean article = (ReviewBean)request.getAttribute("article");
+
+	String sessionId = null;
+	if(session.getAttribute("member_id")!=null){
+	  sessionId = (String)session.getAttribute("member_id");
+	}
+	
+// 	날짜 변환 작업
+
+	SimpleDateFormat sdfOrigin=new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat sdfToday=new SimpleDateFormat("HH 시 mm 분");
+	SimpleDateFormat sdfCalculation= new SimpleDateFormat("yyyyMMdd");
+	
+	Calendar calToday = Calendar.getInstance();
 	
 %>  
 <!DOCTYPE html>
@@ -28,16 +43,12 @@
   <head>
 	<!-- 스타일 인클루드 -->
 <jsp:include page="/include/style.jsp"/>
-<style type="text/css">
-/* div{ */
-/* 	border: 1px solid red; */
-/* } */
-</style>
   </head>
   <body>
 	<!-- 탑메뉴 인클루드 -->    
 <jsp:include page="/include/top_menu.jsp"/>
-    
+<input type="hidden" id="session_Id" value=<%=sessionId %>>    
+
     <section class="home-slider owl-carousel">
       <div class="slider-item" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
@@ -60,33 +71,36 @@
 			if(articleList != null && listCount > 0) {%>
         <div class="row">
 			<!--리스트에서 보여지는 게시물 썸네일 한 덩이 시작 -->
-				<%for(int i=0; i<articleList.size(); i++) {%>
+				<% for (ReviewBean rb : articleList) {
+					String detailURL = "ReviewDetail.rv?review_num=" + rb.getReview_num() + "&page="+nowPage;
+				
+				%>
           <div class="col-md-6 col-lg-3 ftco-animate">
-            <div class="blog-entry">
-              <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="block-20" style="background-image: url('reviewUpload/<%=articleList.get(i).getReview_image()%>');">
+            <div class="blog-entry" onclick="location.href='ReviewDetail.rv?review_num=<%=rb.getReview_num()%>&page=<%=nowPage %>'">
+              <a href="ReviewDetail.rv?review_num=<%=rb.getReview_num()%>&page=<%=nowPage %>" class="block-20" style="background-image: url('reviewUpload/<%=rb.getReview_image()%>');">
               </a>
               <div class="text p-4" >
              <!--  stars --> 
                <div id="stars"> 
-			<%if(articleList.get(i).getReview_star() == 0) {
+			<%if(rb.getReview_star() == 0) {
 				%><img src="images/rating0.png" align="middle" /><%
-			} else if(articleList.get(i).getReview_star() == 1) {
+			} else if(rb.getReview_star() == 1) {
 				%><img src="images/rating01.png" align="middle" /><%
-			} else if(articleList.get(i).getReview_star() == 2) {
+			} else if(rb.getReview_star() == 2) {
 				%><img src="images/rating02.png" align="middle" /><%
-			} else if(articleList.get(i).getReview_star() == 3) {
+			} else if(rb.getReview_star() == 3) {
 				%><img src="images/rating03.png" align="middle" /><%
-			} else if(articleList.get(i).getReview_star() == 4) {
+			} else if(rb.getReview_star() == 4) {
 				%><img src="images/rating04.png" align="middle" /><%
-			} else if(articleList.get(i).getReview_star() == 5) {
+			} else if(rb.getReview_star() == 5) {
 				%><img src="images/rating05.png" align="middle" /><%
-			} else if(articleList.get(i).getReview_star() == 6) {
+			} else if(rb.getReview_star() == 6) {
 				%><img src="images/rating06.png" align="middle" /><%
-			} else if(articleList.get(i).getReview_star() == 7) {
+			} else if(rb.getReview_star() == 7) {
 				%><img src="images/rating07.png" align="middle" /><%
-			} else if(articleList.get(i).getReview_star() == 8) {
+			} else if(rb.getReview_star() == 8) {
 				%><img src="images/rating08.png" align="middle" /><%
-			} else if(articleList.get(i).getReview_star() == 9) {
+			} else if(rb.getReview_star() == 9) {
 				%><img src="images/rating09.png" align="middle" /><%
 			} else {
 				%><img src="images/rating10.png" align="middle" /><%
@@ -94,13 +108,19 @@
 			%>
 			</div>
             <!-- end stars --> 
-                <div class="meta" onclick="location.href='ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>'">
-                  <div><a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>"><%=articleList.get(i).getReview_member_name() %></a></div><!-- 아이디 대신 이름 들어갈 곳 -->
+                <div class="meta" onclick="<%=detailURL%>">
+                  <div><a href="<%=detailURL%>"><%=rb.getReview_member_name() %></a></div>
                 </div>
-                <h3 class="heading"><a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>"><%=articleList.get(i).getReview_subject()%></a></h3>
+                <h3 class="heading"><a href="<%=detailURL%>"><%=rb.getReview_subject()%></a></h3>
                 <p class="clearfix">
-                  <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="float-left"><%=articleList.get(i).getReview_date()%></a>
-                  <a href="ReviewDetail.rv?review_num=<%=articleList.get(i).getReview_num()%>&page=<%=nowPage %>" class="float-right meta-chat"><span class="icon-chat"></span><%=articleList.get(i).getReview_comment_count() %> </a>
+                  <a href="<%=detailURL%>" class="float-left">
+                  <% 
+                  Calendar calWritingPoint = Calendar.getInstance();
+                  	calWritingPoint.setTime(rb.getReview_date());
+    				String today = sdfCalculation.format(calToday.getTime());
+    				String writingPoint = sdfCalculation.format(calWritingPoint.getTime());
+   					String checkedDate=(today.compareTo(writingPoint)==0)?sdfToday.format(rb.getReview_date()):sdfOrigin.format(rb.getReview_date());%><%=checkedDate %></a>
+                  <a href="<%=detailURL%>" class="float-right meta-chat"><span class="icon-chat"></span><%=rb.getReview_comment_count() %> </a>
                 </p>
               </div>
             </div>
