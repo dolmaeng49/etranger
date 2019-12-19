@@ -64,6 +64,18 @@ public class DataChartService {
 		return genderPayment;
 	}
 
+	public ArrayList getMostProduct() {
+		Connection con = getConnection();
+		ManagerDAO managerDAO = ManagerDAO.getInstance();
+		managerDAO.setConnection(con);
+
+		ArrayList mostProduct = null;
+		mostProduct = managerDAO.MostProduct();
+
+		close(con);
+		return mostProduct;
+	}
+
 	
 
 }

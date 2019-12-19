@@ -35,6 +35,7 @@ import manager.action.ReservManagementAction;
 import manager.action.ReservUpdateAction;
 import manager.action.ThemeCheckBoxAction;
 import manager.action.ThemeListAction;
+//import manager.action.changeAge;
 import review.action.ImageCallbackAction;
 
 @WebServlet("*.ma")
@@ -234,7 +235,7 @@ public class ManagerFrontController extends HttpServlet {
 
 			// ------------------ datachart ---------------------
 //			else if (command.equals("/RegionReservationCount.ma")) {
-//				action = new RegionReservationCountAction();
+//				action = new changeAge();
 //				try {
 //					forward = action.execute(request, response);
 //				} catch (Exception e) {
