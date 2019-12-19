@@ -95,7 +95,7 @@
 
 				<section id="categoryInsert" style="display: none;">
 					<!-- 지역,도시,테마 선택결과 가지고 ManagerProInsert.ma 이동 -->
-					<form action="CategoryInsert.ma" class="p-5 bg-light" method="post" enctype="multipart/form-data" onkeydown="return captureReturnKey(event)">
+					<form action="CategoryInsert.ma" class="p-5 bg-light" method="post" onkeydown="return captureReturnKey(event)">
 						<!-- 지역,도시,테마 구역 패딩줘서 안삐져나가게. -->
 						<div class="row block-9 mb-4" style="padding-left: 20px;">
 							<div class="col-md-6 pr-md-5 flex-column">
@@ -205,8 +205,9 @@
 								
 									<h3 class="h4 mb-4 mt-3" >Img</h3>
 									<div class="custom-file" style="width: 60%">
-									<input multiple="multiple" type="file" name="category_image" required="required" class="custom-file-input" id="customFile"/>
-									 <label class="custom-file-label" for="customFile">Choose image file</label>
+									<input type="text" name="category_image" required="required" id="category_image"/>
+<!-- 									class="custom-file-input"  -->
+<!-- 									 <label class="custom-file-label" for="customFile">Choose image file</label> -->
 									</div>
 									
 								

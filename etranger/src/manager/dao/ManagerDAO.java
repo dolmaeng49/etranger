@@ -524,10 +524,10 @@ public class ManagerDAO {
 		return insertCount;
 	}
 
-	public ArrayList<CategoryBean> ProductDetailList(String pcode) {
+	public CategoryBean ProductDetailList(String pcode) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<CategoryBean> productDetailList = new ArrayList<CategoryBean>();
+		CategoryBean cb = null;
 
 		try {
 
@@ -536,9 +536,8 @@ public class ManagerDAO {
 			pstmt.setString(1, pcode);
 			rs = pstmt.executeQuery();
 
-			while (rs.next()) {
-
-				CategoryBean cb = new CategoryBean();
+			if (rs.next()) {
+				cb = new CategoryBean();
 				cb.setPackage_category_code(rs.getString("package_category_code"));
 				cb.setPackage_category_name(rs.getString("package_category_name"));
 				cb.setPackage_category_theme(rs.getString("package_category_theme"));
@@ -547,8 +546,6 @@ public class ManagerDAO {
 				cb.setPackage_category_region(rs.getInt("package_category_region"));
 				cb.setPackage_category_city(rs.getInt("package_category_city"));
 				cb.setPackage_category_wish_count(rs.getInt("package_category_wish_count"));
-
-				productDetailList.add(cb);
 			}
 
 		} catch (SQLException e) {
@@ -557,7 +554,7 @@ public class ManagerDAO {
 			close(rs);
 			close(pstmt);
 		}
-		return productDetailList;
+		return cb;
 	}
 
 	public ArrayList<ProductBean> ProductList(String pcode) {

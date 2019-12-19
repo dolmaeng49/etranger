@@ -24,7 +24,7 @@ public class ProductDetailAction implements Action {
 
 		// 상품리스트에서 선택된 상품에대한 상세리스트를 가져옴
 		ProductDetailService prodectDetailService = new ProductDetailService();
-		ArrayList<CategoryBean> pdetail = new ArrayList<CategoryBean>();
+		CategoryBean pdetail = null;
 
 		pdetail = prodectDetailService.GetProductDetailList(pcode);
 		request.setAttribute("pdetail", pdetail);

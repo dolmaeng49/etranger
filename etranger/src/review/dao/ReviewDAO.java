@@ -421,7 +421,7 @@ public class ReviewDAO {
 			
 			rs = pstmt.executeQuery();
 
-			if (rs.next()) {
+			if (rs.next() && rs.getInt(1) > 0) {
 				duplicateCheck=true;
 			}
 		} catch (SQLException e) {
