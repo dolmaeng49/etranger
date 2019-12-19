@@ -6,7 +6,7 @@
 <%
 	ArrayList<CategoryBean> regionList = (ArrayList<CategoryBean>) request.getAttribute("regionList");
 	ArrayList<CategoryBean> themeList = (ArrayList<CategoryBean>) request.getAttribute("themeList");
-	ArrayList<CategoryBean> categoryList = (ArrayList<CategoryBean>) request.getAttribute("categoryList");
+// 	ArrayList<CategoryBean> categoryList = (ArrayList<CategoryBean>) request.getAttribute("categoryList");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -209,7 +209,7 @@
 								
 									<h3 class="h4 mb-4 mt-3" >Img</h3>
 									<div class="custom-file" style="width: 60%">
-									<input type="text" name="category_image" required="required" id="category_image"/>
+									<input type="hidden" name="category_image" required="required" id="category_image"/>
 <!-- 									class="custom-file-input"  -->
 <!-- 									 <label class="custom-file-label" for="customFile">Choose image file</label> -->
 									</div>

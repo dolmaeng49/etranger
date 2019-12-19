@@ -9,9 +9,9 @@
 	// 패키지 카테고리 상세내용 불러오기 & 제목 내용 수정 기능
 	// 패키지상품 insert & delete 
 
-	ArrayList<CategoryBean> regionList = (ArrayList<CategoryBean>) request.getAttribute("regionList");
-	ArrayList<CategoryBean> themeList = (ArrayList<CategoryBean>) request.getAttribute("themeList");
-	ArrayList<CategoryBean> productList = (ArrayList<CategoryBean>) request.getAttribute("productList");
+// 	ArrayList<CategoryBean> regionList = (ArrayList<CategoryBean>) request.getAttribute("regionList");
+// 	ArrayList<CategoryBean> themeList = (ArrayList<CategoryBean>) request.getAttribute("themeList");
+// 	ArrayList<CategoryBean> productList = (ArrayList<CategoryBean>) request.getAttribute("productList");
 	CategoryBean pdetail = (CategoryBean) request.getAttribute("pdetail");
 	ArrayList<ProductBean> pdList = (ArrayList<ProductBean>) request.getAttribute("pdList");
 	String code = "";
@@ -161,8 +161,7 @@ table.pdList td input {
 			<div class="row">
 				<!--  카테고리 디테일 & 수정 폼 시작 -->
 				<div class="col-md-8 ftco-animate">
-					<form action="CategoryUpdate.ma" class="p-5 bg-light" method="post"
-						enctype="multipart/form-data">
+					<form action="CategoryUpdate.ma" class="p-5 bg-light" method="post">
 						<div class="managerdetailform">
 							<h3 class="mb-5">카테고리 상세내용</h3>
 						</div>
@@ -214,23 +213,10 @@ table.pdList td input {
 								<%=content%>
 							</textarea>
 						</div>
-<<<<<<< HEAD
-						
-						
-						<div class="custom-file mt-3"  style="width: 100%">
-								<label for="name">img</label>
-								<input multiple="multiple" type="hidden" name="category_image" required="required" class="custom-file-input" id="customFile" value="<%=image%>"/>
-									<label class="custom-file-label" for="customFile">change image file</label>
-=======
-
-
 						<div class="custom-file mt-3" style="width: 100%">
-							<label for="name">img</label> <input multiple="multiple"
-								type="file" name="category_image" required="required"
-								class="custom-file-input" id="customFile" value="<%=image%>" />
-							<label class="custom-file-label" for="customFile">change
-								image file</label>
->>>>>>> refs/remotes/origin/master
+								<label for="name">img</label>
+								<input multiple="multiple" type="hidden" name="category_image" required="required" id="category_image" value="<%=image%>"
+								style="width: 100%;"/>
 						</div>
 
 						<input type="submit" class="btn btn-outline-dark btn-lg mt-3 mb-3"

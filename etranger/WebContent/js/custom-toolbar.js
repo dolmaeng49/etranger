@@ -92,17 +92,24 @@ $(function() {
 						[ 'view', [ 'codeview', 'help' ] ] ],
 				callbacks : {
 					onImageUpload : function(files, editor, welEditable) {
+						var category_image = "";
 						for (var i = files.length - 1; i >= 0; i--) {
+							if(i < files.legth - 1) {
+								category_image += '*';
+							}
 							sendFileManager(files[i], this);
+							category_image += 1;
 						}
+						$('#category_image').val(category_image);
 					}
 				}
 			});
 });
 
 //관리자 페이지 이미지 전송
-function sendFileManager(file, el) {
+var sendFileManager = function (file, el) {
 	var data = new FormData();
+	var fileName = null;
   	data.append('file', file);
   	$.ajax({
     	data: data,
@@ -116,4 +123,5 @@ function sendFileManager(file, el) {
 	      	$(el).summernote('editor.insertImage', data.url);
     	}
   	});
+  	return fileName;
 };
