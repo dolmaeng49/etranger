@@ -8,7 +8,6 @@
 <jsp:include page="/include/style.jsp" />
 
 <style type="text/css">
-
 .team-member {
 	margin: 0 0 50px 50px;
 }
@@ -71,14 +70,14 @@ h1 {
 
 	<section class="ftco-section contact-section">
 		<div class="container">
-		<!-- 1행 -->
+			<!-- 1행 -->
 			<div class="row block-9 mb-4">
-			<div class="col-lg-12 text-center">
-							<br>
-							<br>
-							<h2 class="section-heading text-uppercase">The Best Choice For Your Trevel</h2>
-							<h3 class="section-subheading text-muted">éteanger</h3>
-						</div>
+				<div class="col-lg-12 text-center">
+					<br> <br>
+					<h2 class="section-heading text-uppercase">The Best Choice For
+						Your Trevel</h2>
+					<h3 class="section-subheading text-muted">éteanger</h3>
+				</div>
 				<div class="col-md-12" id="earth">
 					<div class="embed-responsive embed-responsive-16by9">
 						<video autoplay muted loop class="embed-responsive-item">
@@ -92,8 +91,7 @@ h1 {
 				<div class="col-md-12" id="info">
 					<div class="row">
 						<div class="col-lg-12 text-center">
-							<br>
-							<br>
+							<br> <br>
 							<h2 class="section-heading text-uppercase">The Best Team
 								Ever</h2>
 							<h3 class="section-subheading text-muted">éteanger를 만든 사람들</h3>
@@ -102,8 +100,8 @@ h1 {
 					<div class="row">
 						<div class="col-sm-4">
 							<div class="team-member">
-								<img class="mx-auto rounded-circle" src="./images/et_jongwoo.png"
-									alt="">
+								<img class="mx-auto rounded-circle"
+									src="./images/et_jongwoo.png" alt="">
 								<h4 class="section-subheading text-muted">김종우</h4>
 								<p class="text-muted1">Kim JongWoo</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
@@ -146,8 +144,8 @@ h1 {
 						</div>
 						<div class="col-sm-4">
 							<div class="team-member">
-								<img class="mx-auto rounded-circle" src="./images/et_soobong.png"
-									" alt="">
+								<img class="mx-auto rounded-circle"
+									src="./images/et_soobong.png" " alt="">
 								<h4 class="section-subheading text-muted">최수봉</h4>
 								<p class="text-muted1">Kwon KyoungMin</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
@@ -202,11 +200,12 @@ h1 {
 
 			<div class="row mt-5">
 
-				<div class="col-md-7 pr-md-5 flex-column" id="map"><!--지도 -->
+				<div class="col-md-7 pr-md-5 flex-column" id="map">
+					<!--지도 -->
 					<!--3행1열  -->
 
 				</div>
-					<!--3행 2열  -->
+				<!--3행 2열  -->
 				<div class="col-md-4" style="margin-left: 50px; text-align: center;">
 					<div class="row d-block flex-row">
 						<h2 class="h4 mb-4">Contact Information</h2>
@@ -241,50 +240,55 @@ h1 {
 							</div>
 						</div>
 						<!--문의하기 버튼  -->
-						<div class="col mb-2 d-flex py-2" style="background: white; padding-left: 8rem;">
+						<div class="col mb-2 d-flex py-2"
+							style="background: white; padding-left: 8rem;">
 							<div class="align-self-center">
-							<div class="form-group">
-							<a href="#layer2Email" class="btn_email">Contact Us</a>
-							</div>
+								<div class="form-group">
+									<a href="#layer2Email" class="btn_email">Contact Us</a>
+								</div>
 							</div>
 						</div>
 						<!--  -->
-						 <!--문의메일 딤처리 레이어  -->
-   <div class="dim-layerEmail">
-    <div class="dimBgEmail"></div>
-    <div id="layer2Email" class="pop-layerEmail">
-        <div class="pop-containerEmail">
-            <div class="pop-contsEmail">
-                <!--content //-->
-                <form action="ContactEmail.ma" method="post" name="contact_mail_form" onsubmit="return validEmail()">
-							<div class="form-group">
-								<input type="text" class="form-contact" id="receiveEmail" name="receiveEmail" placeholder="회신받을 메일주소">
+						<!--문의메일 딤처리 레이어  -->
+						<div class="dim-layerEmail">
+							<div class="dimBgEmail"></div>
+							<div id="layer2Email" class="pop-layerEmail">
+								<div class="pop-containerEmail">
+									<div class="pop-contsEmail">
+										<!--content //-->
+										<form action="ContactEmail.ma" method="post"
+											name="contact_mail_form" onsubmit="return validEmail()">
+											<div class="form-group">
+												<input type="text" class="form-contact" id="receiveEmail"
+													name="receiveEmail" placeholder="회신받을 메일주소">
+											</div>
+											<div class="form-group">
+												<input type="text" class="form-contact" id="subject"
+													name="subject" placeholder="문의 제목">
+											</div>
+											<div class="form-group">
+												<textarea name="content" id="content" cols="20" rows="7"
+													class="form-contact2" placeholder="문의하실 내용을 적어주세요 :)"></textarea>
+											</div>
+											<div class="form-group">
+												<input type="submit" value="문의하기"
+													class="btn btn-primary py-3 px-5">
+											</div>
+											<div class="btn-rEmail">
+												<a href="#" id="btnPopUpCloseEmail"
+													class="btn py-1 px-2 btn-primary">Close</a>
+											</div>
+										</form>
+										<!--// content-->
+									</div>
+								</div>
 							</div>
-							<div class="form-group">
-								<input type="text" class="form-contact" id="subject" name="subject" placeholder="문의 제목">
-							</div>
-							<div class="form-group">
-								<textarea name="content" id="content" cols="20" rows="7" class="form-contact2"
-									placeholder="문의하실 내용을 적어주세요 :)"></textarea>
-							</div>
-							<div class="form-group">
-								<input type="submit" value="문의하기"
-									 class="btn btn-primary py-3 px-5">
-							</div>
-							<div class="btn-rEmail">
-                    <a href="#"  id="btnPopUpCloseEmail" class="btn py-1 px-2 btn-primary">Close</a>
-                </div>
-						</form>
-                <!--// content-->
-            </div>
-        </div>
-    </div>
-</div>
-						
+						</div>
+
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 	</section>
 
@@ -296,27 +300,27 @@ h1 {
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=338d5b0fcaa6b7b36455221b4a956aa2&libraries=services,clusterer,drawing"></script>
 	<script type="text/javascript">
-	
-	function validEmail() {
-		const receiveEmail =$('#receiveEmail').val();
-		const subject = $('#subject').val();
-		const content = $('#content').val();
-		
-		if(receiveEmail.length==0){
-			alert('회신받으실 메일주소를 입력해주세요 :)');
-			return false;
-		}if(subject.length==0){
-			alert('문의 제목을 입력해주세요 :)');
-			return false;
-		}if(content.length==0){
-			alert('문의 내용을 입력해주세요 :)');
-			return false;
+		function validEmail() {
+			const receiveEmail = $('#receiveEmail').val();
+			const subject = $('#subject').val();
+			const content = $('#content').val();
+
+			if (receiveEmail.length == 0) {
+				alert('회신받으실 메일주소를 입력해주세요 :)');
+				return false;
+			}
+			if (subject.length == 0) {
+				alert('문의 제목을 입력해주세요 :)');
+				return false;
+			}
+			if (content.length == 0) {
+				alert('문의 내용을 입력해주세요 :)');
+				return false;
+			}
 		}
-	}
-	
 	</script>
-	
-	
+
+
 	<script type="text/javascript">
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
