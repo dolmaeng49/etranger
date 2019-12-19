@@ -11,16 +11,17 @@ import common.vo.ActionForward;
 import manager.svc.DataChartService;
 import manager.vo.DatachartBean;
 
-public class ChangeAgeAction implements Action {
+public class ChangeMostAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int age = Integer.parseInt(request.getParameter("age"));
+		String gender = request.getParameter("gender");
 		
 		DataChartService changeAgeService = new DataChartService();
 		
 		ArrayList<DatachartBean> ageList = new ArrayList<DatachartBean>();
-		ageList = changeAgeService.getAgeList(age);
+		ageList = changeAgeService.getAgeList(age, gender);
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
