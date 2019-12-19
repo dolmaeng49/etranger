@@ -385,38 +385,9 @@ public class ManagerDAO {
 		int startRow = (page - 1) * limit;
 		try {
 
-			// 카테고리별 예약이 제일 많은 순서대로(인기순) 가져오기
-			// 커리문이 이해안되는 사람들을 위해.
-//			String sql = "select c.package_category_code, c.package_category_name, c.package_category_image, c.package_category_wish_count"  // 카테고리코드, 이름, 이미지
-//					+ "count(*), sum(r.reservation_headcount) AS total_headcount," // 해당 카테고리별로 묶은 총 예약인원수 total_headcount
-//					+ "MIN(p.package_product_price) AS min_price" // 해당 카테고리에 대한 최저가격 min_price
-//					+ "from reservation r" // reservation 테이블에서 
-//					+ "join package_category c on r.reservation_category_code = c.package_category_code" // category와 코드로 조인
-//					+ "join package_product p on p.package_category_code = c.package_category_code" // product와 코드로 조인
-//					+ "group by c.package_category_name"  // package_category_name 별로 상품을 그룹으로 묶어준다.
-//					+ "order by 6 DESC LIMIT ?,?"; // 카테고리별로 예약한 인원수가 많은 순(total_headcount)으로 정렬. 
-
-//			select c.package_category_code, c.package_category_name, 
-//			c.package_category_image, count(*), 
-//			sum(r.reservation_headcount) AS total_headcount, 
-//			MIN(p.package_product_price) AS min_price,
-//			count(r.review_num) AS review_count, avg(r.review_star) AS review_star_avg
-//			from reservation r 
-//			join package_category c on r.reservation_category_code = c.package_category_code 
-//			join package_product p on p.package_category_code = c.package_category_code 
-//			LEFT JOIN review r ON r.review_package_category_code = p.package_category_code
-//			group by c.package_category_name order by 5 DESC LIMIT ?,?
-
-			// String sql = "select c.package_category_code, c.package_category_name,
-			// c.package_category_image, count(*), sum(r.reservation_headcount) AS
-			// total_headcount, MIN(p.package_product_price) AS min_price from reservation r
-			// join package_category c on r.reservation_category_code =
-			// c.package_category_code join package_product p on p.package_category_code =
-			// c.package_category_code group by c.package_category_name order by 5 DESC
-			// LIMIT ?,?";
 			String sql = "select c.package_category_code, c.package_category_name,c.package_category_image, count(*),"
 					+ "sum(r.reservation_headcount) AS total_headcount, MIN(p.package_product_price) AS min_price,"
-					+ "count(rv.review_num) AS review_count, avg(rv.review_star) AS review_star_avg from reservation r "
+					+ "count(DISTINCT rv.review_num) AS review_count, avg(rv.review_star) AS review_star_avg from reservation r "
 					+ "join package_category c on r.reservation_category_code = c.package_category_code "
 					+ "join package_product p on p.package_category_code = c.package_category_code "
 					+ "LEFT JOIN review rv ON rv.review_package_category_code = p.package_category_code "
@@ -465,7 +436,7 @@ public class ManagerDAO {
 //			String sql = "select c.package_category_code, c.package_category_name, c.package_category_image, MIN(p.package_product_price) AS min_price, MIN(p.package_product_depart_date) AS min_date from package_category c join package_product p on p.package_category_code = c.package_category_code group by c.package_category_name order by 5 ASC LIMIT ?,?";
 			String sql = "select c.package_category_code, c.package_category_name, c.package_category_image,"
 					+ "MIN(p.package_product_price) AS min_price, MIN(p.package_product_depart_date) AS min_date,"
-					+ "count(rv.review_num) AS review_count, avg(rv.review_star) AS review_star_avg from package_category c "
+					+ "count(DISTINCT rv.review_num) AS review_count, avg(rv.review_star) AS review_star_avg from package_category c "
 					+ "join package_product p on p.package_category_code = c.package_category_code "
 					+ "LEFT JOIN review rv ON rv.review_package_category_code = p.package_category_code "
 					+ "group by c.package_category_name order by 5 ASC LIMIT ?,?";
@@ -844,7 +815,7 @@ public class ManagerDAO {
 
 		try {
 
-			String sql = "SELECT cr.category_region_name ,sum(r.reservation_headcount) " + "FROM package_product pp "
+			String sql = "SELECT cr.category_region_name ,count(DISTINCT r.reservation_num) " + "FROM package_product pp "
 					+ "JOIN package_category pc ON pp.package_category_code = pc.package_category_code "
 					+ "JOIN category_region cr ON pc.package_category_region = cr.category_region_code "
 					+ "JOIN reservation r ON pp.package_category_code = r.reservation_category_code "
@@ -855,7 +826,7 @@ public class ManagerDAO {
 
 			while (rs.next()) {
 				categoryRegionName.add("\"" + rs.getString("cr.category_region_name") + "\"");
-				packageProductCurrent.add(rs.getInt("sum(r.reservation_headcount)"));
+				packageProductCurrent.add(rs.getInt("count(DISTINCT r.reservation_num)"));
 
 			}
 			regionReservationList.add(categoryRegionName);

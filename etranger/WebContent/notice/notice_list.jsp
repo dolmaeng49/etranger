@@ -22,7 +22,6 @@
 	String sessionId = (String) session.getAttribute("member_id");
 	NoticeBean article = (NoticeBean) request.getAttribute("article");
 	
-	
 // 	날짜 변환 작업
 
 	SimpleDateFormat sdfOrigin=new SimpleDateFormat("yyyy-MM-dd");
@@ -51,7 +50,7 @@
 				<div class="row slider-text align-items-center">
 					<div class="col-md-7 col-sm-12 ftco-animate">
 						<p class="breadcrumbs">
-							<span class="mr-2"><a href="../main/index.jsp">Home</a></span>
+							<span class="mr-2"><a href="./index.jsp">Home</a></span>
 						</p>
 						<h1 class="mb-3">공지사항</h1>
 					</div>
@@ -222,15 +221,6 @@
 					$(this).text($(this).text().substr(0, length) + '...'); //지정한 글자수 이후 표시할 텍스트(...)
 				}
 			});
-
-		});
-
-		$('#notice_del_button').click(function() {
-			var delConfirm = confirm('정말 삭제하시겠습니까?');
-			if (delConfirm) {
-			} else {
-				return false;
-			}
 
 		});
 	</script>

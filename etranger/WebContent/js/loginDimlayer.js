@@ -3,43 +3,6 @@ $('.btn-example').click(function(){
 	layer_popup($href);
 });
 
-//email
-//
-//function layer_popup(el){
-//	alert('확인');
-//    var $el = $(el);        //레이어의 id를 $el 변수에 저장
-//    var isDim = $el.prev().hasClass('dimBgEmail');   //dimmed 레이어를 감지하기 위한 boolean 변수
-//
-//    isDim ? $('.dim-layerEmail').fadeIn() : $el.fadeIn();
-//
-//    var $elWidth = ~~($el.outerWidth()),
-//        $elHeight = ~~($el.outerHeight()),
-//        docWidth = $(document).width(),
-//        docHeight = $(document).height();
-//
-//    // 화면의 중앙에 레이어를 띄운다.
-//    if ($elHeight < docHeight || $elWidth < docWidth) {
-//        $el.css({
-//            marginTop: -$elHeight /2,
-//            marginLeft: -$elWidth/2
-//        })
-//    } else {
-//        $el.css({top: 0, left: 0});
-//    }
-//
-//    $el.find('#btnPopUpCloseEmail').click(function(){
-//        isDim ? $('.dim-layerEmail').fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
-//        return false;
-//    });
-//
-//    $('.layerEmail .dimBgEmail').click(function(){
-//        $('.dim-layerEmail').fadeOut();
-//        return false;
-//    });
-//
-//}
-
-
 //login
 function layer_popup(el){
 	

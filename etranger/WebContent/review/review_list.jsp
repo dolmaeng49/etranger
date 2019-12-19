@@ -6,7 +6,6 @@
 <%@page import="review.vo.ReviewBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%
 	// 전달받은 request 객체로부터 데이터 가져오기
 	// "pageInfo" 객체와 "articleList" 객체를 request 객체로부터 꺼내서 저장
@@ -27,6 +26,12 @@
 	if(session.getAttribute("member_id")!=null){
 	  sessionId = (String)session.getAttribute("member_id");
 	}
+	
+	String sessionName = null;
+	if (session.getAttribute("member_name") != null) {
+		sessionName = (String)session.getAttribute("member_name");
+	}
+	
 	
 // 	날짜 변환 작업
 
@@ -53,7 +58,7 @@
         <div class="container">
           <div class="row slider-text align-items-center">
             <div class="col-md-7 col-sm-12 ftco-animate">
-              <p class="breadcrumbs"><span class="mr-2"><a href="../main/index.jsp">Home</a></span></p>
+              <p class="breadcrumbs"><span class="mr-2"><a href="./index.jsp">Home</a></span></p>
               <h1 class="mb-3">여행후기 모음</h1>
             </div>
           </div>
@@ -132,14 +137,6 @@
             <div class="sidebar-box-list">
             <div>
              <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">Life</a>
-                <a href="#" class="tag-cloud-link">Sport</a>
-                <a href="#" class="tag-cloud-link">Tech</a>
-                <a href="#" class="tag-cloud-link">Travel</a>
-                <a href="#" class="tag-cloud-link">Life</a>
-                <a href="#" class="tag-cloud-link">Sport</a>
-                <a href="#" class="tag-cloud-link">Tech</a>
-                <a href="#" class="tag-cloud-link">Travel</a>
                 <!--  -->
 <!--                 <div id="search"> -->
                 <form action="ReviewSearch.rv" method="get" class="search-form-list" name="search">
