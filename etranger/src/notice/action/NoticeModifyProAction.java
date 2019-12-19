@@ -18,8 +18,6 @@ public class NoticeModifyProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("NoticeModifyProAction");
-		
 		ActionForward forward = null;
 		
 		NoticeBean nb = null;
@@ -39,9 +37,7 @@ public class NoticeModifyProAction implements Action {
 			// Service 클래스의 modifyArticle() 메서드를 호출하여 전달
 		
 		int notice_num = Integer.parseInt(multi.getParameter("notice_num"));
-		System.out.println(notice_num);
 		String page = multi.getParameter("page");
-		System.out.println(page);
 		
 		nb= new NoticeBean();
 		nb.setNotice_num(notice_num);

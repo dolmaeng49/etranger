@@ -21,8 +21,6 @@ public class NoticeListService {
 		
 		int listCount = noticeDAO.selectListCount();
 		
-		System.out.println("총 게시물 수(Service) : "+listCount);
-		
 		close(con);
 		
 		return listCount;

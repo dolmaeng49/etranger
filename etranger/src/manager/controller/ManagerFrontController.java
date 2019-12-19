@@ -50,7 +50,6 @@ public class ManagerFrontController extends HttpServlet {
 		Action action = null;
 		ActionForward forward = null;
 
-		System.out.println(command);
 		String member_id = (String) request.getSession().getAttribute("member_id");
 
 		// 관리자 권한 확인이 필요한 페이지
@@ -198,7 +197,6 @@ public class ManagerFrontController extends HttpServlet {
 
 			else if (command.equals("/ReservDelete.ma")) {
 				action = new ReservDeleteAction();
-				System.out.println("ReservDelete.ma");
 				try {
 					forward = action.execute(request, response);
 				} catch (Exception e) {
@@ -208,7 +206,6 @@ public class ManagerFrontController extends HttpServlet {
 
 			else if (command.equals("/ReservUpdate.ma")) {
 				action = new ReservUpdateAction();
-				System.out.println("ReservUpdate.ma");
 				try {
 					forward = action.execute(request, response);
 				} catch (Exception e) {
@@ -218,7 +215,6 @@ public class ManagerFrontController extends HttpServlet {
 
 			else if (command.equals("/IsReservUpdate.ma")) {
 				action = new IsReservUpdateAction();
-				System.out.println("ReservUpdate.ma");
 				try {
 					forward = action.execute(request, response);
 				} catch (Exception e) {

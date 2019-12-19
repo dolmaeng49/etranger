@@ -14,7 +14,6 @@ public class CommentReplyProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("들어왔니? -CommentReplyProAction");
 
 		String nowPage = request.getParameter("nowPage");
 		int review_num = Integer.parseInt(request.getParameter("review_num"));

@@ -529,8 +529,6 @@ public class ManagerDAO {
 		ResultSet rs = null;
 		ArrayList<CategoryBean> productDetailList = new ArrayList<CategoryBean>();
 
-		System.out.println("ProductDetailList DB");
-
 		try {
 
 			String sql = "select * from package_category where package_category_code=?";
@@ -566,8 +564,6 @@ public class ManagerDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<ProductBean> productList = new ArrayList<ProductBean>();
-
-		System.out.println("ProductBean ProductList DB");
 
 		try {
 
@@ -631,9 +627,6 @@ public class ManagerDAO {
 		ResultSet rs = null;
 		ArrayList<ProductBean> dplist = new ArrayList<ProductBean>();
 
-		System.out.println("ProductBean DeleteList DB");
-		System.out.println("dpcode" + dpcode);
-
 		try {
 
 			String sql = "select * from package_product where package_category_code =?";
@@ -642,7 +635,6 @@ public class ManagerDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				System.out.println("rs.next");
 				ProductBean pb = new ProductBean();
 //					System.out.println(rs.getString("package_product_num"));
 //					System.out.println(rs.getString("package_product_depart_date"));
@@ -852,8 +844,6 @@ public class ManagerDAO {
 		ArrayList categoryRegionName = new ArrayList(); // 지역이름
 		ArrayList packageProductCurrent = new ArrayList(); // 지역별 예약상품 수
 		ArrayList regionReservationList = new ArrayList(); // 지역이름, 지역별 예약상품 수 저장
-
-		System.out.println("RegionReservationCount DB");
 
 		try {
 

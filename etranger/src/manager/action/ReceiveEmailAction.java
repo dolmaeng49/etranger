@@ -20,7 +20,6 @@ public class ReceiveEmailAction implements Action {
 		//받아서 가공할 값
 		String receiveEamil = request.getParameter("receiveEmail");
 		String rowContent = request.getParameter("content");
-		System.out.println(rowContent);
 		
 		//서비스로 넘겨줄 값
 		

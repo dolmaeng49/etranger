@@ -55,9 +55,7 @@ public class CommentDAO {
 			pstmt.setInt(5, ref_num);
 			pstmt.setInt(6, 0);
 			pstmt.setInt(7, 0);
-			System.out.println("날짜:" + cb.getReview_comment_date());
 			insertCount = pstmt.executeUpdate();
-			System.out.println(cb.getReview_comment_review_num());
 			if (insertCount != 0) {
 
 				sql = "UPDATE review set review_comment_count=review_comment_count+1 where review_num="
@@ -65,7 +63,6 @@ public class CommentDAO {
 				pstmt = con.prepareStatement(sql);
 //					pstmt.setInt(1, cb.getReview_comment_review_num());  // 만능문자 ? 로 받아와서 처리하면 에러가 나는 이유 알아보기
 				pstmt.executeUpdate(sql);
-				System.out.println("review 테이블 값 변경 완료?");
 			}
 
 		} catch (Exception e) {
@@ -237,7 +234,6 @@ public class CommentDAO {
 						+ review_comment_review_num;
 				pstmt = con.prepareStatement(sql);
 				pstmt.executeUpdate(sql);
-				System.out.println("review 테이블 값 변경 완료?");
 			}
 
 		} catch (SQLException e) {
@@ -295,7 +291,6 @@ public class CommentDAO {
 						+ comment.getReview_comment_review_num();
 				pstmt.setInt(1, comment.getReview_comment_review_num());
 				pstmt.executeUpdate(sql);
-				System.out.println("review에 넘어가나?");
 			}
 		} catch (Exception e) {
 			System.out.println("insertReplytoComment() 오류! - " + e.getMessage());

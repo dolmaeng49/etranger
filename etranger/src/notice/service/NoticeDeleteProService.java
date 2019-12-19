@@ -9,7 +9,6 @@ import notice.dao.NoticeDAO;
 public class NoticeDeleteProService {
 
 	public boolean isArticleWriter(int notice_num, String notice_member_id) {
-		System.out.println("NoticeDeleteProService - isArticleWriter");
 		Connection con = getConnection();
 		NoticeDAO noticeDAO = NoticeDAO.getInstance();
 		noticeDAO.setConnection(con);
@@ -21,7 +20,6 @@ public class NoticeDeleteProService {
 	}
 
 	public boolean removeArticle(int notice_num) {
-		System.out.println("removeArticle");
 		Connection con = getConnection();
 		NoticeDAO noticeDAO = NoticeDAO.getInstance();
 		noticeDAO.setConnection(con);

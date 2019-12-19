@@ -18,7 +18,6 @@ public class MemberEmailService {
 	public static boolean mailSend(String email, String subject, String content) {
 		boolean isMailSendSuccess = false;
 		
-		System.out.println("MemberEmailService - mailSend");
 		String user = "etrangermanager"; // gmail 계정
 	    String userAddress = user;
 	    String password = "etranger1234";   // 패스워드

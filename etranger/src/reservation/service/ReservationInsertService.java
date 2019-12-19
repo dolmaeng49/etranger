@@ -9,7 +9,6 @@ import reservation.vo.ReservationBean;
 public class ReservationInsertService {
 
 	public boolean insertReservation(ReservationBean rb) {
-		System.out.println("ReservationInsertService");
 		boolean isInsertSuccess = false;
 		
 		Connection con = getConnection();

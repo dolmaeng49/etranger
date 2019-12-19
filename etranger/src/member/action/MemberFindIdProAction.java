@@ -37,7 +37,6 @@ public class MemberFindIdProAction implements Action {
 			out.println("</script>");
 		}else {
 			// 해당 회원정보 있으면 아이디 팝업창 & 로그인 페이지 요청
-			System.out.println(selectedId);
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
