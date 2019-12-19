@@ -44,7 +44,7 @@
 				<div class="row slider-text align-items-center">
 					<div class="col-md-7 col-sm-12 ftco-animate">
 						<p class="breadcrumbs">
-							<span class="mr-2"><a href="../main/index.jsp">Home</a></span>
+							<span class="mr-2"><a href="./index.jsp">Home</a></span>
 						</p>
 						<h1 class="mb-3">공지사항</h1>
 					</div>

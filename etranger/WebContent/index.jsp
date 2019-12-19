@@ -195,14 +195,14 @@
       <div class="container-fluid d-flex">
          <div class="section-2-blocks-wrapper row no-gutters">
             <div class="img col-sm-12 col-lg-6">
-
+			
             <div class="embed-responsive embed-responsive-16by9" style="margin-top: 7rem;">
                   <video autoplay muted loop class="embed-responsive-item">
                      <source src="images/intro.mp4" type="video/mp4">
                   </video>
                </div>
-<!--                <a href="https://vimeo.com/371024892" class="button popup-vimeo"><span -->
-<!--                   class="ion-ios-play"></span></a> -->
+               <a href="https://vimeo.com/371024892" class="button popup-vimeo"  style="height: auto; width: auto;" ><span
+                  class="ion-ios-play"></span></a>
                   
             </div>
             <div class="text col-lg-6 ftco-animate">

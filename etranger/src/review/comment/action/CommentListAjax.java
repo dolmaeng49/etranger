@@ -89,10 +89,8 @@ public class CommentListAjax implements Action {
 					System.out.println(sessionName);
 					if (sessionId != null) {
 					if (commentList.get(i).getReview_comment_lev() < 1) {
-						
 						out.print("<a class=\"comment_reply_btn\" href=\"#comment_reply_btn\" onclick=\"replyComment('"
 								+ commentList.get(i).getReview_comment_num() + "'); this.onclick='';\"><i class=\"fab fa-replyd\">Re</i></a>");
-							
 						}
 					}
 					String print2 = "";

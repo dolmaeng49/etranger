@@ -58,7 +58,7 @@ h1 {
 				<div class="row slider-text align-items-center">
 					<div class="col-md-7 col-sm-12 ftco-animate">
 						<p class="breadcrumbs">
-							<span class="mr-2"><a href="../main/index.jsp">Home</a></span> <span>Contact</span>
+							<span class="mr-2"><a href="./index.jsp">Home</a></span> <span>Contact</span>
 						</p>
 						<h1 class="mb-3">Contact</h1>
 					</div>
@@ -276,7 +276,7 @@ h1 {
 											</div>
 											<div class="btn-rEmail">
 												<a href="#" id="btnPopUpCloseEmail"
-													class="btn py-1 px-2 btn-primary">Close</a>
+													class="btn py-1 px-2 btn-primary">창 닫기</a>
 											</div>
 										</form>
 										<!--// content-->

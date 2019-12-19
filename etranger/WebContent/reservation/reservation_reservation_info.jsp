@@ -161,7 +161,7 @@ table.pdList .right {
 				<div class="row slider-text align-items-center">
 					<div class="col-md-7 col-sm-12 ftco-animate">
 						<p class="breadcrumbs">
-							<span class="mr-2"><a href="../main/index.jsp"></a></span> <span><a
+							<span class="mr-2"><a href="./index.jsp"></a></span> <span><a
 									href="blog.html"></a></span> <span></span>
 						</p>
 						<h1 class="mb-3">예약조회</h1>
