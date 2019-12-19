@@ -926,9 +926,12 @@ public class ManagerDAO {
 		ArrayList payment = new ArrayList();
 
 		try {
-			String sql = "SELECT m.member_gender, sum(r.reservation_price) " + "FROM member m "
+			String sql = "SELECT m.member_gender, sum(r.reservation_price) " 
+					+ "FROM member m "
 					+ "JOIN reservation r ON m.member_id = r.reservation_member_id "
-					+ "WHERE m.member_gender = 'm' OR m.member_gender = 'f' " + "GROUP BY m.member_gender";
+					+ "WHERE m.member_gender = 'm' OR m.member_gender = 'f' " 
+					+ "GROUP BY m.member_gender "
+					+ "ORDER BY 'm'";
 
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -984,6 +987,44 @@ public class ManagerDAO {
 		}
 		return mostProduct;
 	}
+	
+	public ArrayList<DatachartBean> AgeList(int age) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<DatachartBean> ageList = new ArrayList<DatachartBean>();
+		
+		try {
+			String sql = "SELECT pc.package_category_name, count(*) " 
+						+ "FROM package_category pc " 
+						+ "JOIN reservation r ON pc.package_category_code = r.reservation_category_code " 
+						+ "JOIN member m ON r.reservation_member_id = m.member_id " 
+						+ "WHERE  floor((year(now())-year(m.member_birth))/10)*10= ? " 
+						+ "GROUP BY pc.package_category_name " 
+						+ "ORDER BY count(*) DESC LIMIT 5"; 
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, age);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				DatachartBean al = new DatachartBean();
+				al.setAgeMostPick(rs.getString("pc.package_category_name"));
+				al.setAgeMostCount(rs.getInt("count(*)"));
+				ageList.add(al);
+			}
+			
+
+		} catch (SQLException e) {
+			System.out.println("AgeList() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return ageList;
+	}
+	
+	
 // ================================ 시각화 끝 ============================================
 
 }

@@ -75,6 +75,18 @@ public class DataChartService {
 		close(con);
 		return mostProduct;
 	}
+	
+	public ArrayList<DatachartBean> getAgeList(int age) {
+		Connection con = getConnection();
+		ManagerDAO managerDAO = ManagerDAO.getInstance();
+		managerDAO.setConnection(con);
+
+		ArrayList<DatachartBean> ageList = null;
+		ageList = managerDAO.AgeList(age);
+
+		close(con);
+		return ageList;
+	}
 
 	
 

@@ -24,6 +24,7 @@ import manager.action.ProductDetailAction;
 import manager.action.ProductInsertAction;
 import manager.action.CategoryListAction;
 import manager.action.CategoryUpdateAction;
+import manager.action.ChangeAgeAction;
 import manager.action.CategoryDeleteAction;
 import manager.action.CategoryInsertAction;
 //import manager.action.ProductListAction;
@@ -35,7 +36,6 @@ import manager.action.ReservManagementAction;
 import manager.action.ReservUpdateAction;
 import manager.action.ThemeCheckBoxAction;
 import manager.action.ThemeListAction;
-//import manager.action.changeAge;
 import review.action.ImageCallbackAction;
 
 @WebServlet("*.ma")
@@ -234,14 +234,14 @@ public class ManagerFrontController extends HttpServlet {
 			}
 
 			// ------------------ datachart ---------------------
-//			else if (command.equals("/RegionReservationCount.ma")) {
-//				action = new changeAge();
-//				try {
-//					forward = action.execute(request, response);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
+			else if (command.equals("/ChangeAge.ma")) {
+				action = new ChangeAgeAction();
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 
 		}
 		// 관리자 권한이 필요없는 페이지
