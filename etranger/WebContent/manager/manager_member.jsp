@@ -65,13 +65,13 @@
 						<li class="list-group-item li_hover"
 							onclick="location.href='ManagerMain.ma'"><span
 							class="icon icon-pencil"></span> 카테고리 등록&amp;수정 돌아가기</li>
-						<li class="list-group-item li_hover" id="member"><span
-							class="icon icon-users"></span>회원관리</li>
-					</ul>
-					<ul class="list-group" id="memberManagement">
-						<li class="list-group-item li_hover member"
-							onclick="location.href='ReservManagement.ma'">&nbsp;­회원예약</li>
-						<li class="list-group-item li_hover member">&nbsp;­회원등급</li>
+						<li class="list-group-item li_hover dropdown" id="dropdownMenuButton" 
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span class="icon icon-users"></span>회원관리
+						</li>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> 
+						<a class="dropdown-item" href="ReservManagement.ma">예약목록</a> 
+						</div>
 					</ul>
 				</div>
 			</div>

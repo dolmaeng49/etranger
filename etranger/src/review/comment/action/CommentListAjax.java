@@ -85,8 +85,6 @@ public class CommentListAjax implements Action {
 							+ "<input type=\"hidden\" id=\"review_comment_seq\" name=\"review_comment_seq\" value="
 							+ commentList.get(i).getReview_comment_seq() + ">";
 					out.print(print1);
-					System.out.println(sessionId);
-					System.out.println(sessionName);
 					if (sessionId != null) {
 					if (commentList.get(i).getReview_comment_lev() < 1) {
 						out.print("<a class=\"comment_reply_btn\" href=\"#comment_reply_btn\" onclick=\"replyComment('"

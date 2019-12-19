@@ -241,7 +241,7 @@ public class ManagerDAO {
 		return insertCount;
 	}
 	// insertCategory ---
-	
+
 	// updateCategory ---
 	public int CategoryUpdate(CategoryBean cb) {
 //		System.out.println("카테고리업뎃");
@@ -251,7 +251,7 @@ public class ManagerDAO {
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, cb.getPackage_category_name());
-			pstmt.setString(2, cb.getPackage_category_content());			
+			pstmt.setString(2, cb.getPackage_category_content());
 			pstmt.setString(3, cb.getPackage_category_image());
 			pstmt.setString(4, cb.getPackage_category_code());
 			updateCount = pstmt.executeUpdate();
@@ -263,13 +263,13 @@ public class ManagerDAO {
 
 		return updateCount;
 	}
-	
+
 	public int deleteCategory(String code) {
 		int deleteCount = 0;
 		PreparedStatement pstmt = null;
-		
+
 		String sql = "delete from package_category where package_category_code=?";
-		
+
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, code);
@@ -279,11 +279,9 @@ public class ManagerDAO {
 		} finally {
 			close(pstmt);
 		}
-		
+
 		return deleteCount;
 	}
-	
-	
 
 	// --- selectListCount
 	public int selectListCount() {
@@ -344,7 +342,6 @@ public class ManagerDAO {
 		}
 		return productList;
 	}
-	
 
 	// --- selectNewList --최신순 & 최저가격
 	public ArrayList<CategoryBean> selectNewList(int page, int limit) {
@@ -379,16 +376,16 @@ public class ManagerDAO {
 		return productList;
 	}
 
-	// --- selectPopularList --- 인기순 
+	// --- selectPopularList --- 인기순
 	public ArrayList<CategoryBean> selectPopularList(int page, int limit) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<CategoryBean> popularList = new ArrayList<CategoryBean>();
 
 		int startRow = (page - 1) * limit;
-		try {	
+		try {
 
-			// 카테고리별 예약이 제일 많은 순서대로(인기순) 가져오기 
+			// 카테고리별 예약이 제일 많은 순서대로(인기순) 가져오기
 			// 커리문이 이해안되는 사람들을 위해.
 //			String sql = "select c.package_category_code, c.package_category_name, c.package_category_image, c.package_category_wish_count"  // 카테고리코드, 이름, 이미지
 //					+ "count(*), sum(r.reservation_headcount) AS total_headcount," // 해당 카테고리별로 묶은 총 예약인원수 total_headcount
@@ -398,7 +395,7 @@ public class ManagerDAO {
 //					+ "join package_product p on p.package_category_code = c.package_category_code" // product와 코드로 조인
 //					+ "group by c.package_category_name"  // package_category_name 별로 상품을 그룹으로 묶어준다.
 //					+ "order by 6 DESC LIMIT ?,?"; // 카테고리별로 예약한 인원수가 많은 순(total_headcount)으로 정렬. 
-			
+
 //			select c.package_category_code, c.package_category_name, 
 //			c.package_category_image, count(*), 
 //			sum(r.reservation_headcount) AS total_headcount, 
@@ -409,15 +406,21 @@ public class ManagerDAO {
 //			join package_product p on p.package_category_code = c.package_category_code 
 //			LEFT JOIN review r ON r.review_package_category_code = p.package_category_code
 //			group by c.package_category_name order by 5 DESC LIMIT ?,?
-			
-		//	String sql = "select c.package_category_code, c.package_category_name, c.package_category_image, count(*), sum(r.reservation_headcount) AS total_headcount, MIN(p.package_product_price) AS min_price from reservation r join package_category c on r.reservation_category_code = c.package_category_code join package_product p on p.package_category_code = c.package_category_code group by c.package_category_name order by 5 DESC LIMIT ?,?";
+
+			// String sql = "select c.package_category_code, c.package_category_name,
+			// c.package_category_image, count(*), sum(r.reservation_headcount) AS
+			// total_headcount, MIN(p.package_product_price) AS min_price from reservation r
+			// join package_category c on r.reservation_category_code =
+			// c.package_category_code join package_product p on p.package_category_code =
+			// c.package_category_code group by c.package_category_name order by 5 DESC
+			// LIMIT ?,?";
 			String sql = "select c.package_category_code, c.package_category_name,c.package_category_image, count(*),"
 					+ "sum(r.reservation_headcount) AS total_headcount, MIN(p.package_product_price) AS min_price,"
-					+"count(rv.review_num) AS review_count, avg(rv.review_star) AS review_star_avg from reservation r "
-					+"join package_category c on r.reservation_category_code = c.package_category_code "
-					+"join package_product p on p.package_category_code = c.package_category_code "
-					+"LEFT JOIN review rv ON rv.review_package_category_code = p.package_category_code "
-					+"group by c.package_category_name order by 5 DESC LIMIT ?,?";
+					+ "count(rv.review_num) AS review_count, avg(rv.review_star) AS review_star_avg from reservation r "
+					+ "join package_category c on r.reservation_category_code = c.package_category_code "
+					+ "join package_product p on p.package_category_code = c.package_category_code "
+					+ "LEFT JOIN review rv ON rv.review_package_category_code = p.package_category_code "
+					+ "group by c.package_category_name order by 5 DESC LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, limit);
@@ -433,8 +436,7 @@ public class ManagerDAO {
 				cb.setReview_star_avg(rs.getDouble("review_star_avg"));
 				popularList.add(cb);
 			}
-		} catch (
-		SQLException e) {
+		} catch (SQLException e) {
 			System.out.println("selectPopularList() 오류! - " + e.getMessage());
 		} finally {
 			close(rs);
@@ -443,7 +445,7 @@ public class ManagerDAO {
 		return popularList;
 	}
 
-	// --- selectRecommendedList 추천순 
+	// --- selectRecommendedList 추천순
 	public ArrayList<CategoryBean> selectRecommendedList(int page, int limit) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -452,7 +454,7 @@ public class ManagerDAO {
 		int startRow = (page - 1) * limit;
 
 		try {
-			
+
 //			select c.package_category_code, c.package_category_name, c.package_category_image,
 //			MIN(p.package_product_price) AS min_price, MIN(p.package_product_depart_date) AS min_date,
 //			count(rv.review_num) AS review_count, avg(rv.review_star) AS review_star_avg from package_category c 
@@ -462,13 +464,12 @@ public class ManagerDAO {
 
 //			String sql = "select c.package_category_code, c.package_category_name, c.package_category_image, MIN(p.package_product_price) AS min_price, MIN(p.package_product_depart_date) AS min_date from package_category c join package_product p on p.package_category_code = c.package_category_code group by c.package_category_name order by 5 ASC LIMIT ?,?";
 			String sql = "select c.package_category_code, c.package_category_name, c.package_category_image,"
-					+"MIN(p.package_product_price) AS min_price, MIN(p.package_product_depart_date) AS min_date,"
-					+"count(rv.review_num) AS review_count, avg(rv.review_star) AS review_star_avg from package_category c "
-					+"join package_product p on p.package_category_code = c.package_category_code "
-					+"LEFT JOIN review rv ON rv.review_package_category_code = p.package_category_code "
-					+"group by c.package_category_name order by 5 ASC LIMIT ?,?";
-					
-			
+					+ "MIN(p.package_product_price) AS min_price, MIN(p.package_product_depart_date) AS min_date,"
+					+ "count(rv.review_num) AS review_count, avg(rv.review_star) AS review_star_avg from package_category c "
+					+ "join package_product p on p.package_category_code = c.package_category_code "
+					+ "LEFT JOIN review rv ON rv.review_package_category_code = p.package_category_code "
+					+ "group by c.package_category_name order by 5 ASC LIMIT ?,?";
+
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, limit);
@@ -523,12 +524,10 @@ public class ManagerDAO {
 		return insertCount;
 	}
 
-	public ArrayList<CategoryBean> ProductDetailList(String pcode) {
+	public CategoryBean ProductDetailList(String pcode) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<CategoryBean> productDetailList = new ArrayList<CategoryBean>();
-
-		System.out.println("ProductDetailList DB");
+		CategoryBean cb = null;
 
 		try {
 
@@ -537,9 +536,8 @@ public class ManagerDAO {
 			pstmt.setString(1, pcode);
 			rs = pstmt.executeQuery();
 
-			while (rs.next()) {
-
-				CategoryBean cb = new CategoryBean();
+			if (rs.next()) {
+				cb = new CategoryBean();
 				cb.setPackage_category_code(rs.getString("package_category_code"));
 				cb.setPackage_category_name(rs.getString("package_category_name"));
 				cb.setPackage_category_theme(rs.getString("package_category_theme"));
@@ -548,8 +546,6 @@ public class ManagerDAO {
 				cb.setPackage_category_region(rs.getInt("package_category_region"));
 				cb.setPackage_category_city(rs.getInt("package_category_city"));
 				cb.setPackage_category_wish_count(rs.getInt("package_category_wish_count"));
-
-				productDetailList.add(cb);
 			}
 
 		} catch (SQLException e) {
@@ -558,15 +554,13 @@ public class ManagerDAO {
 			close(rs);
 			close(pstmt);
 		}
-		return productDetailList;
+		return cb;
 	}
 
 	public ArrayList<ProductBean> ProductList(String pcode) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<ProductBean> productList = new ArrayList<ProductBean>();
-
-		System.out.println("ProductBean ProductList DB");
 
 		try {
 
@@ -630,9 +624,6 @@ public class ManagerDAO {
 		ResultSet rs = null;
 		ArrayList<ProductBean> dplist = new ArrayList<ProductBean>();
 
-		System.out.println("ProductBean DeleteList DB");
-		System.out.println("dpcode" + dpcode);
-
 		try {
 
 			String sql = "select * from package_product where package_category_code =?";
@@ -641,7 +632,6 @@ public class ManagerDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				System.out.println("rs.next");
 				ProductBean pb = new ProductBean();
 //					System.out.println(rs.getString("package_product_num"));
 //					System.out.println(rs.getString("package_product_depart_date"));
@@ -788,147 +778,11 @@ public class ManagerDAO {
 		return listCount;
 	}
 
-	// =========================== 시각화 =================================
-	
-	// 전체 판매량, 매출액
-	public DatachartBean TotalSales() {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		DatachartBean db =null;
-		
-		try {
-			String sql = "SELECT SUM(reservation_price), COUNT(*) FROM reservation";
-			
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				db = new DatachartBean();
-				db.setSalesVolume(rs.getInt("SUM(reservation_price)"));
-				db.setSales(rs.getInt("COUNT(*)"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return db;
-	}
-	
-	// 지역별 상품예약 수
-	public ArrayList RegionReservationCount() {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		ArrayList categoryRegionName = new ArrayList();	// 지역이름
-		ArrayList packageProductCurrent = new ArrayList(); // 지역별 예약상품 수
-		ArrayList regionReservationList = new ArrayList(); // 지역이름, 지역별 예약상품 수 저장
+	public ArrayList<CategoryBean> selectThemeListLimit() {
 
-		System.out.println("RegionReservationCount DB");
-
-		try {
-
-			String sql = "SELECT cr.category_region_name ,sum(r.reservation_headcount) "
-						+ "FROM package_product pp "
-						+ "JOIN package_category pc ON pp.package_category_code = pc.package_category_code "
-						+ "JOIN category_region cr ON pc.package_category_region = cr.category_region_code "
-						+ "JOIN reservation r ON pp.package_category_code = r.reservation_category_code "
-						+ "GROUP BY cr.category_region_name";
-
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				categoryRegionName.add("\""+rs.getString("cr.category_region_name")+"\"");
-				packageProductCurrent.add(rs.getInt("sum(r.reservation_headcount)"));
-				
-			}
-			regionReservationList.add(categoryRegionName);
-			regionReservationList.add(packageProductCurrent);
-
-		} catch (SQLException e) {
-			System.out.println("RegionReservationCount() 오류! - " + e.getMessage());
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		return regionReservationList;
-	}
-	
-	// 일별 결제건수, 금액
-	public ArrayList TotalPayCount() {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		ArrayList totalPayCount = new ArrayList();
-		ArrayList reservationDate = new ArrayList();
-		ArrayList reservationPrice = new ArrayList();
-		ArrayList paymentNum = new ArrayList();
-
-
-		try {
-			String sql = "SELECT reservation_date, sum(reservation_price), count(*) FROM reservation GROUP BY reservation_date LIMIT 0,30";
-
-
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				reservationDate.add("\""+rs.getString("reservation_date")+"\"");
-				reservationPrice.add(rs.getInt("sum(reservation_price)"));
-				paymentNum.add(rs.getInt("count(*)"));
-			}
-			
-			totalPayCount.add(reservationDate);
-			totalPayCount.add(reservationPrice);
-			totalPayCount.add(paymentNum);
-			
-		} catch (SQLException e) {
-			System.out.println("RegionReservationCount() 오류! - " + e.getMessage());
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		return totalPayCount;
-	}
-
-	public ArrayList GenderPayment() {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		ArrayList genderPayment = new ArrayList();
-		ArrayList gender = new ArrayList();
-		ArrayList payment = new ArrayList();
-
-		try {
-			String sql = "SELECT m.member_gender, sum(r.reservation_price) "
-						+ "FROM member m " 
-						+ "JOIN reservation r ON m.member_id = r.reservation_member_id "
-						+ "WHERE m.member_gender = 'm' OR m.member_gender = 'f' " 
-						+ "GROUP BY m.member_gender";
-
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-//				gender.add("\""+rs.getString("reservation_date")+"\"");
-				payment.add(rs.getInt("sum(r.reservation_price)"));
-			}
-			
-//			genderPayment.add(gender);
-			genderPayment.add(payment);
-			
-		} catch (SQLException e) {
-			System.out.println("RegionReservationCount() 오류! - " + e.getMessage());
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		return genderPayment;
-	}
-	
-public ArrayList<CategoryBean> selectThemeListLimit() {
-		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<CategoryBean> themeList = new ArrayList<CategoryBean>();
-
 
 		try {
 
@@ -953,6 +807,212 @@ public ArrayList<CategoryBean> selectThemeListLimit() {
 		}
 		return themeList;
 	}
+
+	// =========================== 시각화 =================================
+
+	// 전체 판매량, 매출액
+	public DatachartBean TotalSales() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		DatachartBean db = null;
+
+		try {
+			String sql = "SELECT SUM(reservation_price), COUNT(*) FROM reservation";
+
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				db = new DatachartBean();
+				db.setSalesVolume(rs.getInt("SUM(reservation_price)"));
+				db.setSales(rs.getInt("COUNT(*)"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return db;
+	}
+
+	// 지역별 상품예약 수
+	public ArrayList RegionReservationCount() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList categoryRegionName = new ArrayList(); // 지역이름
+		ArrayList packageProductCurrent = new ArrayList(); // 지역별 예약상품 수
+		ArrayList regionReservationList = new ArrayList(); // 지역이름, 지역별 예약상품 수 저장
+
+		try {
+
+			String sql = "SELECT cr.category_region_name ,sum(r.reservation_headcount) " + "FROM package_product pp "
+					+ "JOIN package_category pc ON pp.package_category_code = pc.package_category_code "
+					+ "JOIN category_region cr ON pc.package_category_region = cr.category_region_code "
+					+ "JOIN reservation r ON pp.package_category_code = r.reservation_category_code "
+					+ "GROUP BY cr.category_region_name";
+
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				categoryRegionName.add("\"" + rs.getString("cr.category_region_name") + "\"");
+				packageProductCurrent.add(rs.getInt("sum(r.reservation_headcount)"));
+
+			}
+			regionReservationList.add(categoryRegionName);
+			regionReservationList.add(packageProductCurrent);
+
+		} catch (SQLException e) {
+			System.out.println("RegionReservationCount() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return regionReservationList;
+	}
+
+	// 일별 결제건수, 금액
+	public ArrayList TotalPayCount() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList totalPayCount = new ArrayList();
+		ArrayList reservationDate = new ArrayList();
+		ArrayList reservationPrice = new ArrayList();
+		ArrayList paymentNum = new ArrayList();
+
+		try {
+			String sql = "SELECT reservation_date, sum(reservation_price), count(*) FROM reservation GROUP BY reservation_date LIMIT 0,30";
+
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				reservationDate.add("\"" + rs.getString("reservation_date") + "\"");
+				reservationPrice.add(rs.getInt("sum(reservation_price)"));
+				paymentNum.add(rs.getInt("count(*)"));
+			}
+
+			totalPayCount.add(reservationDate);
+			totalPayCount.add(reservationPrice);
+			totalPayCount.add(paymentNum);
+
+		} catch (SQLException e) {
+			System.out.println("TotalPayCount() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return totalPayCount;
+	}
+
+	// 성별 총 결제금액
+	public ArrayList GenderPayment() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList genderPayment = new ArrayList();
+		ArrayList gender = new ArrayList();
+		ArrayList payment = new ArrayList();
+
+		try {
+			String sql = "SELECT m.member_gender, sum(r.reservation_price) " 
+					+ "FROM member m "
+					+ "JOIN reservation r ON m.member_id = r.reservation_member_id "
+					+ "WHERE m.member_gender = 'm' OR m.member_gender = 'f' " 
+					+ "GROUP BY m.member_gender "
+					+ "ORDER BY 'm'";
+
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				payment.add(rs.getInt("sum(r.reservation_price)"));
+			}
+
+//			genderPayment.add(gender);
+			genderPayment.add(payment);
+
+		} catch (SQLException e) {
+			System.out.println("RegionReservationCount() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return genderPayment;
+	}
+
+	public ArrayList MostProduct() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList mostProduct = new ArrayList();
+		
+		ArrayList most = new ArrayList();
+		ArrayList count = new ArrayList();
+		
+		try {
+			String sql = "SELECT pc.package_category_name, count(*) "
+						+ "FROM package_category pc " 
+						+ "JOIN reservation r ON pc.package_category_code = r.reservation_category_code "
+						+ "GROUP BY pc.package_category_name " 
+						+ "ORDER BY count(*) DESC LIMIT 10";
+
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				most.add("\""+rs.getString("pc.package_category_name")+"\"");
+				count.add(rs.getInt("count(*)"));
+			}
+			
+			mostProduct.add(most);
+			mostProduct.add(count);
+
+		} catch (SQLException e) {
+			System.out.println("GenderAgeMost() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return mostProduct;
+	}
+	
+	public ArrayList<DatachartBean> AgeList(int age, String gender) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<DatachartBean> ageList = new ArrayList<DatachartBean>();
+		
+		try {
+			String sql = "SELECT pc.package_category_name, count(*) " 
+						+ "FROM package_category pc " 
+						+ "JOIN reservation r ON pc.package_category_code = r.reservation_category_code " 
+						+ "JOIN member m ON r.reservation_member_id = m.member_id " 
+						+ "WHERE  floor((year(now())-year(m.member_birth))/10)*10= ? AND member_gender = ? "
+						+ "GROUP BY pc.package_category_name " 
+						+ "ORDER BY count(*) DESC LIMIT 5"; 
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, age);
+			pstmt.setString(2, gender);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				DatachartBean al = new DatachartBean();
+				al.setAgeMostPick(rs.getString("pc.package_category_name"));
+				al.setAgeMostCount(rs.getInt("count(*)"));
+				ageList.add(al);
+			}
+			
+
+		} catch (SQLException e) {
+			System.out.println("AgeList() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return ageList;
+	}
 	
 	
+// ================================ 시각화 끝 ============================================
+
 }

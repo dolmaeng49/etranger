@@ -30,12 +30,9 @@ public class NoticeSearchListAction implements Action {
 		
 		NoticeSearchListService noticeSearchListService = new NoticeSearchListService();
 		int listCount = noticeSearchListService.getListCount(search);
-		System.out.println("검색한 공지글 수(Action) " +listCount);
 		
 		ArrayList<NoticeBean> articleList = new ArrayList<NoticeBean>();
 		articleList = noticeSearchListService.getArticleList(page, limit, search);
-		System.out.println(articleList.size());
-		
 		
 		//페이징
 		int maxPage =(int)((double)listCount / limit +0.95);

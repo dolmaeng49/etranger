@@ -11,15 +11,13 @@ import manager.vo.ProductBean;
 
 public class ProductDetailService {
 
-	public ArrayList<CategoryBean> GetProductDetailList(String pcode) {
-
-		System.out.println("ProductDetailService");
+	public CategoryBean GetProductDetailList(String pcode) {
 
 		Connection con = getConnection();
 		ManagerDAO managerDAO = ManagerDAO.getInstance();
 		managerDAO.setConnection(con);
 
-		ArrayList<CategoryBean> pdetail = null;
+		CategoryBean pdetail = null;
 
 		// pcode(선택한 상품의 코드)를 db에 전달
 		pdetail = managerDAO.ProductDetailList(pcode);
@@ -30,9 +28,7 @@ public class ProductDetailService {
 
 	}
 
-	public ArrayList<ProductBean> GetProductList(ProductBean pb, String pcode) {
-
-		System.out.println("GetProductList Service");
+	public ArrayList<ProductBean> GetProductList(String pcode) {
 
 		Connection con = getConnection();
 		ManagerDAO managerDAO = ManagerDAO.getInstance();

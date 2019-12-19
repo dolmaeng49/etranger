@@ -19,7 +19,7 @@ public class ManagerImageCallbackAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String realFolder = "";
-		String saveFolder = "/managerUpload";
+		String saveFolder = "/ManagerImgUpload";
 		int fileSize = 10 * 1024 * 1024;
 		String fileName = "";
 

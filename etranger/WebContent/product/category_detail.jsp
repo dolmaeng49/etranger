@@ -14,7 +14,7 @@
 <%@page import="manager.dao.ManagerDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	ArrayList<CategoryBean> pdetail = (ArrayList<CategoryBean>) request.getAttribute("pdetail");
+	CategoryBean pdetail = (CategoryBean) request.getAttribute("pdetail");
 	ArrayList<ProductBean> pdList = (ArrayList<ProductBean>) request.getAttribute("pdList");
 // 	ArrayList<ReviewBean> reviewList = (ArrayList<ReviewBean>) request.getAttribute("reviewList");
 	
@@ -27,6 +27,7 @@
 	
 	String code = "";
 	String image = "";
+	String[] imgs = new String[4];
 	String name = "";
 	String content = "";
 	String theme = "";
@@ -37,15 +38,25 @@
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	Date departdate = null;
 	Date today = new Date();
-	for (int i = 0; i < pdetail.size(); i++) {
-		code = pdetail.get(i).getPackage_category_code();
-		image = pdetail.get(i).getPackage_category_image();
-		name = pdetail.get(i).getPackage_category_name();
-		content = pdetail.get(i).getPackage_category_content();
-		theme = pdetail.get(i).getPackage_category_theme();
-		region_code = pdetail.get(i).getPackage_category_region();
-		city_code = pdetail.get(i).getPackage_category_city();
-		wish_count = pdetail.get(i).getPackage_category_wish_count();
+	if (pdetail != null) {
+		code = pdetail.getPackage_category_code();
+		image = pdetail.getPackage_category_image();
+		String[] DBimgs = image.split("\\*");
+		for(int j = 0; j < 4; j++) {
+			// 4장의 사진을 탑슬라이더에 뿌려줌
+			// 업로드된 사진이 4장이 안 될 경우 대비 
+			if(DBimgs.length < j + 1) {
+				imgs[j] = imgs[j - 1]; 
+			} else {
+				imgs[j] = DBimgs[j];
+			}
+		}
+		name = pdetail.getPackage_category_name();
+		content = pdetail.getPackage_category_content();
+		theme = pdetail.getPackage_category_theme();
+		region_code = pdetail.getPackage_category_region();
+		city_code = pdetail.getPackage_category_city();
+		wish_count = pdetail.getPackage_category_wish_count();
 	}
 	for (int i = 0; i < pdList.size(); i++) {
 		product_num = pdList.get(i).getProductNum();
@@ -130,7 +141,7 @@ table.pdList th {
 	<jsp:include page="../include/top_menu.jsp" />
 
 	<section class="home-slider owl-carousel">
-		<div class="slider-item" style="background-image: url('ManagerImgUpload/<%=image%>');" data-stellar-background-ratio="0.5">
+		<div class="slider-item" style="background-image: url('ManagerImgUpload/<%=imgs[0]%>');" data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row slider-text align-items-center">
@@ -142,7 +153,7 @@ table.pdList th {
 				</div>
 			</div>
 		</div>
-		<div class="slider-item" style="background-image: url('ManagerImgUpload/<%=image%>');" data-stellar-background-ratio="0.5">
+		<div class="slider-item" style="background-image: url('ManagerImgUpload/<%=imgs[1]%>');" data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row slider-text align-items-center">
@@ -154,7 +165,7 @@ table.pdList th {
 				</div>
 			</div>
 		</div>
-		<div class="slider-item" style="background-image: url('ManagerImgUpload/<%=image%>');" data-stellar-background-ratio="0.5">
+		<div class="slider-item" style="background-image: url('ManagerImgUpload/<%=imgs[2]%>');" data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row slider-text align-items-center">
@@ -166,7 +177,7 @@ table.pdList th {
 				</div>
 			</div>
 		</div>
-		<div class="slider-item" style="background-image: url('ManagerImgUpload/<%=image%>');" data-stellar-background-ratio="0.5">
+		<div class="slider-item" style="background-image: url('ManagerImgUpload/<%=imgs[3]%>');" data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row slider-text align-items-center">
@@ -197,12 +208,12 @@ table.pdList th {
 							<!-- 꽉찬하트는 class="fa fa-heart" name="1" -->
 						</tr>
 						<tr>
-							<td><label for="image">이미지1</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
-							<td><label for="image">이미지2</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
-							<td><label for="image">이미지3</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
+							<td><label for="image">이미지1</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=imgs[1]%>');"> </a></td>
+							<td><label for="image">이미지2</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=imgs[2]%>');"> </a></td>
+							<td><label for="image">이미지3</label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=imgs[3]%>');"> </a></td>
 						</tr>
 						<tr>
-							<td colspan="3"><label for="image"></label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=image%>');"> </a></td>
+							<td colspan="3"><label for="image"></label> <a href="#" class="block-20" style="background-image: url('ManagerImgUpload/<%=imgs[0]%>');"> </a></td>
 						</tr>
 					</table>
 				</div>
@@ -228,21 +239,6 @@ table.pdList th {
 			<div class="col-md-4 ftco-animate">
 				<div class="writeform-group sticky">
 					<br>
-
-					<!-- 인풋태그 두개로 날짜 범위 선택 하는 달력 -->
-					<!-- 달력이 항상 표시되지가 않음
-	input 태그를 div로 바꾸면 달력이 항상 표시되지만 2개가 표시됨 -->
-					<div id="event_period">
-						<input type="text" class="actual_range"> <input type="text" class="actual_range">
-					</div>
-					<!-- 					날짜 두개를 선택할 수 있는 달력 -->
-					<!-- 					범위 표시 안됨, Action에서 날짜 두개 쪼개서
-<!-- 	빠른 날짜를 출발날짜, 늦은 날짜를 도착날짜로 구분하는 과정 필요 -->
-					<!-- 					<div class="pick_start_date"></div> -->
-					<!-- 											<div class="pick_end_date"></div> -->
-					<!-- 					<input type="text" class="pick_start_date_input"> -->
-					<!-- 											    <div class="input-group-addon">to</div> -->
-					<!-- 											    <input type="text" class="pick_end_date_input"> -->
 					<input type="button" class="btn py-1 px-2 btn-primary" id="moveReview" value="리뷰보기">
 					<%
 						if (pdList != null) {

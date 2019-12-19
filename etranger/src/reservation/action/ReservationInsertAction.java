@@ -78,7 +78,6 @@ public class ReservationInsertAction implements Action {
 						
 						MemberEmailService.mailSend(mb.getMember_email(), subject, content);
 					}
-					System.out.println("action");
 					forward = new ActionForward();
 					forward.setPath("ReservationInfo.rs?member_id="+request.getParameter("member_id"));
 					forward.setRedirect(true);// Redirect 방식 = true, Dispatch 방식 = false 전달

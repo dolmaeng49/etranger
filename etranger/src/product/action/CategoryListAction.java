@@ -23,7 +23,6 @@ public class CategoryListAction implements Action {
 		// 페이징 처리
 		int page = 1;
 		int limit = 8;
-		System.out.println(request.getParameter("page"));
 		// 페이지 정보 파라미터를 받은 경우
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));

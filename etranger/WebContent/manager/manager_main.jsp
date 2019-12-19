@@ -12,28 +12,28 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<!-- 스타일 include -->
-	<jsp:include page="../include/style.jsp" />
+<meta charset="UTF-8">
+<!-- 스타일 include -->
+<jsp:include page="../include/style.jsp" />
 
-	<style type="text/css">
-		/* 사이드바 화면고정 */
-		.sticky {
-			position: sticky;
-			top: 100px;
-		}
+<style type="text/css">
+/* 사이드바 화면고정 */
+.sticky {
+	position: sticky;
+	top: 100px;
+}
 
-		.li_hover:hover {
-			border: 2px solid #68c8f2;
-			background: transparent;
-			color: #68c8f2;
-		}
+.li_hover:hover {
+	border: 2px solid #68c8f2;
+	background: transparent;
+	color: #68c8f2;
+}
 
-		#memberManagement {
-			font-size: smaller;
- 			display: none;  
-		}
-	</style>
+#memberManagement {
+	font-size: smaller;
+	display: none;
+}
+</style>
 </head>
 
 <body>
@@ -41,7 +41,8 @@
 		<!-- 탑메뉴 인클루드 -->
 		<jsp:include page="../include/top_menu.jsp" />
 		<section class="home-slider owl-carousel">
-			<div class="slider-item" style="background-image: url('./images/bg_4.jpg');"
+			<div class="slider-item"
+				style="background-image: url('./images/bg_4.jpg');"
 				data-stellar-background-ratio="0.5">
 				<div class="overlay"></div>
 				<div class="container">
@@ -68,21 +69,24 @@
 						<h3 class="panel-title">Manager Page</h3>
 					</div>
 					<ul class="list-group">
-						<li class="list-group-item active li_hover" onclick="location.href='./index.jsp'"><span
-								class="icon icon-home"></span> 홈</li>
-						<li class="list-group-item li_hover dataChart"><span class="icon icon-line-chart"></span> 관리자 메인
-						</li>
-						<li class="list-group-item li_hover" onclick="showCategoryInsert()"><span
-								class="icon icon-pencil"></span> 카테고리 등록</li>
-						<li class="list-group-item li_hover pList"><span class="icon icon-add_shopping_cart"></span> 투어상품 등록</li>
+						<li class="list-group-item active li_hover"
+							onclick="location.href='./index.jsp'"><span
+							class="icon icon-home"></span> 홈</li>
+						<li class="list-group-item li_hover dataChart"><span
+							class="icon icon-line-chart"></span> 관리자 메인</li>
+						<li class="list-group-item li_hover"
+							onclick="showCategoryInsert()"><span
+							class="icon icon-pencil"></span> 카테고리 등록</li>
+						<li class="list-group-item li_hover pList"><span
+							class="icon icon-add_shopping_cart"></span> 투어상품 등록</li>
 
-						<li class="list-group-item li_hover" id="member">
-							<span class="icon icon-users"></span>회원관리</li>
-					</ul>
-					<ul class="list-group" id="memberManagement">
-						<li class="list-group-item li_hover member" onclick="location.href='ReservManagement.ma'">
-							&nbsp;­회원예약</li>
-						<li class="list-group-item li_hover member">&nbsp;­회원등급</li>
+						<li class="list-group-item li_hover dropdown" id="dropdownMenuButton" 
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span class="icon icon-users"></span>회원관리
+						</li>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> 
+						<a class="dropdown-item" href="ReservManagement.ma">예약목록</a> 
+						</div>
 					</ul>
 				</div>
 			</div>
@@ -95,7 +99,7 @@
 
 				<section id="categoryInsert" style="display: none;">
 					<!-- 지역,도시,테마 선택결과 가지고 ManagerProInsert.ma 이동 -->
-					<form action="CategoryInsert.ma" class="p-5 bg-light" method="post" enctype="multipart/form-data" onkeydown="return captureReturnKey(event)">
+					<form action="CategoryInsert.ma" class="p-5 bg-light" method="post" onkeydown="return captureReturnKey(event)">
 						<!-- 지역,도시,테마 구역 패딩줘서 안삐져나가게. -->
 						<div class="row block-9 mb-4" style="padding-left: 20px;">
 							<div class="col-md-6 pr-md-5 flex-column">
@@ -205,8 +209,9 @@
 								
 									<h3 class="h4 mb-4 mt-3" >Img</h3>
 									<div class="custom-file" style="width: 60%">
-									<input multiple="multiple" type="file" name="category_image" required="required" class="custom-file-input" id="customFile"/>
-									 <label class="custom-file-label" for="customFile">Choose image file</label>
+									<input type="text" name="category_image" required="required" id="category_image"/>
+<!-- 									class="custom-file-input"  -->
+<!-- 									 <label class="custom-file-label" for="customFile">Choose image file</label> -->
 									</div>
 									
 								

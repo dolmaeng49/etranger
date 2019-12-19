@@ -21,15 +21,11 @@ public class ProductListAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		System.out.println("DeleteListAction");
 		String dpcode = request.getParameter("dpcode");
-		System.out.println(dpcode);
-//		System.out.println(dpcode);
 		DeleteListService dls = new DeleteListService();
 		ArrayList<ProductBean> deletelist = new ArrayList<ProductBean>();
 		deletelist = dls.DeleteList(dpcode);
 		
-		System.out.println(deletelist.size());
 	
 		
 	
@@ -54,7 +50,6 @@ public class ProductListAction implements Action {
 		//out.println(JSONArray.toJSONString(articleList));
 	//JSONArray.writeJSONString(articleList, out);
 	out.print(Jdeletelist);
-		System.out.println(Jdeletelist);
 		ActionForward forward = null;
 
 		return forward;

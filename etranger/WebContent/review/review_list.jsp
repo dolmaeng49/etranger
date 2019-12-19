@@ -64,10 +64,10 @@
     
     <!-- 추천여행지 -->
     <section class="ftco-section bg-light">
-			<%
-			if(articleList != null && listCount > 0) {%>
       <div class="container">
         <div class="row">
+			<%
+			if(articleList != null && listCount > 0) {%>
 			<!--리스트에서 보여지는 게시물 썸네일 한 덩이 시작 -->
 				<% for (ReviewBean rb : articleList) {
 					String detailURL = "ReviewDetail.rv?review_num=" + rb.getReview_num() + "&page="+nowPage;
@@ -175,12 +175,12 @@
                 <%} %>
               </ul>
             </div>
+	<%}else{%><div id="emptyArticle">등록된 글이 없습니다</div><%} %>
           </div>
+      <div align="right"><input type="button" id="review_write" value="리뷰 작성" class="btn py-3 px-4 btn-primary"></div>
         </div>
         <!-- 페이지 부분 -->
-	<%}else{%><div id="emptyArticle">등록된 글이 없습니다</div><%} %>
       </div> <!-- <div class="container">의 끝 -->
-      <div align="right"><input type="button" id="review_write" value="리뷰 작성" class="btn py-3 px-4 btn-primary"></div>
     </section>
 
 	<!-- footer 인클루드 -->

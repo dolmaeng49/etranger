@@ -11,7 +11,6 @@ import static common.db.JdbcUtil.*;
 public class NoticeWriteProService {
 
 	public boolean registArticle(NoticeBean nb) {
-		System.out.println("NoticeWriteProService - registArticle");
 		boolean isWriteSuccess = false;
 		
 		Connection con = getConnection();

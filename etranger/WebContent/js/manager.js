@@ -190,9 +190,6 @@ $('.pList').click(function() {
 	}
 });
 
-$("#member").click(function() {
-		$("#memberManagement").toggle('quick');
-});
 
 $('.dataChart').click(function() {
 	$('#categoryInsert').hide(300);

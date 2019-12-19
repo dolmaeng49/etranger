@@ -18,28 +18,19 @@ public class CategoryDetailAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-//		int page = 1;
-//		int limit = 2;
 
-		CategoryBean cb = new CategoryBean();
-		cb.setPackage_category_code(request.getParameter("package_category_code"));
-		cb.setPackage_category_theme(request.getParameter("package_category_theme"));
-		
 		// 상품코드 저장
-
-		String pcode = cb.getPackage_category_code();
+		String pcode = request.getParameter("package_category_code");
 
 		// 상품리스트에서 선택된 상품에대한 상세리스트를 가져옴
 		ProductDetailService productDetailService = new ProductDetailService();
-		ArrayList<CategoryBean> pdetail = null;
+		CategoryBean pdetail = null;
 
 		pdetail = productDetailService.GetProductDetailList(pcode);
 		request.setAttribute("pdetail", pdetail);
 
-		ProductBean pb = new ProductBean();
-		ArrayList<ProductBean> pdList = new ArrayList<ProductBean>();
-		pdList = productDetailService.GetProductList(pb, pcode);
+		ArrayList<ProductBean> pdList = null;
+		pdList = productDetailService.GetProductList(pcode);
 		request.setAttribute("pdList", pdList);
 		
 //		ProductReviewListService productReviewListService = new ProductReviewListService();

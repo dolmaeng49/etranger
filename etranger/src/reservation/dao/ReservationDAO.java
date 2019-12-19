@@ -35,7 +35,6 @@ public class ReservationDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		// ReservationBean rb = new ReservationBean();
-		System.out.println(id);
 
 		int startRow = (page - 1) * limit; // 시작 게시물 번호 계산
 
@@ -83,7 +82,6 @@ public class ReservationDAO {
 	}
 
 	public int insertReservation(ReservationBean rb) {
-		System.out.println("insertReservation");
 		PreparedStatement pstmt = null;
 
 		int insertCount = 0;

@@ -13,7 +13,6 @@ public class NoticeDeleteProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("NoticeDeleteProAction");
 		ActionForward forward = null;
 
 		int notice_num = Integer.parseInt(request.getParameter("notice_num"));

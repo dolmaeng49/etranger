@@ -26,7 +26,6 @@ public class NoticeListAction implements Action {
 		
 		NoticeListService noticeListService = new NoticeListService();
 		int listCount = noticeListService.getListCount();
-		System.out.println("총 게시물 수(Action) " +listCount);
 		
 		ArrayList<NoticeBean> articleList = new ArrayList<NoticeBean>();
 		articleList = noticeListService.getArticleList(page, limit);

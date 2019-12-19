@@ -11,15 +11,12 @@ import notice.vo.NoticeBean;
 
 public class NoticeSearchListService {
 	public int getListCount(String search) {
-		System.out.println("NoticeSearchListService");
 		
 		Connection con =getConnection();
 		NoticeDAO noticeDAO = NoticeDAO.getInstance();
 		noticeDAO.setConnection(con);
 		
 		int listCount = noticeDAO.selectListCount(search);
-		
-		System.out.println("검색한 공지글 수(Service) : "+listCount);
 		
 		close(con);
 		
