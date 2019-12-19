@@ -24,7 +24,7 @@ import manager.action.ProductDetailAction;
 import manager.action.ProductInsertAction;
 import manager.action.CategoryListAction;
 import manager.action.CategoryUpdateAction;
-import manager.action.ChangeAgeAction;
+import manager.action.ChangeMostAction;
 import manager.action.CategoryDeleteAction;
 import manager.action.CategoryInsertAction;
 //import manager.action.ProductListAction;
@@ -231,7 +231,7 @@ public class ManagerFrontController extends HttpServlet {
 
 			// ------------------ datachart ---------------------
 			else if (command.equals("/ChangeAge.ma")) {
-				action = new ChangeAgeAction();
+				action = new ChangeMostAction();
 				try {
 					forward = action.execute(request, response);
 				} catch (Exception e) {

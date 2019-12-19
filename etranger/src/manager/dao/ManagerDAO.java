@@ -978,7 +978,7 @@ public class ManagerDAO {
 		return mostProduct;
 	}
 	
-	public ArrayList<DatachartBean> AgeList(int age) {
+	public ArrayList<DatachartBean> AgeList(int age, String gender) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -989,12 +989,13 @@ public class ManagerDAO {
 						+ "FROM package_category pc " 
 						+ "JOIN reservation r ON pc.package_category_code = r.reservation_category_code " 
 						+ "JOIN member m ON r.reservation_member_id = m.member_id " 
-						+ "WHERE  floor((year(now())-year(m.member_birth))/10)*10= ? " 
+						+ "WHERE  floor((year(now())-year(m.member_birth))/10)*10= ? AND member_gender = ? "
 						+ "GROUP BY pc.package_category_name " 
 						+ "ORDER BY count(*) DESC LIMIT 5"; 
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, age);
+			pstmt.setString(2, gender);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

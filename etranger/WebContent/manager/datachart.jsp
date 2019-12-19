@@ -65,12 +65,18 @@
 
 
 		<div class="border col-5">
-			<p class="text-center font-weight-bold mt-2" style="color: #0F4C81">연령별 최다 구매상품</p>
-			<input class="btn btn-outline-primary btn-sm mb-2" type="button" onclick="changeAge(20)" value="20대"">
-		<input class=" btn btn-outline-primary btn-sm mb-2" type="button" onclick="changeAge(30)" value="30대">
-			<input class="btn btn-outline-primary btn-sm mb-2" type="button" onclick="changeAge(40)" value="40대">
-			<input class="btn btn-outline-primary btn-sm mb-2" type="button" onclick="changeAge(50)" value="50대">
-			<input class="btn btn-outline-primary btn-sm mb-2" type="button" onclick="changeAge(60)" value="60대">
+			<p class="text-center font-weight-bold mt-2" style="color: #0F4C81">성별, 연령별 최다 구매상품</p>
+			<input class="btn btn-outline-primary btn-sm mb-2" type="button" onclick="changeAge(20, 'm')" value="20대">
+			<input class=" btn btn-outline-primary btn-sm mb-2" type="button" onclick="changeAge(30, 'm')" value="30대">
+			<input class="btn btn-outline-primary btn-sm mb-2" type="button" onclick="changeAge(40, 'm')" value="40대">
+			<input class="btn btn-outline-primary btn-sm mb-2" type="button" onclick="changeAge(50, 'm')" value="50대">
+			<input class="btn btn-outline-primary btn-sm mb-2" type="button" onclick="changeAge(60, 'm')" value="60대">
+			
+			<input class="btn btn-outline-primary2 btn-sm mb-2" type="button" onclick="changeAge(20, 'f')" value="20대">
+			<input class="btn btn-outline-primary2 btn-sm mb-2" type="button" onclick="changeAge(30, 'f')" value="30대">
+			<input class="btn btn-outline-primary2 btn-sm mb-2" type="button" onclick="changeAge(40, 'f')" value="40대">
+			<input class="btn btn-outline-primary2 btn-sm mb-2" type="button" onclick="changeAge(50, 'f')" value="50대">
+			<input class="btn btn-outline-primary2 btn-sm mb-2" type="button" onclick="changeAge(60, 'f')" value="60대">
 			<div id="mostpick">
 			</div>
 		</div>
@@ -83,14 +89,14 @@
 	</div>
 	<script>
 
-		$.ajax('ChangeAge.ma?age=' + 20, {
+		$.ajax('ChangeAge.ma?age=20&gender=m', {
 			success: function (sdata) {
 				$('#mostpick').html(sdata);
 			}
 		});
 
-		function changeAge(age) {
-			$.ajax('ChangeAge.ma?age=' + age, {
+		function changeAge(age, gender) {
+			$.ajax('ChangeAge.ma?age=' + age + '&gender=' + gender, {
 				success: function (sdata) {
 					$('#mostpick').html(sdata);
 				}
