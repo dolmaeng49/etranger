@@ -102,7 +102,7 @@ h1 {
 								<img class="mx-auto rounded-circle"
 									src="./images/et_jongwoo.png" alt="">
 								<h4 class="section-subheading text-muted">김종우</h4>
-								<p class="text-muted1">Kim JongWoo</p>
+								<p class="text-muted1">Kim Jongwoo</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
 								<p class="text-muted1" style="margin-top: -21px;">.com</p>
 
@@ -115,40 +115,40 @@ h1 {
 								<h4 class="section-subheading text-muted">서은지</h4>
 								<p class="text-muted1">Seo Eunji</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
-								<p class="text-muted1" style="margin-top: -21px;">cyeongb@gmail.com</p>
+								<p class="text-muted1" style="margin-top: -21px;"></p>
 
 							</div>
 						</div>
 						<div class="col-sm-4">
 							<div class="team-member">
 								<img class="mx-auto rounded-circle" src="./images/et_boss.png"
-									" alt="">
+									 alt="">
 								<h4 class="section-subheading text-muted">신동명</h4>
 								<p class="text-muted1">Shin Dongmyeong</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
-								<p class="text-muted1" style="margin-top: -21px;">game9um@gmail.com</p>
+								<p class="text-muted1" style="margin-top: -21px;">dm49@naver.com</p>
 
 							</div>
 						</div>
 						<div class="col-sm-4">
 							<div class="team-member">
 								<img class="mx-auto rounded-circle" src="./images/et_jinwoo.png"
-									" alt="">
+									 alt="">
 								<h4 class="section-subheading text-muted">Jo Jinwoo</h4>
 								<p class="text-muted1"></p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
-								<p class="text-muted1" style="margin-top: -21px;">fhdgofhdgo@naver.com</p>
+								<p class="text-muted1" style="margin-top: -21px;">wls94@gmail.com</p>
 
 							</div>
 						</div>
 						<div class="col-sm-4">
 							<div class="team-member">
 								<img class="mx-auto rounded-circle"
-									src="./images/et_soobong.png" " alt="">
+									src="./images/et_soobong.png"  alt="">
 								<h4 class="section-subheading text-muted">최수봉</h4>
-								<p class="text-muted1">Choi soobong</p>
+								<p class="text-muted1">Choi Soobong</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
-								<p class="text-muted1" style="margin-top: -21px;">kkmkwon@naver.com</p>
+								<p class="text-muted1" style="margin-top: -21px;">contactcsb119@gmail.com</p>
 
 							</div>
 						</div>
@@ -156,10 +156,10 @@ h1 {
 							<div class="team-member">
 								<img class="mx-auto rounded-circle" src="./images/et_hunwoo.png"
 									" alt="">
-								<h4 class="section-subheading text-muted">Ha Hunwoo</h4>
-								<p class="text-muted1">Ha</p>
+								<h4 class="section-subheading text-muted">하헌우</h4>
+								<p class="text-muted1">Ha Hunwoo</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
-								<p class="text-muted1" style="margin-top: -21px;">saruru1@naver.com</p>
+								<p class="text-muted1" style="margin-top: -21px;">gkgjsdn159@gmail.com</p>
 
 							</div>
 
@@ -169,9 +169,9 @@ h1 {
 								<img class="mx-auto rounded-circle" src="./images/et_eunb.png"
 									" alt="">
 								<h4 class="section-subheading text-muted">홍은비</h4>
-								<p class="text-muted1">Hong EunB</p>
+								<p class="text-muted1">Hong EunBi</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
-								<p class="text-muted1" style="margin-top: -21px;">gkstyd1313@naver.com</p>
+								<p class="text-muted1" style="margin-top: -21px;">imheb@naver.com</p>
 
 							</div>
 						</div>
@@ -182,7 +182,7 @@ h1 {
 								<h4 class="section-subheading text-muted">홍진숙</h4>
 								<p class="text-muted1">Hong Jinsuk</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
-								<p class="text-muted1" style="margin-top: -21px;">ghlee@imsolutions.co.kr</p>
+								<p class="text-muted1" style="margin-top: -21px;">hongcine@itwillbs.co.kr</p>
 
 							</div>
 						</div>
