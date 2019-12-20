@@ -42,7 +42,7 @@
 
 		<div class="col px-md-6 py-1 border rounded">
 			<div align="center" class="align-self-center">
-				<p class="align-middle totalSalesLabel">총 결제금액</p>
+				<p class="align-middle totalSalesLabel">총 매출액</p>
 				<span class="align-middle totalSales"><%=String.format("%,d", totalSales.getSalesVolume())%></span><span
 					style="font-weight:bold; color: #0F4C81;"> 원</span>
 			</div>

@@ -844,7 +844,7 @@ public class ManagerDAO {
 
 		try {
 
-			String sql = "SELECT cr.category_region_name ,sum(r.reservation_headcount) " + "FROM package_product pp "
+			String sql = "SELECT cr.category_region_name ,count(DISTINCT r.reservation_num) " + "FROM package_product pp "
 					+ "JOIN package_category pc ON pp.package_category_code = pc.package_category_code "
 					+ "JOIN category_region cr ON pc.package_category_region = cr.category_region_code "
 					+ "JOIN reservation r ON pp.package_category_code = r.reservation_category_code "
@@ -855,7 +855,7 @@ public class ManagerDAO {
 
 			while (rs.next()) {
 				categoryRegionName.add("\"" + rs.getString("cr.category_region_name") + "\"");
-				packageProductCurrent.add(rs.getInt("sum(r.reservation_headcount)"));
+				packageProductCurrent.add(rs.getInt("count(DISTINCT r.reservation_num)"));
 
 			}
 			regionReservationList.add(categoryRegionName);
