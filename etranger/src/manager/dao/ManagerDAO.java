@@ -384,14 +384,22 @@ public class ManagerDAO {
 
 		int startRow = (page - 1) * limit;
 		try {
+//			String sql = "select c.package_category_code, c.package_category_name, c.package_category_image,"
+//					+ "MIN(p.package_product_price) AS min_price, MIN(p.package_product_depart_date) AS min_date,"
+//					+ "count(DISTINCT rv.review_num) AS review_count, avg(rv.review_star) AS review_star_avg from package_category c "
+//					+ "join package_product p on p.package_category_code = c.package_category_code "
+//					+ "LEFT JOIN review rv ON rv.review_package_category_code = p.package_category_code "
+//					+ "group by c.package_category_name order by 5 ASC LIMIT ?,?";
+			
 
-			String sql = "select c.package_category_code, c.package_category_name,c.package_category_image, count(*),"
-					+ "sum(r.reservation_headcount) AS total_headcount, MIN(p.package_product_price) AS min_price,"
-					+ "count(DISTINCT rv.review_num) AS review_count, avg(rv.review_star) AS review_star_avg from reservation r "
-					+ "join package_category c on r.reservation_category_code = c.package_category_code "
+			String sql = "select c.package_category_code, c.package_category_name,c.package_category_image,"
+					+ "sum(r.reservation_headcount) AS total_headcount, MIN(p.package_product_price) AS min_price "
+//					+ ", count(DISTINCT rv.review_num) AS review_count, avg(rv.review_star) AS review_star_avg "
+					+ "from package_category c "
 					+ "join package_product p on p.package_category_code = c.package_category_code "
-					+ "LEFT JOIN review rv ON rv.review_package_category_code = p.package_category_code "
-					+ "group by c.package_category_name order by 5 DESC LIMIT ?,?";
+					+ "join reservation r on r.reservation_category_code = c.package_category_code "
+//					+ "LEFT JOIN review rv ON rv.review_package_category_code = c.package_category_code "
+					+ "group by c.package_category_name order by 4 DESC LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, limit);
@@ -403,8 +411,8 @@ public class ManagerDAO {
 				cb.setPackage_category_image(rs.getString("package_category_image"));
 				cb.setTotal_headcount(rs.getInt("total_headcount"));
 				cb.setMin_price(rs.getInt("min_price"));
-				cb.setReview_count(rs.getInt("review_count"));
-				cb.setReview_star_avg(rs.getDouble("review_star_avg"));
+//				cb.setReview_count(rs.getInt("review_count"));
+//				cb.setReview_star_avg(rs.getDouble("review_star_avg"));
 				popularList.add(cb);
 			}
 		} catch (SQLException e) {
@@ -640,7 +648,7 @@ public class ManagerDAO {
 
 		try {
 			String sql = "SELECT r.reservation_num,r.reservation_category_code,r.reservation_member_id,r.reservation_product_num,r.reservation_date,r.reservation_price,r.reservation_headcount,r.reservation_ispayment,r.reservation_progress,r.reservation_member_id,p.package_product_depart_date,p.package_product_arriv_date,c.package_category_name FROM reservation r JOIN package_product p ON r.reservation_product_num = p.package_product_num JOIN package_category c ON r.reservation_category_code = c.package_category_code"
-					+ " limit ?,?";
+					+ " ORDER BY r.reservation_num DESC limit ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, limit);

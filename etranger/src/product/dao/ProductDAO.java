@@ -139,13 +139,13 @@ public class ProductDAO {
 					sql += " AND (c.package_category_name like ?"
 						 + " OR c.package_category_theme like ?"
 						 + " OR c.package_category_content like ?)";
-				} else if(!isNulls[1]) {
+				} if(!isNulls[1]) {
 					// 도착날짜
 					sql += " AND p.package_product_arriv_date < ?";
-				} else if(!isNulls[2]) {
+				} if(!isNulls[2]) {
 					// 지역
 					sql += " AND c.package_category_region=?";
-				} else if(!isNulls[3]) {
+				} if(!isNulls[3]) {
 					// 도시
 					sql += " AND c.package_category_city=?";
 				}
@@ -158,13 +158,13 @@ public class ProductDAO {
 					pstmt.setString(index++, "%"+keyword+"%");
 					pstmt.setString(index++, "%"+keyword+"%");
 				}
-				else if(!isNulls[1]) {
+				if(!isNulls[1]) {
 					// 도착날짜
 					pstmt.setString(index++, arriv_date);
-				} else if(!isNulls[2]) {
+				} if(!isNulls[2]) {
 					// 지역
 					pstmt.setInt(index++, Integer.parseInt(region));
-				} else if(!isNulls[3]) {
+				} if(!isNulls[3]) {
 					// 도시
 					pstmt.setInt(index++, Integer.parseInt(city));
 				}
@@ -206,7 +206,7 @@ public class ProductDAO {
 //			System.out.println("depart_date : "+depart_date);
 //			System.out.println("arriv_date : "+arriv_date);
 //			System.out.println("region : "+region);
-//			System.out.println("city : "+city);
+//			System.out.println("dao city : "+city);
 			
 			// 검색 조건 입력 여부 배열에 저장
 			boolean[] isNulls = {keyword.length()==0,arriv_date.length()==0,region.length()==0,city.length()==0};
@@ -236,13 +236,13 @@ public class ProductDAO {
 						 + " OR c.package_category_theme like ?"
 						 + " OR c.package_category_content like ?)";
 				}
-				else if(!isNulls[1]) {
+				if(!isNulls[1]) {
 					// 도착날짜
 					sql += " AND p.package_product_arriv_date < ?";
-				} else if(!isNulls[2]) {
+				} if(!isNulls[2]) {
 					// 지역
 					sql += " AND c.package_category_region=?";
-				} else if(!isNulls[3]) {
+				} if(!isNulls[3]) {
 					// 도시
 					sql += " AND c.package_category_city=?";
 				}
@@ -250,8 +250,8 @@ public class ProductDAO {
 				sql += " GROUP BY c.package_category_code ORDER BY p.package_product_depart_date LIMIT ?,?";
 				
 
-//				System.out.println(sql);
 				pstmt = con.prepareStatement(sql);
+				
 				pstmt.setString(index++, depart_date);
 				if(!isNulls[0]) {
 					// 키워드
@@ -259,13 +259,13 @@ public class ProductDAO {
 					pstmt.setString(index++, "%"+keyword+"%");
 					pstmt.setString(index++, "%"+keyword+"%");
 				}
-				else if(!isNulls[1]) {
+				 if(!isNulls[1]) {
 					// 도착날짜
 					pstmt.setString(index++, arriv_date);
-				} else if(!isNulls[2]) {
+				} if(!isNulls[2]) {
 					// 지역
 					pstmt.setInt(index++, Integer.parseInt(region));
-				} else if(!isNulls[3]) {
+				} if(!isNulls[3]) {
 					// 도시
 					pstmt.setInt(index++, Integer.parseInt(city));
 				}

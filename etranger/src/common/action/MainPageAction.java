@@ -23,17 +23,17 @@ public class MainPageAction implements Action {
 	// 메인페이지가 로드될 때 호출되는 액션클래스 메서드
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+
+		
 		// 카테고리 리스트 서비스 객체 생성
 		CategoryListService categoryListService = new CategoryListService();
 		
 		// 인기순 리스트
-		ArrayList<CategoryBean> categoryList = categoryListService.getPopularList(1, 8);
-		request.setAttribute("popularList", categoryList);
-		
-		// 추천순 리스트 
-		categoryList = categoryListService.getRecommendedList(1, 3);
+		ArrayList<CategoryBean> categoryList = categoryListService.getPopularList(1, 3);
 		request.setAttribute("recommendedList", categoryList);
-		
+		// 추천순 리스트 
+		categoryList = categoryListService.getRecommendedList(1, 8);
+		request.setAttribute("popularList", categoryList);
 		// 세션 객체 받아와 세션에서 로그인한 회원 정보 가져오기
 		HttpSession session = request.getSession();
 		String member_id = (String)session.getAttribute("member_id");
@@ -87,9 +87,8 @@ public class MainPageAction implements Action {
 			// 로그인 상태가 아닐 경우
 			categoryList = categoryListService.getNewList(1, 4);
 			request.setAttribute("newList", categoryList);
-			request.setAttribute("newList_name", "Most Popular Destination");
+			request.setAttribute("newList_name", "Highly Recommended Tours");
 		}
-		
 		// 리뷰 5개 조회
 		ReviewListService reviewListService = new ReviewListService();
 		ArrayList<ReviewBean> reviewList = reviewListService.getArticleList(1, 5);

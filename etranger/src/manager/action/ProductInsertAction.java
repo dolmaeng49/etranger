@@ -17,16 +17,14 @@ public class ProductInsertAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
-
 		ProductBean pb = new ProductBean();
 		pb.setCategoryCode(request.getParameter("package_category_code"));
 		pb.setProductNum(request.getParameter("package_category_code") + request.getParameter("product_departdate"));
-		pb.setProductDepartDate(request.getParameter("product_depardate"));
+		pb.setProductDepartDate(request.getParameter("product_departdate"));
 		pb.setProductArrivDate(request.getParameter("product_arrivdate"));
 		pb.setProductPrice(Integer.parseInt(request.getParameter("product_price")));
 		pb.setProductTotal(Integer.parseInt(request.getParameter("product_total")));
-
-
+		
 		ProductInsertService pis = new ProductInsertService();
 		boolean isInsertSuccess = pis.InsertProduct(pb);
 

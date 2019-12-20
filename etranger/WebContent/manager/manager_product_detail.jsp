@@ -301,8 +301,8 @@ table.pdList td input {
 									<td><input type="hidden" value="<%=code%>"
 										id="package_category_code"> <input type="text"
 										class="form-control form-control-shortshort actual_range"
-										id="product_depardate" placeholder="depardate"
-										name="product_depardate" required="required"
+										id="product_departdate" placeholder="depardate"
+										name="product_departdate" required="required"
 										readonly="readonly"></td>
 									<td><input type="text"
 										class="form-control form-control-shortshort actual_range"
@@ -350,7 +350,7 @@ table.pdList td input {
 		$.ajax('ProductInsertPro.ma', {
 			data : {
 				package_category_code : $('#package_category_code').val(),
-				product_depardate : $('#product_depardate').val(),
+				product_departdate : $('#product_departdate').val(),
 				product_arrivdate : $('#product_arrivdate').val(),
 				product_price : $('#product_price').val(),
 				product_total : $('#product_total').val()

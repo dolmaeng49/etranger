@@ -1,7 +1,6 @@
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DecimalFormat"%>
-<%@page import="java.util.StringTokenizer"%>
 <%@page import="review.vo.ReviewBean"%>
 <%@page import="manager.vo.CategoryBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -123,12 +122,12 @@
                               </div>
 
                               <div class="check-in one-third one-third-1">
-                                 <input type="text" name="depart_date" autocomplete="off"
+                                 <input type="text" name="depart_date" autocomplete="off" readonly="readonly"
                                     class="form-control actual_range" placeholder="출발일 검색">
                               </div>
 
                               <div class="check-out one-third one-third-1">
-                                 <input type="text" name="arriv_date" autocomplete="off"
+                                 <input type="text" name="arriv_date" autocomplete="off" readonly="readonly"
                                     class="form-control actual_range" placeholder="도착일 검색">
                               </div>
                            </div>
@@ -146,12 +145,12 @@
                            <div class="fields d-block d-lg-flex" id="event_period2">
 
                               <div class="check-in one-third one-third-1">
-                                 <input type="text" name="depart_date" autocomplete="off"
+                                 <input type="text" name="depart_date" autocomplete="off" readonly="readonly"
                                     class="form-control actual_range" placeholder="출발일 검색">
                               </div>
 
                               <div class="check-out one-third one-third-1">
-                                 <input type="text" name="arriv_date" autocomplete="off"
+                                 <input type="text" name="arriv_date" autocomplete="off" readonly="readonly"
                                     class="form-control actual_range" placeholder="도착일 검색">
                               </div>
 
@@ -231,11 +230,15 @@
          <div class="row">
             <%
                for (CategoryBean cb : newList) {
+            	   // 여러개의 이미지 정보가 저장된 이미지를 구분자로 나눔
+	           		String image = cb.getPackage_category_image();
+	           		String[] DBimgs = image.split("\\*");
+            	   
                   String detailURL = "CategoryDetail.pr?package_category_code=".concat(cb.getPackage_category_code());
             %>
             <div class="col-lg-3 promo ftco-animate">
                <a href="<%=detailURL%>" class="promo-img mb-4"
-                  style="background-image: url(ManagerImgUpload/<%=cb.getPackage_category_image()%>);"></a>
+                  style="background-image: url(ManagerImgUpload/<%=DBimgs[0]%>);"></a>
                <div class="text text-center">
                   <a href="<%=detailURL%>"><h2><%=cb.getPackage_category_name()%></h2></a>
                   <h3 class="price">
@@ -244,7 +247,7 @@
                            String prices = String.format("%,d", price); // 천단위 , 표시
                      %>
                      <span>from</span>
-                     <%=prices%>￦
+                     ￦<%=prices%>
                   </h3>
 
                   <a href="<%=detailURL%>" class="read">Read more</a>
@@ -269,17 +272,19 @@
          <div class="row no-gutters">
             <%
                for (CategoryBean cb : popularList) {
+            	   String image = cb.getPackage_category_image();
+	           		String[] DBimgs = image.split("\\*");
                   String detailURL = "CategoryDetail.pr?package_category_code=".concat(cb.getPackage_category_code());
             %>
             <div class="col-md-6 col-lg-3 ftco-animate">
                <a href="<%=detailURL%>" class="block-5"
-                  style="background-image: url(ManagerImgUpload/<%=cb.getPackage_category_image()%>);">
+                  style="background-image: url(ManagerImgUpload/<%=DBimgs[0]%>);">
                   <div class="text">
                   <% 
                   int price = cb.getMin_price(); 
                   String prices = String.format("%,d", price); // 천단위 , 표시
                   %>
-                     <span class="price"><%=prices %>&nbsp;￦부터</span>
+                     <span class="price">￦&nbsp;<%=prices %>부터</span>
                      <h3 class="heading"><%=cb.getPackage_category_name()%></h3>
                      <div class="post-meta">
                         <% String code = cb.getPackage_category_code();
@@ -326,68 +331,13 @@
       </div>
    </section>
 
-   <!-- 블로그 5개 -->
-   <section class="ftco-section bg-light">
-      <div class="container">
-         <div class="row justify-content-center mb-5 pb-5">
-            <div class="col-md-7 text-center heading-section ftco-animate">
-               <h2>Recent Reviews</h2>
-            </div>
-         </div>
-         <div class="row ftco-animate">
-            <div class="carousel1 owl-carousel ftco-owl">
-               <%
-                  for (ReviewBean rb : reviewList) {
-                     String detailURL = "ReviewDetail.rv?review_num=" + rb.getReview_num();
-               %>
-               <div class="item">
-                  <div class="blog-entry">
-                     <a href=<%=detailURL%> class="block-20"
-                        style="background-image: url('reviewUpload/<%=rb.getReview_image()%>');">
-                     </a>
-                     <div class="text p-4">
-                        <div class="meta">
-                           <div>
-                              <a href="<%=detailURL%>">
-                              <% 
-                              //날짜 포맷 변경
-                  Calendar calWritingPoint = Calendar.getInstance();
-                  	calWritingPoint.setTime(rb.getReview_date());
-    				String today = sdfCalculation.format(calToday.getTime());
-    				String writingPoint = sdfCalculation.format(calWritingPoint.getTime());
-   					String checkedDate=(today.compareTo(writingPoint)==0)?sdfToday.format(rb.getReview_date()):sdfOrigin.format(rb.getReview_date());%>
-   					<%=checkedDate %></a>
-                           </div>
-                           <div>
-                              <a href="<%=detailURL%>"><%=rb.getReview_member_name()%></a>
-                           </div>
-                        </div>
-                        <h3 class="heading">
-                           <a href="<%=detailURL%>"><%=rb.getReview_subject()%></a>
-                        </h3>
-                        <p class="clearfix">
-                           <a href="<%=detailURL%>" class="float-left">Read more</a> <a
-                              href="<%=detailURL%>" class="float-right meta-chat"><span
-                              class="icon-chat"></span> 3</a>
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <%
-                  }
-               %>
-            </div>
-         </div>
-      </div>
-   </section>
 
    <!-- 추천 상품3개 -->
    <section class="ftco-section">
       <div class="container-fluid">
          <div class="row justify-content-center mb-5 pb-5">
             <div class="col-md-7 text-center heading-section ftco-animate">
-               <h2 class="mb-1 p-2 pb-3 ftco-animate">Highly Recommended
-                  Tours</h2>
+               <h2 class="mb-1 p-2 pb-3 ftco-animate">Most Popular Destination TOP3</h2>
                <h5 class="mb-3 p-2 pb-3 ftco-animate">어디로 가야 할지 아직 못 정하셨나요?</h5>
 
                <div class="row no-gutters d-flex">
@@ -397,7 +347,7 @@
                   %>
                   <div class="col-md-4 ftco-animate">
                      <a href="<%=detailURL%>" class="block-5"
-                        style="background-image: url(ManagerImgUpload/<%=cb.getPackage_category_image()%>);">
+                        style="background-image: url(ManagerImgUpload/<%=cb.getPackage_category_image().split("\\*")[0]%>);">
                         <div class="text">
                            <%
                               int price = cb.getMin_price();
@@ -446,6 +396,60 @@
                   %>
                   
                </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- 블로그 5개 -->
+   <section class="ftco-section bg-light">
+      <div class="container">
+         <div class="row justify-content-center mb-5 pb-5">
+            <div class="col-md-7 text-center heading-section ftco-animate">
+               <h2>Recent Reviews</h2>
+            </div>
+         </div>
+         <div class="row ftco-animate">
+            <div class="carousel1 owl-carousel ftco-owl">
+               <%
+                  for (ReviewBean rb : reviewList) {
+                     String detailURL = "ReviewDetail.rv?review_num=" + rb.getReview_num();
+               %>
+               <div class="item">
+                  <div class="blog-entry">
+                     <a href=<%=detailURL%> class="block-20"
+                        style="background-image: url('reviewUpload/<%=rb.getReview_image()%>');">
+                     </a>
+                     <div class="text p-4">
+                        <div class="meta">
+                           <div>
+                              <a href="<%=detailURL%>">
+                              <% 
+                              //날짜 포맷 변경
+                  Calendar calWritingPoint = Calendar.getInstance();
+                  	calWritingPoint.setTime(rb.getReview_date());
+    				String today = sdfCalculation.format(calToday.getTime());
+    				String writingPoint = sdfCalculation.format(calWritingPoint.getTime());
+   					String checkedDate=(today.compareTo(writingPoint)==0)?sdfToday.format(rb.getReview_date()):sdfOrigin.format(rb.getReview_date());%>
+   					<%=checkedDate %></a>
+                           </div>
+                           <div>
+                              <a href="<%=detailURL%>"><%=rb.getReview_member_name()%></a>
+                           </div>
+                        </div>
+                        <h3 class="heading">
+                           <a href="<%=detailURL%>"><%=rb.getReview_subject()%></a>
+                        </h3>
+                        <p class="clearfix">
+                           <a href="<%=detailURL%>" class="float-left">Read more</a> <a
+                              href="<%=detailURL%>" class="float-right meta-chat"><span
+                              class="icon-chat"></span><%=rb.getReview_comment_count() %></a>
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <%
+                  }
+               %>
             </div>
          </div>
       </div>

@@ -70,7 +70,7 @@
 				%>
           <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="blog-entry" onclick="location.href='<%=detailURL %>'">
-              <a href="<%=detailURL%>" class="block-20" style="background-image: url('ManagerImgUpload/<%=cb.getPackage_category_image()%>');">
+              <a href="<%=detailURL%>" class="block-20" style="background-image: url('ManagerImgUpload/<%=cb.getPackage_category_image().split("\\*")[0]%>');">
               </a>
               <div class="text p-4" >
              <!--  stars --> 

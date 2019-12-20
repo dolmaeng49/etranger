@@ -63,7 +63,7 @@ public class CategoryListAction implements Action {
 						+ productList.get(i).getPackage_category_code() + "&package_category_theme="
 						+ productList.get(i).getPackage_category_theme() + "\"class=\"block-20\""
 						+ "style=\"background-image: url('ManagerImgUpload/"
-						+ productList.get(i).getPackage_category_image() + "')\"></a>"
+						+ productList.get(i).getPackage_category_image().split("\\*")[0] + "')\"></a>"
 				+ "<div class=\"text p-4\">"
 				+ "<div class=\"meta\">"
 				+ "<div>"

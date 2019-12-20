@@ -18,7 +18,7 @@ public class CategoryListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+//		System.out.println("categoryLIstAction");
 		ActionForward forward = null;
 		// 페이징 처리
 		int page = 1;
@@ -32,6 +32,11 @@ public class CategoryListAction implements Action {
 		String arriv_date = request.getParameter("arriv_date");
 		String region = request.getParameter("region");
 		String city = request.getParameter("city");
+		
+//		System.out.println("keyword : "+keyword);
+//		System.out.println("arriv_date : "+arriv_date);
+//		System.out.println("region : "+region);
+//		System.out.println("city : "+city);
 		
 		// 출발날짜가 선택되지않았을 경우 로컬시간 1일 후로 설정
 		LocalDateTime date = LocalDateTime.now().plusDays(1);
@@ -49,7 +54,6 @@ public class CategoryListAction implements Action {
 		
 		//SearchBean
 		SearchBean searchBean = new SearchBean(keyword,depart_date, arriv_date,region,city);
-		
 		CategoryListService categoryListService = new CategoryListService();
 		int listCount = categoryListService.getListCount(searchBean);
 		

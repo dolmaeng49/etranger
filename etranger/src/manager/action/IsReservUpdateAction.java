@@ -21,6 +21,9 @@ public class IsReservUpdateAction implements Action {
 
 		isReservUpdateService isReservUpdateService = new isReservUpdateService();
 		boolean isUpdateSuccess = isReservUpdateService.isupdateReserv(isReserv, reservNum);
+		ReservUpdateService rus = new ReservUpdateService();
+		rus.updateReserv("결제완료", reservNum);
+		
 		
 		if(!isUpdateSuccess) {
 			response.setContentType("text/html; charser=UTF-8");
