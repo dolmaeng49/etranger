@@ -104,7 +104,7 @@ h1 {
 								<h4 class="section-subheading text-muted">김종우</h4>
 								<p class="text-muted1">Kim Jongwoo</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
-								<p class="text-muted1" style="margin-top: -21px;">.com</p>
+								<p class="text-muted1" style="margin-top: -21px;">danane@naver.com</p>
 
 							</div>
 						</div>

@@ -64,7 +64,7 @@
             <%for (int i = 0; i < categoryList.size(); i++) { %>
               <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
                 <a href="CategoryDetail.pr?package_category_code=<%=categoryList.get(i).getPackage_category_code() %>&package_category_theme=<%=categoryList.get(i).getPackage_category_theme() %>"
-                 class="block-5" style="background-image: url('ManagerImgUpload/<%=categoryList.get(i).getPackage_category_image()%>');">
+                 class="block-5" style="background-image: url('ManagerImgUpload/<%=categoryList.get(i).getPackage_category_image().split("\\*")[0]%>');">
                 </a>
                   <div class="text">
                     <span class="price">￦<%=categoryList.get(i).getMin_price() %> ~</span>
@@ -145,18 +145,18 @@
                 <h3>Find your tour</h3>
                 <form action="CategoryListSearch.pr" method="post" id="categorySearchForm">
                   <div class="fields">
-                    <div class="row flex-column"><!-- 검색바 묶음 -->
+                    <div class="row flex-column" id="event_period"><!-- 검색바 묶음 -->
 
                       <div class="textfield-search col-sm-12 group mb-3">
                       	<input type="text" class="form-control" placeholder="상품명" name="keyword" value="<%=searchBean.getKeyword()%>"></div> <!-- 키워드 검색창 -->
 
                       <div class="check-in col-sm-12 group mb-3">
-                      	<input type="text" class="form-control pick_start_date" placeholder="출발 날짜"
+                      	<input type="text" class="form-control actual_range" placeholder="출발 날짜"
                       	name="depart_date" readonly="readonly" value="<%=searchBean.getDepart_date()%>"><!--출발일 검색  -->
                       </div>
 
                       <div class="check-out col-sm-12 group mb-3">
-                      	<input type="text" id="checkout_date" class="form-control" placeholder="도착 날짜"
+                      	<input type="text" class="form-control actual_range" placeholder="도착 날짜"
                       	name="arriv_date" readonly="readonly" value="<%=searchBean.getArriv_date()%>"></div> <!--도착일 검색  -->
                       
                       
@@ -256,7 +256,7 @@ function displaySideTheme() {
 function getRegion() {
 	// 검색한 지역코드 가져오기(Number 타입으로 형변환)
 	var region_code_search = Number($('#region_code_search').val());
-	var city_code_search = Number($('#region_code_search').val());
+	var city_code_search_1 = Number($('#city_code_search').val());
 	// #selectRegion에 있는 내용 지우기
 	$('#selectRegion').empty();
 	$('#selectRegion').append("<option value=''>지역선택</option>");
@@ -268,7 +268,7 @@ function getRegion() {
 			if(region_code_search != null && region_code_search == value.regionCode){
 				$('#selectRegion').append('<option value=' + value.regionCode + ' selected="selected"> 지역이름 : '
 						+ value.regionName + '</option>');
-				if(city_code_search != null){
+				if(city_code_search_1 != null){
 					getCity(); // 도시코드도 입력된 경우 getCity() 함수 호출
 				}
 			} else {
@@ -281,8 +281,9 @@ function getRegion() {
 
 // 도시 목록 불러오기
 function getCity() {
+	
 	var code = $('#selectRegion').val();
-	var city_code_search = Number($('#region_code_search').val());
+	var city_code_search = Number($('#city_code_search').val());
 	
 	$('#selectCity').empty();
 	$('#selectCity').append("<option value=''>도시선택</option>");
@@ -293,9 +294,10 @@ function getCity() {
 			if(city_code_search != null && city_code_search == value.cityCode){
 				$('#selectCity').append('<option value=' + value.cityCode + ' selected="selected"> 도시이름 : '
 						+ value.cityName + '</option>');
-			}
+			} else {
 			$('#selectCity').append("<option value=" + value.cityCode + "> 도시이름 : "
 					+ value.cityName + "</option>");
+			}
 		});
 	});
 }

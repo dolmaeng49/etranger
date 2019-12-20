@@ -147,7 +147,7 @@ table.pdList th {
 				<div class="row slider-text align-items-center">
 					<div class="col-md-12 col-sm-12 ftco-animate">
 						<h2 class="mb-12"><%=name%></h2>
-						<h4 class="mb-2"><%=theme%>
+						<h4 class="mb-2"><%=theme.replace('!', '#') %>
 						</h4>
 					</div>
 				</div>
@@ -159,7 +159,7 @@ table.pdList th {
 				<div class="row slider-text align-items-center">
 					<div class="col-md-12 col-sm-12 ftco-animate">
 						<h2 class="mb-12"><%=name%></h2>
-						<h4 class="mb-2"><%=theme%>
+						<h4 class="mb-2"><%=theme.replace('!', '#') %>
 						</h4>
 					</div>
 				</div>
@@ -171,7 +171,7 @@ table.pdList th {
 				<div class="row slider-text align-items-center">
 					<div class="col-md-12 col-sm-12 ftco-animate">
 						<h2 class="mb-12"><%=name%></h2>
-						<h4 class="mb-2"><%=theme%>
+						<h4 class="mb-2"><%=theme.replace('!', '#') %>
 						</h4>
 					</div>
 				</div>
@@ -183,7 +183,7 @@ table.pdList th {
 				<div class="row slider-text align-items-center">
 					<div class="col-md-12 col-sm-12 ftco-animate">
 						<h2 class="mb-12"><%=name%></h2>
-						<h4 class="mb-2"><%=theme%>
+						<h4 class="mb-2"><%=theme.replace('!', '#') %>
 						</h4>
 					</div>
 				</div>
