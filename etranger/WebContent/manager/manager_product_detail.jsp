@@ -107,7 +107,7 @@ table.pdList td input {
 				<div class="row slider-text align-items-center">
 					<div class="col-md-7 col-sm-12 ftco-animate">
 						<p class="breadcrumbs">
-							<span class="mr-2"><a href="../main/index.jsp"></a></span> <span><a
+							<span class="mr-2"><a href="./index.jsp"></a></span> <span><a
 								href="blog.html"></a></span> <span></span>
 						</p>
 						<h1 class="mb-3">카테고리 상세내용&amp;패키지상품 추가</h1>

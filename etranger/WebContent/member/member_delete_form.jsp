@@ -47,7 +47,7 @@
 				<div class="row slider-text align-items-center">
 					<div class="col-md-7 col-sm-12 ftco-animate">
 						<p class="breadcrumbs">
-							<span class="mr-2"><a href="../main/index.jsp">Home</a></span><span><a 
+							<span class="mr-2"><a href="./index.jsp">Home</a></span><span><a 
 								href="MemberLoginForm.me">회원 탈퇴</a></span>
 						</p>
 						<h1 class="mb-3">회원 탈퇴</h1>

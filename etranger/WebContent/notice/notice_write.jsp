@@ -14,13 +14,7 @@
 <jsp:include page="../include/top_menu.jsp"/>
 <%
 String sessionId = (String)session.getAttribute("member_id");
-// String sessionName = (String)session.getAttribute("member_name");
 
-
-// if(sessionId != null && notice_member_id.equals("admin")) {
-// 	out.print("관리자 로그인이 필요합니다.");
-// 	response.sendRedirect("LoginForm.me");
-// 	}
 %>
     <section class="home-slider owl-carousel">
       <div class="slider-item" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
@@ -28,7 +22,7 @@ String sessionId = (String)session.getAttribute("member_id");
         <div class="container">
           <div class="row slider-text align-items-center">
             <div class="col-md-7 col-sm-12 ftco-animate">
-              <p class="breadcrumbs"><span class="mr-2"><a href="../main/index.jsp">Home</a></span> <span><a href="blog.html">Blog</a></span> <span>Single Blog</span></p>
+              <p class="breadcrumbs"><span class="mr-2"><a href="./index.jsp">Home</a></span> <span><a href="blog.html">Blog</a></span> <span>Single Blog</span></p>
               <h1 class="mb-3">공지사항 작성</h1>
             </div>
           </div>
@@ -47,10 +41,7 @@ String sessionId = (String)session.getAttribute("member_id");
                 <h3 class="mb-5">공지사항 작성</h3>
                 <div style="height:90px"></div>
                 <form action="NoticeWritePro.no" method="post" enctype="multipart/form-data" name="notice_write_form" onsubmit="return validCheck()">
-				<input type="text" name="notice_member_id" value="<%=sessionId%>"> <!-- 관리자 admin 의 경우에만 작성 가능 하도록 히든 처리 -->
-<%-- 				<input type="text" name="notice_member_id" value=<%=sessionId %>>아이디 --%>
-<%-- 				<input type="hidden" name="review_member_name" value=<%=sessionName %>> --%>
-<!-- 				<input type="hidden" name="review_comment_count" value=0> -->
+				<input type="hidden" name="notice_member_id" value="<%=sessionId%>"> <!-- 관리자 admin 의 경우에만 작성 가능 하도록 히든 처리 -->
                   <div class="writeform-group">
                     <input type="text" class="form-control-subject" name="notice_subject" id="notice_subject" maxlength="70" placeholder="제목을 입력해주세요"/>
                   </div>
@@ -70,47 +61,37 @@ String sessionId = (String)session.getAttribute("member_id");
 
                 </form>
               </div>
-<!--             </div> -->
 
           </div> <!-- .col-md-8 -->
           <div class="col-md-4 sidebar">
+            <!--커스텀 사이드바 시작 -->
             <div class="sidebar-box">
-              <form action="#" class="search-form">
-                <div class="form-group">
-                  <span class="icon fa fa-search"></span>
-                  <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
-                </div>
-              </form>
+          <form action="ReviewSearch.rv" method="get" class="search-form-detail" name="search">
+                <fieldset id="search-fieldset-detail" >
+                <input type="text"  id="search_input" class="search_border" name="search" placeholder="Search">
+                <button type="submit" id="search_button" ><i class="fa fa-search"></i></button>
+                </fieldset>
+                </form>
             </div>
+            
+            <!--추천 지역 -->
             <div class="sidebar-box ftco-animate">
               <div class="categories">
-                <h3>Categories</h3>
-                <li><a href="#">Tours <span>(12)</span></a></li>
-                <li><a href="#">Hotels <span>(22)</span></a></li>
-                <li><a href="#">Cruises <span>(37)</span></a></li>
-                <li><a href="#">Restaurant <span>(42)</span></a></li>
-                <li><a href="#">Destination <span>(14)</span></a></li>
+                <h3>추천 지역</h3>
+                <div id="side_region" class="side_region">
+                
+                </div>
               </div>
             </div>
-
+            <!--  -->
+            
+			<!-- 추천 테마 -->
             <div class="sidebar-box ftco-animate">
-              <h3>Tag Cloud</h3>
-              <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">Life</a>
-                <a href="#" class="tag-cloud-link">Sport</a>
-                <a href="#" class="tag-cloud-link">Tech</a>
-                <a href="#" class="tag-cloud-link">Travel</a>
-                <a href="#" class="tag-cloud-link">Life</a>
-                <a href="#" class="tag-cloud-link">Sport</a>
-                <a href="#" class="tag-cloud-link">Tech</a>
-                <a href="#" class="tag-cloud-link">Travel</a>
+              <h3>추천 테마</h3>
+              <div id="side_theme" class="tagcloud">
               </div>
             </div>
-
-            <div class="sidebar-box ftco-animate">
-              <h3>Paragraph</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-            </div>
+            <!--  -->
           </div>
 
         </div>
@@ -121,6 +102,40 @@ String sessionId = (String)session.getAttribute("member_id");
 <jsp:include page="../include/footer.jsp"/>
 	<!-- loader 인클루드 -->
 <jsp:include page="../include/loader.jsp"/>
+<script type="text/javascript">
+displaySideRegion();
+displaySideTheme();
+
+// 사이드바 추천 지역 
+function displaySideRegion() {
+	
+	$('#side_region').empty();
+	// JSON으로 가져온 데이터 #side_region에 뿌려주기
+	$.getJSON('RegionSelect.ma', function(data) {
+
+		$.each(data, function(index, value) {
+			$('#side_region').append(
+					"<li><a href='CategoryListSearch.pr?region="+value.regionCode+"'>" + value.regionName + "</a></li>");
+		});
+	});
+}
+
+//사이드바 추천 테마
+
+function displaySideTheme() {
+	
+$('#side_theme').empty();
+	// JSON으로 가져온 데이터 #side_theme에 뿌려주기
+	$.getJSON('GetThemeListAjax.ma', function(data) {
+
+		$.each(data, function(index, value) {
+			$('#side_theme').append(
+					"<a href='CategoryListSearch.pr?keyword="+ value.themeName +"' class='tag-cloud-link'>" +value.themeName + "</a>");
+		});
+	});
+}
+</script>
+
 <script type="text/javascript">
 
 function validCheck() {

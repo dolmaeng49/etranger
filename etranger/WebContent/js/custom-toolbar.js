@@ -6,12 +6,11 @@
  		    tooltip: 'guess what',
  		    click: function () {
  		    	alert("etranger==\"TheBestTeamEver\"");
-// 		      context.invoke('editor.insertText', 'etranger==TheBestTeamEver');
-// 		      context.invoke('editor.bold');
  		    }
  		  });
  		  return button.render();   // return button as jquery object
  		}
+ 	  
 //========================
 //버튼추가시, .summernote 안에 들어갈 속성
 //buttons: {

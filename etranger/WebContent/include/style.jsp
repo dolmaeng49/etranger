@@ -19,3 +19,4 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css" rel="stylesheet">
     <link rel="stylesheet" href="css/loginDimlayer.css">
     <link rel="stylesheet" href="css/emailDimlayer.css">
+    <link rel="stylesheet" href="css/reviewDeleteDimlayer.css">
