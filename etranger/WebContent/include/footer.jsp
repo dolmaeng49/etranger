@@ -18,7 +18,7 @@
               <!--추천 지역  -->
           <div class="col-md">
              <div class="ftco-footer-widget mb-4">
-             <h2 class="ftco-heading-2">추천 지역</h2>
+             <h2 class="ftco-heading-2">Most Popular Destination</h2>
               <ul class="list-unstyled" id="footer_region">
               </ul>
             </div>
@@ -28,7 +28,7 @@
           <!--추천 테마  -->
           <div class="col-md">
              <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">추천 테마</h2>
+              <h2 class="ftco-heading-2">Recommended travel concept</h2>
               <ul class="list-unstyled" id="footer_theme">
                 
               </ul>

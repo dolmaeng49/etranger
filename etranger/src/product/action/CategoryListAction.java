@@ -33,6 +33,13 @@ public class CategoryListAction implements Action {
 		String region = request.getParameter("region");
 		String city = request.getParameter("city");
 		
+		System.out.println(keyword);
+		System.out.println(arriv_date);
+		System.out.println(region);
+		System.out.println(city);
+		
+		
+		
 		// 출발날짜가 선택되지않았을 경우 로컬시간 1일 후로 설정
 		LocalDateTime date = LocalDateTime.now().plusDays(1);
 		String depart_date = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
