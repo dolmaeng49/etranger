@@ -93,7 +93,7 @@ h1 {
 							<br> <br>
 							<h2 class="section-heading text-uppercase">The Best Team
 								Ever</h2>
-							<h3 class="section-subheading text-muted">éteanger를 만든 사람들</h3>
+							<h3 class="section-subheading text-muted">étanger를 만든 사람들</h3>
 						</div>
 					</div>
 					<div class="row">
@@ -134,8 +134,8 @@ h1 {
 							<div class="team-member">
 								<img class="mx-auto rounded-circle" src="./images/et_jinwoo.png"
 									 alt="">
-								<h4 class="section-subheading text-muted">Jo Jinwoo</h4>
-								<p class="text-muted1"></p>
+								<h4 class="section-subheading text-muted">조진우</h4>
+								<p class="text-muted1">Jo Jinwoo</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
 								<p class="text-muted1" style="margin-top: -21px;">wls94@gmail.com</p>
 
@@ -181,7 +181,7 @@ h1 {
 									" alt="">
 								<h4 class="section-subheading text-muted">홍진숙</h4>
 								<p class="text-muted1">Hong Jinsuk</p>
-								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
+								<p class="text-muted1" style="margin-top: -12px;">Senior Developer</p>
 								<p class="text-muted1" style="margin-top: -21px;">hongcine@itwillbs.co.kr</p>
 
 							</div>
@@ -240,10 +240,11 @@ h1 {
 						</div>
 						<!--문의하기 버튼  -->
 						<div class="col mb-2 d-flex py-2"
-							style="background: white; padding-left: 8rem;">
+							style="background: white; padding-left: 5rem;">
 							<div class="align-self-center">
 								<div class="form-group">
-									<a href="#layer2Email" class="btn_email">Contact Us</a>
+									<a href="#layer2Email" class="btn_email"> <input type="submit" value="Contact Us"
+													class="btn btn-primary py-3 px-5"></a>
 								</div>
 							</div>
 						</div>

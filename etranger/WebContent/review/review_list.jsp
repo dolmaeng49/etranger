@@ -137,15 +137,12 @@
             <div class="sidebar-box-list">
             <div>
              <div class="tagcloud">
-                <!--  -->
-<!--                 <div id="search"> -->
                 <form action="ReviewSearch.rv" method="get" class="search-form-list" name="search">
                 <fieldset id="search_fieldset" >
                 <input type="text"  id="search_input" name="search" placeholder="Search"  style="width: 100px;">
                 <button type="submit" id="search_button" ><i class="fa fa-search"></i></button>
                 </fieldset>
                 </form>
-<!--                 </div> -->
             </div>
             </div>
             </div>

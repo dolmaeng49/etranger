@@ -24,8 +24,7 @@
 				<div class="row slider-text align-items-center">
 					<div class="col-md-7 col-sm-12 ftco-animate">
 						<p class="breadcrumbs">
-							<span class="mr-2"><a href="./index.jsp">Home</a></span> <span><a
-								href="blog.html">Blog</a></span> <span>Single Blog</span>
+							<span class="mr-2"><a href="./index.jsp">Home</a></span>
 						</p>
 						<h1 class="mb-3">공지사항 수정</h1>
 					</div>
@@ -76,33 +75,34 @@
 				</div>
 				<div class="col-md-4 sidebar">
 					<!--검색창  -->
-            <div class="sidebar-box">
-          <form action="ReviewSearch.rv" method="get" class="search-form-detail" name="search">
-                <fieldset id="search-fieldset-detail" >
-                <input type="text"  id="search_input" class="search_border" name="search" placeholder="Search">
-                <button type="submit" id="search_button" ><i class="fa fa-search"></i></button>
-                </fieldset>
-                </form>
-            </div>
-            
-            <!--추천 지역 -->
-            <div class="sidebar-box ftco-animate">
-              <div class="categories">
-                <h3>추천 지역</h3>
-                <div id="side_region" class="side_region">
-                
-                </div>
-              </div>
-            </div>
-            <!--  -->
-            
-			<!-- 추천 테마 -->
-            <div class="sidebar-box ftco-animate">
-              <h3>추천 테마</h3>
-              <div id="side_theme" class="tagcloud">
-              </div>
-            </div>
-            <!--  -->
+					<div class="sidebar-box">
+						<form action="ReviewSearch.rv" method="get"
+							class="search-form-detail" name="search">
+							<fieldset id="search-fieldset-detail">
+								<input type="text" id="search_input" class="search_border"
+									name="search" placeholder="Search">
+								<button type="submit" id="search_button">
+									<i class="fa fa-search"></i>
+								</button>
+							</fieldset>
+						</form>
+					</div>
+
+					<!--추천 지역 -->
+					<div class="sidebar-box ftco-animate">
+						<div class="categories">
+							<h3>추천 지역</h3>
+							<div id="side_region" class="side_region"></div>
+						</div>
+					</div>
+					<!--  -->
+
+					<!-- 추천 테마 -->
+					<div class="sidebar-box ftco-animate">
+						<h3>추천 테마</h3>
+						<div id="side_theme" class="tagcloud"></div>
+					</div>
+					<!--  -->
 				</div>
 
 			</div>
@@ -118,43 +118,46 @@
 	<!-- loader 인클루드 -->
 	<jsp:include page="/include/loader.jsp" />
 	<script type="text/javascript">
-displaySideRegion();
-displaySideTheme();
+		displaySideRegion();
+		displaySideTheme();
 
-// 사이드바 추천 지역 
-function displaySideRegion() {
-	
-	$('#side_region').empty();
-	// JSON으로 가져온 데이터 #side_region에 뿌려주기
-	$.getJSON('RegionSelect.ma', function(data) {
+		// 사이드바 추천 지역 
+		function displaySideRegion() {
 
-		$.each(data, function(index, value) {
-			$('#side_region').append(
-					"<li><a href='CategoryListSearch.pr?region="+value.regionCode+"'>" + value.regionName + "</a></li>");
-		});
-	});
-}
+			$('#side_region').empty();
+			// JSON으로 가져온 데이터 #side_region에 뿌려주기
+			$.getJSON('RegionSelect.ma', function(data) {
 
-//사이드바 추천 테마
+				$.each(data, function(index, value) {
+					$('#side_region').append(
+							"<li><a href='CategoryListSearch.pr?region="
+									+ value.regionCode + "'>"
+									+ value.regionName + "</a></li>");
+				});
+			});
+		}
 
-function displaySideTheme() {
-	
-$('#side_theme').empty();
-	// JSON으로 가져온 데이터 #side_theme에 뿌려주기
-	$.getJSON('GetThemeListAjax.ma', function(data) {
+		//사이드바 추천 테마
 
-		$.each(data, function(index, value) {
-			$('#side_theme').append(
-					"<a href='CategoryListSearch.pr?keyword="+ value.themeName +"' class='tag-cloud-link'>" +value.themeName + "</a>");
-		});
-	});
-}
+		function displaySideTheme() {
+
+			$('#side_theme').empty();
+			// JSON으로 가져온 데이터 #side_theme에 뿌려주기
+			$.getJSON('GetThemeListAjax.ma', function(data) {
+
+				$.each(data, function(index, value) {
+					$('#side_theme').append(
+							"<a href='CategoryListSearch.pr?keyword="
+									+ value.themeName
+									+ "' class='tag-cloud-link'>"
+									+ value.themeName + "</a>");
+				});
+			});
+		}
+	</script>
 
 
-</script>
-	
-	
-	
+
 	<script type="text/javascript">
 		function validCheck() {
 			// 	const review_star = $('#review_star').val();
@@ -177,10 +180,6 @@ $('#side_theme').empty();
 
 		}
 
-		// if(review_star==0){
-		// 	alert('별점을 매겨주세요 :)');  		//종우형님 별점 넣으시면 추가할 것
-		// 	return false;
-		// }
 	</script>
 </body>
 </html>
