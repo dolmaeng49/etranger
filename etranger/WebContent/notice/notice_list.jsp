@@ -86,7 +86,7 @@
 								<td align="center"><a data-toggle="collapse"
 									data-parent="#accordian" href="#collapse<%=i%>"><%=articleList.get(i).getNotice_subject()%></a>
 									<div id="collapse<%=i%>" class="panel-collapse collapse in">
-										<div class="panel-body">
+										<div class="panel-body"">
 											<br><%=articleList.get(i).getNotice_content()%></div>
 									</div></td>
 								<td align="center">

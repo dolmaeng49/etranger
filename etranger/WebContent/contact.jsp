@@ -134,8 +134,8 @@ h1 {
 							<div class="team-member">
 								<img class="mx-auto rounded-circle" src="./images/et_jinwoo.png"
 									 alt="">
-								<h4 class="section-subheading text-muted">Jo Jinwoo</h4>
-								<p class="text-muted1"></p>
+								<h4 class="section-subheading text-muted">조진우</h4>
+								<p class="text-muted1">Jo Jinwoo</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
 								<p class="text-muted1" style="margin-top: -21px;">wls94@gmail.com</p>
 
@@ -243,7 +243,7 @@ h1 {
 							style="background: white; padding-left: 8rem;">
 							<div class="align-self-center">
 								<div class="form-group">
-									<a href="#layer2Email" class="btn_email">Contact Us</a>
+									<a href="#layer2Email" class="btn_email"><input type="button" class="btn btn-primary" value="Contact Us"></a>
 								</div>
 							</div>
 						</div>
