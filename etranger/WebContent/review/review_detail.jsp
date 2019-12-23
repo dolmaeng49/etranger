@@ -180,8 +180,10 @@
 								<div class="pop-containerReviewDelete">
 									<div class="pop-contsReviewDelete">
 										<!--content //-->
+										<div style="margin-bottom: 1rem;">
+										삭제된 게시글은 다시 복구할 수 없습니다.<br>정말 삭제하시겠습니까? <br>
+										</div>
 										<div class="form-group form-group-btn">
-										삭제된 게시글은 다시 복구할 수 없습니다. 정말 삭제하시겠습니까? <br>
 											<input type="submit" value="삭제하기" class="btn py-2 px-3 btn-primary" onclick="location.href='ReviewDeletePro.rv?review_num=<%=article.getReview_num() %>&review_member_id=<%=sessionId %>&page=<%=nowPage%>'">&nbsp;&nbsp;
 										</div>
 										<div class="btn-rReviewDelete">

@@ -38,7 +38,7 @@
           
             <!--  글 작성 폼 시작 -->
               <div class="comment-form-wrap">
-                <h3 class="mb-5">여행후기 작성</h3>
+                <h3 class="mb-5">여행후기 수정</h3>
                 <div style="height:90px"></div>
                 <form action="ReviewModifyPro.rv" method="post" name="review_write_form" onsubmit="return validCheck()">
                 <input type="hidden" name="review_num" value=<%=article.getReview_num() %>>
@@ -78,10 +78,38 @@
 
                 </form>
               </div>  <!--  end 글 작성 폼 -->
-            
-            
-            
 			</div>
+			
+			<div class="col-md-4 sidebar">
+					<!--검색창  -->
+            <div class="sidebar-box">
+          <form action="ReviewSearch.rv" method="get" class="search-form-detail" name="search">
+                <fieldset id="search-fieldset-detail" >
+                <input type="text"  id="search_input" class="search_border" name="search" placeholder="Search">
+                <button type="submit" id="search_button" ><i class="fa fa-search"></i></button>
+                </fieldset>
+                </form>
+            </div>
+            
+            <!--추천 지역 -->
+            <div class="sidebar-box ftco-animate">
+              <div class="categories">
+                <h3>추천 지역</h3>
+                <div id="side_region" class="side_region">
+                
+                </div>
+              </div>
+            </div>
+            <!--  -->
+            
+			<!-- 추천 테마 -->
+            <div class="sidebar-box ftco-animate">
+              <h3>추천 테마</h3>
+              <div id="side_theme" class="tagcloud">
+              </div>
+            </div>
+            <!--  -->
+				</div>
         </div> <!-- row 끝 -->
       </div><!-- container 끝 -->
     </section> <!-- .section -->
@@ -91,10 +119,46 @@
 
 	<!-- loader 인클루드 -->
 <jsp:include page="/include/loader.jsp"/>
+	<script type="text/javascript">
+displaySideRegion();
+displaySideTheme();
+
+// 사이드바 추천 지역 
+function displaySideRegion() {
+	
+	$('#side_region').empty();
+	// JSON으로 가져온 데이터 #side_region에 뿌려주기
+	$.getJSON('RegionSelect.ma', function(data) {
+
+		$.each(data, function(index, value) {
+			$('#side_region').append(
+					"<li><a href='CategoryListSearch.pr?region="+value.regionCode+"'>" + value.regionName + "</a></li>");
+		});
+	});
+}
+
+//사이드바 추천 테마
+
+function displaySideTheme() {
+	
+$('#side_theme').empty();
+	// JSON으로 가져온 데이터 #side_theme에 뿌려주기
+	$.getJSON('GetThemeListAjax.ma', function(data) {
+
+		$.each(data, function(index, value) {
+			$('#side_theme').append(
+					"<a href='CategoryListSearch.pr?keyword="+ value.themeName +"' class='tag-cloud-link'>" +value.themeName + "</a>");
+		});
+	});
+}
+
+
+</script>
+
+
 <script type="text/javascript">
 
 function validCheck() {
-// 	const review_star = $('#review_star').val();
 	const subject = $('#subject').val();
 	const content = $('#content').val();
 	const img = $('#image').val();
@@ -118,12 +182,6 @@ $('#review_star').ready(function() {
 var star = $('#review_star').val() -1;
 $(".starRev span:eq(" + star + ")").trigger("click");
 });
-
-// if(review_star==0){
-// 	alert('별점을 매겨주세요 :)');  		//종우형님 별점 넣으시면 추가할 것
-// 	return false;
-// }
-
 
 </script>    
   </body>

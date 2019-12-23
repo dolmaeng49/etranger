@@ -37,6 +37,7 @@ public class CategoryListAction implements Action {
 //		System.out.println("arriv_date : "+arriv_date);
 //		System.out.println("region : "+region);
 //		System.out.println("city : "+city);
+
 		
 		// 출발날짜가 선택되지않았을 경우 로컬시간 1일 후로 설정
 		LocalDateTime date = LocalDateTime.now().plusDays(1);
