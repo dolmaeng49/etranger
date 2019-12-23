@@ -20,7 +20,6 @@ Language|JAVA, JSP & Servlet(MVC Model-2) / JavaScript, Ajax, JQuery, HTML5, CSS
 관리자 페이지|카테고리 및 상품 등록 / 예약 관리 / 예약 통계 시각화
 상품 예약|찜하기 / 상품 검색 / 상품 예약(구매)
 리뷰 게시판|리뷰 및 댓글 조회,작성,수정,삭제
-(추후 추가예정)|
 
 ## 호스팅 주소
 http://itwillbs6.cafe24.com/etranger
