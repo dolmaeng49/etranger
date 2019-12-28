@@ -22,25 +22,20 @@ public class MainPageAction implements Action {
 		 * CategoryListService, DAO 에서 추천순/인기순에 따른 메서드 작성 필요 
 		 * 메서드 만들면 이 주석은 지워주세여
 		 */
-		
 
 		// 카테고리 리스트 서비스 객체 생성
 		CategoryListService categoryListService = new CategoryListService();
 		// 동그라미 4개에 출력할 카테고리 리스트 4개 조회하기
-		ArrayList<CategoryBean> categoryList = categoryListService.getCategoryList(1, 4);
-		request.setAttribute("categoryList1", categoryList);
+		ArrayList<CategoryBean> newList = categoryListService.getNewList(1, 4);
+		request.setAttribute("newList", newList);
 		
-		// 꽉찬 네모 8개에 출력할 카테고리 리스트 8개 조회
-		categoryList = categoryListService.getCategoryList(1, 8);
-		request.setAttribute("categoryList2", categoryList);
+		// 인기순 리스트
+		ArrayList<CategoryBean> popularList = categoryListService.getPopularList(1, 8);
+		request.setAttribute("popularList", popularList);
 		
-//		// 인기순 리스트
-//		ArrayList<CategoryBean> popularList = categoryListService.getpopularList(1, 8);
-//		request.setAttribute("popularList", popularList);
-//		
-//		// 추천순 리스트 
-//		ArrayList<CategoryBean> RecommendedList = categoryListService.getRecommendedList(1, 3);
-//		request.setAttribute("RecommendedList", RecommendedList);
+		// 추천순 리스트 
+		ArrayList<CategoryBean> recommendedList = categoryListService.getRecommendedList(1, 3);
+		request.setAttribute("recommendedList", recommendedList);
 		
 		
 		ReviewListService reviewListService = new ReviewListService();

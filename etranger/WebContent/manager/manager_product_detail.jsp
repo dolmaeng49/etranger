@@ -50,7 +50,7 @@ table.pdList th {
 	font-weight: bold;
 	vertical-align: center;
 	color: #fff;
-	background: #ff5f5f;
+	background: #0a3458;
 	font-size: 0.7em;
 }
 

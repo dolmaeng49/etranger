@@ -233,6 +233,7 @@ public class ManagerDAO {
 			insertCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("CategoryInsert() 오류! - " + e.getMessage());
 		} finally {
 			close(pstmt);
 		}
@@ -292,17 +293,17 @@ public class ManagerDAO {
 				productList.add(cb);
 			}
 		} catch (SQLException e) {
-			System.out.println("selectArticleList() 오류! - " + e.getMessage());
+			System.out.println("selectCategoryList() 오류! - " + e.getMessage());
 		} finally {
 			close(rs);
 			close(pstmt);
 		}
 		return productList;
 	}
-	// selectProductList ---
+	
 
-	// --- selectRecommendedList
-	public ArrayList<CategoryBean> selectRecommendedList(int page, int limit) {
+	// --- selectNewList --최신순 & 최저가격
+	public ArrayList<CategoryBean> selectNewList(int page, int limit) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<CategoryBean> productList = new ArrayList<CategoryBean>();
@@ -311,10 +312,7 @@ public class ManagerDAO {
 
 		try {
 
-			String sql = "select c.package_category_name, count(*), sum(r.reservation_headcount) AS total_headcount"
-					+ "from reservation r join package_category c"
-					+ "on r.reservation_category_code = c.package_category_code" + "group by c.package_category_name"
-					+ "order by 3 desc LIMIT ?,?";
+			String sql = "select c.package_category_code, c.package_category_name, c.package_category_image, MIN(p.package_product_price) AS min_price from package_category c join package_product p on p.package_category_code = c.package_category_code group by c.package_category_name ORDER BY package_category_num DESC LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, limit);
@@ -324,16 +322,91 @@ public class ManagerDAO {
 				CategoryBean cb = new CategoryBean();
 				cb.setPackage_category_code(rs.getString("package_category_code"));
 				cb.setPackage_category_name(rs.getString("package_category_name"));
-				cb.setPackage_category_theme(rs.getString("package_category_theme"));
 				cb.setPackage_category_image(rs.getString("package_category_image"));
-				cb.setPackage_category_content(rs.getString("package_category_content"));
-				cb.setPackage_category_region(rs.getInt("package_category_region"));
-				cb.setPackage_category_city(rs.getInt("package_category_city"));
-				cb.setPackage_category_wish_count(rs.getInt("package_category_wish_count"));
+				cb.setMin_price(rs.getInt("min_price"));
 				productList.add(cb);
 			}
 		} catch (SQLException e) {
-			System.out.println("selectArticleList() 오류! - " + e.getMessage());
+			System.out.println("selectNewList() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return productList;
+	}
+
+	// --- selectPopularList --- 인기순 
+	public ArrayList<CategoryBean> selectPopularList(int page, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<CategoryBean> popularList = new ArrayList<CategoryBean>();
+
+		int startRow = (page - 1) * limit;
+		try {	
+
+			// 카테고리별 예약이 제일 많은 순서대로(인기순) 가져오기 
+			// 커리문이 이해안되는 사람들을 위해.
+//			String sql = "select c.package_category_code, c.package_category_name, c.package_category_image, c.package_category_wish_count"  // 카테고리코드, 이름, 이미지
+//					+ "count(*), sum(r.reservation_headcount) AS total_headcount," // 해당 카테고리별로 묶은 총 예약인원수 total_headcount
+//					+ "MIN(p.package_product_price) AS min_price" // 해당 카테고리에 대한 최저가격 min_price
+//					+ "from reservation r" // reservation 테이블에서 
+//					+ "join package_category c on r.reservation_category_code = c.package_category_code" // category와 코드로 조인
+//					+ "join package_product p on p.package_category_code = c.package_category_code" // product와 코드로 조인
+//					+ "group by c.package_category_name"  // package_category_name 별로 상품을 그룹으로 묶어준다.
+//					+ "order by 6 DESC LIMIT ?,?"; // 카테고리별로 예약한 인원수가 많은 순(total_headcount)으로 정렬. 
+			
+			String sql = "select c.package_category_code, c.package_category_name, c.package_category_image, count(*), sum(r.reservation_headcount) AS total_headcount, MIN(p.package_product_price) AS min_price from reservation r join package_category c on r.reservation_category_code = c.package_category_code join package_product p on p.package_category_code = c.package_category_code group by c.package_category_name order by 5 DESC LIMIT ?,?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, limit);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				CategoryBean cb = new CategoryBean();
+				cb.setPackage_category_code(rs.getString("package_category_code"));
+				cb.setPackage_category_name(rs.getString("package_category_name"));
+				cb.setPackage_category_image(rs.getString("package_category_image"));
+				cb.setTotal_headcount(rs.getInt("total_headcount"));
+				cb.setMin_price(rs.getInt("min_price"));
+				popularList.add(cb);
+			}
+		} catch (
+		SQLException e) {
+			System.out.println("selectPopularList() 오류! - " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return popularList;
+	}
+
+	// --- selectRecommendedList 추천순 
+	public ArrayList<CategoryBean> selectRecommendedList(int page, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<CategoryBean> productList = new ArrayList<CategoryBean>();
+
+		int startRow = (page - 1) * limit;
+
+		try {
+
+			String sql = "select c.package_category_code, c.package_category_name, c.package_category_image, MIN(p.package_product_price) AS min_price, MIN(p.package_product_depart_date) AS min_date from package_category c join package_product p on p.package_category_code = c.package_category_code group by c.package_category_name order by 5 ASC LIMIT ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, limit);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				CategoryBean cb = new CategoryBean();
+				cb.setPackage_category_code(rs.getString("package_category_code"));
+				cb.setPackage_category_name(rs.getString("package_category_name"));
+				cb.setPackage_category_image(rs.getString("package_category_image"));
+				cb.setMin_price(rs.getInt("min_price"));
+				cb.setMin_date(rs.getString("min_date"));
+				productList.add(cb);
+			}
+		} catch (SQLException e) {
+			System.out.println("selectRecommendedList() 오류! - " + e.getMessage());
 		} finally {
 			close(rs);
 			close(pstmt);
