@@ -50,7 +50,7 @@
 	int endPage = pageInfo.getEndPage();
 	int listCount = pageInfo.getListCount();
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-	Date day = null;
+	Date arrivdate = null;
 	Date today = new Date();
 %>
 <!DOCTYPE html>
@@ -232,10 +232,13 @@ table.pdList .right {
 									<%
 										}
 									%>
-									<!--작업 중  -->
 									<%
-									day = format.parse(rb.get(i).getPackage_product_arriv_date());
-									int compare = day.compareTo(today);
+									arrivdate = format.parse(rb.get(i).getPackage_product_arriv_date());
+									int compare = arrivdate.compareTo(today);
+									// arrivdate > today : 1
+									// arrivdate == today : 0
+									// arrivdate < today : -1
+									// 도착일이 지나야 리뷰작성이 가능하므로 도착일 <= 오늘날짜 따라서 compare 가 0보다 작거나 같아야함
 									if(compare <= 0){
 									%>
 									<td><input type="button" id="category_code" value="리뷰작성" class="btn py-1 px-2 btn-primary" onclick="location.href='./ReviewWriteForm.rv?code=<%=rb.get(i).getReservation_category_code()%>'"></td>
@@ -244,7 +247,7 @@ table.pdList .right {
 										// Date 형식의 두 날짜를 계산
 										// xxx.getTime() => 해당날짜를 기준으로1970년 00:00:00 부터 몇 초가 흘렀는지 반환
 										// 24*60*60*1000(두 날짜의 차이)를 나누어 일수 반환
-										long calDate = day.getTime()-today.getTime(); 
+										long calDate = arrivdate.getTime()-today.getTime(); 
 										long calDateDay = calDate/(24*60*60*1000);
 										calDateDay = Math.abs(calDateDay);
 									%>

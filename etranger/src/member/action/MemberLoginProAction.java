@@ -47,13 +47,15 @@ public class MemberLoginProAction implements Action {
 			// 아이디 세션에 저장
 			session.setAttribute("member_id", member_id);
 			// 아이디에 해당하는 이름(String) 조회, 세션에 저장
-			session.setAttribute("member_name", memberLoginProService.getMemberName(member_id));
+			// member_name, member_email, member_birth, member_gender, member_grade
+			// 5 개의 정보 저장되어 있음
+			session.setAttribute("memberInfo", memberLoginProService.getMemberInfo(member_id));
 			
 			
 			// 아이디에 해당하는 찜목록(ArrayList<String>) 조회, 세션에 저장
 			// 찜목록이 없을 경우 ArrayList의 size = 0
-//			WishListService wishListService = new WishListService();
-//			session.setAttribute("member_wishList", wishListService.getMemberWishList(member_id));
+			WishListService wishListService = new WishListService();
+			session.setAttribute("member_wishList", wishListService.getMemberWishList(member_id));
 			
 			forward = new ActionForward();
 			forward.setPath("index.jsp");

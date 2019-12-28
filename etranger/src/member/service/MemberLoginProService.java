@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import member.dao.MemberDAO;
+import member.vo.MemberBean;
 
 import static common.db.JdbcUtil.*;
 
@@ -30,17 +31,17 @@ public class MemberLoginProService {
 	}	
 	
 	// 아이디를 이용해 회원의 이름 조회
-	public String getMemberName(String member_id) {
+	public MemberBean getMemberInfo(String member_id) {
 		Connection con = getConnection();
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		memberDAO.setConnection(con);
 		// 아이디를 이용해 회원의 이름 조회
 		// 아이디에 해당하는 정보가 없으면 null
-		String member_name = memberDAO.getMemberName(member_id);
+		MemberBean memberBean = memberDAO.getMemberInfo(member_id);
 		
 		close(con);
 		
-		return member_name;
+		return memberBean;
 	}
 
 

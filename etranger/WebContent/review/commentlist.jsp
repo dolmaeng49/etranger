@@ -1,3 +1,4 @@
+<%@page import="member.vo.MemberBean"%>
 <%@page import="review.comment.vo.CommentBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="common.vo.PageInfo"%>
@@ -14,10 +15,12 @@
 	if(session.getAttribute("member_id")!=null){
 	  sessionId = (String)session.getAttribute("member_id");
 	}
-	String sessionName = null;
-	if(session.getAttribute("member_name")!=null){
-	  sessionName = (String)session.getAttribute("member_name");
-	}
+	
+	MemberBean mb = (MemberBean)session.getAttribute("memberInfo");
+    String sessionName = null;
+    if (mb != null && mb.getMember_name() != null) {
+    	sessionName = mb.getMember_name();
+    }
 	
 %>
 <!-- ajax 송신 위한 값 저장 -->

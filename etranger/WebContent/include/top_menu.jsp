@@ -1,3 +1,4 @@
+<%@page import="member.vo.MemberBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
@@ -7,9 +8,10 @@
     if (session.getAttribute("member_id") != null) {
         member_id = (String) session.getAttribute("member_id");
     }
+    MemberBean mb = (MemberBean)session.getAttribute("memberInfo");
     String member_name = null;
-    if (session.getAttribute("member_name") != null) {
-        member_name = (String) session.getAttribute("member_name");
+    if (mb != null && mb.getMember_name() != null) {
+        member_name = mb.getMember_name();
     }
 %>
 
@@ -82,7 +84,7 @@
                 <li class="nav-item"><a href="./ProductList.pr" class="nav-link">Packages</a></li>
                 <li class="nav-item"><a href="./ReviewList.rv" class="nav-link">Review</a></li>
                 <li class="nav-item"><a href="./NoticeList.no" class="nav-link">Notice</a></li>
-                <li class="nav-item"><a href="./Contact.co" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="./contact.jsp" class="nav-link">Contact</a></li>
 
                 <%
                     if (member_id != null && member_id.equals("admin")) {

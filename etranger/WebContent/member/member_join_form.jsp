@@ -1,3 +1,4 @@
+<%@page import="common.db.InsertProductData"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -28,6 +29,7 @@
 			margin-bottom: 1.5em;
 		}
 	</style>
+
 </head>
 <body>
 
