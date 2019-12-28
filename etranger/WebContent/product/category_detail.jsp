@@ -368,6 +368,7 @@
 										value="예약하기" disabled="disabled"></td>
 							</tr>
 						</table>
+						
 						<!-- 						<input type="hidden" name="headCount" id="headCount"> -->
 						<input type="hidden" name="member_id" value="<%=member_id%>">
 						<input type="hidden" name="category_code" value="<%=code%>">
@@ -381,6 +382,7 @@
 						}
 					}
 					%>
+
 				</div>
 			</div>
 		</div>

@@ -118,7 +118,7 @@
 								<option value="결제완료">결제완료</option>
 								<option value="결제취소">결제취소</option>
 						</select></td>
-						<td><input type="button" value="삭제"
+						<td><input type="button" value="삭제" class="btn py-1 px-2 btn-primary deletecode"
 							onclick="deleteYesOrNo('<%=reservList.get(i).getReservation_num()%>')"
 							></td>
 

@@ -19,8 +19,8 @@
               <h2 class="ftco-heading-2">Book Now</h2>
               <ul class="list-unstyled">
                 <li><a href="#" class="py-2 d-block">Best Tour</a></li>
-                <li><a href="#" class="py-2 d-block">Familly Tour</a></li>
-                <li><a href="#" class="py-2 d-block">Tour</a></li>
+                <li><a href="#" class="py-2 d-block">Honeymoon Tour</a></li>
+                <li><a href="#" class="py-2 d-block">Mukbang Tour</a></li>
                 <li><a href="#" class="py-2 d-block">Car Rent</a></li>
                 <li><a href="#" class="py-2 d-block">Beach &amp; Resorts</a></li>
                 <li><a href="#" class="py-2 d-block">Mountains</a></li>
