@@ -10,7 +10,6 @@ import review.vo.ReviewBean;
 public class ReviewDetailService {
 
 	public ReviewBean getArticle(int review_num, boolean readcountDuplFlag) {
-
 		Connection con = getConnection();
 		ReviewDAO reviewDAO = ReviewDAO.getInstance();
 		reviewDAO.setConnection(con);
@@ -25,8 +24,8 @@ public class ReviewDetailService {
 			} else {
 				rollback(con);
 			}
-			close(con);
 		}
+		close(con);
 
 		return article;
 	}
