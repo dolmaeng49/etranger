@@ -137,7 +137,7 @@ h1 {
 								<h4 class="section-subheading text-muted">조진우</h4>
 								<p class="text-muted1">Jo Jinwoo</p>
 								<p class="text-muted1" style="margin-top: -12px;">Developer</p>
-								<p class="text-muted1" style="margin-top: -21px;">wls94@gmail.com</p>
+								<p class="text-muted1" style="margin-top: -21px;">wls94kr@gmail.com</p>
 
 							</div>
 						</div>
