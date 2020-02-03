@@ -134,14 +134,16 @@ public class ReservationDAO {
 			pstmt.setString(7, rb.getReservation_progress());
 
 			insertCount = pstmt.executeUpdate();
-
+			if(insertCount > 0) {
+				updateCurrent(rb.getReservation_headcount(), rb.getReservation_product_num());
+			}
 //			sql = "UPDATE package_product SET package_product_total = package_product_total - ?, package_product_current = package_product_current + ? WHERE package_product_num = ?";
-			sql = "UPDATE package_product SET package_product_current = package_product_current + ? WHERE package_product_num = ?";
-			pstmt = con.prepareStatement(sql);
-
-			pstmt.setInt(1, rb.getReservation_headcount());
-			pstmt.setString(2, rb.getReservation_product_num());
-			pstmt.executeUpdate();
+//			sql = "UPDATE package_product SET package_product_current = package_product_current + ? WHERE package_product_num = ?";
+//			pstmt = con.prepareStatement(sql);
+//
+//			pstmt.setInt(1, rb.getReservation_headcount());
+//			pstmt.setString(2, rb.getReservation_product_num());
+//			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 			System.out.println("insertArticle() 오류 -" + e.getMessage());
@@ -174,6 +176,85 @@ public class ReservationDAO {
 			close(pstmt);
 		}
 		return listCount;
+	}
+	
+	// 예약 등록,수정,삭제에 따른 상품의 현재 예약 인원 변경
+	private int updateCurrent(int change, String product_num) {
+		System.out.println("updateCurrent : " + change);
+		PreparedStatement pstmt = null;
+
+		int updateCount = 0;
+
+		try {
+
+			String sql = "UPDATE package_product SET package_product_current = package_product_current + ? WHERE package_product_num = ?";
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, change);
+			pstmt.setString(2, product_num);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("updateCurrent() 오류 -" + e.getMessage());
+
+		} finally {
+			close(pstmt);
+		}
+
+		return updateCount;
+	}
+
+	public int deleteReserv(int reservNum) {
+		int deleteCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int change = 0;
+		String product_num = null;
+		try {
+			String sql = "SELECT reservation_headcount, reservation_product_num FROM reservation WHERE reservation_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, reservNum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				change = -rs.getInt(1);
+				product_num = rs.getString(2);
+			}
+			
+			sql = "delete from reservation where reservation_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, reservNum);
+			deleteCount = pstmt.executeUpdate();
+			System.out.println("deleteCount : " + deleteCount);
+			if(deleteCount > 0) {
+				updateCurrent(change, product_num);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+	
+		return deleteCount;
+	}
+
+	public int updateReserv(String reservation_progress, int reservNum) {
+		int updateCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE reservation set reservation_progress=? where reservation_num=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, reservation_progress);
+			pstmt.setInt(2, reservNum);
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	
+		return updateCount;
 	}
 
 }

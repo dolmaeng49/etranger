@@ -31,11 +31,11 @@ import manager.action.CategoryInsertAction;
 import manager.action.ThemeInsertAction;
 import manager.action.RegionInsertAction;
 import manager.action.RegionSelectAction;
-import manager.action.ReservDeleteAction;
 import manager.action.ReservManagementAction;
-import manager.action.ReservUpdateAction;
 import manager.action.ThemeCheckBoxAction;
 import manager.action.ThemeListAction;
+import reservation.action.ReservDeleteAction;
+import reservation.action.ReservUpdateAction;
 import review.action.ImageCallbackAction;
 
 @WebServlet("*.ma")

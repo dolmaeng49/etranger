@@ -12,8 +12,8 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import common.action.Action;
 import common.vo.ActionForward;
 import manager.svc.CategoryUpdateService;
-import manager.svc.ReservUpdateService;
 import manager.vo.CategoryBean;
+import reservation.service.ReservUpdateService;
 import review.service.ReviewModifyProService;
 
 public class CategoryUpdateAction implements Action{

@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.action.Action;
 import common.vo.ActionForward;
-import manager.svc.ReservUpdateService;
 import manager.svc.isReservUpdateService;
+import reservation.service.ReservUpdateService;
 
 public class IsReservUpdateAction implements Action {
 
