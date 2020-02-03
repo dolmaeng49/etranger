@@ -46,7 +46,7 @@
          <div class="container">
             <div class="row slider-text align-items-center">
                <div class="col-md-7 col-sm-12 ftco-animate">
-                  <h1 class="mb-3">Travel with etranger!</h1>
+                  <h1 class="mb-3_main">Travel with etranger!</h1>
                </div>
             </div>
          </div>
@@ -58,7 +58,7 @@
          <div class="container">
             <div class="row slider-text align-items-center">
                <div class="col-md-7 col-sm-12 ftco-animate">
-                  <h1 class="mb-3">Experience the best trip ever</h1>
+                  <h1 class="mb-3_main">Experience the best trip ever</h1>
                </div>
             </div>
          </div>
@@ -70,7 +70,7 @@
          <div class="container">
             <div class="row slider-text align-items-center">
                <div class="col-md-7 col-sm-12 ftco-animate">
-                  <h1 class="mb-3">Making the most out of your holiday</h1>
+                  <h1 class="mb-3_main">Making the most out of your holiday</h1>
                </div>
             </div>
          </div>
@@ -82,7 +82,7 @@
          <div class="container">
             <div class="row slider-text align-items-center">
                <div class="col-md-7 col-sm-12 ftco-animate">
-                  <h1 class="mb-3">Travel Operator Just For You</h1>
+                  <h1 class="mb-3_main">Travel Operator Just For You</h1>
                </div>
             </div>
          </div>

@@ -22,7 +22,8 @@ Language|JAVA, JSP & Servlet(MVC Model-2) / JavaScript, Ajax, JQuery, HTML5, CSS
 리뷰 게시판|리뷰 및 댓글 조회,작성,수정,삭제
 
 ## 호스팅 주소
-http://itwillbs6.cafe24.com/etranger
+http://itwillbs6.cafe24.com/etranger \
+http://34.64.167.255:8080/etranger/
 
 ## 소개 영상
 [![Video Label](http://img.youtube.com/vi/GUoib3zluGI/0.jpg)](https://youtu.be/GUoib3zluGI)
